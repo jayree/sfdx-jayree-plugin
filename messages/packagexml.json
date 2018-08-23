@@ -1,0 +1,9 @@
+{
+  "commandDescription": "Generate a complete package xml form the specified org",
+  "nameFlagDescription": "name to print",
+  "forceFlagDescription": "example boolean flag",
+  "configFlagDescription": "path to config file",
+  "quickfilterFlagDescription": "CSV separated list of metadata types to filter on",
+  "errorNoOrgResults": "No results found for the organization '%s'.",
+  "excludeManagedFlagDescription": "Exclude Managed Packages from output"
+}
