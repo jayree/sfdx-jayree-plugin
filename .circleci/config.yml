@@ -23,7 +23,6 @@ jobs:
       - checkout
       - run: 'yarn global add greenkeeper-lockfile@2'
       - run: 'greenkeeper-lockfile-update'
-      - run: 'echo installed greenkeeper-lockfile and ran greenkeeper-lockfile-update'
       - <<: *save
       - restore_cache: &restore_cache
           keys:
@@ -53,7 +52,6 @@ jobs:
           # name: SSH Avoid hosts unknown
           # command: 'mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config'
       - run: 'greenkeeper-lockfile-upload'
-      - run: 'echo ran greenkeeper-lockfile-upload'
   node-8:
     <<: *test
     docker:

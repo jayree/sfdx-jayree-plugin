@@ -30,8 +30,7 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-- [sfdx-jayree-plugin](#sfdx-jayree-plugin)
-  - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
+* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
 ## `sfdx-jayree jayree:packagexml`
 
