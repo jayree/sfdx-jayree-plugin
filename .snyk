@@ -1,0 +1,13 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.12.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:hoek:20180212':
+    - '@salesforce/command > @salesforce/core > jsonwebtoken > joi > hoek':
+        patched: '2018-08-23T22:57:54.797Z'
+    - '@salesforce/command > @salesforce/core > jsonwebtoken > joi > topo > hoek':
+        patched: '2018-08-23T22:57:54.797Z'
+  'npm:ms:20170412':
+    - '@salesforce/command > @salesforce/core > jsonwebtoken > ms':
+        patched: '2018-08-23T22:57:54.797Z'
