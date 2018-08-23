@@ -1,16 +1,16 @@
-sfdx-jayree
+sfdx-jayree-plugin
 ===========
 
 Create configuration from an existing salesforce org
 
-[![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
-[![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree/tree/master.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree?branch=master&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree/branch/master)
-[![Codecov](https://codecov.io/gh/jayree/sfdx-jayree/branch/master/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree)
-[![Greenkeeper](https://badges.greenkeeper.io/jayree/sfdx-jayree.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/jayree/sfdx-jayree/badge.svg)](https://snyk.io/test/github/jayree/sfdx-jayree)
-[![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
-[![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
+[![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master)
+[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree-plugin/branch/master)
+[![Codecov](https://codecov.io/gh/jayree/sfdx-jayree-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree-plugin)
+[![Greenkeeper](https://badges.greenkeeper.io/jayree/sfdx-jayree-plugin.svg)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/jayree/sfdx-jayree-plugin/badge.svg)](https://snyk.io/test/github/jayree/sfdx-jayree-plugin)
+[![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
+[![License](https://img.shields.io/npm/l/sfdx-jayree-plugin.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
 <!-- toc -->
 
@@ -30,7 +30,8 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
+- [sfdx-jayree-plugin](#sfdx-jayree-plugin)
+  - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
 ## `sfdx-jayree jayree:packagexml`
 
