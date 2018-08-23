@@ -21,7 +21,7 @@ jobs:
     working_directory: ~/cli
     steps:
       - checkout
-      - run: 'sudo yarn global add greenkeeper-lockfile@2'
+      - run: 'yarn global add greenkeeper-lockfile@2'
       - run: 'greenkeeper-lockfile-update'
       - run: 'echo job1 installed greenkeeper-lockfile and ran greenkeeper-lockfile-update'
       - <<: *save
@@ -47,7 +47,7 @@ jobs:
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
       - <<: *restore
-      - run: 'sudo yarn global add greenkeeper-lockfile@2'
+      - run: 'yarn global add greenkeeper-lockfile@2'
       # optionally ignore ssh hosts unknown error if you don't want to save ~/.ssh between jobs
       # - run:
           # name: SSH Avoid hosts unknown
