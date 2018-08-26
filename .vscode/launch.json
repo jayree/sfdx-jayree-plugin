@@ -7,17 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Mocha Tests",
-            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "name": "Launch jayree:packagexml",
+            "protocol": "inspector",
+            "program": "${workspaceFolder}/bin/run",
             "args": [
-                "-u",
-                "tdd",
-                "--timeout",
-                "999999",
-                "--colors",
-                "${workspaceFolder}/test/*/*/*"
+                "jayree:packagexml"
             ],
-            "internalConsoleOptions": "openOnSessionStart"
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen"
         },
         {
             "type": "node",
@@ -34,6 +31,9 @@
             "protocol": "inspector",
             "program": "${workspaceRoot}/node_modules/.bin/_mocha",
             "args": [
+                "--timeout",
+                "999999",
+                "--colors",
                 "--require", "test/helpers/init.js",
                 "--require", "ts-node/register",
                 "--require", "source-map-support/register",
@@ -41,7 +41,8 @@
                 "--reporter", "spec",
                 "test/**/*.test.ts"
             ],
-            "cwd": "${workspaceRoot}"
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

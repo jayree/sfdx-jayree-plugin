@@ -2,9 +2,6 @@
   "extension": [
     ".ts"
   ],
-  "require": [
-      "ts-node/register"
-  ],
   "include": [
     "src/**/*.ts"
   ],
