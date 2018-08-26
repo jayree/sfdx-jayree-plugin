@@ -22,7 +22,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.1 darwin-x64 node-v10.9.0
+sfdx-jayree/0.0.1 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -86,7 +86,5 @@ To debug the `hello:org` command:
 4. In the upper left hand corner of VS Code, verify that the "Attach to Remote" launch configuration has been chosen.
 5. Hit the green play button to the left of the "Attach to Remote" launch configuration window. The debugger should now be suspended on the first line of the program.
 6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
-
-![vscodeScreenshot](https://raw.githubusercontent.com/jayree/sfdx-jayree-plugin/master/.images/vscodeScreenshot.png =480x278)
 
 Congrats, you are debugging!
