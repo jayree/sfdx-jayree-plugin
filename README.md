@@ -87,6 +87,6 @@ To debug the `hello:org` command:
 5. Hit the green play button to the left of the "Attach to Remote" launch configuration window. The debugger should now be suspended on the first line of the program.
 6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
 
-![vscodeScreenshot](.images/vscodeScreenshot.png =480x278)
+![vscodeScreenshot](https://raw.githubusercontent.com/jayree/sfdx-jayree-plugin/master/.images/vscodeScreenshot.png =480x278)
 
 Congrats, you are debugging!
