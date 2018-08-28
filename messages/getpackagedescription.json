@@ -1,9 +1,9 @@
 {
-  "commandDescription": "Get the Description within a package",
-  "nameFlagDescription": "name to print",
+  "commandDescription": "get the description within a package",
+  "fileFlagDescription": "file to read",
   "forceFlagDescription": "example boolean flag",
   "configFlagDescription": "path to config file",
-  "quickfilterFlagDescription": "CSV separated list of metadata types to filter on",
-  "errorNoOrgResults": "No results found for the organization '%s'.",
-  "excludeManagedFlagDescription": "Exclude Managed Packages from output"
+  "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
+  "errorNoOrgResults": "no results found for the organization '%s'.",
+  "excludeManagedFlagDescription": "exclude Managed Packages from output"
 }

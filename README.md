@@ -12,8 +12,8 @@ Create configuration from an existing salesforce org
 [![License](https://img.shields.io/npm/l/sfdx-jayree-plugin.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
 - [sfdx-jayree-plugin](#sfdx-jayree-plugin)
-  - [`sfdx-jayree jayree:packagedescription:get`](#sfdx-jayree-jayreepackagedescriptionget)
-  - [`sfdx-jayree jayree:packagedescription:set`](#sfdx-jayree-jayreepackagedescriptionset)
+  - [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
+  - [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
   - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
 <!-- install -->
@@ -23,7 +23,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.1 darwin-x64 node-v10.9.0
+sfdx-jayree/0.0.5 darwin-x64 node-v10.9.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -32,59 +32,49 @@ USAGE
 <!-- usagestop -->
 <!-- commands -->
 
-## `sfdx-jayree jayree:packagedescription:get`
+## `sfdx-jayree jayree:packagedescription:get [FILE]`
 
-Get the Description within a package
+get the description within a package
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:get
+  $ sfdx-jayree jayree:packagedescription:get [FILE]
 
 OPTIONS
-  -c, --config=config                             path to config file
-  -q, --quickfilter=quickfilter                   CSV separated list of metadata types to filter on
-  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
-  -x, --excludemanaged                            Exclude Managed Packages from output
-  --apiversion=apiversion                         override the api version used for api requests made by this command
+  -f, --file=file                                 file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:packagexml --targetusername myOrg@example.com
-       <?xml version="1.0" encoding="UTF-8"?>
-       <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
+  $ sfdx jayree:packagedescription:get --file FILENAME
+       Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagedescription/get.ts)_
 
-## `sfdx-jayree jayree:packagedescription:set`
+## `sfdx-jayree jayree:packagedescription:set [FILE]`
 
-Set the Description within a package
+set the description within a package
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:set
+  $ sfdx-jayree jayree:packagedescription:set [FILE]
 
 OPTIONS
-  -c, --config=config                             path to config file
-  -q, --quickfilter=quickfilter                   CSV separated list of metadata types to filter on
-  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
-  -x, --excludemanaged                            Exclude Managed Packages from output
-  --apiversion=apiversion                         override the api version used for api requests made by this command
+  -d, --description=description                   new description value
+  -f, --file=file                                 file to Read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:packagexml --targetusername myOrg@example.com
-       <?xml version="1.0" encoding="UTF-8"?>
-       <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
+  $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagedescription/set.ts)_
 
 ## `sfdx-jayree jayree:packagexml`
 
-Generate a complete package xml form the specified org
+generate a complete package xml form the specified org
 
 ```
 USAGE
@@ -92,9 +82,9 @@ USAGE
 
 OPTIONS
   -c, --config=config                             path to config file
-  -q, --quickfilter=quickfilter                   CSV separated list of metadata types to filter on
+  -q, --quickfilter=quickfilter                   csv separated list of metadata types to filter on
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
-  -x, --excludemanaged                            Exclude Managed Packages from output
+  -x, --excludemanaged                            exclude Managed Packages from output
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
@@ -105,7 +95,7 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagexml.ts)_
+_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagexml.ts)_
 <!-- commandsstop -->
 <!-- 
 ## Debugging your plugin

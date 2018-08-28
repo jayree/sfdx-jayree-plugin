@@ -1,6 +1,6 @@
 {
   "name": "sfdx-jayree",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "bugs": "https://github.com/jayree/sfdx-jayree/issues",
   "dependencies": {
     "@oclif/command": "1.5.0",
@@ -22,6 +22,7 @@
     "@oclif/plugin-help": "2",
     "@oclif/test": "^1",
     "@salesforce/dev-config": "1.1.4",
+    "@types/adm-zip": "0.4.31",
     "@types/chai": "4",
     "@types/jsforce": "1.8.16",
     "@types/mocha": "5",
@@ -53,7 +54,7 @@
     "commands": "./lib/commands",
     "topics": {
       "jayree": {
-        "description": "Create configuration from an existing salesforce org"
+        "description": "Tools to generate and modify packages"
       }
     },
     "devPlugins": [
