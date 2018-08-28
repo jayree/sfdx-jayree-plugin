@@ -1,6 +1,6 @@
 # sfdx-jayree-plugin
 
-Create configuration from an existing salesforce org
+Tools to generate and modify packages
 
 [![Version](https://img.shields.io/npm/v/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
 [![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master)
@@ -24,7 +24,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.5 darwin-x64 node-v8.9.4
+sfdx-jayree/0.0.5 darwin-x64 node-v10.9.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -32,10 +32,14 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
+* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
+* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
+* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
+* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
-create an empty package with the description
+creates an empty package with the description
 
 ```
 USAGE
