@@ -5,5 +5,5 @@
   "configFlagDescription": "path to config file",
   "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
   "errorNoOrgResults": "no results found for the organization '%s'.",
-  "excludeManagedFlagDescription": "exclude Managed Packages from output"
+  "excludeManagedFlagDescription": "exclude managed packages from output"
 }

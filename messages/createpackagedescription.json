@@ -1,9 +1,9 @@
 {
-  "commandDescription": "set the description within a package",
-  "fileFlagDescription": "file to cead",
+  "commandDescription": "creates an empty package with the description",
+  "fileFlagDescription": "file to create",
   "forceFlagDescription": "example boolean flag",
   "descriptionFlagDescription": "new description value",
   "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
   "errorNoOrgResults": "no results found for the organization '%s'.",
-  "excludeManagedFlagDescription": "exclude managed packages from output"
+  "excludeManagedFlagDescription": "exclude Managed Packages from output"
 }

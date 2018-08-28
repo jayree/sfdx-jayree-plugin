@@ -1636,6 +1636,11 @@
         "for-in": "^1.0.1"
       }
     },
+    "foreground-child": {
+      "dependencies": {
+        "cross-spawn": {}
+      }
+    },
     "forever-agent": {
       "version": "0.6.1",
       "resolved": "https://registry.npmjs.org/forever-agent/-/forever-agent-0.6.1.tgz",
@@ -1844,6 +1849,7 @@
       "integrity": "sha512-qBr4OuELkhPenW6goKVXiv47US3clb3/IbuWF9KNKEijAy9oeHxU9IgzjvJhHkUzhaj7rOUD7+YGWqUjLp5oSA==",
       "dev": true
     },
+    "handlebars": {},
     "har-schema": {
       "version": "2.0.0",
       "resolved": "https://registry.npmjs.org/har-schema/-/har-schema-2.0.0.tgz",
@@ -2283,6 +2289,8 @@
         "semver": "^5.5.0"
       }
     },
+    "istanbul-lib-source-maps": {},
+    "istanbul-reports": {},
     "joi": {
       "version": "6.10.1",
       "resolved": "https://registry.npmjs.org/joi/-/joi-6.10.1.tgz",
@@ -4456,6 +4464,11 @@
         }
       }
     },
+    "os-locale": {
+      "dependencies": {
+        "cross-spawn": {}
+      }
+    },
     "os-name": {
       "version": "2.0.1",
       "resolved": "https://registry.npmjs.org/os-name/-/os-name-2.0.1.tgz",
@@ -5472,6 +5485,7 @@
       "integrity": "sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=",
       "dev": true
     },
+    "spawn-wrap": {},
     "spdx-correct": {
       "version": "3.0.0",
       "resolved": "https://registry.npmjs.org/spdx-correct/-/spdx-correct-3.0.0.tgz",
@@ -5853,6 +5867,7 @@
         }
       }
     },
+    "tsutils": {},
     "tunnel-agent": {
       "version": "0.6.0",
       "resolved": "https://registry.npmjs.org/tunnel-agent/-/tunnel-agent-0.6.0.tgz",
