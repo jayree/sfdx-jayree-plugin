@@ -12,8 +12,9 @@ Create configuration from an existing salesforce org
 [![License](https://img.shields.io/npm/l/sfdx-jayree-plugin.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
 - [sfdx-jayree-plugin](#sfdx-jayree-plugin)
+  - [`sfdx-jayree jayree:packagedescription:get`](#sfdx-jayree-jayreepackagedescriptionget)
+  - [`sfdx-jayree jayree:packagedescription:set`](#sfdx-jayree-jayreepackagedescriptionset)
   - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
-  - [Debugging your plugin](#debugging-your-plugin)
 
 <!-- install -->
 <!-- usage -->
@@ -22,7 +23,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.1 darwin-x64 node-v8.9.4
+sfdx-jayree/0.0.1 darwin-x64 node-v10.9.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -30,6 +31,56 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
+
+## `sfdx-jayree jayree:packagedescription:get`
+
+Get the Description within a package
+
+```
+USAGE
+  $ sfdx-jayree jayree:packagedescription:get
+
+OPTIONS
+  -c, --config=config                             path to config file
+  -q, --quickfilter=quickfilter                   CSV separated list of metadata types to filter on
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  -x, --excludemanaged                            Exclude Managed Packages from output
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  $ sfdx jayree:packagexml --targetusername myOrg@example.com
+       <?xml version="1.0" encoding="UTF-8"?>
+       <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
+```
+
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagedescription/get.ts)_
+
+## `sfdx-jayree jayree:packagedescription:set`
+
+Set the Description within a package
+
+```
+USAGE
+  $ sfdx-jayree jayree:packagedescription:set
+
+OPTIONS
+  -c, --config=config                             path to config file
+  -q, --quickfilter=quickfilter                   CSV separated list of metadata types to filter on
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  -x, --excludemanaged                            Exclude Managed Packages from output
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  $ sfdx jayree:packagexml --targetusername myOrg@example.com
+       <?xml version="1.0" encoding="UTF-8"?>
+       <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
+```
+
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagedescription/set.ts)_
 
 ## `sfdx-jayree jayree:packagexml`
 
@@ -56,7 +107,7 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagexml.ts)_
 <!-- commandsstop -->
-
+<!-- 
 ## Debugging your plugin
 
 We recommend using the Visual Studio Code (VS Code) IDE for your plugin development. Included in the `.vscode` directory of this plugin is a `launch.json` config file, which allows you to attach a debugger to the node process when running your commands.
@@ -88,3 +139,4 @@ To debug the `hello:org` command:
 6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
 
 Congrats, you are debugging!
+ -->
