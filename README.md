@@ -13,7 +13,6 @@ Create configuration from an existing salesforce org
 
 - [sfdx-jayree-plugin](#sfdx-jayree-plugin)
   - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
-  - [Debugging your plugin](#debugging-your-plugin)
 
 <!-- install -->
 <!-- usage -->
@@ -22,7 +21,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.1 darwin-x64 node-v8.9.4
+sfdx-jayree/0.0.1 darwin-x64 node-v10.9.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -56,7 +55,7 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.1/src/commands/jayree/packagexml.ts)_
 <!-- commandsstop -->
-
+<!-- 
 ## Debugging your plugin
 
 We recommend using the Visual Studio Code (VS Code) IDE for your plugin development. Included in the `.vscode` directory of this plugin is a `launch.json` config file, which allows you to attach a debugger to the node process when running your commands.
@@ -87,4 +86,4 @@ To debug the `hello:org` command:
 5. Hit the green play button to the left of the "Attach to Remote" launch configuration window. The debugger should now be suspended on the first line of the program.
 6. Hit the green play button at the top middle of VS Code (this play button will be to the right of the play button that you clicked in step #5).
 
-Congrats, you are debugging!
+Congrats, you are debugging! -->
