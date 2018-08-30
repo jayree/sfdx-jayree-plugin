@@ -1,0 +1,9 @@
+{
+  "commandDescription": "remove the description within a package",
+  "fileFlagDescription": "file to cead",
+  "forceFlagDescription": "example boolean flag",
+  "descriptionFlagDescription": "new description value",
+  "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
+  "errorNoOrgResults": "no results found for the organization '%s'.",
+  "excludeManagedFlagDescription": "exclude managed packages from output"
+}

@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import * as jf from 'jsonfile';
+import * as notifier from 'node-notifier';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -27,6 +28,9 @@ if (Symbol['asyncIterator'] === undefined) {
 }
 
 export default class PackageXML extends SfdxCommand {
+
+  // hotfix to receive only one help page
+  // public static hidden = true;
 
   public static description = messages.getMessage('commandDescription');
 
@@ -247,6 +251,11 @@ export default class PackageXML extends SfdxCommand {
       });
 
       const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
+
+      notifier.notify({
+        title: 'sfdx-jayree packagexml',
+        message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
+      });
 
       this.ux.log(packageXml);
 

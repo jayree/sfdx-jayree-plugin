@@ -14,6 +14,7 @@ Tools to generate and modify packages
 - [sfdx-jayree-plugin](#sfdx-jayree-plugin)
   - [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
   - [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
+  - [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
   - [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
   - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
@@ -24,7 +25,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.0.5 darwin-x64 node-v10.9.0
+sfdx-jayree/0.0.5 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -32,10 +33,6 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
-* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
-* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
@@ -46,13 +43,13 @@ USAGE
   $ sfdx-jayree jayree:packagedescription:create [FILE]
 
 OPTIONS
-  -d, --description=description                   new description value
-  -f, --file=file                                 file to create
+  -d, --description=description                   (required) new description value
+  -f, --file=file                                 (required) file to create
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
+  $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
 _See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagedescription/create.ts)_
@@ -66,7 +63,7 @@ USAGE
   $ sfdx-jayree jayree:packagedescription:get [FILE]
 
 OPTIONS
-  -f, --file=file                                 file to read
+  -f, --file=file                                 (required) file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
@@ -77,6 +74,25 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagedescription/get.ts)_
 
+## `sfdx-jayree jayree:packagedescription:remove [FILE]`
+
+remove the description within a package
+
+```
+USAGE
+  $ sfdx-jayree jayree:packagedescription:remove [FILE]
+
+OPTIONS
+  -f, --file=file                                 (required) file to cead
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  $ sfdx jayree:packagedescription:remove --file FILENAME
+```
+
+_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree/blob/v0.0.5/src/commands/jayree/packagedescription/remove.ts)_
+
 ## `sfdx-jayree jayree:packagedescription:set [FILE]`
 
 set the description within a package
@@ -86,8 +102,8 @@ USAGE
   $ sfdx-jayree jayree:packagedescription:set [FILE]
 
 OPTIONS
-  -d, --description=description                   new description value
-  -f, --file=file                                 file to cead
+  -d, --description=description                   (required) new description value
+  -f, --file=file                                 (required) file to cead
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 

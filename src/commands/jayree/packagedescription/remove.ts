@@ -3,7 +3,7 @@ import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'setpackagedescription');
+const messages = core.Messages.loadMessages('sfdx-jayree', 'removepackagedescription');
 
 export default class SetPackageDescription extends SfdxCommand {
 
@@ -13,15 +13,14 @@ export default class SetPackageDescription extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
+    `$ sfdx jayree:packagedescription:remove --file FILENAME
     `
   ];
 
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true  }),
-    description: flags.string({ char: 'd', description: messages.getMessage('descriptionFlagDescription'), dependsOn: ['file'], required: true })
+    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true })
   };
 
   protected static requiresUsername = false;
@@ -38,8 +37,8 @@ export default class SetPackageDescription extends SfdxCommand {
       const zip = new AdmZip(inputfile);
       const zipEntries = zip.getEntries();
 
-      const text = this.flags.description;
       let action;
+      let text;
       zipEntries.forEach(zipEntry => {
         const fileName = zipEntry.entryName;
         const fileContent = zip.readAsText(fileName);
@@ -47,23 +46,23 @@ export default class SetPackageDescription extends SfdxCommand {
         if (fileName.includes('package.xml')) {
           const xml = convert.xml2js(fileContent, { compact: true });
           if ('description' in xml['Package']) {
-            xml['Package']['description'] = text;
-            action = 'updated';
-            fileContentjs = xml;
-          } else {
+            text = xml['Package']['description']['_text'];
+            action = 'removed';
+            this.ux.log(action + ' description: ' + text);
             fileContentjs = {
               _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
               Package: [{
                 _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-                description: text,
                 types: xml['Package']['types'],
                 version: xml['Package']['version']
               }]
             };
-            action = 'added';
+            newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+          } else {
+            newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+            action = '';
+            this.ux.log('no description found');
           }
-          this.ux.log(action + ' description: ' + text);
-          newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
         } else {
           newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
         }
@@ -71,7 +70,7 @@ export default class SetPackageDescription extends SfdxCommand {
 
       newZip.writeZip(inputfile);
 
-      return { description: text, task: action };
+      return { old_description: text, task: action };
     } catch (err) {
       this.ux.error(err);
     }

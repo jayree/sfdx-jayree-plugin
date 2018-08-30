@@ -7,6 +7,9 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescriptio
 
 export default class GetPackageDescription extends SfdxCommand {
 
+  // hotfix to receive only one help page
+  // public static hidden = true;
+
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
@@ -18,7 +21,7 @@ export default class GetPackageDescription extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription') })
+    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true })
   };
 
   protected static requiresUsername = false;
@@ -40,16 +43,14 @@ export default class GetPackageDescription extends SfdxCommand {
         const fileContent = zip.readAsText(fileName);
         if (fileName.includes('package.xml')) {
           text = convert.xml2js(fileContent, { compact: true });
-          if (text['Package']['description']) {
+          if ('description' in text['Package']) {
             text = text['Package']['description']['_text'];
+            this.ux.log(text);
           } else {
             text = '';
           }
         }
       });
-
-      this.ux.log(text);
-
       return { description: text };
     } catch (err) {
       this.ux.error(err);

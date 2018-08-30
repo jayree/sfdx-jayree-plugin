@@ -12,6 +12,7 @@
     "async": "2.6.1",
     "js2xmlparser": "3.0.0",
     "jsonfile": "4.0.0",
+    "node-notifier": "5.2.1",
     "snyk": "^1.93.0",
     "tslib": "1",
     "x2js": "3.2.1",
@@ -53,8 +54,8 @@
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
-      "jayree": {
-        "description": "Tools to generate and modify packages"
+      "jayree:packagedescription": {
+        "description": "Tools to add/modify/remove the description in a package"
       }
     },
     "devPlugins": [
