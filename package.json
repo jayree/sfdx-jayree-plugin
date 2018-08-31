@@ -54,8 +54,16 @@
   "oclif": {
     "commands": "./lib/commands",
     "topics": {
-      "jayree": { "description": "Tools to generate and modify packages" },
-      "jayree:packagedescription": { "description": "Tools to add/modify/remove the description in a package" }
+      "jayree": {
+        "name": "jayree",
+        "description": "Tools to generate and modify packages",
+        "subtopics": {
+          "packagedescription": {
+            "name": "packagedescription",
+            "description": "Tools to add/modify/remove the description in a package"
+          }
+        }
+      }
     },
     "devPlugins": [
       "@oclif/plugin-help"
