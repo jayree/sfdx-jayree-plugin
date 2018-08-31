@@ -30,30 +30,26 @@ export default class GetPackageDescription extends SfdxCommand {
 
   public async run(): Promise<core.AnyJson> {
 
-    try {
+    const inputfile = this.args.file || this.flags.file;
 
-      const inputfile = this.args.file || this.flags.file;
+    const zip = new AdmZip(inputfile);
+    const zipEntries = zip.getEntries();
 
-      const zip = new AdmZip(inputfile);
-      const zipEntries = zip.getEntries();
-
-      let text;
-      zipEntries.forEach(zipEntry => {
-        const fileName = zipEntry.entryName;
-        const fileContent = zip.readAsText(fileName);
-        if (fileName.includes('package.xml')) {
-          text = convert.xml2js(fileContent, { compact: true });
-          if ('description' in text['Package']) {
-            text = text['Package']['description']['_text'];
-            this.ux.log(text);
-          } else {
-            text = '';
-          }
+    let text;
+    zipEntries.forEach(zipEntry => {
+      const fileName = zipEntry.entryName;
+      const fileContent = zip.readAsText(fileName);
+      if (fileName.includes('package.xml')) {
+        text = convert.xml2js(fileContent, { compact: true });
+        if ('description' in text['Package']) {
+          text = text['Package']['description']['_text'];
+          this.ux.log(text);
+        } else {
+          text = '';
         }
-      });
-      return { description: text };
-    } catch (err) {
-      this.ux.error(err);
-    }
+      }
+    });
+    return { description: text };
+
   }
 }

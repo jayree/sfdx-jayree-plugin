@@ -30,29 +30,24 @@ export default class SetPackageDescription extends SfdxCommand {
 
   public async run(): Promise<core.AnyJson> {
 
-    try {
+    const inputfile = this.args.file || this.flags.file;
+    const newZip = new AdmZip();
+    const text = this.flags.description;
 
-      const inputfile = this.args.file || this.flags.file;
-      const newZip = new AdmZip();
-      const text = this.flags.description;
+    const fileContentjs = {
+      _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+      Package: [{
+        _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+        description: text,
+        version: '43.0'
+      }]
+    };
 
-      const fileContentjs = {
-        _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-        Package: [{
-          _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-          description: text,
-          version: '43.0'
-        }]
-      };
+    newZip.addFile('unpackaged/package.xml', Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
 
-      newZip.addFile('unpackaged/package.xml', Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+    newZip.writeZip(inputfile);
+    this.ux.log(text);
 
-      newZip.writeZip(inputfile);
-      this.ux.log(text);
-
-      return { description: text, task: 'created' };
-    } catch (err) {
-      this.ux.error(err);
-    }
+    return { description: text, task: 'created' };
   }
 }

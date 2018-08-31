@@ -29,50 +29,46 @@ export default class SetPackageDescription extends SfdxCommand {
 
   public async run(): Promise<core.AnyJson> {
 
-    try {
+    const inputfile = this.args.file || this.flags.file;
+    const newZip = new AdmZip();
 
-      const inputfile = this.args.file || this.flags.file;
-      const newZip = new AdmZip();
+    const zip = new AdmZip(inputfile);
+    const zipEntries = zip.getEntries();
 
-      const zip = new AdmZip(inputfile);
-      const zipEntries = zip.getEntries();
-
-      let action;
-      let text;
-      zipEntries.forEach(zipEntry => {
-        const fileName = zipEntry.entryName;
-        const fileContent = zip.readAsText(fileName);
-        let fileContentjs;
-        if (fileName.includes('package.xml')) {
-          const xml = convert.xml2js(fileContent, { compact: true });
-          if ('description' in xml['Package']) {
-            text = xml['Package']['description']['_text'];
-            action = 'removed';
-            this.ux.log(action + ' description: ' + text);
-            fileContentjs = {
-              _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-              Package: [{
-                _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-                types: xml['Package']['types'],
-                version: xml['Package']['version']
-              }]
-            };
-            newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
-          } else {
-            newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
-            action = '';
-            this.ux.log('no description found');
-          }
+    let action;
+    let text;
+    zipEntries.forEach(zipEntry => {
+      const fileName = zipEntry.entryName;
+      const fileContent = zip.readAsText(fileName);
+      let fileContentjs;
+      if (fileName.includes('package.xml')) {
+        const xml = convert.xml2js(fileContent, { compact: true });
+        if ('description' in xml['Package']) {
+          text = xml['Package']['description']['_text'];
+          action = 'removed';
+          this.ux.log(action + ' description: ' + text);
+          fileContentjs = {
+            _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+            Package: [{
+              _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+              types: xml['Package']['types'],
+              version: xml['Package']['version']
+            }]
+          };
+          newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
         } else {
           newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+          action = '';
+          this.ux.log('no description found');
         }
-      });
+      } else {
+        newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+      }
+    });
 
-      newZip.writeZip(inputfile);
+    newZip.writeZip(inputfile);
 
-      return { old_description: text, task: action };
-    } catch (err) {
-      this.ux.error(err);
-    }
+    return { old_description: text, task: action };
+
   }
 }

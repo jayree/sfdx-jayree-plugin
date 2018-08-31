@@ -20,7 +20,7 @@ export default class SetPackageDescription extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true  }),
+    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true }),
     description: flags.string({ char: 'd', description: messages.getMessage('descriptionFlagDescription'), dependsOn: ['file'], required: true })
   };
 
@@ -30,50 +30,46 @@ export default class SetPackageDescription extends SfdxCommand {
 
   public async run(): Promise<core.AnyJson> {
 
-    try {
+    const inputfile = this.args.file || this.flags.file;
+    const newZip = new AdmZip();
 
-      const inputfile = this.args.file || this.flags.file;
-      const newZip = new AdmZip();
+    const zip = new AdmZip(inputfile);
+    const zipEntries = zip.getEntries();
 
-      const zip = new AdmZip(inputfile);
-      const zipEntries = zip.getEntries();
-
-      const text = this.flags.description;
-      let action;
-      zipEntries.forEach(zipEntry => {
-        const fileName = zipEntry.entryName;
-        const fileContent = zip.readAsText(fileName);
-        let fileContentjs;
-        if (fileName.includes('package.xml')) {
-          const xml = convert.xml2js(fileContent, { compact: true });
-          if ('description' in xml['Package']) {
-            xml['Package']['description'] = text;
-            action = 'updated';
-            fileContentjs = xml;
-          } else {
-            fileContentjs = {
-              _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-              Package: [{
-                _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-                description: text,
-                types: xml['Package']['types'],
-                version: xml['Package']['version']
-              }]
-            };
-            action = 'added';
-          }
-          this.ux.log(action + ' description: ' + text);
-          newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+    const text = this.flags.description;
+    let action;
+    zipEntries.forEach(zipEntry => {
+      const fileName = zipEntry.entryName;
+      const fileContent = zip.readAsText(fileName);
+      let fileContentjs;
+      if (fileName.includes('package.xml')) {
+        const xml = convert.xml2js(fileContent, { compact: true });
+        if ('description' in xml['Package']) {
+          xml['Package']['description'] = text;
+          action = 'updated';
+          fileContentjs = xml;
         } else {
-          newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+          fileContentjs = {
+            _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+            Package: [{
+              _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+              description: text,
+              types: xml['Package']['types'],
+              version: xml['Package']['version']
+            }]
+          };
+          action = 'added';
         }
-      });
+        this.ux.log(action + ' description: ' + text);
+        newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+      } else {
+        newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+      }
+    });
 
-      newZip.writeZip(inputfile);
+    newZip.writeZip(inputfile);
 
-      return { description: text, task: action };
-    } catch (err) {
-      this.ux.error(err);
-    }
+    return { description: text, task: action };
+
   }
 }
