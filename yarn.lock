@@ -102,7 +102,14 @@
     debug "^3.1.0"
     semver "^5.5.0"
 
-"@oclif/config@1.7.2", "@oclif/config@^1.7.0":
+"@oclif/config@1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.7.3.tgz#b666b581a9b080419d5f12a2cb618a2c4c6bced0"
+  dependencies:
+    debug "^3.1.0"
+    tslib "^1.9.3"
+
+"@oclif/config@^1.7.0":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.7.2.tgz#2b474e47fd46aea2ff2d2dcab2cef47fa39dbfcf"
   dependencies:
