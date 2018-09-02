@@ -1,19 +1,5 @@
 ---
 version: 2
-
-save: &save
-  save_cache:
-    key: code-{{ .Revision }}
-    paths:
-      - .
-      # save the git commit and ssh config
-      - ".git"
-      - "~/.ssh"
-
-restore: &restore
-  restore_cache:
-    key: code-{{ .Revision }}
-
 jobs:
   node-latest: &test
     docker:
@@ -21,9 +7,6 @@ jobs:
     working_directory: ~/cli
     steps:
       - checkout
-      - run: 'yarn global add greenkeeper-lockfile@2'
-      - run: 'greenkeeper-lockfile-update'
-      - <<: *save
       - restore_cache: &restore_cache
           keys:
             - v1-npm-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
@@ -45,13 +28,6 @@ jobs:
             - ~/cli/node_modules
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
-      - <<: *restore
-      - run: 'yarn global add greenkeeper-lockfile@2'
-      # optionally ignore ssh hosts unknown error if you don't want to save ~/.ssh between jobs
-      # - run:
-          # name: SSH Avoid hosts unknown
-          # command: 'mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config'
-      - run: 'greenkeeper-lockfile-upload'
   node-8:
     <<: *test
     docker:
