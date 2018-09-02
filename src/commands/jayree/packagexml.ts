@@ -1,4 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-json';
 import * as jf from 'jsonfile';
 import * as notifier from 'node-notifier';
 import * as convert from 'xml-js';
@@ -51,7 +52,7 @@ export default class PackageXML extends SfdxCommand {
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
 
     let apiVersion;
     let quickFilters;
@@ -60,13 +61,21 @@ export default class PackageXML extends SfdxCommand {
     const configFile = this.flags.config || false;
 
     try {
+      apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
+      if (this.flags.quickfilter) {
+        quickFilters = this.flags.quickfilter.split(',');
+      } else {
+        quickFilters = [];
+      }
+      excludeManaged = this.flags.excludeManaged || false;
+
       if (configFile) {
         jf.readFile(configFile, (err, obj) => {
           if (err) {
             throw err;
           } else {
             /* cli parameters still override whats in the config file */
-            apiVersion = this.flags.apiversion || obj.apiVersion || '43.0';
+            apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
             if (this.flags.quickfilter) {
               quickFilters = this.flags.quickfilter.split(',');
             } else {
@@ -75,14 +84,6 @@ export default class PackageXML extends SfdxCommand {
             excludeManaged = this.flags.excludeManaged || (obj.excludeManaged === 'true') || false;
           }
         });
-      } else {
-        apiVersion = this.flags.apiversion || '43.0';
-        if (this.flags.quickfilter) {
-          quickFilters = this.flags.quickfilter.split(',');
-        } else {
-          quickFilters = [];
-        }
-        excludeManaged = this.flags.excludeManaged || false;
       }
 
       const conn = this.org.getConnection();

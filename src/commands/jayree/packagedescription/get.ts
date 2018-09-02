@@ -1,4 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-json';
 import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
@@ -28,7 +29,7 @@ export default class GetPackageDescription extends SfdxCommand {
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
 
     const inputfile = this.args.file || this.flags.file;
 

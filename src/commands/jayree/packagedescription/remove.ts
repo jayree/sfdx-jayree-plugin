@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import * as AdmZip from 'adm-zip';
+import {AnyJson} from '@salesforce/ts-json';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -27,7 +28,7 @@ export default class SetPackageDescription extends SfdxCommand {
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
 
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
