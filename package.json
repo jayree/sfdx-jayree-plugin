@@ -4,7 +4,7 @@
   "bugs": "https://github.com/jayree/sfdx-jayree/issues",
   "dependencies": {
     "@oclif/command": "1.5.0",
-    "@oclif/config": "1.7.3",
+    "@oclif/config": "1.7.4",
     "@oclif/errors": "1.2.0",
     "@salesforce/command": "0.2.3",
     "@types/jsonfile": "4.0.1",
