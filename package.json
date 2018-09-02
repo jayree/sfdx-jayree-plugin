@@ -16,7 +16,7 @@
     "snyk": "^1.93.0"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "1.17.0",
+    "@oclif/dev-cli": "1.18.0",
     "@oclif/plugin-help": "2.1.1",
     "@oclif/test": "^1.0.0",
     "@salesforce/dev-config": "1.1.4",
