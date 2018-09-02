@@ -1,4 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
 import * as convert from 'xml-js';
 
@@ -60,7 +61,7 @@ export default class Org extends SfdxCommand {
   // Set this to true if your command requires a project workspace; 'requiresProject' is false by default
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
 
     let apiVersion;
     let quickFilters;
