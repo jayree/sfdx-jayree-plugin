@@ -26,6 +26,7 @@
     "@types/node": "10.9.4",
     "chai": "^4.0.0",
     "codecov": "3.0.4",
+    "greenkeeper-lockfile": "1.15.1",
     "globby": "8.0.1",
     "mocha": "^5.0.0",
     "nyc": "13.0.1",
