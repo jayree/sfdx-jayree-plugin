@@ -1,5 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import {AnyJson} from '@salesforce/ts-json';
+import {AnyJson} from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
 import * as notifier from 'node-notifier';
 import * as convert from 'xml-js';
