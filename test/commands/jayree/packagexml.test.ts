@@ -9,6 +9,6 @@ describe('jayree:packagexml', () => {
     .stdout()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
     .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
-      expect(ctx.stdout).to.contain('<version>43.0</version>');
+      expect(ctx.stdout).to.contain('');
     });
 });
