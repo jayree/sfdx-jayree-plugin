@@ -1,8 +1,8 @@
 {
-  "commandDescription": "generate a complete package xml form the specified org",
-  "nameFlagDescription": "name to print",
+  "commandDescription": "set the description within a package",
+  "fileFlagDescription": "file to cead",
   "forceFlagDescription": "example boolean flag",
-  "configFlagDescription": "path to config file",
+  "descriptionFlagDescription": "new description value",
   "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
   "errorNoOrgResults": "no results found for the organization '%s'.",
   "excludeManagedFlagDescription": "exclude managed packages from output"

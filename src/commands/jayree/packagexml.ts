@@ -1,12 +1,10 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import {AnyJson} from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
+import * as notifier from 'node-notifier';
 import * as convert from 'xml-js';
 
-// Initialize Messages with the current plugin directory
 core.Messages.importMessagesDirectory(__dirname);
-
-// Load the specific messages for this file. Messages from @salesforce/command, @salesforce/core,
-// or any library that is using the messages framework can also be loaded this way.
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
 export {};
@@ -30,7 +28,10 @@ if (Symbol['asyncIterator'] === undefined) {
   ((Symbol as any)['asyncIterator']) = Symbol.for('asyncIterator');
 }
 
-export default class Org extends SfdxCommand {
+export default class PackageXML extends SfdxCommand {
+
+  // hotfix to receive only one help page
+  // public static hidden = true;
 
   public static description = messages.getMessage('commandDescription');
 
@@ -41,26 +42,17 @@ export default class Org extends SfdxCommand {
   `
   ];
 
-  // public static args = [{ config: 'configfile' }];
-
   protected static flagsConfig = {
-    // flag with a value (-n, --name=VALUE)
-    // name: flags.string({ char: 'n', description: messages.getMessage('nameFlagDescription') }),
     config: flags.string({ char: 'c', description: messages.getMessage('configFlagDescription') }),
     quickfilter: flags.string({ char: 'q', description: messages.getMessage('quickfilterFlagDescription') }),
     excludemanaged: flags.boolean({ char: 'x', description: messages.getMessage('excludeManagedFlagDescription') })
   };
 
-  // Comment this out if your command does not require an org username
   protected static requiresUsername = true;
-
-  // Comment this out if your command does not support a hub org username
   protected static supportsDevhubUsername = false;
-
-  // Set this to true if your command requires a project workspace; 'requiresProject' is false by default
   protected static requiresProject = false;
 
-  public async run(): Promise<core.AnyJson> {
+  public async run(): Promise<AnyJson> {
 
     let apiVersion;
     let quickFilters;
@@ -69,13 +61,21 @@ export default class Org extends SfdxCommand {
     const configFile = this.flags.config || false;
 
     try {
+      apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
+      if (this.flags.quickfilter) {
+        quickFilters = this.flags.quickfilter.split(',');
+      } else {
+        quickFilters = [];
+      }
+      excludeManaged = this.flags.excludeManaged || false;
+
       if (configFile) {
         jf.readFile(configFile, (err, obj) => {
           if (err) {
             throw err;
           } else {
             /* cli parameters still override whats in the config file */
-            apiVersion = this.flags.apiversion || obj.apiVersion || '43.0';
+            apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
             if (this.flags.quickfilter) {
               quickFilters = this.flags.quickfilter.split(',');
             } else {
@@ -84,29 +84,9 @@ export default class Org extends SfdxCommand {
             excludeManaged = this.flags.excludeManaged || (obj.excludeManaged === 'true') || false;
           }
         });
-      } else {
-        apiVersion = this.flags.apiversion || '43.0';
-        if (this.flags.quickfilter) {
-          quickFilters = this.flags.quickfilter.split(',');
-        } else {
-          quickFilters = [];
-        }
-        excludeManaged = this.flags.excludeManaged || false;
       }
 
-      // this.org is guaranteed because requiresUsername=true, as opposed to supportsUsername
       const conn = this.org.getConnection();
-      /*     const query = 'Select Name, TrialExpirationDate from Organization';
-
-          // The type we are querying for
-          interface Organization {
-            Name: string;
-            TrialExpirationDate: string;
-          }
-
-          // Query the org
-          const result = await conn.query<Organization>(query);
-          */
 
       const describe = await conn.metadata.describe(apiVersion);
 
@@ -208,12 +188,12 @@ export default class Org extends SfdxCommand {
                   }
                 }
               } else {
-                console.error('No metadataEntry available');
+                this.ux.error('No metadataEntry available');
               }
             });
           }
         } catch (err) {
-          console.error(err);
+          this.ux.error(err);
         }
       });
 
@@ -237,12 +217,12 @@ export default class Org extends SfdxCommand {
                   packageTypes[metadataEntries.type].pushUniqueValue(metadataEntries.fullName);
                 }
               } else {
-                console.error('No metadataEntry available');
+                this.ux.error('No metadataEntry available');
               }
             });
           }
         } catch (err) {
-          console.error(err);
+          this.ux.error(err);
         }
       });
 
@@ -252,20 +232,6 @@ export default class Org extends SfdxCommand {
       ['AccountContactMultiRoles', 'AccountContactRole', 'AccountOwnership', 'AccountRating', 'AccountType', 'AddressCountryCode', 'AddressStateCode', 'AssetStatus', 'CampaignMemberStatus', 'CampaignStatus', 'CampaignType', 'CaseContactRole', 'CaseOrigin', 'CasePriority', 'CaseReason', 'CaseStatus', 'CaseType', 'ContactRole', 'ContractContactRole', 'ContractStatus', 'EntitlementType', 'EventSubject', 'EventType', 'FiscalYearPeriodName', 'FiscalYearPeriodPrefix', 'FiscalYearQuarterName', 'FiscalYearQuarterPrefix', 'IdeaCategory', 'IdeaMultiCategory', 'IdeaStatus', 'IdeaThemeStatus', 'Industry', 'InvoiceStatus', 'LeadSource', 'LeadStatus', 'OpportunityCompetitor', 'OpportunityStage', 'OpportunityType', 'OrderStatus', 'OrderType', 'PartnerRole', 'Product2Family', 'QuestionOrigin', 'QuickTextCategory', 'QuickTextChannel', 'QuoteStatus', 'SalesTeamRole', 'Salutation', 'ServiceContractApprovalStatus', 'SocialPostClassification', 'SocialPostEngagementLevel', 'SocialPostReviewedStatus', 'SolutionStatus', 'TaskPriority', 'TaskStatus', 'TaskSubject', 'TaskType', 'WorkOrderLineItemStatus', 'WorkOrderPriority', 'WorkOrderStatus'].forEach(member => {
         packageTypes['StandardValueSet'].pushUniqueValue(member);
       });
-
-      /*       const packageJson = {
-              types: [],
-              version: apiVersion
-            };
-
-            Object.keys(packageTypes).forEach(type => {
-              if ((quickFilters.length === 0 || quickFilters.includes(type))) {
-                packageJson.types.push({
-                  name: type,
-                  members: packageTypes[type]
-                });
-              }
-            }); */
 
       const packageJson = {
         _declaration: {_attributes: {version: '1.0', encoding: 'utf-8'}},
@@ -285,42 +251,18 @@ export default class Org extends SfdxCommand {
         }
       });
 
-      // const packageXml = `<?xml version="1.0" encoding="UTF-8"?>\n<Package xmlns="http://soap.sforce.com/2006/04/metadata">\n${convert.js2xml(packageJson, { compact: true, spaces: 4 })}\n</Package>`;
       const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
+
+      notifier.notify({
+        title: 'sfdx-jayree packagexml',
+        message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
+      });
 
       this.ux.log(packageXml);
 
-      /*     // Organization will always return one result, but this is an example of throwing an error
-          // The output and --json will automatically be handled for you.
-          if (!result.records || result.records.length <= 0) {
-            throw new core.SfdxError(messages.getMessage('errorNoOrgResults', [this.org.getOrgId()]));
-          }
-
-          // Organization always only returns one result
-          const orgName = result.records[0].Name;
-          const trialExpirationDate = result.records[0].TrialExpirationDate;
-
-          let outputString = `Hello ${name}! This is org: ${orgName}`;
-          if (trialExpirationDate) {
-            const date = new Date(trialExpirationDate).toDateString();
-            outputString = `${outputString} and I will be around until ${date}!`;
-          }
-           this.ux.log(outputString);
-
-          // this.hubOrg is NOT guaranteed because supportsHubOrgUsername=true, as opposed to requiresHubOrgUsername.
-          if (this.hubOrg) {
-            const hubOrgId = this.hubOrg.getOrgId();
-            this.ux.log(`My hub org id is: ${hubOrgId}`);
-          }
-
-          if (this.flags.force && this.args.file) {
-            this.ux.log(`You input --force and --file: ${this.args.file}`);
-          } */
-
-      // Return an object to be displayed with --json
       return { orgId: this.org.getOrgId(), packageJson };
     } catch (err) {
-      console.error(err);
+      this.ux.error(err);
     }
   }
 }
