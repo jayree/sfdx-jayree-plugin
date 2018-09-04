@@ -108,7 +108,7 @@
       }
     },
     "@nodelib/fs.stat": {
-      "version": "1.1.1",
+      "version": "1.1.2",
       "dev": true
     },
     "@oclif/command": {
