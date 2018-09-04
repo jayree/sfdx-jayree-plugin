@@ -72,8 +72,10 @@
     "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "tsc -p test --noEmit && tslint -p test -t stylish",
     "prepack": "rimraf lib && tsc && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
-    "prepare": "rimraf lib && tsc && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "prepare": "npm run snyk-protect && rimraf lib && tsc && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "test": "nyc mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
-  }
+    "version": "oclif-dev readme && git add README.md",
+    "snyk-protect": "snyk protect"
+  },
+  "snyk": true
 }
