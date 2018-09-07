@@ -9,7 +9,7 @@
     "@salesforce/command": "0.2.4",
     "adm-zip": "0.4.11",
     "node-notifier": "5.2.1",
-    "snyk": "1.94.0",
+    "snyk": "1.95.0",
     "tslib": "1.9.3",
     "xml-js": "1.6.7"
   },
