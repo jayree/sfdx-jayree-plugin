@@ -1523,7 +1523,7 @@ http-call@^5.1.2:
 
 http-errors@1.6.3:
   version "1.6.3"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
+  resolved "http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
   dependencies:
     depd "~1.1.2"
     inherits "2.0.3"
@@ -1890,7 +1890,7 @@ jsesc@^2.5.1:
 
 jsforce@1.8.4:
   version "1.8.4"
-  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-1.8.4.tgz#7c1a32cd799205e77706fa99229e4dd207030fc6"
+  resolved "http://registry.npmjs.org/jsforce/-/jsforce-1.8.4.tgz#7c1a32cd799205e77706fa99229e4dd207030fc6"
   dependencies:
     co-prompt "^1.0.0"
     coffeescript "^1.10.0"
@@ -3089,9 +3089,9 @@ snyk-go-plugin@1.5.2:
     tmp "0.0.33"
     toml "^2.3.2"
 
-snyk-gradle-plugin@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/snyk-gradle-plugin/-/snyk-gradle-plugin-1.3.0.tgz#7a589155825ec613e24cc2bcf0d738438fb06216"
+snyk-gradle-plugin@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/snyk-gradle-plugin/-/snyk-gradle-plugin-1.3.1.tgz#9bd080f9d9ee0b9186fa0e34e682613766a13637"
   dependencies:
     clone-deep "^0.3.0"
 
@@ -3102,9 +3102,9 @@ snyk-module@1.8.2, snyk-module@^1.6.0, snyk-module@^1.8.2:
     debug "^3.1.0"
     hosted-git-info "^2.1.4"
 
-snyk-mvn-plugin@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/snyk-mvn-plugin/-/snyk-mvn-plugin-1.2.1.tgz#133c0b8958c3c6614cd206755f0f8e910c313234"
+snyk-mvn-plugin@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/snyk-mvn-plugin/-/snyk-mvn-plugin-1.2.2.tgz#1ffbd0696aa548ab0ae55fb842b7d4a7d9c50f90"
 
 snyk-nodejs-lockfile-parser@1.4.1:
   version "1.4.1"
@@ -3177,11 +3177,9 @@ snyk-resolve@1.0.1, snyk-resolve@^1.0.0, snyk-resolve@^1.0.1:
     debug "^3.1.0"
     then-fs "^2.0.0"
 
-snyk-sbt-plugin@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/snyk-sbt-plugin/-/snyk-sbt-plugin-1.3.1.tgz#15b4a212672dfba33f26aec953229db1a962f29e"
-  dependencies:
-    debug "^3.1.0"
+snyk-sbt-plugin@1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/snyk-sbt-plugin/-/snyk-sbt-plugin-1.3.2.tgz#f724219c7084da30505b90492a672c5e9493945f"
 
 snyk-tree@^1.0.0:
   version "1.0.0"
@@ -3198,9 +3196,9 @@ snyk-try-require@1.3.1, snyk-try-require@^1.1.1:
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
 
-snyk@1.95.0:
-  version "1.95.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.95.0.tgz#0efedd4701c04e597ffcff10a702a32053314849"
+snyk@1.95.1:
+  version "1.95.1"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.95.1.tgz#99b2ed59239b4d199dc93d5b065eb55d0a173e78"
   dependencies:
     abbrev "^1.1.1"
     ansi-escapes "^3.1.0"
@@ -3220,9 +3218,9 @@ snyk@1.95.0:
     snyk-config "2.2.0"
     snyk-docker-plugin "1.10.4"
     snyk-go-plugin "1.5.2"
-    snyk-gradle-plugin "1.3.0"
+    snyk-gradle-plugin "1.3.1"
     snyk-module "1.8.2"
-    snyk-mvn-plugin "1.2.1"
+    snyk-mvn-plugin "1.2.2"
     snyk-nodejs-lockfile-parser "1.4.1"
     snyk-nuget-plugin "1.6.5"
     snyk-php-plugin "1.5.1"
@@ -3230,7 +3228,7 @@ snyk@1.95.0:
     snyk-python-plugin "1.8.1"
     snyk-resolve "1.0.1"
     snyk-resolve-deps "3.1.0"
-    snyk-sbt-plugin "1.3.1"
+    snyk-sbt-plugin "1.3.2"
     snyk-tree "^1.0.0"
     snyk-try-require "1.3.1"
     tempfile "^2.0.0"
@@ -3317,8 +3315,8 @@ spdx-expression-parse@^3.0.0:
     spdx-license-ids "^3.0.0"
 
 spdx-license-ids@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.0.tgz#7a7cd28470cc6d3a1cfe6d66886f6bc430d3ac87"
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.1.tgz#e2a303236cac54b04031fa7a5a79c7e701df852f"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
