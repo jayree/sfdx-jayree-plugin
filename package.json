@@ -9,7 +9,7 @@
     "@salesforce/command": "0.2.4",
     "adm-zip": "0.4.11",
     "node-notifier": "5.2.1",
-    "snyk": "1.95.1",
+    "snyk": "1.95.3",
     "tslib": "1.9.3",
     "xml-js": "1.6.7"
   },
@@ -31,7 +31,7 @@
     "greenkeeper-lockfile": "1.15.1",
     "mocha": "5.2.0",
     "nyc": "13.0.1",
-    "sinon": "6.1.5",
+    "sinon": "6.2.0",
     "ts-node": "7.0.1",
     "typescript": "3.0.3"
   },
