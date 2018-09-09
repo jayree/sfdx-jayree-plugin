@@ -12,20 +12,14 @@ jobs:
             - v1-npm-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
             - v1-npm-{{checksum ".circleci/config.yml"}}
       - run:
-          name: Add greenkeeper-lockfile-update
-          command: yarn global add greenkeeper-lockfile@1
-      - run:
-          name: Run Greenkeeper lockfile update
-          command: $(yarn global bin)/greenkeeper-lockfile-update
+          name: Install dependencies
+          command: .circleci/greenkeeper
       - save_cache:
           key: v1-yarn-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
           paths:
             - ~/cli/node_modules
             - /usr/local/share/.cache/yarn
             - /usr/local/share/.config/yarn
-      - run:
-          name: Greenkeeper uploading lockfile
-          command: $(yarn global bin)/greenkeeper-lockfile-upload
   node-latest: &test
     docker:
       - image: node:latest
