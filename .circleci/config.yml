@@ -58,8 +58,8 @@ workflows:
     jobs:
       - greenkeeper-updates
       - node-latest
-          requires:
-            - greenkeeper-updates
+        requires:
+          - greenkeeper-updates
       - node-8
-          requires:
-            - greenkeeper-updates
+        requires:
+          - greenkeeper-updates
