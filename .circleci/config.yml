@@ -1,6 +1,31 @@
 ---
 version: 2
 jobs:
+  greenkeeper-updates:
+    docker:
+      - image: node:latest
+    working_directory: ~/cli
+    steps:
+      - checkout
+      - restore_cache: &restore_cache
+          keys:
+            - v1-npm-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
+            - v1-npm-{{checksum ".circleci/config.yml"}}
+      - run:
+          name: Add greenkeeper-lockfile-update
+          command: yarn global add greenkeeper-lockfile@1
+      - run:
+          name: Run Greenkeeper lockfile update
+          command: $(yarn global bin)/greenkeeper-lockfile-update
+      - save_cache:
+          key: v1-yarn-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+          paths:
+            - ~/cli/node_modules
+            - /usr/local/share/.cache/yarn
+            - /usr/local/share/.config/yarn
+      - run:
+          name: Greenkeeper uploading lockfile
+          command: $(yarn global bin)/greenkeeper-lockfile-upload
   node-latest: &test
     docker:
       - image: node:latest
@@ -13,7 +38,7 @@ jobs:
             - v1-npm-{{checksum ".circleci/config.yml"}}
       - run:
           name: Install dependencies
-          command: .circleci/greenkeeper
+          command: yarn
       - run:
           name: Testing
           command: yarn test
@@ -37,5 +62,10 @@ workflows:
   version: 2
   "sfdx-jayree":
     jobs:
-      - node-latest
-      - node-8
+      - greenkeeper-updates
+      - node-latest:
+          requires:
+            - greenkeeper-updates
+      - node-8:
+          requires:
+            - greenkeeper-updates
