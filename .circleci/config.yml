@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  greenkeeper-updates: &test
+  greenkeeper-updates:
     docker:
       - image: node:latest
     working_directory: ~/cli
@@ -56,5 +56,6 @@ workflows:
   version: 2
   "sfdx-jayree":
     jobs:
+      - greenkeeper-updates
       - node-latest
       - node-8
