@@ -2,14 +2,18 @@
 version: 2
 jobs:
   greenkeeper-updates:
-    - checkout
-    - restore_cache: &restore_cache
-        keys:
-            - v1-npm-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
-            - v1-npm-{{checksum ".circleci/config.yml"}}
-    - run:
-        name: Run Greenkeeper lockfile update
-        command: .circleci/greenkeeper
+    docker:
+      - image: node:latest
+    working_directory: ~/cli
+    steps:
+      - checkout
+      - restore_cache: &restore_cache
+         keys:
+             - v1-npm-{{checksum ".circleci/config.yml"}}-{{ checksum "yarn.lock"}}
+             - v1-npm-{{checksum ".circleci/config.yml"}}
+      - run:
+          name: Run Greenkeeper lockfile update
+         command: .circleci/greenkeeper
   node-latest: &test
     docker:
       - image: node:latest
