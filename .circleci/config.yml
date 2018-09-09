@@ -56,10 +56,5 @@ workflows:
   version: 2
   "sfdx-jayree":
     jobs:
-      - greenkeeper-updates
       - node-latest
-          requires:
-            - greenkeeper-updates
       - node-8
-          requires:
-            - greenkeeper-updates
