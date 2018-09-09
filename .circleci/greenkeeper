@@ -19,7 +19,7 @@ fi
 if [[ ! -x "$(command -v greenkeeper-lockfile-update)" ]]; then
   yarn global add greenkeeper-lockfile@next
 fi
-
+CI_PULL_REQUEST=''
 greenkeeper-lockfile-update
 yarn
 greenkeeper-lockfile-upload
