@@ -1,5 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import {AnyJson} from '@salesforce/ts-types';
+import { AnyJson } from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
 import * as notifier from 'node-notifier';
 import * as convert from 'xml-js';
@@ -7,15 +7,15 @@ import * as convert from 'xml-js';
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
-export {};
+export { };
 declare global {
-    interface Array<T> {
-      pushUniqueValue(elem: T): T[];
-    }
+  interface Array<T> {
+    pushUniqueValue(elem: T): T[];
+  }
 }
 
 if (!Array.prototype.pushUniqueValue) {
-  Array.prototype.pushUniqueValue = function<T>(elem: T): T[] {
+  Array.prototype.pushUniqueValue = function <T>(elem: T): T[] {
     if (!this.includes(elem)) {
       this.push(elem);
     }
@@ -130,15 +130,17 @@ export default class PackageXML extends SfdxCommand {
         }
       }
 
-      const flowDefinitionQuery = await conn.tooling.query('SELECT DeveloperName,ActiveVersion.VersionNumber FROM FlowDefinition');
+      const flowDefinitionQuery = await conn.tooling.query('SELECT DeveloperName,ActiveVersion.VersionNumber,LatestVersion.VersionNumber FROM FlowDefinition');
 
-      const activeFlowVersions = [];
+      const activeFlowVersions = {};
       for await (const record of flowDefinitionQuery.records) {
-        if (record['ActiveVersion']) {
+        if (record['ActiveVersion'] && record['LatestVersion']) {
           if (!activeFlowVersions[record['DeveloperName']]) {
             activeFlowVersions[record['DeveloperName']] = [];
           }
-          activeFlowVersions[record['DeveloperName']].pushUniqueValue(record['ActiveVersion']['VersionNumber']);
+          // activeFlowVersions[record['DeveloperName']].push({ActiveVersion: record['ActiveVersion']['VersionNumber'], LatestVersion: record['LatestVersion']['VersionNumber']});
+          activeFlowVersions[record['DeveloperName']] = { ActiveVersion: record['ActiveVersion']['VersionNumber'], LatestVersion: record['LatestVersion']['VersionNumber'] };
+
         }
       }
 
@@ -173,12 +175,17 @@ export default class PackageXML extends SfdxCommand {
                       packageTypes[metadataEntries.type] = [];
                     }
 
-                    if (metadataEntries.type === 'Flow') {
+                    if (metadataEntries.type === 'Flow' && activeFlowVersions[metadataEntries.fullName]) {
 
-                      if (activeFlowVersions[metadataEntries.fullName]) {
-                        packageTypes[metadataEntries.type].pushUniqueValue(`${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName]}`);
-                      } else {
+                      if (apiVersion >= 44.0) {
+                        if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
+                          this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - adding '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
+                          packageTypes[metadataEntries.type].pushUniqueValue(`${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`);
+                        }
                         packageTypes[metadataEntries.type].pushUniqueValue(metadataEntries.fullName);
+                      } else {
+                        packageTypes[metadataEntries.type].pushUniqueValue(`${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`);
+                        this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                       }
 
                     } else {
@@ -234,9 +241,9 @@ export default class PackageXML extends SfdxCommand {
       });
 
       const packageJson = {
-        _declaration: {_attributes: {version: '1.0', encoding: 'utf-8'}},
+        _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
         Package: [{
-          _attributes: {xmlns: 'http://soap.sforce.com/2006/04/metadata'},
+          _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
           types: [],
           version: apiVersion
         }]
