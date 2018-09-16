@@ -22,5 +22,7 @@ fi
 
 CI_PULL_REQUEST=''
 greenkeeper-lockfile-update
+greenkeeper-shrinkwrap-update
 yarn
 greenkeeper-lockfile-upload
+greenkeeper-shrinkwrap-upload
