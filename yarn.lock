@@ -93,7 +93,7 @@
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.2.tgz#54c5a964462be3d4d78af631363c18d6fa91ac26"
 
-"@oclif/command@1.5.1", "@oclif/command@^1.5.1":
+"@oclif/command@1.5.1", "@oclif/command@^1.5.0", "@oclif/command@^1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@oclif/command/-/command-1.5.1.tgz#dd2e1c1f8e55dad73036d4cab036ac3550ff8c24"
   dependencies:
@@ -101,15 +101,6 @@
     "@oclif/parser" "^3.6.1"
     debug "^4.0.1"
     semver "^5.5.1"
-
-"@oclif/command@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@oclif/command/-/command-1.5.0.tgz#d5276a19506349fff0254b0dd98e3b8a2bd971aa"
-  dependencies:
-    "@oclif/errors" "^1.1.2"
-    "@oclif/parser" "^3.6.0"
-    debug "^3.1.0"
-    semver "^5.5.0"
 
 "@oclif/config@1.7.6", "@oclif/config@^1.7.6":
   version "1.7.6"
@@ -134,7 +125,7 @@
     qqjs "^0.3.10"
     tslib "^1.9.3"
 
-"@oclif/errors@1.2.1", "@oclif/errors@^1.2.1":
+"@oclif/errors@1.2.1", "@oclif/errors@^1.2.0", "@oclif/errors@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@oclif/errors/-/errors-1.2.1.tgz#3d655bec6ce7eb7df2f3cd39c23eb62f0470b77d"
   dependencies:
@@ -143,16 +134,6 @@
     indent-string "^3.2.0"
     strip-ansi "^4.0.0"
     wrap-ansi "^4.0.0"
-
-"@oclif/errors@^1.1.2", "@oclif/errors@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@oclif/errors/-/errors-1.2.0.tgz#4166952699724c25af2ab4528fe223e930655e72"
-  dependencies:
-    clean-stack "^1.3.0"
-    fs-extra "^7.0.0"
-    indent-string "^3.2.0"
-    strip-ansi "^4.0.0"
-    wrap-ansi "^3.0.1"
 
 "@oclif/linewrap@^1.0.0":
   version "1.0.0"
@@ -166,7 +147,7 @@
     chalk "^2.4.1"
     tslib "^1.9.3"
 
-"@oclif/plugin-help@2.1.2", "@oclif/plugin-help@^2.1.2":
+"@oclif/plugin-help@2.1.2", "@oclif/plugin-help@^2.1.0", "@oclif/plugin-help@^2.1.2":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-2.1.2.tgz#b6639e95157f563225a29b4329ce62e2e162afe9"
   dependencies:
@@ -179,33 +160,15 @@
     widest-line "^2.0.0"
     wrap-ansi "^4.0.0"
 
-"@oclif/plugin-help@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-2.1.1.tgz#5bce32a8a9795827e4f0c6f18c3ff30010130e18"
-  dependencies:
-    "@oclif/command" "^1.5.0"
-    chalk "^2.4.1"
-    indent-string "^3.2.0"
-    lodash.template "^4.4.0"
-    string-width "^2.1.1"
-    widest-line "^2.0.0"
-    wrap-ansi "^4.0.0"
-
 "@oclif/screen@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.2.tgz#c9d7c84b0ea60ecec8dd7a9b22c012ba9967aed8"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-1.0.3.tgz#da9f3481a0e386abd36ac7c0d2fe6e1d8c1058f7"
 
-"@oclif/test@1.2.1":
+"@oclif/test@1.2.1", "@oclif/test@^1.2.0":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@oclif/test/-/test-1.2.1.tgz#68f4e9a3849a8717d9c13f94b62b655d099a02d9"
   dependencies:
     fancy-test "^1.4.1"
-
-"@oclif/test@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-1.2.0.tgz#764ca66215f5bd36c0b5cbcbfc5963f0271825b8"
-  dependencies:
-    fancy-test "^1.3.0"
 
 "@salesforce/command@0.2.4":
   version "0.2.4"
@@ -690,8 +653,8 @@ check-error@^1.0.1:
   resolved "https://registry.yarnpkg.com/check-error/-/check-error-1.0.2.tgz#574d312edd88bb5dd8912e9286dd6c0aed4aac82"
 
 chownr@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
 
 class-utils@^0.3.5:
   version "0.3.6"
@@ -712,30 +675,7 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
-cli-ux@^4.8.0:
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-4.8.1.tgz#aaaf3d9f0d48310955a208467800325fdeb67b7f"
-  dependencies:
-    "@oclif/errors" "^1.2.0"
-    "@oclif/linewrap" "^1.0.0"
-    "@oclif/screen" "^1.0.2"
-    ansi-styles "^3.2.1"
-    cardinal "^2.1.1"
-    chalk "^2.4.1"
-    clean-stack "^1.3.0"
-    extract-stack "^1.0.0"
-    fs-extra "^7.0.0"
-    hyperlinker "^1.0.0"
-    indent-string "^3.2.0"
-    is-wsl "^1.1.0"
-    lodash "^4.17.10"
-    password-prompt "^1.0.7"
-    semver "^5.5.1"
-    strip-ansi "^4.0.0"
-    supports-color "^5.5.0"
-    supports-hyperlinks "^1.0.1"
-
-cli-ux@^4.8.2:
+cli-ux@^4.8.0, cli-ux@^4.8.2:
   version "4.8.2"
   resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-4.8.2.tgz#6be3c966919727106fba875de1dc771b2567de1d"
   dependencies:
@@ -966,6 +906,12 @@ debug@3.1.0:
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
+
+debug@^3.1.0:
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.5.tgz#c2418fbfd7a29f4d4f70ff4cea604d4b64c46407"
+  dependencies:
+    ms "^2.1.1"
 
 debug@^4.0.1:
   version "4.0.1"
@@ -1222,20 +1168,6 @@ extsprintf@1.3.0:
 extsprintf@^1.2.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
-
-fancy-test@^1.3.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-1.4.0.tgz#93e8b1904afbcefb496f58a05f6d2d99fc9c4acc"
-  dependencies:
-    "@types/chai" "^4.1.4"
-    "@types/lodash" "^4.14.116"
-    "@types/mocha" "^5.2.5"
-    "@types/nock" "^9.3.0"
-    "@types/node" "^10.9.4"
-    "@types/sinon" "^5.0.2"
-    lodash "^4.17.10"
-    mock-stdin "^0.3.1"
-    stdout-stderr "^0.1.9"
 
 fancy-test@^1.4.1:
   version "1.4.1"
@@ -1834,7 +1766,7 @@ is-number@^3.0.0:
 
 is-obj@^1.0.0:
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
+  resolved "http://registry.npmjs.org/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
 
 is-plain-obj@^1.0.0:
   version "1.1.0"
@@ -2025,7 +1957,7 @@ jsonfile@^4.0.0:
 
 jsonwebtoken@7.0.0:
   version "7.0.0"
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.0.0.tgz#0e1eb109cffe631db7dc0ec8c3face3b57f8f5c3"
+  resolved "http://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-7.0.0.tgz#0e1eb109cffe631db7dc0ec8c3face3b57f8f5c3"
   dependencies:
     joi "~6.10.1"
     jws "^3.0.0"
@@ -2200,11 +2132,11 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "~3.0.0"
 
-lodash@4.17.10, lodash@^4.11.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
+lodash@4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
-lodash@^4.17.11:
+lodash@^4.11.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -3580,7 +3512,7 @@ then-fs@^2.0.0:
 
 through@^2.3.6:
   version "2.3.8"
-  resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
+  resolved "http://registry.npmjs.org/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
 thunkify@^2.1.2:
   version "2.1.2"
@@ -3854,13 +3786,6 @@ wrap-ansi@^2.0.0:
   dependencies:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
-
-wrap-ansi@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-3.0.1.tgz#288a04d87eda5c286e060dfe8f135ce8d007f8ba"
-  dependencies:
-    string-width "^2.1.1"
-    strip-ansi "^4.0.0"
 
 wrap-ansi@^4.0.0:
   version "4.0.0"
