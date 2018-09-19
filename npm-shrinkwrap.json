@@ -5,19 +5,19 @@
   "requires": true,
   "dependencies": {
     "@babel/code-frame": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
-        "@babel/highlight": "7.0.0-beta.51"
+        "@babel/highlight": "^7.0.0"
       }
     },
     "@babel/generator": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
-        "@babel/types": "7.0.0-beta.51",
+        "@babel/types": "^7.0.0",
         "jsesc": "^2.5.1",
-        "lodash": "^4.17.5",
+        "lodash": "^4.17.10",
         "source-map": "^0.5.0",
         "trim-right": "^1.0.1"
       },
@@ -29,73 +29,77 @@
       }
     },
     "@babel/helper-function-name": {
-      "version": "7.0.0-beta.51",
+      "version": "7.1.0",
       "dev": true,
       "requires": {
-        "@babel/helper-get-function-arity": "7.0.0-beta.51",
-        "@babel/template": "7.0.0-beta.51",
-        "@babel/types": "7.0.0-beta.51"
+        "@babel/helper-get-function-arity": "^7.0.0",
+        "@babel/template": "^7.1.0",
+        "@babel/types": "^7.0.0"
       }
     },
     "@babel/helper-get-function-arity": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
-        "@babel/types": "7.0.0-beta.51"
+        "@babel/types": "^7.0.0"
       }
     },
     "@babel/helper-split-export-declaration": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
-        "@babel/types": "7.0.0-beta.51"
+        "@babel/types": "^7.0.0"
       }
     },
     "@babel/highlight": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
         "chalk": "^2.0.0",
         "esutils": "^2.0.2",
-        "js-tokens": "^3.0.0"
+        "js-tokens": "^4.0.0"
+      },
+      "dependencies": {
+        "js-tokens": {
+          "version": "4.0.0",
+          "dev": true
+        }
       }
     },
     "@babel/parser": {
-      "version": "7.0.0-beta.51",
+      "version": "7.1.0",
       "dev": true
     },
     "@babel/template": {
-      "version": "7.0.0-beta.51",
+      "version": "7.1.0",
       "dev": true,
       "requires": {
-        "@babel/code-frame": "7.0.0-beta.51",
-        "@babel/parser": "7.0.0-beta.51",
-        "@babel/types": "7.0.0-beta.51",
-        "lodash": "^4.17.5"
+        "@babel/code-frame": "^7.0.0",
+        "@babel/parser": "^7.1.0",
+        "@babel/types": "^7.0.0"
       }
     },
     "@babel/traverse": {
-      "version": "7.0.0-beta.51",
+      "version": "7.1.0",
       "dev": true,
       "requires": {
-        "@babel/code-frame": "7.0.0-beta.51",
-        "@babel/generator": "7.0.0-beta.51",
-        "@babel/helper-function-name": "7.0.0-beta.51",
-        "@babel/helper-split-export-declaration": "7.0.0-beta.51",
-        "@babel/parser": "7.0.0-beta.51",
-        "@babel/types": "7.0.0-beta.51",
+        "@babel/code-frame": "^7.0.0",
+        "@babel/generator": "^7.0.0",
+        "@babel/helper-function-name": "^7.1.0",
+        "@babel/helper-split-export-declaration": "^7.0.0",
+        "@babel/parser": "^7.1.0",
+        "@babel/types": "^7.0.0",
         "debug": "^3.1.0",
         "globals": "^11.1.0",
-        "invariant": "^2.2.0",
-        "lodash": "^4.17.5"
+        "lodash": "^4.17.10"
       }
     },
     "@babel/types": {
-      "version": "7.0.0-beta.51",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
         "esutils": "^2.0.2",
-        "lodash": "^4.17.5",
+        "lodash": "^4.17.10",
         "to-fast-properties": "^2.0.0"
       }
     },
@@ -243,14 +247,14 @@
       }
     },
     "@salesforce/command": {
-      "version": "0.2.4",
+      "version": "0.2.5",
       "requires": {
         "@oclif/command": "^1.5.0",
         "@oclif/errors": "^1.2.0",
         "@oclif/parser": "^3.6.0",
         "@oclif/plugin-help": "^2.1.0",
         "@oclif/test": "^1.2.0",
-        "@salesforce/core": "0.20.0",
+        "@salesforce/core": "0.21.1",
         "@salesforce/kit": "0.0.8",
         "@salesforce/ts-types": "0.5.0",
         "chalk": "^2.4.0",
@@ -263,24 +267,23 @@
       }
     },
     "@salesforce/core": {
-      "version": "0.20.0",
+      "version": "0.21.1",
       "requires": {
-        "@salesforce/kit": "0.0.7",
-        "@salesforce/ts-types": "0.4.0",
+        "@salesforce/kit": "0.4.0",
+        "@salesforce/ts-types": "0.11.0",
         "@types/jsforce": "1.8.12",
         "bunyan-sfdx-no-dtrace": "1.8.2",
         "debug": "^3.1.0",
         "jsen": "0.6.6",
         "jsforce": "1.8.4",
         "jsonwebtoken": "7.0.0",
-        "lodash": "^4.17.4",
         "mkdirp": "0.5.1"
       },
       "dependencies": {
         "@salesforce/kit": {
-          "version": "0.0.7",
+          "version": "0.4.0",
           "requires": {
-            "@salesforce/ts-types": "0.4.0"
+            "@salesforce/ts-types": "0.11.0"
           }
         },
         "@types/jsforce": {
@@ -311,33 +314,17 @@
       }
     },
     "@salesforce/ts-types": {
-      "version": "0.4.0"
-    },
-    "@sinonjs/commons": {
-      "version": "1.0.2",
-      "dev": true,
-      "requires": {
-        "type-detect": "4.0.8"
-      }
+      "version": "0.11.0"
     },
     "@sinonjs/formatio": {
-      "version": "3.0.0",
+      "version": "2.0.0",
       "dev": true,
       "requires": {
-        "@sinonjs/samsam": "2.1.0"
-      },
-      "dependencies": {
-        "@sinonjs/samsam": {
-          "version": "2.1.0",
-          "dev": true,
-          "requires": {
-            "array-from": "^2.1.1"
-          }
-        }
+        "samsam": "1.3.0"
       }
     },
     "@sinonjs/samsam": {
-      "version": "2.1.1",
+      "version": "2.1.0",
       "dev": true,
       "requires": {
         "array-from": "^2.1.1"
@@ -351,13 +338,13 @@
       }
     },
     "@types/chai": {
-      "version": "4.1.4"
+      "version": "4.1.5"
     },
     "@types/events": {
       "version": "1.2.0"
     },
     "@types/jsforce": {
-      "version": "1.8.16",
+      "version": "1.9.0",
       "dev": true,
       "requires": {
         "@types/events": "*"
@@ -383,7 +370,7 @@
       }
     },
     "@types/node": {
-      "version": "10.9.4"
+      "version": "10.10.1"
     },
     "@types/node-notifier": {
       "version": "0.0.28",
@@ -842,7 +829,7 @@
       "version": "1.1.3"
     },
     "combined-stream": {
-      "version": "1.0.6",
+      "version": "1.0.7",
       "requires": {
         "delayed-stream": "~1.0.0"
       }
@@ -1335,6 +1322,14 @@
         "asynckit": "^0.4.0",
         "combined-stream": "1.0.6",
         "mime-types": "^2.1.12"
+      },
+      "dependencies": {
+        "combined-stream": {
+          "version": "1.0.6",
+          "requires": {
+            "delayed-stream": "~1.0.0"
+          }
+        }
       }
     },
     "fragment-cache": {
@@ -1686,13 +1681,6 @@
         "through": "^2.3.6"
       }
     },
-    "invariant": {
-      "version": "2.2.4",
-      "dev": true,
-      "requires": {
-        "loose-envify": "^1.0.0"
-      }
-    },
     "invert-kv": {
       "version": "1.0.0"
     },
@@ -1833,14 +1821,14 @@
       }
     },
     "istanbul-lib-instrument": {
-      "version": "2.3.2",
+      "version": "3.0.0",
       "dev": true,
       "requires": {
-        "@babel/generator": "7.0.0-beta.51",
-        "@babel/parser": "7.0.0-beta.51",
-        "@babel/template": "7.0.0-beta.51",
-        "@babel/traverse": "7.0.0-beta.51",
-        "@babel/types": "7.0.0-beta.51",
+        "@babel/generator": "^7.0.0",
+        "@babel/parser": "^7.0.0",
+        "@babel/template": "^7.0.0",
+        "@babel/traverse": "^7.0.0",
+        "@babel/types": "^7.0.0",
         "istanbul-lib-coverage": "^2.0.1",
         "semver": "^5.5.0"
       }
@@ -2039,7 +2027,7 @@
       }
     },
     "load-json-file": {
-      "version": "5.0.0",
+      "version": "5.1.0",
       "dev": true,
       "requires": {
         "graceful-fs": "^4.1.2",
@@ -2096,21 +2084,8 @@
       }
     },
     "lolex": {
-      "version": "2.7.4",
+      "version": "2.7.5",
       "dev": true
-    },
-    "loose-envify": {
-      "version": "1.4.0",
-      "dev": true,
-      "requires": {
-        "js-tokens": "^3.0.0 || ^4.0.0"
-      },
-      "dependencies": {
-        "js-tokens": {
-          "version": "4.0.0",
-          "dev": true
-        }
-      }
     },
     "lru-cache": {
       "version": "4.1.3",
@@ -2519,6 +2494,15 @@
         "lolex": "^2.3.2",
         "path-to-regexp": "^1.7.0",
         "text-encoding": "^0.6.4"
+      },
+      "dependencies": {
+        "@sinonjs/formatio": {
+          "version": "3.0.0",
+          "dev": true,
+          "requires": {
+            "@sinonjs/samsam": "2.1.0"
+          }
+        }
       }
     },
     "node-notifier": {
@@ -2549,24 +2533,24 @@
       "version": "1.0.1"
     },
     "nyc": {
-      "version": "13.0.1",
+      "version": "13.1.0",
       "dev": true,
       "requires": {
         "archy": "^1.0.0",
         "arrify": "^1.0.1",
         "caching-transform": "^2.0.0",
-        "convert-source-map": "^1.5.1",
+        "convert-source-map": "^1.6.0",
         "debug-log": "^1.0.1",
         "find-cache-dir": "^2.0.0",
         "find-up": "^3.0.0",
         "foreground-child": "^1.5.6",
-        "glob": "^7.1.2",
+        "glob": "^7.1.3",
         "istanbul-lib-coverage": "^2.0.1",
         "istanbul-lib-hook": "^2.0.1",
-        "istanbul-lib-instrument": "^2.3.2",
-        "istanbul-lib-report": "^2.0.1",
+        "istanbul-lib-instrument": "^3.0.0",
+        "istanbul-lib-report": "^2.0.2",
         "istanbul-lib-source-maps": "^2.0.1",
-        "istanbul-reports": "^2.0.0",
+        "istanbul-reports": "^2.0.1",
         "make-dir": "^1.3.0",
         "merge-source-map": "^1.1.0",
         "resolve-from": "^4.0.0",
@@ -2721,10 +2705,13 @@
           "dev": true
         },
         "convert-source-map": {
-          "version": "1.5.1",
-          "resolved": "https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.5.1.tgz",
-          "integrity": "sha1-uCeAl7m8IpNl3lxiz1/K7YtVmeU=",
-          "dev": true
+          "version": "1.6.0",
+          "resolved": "https://registry.npmjs.org/convert-source-map/-/convert-source-map-1.6.0.tgz",
+          "integrity": "sha512-eFu7XigvxdZ1ETfbgPBohgyQ/Z++C0eEhTor0qRwBw9unw+L0/6V8wkSuGgzdThkiS5lSpdptOQPD8Ak40a+7A==",
+          "dev": true,
+          "requires": {
+            "safe-buffer": "~5.1.1"
+          }
         },
         "cross-spawn": {
           "version": "4.0.2",
@@ -2858,9 +2845,9 @@
           "dev": true
         },
         "glob": {
-          "version": "7.1.2",
-          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.2.tgz",
-          "integrity": "sha512-MJTUg1kjuLeQCJ+ccE4Vpa6kKVXkPYJ2mOCQyUuKLcLQsdrMCpBPUi8qVE6+YuaJkozeA9NusTAw3hLr8Xe5EQ==",
+          "version": "7.1.3",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.3.tgz",
+          "integrity": "sha512-vcfuiIxogLV4DlGBHIUOwI0IbrJ8HWPc4MU7HzviGeNho/UJDfi6B5p3sHeWIQ0KGIU0Jpxi5ZHxemQfLkkAwQ==",
           "dev": true,
           "requires": {
             "fs.realpath": "^1.0.0",
@@ -2995,9 +2982,9 @@
           }
         },
         "istanbul-lib-report": {
-          "version": "2.0.1",
-          "resolved": "https://registry.npmjs.org/istanbul-lib-report/-/istanbul-lib-report-2.0.1.tgz",
-          "integrity": "sha512-pXYOWwpDNc5AHIY93WjFTuxzkDOOZ7B8eSa0cBHTmTnKRst5ccc/xBfWu/5wcNJqB6/Qy0lDMhpn+Uy0qyyUjA==",
+          "version": "2.0.2",
+          "resolved": "https://registry.npmjs.org/istanbul-lib-report/-/istanbul-lib-report-2.0.2.tgz",
+          "integrity": "sha512-rJ8uR3peeIrwAxoDEbK4dJ7cqqtxBisZKCuwkMtMv0xYzaAnsAi3AHrHPAAtNXzG/bcCgZZ3OJVqm1DTi9ap2Q==",
           "dev": true,
           "requires": {
             "istanbul-lib-coverage": "^2.0.1",
@@ -3027,9 +3014,9 @@
           }
         },
         "istanbul-reports": {
-          "version": "2.0.0",
-          "resolved": "https://registry.npmjs.org/istanbul-reports/-/istanbul-reports-2.0.0.tgz",
-          "integrity": "sha512-d2YRSnAOHHb+6vMc5qjJEyPN4VapkgUMhKlMmr3BzKdMDWdJbyYGEi/7m5AjDjkvRRTjs68ttPRZ7W2jBZ31SQ==",
+          "version": "2.0.1",
+          "resolved": "https://registry.npmjs.org/istanbul-reports/-/istanbul-reports-2.0.1.tgz",
+          "integrity": "sha512-CT0QgMBJqs6NJLF678ZHcquUAZIoBIUNzdJrRJfpkI9OnzG6MkUfHxbJC3ln981dMswC7/B1mfX3LNkhgJxsuw==",
           "dev": true,
           "requires": {
             "handlebars": "^4.0.11"
@@ -3439,6 +3426,12 @@
           "requires": {
             "glob": "^7.0.5"
           }
+        },
+        "safe-buffer": {
+          "version": "5.1.2",
+          "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz",
+          "integrity": "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==",
+          "dev": true
         },
         "semver": {
           "version": "5.5.0",
@@ -4411,6 +4404,10 @@
     "safer-buffer": {
       "version": "2.1.2"
     },
+    "samsam": {
+      "version": "1.3.0",
+      "dev": true
+    },
     "sax": {
       "version": "1.2.4"
     },
@@ -4472,17 +4469,15 @@
       "version": "3.0.2"
     },
     "sinon": {
-      "version": "6.3.3",
+      "version": "5.1.1",
       "dev": true,
       "requires": {
-        "@sinonjs/commons": "^1.0.2",
-        "@sinonjs/formatio": "^3.0.0",
-        "@sinonjs/samsam": "^2.1.0",
+        "@sinonjs/formatio": "^2.0.0",
         "diff": "^3.5.0",
         "lodash.get": "^4.4.2",
-        "lolex": "^2.7.4",
-        "nise": "^1.4.5",
-        "supports-color": "^5.5.0",
+        "lolex": "^2.4.2",
+        "nise": "^1.3.3",
+        "supports-color": "^5.4.0",
         "type-detect": "^4.0.8"
       }
     },
@@ -4546,7 +4541,7 @@
       }
     },
     "snyk": {
-      "version": "1.95.3",
+      "version": "1.96.0",
       "requires": {
         "abbrev": "^1.1.1",
         "ansi-escapes": "^3.1.0",
@@ -4564,7 +4559,7 @@
         "recursive-readdir": "^2.2.2",
         "semver": "^5.5.0",
         "snyk-config": "2.2.0",
-        "snyk-docker-plugin": "1.10.4",
+        "snyk-docker-plugin": "1.11.0",
         "snyk-go-plugin": "1.5.2",
         "snyk-gradle-plugin": "1.3.1",
         "snyk-module": "1.8.2",
@@ -4594,22 +4589,10 @@
       }
     },
     "snyk-docker-plugin": {
-      "version": "1.10.4",
+      "version": "1.11.0",
       "requires": {
-        "debug": "^3.1.0",
-        "fs-extra": "^5.0.0",
-        "needle": "^2.0.1",
-        "temp-dir": "^1.0.0"
-      },
-      "dependencies": {
-        "fs-extra": {
-          "version": "5.0.0",
-          "requires": {
-            "graceful-fs": "^4.1.2",
-            "jsonfile": "^4.0.0",
-            "universalify": "^0.1.0"
-          }
-        }
+        "debug": "^3",
+        "tslib": "^1"
       }
     },
     "snyk-go-plugin": {
