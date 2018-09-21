@@ -1,6 +1,7 @@
 {
   "name": "sfdx-jayree",
-  "version": "0.0.5",
+  "description": "some sfdx plugins",
+  "version": "0.0.6",
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
@@ -72,8 +73,7 @@
   "scripts": {
     "postpack": "rimraf oclif.manifest.json npm-shrinkwrap.json",
     "posttest": "tslint -p test -t stylish",
-    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
-    "prepare": "npm run snyk-protect && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "prepare": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "snyk-protect": "snyk protect",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
