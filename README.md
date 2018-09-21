@@ -33,7 +33,6 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
 creates an empty package with the description
