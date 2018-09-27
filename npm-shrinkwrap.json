@@ -286,6 +286,11 @@
             "@salesforce/ts-types": "0.11.0"
           }
         },
+        "@salesforce/ts-types": {
+          "version": "0.11.0",
+          "resolved": "https://registry.npmjs.org/@salesforce/ts-types/-/ts-types-0.11.0.tgz",
+          "integrity": "sha512-QLk6cwBHvRagCzWKvS9LW7XsV1N1YFQif2c/LsFsqU90ga1o9SsK2Hm/iu+cAwf1WDm6p8hvi69q9U7qnTh3wA=="
+        },
         "@types/jsforce": {
           "version": "1.8.12",
           "requires": {
@@ -313,19 +318,31 @@
         }
       }
     },
-    "@salesforce/ts-types": {
-      "version": "0.11.0"
-    },
-    "@sinonjs/formatio": {
-      "version": "2.0.0",
+    "@salesforce/ts-types": {},
+    "@sinonjs/commons": {
+      "version": "1.0.2",
       "dev": true,
       "requires": {
-        "samsam": "1.3.0"
+        "type-detect": "4.0.8"
+      }
+    },
+    "@sinonjs/formatio": {
+      "version": "3.0.0",
+      "dev": true,
+      "requires": {
+        "@sinonjs/samsam": "2.1.0"
+      },
+      "dependencies": {
+        "@sinonjs/samsam": {
+          "version": "2.1.0",
+          "dev": true,
+          "requires": {
+            "array-from": "^2.1.1"
+          }
+        }
       }
     },
     "@sinonjs/samsam": {
-      "version": "2.1.0",
-      "dev": true,
       "requires": {
         "array-from": "^2.1.1"
       }
@@ -381,6 +398,9 @@
     },
     "@types/sinon": {
       "version": "5.0.2"
+    },
+    "@yarnpkg/lockfile": {
+      "version": "1.1.0"
     },
     "abbrev": {
       "version": "1.1.1"
@@ -450,8 +470,7 @@
       "dev": true
     },
     "array-from": {
-      "version": "2.1.1",
-      "dev": true
+      "version": "2.1.1"
     },
     "array-union": {
       "version": "1.0.2",
@@ -2464,7 +2483,7 @@
       "optional": true
     },
     "needle": {
-      "version": "2.2.3",
+      "version": "2.2.4",
       "requires": {
         "debug": "^2.1.2",
         "iconv-lite": "^0.4.4",
@@ -2494,15 +2513,6 @@
         "lolex": "^2.3.2",
         "path-to-regexp": "^1.7.0",
         "text-encoding": "^0.6.4"
-      },
-      "dependencies": {
-        "@sinonjs/formatio": {
-          "version": "3.0.0",
-          "dev": true,
-          "requires": {
-            "@sinonjs/samsam": "2.1.0"
-          }
-        }
       }
     },
     "node-notifier": {
@@ -4404,10 +4414,6 @@
     "safer-buffer": {
       "version": "2.1.2"
     },
-    "samsam": {
-      "version": "1.3.0",
-      "dev": true
-    },
     "sax": {
       "version": "1.2.4"
     },
@@ -4469,15 +4475,16 @@
       "version": "3.0.2"
     },
     "sinon": {
-      "version": "5.1.1",
+      "version": "6.3.4",
       "dev": true,
       "requires": {
-        "@sinonjs/formatio": "^2.0.0",
+        "@sinonjs/commons": "^1.0.2",
+        "@sinonjs/formatio": "^3.0.0",
         "diff": "^3.5.0",
         "lodash.get": "^4.4.2",
-        "lolex": "^2.4.2",
-        "nise": "^1.3.3",
-        "supports-color": "^5.4.0",
+        "lolex": "^2.7.4",
+        "nise": "^1.4.5",
+        "supports-color": "^5.5.0",
         "type-detect": "^4.0.8"
       }
     },
@@ -4541,7 +4548,6 @@
       }
     },
     "snyk": {
-      "version": "1.96.0",
       "requires": {
         "abbrev": "^1.1.1",
         "ansi-escapes": "^3.1.0",
@@ -4551,7 +4557,7 @@
         "hasbin": "^1.2.3",
         "inquirer": "^3.0.0",
         "lodash": "^4.17.5",
-        "needle": "^2.0.1",
+        "needle": "^2.2.4",
         "opn": "^5.2.0",
         "os-name": "^2.0.1",
         "proxy-agent": "^2.0.0",
@@ -4564,7 +4570,6 @@
         "snyk-gradle-plugin": "1.3.1",
         "snyk-module": "1.8.2",
         "snyk-mvn-plugin": "1.2.2",
-        "snyk-nodejs-lockfile-parser": "1.4.1",
         "snyk-nuget-plugin": "1.6.5",
         "snyk-php-plugin": "1.5.1",
         "snyk-policy": "1.12.0",
@@ -4574,6 +4579,7 @@
         "snyk-sbt-plugin": "1.3.2",
         "snyk-tree": "^1.0.0",
         "snyk-try-require": "1.3.1",
+        "source-map-support": "^0.5.9",
         "tempfile": "^2.0.0",
         "then-fs": "^2.0.0",
         "undefsafe": "^2.0.0",
@@ -4620,8 +4626,8 @@
       "version": "1.2.2"
     },
     "snyk-nodejs-lockfile-parser": {
-      "version": "1.4.1",
       "requires": {
+        "@yarnpkg/lockfile": "^1.0.2",
         "lodash": "4.17.10",
         "path": "0.12.7",
         "source-map-support": "^0.5.7"
@@ -5347,7 +5353,6 @@
       "version": "3.0.0"
     },
     "xml-js": {
-      "version": "1.6.7",
       "requires": {
         "sax": "^1.2.4"
       }

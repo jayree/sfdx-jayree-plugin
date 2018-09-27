@@ -1,5 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import {AnyJson} from '@salesforce/ts-types';
+import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
@@ -40,10 +40,11 @@ export default class SetPackageDescription extends SfdxCommand {
     let text;
     zipEntries.forEach(zipEntry => {
       const fileName = zipEntry.entryName;
-      const fileContent = zip.readAsText(fileName);
-      let fileContentjs;
+      const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {
-        const xml = convert.xml2js(fileContent, { compact: true });
+        let fileContentjs;
+        const fileTXTContent = zip.readAsText(fileName);
+        const xml = convert.xml2js(fileTXTContent, { compact: true });
         if ('description' in xml['Package']) {
           text = xml['Package']['description']['_text'];
           action = 'removed';
@@ -58,16 +59,16 @@ export default class SetPackageDescription extends SfdxCommand {
           };
           newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
         } else {
-          newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
           action = '';
           this.ux.log('no description found');
         }
       } else {
-        newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+        newZip.addFile(fileName, fileContent, '', 0o644);
       }
     });
-
-    newZip.writeZip(inputfile);
+    if (action === 'removed') {
+      newZip.writeZip(inputfile);
+    }
 
     return { old_description: text, task: action };
 
