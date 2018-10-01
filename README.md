@@ -33,12 +33,6 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
-* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
-* [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
-* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
-
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
 creates an empty package with the description
