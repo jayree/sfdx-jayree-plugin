@@ -286,11 +286,6 @@
             "@salesforce/ts-types": "0.11.0"
           }
         },
-        "@salesforce/ts-types": {
-          "version": "0.11.0",
-          "resolved": "https://registry.npmjs.org/@salesforce/ts-types/-/ts-types-0.11.0.tgz",
-          "integrity": "sha512-QLk6cwBHvRagCzWKvS9LW7XsV1N1YFQif2c/LsFsqU90ga1o9SsK2Hm/iu+cAwf1WDm6p8hvi69q9U7qnTh3wA=="
-        },
         "@types/jsforce": {
           "version": "1.8.12",
           "requires": {
@@ -318,7 +313,9 @@
         }
       }
     },
-    "@salesforce/ts-types": {},
+    "@salesforce/ts-types": {
+      "version": "0.11.0"
+    },
     "@sinonjs/commons": {
       "version": "1.0.2",
       "dev": true,
@@ -343,6 +340,8 @@
       }
     },
     "@sinonjs/samsam": {
+      "version": "2.1.1",
+      "dev": true,
       "requires": {
         "array-from": "^2.1.1"
       }
@@ -470,7 +469,8 @@
       "dev": true
     },
     "array-from": {
-      "version": "2.1.1"
+      "version": "2.1.1",
+      "dev": true
     },
     "array-union": {
       "version": "1.0.2",
@@ -4480,6 +4480,7 @@
       "requires": {
         "@sinonjs/commons": "^1.0.2",
         "@sinonjs/formatio": "^3.0.0",
+        "@sinonjs/samsam": "^2.1.1",
         "diff": "^3.5.0",
         "lodash.get": "^4.4.2",
         "lolex": "^2.7.4",
@@ -4548,6 +4549,7 @@
       }
     },
     "snyk": {
+      "version": "1.99.0",
       "requires": {
         "abbrev": "^1.1.1",
         "ansi-escapes": "^3.1.0",
@@ -4567,16 +4569,17 @@
         "snyk-config": "2.2.0",
         "snyk-docker-plugin": "1.11.0",
         "snyk-go-plugin": "1.5.2",
-        "snyk-gradle-plugin": "1.3.1",
+        "snyk-gradle-plugin": "2.0.0",
         "snyk-module": "1.8.2",
-        "snyk-mvn-plugin": "1.2.2",
+        "snyk-mvn-plugin": "2.0.0",
+        "snyk-nodejs-lockfile-parser": "1.5.1",
         "snyk-nuget-plugin": "1.6.5",
         "snyk-php-plugin": "1.5.1",
         "snyk-policy": "1.12.0",
         "snyk-python-plugin": "1.8.1",
         "snyk-resolve": "1.0.1",
         "snyk-resolve-deps": "3.1.0",
-        "snyk-sbt-plugin": "1.3.2",
+        "snyk-sbt-plugin": "2.0.0",
         "snyk-tree": "^1.0.0",
         "snyk-try-require": "1.3.1",
         "source-map-support": "^0.5.9",
@@ -4610,7 +4613,7 @@
       }
     },
     "snyk-gradle-plugin": {
-      "version": "1.3.1",
+      "version": "2.0.0",
       "requires": {
         "clone-deep": "^0.3.0"
       }
@@ -4623,9 +4626,10 @@
       }
     },
     "snyk-mvn-plugin": {
-      "version": "1.2.2"
+      "version": "2.0.0"
     },
     "snyk-nodejs-lockfile-parser": {
+      "version": "1.5.1",
       "requires": {
         "@yarnpkg/lockfile": "^1.0.2",
         "lodash": "4.17.10",
@@ -4702,7 +4706,7 @@
       }
     },
     "snyk-sbt-plugin": {
-      "version": "1.3.2"
+      "version": "2.0.0"
     },
     "snyk-tree": {
       "version": "1.0.0",
@@ -5353,6 +5357,7 @@
       "version": "3.0.0"
     },
     "xml-js": {
+      "version": "1.6.8",
       "requires": {
         "sax": "^1.2.4"
       }
