@@ -33,6 +33,7 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn
+      - run: ./bin/run --help
       - run:
           name: Testing
           command: yarn test
