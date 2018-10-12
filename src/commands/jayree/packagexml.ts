@@ -100,10 +100,18 @@ export default class PackageXML extends SfdxCommand {
           }, apiVersion);
           folders.push(promise);
         } else {
-          const promise = conn.metadata.list({
+          let promise = conn.metadata.list({
             type: object.xmlName
           }, apiVersion);
           unfolderedObjects.push(promise);
+          if (Array.isArray(object.childXmlNames)) {
+            for (const childXmlNames of object.childXmlNames) {
+              promise = conn.metadata.list({
+                type: childXmlNames
+              }, apiVersion);
+              unfolderedObjects.push(promise);
+            }
+          }
         }
       }
 
@@ -158,7 +166,7 @@ export default class PackageXML extends SfdxCommand {
               unfolderedObjectItems = [unfolderedObject];
             }
             unfolderedObjectItems.forEach(metadataEntries => {
-
+              console.error(metadataEntries.fileName);
               if (metadataEntries) {
 
                 if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
