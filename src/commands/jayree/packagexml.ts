@@ -276,12 +276,21 @@ export default class PackageXML extends SfdxCommand {
       .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
       .filter((value, index, self) => self.indexOf(value) === index) : [];
 
-      if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0) {
+      const mFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
+      .map(value => value.fullName.toLowerCaseifTrue(this.flags.ignorecase))
+      .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
+      .filter((value, index, self) => self.indexOf(value) === index) : [];
+
+/*       if (mdFilters.length > 0) {this.ux.warn(`mdFilters: ${mdFilters}`); }
+      if (mFilters.length > 0) {this.ux.warn(`mFilters: ${mFilters}`); }
+      if (fileFilters.length > 0) {this.ux.warn(`fileFilters: ${fileFilters}`); } */
+
+      if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0 || mFilters.length > 0) {
 
         packageJson.Package[0].types.push({
               name: mdtype,
               members: packageTypes[mdtype]
-              .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(this.flags.ignorecase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(this.flags.ignorecase)))
+              .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(this.flags.ignorecase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(this.flags.ignorecase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(this.flags.ignorecase)))
               .map(value => value.fullName)
             });
 

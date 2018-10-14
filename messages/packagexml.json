@@ -3,7 +3,7 @@
   "nameFlagDescription": "name to print",
   "forceFlagDescription": "example boolean flag",
   "configFlagDescription": "path to config file",
-  "quickfilterFlagDescription": "csv separated list of metadata types or file names to filter on",
+  "quickfilterFlagDescription": "csv separated list of metadata type, member or file names to filter on",
   "ignoreCaseFlagDescription": "ignores the case of the quickfilter list items",
   "matchExactFlagDescription": "matches the exact values of the quickfilter list items",
   "errorNoOrgResults": "no results found for the organization '%s'.",
