@@ -121,13 +121,13 @@ USAGE
   $ sfdx-jayree jayree:packagexml
 
 OPTIONS
-  -c, --config=config                             path to config file
-  -e, --matchexact                                matches the exact values of the quickfilter list items
-  -i, --ignorecase                                ignores the case of the quickfilter list items
+  -c, --matchcase                                 enable 'match case' for the quickfilter
   -q, --quickfilter=quickfilter                   csv separated list of metadata type, member or file names to filter on
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  -w, --matchwholeword                            enable 'match whole word' for the quickfilter
   -x, --excludemanaged                            exclude managed packages from output
   --apiversion=apiversion                         override the api version used for api requests made by this command
+  --config=config                                 path to config file
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 

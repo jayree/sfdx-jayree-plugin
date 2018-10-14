@@ -4,8 +4,8 @@
   "forceFlagDescription": "example boolean flag",
   "configFlagDescription": "path to config file",
   "quickfilterFlagDescription": "csv separated list of metadata type, member or file names to filter on",
-  "ignoreCaseFlagDescription": "ignores the case of the quickfilter list items",
-  "matchExactFlagDescription": "matches the exact values of the quickfilter list items",
+  "matchCaseFlagDescription": "enable 'match case' for the quickfilter",
+  "matchWholeWordFlagDescription": "enable 'match whole word' for the quickfilter",
   "errorNoOrgResults": "no results found for the organization '%s'.",
   "excludeManagedFlagDescription": "exclude managed packages from output"
 }

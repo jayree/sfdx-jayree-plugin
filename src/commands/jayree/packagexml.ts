@@ -50,10 +50,10 @@ export default class PackageXML extends SfdxCommand {
   ];
 
   protected static flagsConfig = {
-    config: flags.string({ char: 'c', description: messages.getMessage('configFlagDescription') }),
+    config: flags.string({ description: messages.getMessage('configFlagDescription') }),
     quickfilter: flags.string({ char: 'q', description: messages.getMessage('quickfilterFlagDescription') }),
-    ignorecase: flags.boolean({ char: 'i', description: messages.getMessage('ignoreCaseFlagDescription') }),
-    matchexact: flags.boolean({ char: 'e', description: messages.getMessage('matchExactFlagDescription') }),
+    matchcase: flags.boolean({ char: 'c', description: messages.getMessage('matchCaseFlagDescription') }),
+    matchwholeword: flags.boolean({ char: 'w', description: messages.getMessage('matchWholeWordFlagDescription') }),
     excludemanaged: flags.boolean({ char: 'x', description: messages.getMessage('excludeManagedFlagDescription') })
   };
 
@@ -68,7 +68,7 @@ export default class PackageXML extends SfdxCommand {
 
     // try {
     let apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
-    let quickFilters = this.flags.quickfilter ? this.flags.quickfilter.toLowerCaseifTrue(this.flags.ignorecase).split(',') : [];
+    let quickFilters = this.flags.quickfilter ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',') : [];
     let excludeManaged = this.flags.excludeManaged || false;
 
     if (configFile) {
@@ -78,7 +78,7 @@ export default class PackageXML extends SfdxCommand {
         } else {
           /* cli parameters still override whats in the config file */
           apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
-          quickFilters = this.flags.quickfilter ? this.flags.quickfilter.toLowerCaseifTrue(this.flags.ignorecase).split(',') : obj.quickfilter || [];
+          quickFilters = this.flags.quickfilter ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',') : obj.quickfilter || [];
           excludeManaged = this.flags.excludeManaged || (obj.excludeManaged === 'true') || false;
         }
       });
@@ -252,17 +252,17 @@ export default class PackageXML extends SfdxCommand {
     Object.keys(packageTypes).forEach(mdtype => {
 
       const fileFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
-        .map(value => value.fileName.toLowerCaseifTrue(this.flags.ignorecase))
-        .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
+        .map(value => value.fileName.toLowerCaseifTrue(!this.flags.matchcase))
+        .filter(value => quickFilters.some(element => this.flags.matchwholeword ? value === element : value.includes(element)))
         .filter((value, index, self) => self.indexOf(value) === index) : [];
 
-      const mdFilters = (quickFilters.length > 0) ? [mdtype.toLowerCaseifTrue(this.flags.ignorecase)]
-        .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
+      const mdFilters = (quickFilters.length > 0) ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
+        .filter(value => quickFilters.some(element => this.flags.matchwholeword ? value === element : value.includes(element)))
         .filter((value, index, self) => self.indexOf(value) === index) : [];
 
       const mFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
-        .map(value => value.fullName.toLowerCaseifTrue(this.flags.ignorecase))
-        .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
+        .map(value => value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
+        .filter(value => quickFilters.some(element => this.flags.matchwholeword ? value === element : value.includes(element)))
         .filter((value, index, self) => self.indexOf(value) === index) : [];
 
       /*       if (mdFilters.length > 0) {this.ux.warn(`mdFilters: ${mdFilters}`); }
@@ -274,7 +274,7 @@ export default class PackageXML extends SfdxCommand {
         packageJson.Package[0].types.push({
           name: mdtype,
           members: packageTypes[mdtype]
-            .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(this.flags.ignorecase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(this.flags.ignorecase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(this.flags.ignorecase)))
+            .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase)))
             .map(value => value.fullName)
         });
 
