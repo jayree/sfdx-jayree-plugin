@@ -11,7 +11,7 @@
     "@salesforce/command": "0.2.5",
     "adm-zip": "0.4.11",
     "node-notifier": "5.2.1",
-    "snyk": "1.99.1",
+    "snyk": "1.103.4",
     "tslib": "^1",
     "xml-js": "1.6.8"
   },
@@ -23,7 +23,7 @@
     "@salesforce/dev-config": "1.1.4",
     "@types/adm-zip": "0.4.31",
     "@types/chai": "^4",
-    "@types/jsforce": "1.9.0",
+    "@types/jsforce": "1.9.1",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "^5",
     "@types/node": "^10",

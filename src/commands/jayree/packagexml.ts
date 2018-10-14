@@ -60,16 +60,16 @@ export default class PackageXML extends SfdxCommand {
     const packageTypes = {};
     const configFile = this.flags.config || false;
 
-    try {
-      apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
-      if (this.flags.quickfilter) {
-        quickFilters = this.flags.quickfilter.split(',');
+    // try {
+    apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
+    if (this.flags.quickfilter) {
+      quickFilters = this.flags.quickfilter.toLowerCase().split(',');
       } else {
         quickFilters = [];
       }
-      excludeManaged = this.flags.excludeManaged || false;
+    excludeManaged = this.flags.excludeManaged || false;
 
-      if (configFile) {
+    if (configFile) {
         jf.readFile(configFile, (err, obj) => {
           if (err) {
             throw err;
@@ -77,7 +77,7 @@ export default class PackageXML extends SfdxCommand {
             /* cli parameters still override whats in the config file */
             apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
             if (this.flags.quickfilter) {
-              quickFilters = this.flags.quickfilter.split(',');
+              quickFilters = this.flags.quickfilter.toLowerCase().split(',');
             } else {
               quickFilters = obj.quickfilter || [];
             }
@@ -86,13 +86,13 @@ export default class PackageXML extends SfdxCommand {
         });
       }
 
-      const conn = this.org.getConnection();
+    const conn = this.org.getConnection();
 
-      const describe = await conn.metadata.describe(apiVersion);
+    const describe = await conn.metadata.describe(apiVersion);
 
-      const folders = [];
-      const unfolderedObjects = [];
-      for await (const object of describe.metadataObjects) {
+    const folders = [];
+    const unfolderedObjects = [];
+    for await (const object of describe.metadataObjects) {
         if (object.inFolder) {
           const objectType = object.xmlName.replace('Template', '');
           const promise = conn.metadata.list({
@@ -115,8 +115,8 @@ export default class PackageXML extends SfdxCommand {
         }
       }
 
-      const folderedObjects = [];
-      for await (const folder of folders) {
+    const folderedObjects = [];
+    for await (const folder of folders) {
         let folderItems = [];
         if (Array.isArray(folder)) {
           folderItems = folder;
@@ -138,10 +138,10 @@ export default class PackageXML extends SfdxCommand {
         }
       }
 
-      const flowDefinitionQuery = await conn.tooling.query('SELECT DeveloperName,ActiveVersion.VersionNumber,LatestVersion.VersionNumber FROM FlowDefinition');
+    const flowDefinitionQuery = await conn.tooling.query('SELECT DeveloperName,ActiveVersion.VersionNumber,LatestVersion.VersionNumber FROM FlowDefinition');
 
-      const activeFlowVersions = {};
-      for await (const record of flowDefinitionQuery.records) {
+    const activeFlowVersions = {};
+    for await (const record of flowDefinitionQuery.records) {
         if (record['ActiveVersion'] && record['LatestVersion']) {
           if (!activeFlowVersions[record['DeveloperName']]) {
             activeFlowVersions[record['DeveloperName']] = [];
@@ -156,7 +156,7 @@ export default class PackageXML extends SfdxCommand {
       // this.ux.log(await Promise.all(folderedObjects));
       // this.ux.log(await Promise.all(unfolderedObjects));
 
-      (await Promise.all(unfolderedObjects)).forEach(unfolderedObject => {
+    (await Promise.all(unfolderedObjects)).forEach(unfolderedObject => {
         try {
           if (unfolderedObject) {
             let unfolderedObjectItems = [];
@@ -166,9 +166,7 @@ export default class PackageXML extends SfdxCommand {
               unfolderedObjectItems = [unfolderedObject];
             }
             unfolderedObjectItems.forEach(metadataEntries => {
-              console.error(metadataEntries.fileName);
               if (metadataEntries) {
-
                 if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
 
                   if (metadataEntries.fileName.includes('ValueSetTranslation')) {
@@ -176,7 +174,7 @@ export default class PackageXML extends SfdxCommand {
                     if (!packageTypes[x]) {
                       packageTypes[x] = [];
                     }
-                    packageTypes[x].pushUniqueValue(metadataEntries.fullName);
+                    packageTypes[x].pushUniqueValue({fullName: metadataEntries.fullName, fileName: metadataEntries.fileName});
                   } else {
 
                     if (!packageTypes[metadataEntries.type]) {
@@ -188,16 +186,16 @@ export default class PackageXML extends SfdxCommand {
                       if (apiVersion >= 44.0) {
                         if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
                           this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - adding '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
-                          packageTypes[metadataEntries.type].pushUniqueValue(`${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`);
+                          packageTypes[metadataEntries.type].pushUniqueValue({fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName});
                         }
-                        packageTypes[metadataEntries.type].pushUniqueValue(metadataEntries.fullName);
+                        packageTypes[metadataEntries.type].pushUniqueValue({fullName: metadataEntries.fullName, fileName: metadataEntries.fileName});
                       } else {
-                        packageTypes[metadataEntries.type].pushUniqueValue(`${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`);
+                        packageTypes[metadataEntries.type].pushUniqueValue({fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName});
                         this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                       }
 
                     } else {
-                      packageTypes[metadataEntries.type].pushUniqueValue(metadataEntries.fullName);
+                      packageTypes[metadataEntries.type].pushUniqueValue({fullName: metadataEntries.fullName, fileName: metadataEntries.fileName});
                     }
 
                   }
@@ -212,7 +210,7 @@ export default class PackageXML extends SfdxCommand {
         }
       });
 
-      (await Promise.all(folderedObjects)).forEach(folderedObject => {
+    (await Promise.all(folderedObjects)).forEach(folderedObject => {
         try {
 
           if (folderedObject) {
@@ -229,7 +227,7 @@ export default class PackageXML extends SfdxCommand {
                   if (!packageTypes[metadataEntries.type]) {
                     packageTypes[metadataEntries.type] = [];
                   }
-                  packageTypes[metadataEntries.type].pushUniqueValue(metadataEntries.fullName);
+                  packageTypes[metadataEntries.type].pushUniqueValue({fullName: metadataEntries.fullName, fileName: metadataEntries.fileName});
                 }
               } else {
                 this.ux.error('No metadataEntry available');
@@ -241,14 +239,14 @@ export default class PackageXML extends SfdxCommand {
         }
       });
 
-      if (!packageTypes['StandardValueSet']) {
+    if (!packageTypes['StandardValueSet']) {
         packageTypes['StandardValueSet'] = [];
       }
-      ['AccountContactMultiRoles', 'AccountContactRole', 'AccountOwnership', 'AccountRating', 'AccountType', 'AddressCountryCode', 'AddressStateCode', 'AssetStatus', 'CampaignMemberStatus', 'CampaignStatus', 'CampaignType', 'CaseContactRole', 'CaseOrigin', 'CasePriority', 'CaseReason', 'CaseStatus', 'CaseType', 'ContactRole', 'ContractContactRole', 'ContractStatus', 'EntitlementType', 'EventSubject', 'EventType', 'FiscalYearPeriodName', 'FiscalYearPeriodPrefix', 'FiscalYearQuarterName', 'FiscalYearQuarterPrefix', 'IdeaCategory', 'IdeaMultiCategory', 'IdeaStatus', 'IdeaThemeStatus', 'Industry', 'InvoiceStatus', 'LeadSource', 'LeadStatus', 'OpportunityCompetitor', 'OpportunityStage', 'OpportunityType', 'OrderStatus', 'OrderType', 'PartnerRole', 'Product2Family', 'QuestionOrigin', 'QuickTextCategory', 'QuickTextChannel', 'QuoteStatus', 'SalesTeamRole', 'Salutation', 'ServiceContractApprovalStatus', 'SocialPostClassification', 'SocialPostEngagementLevel', 'SocialPostReviewedStatus', 'SolutionStatus', 'TaskPriority', 'TaskStatus', 'TaskSubject', 'TaskType', 'WorkOrderLineItemStatus', 'WorkOrderPriority', 'WorkOrderStatus'].forEach(member => {
-        packageTypes['StandardValueSet'].pushUniqueValue(member);
+    ['AccountContactMultiRoles', 'AccountContactRole', 'AccountOwnership', 'AccountRating', 'AccountType', 'AddressCountryCode', 'AddressStateCode', 'AssetStatus', 'CampaignMemberStatus', 'CampaignStatus', 'CampaignType', 'CaseContactRole', 'CaseOrigin', 'CasePriority', 'CaseReason', 'CaseStatus', 'CaseType', 'ContactRole', 'ContractContactRole', 'ContractStatus', 'EntitlementType', 'EventSubject', 'EventType', 'FiscalYearPeriodName', 'FiscalYearPeriodPrefix', 'FiscalYearQuarterName', 'FiscalYearQuarterPrefix', 'IdeaCategory', 'IdeaMultiCategory', 'IdeaStatus', 'IdeaThemeStatus', 'Industry', 'InvoiceStatus', 'LeadSource', 'LeadStatus', 'OpportunityCompetitor', 'OpportunityStage', 'OpportunityType', 'OrderStatus', 'OrderType', 'PartnerRole', 'Product2Family', 'QuestionOrigin', 'QuickTextCategory', 'QuickTextChannel', 'QuoteStatus', 'SalesTeamRole', 'Salutation', 'ServiceContractApprovalStatus', 'SocialPostClassification', 'SocialPostEngagementLevel', 'SocialPostReviewedStatus', 'SolutionStatus', 'TaskPriority', 'TaskStatus', 'TaskSubject', 'TaskType', 'WorkOrderLineItemStatus', 'WorkOrderPriority', 'WorkOrderStatus'].forEach(member => {
+        packageTypes['StandardValueSet'].pushUniqueValue({fullName: member, fileName: `${member}.standardValueSet`});
       });
 
-      const packageJson = {
+    const packageJson = {
         _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
         Package: [{
           _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
@@ -257,27 +255,41 @@ export default class PackageXML extends SfdxCommand {
         }]
       };
 
-      Object.keys(packageTypes).forEach(mdtype => {
-        if ((quickFilters.length === 0 || quickFilters.includes(mdtype))) {
-          packageJson.Package[0].types.push({
-            name: mdtype,
-            members: packageTypes[mdtype]
-          });
+    Object.keys(packageTypes).forEach(mdtype => {
+
+      const fileFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
+      .map(value => value.fileName.toLowerCase())
+      .filter(value => quickFilters.some(element => value.includes(element)))
+      .filter((value, index, self) => self.indexOf(value) === index) : [];
+
+      const mdFilters = (quickFilters.length > 0) ? [mdtype.toLowerCase()]
+      .filter(value => quickFilters.some(element => value.includes(element)))
+      .filter((value, index, self) => self.indexOf(value) === index) : [];
+
+      if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0) {
+
+        packageJson.Package[0].types.push({
+              name: mdtype,
+              members: packageTypes[mdtype]
+              .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCase()) || fileFilters.includes(value.fileName.toLowerCase()))
+              .map(value => value.fullName)
+            });
+
         }
       });
 
-      const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
+    const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
 
-      notifier.notify({
+    notifier.notify({
         title: 'sfdx-jayree packagexml',
         message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
       });
 
-      this.ux.log(packageXml);
+    this.ux.log(packageXml);
 
-      return { orgId: this.org.getOrgId(), packageJson };
-    } catch (err) {
-      this.ux.error(err);
-    }
+    return { orgId: this.org.getOrgId(), packageJson };
+    // } catch (err) {
+    //   this.ux.error(err);
+    // }
   }
 }
