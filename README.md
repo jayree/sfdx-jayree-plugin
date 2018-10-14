@@ -122,7 +122,9 @@ USAGE
 
 OPTIONS
   -c, --config=config                             path to config file
-  -q, --quickfilter=quickfilter                   csv separated list of metadata types to filter on
+  -e, --matchexact                                matches the exact values of the quickfilter list items
+  -i, --ignorecase                                ignores the case of the quickfilter list items
+  -q, --quickfilter=quickfilter                   csv separated list of metadata types or file names to filter on
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   -x, --excludemanaged                            exclude managed packages from output
   --apiversion=apiversion                         override the api version used for api requests made by this command

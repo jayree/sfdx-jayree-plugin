@@ -12,6 +12,9 @@ declare global {
   interface Array<T> {
     pushUniqueValue(elem: T): T[];
   }
+  interface String {
+    toLowerCaseifTrue(ignore: boolean): string;
+}
 }
 
 if (!Array.prototype.pushUniqueValue) {
@@ -22,6 +25,11 @@ if (!Array.prototype.pushUniqueValue) {
     return this;
   };
 }
+
+String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
+  // return this.toLowerCase();
+  return ignore ? this.toLowerCase() : this;
+};
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
@@ -45,6 +53,8 @@ export default class PackageXML extends SfdxCommand {
   protected static flagsConfig = {
     config: flags.string({ char: 'c', description: messages.getMessage('configFlagDescription') }),
     quickfilter: flags.string({ char: 'q', description: messages.getMessage('quickfilterFlagDescription') }),
+    ignorecase: flags.boolean({ char: 'i', description: messages.getMessage('ignoreCaseFlagDescription') }),
+    matchexact: flags.boolean({ char: 'e', description: messages.getMessage('matchExactFlagDescription') }),
     excludemanaged: flags.boolean({ char: 'x', description: messages.getMessage('excludeManagedFlagDescription') })
   };
 
@@ -63,7 +73,7 @@ export default class PackageXML extends SfdxCommand {
     // try {
     apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
     if (this.flags.quickfilter) {
-      quickFilters = this.flags.quickfilter.toLowerCase().split(',');
+      quickFilters = this.flags.quickfilter.toLowerCaseifTrue(this.flags.ignorecase).split(',');
       } else {
         quickFilters = [];
       }
@@ -77,7 +87,7 @@ export default class PackageXML extends SfdxCommand {
             /* cli parameters still override whats in the config file */
             apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
             if (this.flags.quickfilter) {
-              quickFilters = this.flags.quickfilter.toLowerCase().split(',');
+              quickFilters = this.flags.quickfilter.toLowerCaseifTrue(this.flags.ignorecase).split(',');
             } else {
               quickFilters = obj.quickfilter || [];
             }
@@ -258,12 +268,12 @@ export default class PackageXML extends SfdxCommand {
     Object.keys(packageTypes).forEach(mdtype => {
 
       const fileFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
-      .map(value => value.fileName.toLowerCase())
-      .filter(value => quickFilters.some(element => value.includes(element)))
+      .map(value => value.fileName.toLowerCaseifTrue(this.flags.ignorecase))
+      .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
       .filter((value, index, self) => self.indexOf(value) === index) : [];
 
-      const mdFilters = (quickFilters.length > 0) ? [mdtype.toLowerCase()]
-      .filter(value => quickFilters.some(element => value.includes(element)))
+      const mdFilters = (quickFilters.length > 0) ? [mdtype.toLowerCaseifTrue(this.flags.ignorecase)]
+      .filter(value => quickFilters.some(element => this.flags.matchexact ? value === element : value.includes(element)))
       .filter((value, index, self) => self.indexOf(value) === index) : [];
 
       if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0) {
@@ -271,7 +281,7 @@ export default class PackageXML extends SfdxCommand {
         packageJson.Package[0].types.push({
               name: mdtype,
               members: packageTypes[mdtype]
-              .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCase()) || fileFilters.includes(value.fileName.toLowerCase()))
+              .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(this.flags.ignorecase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(this.flags.ignorecase)))
               .map(value => value.fullName)
             });
 
