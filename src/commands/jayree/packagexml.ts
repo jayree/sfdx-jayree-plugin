@@ -179,8 +179,9 @@ export default class PackageXML extends SfdxCommand {
 
                     if (apiVersion >= 44.0) {
                       if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
-                        this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - adding '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
-                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName });
+                        // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - adding '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
+                        // packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName });
+                        this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
                       }
                       packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
                     } else {

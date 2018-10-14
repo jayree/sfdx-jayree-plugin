@@ -12,10 +12,10 @@
       }
     },
     "@babel/generator": {
-      "version": "7.1.2",
+      "version": "7.1.3",
       "dev": true,
       "requires": {
-        "@babel/types": "^7.1.2",
+        "@babel/types": "^7.1.3",
         "jsesc": "^2.5.1",
         "lodash": "^4.17.10",
         "source-map": "^0.5.0",
@@ -67,7 +67,7 @@
       }
     },
     "@babel/parser": {
-      "version": "7.1.2",
+      "version": "7.1.3",
       "dev": true
     },
     "@babel/template": {
@@ -80,22 +80,22 @@
       }
     },
     "@babel/traverse": {
-      "version": "7.1.0",
+      "version": "7.1.4",
       "dev": true,
       "requires": {
         "@babel/code-frame": "^7.0.0",
-        "@babel/generator": "^7.0.0",
+        "@babel/generator": "^7.1.3",
         "@babel/helper-function-name": "^7.1.0",
         "@babel/helper-split-export-declaration": "^7.0.0",
-        "@babel/parser": "^7.1.0",
-        "@babel/types": "^7.0.0",
+        "@babel/parser": "^7.1.3",
+        "@babel/types": "^7.1.3",
         "debug": "^3.1.0",
         "globals": "^11.1.0",
         "lodash": "^4.17.10"
       }
     },
     "@babel/types": {
-      "version": "7.1.2",
+      "version": "7.1.3",
       "dev": true,
       "requires": {
         "esutils": "^2.0.2",
@@ -135,47 +135,53 @@
       "dev": true
     },
     "@oclif/command": {
-      "version": "1.5.1",
+      "version": "1.5.4",
       "requires": {
-        "@oclif/errors": "^1.2.0",
+        "@oclif/errors": "^1.2.2",
         "@oclif/parser": "^3.6.1",
-        "debug": "^4.0.1",
-        "semver": "^5.5.1"
+        "debug": "^4.1.0",
+        "semver": "^5.6.0"
       },
       "dependencies": {
         "debug": {
-          "version": "4.0.1",
+          "version": "4.1.0",
           "requires": {
             "ms": "^2.1.1"
           }
+        },
+        "ms": {
+          "version": "2.1.1"
         }
       }
     },
     "@oclif/config": {
-      "version": "1.8.1",
+      "version": "1.8.8",
       "requires": {
-        "debug": "^4.0.1",
+        "debug": "^4.1.0",
         "tslib": "^1.9.3"
       },
       "dependencies": {
         "debug": {
-          "version": "4.0.1",
+          "version": "4.1.0",
           "requires": {
             "ms": "^2.1.1"
           }
+        },
+        "ms": {
+          "version": "2.1.1"
         }
       }
     },
     "@oclif/dev-cli": {
-      "version": "1.19.0",
+      "version": "1.19.2",
       "dev": true,
       "requires": {
-        "@oclif/command": "^1.5.1",
-        "@oclif/config": "^1.7.6",
-        "@oclif/errors": "^1.2.1",
+        "@oclif/command": "^1.5.4",
+        "@oclif/config": "^1.8.7",
+        "@oclif/errors": "^1.2.2",
         "@oclif/plugin-help": "^2.1.2",
-        "cli-ux": "^4.8.2",
-        "debug": "^4.0.1",
+        "cli-ux": "^4.9.0",
+        "debug": "^4.1.0",
         "fs-extra": "^7.0.0",
         "lodash": "^4.17.11",
         "normalize-package-data": "^2.4.0",
@@ -184,30 +190,54 @@
       },
       "dependencies": {
         "debug": {
-          "version": "4.0.1",
+          "version": "4.1.0",
           "dev": true,
           "requires": {
             "ms": "^2.1.1"
           }
+        },
+        "ms": {
+          "version": "2.1.1",
+          "dev": true
         }
       }
     },
     "@oclif/errors": {
-      "version": "1.2.1",
+      "version": "1.2.2",
       "requires": {
         "clean-stack": "^1.3.0",
         "fs-extra": "^7.0.0",
         "indent-string": "^3.2.0",
-        "strip-ansi": "^4.0.0",
+        "strip-ansi": "^5.0.0",
         "wrap-ansi": "^4.0.0"
       },
       "dependencies": {
+        "ansi-regex": {
+          "version": "4.0.0"
+        },
+        "strip-ansi": {
+          "version": "5.0.0",
+          "requires": {
+            "ansi-regex": "^4.0.0"
+          }
+        },
         "wrap-ansi": {
           "version": "4.0.0",
           "requires": {
             "ansi-styles": "^3.2.0",
             "string-width": "^2.1.1",
             "strip-ansi": "^4.0.0"
+          },
+          "dependencies": {
+            "ansi-regex": {
+              "version": "3.0.0"
+            },
+            "strip-ansi": {
+              "version": "4.0.0",
+              "requires": {
+                "ansi-regex": "^3.0.0"
+              }
+            }
           }
         }
       }
@@ -216,7 +246,7 @@
       "version": "1.0.0"
     },
     "@oclif/parser": {
-      "version": "3.6.1",
+      "version": "3.6.2",
       "requires": {
         "@oclif/linewrap": "^1.0.0",
         "chalk": "^2.4.1",
@@ -224,39 +254,59 @@
       }
     },
     "@oclif/plugin-help": {
-      "version": "2.1.2",
+      "version": "2.1.3",
       "requires": {
-        "@oclif/command": "^1.5.0",
+        "@oclif/command": "^1.5.4",
         "chalk": "^2.4.1",
         "indent-string": "^3.2.0",
         "lodash.template": "^4.4.0",
         "string-width": "^2.1.1",
-        "strip-ansi": "^4.0.0",
+        "strip-ansi": "^5.0.0",
         "widest-line": "^2.0.0",
         "wrap-ansi": "^4.0.0"
       },
       "dependencies": {
+        "ansi-regex": {
+          "version": "4.0.0"
+        },
+        "strip-ansi": {
+          "version": "5.0.0",
+          "requires": {
+            "ansi-regex": "^4.0.0"
+          }
+        },
         "wrap-ansi": {
           "version": "4.0.0",
           "requires": {
             "ansi-styles": "^3.2.0",
             "string-width": "^2.1.1",
             "strip-ansi": "^4.0.0"
+          },
+          "dependencies": {
+            "ansi-regex": {
+              "version": "3.0.0"
+            },
+            "strip-ansi": {
+              "version": "4.0.0",
+              "requires": {
+                "ansi-regex": "^3.0.0"
+              }
+            }
           }
         }
       }
     },
     "@oclif/screen": {
-      "version": "1.0.3"
+      "version": "1.0.4"
     },
     "@oclif/test": {
-      "version": "1.2.1",
+      "version": "1.2.2",
       "requires": {
         "fancy-test": "^1.4.1"
       }
     },
     "@oclif/tslint": {
-      "version": "3.1.0",
+      "version": "3.1.1",
       "dev": true,
       "requires": {
         "tslint-eslint-rules": "^5.4.0",
@@ -357,11 +407,8 @@
       }
     },
     "@sinonjs/samsam": {
-      "version": "2.1.1",
-      "dev": true,
-      "requires": {
-        "array-from": "^2.1.1"
-      }
+      "version": "2.1.2",
+      "dev": true
     },
     "@types/adm-zip": {
       "version": "0.4.31",
@@ -388,7 +435,7 @@
       }
     },
     "@types/lodash": {
-      "version": "4.14.116"
+      "version": "4.14.117"
     },
     "@types/mocha": {
       "version": "5.2.5"
@@ -400,7 +447,7 @@
       }
     },
     "@types/node": {
-      "version": "10.11.3"
+      "version": "10.11.7"
     },
     "@types/node-notifier": {
       "version": "0.0.28",
@@ -410,7 +457,7 @@
       }
     },
     "@types/sinon": {
-      "version": "5.0.2"
+      "version": "5.0.5"
     },
     "@yarnpkg/lockfile": {
       "version": "1.1.0"
@@ -529,7 +576,7 @@
       "dev": true
     },
     "ast-types": {
-      "version": "0.11.5"
+      "version": "0.11.6"
     },
     "async": {
       "version": "1.5.2"
@@ -611,7 +658,6 @@
     },
     "bcrypt-pbkdf": {
       "version": "1.0.2",
-      "optional": true,
       "requires": {
         "tweetnacl": "^0.14.3"
       }
@@ -787,11 +833,11 @@
       }
     },
     "cli-ux": {
-      "version": "4.8.2",
+      "version": "4.9.1",
       "requires": {
-        "@oclif/errors": "^1.2.0",
+        "@oclif/errors": "^1.2.2",
         "@oclif/linewrap": "^1.0.0",
-        "@oclif/screen": "^1.0.2",
+        "@oclif/screen": "^1.0.3",
         "ansi-escapes": "^3.1.0",
         "ansi-styles": "^3.2.1",
         "cardinal": "^2.1.1",
@@ -804,10 +850,22 @@
         "is-wsl": "^1.1.0",
         "lodash": "^4.17.11",
         "password-prompt": "^1.0.7",
-        "semver": "^5.5.1",
-        "strip-ansi": "^4.0.0",
+        "semver": "^5.6.0",
+        "strip-ansi": "^5.0.0",
         "supports-color": "^5.5.0",
-        "supports-hyperlinks": "^1.0.1"
+        "supports-hyperlinks": "^1.0.1",
+        "treeify": "^1.1.0"
+      },
+      "dependencies": {
+        "ansi-regex": {
+          "version": "4.0.0"
+        },
+        "strip-ansi": {
+          "version": "5.0.0",
+          "requires": {
+            "ansi-regex": "^4.0.0"
+          }
+        }
       }
     },
     "cli-width": {
@@ -880,7 +938,7 @@
       }
     },
     "commander": {
-      "version": "2.18.0"
+      "version": "2.19.0"
     },
     "commondir": {
       "version": "1.0.1"
@@ -967,9 +1025,14 @@
       "version": "1.2.0"
     },
     "debug": {
-      "version": "3.2.5",
+      "version": "3.2.6",
       "requires": {
         "ms": "^2.1.1"
+      },
+      "dependencies": {
+        "ms": {
+          "version": "2.1.1"
+        }
       }
     },
     "debug-log": {},
@@ -1109,7 +1172,6 @@
     },
     "ecc-jsbn": {
       "version": "0.1.2",
-      "optional": true,
       "requires": {
         "jsbn": "~0.1.0",
         "safer-buffer": "^2.1.0"
@@ -1208,10 +1270,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0",
-          "dev": true
         }
       }
     },
@@ -1467,9 +1525,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0"
         }
       }
     },
@@ -1671,9 +1726,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0"
         }
       }
     },
@@ -1967,8 +2019,7 @@
       }
     },
     "jsbn": {
-      "version": "0.1.1",
-      "optional": true
+      "version": "0.1.1"
     },
     "jsen": {
       "version": "0.6.6"
@@ -2177,7 +2228,7 @@
       }
     },
     "lolex": {
-      "version": "2.7.5",
+      "version": "3.0.0",
       "dev": true
     },
     "loud-rejection": {
@@ -2260,7 +2311,7 @@
       }
     },
     "merge2": {
-      "version": "1.2.2",
+      "version": "1.2.3",
       "dev": true
     },
     "micromatch": {
@@ -2413,10 +2464,6 @@
             "path-is-absolute": "^1.0.0"
           }
         },
-        "ms": {
-          "version": "2.0.0",
-          "dev": true
-        },
         "supports-color": {
           "version": "5.4.0",
           "dev": true,
@@ -2433,7 +2480,7 @@
       "version": "2.22.2"
     },
     "ms": {
-      "version": "2.1.1"
+      "version": "2.0.0"
     },
     "multistream": {
       "version": "2.1.1",
@@ -2598,9 +2645,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0"
         }
       }
     },
@@ -2619,6 +2663,12 @@
         "lolex": "^2.3.2",
         "path-to-regexp": "^1.7.0",
         "text-encoding": "^0.6.4"
+      },
+      "dependencies": {
+        "lolex": {
+          "version": "2.7.5",
+          "dev": true
+        }
       }
     },
     "node-notifier": {
@@ -4623,7 +4673,7 @@
       "version": "1.0.0"
     },
     "semver": {
-      "version": "5.5.1"
+      "version": "5.6.0"
     },
     "sequin": {
       "version": "0.1.1"
@@ -4677,15 +4727,15 @@
       "version": "3.0.2"
     },
     "sinon": {
-      "version": "6.3.4",
+      "version": "7.0.0",
       "dev": true,
       "requires": {
         "@sinonjs/commons": "^1.0.2",
         "@sinonjs/formatio": "^3.0.0",
-        "@sinonjs/samsam": "^2.1.1",
+        "@sinonjs/samsam": "^2.1.2",
         "diff": "^3.5.0",
         "lodash.get": "^4.4.2",
-        "lolex": "^2.7.4",
+        "lolex": "^3.0.0",
         "nise": "^1.4.5",
         "supports-color": "^5.5.0",
         "type-detect": "^4.0.8"
@@ -4718,10 +4768,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0",
-          "dev": true
         },
         "source-map": {
           "version": "0.5.7",
@@ -4910,14 +4956,6 @@
         "snyk-tree": "^1.0.0",
         "snyk-try-require": "^1.1.1",
         "then-fs": "^2.0.0"
-      },
-      "dependencies": {
-        "debug": {
-          "version": "3.2.6",
-          "requires": {
-            "ms": "^2.1.1"
-          }
-        }
       }
     },
     "snyk-sbt-plugin": {
@@ -4995,7 +5033,7 @@
       }
     },
     "spdx-correct": {
-      "version": "3.0.1",
+      "version": "3.0.2",
       "requires": {
         "spdx-expression-parse": "^3.0.0",
         "spdx-license-ids": "^3.0.0"
@@ -5042,7 +5080,7 @@
       "version": "1.0.3"
     },
     "sshpk": {
-      "version": "1.14.2",
+      "version": "1.15.1",
       "requires": {
         "asn1": "~0.2.3",
         "assert-plus": "^1.0.0",
@@ -5288,6 +5326,9 @@
         "punycode": "^1.4.1"
       }
     },
+    "treeify": {
+      "version": "1.1.0"
+    },
     "trim-newlines": {
       "version": "1.0.0",
       "dev": true
@@ -5423,8 +5464,7 @@
       }
     },
     "tweetnacl": {
-      "version": "0.14.5",
-      "optional": true
+      "version": "0.14.5"
     },
     "type-check": {
       "version": "0.3.2",
@@ -5437,7 +5477,7 @@
       "dev": true
     },
     "typescript": {
-      "version": "3.1.1",
+      "version": "3.1.3",
       "dev": true
     },
     "uglify-js": {
@@ -5465,9 +5505,6 @@
           "requires": {
             "ms": "2.0.0"
           }
-        },
-        "ms": {
-          "version": "2.0.0"
         }
       }
     },
