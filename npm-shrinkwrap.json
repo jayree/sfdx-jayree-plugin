@@ -415,6 +415,12 @@
       "dev": true,
       "requires": {
         "@types/node": "*"
+      },
+      "dependencies": {
+        "@types/node": {
+          "version": "10.11.7",
+          "dev": true
+        }
       }
     },
     "@types/chai": {
@@ -432,6 +438,12 @@
       "dev": true,
       "requires": {
         "@types/node": "*"
+      },
+      "dependencies": {
+        "@types/node": {
+          "version": "10.11.7",
+          "dev": true
+        }
       }
     },
     "@types/lodash": {
@@ -444,16 +456,28 @@
       "version": "9.3.0",
       "requires": {
         "@types/node": "*"
+      },
+      "dependencies": {
+        "@types/node": {
+          "version": "10.11.7"
+        }
       }
     },
     "@types/node": {
-      "version": "10.11.7"
+      "version": "10.12.0",
+      "dev": true
     },
     "@types/node-notifier": {
       "version": "0.0.28",
       "dev": true,
       "requires": {
         "@types/node": "*"
+      },
+      "dependencies": {
+        "@types/node": {
+          "version": "10.11.7",
+          "dev": true
+        }
       }
     },
     "@types/sinon": {
@@ -1332,6 +1356,11 @@
         "lodash": "^4.17.11",
         "mock-stdin": "^0.3.1",
         "stdout-stderr": "^0.1.9"
+      },
+      "dependencies": {
+        "@types/node": {
+          "version": "10.11.7"
+        }
       }
     },
     "fast-deep-equal": {
@@ -4801,7 +4830,6 @@
       }
     },
     "snyk": {
-      "version": "1.103.4",
       "requires": {
         "abbrev": "^1.1.1",
         "ansi-escapes": "^3.1.0",
@@ -4820,7 +4848,6 @@
         "semver": "^5.5.0",
         "snyk-config": "2.2.0",
         "snyk-docker-plugin": "1.12.0",
-        "snyk-go-plugin": "1.5.2",
         "snyk-gradle-plugin": "2.1.0",
         "snyk-module": "1.8.2",
         "snyk-mvn-plugin": "2.0.0",
@@ -4857,7 +4884,6 @@
       }
     },
     "snyk-go-plugin": {
-      "version": "1.5.2",
       "requires": {
         "graphlib": "^2.1.1",
         "tmp": "0.0.33",
