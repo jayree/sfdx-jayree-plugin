@@ -11,13 +11,6 @@ Tools to generate and modify packages
 [![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
 [![License](https://img.shields.io/npm/l/sfdx-jayree-plugin.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
-- [sfdx-jayree-plugin](#sfdx-jayree-plugin)
-  - [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
-  - [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
-  - [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
-  - [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-  - [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
-
 <!-- install -->
 <!-- usage -->
 ```sh-session
@@ -33,6 +26,12 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
+* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
+* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
+* [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
+* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
+* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
+
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
 creates an empty package with the description
