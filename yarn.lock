@@ -221,9 +221,9 @@
     jsonwebtoken "7.0.0"
     mkdirp "0.5.1"
 
-"@salesforce/dev-config@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.1.4.tgz#d38c1090c8d82769cc1238ee2115b23a1cdc49f6"
+"@salesforce/dev-config@1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.1.5.tgz#acf08bbe14d4f963dc33275399fada9e8a87e3c0"
   dependencies:
     tslint "5.11.0"
     tslint-microsoft-contrib "5.2.0"
@@ -628,6 +628,12 @@ caching-transform@^2.0.0:
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
+
+caller-id@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/caller-id/-/caller-id-0.1.0.tgz#59bdac0893d12c3871408279231f97458364f07b"
+  dependencies:
+    stack-trace "~0.0.7"
 
 camelcase-keys@^2.0.0:
   version "2.1.0"
@@ -2412,6 +2418,12 @@ mocha@5.2.0:
     mkdirp "0.5.1"
     supports-color "5.4.0"
 
+mock-require@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/mock-require/-/mock-require-2.0.2.tgz#1eaa71aad23013773d127dc7e91a3fbb4837d60d"
+  dependencies:
+    caller-id "^0.1.0"
+
 mock-stdin@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/mock-stdin/-/mock-stdin-0.3.1.tgz#c657d9642d90786435c64ca5e99bbd4d09bd7dd3"
@@ -3422,9 +3434,9 @@ snyk-try-require@1.3.1, snyk-try-require@^1.1.1:
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
 
-snyk@1.104.0:
-  version "1.104.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.104.0.tgz#8427f1f6f6bfecaa19e62e309e6e274fe994bb05"
+snyk@1.104.1:
+  version "1.104.1"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.104.1.tgz#aff4a717b99eed424f8df2b928b67ac0b77b3748"
   dependencies:
     abbrev "^1.1.1"
     ansi-escapes "^3.1.0"
@@ -3568,6 +3580,10 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
+
+stack-trace@~0.0.7:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
 
 static-extend@^0.1.1:
   version "0.1.2"
@@ -3833,6 +3849,12 @@ tslint-eslint-rules@^5.3.1, tslint-eslint-rules@^5.4.0:
     doctrine "0.7.2"
     tslib "1.9.0"
     tsutils "^3.0.0"
+
+tslint-language-service@0.9.9:
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/tslint-language-service/-/tslint-language-service-0.9.9.tgz#f546dc38483979e6fb3cfa59584ad8525b3ad4da"
+  dependencies:
+    mock-require "^2.0.2"
 
 tslint-microsoft-contrib@5.2.0:
   version "5.2.0"

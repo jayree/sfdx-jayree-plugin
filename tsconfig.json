@@ -1,6 +1,9 @@
 {
   "extends": "./node_modules/@salesforce/dev-config/tsconfig",
   "compilerOptions": {
+    "plugins": [
+      { "name": "tslint-language-service"}
+    ],
     "declaration": true,
     "importHelpers": true,
     "module": "commonjs",
