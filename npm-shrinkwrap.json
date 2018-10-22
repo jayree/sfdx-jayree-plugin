@@ -173,7 +173,7 @@
       }
     },
     "@oclif/dev-cli": {
-      "version": "1.19.2",
+      "version": "1.19.3",
       "dev": true,
       "requires": {
         "@oclif/command": "^1.5.4",
@@ -353,11 +353,6 @@
             "@salesforce/ts-types": "0.11.0"
           }
         },
-        "@salesforce/ts-types": {
-          "version": "0.11.0",
-          "resolved": "https://registry.npmjs.org/@salesforce/ts-types/-/ts-types-0.11.0.tgz",
-          "integrity": "sha512-QLk6cwBHvRagCzWKvS9LW7XsV1N1YFQif2c/LsFsqU90ga1o9SsK2Hm/iu+cAwf1WDm6p8hvi69q9U7qnTh3wA=="
-        },
         "@types/jsforce": {
           "version": "1.8.12",
           "requires": {
@@ -385,7 +380,9 @@
         }
       }
     },
-    "@salesforce/ts-types": {},
+    "@salesforce/ts-types": {
+      "version": "0.11.0"
+    },
     "@sinonjs/commons": {
       "version": "1.0.2",
       "dev": true,
@@ -2718,10 +2715,10 @@
       }
     },
     "node-notifier": {
-      "version": "5.2.1",
+      "version": "5.3.0",
       "requires": {
         "growly": "^1.3.0",
-        "semver": "^5.4.1",
+        "semver": "^5.5.0",
         "shellwords": "^0.1.1",
         "which": "^1.3.0"
       }

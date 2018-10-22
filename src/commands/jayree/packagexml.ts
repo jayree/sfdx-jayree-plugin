@@ -26,9 +26,11 @@ if (!Array.prototype.pushUniqueValue) {
   };
 }
 
-String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
-  return ignore ? this.toLowerCase() : this;
-};
+if (!String.prototype.toLowerCaseifTrue) {
+  String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
+    return ignore ? this.toLowerCase() : this;
+  };
+}
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
@@ -36,9 +38,6 @@ if (Symbol['asyncIterator'] === undefined) {
 }
 
 export default class PackageXML extends SfdxCommand {
-
-  // hotfix to receive only one help page
-  // public static hidden = true;
 
   public static description = messages.getMessage('commandDescription');
 
@@ -146,10 +145,6 @@ export default class PackageXML extends SfdxCommand {
       }
     }
 
-    // this.ux.log(activeFlowVersions);
-    // this.ux.log(await Promise.all(folderedObjects));
-    // this.ux.log(await Promise.all(unfolderedObjects));
-
     (await Promise.all(unfolderedObjects)).forEach(unfolderedObject => {
       try {
         if (unfolderedObject) {
@@ -179,16 +174,15 @@ export default class PackageXML extends SfdxCommand {
 
                     if (apiVersion >= 44.0) {
                       if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
-                        // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - adding '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
-                        // packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName });
-                        this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
+                        // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
+                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!` });
+                      } else {
+                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
                       }
-                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
                     } else {
-                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName });
-                      this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
+                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'` });
+                      // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                     }
-
                   } else {
                     packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
                   }
@@ -266,17 +260,16 @@ export default class PackageXML extends SfdxCommand {
         .filter(value => quickFilters.some(element => this.flags.matchwholeword ? value === element : value.includes(element)))
         .filter((value, index, self) => self.indexOf(value) === index) : [];
 
-      /*       if (mdFilters.length > 0) {this.ux.warn(`mdFilters: ${mdFilters}`); }
-            if (mFilters.length > 0) {this.ux.warn(`mFilters: ${mFilters}`); }
-            if (fileFilters.length > 0) {this.ux.warn(`fileFilters: ${fileFilters}`); } */
-
       if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0 || mFilters.length > 0) {
 
         packageJson.Package[0].types.push({
           name: mdtype,
           members: packageTypes[mdtype]
             .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase)))
-            .map(value => value.fullName)
+            .map(value => {
+              if (value.warning) { this.ux.warn(value.warning); }
+              return value.fullName;
+            })
         });
 
       }
