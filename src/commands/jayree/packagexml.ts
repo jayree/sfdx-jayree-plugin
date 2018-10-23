@@ -36,7 +36,7 @@ if (Symbol['asyncIterator'] === undefined) {
   ((Symbol as any)['asyncIterator']) = Symbol.for('asyncIterator');
 }
 
-export default class PackageXML extends SfdxCommand {
+export default class GeneratePackageXML extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 

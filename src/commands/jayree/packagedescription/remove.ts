@@ -6,7 +6,7 @@ import * as convert from 'xml-js';
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'removepackagedescription');
 
-export default class SetPackageDescription extends SfdxCommand {
+export default class RemovePackageDescription extends SfdxCommand {
 
   // hotfix to receive only one help page
   // public static hidden = true;
