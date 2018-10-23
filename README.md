@@ -1,30 +1,35 @@
-# sfdx-jayree-plugin
+sfdx-jayree
+===========
 
-Tools to generate and modify packages
+some sfdx plugins
 
-[![Version](https://img.shields.io/npm/v/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
 [![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree-plugin/branch/master)
 [![Codecov](https://codecov.io/gh/jayree/sfdx-jayree-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree-plugin)
-[![Greenkeeper](https://badges.greenkeeper.io/jayree/sfdx-jayree-plugin.svg)](https://greenkeeper.io/)
-[![Known Vulnerabilities](https://snyk.io/test/github/jayree/sfdx-jayree-plugin/badge.svg)](https://snyk.io/test/github/jayree/sfdx-jayree-plugin)
-[![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree-plugin.svg)](https://npmjs.org/package/sfdx-jayree-plugin)
-[![License](https://img.shields.io/npm/l/sfdx-jayree-plugin.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
+[![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
+[![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
-<!-- install -->
+<!-- toc -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
+# Usage
 <!-- usage -->
 ```sh-session
 $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.1.0 darwin-x64 node-v8.9.4
+sfdx-jayree/0.1.0 darwin-x64 node-v10.12.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
 ...
 ```
 <!-- usagestop -->
+# Commands
 <!-- commands -->
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
