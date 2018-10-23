@@ -537,10 +537,6 @@
         "sprintf-js": "~1.0.2"
       }
     },
-    "argv": {
-      "version": "0.0.2",
-      "dev": true
-    },
     "arr-diff": {
       "version": "4.0.0",
       "dev": true
@@ -932,15 +928,8 @@
       "version": "1.1.0"
     },
     "codecov": {
-      "version": "3.1.0",
-      "dev": true,
-      "requires": {
-        "argv": "^0.0.2",
-        "ignore-walk": "^3.0.1",
-        "js-yaml": "^3.12.0",
-        "request": "^2.87.0",
-        "urlgrey": "^0.4.4"
-      }
+      "version": "4.0.0-0",
+      "dev": true
     },
     "coffeescript": {
       "version": "1.12.7"
@@ -1633,13 +1622,19 @@
       }
     },
     "greenkeeper-lockfile": {
-      "version": "1.15.1",
+      "version": "2.7.1",
       "dev": true,
       "requires": {
-        "lodash": "^4.17.4",
+        "fast-glob": "^2.2.0",
+        "greenkeeper-monorepo-definitions": "^1.0.0",
+        "lodash": "^4.17.10",
         "require-relative": "^0.8.7",
         "semver": "^5.3.0"
       }
+    },
+    "greenkeeper-monorepo-definitions": {
+      "version": "1.8.0",
+      "dev": true
     },
     "growl": {
       "version": "1.10.5",
@@ -1792,13 +1787,6 @@
     "ignore": {
       "version": "3.3.10",
       "dev": true
-    },
-    "ignore-walk": {
-      "version": "3.0.1",
-      "dev": true,
-      "requires": {
-        "minimatch": "^3.0.4"
-      }
     },
     "immediate": {
       "version": "3.0.6"
@@ -5634,10 +5622,6 @@
     },
     "urix": {
       "version": "0.1.0",
-      "dev": true
-    },
-    "urlgrey": {
-      "version": "0.4.4",
       "dev": true
     },
     "use": {

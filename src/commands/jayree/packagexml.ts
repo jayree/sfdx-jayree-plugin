@@ -7,7 +7,6 @@ import * as convert from 'xml-js';
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
-export { };
 declare global {
   interface Array<T> {
     pushUniqueValue(elem: T): T[];
@@ -244,6 +243,7 @@ export default class PackageXML extends SfdxCommand {
       }]
     };
 
+    const filteredwarnings = [];
     Object.keys(packageTypes).forEach(mdtype => {
 
       const fileFilters = (quickFilters.length > 0) ? packageTypes[mdtype]
@@ -267,7 +267,7 @@ export default class PackageXML extends SfdxCommand {
           members: packageTypes[mdtype]
             .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase)))
             .map(value => {
-              if (value.warning) { this.ux.warn(value.warning); }
+              if (value.warning) { filteredwarnings.push(value.warning); }
               return value.fullName;
             })
         });
@@ -282,9 +282,10 @@ export default class PackageXML extends SfdxCommand {
       message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
     });
 
+    filteredwarnings.forEach(value => this.ux.warn(value));
     this.ux.log(packageXml);
 
-    return { orgId: this.org.getOrgId(), packageJson };
+    return { orgId: this.org.getOrgId(), packagexml: packageJson, warnings: filteredwarnings};
     // } catch (err) {
     //   this.ux.error(err);
     // }
