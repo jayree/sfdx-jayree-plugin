@@ -6,6 +6,7 @@
   "quickfilterFlagDescription": "csv separated list of metadata type, member or file names to filter on",
   "matchCaseFlagDescription": "enable 'match case' for the quickfilter",
   "matchWholeWordFlagDescription": "enable 'match whole word' for the quickfilter",
+  "fileFlagDescription": "write to 'file' instead of stdout",
   "errorNoOrgResults": "no results found for the organization '%s'.",
   "excludeManagedFlagDescription": "exclude managed packages from output"
 }

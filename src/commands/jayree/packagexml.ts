@@ -1,8 +1,10 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import { fs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
 import * as notifier from 'node-notifier';
-import * as convert from 'xml-js';
+// import * as convert from 'xml-js';
+import * as xml2js from 'xml2js';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
@@ -26,7 +28,8 @@ if (!Array.prototype.pushUniqueValue) {
 }
 
 if (!String.prototype.toLowerCaseifTrue) {
-  String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
+  // tslint:disable-next-line:space-before-function-paren
+  String.prototype.toLowerCaseifTrue = function (ignore: boolean) {
     return ignore ? this.toLowerCase() : this;
   };
 }
@@ -47,11 +50,14 @@ export default class GeneratePackageXML extends SfdxCommand {
   `
   ];
 
+  public static args = [{ name: 'file' }];
+
   protected static flagsConfig = {
     config: flags.string({ description: messages.getMessage('configFlagDescription') }),
     quickfilter: flags.string({ char: 'q', description: messages.getMessage('quickfilterFlagDescription') }),
     matchcase: flags.boolean({ char: 'c', description: messages.getMessage('matchCaseFlagDescription') }),
     matchwholeword: flags.boolean({ char: 'w', description: messages.getMessage('matchWholeWordFlagDescription') }),
+    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription') }),
     excludemanaged: flags.boolean({ char: 'x', description: messages.getMessage('excludeManagedFlagDescription') })
   };
 
@@ -63,6 +69,7 @@ export default class GeneratePackageXML extends SfdxCommand {
 
     const packageTypes = {};
     const configFile = this.flags.config || false;
+    const outputFile = this.flags.file || this.args.file || null;
 
     // try {
     let apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
@@ -82,6 +89,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       });
     }
 
+    outputFile ? this.ux.startSpinner(`Generate ${outputFile}`) : this.ux.startSpinner('Generate package.xml');
     const conn = this.org.getConnection();
     const describe = await conn.metadata.describe(apiVersion);
 
@@ -234,13 +242,21 @@ export default class GeneratePackageXML extends SfdxCommand {
       packageTypes['StandardValueSet'].pushUniqueValue({ fullName: member, fileName: `${member}.standardValueSet` });
     });
 
+    /*     const packageJson = {
+          _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+          Package: {
+            _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+            types: [],
+            version: apiVersion
+          }
+        }; */
+
     const packageJson = {
-      _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-      Package: [{
-        _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+      Package: {
+        $: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
         types: [],
         version: apiVersion
-      }]
+      }
     };
 
     const filteredwarnings = [];
@@ -262,7 +278,7 @@ export default class GeneratePackageXML extends SfdxCommand {
 
       if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0 || mFilters.length > 0) {
 
-        packageJson.Package[0].types.push({
+        packageJson.Package.types.push({
           name: mdtype,
           members: packageTypes[mdtype]
             .filter(value => quickFilters.length === 0 || mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) || fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) || mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase)))
@@ -275,7 +291,9 @@ export default class GeneratePackageXML extends SfdxCommand {
       }
     });
 
-    const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
+    // const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
+    const builder = new xml2js.Builder({ xmldec: { version: '1.0', encoding: 'UTF-8' }, xmlns: true });
+    const packageXml = builder.buildObject(packageJson);
 
     notifier.notify({
       title: 'sfdx-jayree packagexml',
@@ -283,9 +301,18 @@ export default class GeneratePackageXML extends SfdxCommand {
     });
 
     filteredwarnings.forEach(value => this.ux.warn(value));
-    this.ux.log(packageXml);
 
-    return { orgId: this.org.getOrgId(), packagexml: packageJson, warnings: filteredwarnings};
+    if (outputFile) {
+      await fs.writeFile(outputFile, packageXml)
+        .then(() => this.ux.stopSpinner())
+        .catch(error => { this.ux.stopSpinner('!'); throw error; });
+    } else {
+      this.ux.stopSpinner();
+      this.ux.styledHeader(this.org.getOrgId());
+      this.ux.log(packageXml);
+    }
+
+    return { orgId: this.org.getOrgId(), packagexml: packageJson, warnings: filteredwarnings };
     // } catch (err) {
     //   this.ux.error(err);
     // }

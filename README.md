@@ -22,7 +22,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.1.0 darwin-x64 node-v10.12.0
+sfdx-jayree/0.1.0 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -35,7 +35,7 @@ USAGE
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
 * [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
 * [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-* [`sfdx-jayree jayree:packagexml`](#sfdx-jayree-jayreepackagexml)
+* [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
@@ -116,16 +116,17 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.0/src/commands/jayree/packagedescription/set.ts)_
 
-## `sfdx-jayree jayree:packagexml`
+## `sfdx-jayree jayree:packagexml [FILE]`
 
 generate a complete package xml form the specified org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagexml
+  $ sfdx-jayree jayree:packagexml [FILE]
 
 OPTIONS
   -c, --matchcase                                 enable 'match case' for the quickfilter
+  -f, --file=file                                 write to 'file' instead of stdout
   -q, --quickfilter=quickfilter                   csv separated list of metadata type, member or file names to filter on
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   -w, --matchwholeword                            enable 'match whole word' for the quickfilter
