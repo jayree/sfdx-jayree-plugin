@@ -20,7 +20,7 @@ declare global {
 
 if (!Array.prototype.pushUniqueValue) {
   Array.prototype.pushUniqueValue = function <T>(elem: T): T[] {
-    if (!this.includes(elem)) {
+    if (!this.map(value => value.fullName).includes(elem['fullName'])) {
       this.push(elem);
     }
     return this;
@@ -89,7 +89,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       });
     }
 
-    outputFile ? this.ux.startSpinner(`Generate ${outputFile}`) : this.ux.startSpinner('Generate package.xml');
+    outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
     const conn = this.org.getConnection();
     const describe = await conn.metadata.describe(apiVersion);
 
@@ -162,7 +162,7 @@ export default class GeneratePackageXML extends SfdxCommand {
             unfolderedObjectItems = [unfolderedObject];
           }
           unfolderedObjectItems.forEach(metadataEntries => {
-            if (metadataEntries) {
+            // if (metadataEntries) {
               if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
 
                 if (metadataEntries.fileName.includes('ValueSetTranslation')) {
@@ -196,13 +196,13 @@ export default class GeneratePackageXML extends SfdxCommand {
 
                 }
               }
-            } else {
+/*             } else {
               this.ux.error('No metadataEntry available');
-            }
+            } */
           });
         }
       } catch (err) {
-        this.ux.error(err);
+        throw err;
       }
     });
 
@@ -217,7 +217,7 @@ export default class GeneratePackageXML extends SfdxCommand {
             folderedObjectItems = [folderedObject];
           }
           folderedObjectItems.forEach(metadataEntries => {
-            if (metadataEntries) {
+            // if (metadataEntries) {
               if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
 
                 if (!packageTypes[metadataEntries.type]) {
@@ -225,13 +225,13 @@ export default class GeneratePackageXML extends SfdxCommand {
                 }
                 packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
               }
-            } else {
+/*             } else {
               this.ux.error('No metadataEntry available');
-            }
+            } */
           });
         }
       } catch (err) {
-        this.ux.error(err);
+        throw err;
       }
     });
 
