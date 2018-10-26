@@ -2,7 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { fs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
-import * as notifier from 'node-notifier';
+// import * as notifier from 'node-notifier';
 // import * as convert from 'xml-js';
 import * as xml2js from 'xml2js';
 
@@ -11,7 +11,7 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
 declare global {
   interface Array<T> {
-    pushUniqueValue(elem: T): T[];
+    pushUniqueValue(elem: T, key: string): T[];
   }
   interface String {
     toLowerCaseifTrue(ignore: boolean): string;
@@ -19,11 +19,11 @@ declare global {
 }
 
 if (!Array.prototype.pushUniqueValue) {
-  Array.prototype.pushUniqueValue = function <T>(elem: T): T[] {
-    if (!this.map(value => value.fullName).includes(elem['fullName'])) {
+  Array.prototype.pushUniqueValue = function <T>(elem: T, key: string): T[] {
+     if (!this.map(value => value[key]).includes(elem[key])) {
       this.push(elem);
     }
-    return this;
+     return this;
   };
 }
 
@@ -89,7 +89,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       });
     }
 
-    outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
+    // outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
     const conn = this.org.getConnection();
     const describe = await conn.metadata.describe(apiVersion);
 
@@ -170,7 +170,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                   if (!packageTypes[x]) {
                     packageTypes[x] = [];
                   }
-                  packageTypes[x].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
+                  packageTypes[x].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
                 } else {
 
                   if (!packageTypes[metadataEntries.type]) {
@@ -182,16 +182,16 @@ export default class GeneratePackageXML extends SfdxCommand {
                     if (apiVersion >= 44.0) {
                       if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
                         // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
-                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!` });
+                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!` }, 'fullName');
                       } else {
-                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
+                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
                       }
                     } else {
-                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'` });
+                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'` }, 'fullName');
                       // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                     }
                   } else {
-                    packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
+                    packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
                   }
 
                 }
@@ -223,7 +223,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                 if (!packageTypes[metadataEntries.type]) {
                   packageTypes[metadataEntries.type] = [];
                 }
-                packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName });
+                packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
               }
 /*             } else {
               this.ux.error('No metadataEntry available');
@@ -239,7 +239,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       packageTypes['StandardValueSet'] = [];
     }
     ['AccountContactMultiRoles', 'AccountContactRole', 'AccountOwnership', 'AccountRating', 'AccountType', 'AddressCountryCode', 'AddressStateCode', 'AssetStatus', 'CampaignMemberStatus', 'CampaignStatus', 'CampaignType', 'CaseContactRole', 'CaseOrigin', 'CasePriority', 'CaseReason', 'CaseStatus', 'CaseType', 'ContactRole', 'ContractContactRole', 'ContractStatus', 'EntitlementType', 'EventSubject', 'EventType', 'FiscalYearPeriodName', 'FiscalYearPeriodPrefix', 'FiscalYearQuarterName', 'FiscalYearQuarterPrefix', 'IdeaCategory', 'IdeaMultiCategory', 'IdeaStatus', 'IdeaThemeStatus', 'Industry', 'InvoiceStatus', 'LeadSource', 'LeadStatus', 'OpportunityCompetitor', 'OpportunityStage', 'OpportunityType', 'OrderStatus', 'OrderType', 'PartnerRole', 'Product2Family', 'QuestionOrigin', 'QuickTextCategory', 'QuickTextChannel', 'QuoteStatus', 'SalesTeamRole', 'Salutation', 'ServiceContractApprovalStatus', 'SocialPostClassification', 'SocialPostEngagementLevel', 'SocialPostReviewedStatus', 'SolutionStatus', 'TaskPriority', 'TaskStatus', 'TaskSubject', 'TaskType', 'WorkOrderLineItemStatus', 'WorkOrderPriority', 'WorkOrderStatus'].forEach(member => {
-      packageTypes['StandardValueSet'].pushUniqueValue({ fullName: member, fileName: `${member}.standardValueSet` });
+      packageTypes['StandardValueSet'].pushUniqueValue({ fullName: member, fileName: `${member}.standardValueSet` }, 'fullName');
     });
 
     /*     const packageJson = {
@@ -295,10 +295,10 @@ export default class GeneratePackageXML extends SfdxCommand {
     const builder = new xml2js.Builder({ xmldec: { version: '1.0', encoding: 'UTF-8' }, xmlns: true });
     const packageXml = builder.buildObject(packageJson);
 
-    notifier.notify({
+/*     notifier.notify({
       title: 'sfdx-jayree packagexml',
       message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
-    });
+    }); */
 
     filteredwarnings.forEach(value => this.ux.warn(value));
 
