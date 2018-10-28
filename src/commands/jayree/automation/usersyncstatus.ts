@@ -4,59 +4,7 @@ import puppeteer = require('puppeteer');
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
-
-async function login(conn, page) {
-  await page.goto('https://eu12.salesforce.com/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-    waitUntil: 'networkidle2'
-  });
-}
-
-async function resetuser(page) {
-  page.on('dialog', async dialog => {
-    await dialog.accept();
-  });
-  await page.evaluate(() => {
-    document.getElementById('thePage:theForm:thePageBlock:pageBlock:resetButton').click();
-  });
-  await page.waitForNavigation({
-    waitUntil: 'networkidle2'
-  });
-}
-
-async function checkstatus(page) {
-  await page.evaluate(() => {
-    document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
-  });
-
-  await page.waitForNavigation({
-    waitUntil: 'networkidle2'
-  });
-
-  return await page.evaluate(() => {
-    const user = (document.getElementById('resetExchangeSyncUser') as HTMLInputElement).value;
-    const convertedtables = {};
-    ['configSetup', 'userContacts', 'userEvents'].forEach(tableid => {
-      const object = {};
-      if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
-        // tslint:disable-next-line:no-any
-        for (const row of (document.getElementById(tableid) as any).rows) {
-          if (typeof row.cells[1] !== 'undefined') {
-            if (typeof row.cells[1].getElementsByTagName('img')[0] !== 'undefined') {
-              object[row.cells[0].innerText.replace(/(:\t)/g, '')] = row.cells[1].getElementsByTagName('img')[0].alt;
-            } else {
-              object[row.cells[0].innerText.replace(/(:\t)/g, '')] = row.cells[1].innerHTML;
-            }
-          }
-        }
-      }
-      convertedtables[tableid] = object;
-    });
-    return {
-      [user]: convertedtables
-    };
-  });
-}
-export default class GetPackageDescription extends SfdxCommand {
+export default class UserSyncStatus extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 
@@ -85,7 +33,7 @@ export default class GetPackageDescription extends SfdxCommand {
 
     const page = await browser.newPage();
 
-    await login(conn, page);
+    await this.login(conn, page);
 
     await page.goto('https://eu12.salesforce.com/s2x/resetExchangeSyncUser.apexp', {
       waitUntil: 'networkidle2'
@@ -98,7 +46,7 @@ export default class GetPackageDescription extends SfdxCommand {
     let status = '';
 
     this.ux.startSpinner('configSetup: User assigned to active Lightning Sync configuration');
-    tables = await checkstatus(page);
+    tables = await this.checkstatus(page);
 
     let configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
 
@@ -113,12 +61,12 @@ export default class GetPackageDescription extends SfdxCommand {
 
         this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
         this.ux.log('User needs a sync reset!');
-        await resetuser(page);
+        await this.resetuser(page);
         itemtext = 'Reset sync status';
         configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
         this.ux.startSpinner('configSetup: ' + itemtext);
         do {
-          tables = await checkstatus(page);
+          tables = await this.checkstatus(page);
           configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
           if (status !== configSetupItem && typeof configSetupItem !== 'undefined') {
             status = configSetupItem;
@@ -133,7 +81,7 @@ export default class GetPackageDescription extends SfdxCommand {
         this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
         if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
           do {
-            tables = await checkstatus(page);
+            tables = await this.checkstatus(page);
             userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
             userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
             if (status !== userContactsItem + '/' + userEventsItem) {
@@ -154,7 +102,7 @@ export default class GetPackageDescription extends SfdxCommand {
       this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
       if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
         do {
-          tables = await checkstatus(page);
+          tables = await this.checkstatus(page);
           userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
           userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
           if (status !== userContactsItem + '/' + userEventsItem) {
@@ -168,11 +116,10 @@ export default class GetPackageDescription extends SfdxCommand {
       itemtext = 'Exchange to Salesforce sync status';
       userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
       userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-      userEventsItem = 'Not started';
       this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
       if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
         do {
-          tables = await checkstatus(page);
+          tables = await this.checkstatus(page);
           userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
           userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
           if (status !== userContactsItem + '/' + userEventsItem) {
@@ -182,10 +129,62 @@ export default class GetPackageDescription extends SfdxCommand {
         } while (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem));
       }
       this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+
     }
     browser.close();
 
     return { description: 'text' };
 
   }
+
+  private async login(conn, page) {
+    await page.goto('https://eu12.salesforce.com/secur/frontdoor.jsp?sid=' + conn.accessToken, {
+      waitUntil: 'networkidle2'
+    });
+  }
+  private async resetuser(page) {
+    page.on('dialog', async dialog => {
+      await dialog.accept();
+    });
+    await page.evaluate(() => {
+      document.getElementById('thePage:theForm:thePageBlock:pageBlock:resetButton').click();
+    });
+    await page.waitForNavigation({
+      waitUntil: 'networkidle2'
+    });
+  }
+  private async checkstatus(page) {
+    await page.evaluate(() => {
+      document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
+    });
+
+    await page.waitForNavigation({
+      waitUntil: 'networkidle2'
+    });
+
+    return await page.evaluate(() => {
+      const user = (document.getElementById('resetExchangeSyncUser') as HTMLInputElement).value;
+      const convertedtables = {};
+      ['configSetup', 'userContacts', 'userEvents'].forEach(tableid => {
+        const object = {};
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
+          // tslint:disable-next-line:no-any
+          for (const row of (document.getElementById(tableid) as any).rows) {
+            if (typeof row.cells[1] !== 'undefined') {
+              if (typeof row.cells[1].getElementsByTagName('img')[0] !== 'undefined') {
+                object[row.cells[0].innerText.replace(/(:\t)/g, '')] = row.cells[1].getElementsByTagName('img')[0].alt;
+              } else {
+                object[row.cells[0].innerText.replace(/(:\t)/g, '')] = row.cells[1].innerHTML;
+              }
+            }
+          }
+        }
+        convertedtables[tableid] = object;
+      });
+      return {
+        [user]: convertedtables
+      };
+    });
+  }
+
 }
