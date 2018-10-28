@@ -56,7 +56,6 @@ async function checkstatus(page) {
     };
   });
 }
-
 export default class GetPackageDescription extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
@@ -110,7 +109,8 @@ export default class GetPackageDescription extends SfdxCommand {
       let userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
       let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
       this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if (userContactsItem !== 'Linked' && userEventsItem !== 'Linked') {
+      if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
+
         this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
         this.ux.log('User needs a sync reset!');
         await resetuser(page);
@@ -122,21 +122,28 @@ export default class GetPackageDescription extends SfdxCommand {
           configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
           if (status !== configSetupItem && typeof configSetupItem !== 'undefined') {
             status = configSetupItem;
-            this.ux.stopSpinner(status);
-            if (typeof configSetupItem !== 'undefined') {
-              this.ux.startSpinner('configSetup: ' + itemtext);
-            }
+            this.ux.setSpinnerStatus(status);
           }
         } while (typeof configSetupItem !== 'undefined');
         this.ux.stopSpinner('Reset completed');
+
         itemtext = 'Salesforce and Exchange email addresses linked';
+        userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
+        userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
         this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-        do {
-          tables = await checkstatus(page);
-          userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-          userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-        } while (userContactsItem !== 'Linked' && userEventsItem !== 'Linked');
+        if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
+          do {
+            tables = await checkstatus(page);
+            userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
+            userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
+            if (status !== userContactsItem + '/' + userEventsItem) {
+              status = userContactsItem + '/' + userEventsItem;
+              this.ux.setSpinnerStatus(status);
+            }
+          } while (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem));
+        }
         this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+
       } else {
         this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
       }
@@ -145,45 +152,36 @@ export default class GetPackageDescription extends SfdxCommand {
       userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
       userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
       this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) ) {
+      if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
         do {
           tables = await checkstatus(page);
           userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
           userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
           if (status !== userContactsItem + '/' + userEventsItem) {
             status = userContactsItem + '/' + userEventsItem;
-            this.ux.stopSpinner(status);
-            if ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) ) {
-              this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-            }
+            this.ux.setSpinnerStatus(status);
           }
-        } while ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) );
-      } else {
-        this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+        } while (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem));
       }
+      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
 
       itemtext = 'Exchange to Salesforce sync status';
       userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
       userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
       userEventsItem = 'Not started';
       this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) ) {
+      if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
         do {
           tables = await checkstatus(page);
           userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
           userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
           if (status !== userContactsItem + '/' + userEventsItem) {
             status = userContactsItem + '/' + userEventsItem;
-            this.ux.stopSpinner(status);
-            if ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) ) {
-              this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-            }
+            this.ux.setSpinnerStatus(status);
           }
-        } while ( !['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem) );
-      } else {
-        this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+        } while (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem));
       }
-
+      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
     }
     browser.close();
 
