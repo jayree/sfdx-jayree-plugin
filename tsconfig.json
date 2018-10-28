@@ -11,7 +11,8 @@
     "rootDir": "src",
     "strict": false,
     "target": "es2017",
-    "composite": true
+    "composite": true,
+    "lib": ["dom","es2017"]
   },
   "include": [
     "src/**/*"
