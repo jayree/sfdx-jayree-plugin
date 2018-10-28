@@ -39,8 +39,8 @@ export default class GetPackageDescription extends SfdxCommand {
     let text;
     zipEntries.forEach(zipEntry => {
       const fileName = zipEntry.entryName;
-      const fileContent = zip.readAsText(fileName);
       if (fileName.includes('package.xml')) {
+        const fileContent = zip.readAsText(fileName);
         text = convert.xml2js(fileContent, { compact: true });
         if ('description' in text['Package']) {
           text = text['Package']['description']['_text'];

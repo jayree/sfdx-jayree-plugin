@@ -41,10 +41,11 @@ export default class SetPackageDescription extends SfdxCommand {
     let action;
     zipEntries.forEach(zipEntry => {
       const fileName = zipEntry.entryName;
-      const fileContent = zip.readAsText(fileName);
-      let fileContentjs;
+      const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {
-        const xml = convert.xml2js(fileContent, { compact: true });
+        let fileContentjs;
+        const fileTXTContent = zip.readAsText(fileName);
+        const xml = convert.xml2js(fileTXTContent, { compact: true });
         if ('description' in xml['Package']) {
           xml['Package']['description'] = text;
           action = 'updated';
@@ -64,7 +65,7 @@ export default class SetPackageDescription extends SfdxCommand {
         this.ux.log(action + ' description: ' + text);
         newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
       } else {
-        newZip.addFile(fileName, Buffer.from(fileContent), '', 0o644);
+        newZip.addFile(fileName, fileContent, '', 0o644);
       }
     });
 
