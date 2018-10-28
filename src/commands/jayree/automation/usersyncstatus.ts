@@ -3,19 +3,22 @@ import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
+const messages = core.Messages.loadMessages('sfdx-jayree', 'usersyncstatus');
 export default class UserSyncStatus extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:packagedescription:get --file FILENAME
-    Description of Package FILENAME
+    `$ sfdx jayree:automation:usersyncstatus -o 'Name'
+    configSetup: User assigned to active Lightning Sync configuration... Yes
+    userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
+    userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
+    userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
     `
   ];
 
   protected static flagsConfig = {
-    officeuser: flags.string({ char: 'o', description: messages.getMessage('fileFlagDescription'), required: true })
+    officeuser: flags.string({ char: 'o', description: messages.getMessage('UserFlagDescription'), required: true })
   };
 
   protected static requiresUsername = true;
@@ -35,35 +38,44 @@ export default class UserSyncStatus extends SfdxCommand {
 
     await this.login(conn, page);
 
+    // tslint:disable-next-line:prefer-const
+    let { tables, userSetup } = await this.checkUserSetup(page);
+
+    if (userSetup === 'Yes') {
+      ({ tables } = await this.checkUserReset(page, tables, 'Salesforce and Exchange email addresses linked'));
+      ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce and Exchange email addresses linked', ['Linked']));
+      ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce to Exchange sync status', ['Initial sync completed', 'In sync']));
+      ({ tables } = await this.checkContactsEvents(page, tables, 'Exchange to Salesforce sync status', ['Initial sync completed', 'In sync']));
+    }
+    await browser.close();
+
+    return { description: 'text' };
+
+  }
+
+  private async checkUserSetup(page: puppeteer.Page) {
     await page.goto('https://eu12.salesforce.com/s2x/resetExchangeSyncUser.apexp', {
       waitUntil: 'networkidle2'
     });
-
     await page.focus('#resetExchangeSyncUser');
     await page.keyboard.type(this.flags.officeuser);
-
-    let tables = {};
-    let status = '';
-
     this.ux.startSpinner('configSetup: User assigned to active Lightning Sync configuration');
-    tables = await this.checkstatus(page);
-
-    let configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
-
+    const tables = await this.checkstatus(page);
+    const configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
     this.ux.stopSpinner(configSetupItem);
+    return { tables, userSetup: configSetupItem };
+  }
 
-    if (configSetupItem === 'Yes') {
-      let itemtext = 'Salesforce and Exchange email addresses linked';
-      let userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-      let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-      this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
-
-        this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
-        this.ux.log('User needs a sync reset!');
+  private async checkUserReset(page: puppeteer.Page, tables: {}, itemtext: string) {
+    const userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
+    const userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
+    let status = '';
+    if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
+      this.ux.log('userContacts/userEvents: ' + itemtext + '... ' + userContactsItem + '/' + userEventsItem);
+      if (await this.ux.confirm('Do you want to perform a sync reset? (yes/no)')) {
         await this.resetuser(page);
         itemtext = 'Reset sync status';
-        configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
+        let configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
         this.ux.startSpinner('configSetup: ' + itemtext);
         do {
           tables = await this.checkstatus(page);
@@ -74,67 +86,29 @@ export default class UserSyncStatus extends SfdxCommand {
           }
         } while (typeof configSetupItem !== 'undefined');
         this.ux.stopSpinner('Reset completed');
+      }
+    }
+    return { tables };
+  }
 
-        itemtext = 'Salesforce and Exchange email addresses linked';
+  private async checkContactsEvents(page: puppeteer.Page, tables: {}, itemtext: string, finalstate: string[]) {
+    let userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
+    let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
+    let status = '';
+    this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
+    if (!finalstate.includes(userContactsItem) || !finalstate.includes(userEventsItem)) {
+      do {
+        tables = await this.checkstatus(page);
         userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
         userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-        this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-        if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
-          do {
-            tables = await this.checkstatus(page);
-            userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-            userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-            if (status !== userContactsItem + '/' + userEventsItem) {
-              status = userContactsItem + '/' + userEventsItem;
-              this.ux.setSpinnerStatus(status);
-            }
-          } while (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem));
+        if (status !== userContactsItem + '/' + userEventsItem) {
+          status = userContactsItem + '/' + userEventsItem;
+          this.ux.setSpinnerStatus(status);
         }
-        this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
-
-      } else {
-        this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
-      }
-
-      itemtext = 'Salesforce to Exchange sync status';
-      userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-      userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-      this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
-        do {
-          tables = await this.checkstatus(page);
-          userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-          userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-          if (status !== userContactsItem + '/' + userEventsItem) {
-            status = userContactsItem + '/' + userEventsItem;
-            this.ux.setSpinnerStatus(status);
-          }
-        } while (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem));
-      }
-      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
-
-      itemtext = 'Exchange to Salesforce sync status';
-      userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-      userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-      this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-      if (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem)) {
-        do {
-          tables = await this.checkstatus(page);
-          userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
-          userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
-          if (status !== userContactsItem + '/' + userEventsItem) {
-            status = userContactsItem + '/' + userEventsItem;
-            this.ux.setSpinnerStatus(status);
-          }
-        } while (!['Initial sync completed', 'In sync'].includes(userContactsItem) || !['Initial sync completed', 'In sync'].includes(userEventsItem));
-      }
-      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
-
+      } while (!finalstate.includes(userContactsItem) || !finalstate.includes(userEventsItem));
     }
-    browser.close();
-
-    return { description: 'text' };
-
+    this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+    return { tables, userContactsItem, userEventsItem };
   }
 
   private async login(conn, page) {
@@ -153,15 +127,14 @@ export default class UserSyncStatus extends SfdxCommand {
       waitUntil: 'networkidle2'
     });
   }
+
   private async checkstatus(page) {
     await page.evaluate(() => {
       document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
     });
-
     await page.waitForNavigation({
       waitUntil: 'networkidle2'
     });
-
     return await page.evaluate(() => {
       const user = (document.getElementById('resetExchangeSyncUser') as HTMLInputElement).value;
       const convertedtables = {};

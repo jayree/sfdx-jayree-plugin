@@ -1,0 +1,9 @@
+{
+  "commandDescription": "check the Lightning Sync User Sync Status and reset sync if needed",
+  "UserFlagDescription": "'name' (firstname lastname) of the SF user",
+  "forceFlagDescription": "example boolean flag",
+  "configFlagDescription": "path to config file",
+  "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
+  "errorNoOrgResults": "no results found for the organization '%s'.",
+  "excludeManagedFlagDescription": "exclude Managed Packages from output"
+}

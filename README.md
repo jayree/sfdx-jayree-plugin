@@ -40,22 +40,25 @@ USAGE
 
 ## `sfdx-jayree jayree:automation:usersyncstatus`
 
-get the description within a package
+check the Lightning Sync User Sync Status and reset sync if needed
 
 ```
 USAGE
   $ sfdx-jayree jayree:automation:usersyncstatus
 
 OPTIONS
-  -o, --officeuser=officeuser                     (required) file to read
+  -o, --officeuser=officeuser                     (required) 'name' (firstname lastname) of the SF user
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:packagedescription:get --file FILENAME
-       Description of Package FILENAME
+  $ sfdx jayree:automation:usersyncstatus -o 'Name'
+       configSetup: User assigned to active Lightning Sync configuration... Yes
+       userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
+       userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
+       userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
 _See code: [src/commands/jayree/automation/usersyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/usersyncstatus.ts)_

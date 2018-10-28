@@ -249,8 +249,8 @@
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-0.5.0.tgz#6b36c6ec37230dab53540e2dcdfc862592d6ffc1"
 
 "@sinonjs/commons@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.0.2.tgz#3e0ac737781627b8844257fadc3d803997d0526e"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.3.0.tgz#50a2754016b6f30a994ceda6d9a0a8c36adda849"
   dependencies:
     type-detect "4.0.8"
 
@@ -276,9 +276,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/chai@4.1.6", "@types/chai@^4.1.4":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.6.tgz#1eb26c040e3a84205b1008ad55c800e5e8a94e34"
+"@types/chai@4.1.7", "@types/chai@^4.1.4":
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.7.tgz#1b8e33b61a8c09cbe1f85133071baa0dbf9fa71a"
 
 "@types/events@*":
   version "1.2.0"
@@ -317,6 +317,12 @@
 "@types/node@*", "@types/node@10.12.0", "@types/node@^10.9.4":
   version "10.12.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
+
+"@types/puppeteer@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.9.1.tgz#a2499bb7eff5da8e9197f8407205e7b28bece29a"
+  dependencies:
+    "@types/node" "*"
 
 "@types/sinon@^5.0.2":
   version "5.0.5"
@@ -598,12 +604,6 @@ caching-transform@^2.0.0:
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
-
-caller-id@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/caller-id/-/caller-id-0.1.0.tgz#59bdac0893d12c3871408279231f97458364f07b"
-  dependencies:
-    stack-trace "~0.0.7"
 
 camelcase-keys@^2.0.0:
   version "2.1.0"
@@ -1120,7 +1120,7 @@ fancy-test@^1.4.1:
 
 fast-deep-equal@^1.0.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
+  resolved "http://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
 
 fast-glob@^2.0.2, fast-glob@^2.2.0:
   version "2.2.3"
@@ -2096,12 +2096,6 @@ mocha@5.2.0:
     mkdirp "0.5.1"
     supports-color "5.4.0"
 
-mock-require@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/mock-require/-/mock-require-2.0.2.tgz#1eaa71aad23013773d127dc7e91a3fbb4837d60d"
-  dependencies:
-    caller-id "^0.1.0"
-
 mock-stdin@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/mock-stdin/-/mock-stdin-0.3.1.tgz#c657d9642d90786435c64ca5e99bbd4d09bd7dd3"
@@ -2688,7 +2682,7 @@ safe-json-stringify@~1:
 
 safe-regex@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.yarnpkg.com/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
+  resolved "http://registry.npmjs.org/safe-regex/-/safe-regex-1.1.0.tgz#40a3669f3b077d1e943d44629e157dd48023bf2e"
   dependencies:
     ret "~0.1.10"
 
@@ -2881,10 +2875,6 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-stack-trace@~0.0.7:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
-
 static-extend@^0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
@@ -2950,7 +2940,7 @@ strip-bom@^3.0.0:
 
 strip-eof@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
+  resolved "http://registry.npmjs.org/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
 
 strip-indent@^1.0.1:
   version "1.0.1"
@@ -3113,12 +3103,6 @@ tslint-eslint-rules@^5.3.1, tslint-eslint-rules@^5.4.0:
     tslib "1.9.0"
     tsutils "^3.0.0"
 
-tslint-language-service@0.9.9:
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/tslint-language-service/-/tslint-language-service-0.9.9.tgz#f546dc38483979e6fb3cfa59584ad8525b3ad4da"
-  dependencies:
-    mock-require "^2.0.2"
-
 tslint-microsoft-contrib@5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/tslint-microsoft-contrib/-/tslint-microsoft-contrib-5.2.0.tgz#a0ef808691b8f8c6e7902a62cd06e9502a91dde2"
@@ -3192,6 +3176,13 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typescript-tslint-plugin@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.0.4.tgz#8f403606b94a0be64823ba584264dfd52885e4f3"
+  dependencies:
+    minimatch "^3.0.4"
+    vscode-languageserver "^5.1.0"
+
 typescript@3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.3.tgz#01b70247a6d3c2467f70c45795ef5ea18ce191d5"
@@ -3253,6 +3244,32 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+vscode-jsonrpc@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-4.0.0.tgz#a7bf74ef3254d0a0c272fab15c82128e378b3be9"
+
+vscode-languageserver-protocol@3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.13.0.tgz#710d8e42119bb3affb1416e1e104bd6b4d503595"
+  dependencies:
+    vscode-jsonrpc "^4.0.0"
+    vscode-languageserver-types "3.13.0"
+
+vscode-languageserver-types@3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.13.0.tgz#b704b024cef059f7b326611c99b9c8753c0a18b4"
+
+vscode-languageserver@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver/-/vscode-languageserver-5.1.0.tgz#012a28f154cc7a848c443d217894942e4c3eeb39"
+  dependencies:
+    vscode-languageserver-protocol "3.13.0"
+    vscode-uri "^1.0.6"
+
+vscode-uri@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vscode-uri/-/vscode-uri-1.0.6.tgz#6b8f141b0bbc44ad7b07e94f82f168ac7608ad4d"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"
