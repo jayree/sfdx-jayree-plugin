@@ -11,19 +11,29 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
 declare global {
   interface Array<T> {
-    pushUniqueValue(elem: T, key: string): T[];
+    pushUniqueValueKey(elem: T, key: string): T[];
+    pushUniqueValue(elem: T): T[];
   }
   interface String {
     toLowerCaseifTrue(ignore: boolean): string;
   }
 }
 
-if (!Array.prototype.pushUniqueValue) {
-  Array.prototype.pushUniqueValue = function <T>(elem: T, key: string): T[] {
-     if (!this.map(value => value[key]).includes(elem[key])) {
+if (!Array.prototype.pushUniqueValueKey) {
+  Array.prototype.pushUniqueValueKey = function <T>(elem: T, key: string): T[] {
+    if (!this.map(value => value[key]).includes(elem[key])) {
       this.push(elem);
     }
-     return this;
+    return this;
+  };
+}
+
+if (!Array.prototype.pushUniqueValue) {
+  Array.prototype.pushUniqueValue = function <T>(elem: T): T[] {
+    if (!this.includes(elem)) {
+      this.push(elem);
+    }
+    return this;
   };
 }
 
@@ -74,7 +84,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     // try {
     let apiVersion = this.flags.apiversion || await this.org.retrieveMaxApiVersion();
     let quickFilters = this.flags.quickfilter ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',') : [];
-    let excludeManaged = this.flags.excludeManaged || false;
+    let excludeManaged = this.flags.excludemanaged || false;
 
     if (configFile) {
       jf.readFile(configFile, (err, obj) => {
@@ -89,12 +99,14 @@ export default class GeneratePackageXML extends SfdxCommand {
       });
     }
 
-    // outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
+    outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
+    await this.org.refreshAuth();
     const conn = this.org.getConnection();
     const describe = await conn.metadata.describe(apiVersion);
 
     const folders = [];
     const unfolderedObjects = [];
+    let ipPromise;
     for await (const object of describe.metadataObjects) {
       if (object.inFolder) {
         const objectType = object.xmlName.replace('Template', '');
@@ -106,6 +118,9 @@ export default class GeneratePackageXML extends SfdxCommand {
         let promise = conn.metadata.list({
           type: object.xmlName
         }, apiVersion);
+        if (object.xmlName === 'InstalledPackage') {
+          ipPromise = promise;
+        }
         unfolderedObjects.push(promise);
         if (Array.isArray(object.childXmlNames)) {
           for (const childXmlNames of object.childXmlNames) {
@@ -141,6 +156,12 @@ export default class GeneratePackageXML extends SfdxCommand {
       }
     }
 
+    let ipRegexStr: string = '^(';
+    const nsPrefixes = [];
+    (await ipPromise).forEach(pkg => { nsPrefixes.pushUniqueValue(pkg.namespacePrefix); });
+    nsPrefixes.forEach(prefix => { ipRegexStr += prefix + '|'; });
+    ipRegexStr += ')+__';
+
     const flowDefinitionQuery = await conn.tooling.query('SELECT DeveloperName,ActiveVersion.VersionNumber,LatestVersion.VersionNumber FROM FlowDefinition');
     const activeFlowVersions = {};
     for await (const record of flowDefinitionQuery.records) {
@@ -163,42 +184,43 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
           unfolderedObjectItems.forEach(metadataEntries => {
             // if (metadataEntries) {
-              if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
+            // if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
+            if (metadataEntries.type && !(excludeManaged && (RegExp(ipRegexStr).test(metadataEntries.fullName) || metadataEntries.namespacePrefix || metadataEntries.manageableState === 'installed'))) {
 
-                if (metadataEntries.fileName.includes('ValueSetTranslation')) {
-                  const x = metadataEntries.fileName.split('.')[1].substring(0, 1).toUpperCase() + metadataEntries.fileName.split('.')[1].substring(1);
-                  if (!packageTypes[x]) {
-                    packageTypes[x] = [];
-                  }
-                  packageTypes[x].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
-                } else {
+              if (metadataEntries.fileName.includes('ValueSetTranslation')) {
+                const x = metadataEntries.fileName.split('.')[1].substring(0, 1).toUpperCase() + metadataEntries.fileName.split('.')[1].substring(1);
+                if (!packageTypes[x]) {
+                  packageTypes[x] = [];
+                }
+                packageTypes[x].pushUniqueValueKey({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
+              } else {
 
-                  if (!packageTypes[metadataEntries.type]) {
-                    packageTypes[metadataEntries.type] = [];
-                  }
+                if (!packageTypes[metadataEntries.type]) {
+                  packageTypes[metadataEntries.type] = [];
+                }
 
-                  if (metadataEntries.type === 'Flow' && activeFlowVersions[metadataEntries.fullName]) {
+                if (metadataEntries.type === 'Flow' && activeFlowVersions[metadataEntries.fullName]) {
 
-                    if (apiVersion >= 44.0) {
-                      if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
-                        // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
-                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!` }, 'fullName');
-                      } else {
-                        packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
-                      }
+                  if (apiVersion >= 44.0) {
+                    if (activeFlowVersions[metadataEntries.fullName].ActiveVersion !== activeFlowVersions[metadataEntries.fullName].LatestVersion) {
+                      // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
+                      packageTypes[metadataEntries.type].pushUniqueValueKey({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!` }, 'fullName');
                     } else {
-                      packageTypes[metadataEntries.type].pushUniqueValue({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'` }, 'fullName');
-                      // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
+                      packageTypes[metadataEntries.type].pushUniqueValueKey({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
                     }
                   } else {
-                    packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
+                    packageTypes[metadataEntries.type].pushUniqueValueKey({ fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`, fileName: metadataEntries.fileName, warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'` }, 'fullName');
+                    // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                   }
-
+                } else {
+                  packageTypes[metadataEntries.type].pushUniqueValueKey({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
                 }
+
               }
-/*             } else {
-              this.ux.error('No metadataEntry available');
-            } */
+            }
+            /*             } else {
+                          this.ux.error('No metadataEntry available');
+                        } */
           });
         }
       } catch (err) {
@@ -218,16 +240,16 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
           folderedObjectItems.forEach(metadataEntries => {
             // if (metadataEntries) {
-              if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
+            if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
 
-                if (!packageTypes[metadataEntries.type]) {
-                  packageTypes[metadataEntries.type] = [];
-                }
-                packageTypes[metadataEntries.type].pushUniqueValue({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
+              if (!packageTypes[metadataEntries.type]) {
+                packageTypes[metadataEntries.type] = [];
               }
-/*             } else {
-              this.ux.error('No metadataEntry available');
-            } */
+              packageTypes[metadataEntries.type].pushUniqueValueKey({ fullName: metadataEntries.fullName, fileName: metadataEntries.fileName }, 'fullName');
+            }
+            /*             } else {
+                          this.ux.error('No metadataEntry available');
+                        } */
           });
         }
       } catch (err) {
@@ -239,7 +261,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       packageTypes['StandardValueSet'] = [];
     }
     ['AccountContactMultiRoles', 'AccountContactRole', 'AccountOwnership', 'AccountRating', 'AccountType', 'AddressCountryCode', 'AddressStateCode', 'AssetStatus', 'CampaignMemberStatus', 'CampaignStatus', 'CampaignType', 'CaseContactRole', 'CaseOrigin', 'CasePriority', 'CaseReason', 'CaseStatus', 'CaseType', 'ContactRole', 'ContractContactRole', 'ContractStatus', 'EntitlementType', 'EventSubject', 'EventType', 'FiscalYearPeriodName', 'FiscalYearPeriodPrefix', 'FiscalYearQuarterName', 'FiscalYearQuarterPrefix', 'IdeaCategory', 'IdeaMultiCategory', 'IdeaStatus', 'IdeaThemeStatus', 'Industry', 'InvoiceStatus', 'LeadSource', 'LeadStatus', 'OpportunityCompetitor', 'OpportunityStage', 'OpportunityType', 'OrderStatus', 'OrderType', 'PartnerRole', 'Product2Family', 'QuestionOrigin', 'QuickTextCategory', 'QuickTextChannel', 'QuoteStatus', 'SalesTeamRole', 'Salutation', 'ServiceContractApprovalStatus', 'SocialPostClassification', 'SocialPostEngagementLevel', 'SocialPostReviewedStatus', 'SolutionStatus', 'TaskPriority', 'TaskStatus', 'TaskSubject', 'TaskType', 'WorkOrderLineItemStatus', 'WorkOrderPriority', 'WorkOrderStatus'].forEach(member => {
-      packageTypes['StandardValueSet'].pushUniqueValue({ fullName: member, fileName: `${member}.standardValueSet` }, 'fullName');
+      packageTypes['StandardValueSet'].pushUniqueValueKey({ fullName: member, fileName: `${member}.standardValueSet` }, 'fullName');
     });
 
     /*     const packageJson = {
@@ -295,10 +317,10 @@ export default class GeneratePackageXML extends SfdxCommand {
     const builder = new xml2js.Builder({ xmldec: { version: '1.0', encoding: 'UTF-8' }, xmlns: true });
     const packageXml = builder.buildObject(packageJson);
 
-/*     notifier.notify({
-      title: 'sfdx-jayree packagexml',
-      message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
-    }); */
+    /*     notifier.notify({
+          title: 'sfdx-jayree packagexml',
+          message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
+        }); */
 
     filteredwarnings.forEach(value => this.ux.warn(value));
 
