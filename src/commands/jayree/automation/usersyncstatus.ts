@@ -39,7 +39,7 @@ export default class UserSyncStatus extends SfdxCommand {
     await this.login(conn, page);
 
     // tslint:disable-next-line:prefer-const
-    let { tables, userSetup } = await this.checkUserSetup(page);
+    let { tables, userSetup } = await this.checkUserSetup(conn, page);
 
     if (userSetup === 'Yes') {
       ({ tables } = await this.checkUserReset(page, tables, 'Salesforce and Exchange email addresses linked'));
@@ -53,8 +53,8 @@ export default class UserSyncStatus extends SfdxCommand {
 
   }
 
-  private async checkUserSetup(page: puppeteer.Page) {
-    await page.goto('https://eu12.salesforce.com/s2x/resetExchangeSyncUser.apexp', {
+  private async checkUserSetup(conn: core.Connection, page: puppeteer.Page) {
+    await page.goto(conn.instanceUrl + '/s2x/resetExchangeSyncUser.apexp', {
       waitUntil: 'networkidle2'
     });
     await page.focus('#resetExchangeSyncUser');
@@ -111,12 +111,12 @@ export default class UserSyncStatus extends SfdxCommand {
     return { tables, userContactsItem, userEventsItem };
   }
 
-  private async login(conn, page) {
-    await page.goto('https://eu12.salesforce.com/secur/frontdoor.jsp?sid=' + conn.accessToken, {
+  private async login(conn: core.Connection, page: puppeteer.Page) {
+    await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
       waitUntil: 'networkidle2'
     });
   }
-  private async resetuser(page) {
+  private async resetuser(page: puppeteer.Page) {
     page.on('dialog', async dialog => {
       await dialog.accept();
     });
@@ -128,7 +128,7 @@ export default class UserSyncStatus extends SfdxCommand {
     });
   }
 
-  private async checkstatus(page) {
+  private async checkstatus(page: puppeteer.Page) {
     await page.evaluate(() => {
       document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
     });
