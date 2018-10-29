@@ -31,7 +31,7 @@ export default class UserSyncStatus extends SfdxCommand {
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({
-      headless: false
+      headless: true
     });
 
     const page = await browser.newPage();
