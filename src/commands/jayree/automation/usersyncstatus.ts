@@ -27,11 +27,11 @@ export default class UserSyncStatus extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
 
-    // const inputfile = this.args.file || this.flags.file;
+    await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({
-      headless: true
+      headless: false
     });
 
     const page = await browser.newPage();
