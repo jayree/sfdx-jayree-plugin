@@ -7,7 +7,9 @@
   ],
   "exclude": [
     "**/*.d.ts",
-    "**/index.ts"
+    "**/index.ts",
+    "**/packagexml.ts",
+    "**/automation/*.ts"
   ],
   "all": true
 }

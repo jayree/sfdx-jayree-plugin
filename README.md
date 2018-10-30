@@ -31,23 +31,24 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`sfdx-jayree jayree:automation:usersyncstatus`](#sfdx-jayree-jayreeautomationusersyncstatus)
+* [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
 * [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
 * [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
 * [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
 
-## `sfdx-jayree jayree:automation:usersyncstatus`
+## `sfdx-jayree jayree:automation:ltngsyncstatus`
 
 check the Lightning Sync User Sync Status and reset sync if needed
 
 ```
 USAGE
-  $ sfdx-jayree jayree:automation:usersyncstatus
+  $ sfdx-jayree jayree:automation:ltngsyncstatus
 
 OPTIONS
-  -o, --officeuser=officeuser                     (required) 'name' (firstname lastname) of the SF user
+  -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
+  -s, --statusonly                                'name' (firstname lastname) of the SF user
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
@@ -61,7 +62,7 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/usersyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/usersyncstatus.ts)_
+_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/ltngsyncstatus.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
