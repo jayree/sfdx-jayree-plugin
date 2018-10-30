@@ -73,9 +73,15 @@ export default class UserSyncStatus extends SfdxCommand {
     await page.keyboard.type(this.flags.officeuser);
     this.ux.startSpinner('configSetup: User assigned to active Lightning Sync configuration');
     const tables = await this.checkstatus(page);
-    const configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
+    let configSetupItem;
+    try {
+      configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
+    } catch {
+      tables[this.flags.officeuser] = {configSetup: {'User assigned to active Lightning Sync configuration': 'No'}};
+      configSetupItem = 'No';
+    }
     this.ux.stopSpinner(configSetupItem);
-    return { tables, userSetup: configSetupItem };
+    return { tables, userSetup: configSetupItem};
   }
 
   private async checkUserReset(page: puppeteer.Page, tables: {}, itemtext: string) {
@@ -168,7 +174,7 @@ export default class UserSyncStatus extends SfdxCommand {
       if (typeof document.getElementById('resetExchangeSyncUser') !== 'undefined' && document.getElementById('resetExchangeSyncUser')) {
         const user = (document.getElementById('resetExchangeSyncUser') as HTMLInputElement).value;
         if (user !== '') {
-          returntables[user] = converttables(document, ['configSetup', 'userContacts', 'userEvents']);
+            returntables[user] = converttables(document, ['configSetup', 'userContacts', 'userEvents']);
         }
       }
       return returntables;
