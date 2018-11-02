@@ -60,11 +60,25 @@
     "topics": {
       "jayree": {
         "name": "jayree",
-        "description": "Tools to generate and modify packages",
+        "description": "packages and automation toolset",
         "subtopics": {
           "packagedescription": {
             "name": "packagedescription",
-            "description": "Tools to add/modify/remove the description in a package"
+            "description": "tools to add/modify/remove the description in a package"
+          },
+          "automation": {
+            "name": "automation",
+            "description": "headless browser automation tools",
+            "subtopics": {
+              "changeset": {
+                "name": "changeset",
+                "description": "deploy/list incomming change sets"
+              },
+              "ltngsyncstatus": {
+                "name": "ltngsyncstatus",
+                "description": "check the Lightning Sync User Sync Status and reset sync if needed"
+              }
+            }
           }
         }
       }

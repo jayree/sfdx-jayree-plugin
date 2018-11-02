@@ -14,21 +14,28 @@ export default class DeployChangeSet extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 
-  /*   public static examples = [
-      `$ sfdx jayree:automation:usersyncstatus -o 'Name'
-      configSetup: User assigned to active Lightning Sync configuration... Yes
-      userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
-      userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
-      userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
-      `
-    ]; */
+  public static examples = [
+    `$ sfdx jayree:automation:changeset:deploy -s ChangeSet -l RunLocalTests --nodialog
+Deploying Change Set 'ChangeSet'...
+
+=== Status
+Status: Pending
+jobid:  0Xxx100000xx1x1
+`,
+      `$ sfdx jayree:automation:changeset:deploy
+? Change Sets Awaiting Deployment (Use arrow keys)
+ ChangeSet3
+ ChangeSet2
+❯ ChangeSet1
+`
+];
 
   protected static flagsConfig = {
     changeset: flags.string({ char: 's', description: messages.getMessage('changesetFlagDescription'), required: false }),
     runtests: flags.string({ char: 'r', description: messages.getMessage('runtestsFlagDescription'), required: false, dependsOn: ['testlevel'] }),
     testlevel: flags.string({ char: 'l', description: messages.getMessage('testlevelFlagDescription'), required: false, options: ['Default', 'RunSpecifiedTests', 'RunLocalTests', 'RunAllTestsInOrg'] }),
     checkonly: flags.boolean({ char: 'c', description: messages.getMessage('checkonlyFlagDescription'), required: false }),
-    nodialog: flags.boolean({ description: messages.getMessage('checkonlyFlagDescription'), required: false, dependsOn: ['changeset', 'testlevel'] })
+    nodialog: flags.boolean({ description: messages.getMessage('nodialogFlagDescription'), required: false, dependsOn: ['changeset', 'testlevel'] })
   };
 
   protected static requiresUsername = true;

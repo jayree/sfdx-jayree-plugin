@@ -1,5 +1,5 @@
 {
-  "commandDescription": "deploy incomming change set to an org",
+  "commandDescription": "list incomming change sets of an org",
   "changesetFlagDescription": "name of changeset to deploy",
   "runtestsFlagDescription": "tests to run if --testlevel RunSpecifiedTests",
   "testlevelFlagDescription": "deployment testing level (Default,RunSpecifiedTests,RunLocalTests,RunAllTestsInOrg)",

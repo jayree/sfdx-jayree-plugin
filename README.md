@@ -32,7 +32,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
-* [`sfdx-jayree jayree:automation:changeset:view`](#sfdx-jayree-jayreeautomationchangesetview)
+* [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
 * [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
@@ -71,29 +71,41 @@ OPTIONS
 
   --loglevel=(trace|debug|info|warn|error|fatal)                            logging level for this command invocation
 
-  --nodialog                                                                validate deploy but don’t save to the org
-                                                                            (default:false)
+  --nodialog                                                                don't show the dialog wizard
+
+EXAMPLES
+  $ sfdx jayree:automation:changeset:deploy -s ChangeSet -l RunLocalTests --nodialog
+  Deploying Change Set 'ChangeSet'...
+
+  === Status
+  Status: Pending
+  jobid:  0Xxx100000xx1x1
+
+  $ sfdx jayree:automation:changeset:deploy
+  ? Change Sets Awaiting Deployment (Use arrow keys)
+    ChangeSet3
+    ChangeSet2
+  ❯ ChangeSet1
 ```
 
 _See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/changeset/deploy.ts)_
 
-## `sfdx-jayree jayree:automation:changeset:view`
+## `sfdx-jayree jayree:automation:changeset:list`
 
-deploy incomming change set to an org
+list incomming change sets of an org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:automation:changeset:view
+  $ sfdx-jayree jayree:automation:changeset:list
 
 OPTIONS
-  -s, --changeset=changeset                       name of changeset to deploy
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 ```
 
-_See code: [src/commands/jayree/automation/changeset/view.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/changeset/view.ts)_
+_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/changeset/list.ts)_
 
 ## `sfdx-jayree jayree:automation:ltngsyncstatus`
 

@@ -1,4 +1,4 @@
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
 
@@ -8,7 +8,7 @@ if (Symbol['asyncIterator'] === undefined) {
 }
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
+const messages = core.Messages.loadMessages('sfdx-jayree', 'listchangeset');
 export default class ViewChangeSets extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
@@ -21,10 +21,6 @@ export default class ViewChangeSets extends SfdxCommand {
       userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
       `
     ]; */
-
-  protected static flagsConfig = {
-    changeset: flags.string({ char: 's', description: messages.getMessage('changesetFlagDescription'), required: false })
-  };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
