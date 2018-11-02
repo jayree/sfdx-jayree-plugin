@@ -31,12 +31,50 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
 * [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
 * [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
 * [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
 * [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
+
+## `sfdx-jayree jayree:automation:changeset:deploy`
+
+deploy incomming change set to an org
+
+```
+USAGE
+  $ sfdx-jayree jayree:automation:changeset:deploy
+
+OPTIONS
+  -c, --checkonly                                                           validate deploy but don’t save to the org
+                                                                            (default:false)
+
+  -l, --testlevel=Default|RunSpecifiedTests|RunLocalTests|RunAllTestsInOrg  deployment testing level
+                                                                            (Default,RunSpecifiedTests,RunLocalTests,Run
+                                                                            AllTestsInOrg)
+
+  -r, --runtests=runtests                                                   tests to run if --testlevel
+                                                                            RunSpecifiedTests
+
+  -s, --changeset=changeset                                                 name of changeset to deploy
+
+  -u, --targetusername=targetusername                                       username or alias for the target org;
+                                                                            overrides default target org
+
+  --apiversion=apiversion                                                   override the api version used for api
+                                                                            requests made by this command
+
+  --json                                                                    format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal)                            logging level for this command invocation
+
+  --nodialog                                                                validate deploy but don’t save to the org
+                                                                            (default:false)
+```
+
+_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ## `sfdx-jayree jayree:automation:ltngsyncstatus`
 
