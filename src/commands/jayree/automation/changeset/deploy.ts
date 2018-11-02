@@ -108,11 +108,13 @@ export default class UserSyncStatus extends SfdxCommand {
           return answers;
         });
       } else {
-        sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', selectedTestOption: this.flags.testlevel };
-        if (this.flags.testlevel === 'RunSpecifiedTests' && !this.flags.runtests) {
-          throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
-        } else {
-          sCS['runtests'] = this.flags.runtests;
+        sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', testlevel: this.flags.testlevel };
+        if (this.flags.testlevel === 'RunSpecifiedTests') {
+          if (!this.flags.runtests) {
+            throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
+          } else {
+            sCS['runtests'] = this.flags.runtests;
+          }
         }
       }
 
