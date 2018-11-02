@@ -48,10 +48,10 @@ export default class UserSyncStatus extends SfdxCommand {
 
     await this.login(conn, page);
 
-    const jobid = await this.getjobid(conn, page);
+    let jobid = await this.getjobid(conn, page);
 
     if (jobid) {
-      console.log(`sfdx force:mdapi:deploy:report -i ${jobid} -u ${conn.getUsername()} --json`);
+      throw Error('a deployment is already running with jobid ' + jobid);
     } else {
       await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
         waitUntil: 'networkidle2'
@@ -125,7 +125,7 @@ export default class UserSyncStatus extends SfdxCommand {
           waitUntil: 'networkidle2'
         });
 
-        await this.clickvalidateordeploy(page);
+        await this.clickvalidateordeploy(page, sCS.selectedMode);
 
         switch (sCS.testlevel) {
           case 'Default':
@@ -145,16 +145,22 @@ export default class UserSyncStatus extends SfdxCommand {
             await this.selecttest(page, '0');
         }
 
-        await this.clickvalidateordeploy2(page);
+        await this.clickvalidateordeploy2(page, sCS.selectedMode);
 
-        console.log(`sfdx force:mdapi:deploy:report -i ${await this.getjobid(conn, page)} -u ${conn.getUsername()} --json`);
+        jobid = await this.getjobid(conn, page);
+        // console.log(`sfdx force:mdapi:deploy:report -i ${jobId} -u ${conn.getUsername()} --json`);
+        this.ux.log(`Deploying Change Set ${sCS.selectedChangeSet}...`);
+        this.ux.log('');
+        this.ux.styledHeader('Status');
+        this.ux.log('Status:  Queued');
+        this.ux.log('jobid:  ' + jobid);
       }
 
     }
 
     await browser.close();
 
-    return 'tables';
+    return { done: false, id: jobid, state: 'Queued', status: 'Queued', timedOut: true };
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
@@ -174,8 +180,8 @@ export default class UserSyncStatus extends SfdxCommand {
     }
   }
 
-  private async clickvalidateordeploy(page: puppeteer.Page) {
-    if (this.flags.checkonly) {
+  private async clickvalidateordeploy(page: puppeteer.Page, selectedMode: string) {
+    if (selectedMode === 'Validate') {
       // click on validate
       await page.evaluate(() => {
         document.getElementById('inboundChangeSetDetailPage:inboundChangeSetDetailPageBody:inboundChangeSetDetailPageBody:detail_form:ics_detail_block:form_buttons:validate_button').click();
@@ -191,8 +197,8 @@ export default class UserSyncStatus extends SfdxCommand {
     });
   }
 
-  private async clickvalidateordeploy2(page: puppeteer.Page) {
-    if (this.flags.checkonly) {
+  private async clickvalidateordeploy2(page: puppeteer.Page, selectedMode: string) {
+    if (selectedMode === 'Validate') {
       // click on validate
       await page.evaluate(() => {
         document.getElementById('inboundChangeSetTestOptions:pageForm:ics_test_level_block:form_buttons:validate_button').click();
@@ -232,18 +238,20 @@ export default class UserSyncStatus extends SfdxCommand {
 
       const converttable = (document: Document, tableid: string) => {
         const rows = [];
-        const table = document.getElementById(tableid) as HTMLTableElement;
-        for (let r = 1, n = table.rows.length; r < n; r++) {
-          const cells = {};
-          for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
-            cells[table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
-            if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
-              const div = document.createElement('div');
-              div.innerHTML = table.rows[r].cells[c].innerHTML;
-              cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid) != null) {
+          const table = document.getElementById(tableid) as HTMLTableElement;
+          for (let r = 1, n = table.rows.length; r < n; r++) {
+            const cells = {};
+            for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
+              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
+                const div = document.createElement('div');
+                div.innerHTML = table.rows[r].cells[c].innerHTML;
+                cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
+              }
             }
+            rows.push(cells);
           }
-          rows.push(cells);
         }
         return rows;
       };
