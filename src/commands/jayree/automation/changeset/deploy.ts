@@ -249,16 +249,20 @@ jobid:  0Xxx100000xx1x1
       let currentname;
       // let pendinglist;
       let pendingid;
+      let running = false;
       if (typeof document.getElementById('viewErrors') !== 'undefined' && document.getElementById('viewErrors')) {
         id = (document.getElementById('viewErrors') as HTMLElement).getAttribute('onclick').split('asyncId=')[1].split("'")[0];
+        running = true;
       }
       if (typeof document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)') !== 'undefined' && document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)')) {
         currentname = document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)').textContent.replace(/(\t|\n)/g, '').split(':')[1].trim();
+        running = true;
       }
 
       // const rows = [];
       if (typeof document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') !== 'undefined' && document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList')) {
         const table = document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') as HTMLTableElement;
+        running = true;
         for (let r = 0, n = table.rows.length; r < n; r++) {
           const div = document.createElement('div');
           div.innerHTML = table.rows[r].cells[0].innerHTML;
@@ -270,10 +274,10 @@ jobid:  0Xxx100000xx1x1
       }
       // pendinglist = rows;
 
-      return { id, currentname, pendingid };
+      return { id, currentname, pendingid, running };
     }, cs.ChangeSetName);
 
-    if (typeof job.currentname === 'undefined') {
+    if (!job.running) {
       // open detail page
       await page.goto(conn.instanceUrl + cs.DetailPage, {
         waitUntil: 'networkidle2'
@@ -291,13 +295,13 @@ jobid:  0Xxx100000xx1x1
           };
         }
       });
-      return { id: csstatus.id, name: cs.ChangeSetName, status: csstatus.status, running: (typeof job.currentname !== 'undefined') ? true : false };
+      return { id: csstatus.id, name: cs.ChangeSetName, status: csstatus.status, running: job.running };
     }
 
     if (cs.ChangeSetName === job.currentname) {
-      return { id: job.id, name: job.currentname, status: 'InProgress', running: (typeof job.currentname !== 'undefined') ? true : false };
+      return { id: job.id, name: job.currentname, status: 'InProgress', running: job.running };
     } else {
-      return { id: job.pendingid, name: cs.ChangeSetName, status: 'Pending', running: (typeof job.currentname !== 'undefined') ? true : false };
+      return { id: job.pendingid, name: cs.ChangeSetName, status: 'Pending', running: job.running };
     }
     // } catch {
     //  return false;
