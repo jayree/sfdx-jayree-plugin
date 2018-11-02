@@ -44,134 +44,133 @@ export default class DeployChangeSet extends SfdxCommand {
       headless: true
     });
 
-    let jobid;
+    let job;
 
     try {
       const page = await browser.newPage();
 
       await this.login(conn, page);
 
-      jobid = await this.getjobid(conn, page);
+      await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
+        waitUntil: 'networkidle2'
+      });
 
-      if (jobid) {
-        throw Error('a deployment is already running with jobid ' + jobid);
+      const tables = await this.gettables(page);
+
+      let sCS;
+
+      if (!this.flags.nodialog) {
+        const questions = [
+          {
+            type: 'list',
+            message: 'Change Sets Awaiting Deployment',
+            name: 'selectedChangeSet',
+            choices: tables.csad.map(element => ({ name: element.ChangeSetName })),
+            default: this.flags.changeset
+          },
+          {
+            type: 'list',
+            name: 'selectedMode',
+            message: 'Validate or Deploy?',
+            choices: ['Validate', 'Deploy'],
+            default: () => this.flags.checkonly ? 'Validate' : 'Deploy'
+          },
+          {
+            type: 'list',
+            name: 'testlevel',
+            message: 'Choose a Test Option',
+            choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
+            default: () => this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default',
+            filter: val => {
+              return val.replace(/( )/g, '');
+            }
+          },
+          {
+            type: 'input',
+            name: 'runtests',
+            message: 'Only the tests that you specify are run. Provide the names of test classes in a comma-separated list:',
+            default: this.flags.runtests,
+            when: answers => {
+              return answers.testlevel === 'RunSpecifiedTests';
+            },
+            validate: answer => {
+              if (answer.length < 1) {
+                return 'You must specify at least one test.';
+              }
+              return true;
+            }
+          }
+        ];
+
+        sCS = await inquirer.prompt(questions).then(answers => {
+          return answers;
+        });
       } else {
-        await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
-          waitUntil: 'networkidle2'
-        });
-
-        const tables = await this.gettables(page);
-
-        let sCS;
-
-        if (!this.flags.nodialog) {
-          const questions = [
-            {
-              type: 'list',
-              message: 'Change Sets Awaiting Deployment',
-              name: 'selectedChangeSet',
-              choices: tables.csad.map(element => ({ name: element['Change Set Name'] })),
-              default: this.flags.changeset
-            },
-            {
-              type: 'list',
-              name: 'selectedMode',
-              message: 'Validate or Deploy?',
-              choices: ['Validate', 'Deploy'],
-              default: () => this.flags.checkonly ? 'Validate' : 'Deploy'
-            },
-            {
-              type: 'list',
-              name: 'testlevel',
-              message: 'Choose a Test Option',
-              choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
-              default: () => this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default',
-              filter: val => {
-                return val.replace(/( )/g, '');
-              }
-            },
-            {
-              type: 'input',
-              name: 'runtests',
-              message: 'Only the tests that you specify are run. Provide the names of test classes in a comma-separated list:',
-              default: this.flags.runtests,
-              when: answers => {
-                return answers.testlevel === 'RunSpecifiedTests';
-              },
-              validate: answer => {
-                if (answer.length < 1) {
-                  return 'You must specify at least one test.';
-                }
-                return true;
-              }
-            }
-          ];
-
-          sCS = await inquirer.prompt(questions).then(answers => {
-            return answers;
-          });
-        } else {
-          sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', testlevel: this.flags.testlevel };
-          if (this.flags.testlevel === 'RunSpecifiedTests') {
-            if (!this.flags.runtests) {
-              throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
-            } else {
-              sCS['runtests'] = this.flags.runtests;
-            }
+        sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', testlevel: this.flags.testlevel };
+        if (this.flags.testlevel === 'RunSpecifiedTests') {
+          if (!this.flags.runtests) {
+            throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
+          } else {
+            sCS['runtests'] = this.flags.runtests;
           }
         }
-
-        // console.log(sCS);
-        const changeset = tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))[0];
-        // for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
-        // console.log(changeset);
-        if (!changeset) {
-          throw Error('Change Set ' + sCS.selectedChangeSet + ' not found!');
-        }
-        // open detail page
-        await page.goto(conn.instanceUrl + changeset.DetailPage, {
-          waitUntil: 'networkidle2'
-        });
-
-        await this.clickvalidateordeploy(page, sCS.selectedMode);
-
-        switch (sCS.testlevel) {
-          case 'Default':
-            await this.selecttest(page, '0');
-            break;
-          case 'RunSpecifiedTests':
-            await this.selecttest(page, '3', sCS.runtests);
-            break;
-          case 'RunLocalTests': {
-            await this.selecttest(page, '1');
-            break;
-          }
-          case 'RunAllTestsInOrg':
-            await this.selecttest(page, '2');
-            break;
-          default:
-            await this.selecttest(page, '0');
-        }
-
-        await this.clickvalidateordeploy2(page, sCS.selectedMode);
-
-        jobid = await this.getjobid(conn, page);
-        // console.log(`sfdx force:mdapi:deploy:report -i ${jobId} -u ${conn.getUsername()} --json`);
-        this.ux.log(`Deploying Change Set ${sCS.selectedChangeSet}...`);
-        this.ux.log('');
-        this.ux.styledHeader('Status');
-        this.ux.log('Status:  Queued');
-        this.ux.log('jobid:  ' + jobid);
-        // }
-
       }
+
+      // console.log(sCS);
+      const changeset = tables.csad.filter(element => sCS.selectedChangeSet.includes(element.ChangeSetName))[0];
+      // for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
+      // console.log(changeset);
+      if (!changeset) {
+        throw Error(`Change Set '${sCS.selectedChangeSet}' not found!`);
+      }
+      // open detail page
+      await page.goto(conn.instanceUrl + changeset.DetailPage, {
+        waitUntil: 'networkidle2'
+      });
+
+      await this.clickvalidateordeploy(page, sCS.selectedMode);
+
+      switch (sCS.testlevel) {
+        case 'Default':
+          await this.selecttest(page, '0');
+          break;
+        case 'RunSpecifiedTests':
+          await this.selecttest(page, '3', sCS.runtests);
+          break;
+        case 'RunLocalTests': {
+          await this.selecttest(page, '1');
+          break;
+        }
+        case 'RunAllTestsInOrg':
+          await this.selecttest(page, '2');
+          break;
+        default:
+          await this.selecttest(page, '0');
+      }
+
+      await this.clickvalidateordeploy2(page, sCS.selectedMode);
+      job = await this.getjob(conn, page, sCS.selectedChangeSet);
+      // console.log(job);
+      // console.log(`sfdx force:mdapi:deploy:report -i ${jobId} -u ${conn.getUsername()} --json`);
+      this.ux.log(`Deploying Change Set '${sCS.selectedChangeSet}'...`);
+      this.ux.log('');
+      if (changeset.HTMLDescription) {
+        this.ux.styledHeader('Description');
+        this.ux.log(changeset.HTMLDescription);
+        this.ux.log('');
+      }
+      this.ux.styledHeader('Status');
+      this.ux.log('Status: ' + job.status);
+      this.ux.log('jobid:  ' + job.id);
+      // }
+
     } catch (error) {
       throw error;
     } finally {
       await browser.close();
     }
 
-    return { done: false, id: jobid, state: 'Queued', status: 'Queued', timedOut: true };
+    return { done: false, id: job.id, state: job.status, status: job.status, timedOut: true };
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
@@ -230,18 +229,49 @@ export default class DeployChangeSet extends SfdxCommand {
     });
   }
 
-  private async getjobid(conn: core.Connection, page: puppeteer.Page) {
+  private async getjob(conn: core.Connection, page: puppeteer.Page, csName: string) {
     // open deployment status
     await page.goto(conn.instanceUrl + '/changemgmt/monitorDeployment.apexp', {
       waitUntil: 'networkidle2'
     });
-    try {
-      return await page.evaluate(() => {
-        return (document.getElementById('viewErrors') as HTMLElement).getAttribute('onclick').split('asyncId=')[1].split("'")[0];
-      });
-    } catch {
-      return false;
+    // try {
+
+    const job = await page.evaluate(csN => {
+      let id;
+      let currentname;
+      // let pendinglist;
+      let pendingid;
+      if (typeof document.getElementById('viewErrors') !== 'undefined' && document.getElementById('viewErrors')) {
+        id = (document.getElementById('viewErrors') as HTMLElement).getAttribute('onclick').split('asyncId=')[1].split("'")[0];
+      }
+      if (typeof document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)') !== 'undefined' && document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)')) {
+        currentname = document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)').textContent.replace(/(\t|\n)/g, '').split(':')[1].trim();
+      }
+
+      // const rows = [];
+      if (typeof document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') !== 'undefined' && document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList')) {
+        const table = document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') as HTMLTableElement;
+        for (let r = 0, n = table.rows.length; r < n; r++) {
+          const div = document.createElement('div');
+          div.innerHTML = table.rows[r].cells[0].innerHTML;
+          // rows.push({ Action: (div.firstChild as Element).getAttribute('href').split("\'")[1], Name: table.rows[r].cells[1].innerText.replace(/(:\t|\t)/g, '') });
+          if (table.rows[r].cells[1].innerText.replace(/(:\t|\t)/g, '') === csN) {
+            pendingid = (div.firstChild as Element).getAttribute('href').split("\'")[1];
+          }
+        }
+      }
+      // pendinglist = rows;
+
+      return { id, currentname, pendingid };
+    }, csName);
+    if (csName === job.currentname) {
+      return { id: job.id, name: job.currentname, status: 'InProgress' };
+    } else {
+      return { id: job.pendingid, name: csName, status: 'Pending' };
     }
+    // } catch {
+    //  return false;
+    // }
   }
 
   private async gettables(page: puppeteer.Page) {
@@ -249,16 +279,27 @@ export default class DeployChangeSet extends SfdxCommand {
 
       const converttable = (document: Document, tableid: string) => {
         const rows = [];
-        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid) != null) {
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
           const table = document.getElementById(tableid) as HTMLTableElement;
           for (let r = 1, n = table.rows.length; r < n; r++) {
             const cells = {};
             for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
-              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Uploaded By') {
+                cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/( @.*)/g, '');
+              }
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Description') {
+                cells['HTMLDescription'] = table.rows[r].cells[c].innerHTML;
+              }
               if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
                 cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
+              }
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Source Organization') {
+                const div = document.createElement('div');
+                div.innerHTML = table.rows[r].cells[c].innerHTML;
+                cells['SourceOrganizationID'] = (div.firstChild as Element).getAttribute('href').split('id=')[1];
               }
             }
             rows.push(cells);

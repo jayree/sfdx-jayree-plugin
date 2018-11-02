@@ -9,7 +9,7 @@ if (Symbol['asyncIterator'] === undefined) {
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
-export default class UserSyncStatus extends SfdxCommand {
+export default class ViewChangeSets extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 
@@ -51,6 +51,14 @@ export default class UserSyncStatus extends SfdxCommand {
 
     await this.ux.styledJSON(tables.csad);
 
+    /*     const jsonParsed = {};
+        tables.csad.forEach(value => {
+          const keyval = value[Object.keys(value)[0]];
+          delete value[Object.keys(value)[0]];
+          jsonParsed[keyval] = value;
+        });
+        await this.ux.styledJSON(jsonParsed); */
+
     await browser.close();
 
     return tables.csad;
@@ -72,11 +80,22 @@ export default class UserSyncStatus extends SfdxCommand {
           for (let r = 1, n = table.rows.length; r < n; r++) {
             const cells = {};
             for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
-              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Uploaded By') {
+                cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/( @.*)/g, '');
+              }
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Description') {
+                cells['HTMLDescription'] = table.rows[r].cells[c].innerHTML;
+              }
               if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
                 cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
+              }
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Source Organization') {
+                const div = document.createElement('div');
+                div.innerHTML = table.rows[r].cells[c].innerHTML;
+                cells['SourceOrganizationID'] = (div.firstChild as Element).getAttribute('href').split('id=')[1];
               }
             }
             rows.push(cells);
