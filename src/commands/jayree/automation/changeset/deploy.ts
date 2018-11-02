@@ -22,13 +22,13 @@ Deploying Change Set 'ChangeSet'...
 Status: Pending
 jobid:  0Xxx100000xx1x1
 `,
-      `$ sfdx jayree:automation:changeset:deploy
+    `$ sfdx jayree:automation:changeset:deploy
 ? Change Sets Awaiting Deployment (Use arrow keys)
  ChangeSet3
  ChangeSet2
 ❯ ChangeSet1
 `
-];
+  ];
 
   protected static flagsConfig = {
     changeset: flags.string({ char: 's', description: messages.getMessage('changesetFlagDescription'), required: false }),
@@ -156,7 +156,7 @@ jobid:  0Xxx100000xx1x1
       }
 
       await this.clickvalidateordeploy2(page, sCS.selectedMode);
-      job = await this.getjob(conn, page, sCS.selectedChangeSet);
+      job = await this.getjob(conn, page, changeset);
       // console.log(job);
       // console.log(`sfdx force:mdapi:deploy:report -i ${jobId} -u ${conn.getUsername()} --json`);
       this.ux.log(`Deploying Change Set '${sCS.selectedChangeSet}'...`);
@@ -236,7 +236,8 @@ jobid:  0Xxx100000xx1x1
     });
   }
 
-  private async getjob(conn: core.Connection, page: puppeteer.Page, csName: string) {
+  // tslint:disable-next-line:no-any
+  private async getjob(conn: core.Connection, page: puppeteer.Page, cs: any) {
     // open deployment status
     await page.goto(conn.instanceUrl + '/changemgmt/monitorDeployment.apexp', {
       waitUntil: 'networkidle2'
@@ -270,11 +271,33 @@ jobid:  0Xxx100000xx1x1
       // pendinglist = rows;
 
       return { id, currentname, pendingid };
-    }, csName);
-    if (csName === job.currentname) {
-      return { id: job.id, name: job.currentname, status: 'InProgress' };
+    }, cs.ChangeSetName);
+
+    if (typeof job.currentname === 'undefined') {
+      // open detail page
+      await page.goto(conn.instanceUrl + cs.DetailPage, {
+        waitUntil: 'networkidle2'
+      });
+
+      const csstatus = await page.evaluate(() => {
+        const tableid = 'inboundChangeSetDetailPage:inboundChangeSetDetailPageBody:inboundChangeSetDetailPageBody:detail_form:ics_deploy_history:ics_deploy_history_BlockSection:ics_deploy_history_table';
+        // const rows = [];
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
+          const table = document.getElementById(tableid) as HTMLTableElement;
+          const div = document.createElement('div');
+          div.innerHTML = table.rows[1].cells[0].innerHTML;
+          return {
+            id: (div.firstChild as Element).getAttribute('href').split('asyncId=')[1].split('&')[0], status: table.rows[1].cells[1].innerText.replace(/(:\t|\t)/g, '').split(': ')[1]
+          };
+        }
+      });
+      return { id: csstatus.id, name: cs.ChangeSetName, status: csstatus.status, running: (typeof job.currentname !== 'undefined') ? true : false };
+    }
+
+    if (cs.ChangeSetName === job.currentname) {
+      return { id: job.id, name: job.currentname, status: 'InProgress', running: (typeof job.currentname !== 'undefined') ? true : false };
     } else {
-      return { id: job.pendingid, name: csName, status: 'Pending' };
+      return { id: job.pendingid, name: cs.ChangeSetName, status: 'Pending', running: (typeof job.currentname !== 'undefined') ? true : false };
     }
     // } catch {
     //  return false;

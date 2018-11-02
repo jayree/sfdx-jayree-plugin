@@ -24,6 +24,7 @@
     "@salesforce/dev-config": "1.2.0",
     "@types/adm-zip": "0.4.31",
     "@types/chai": "4.1.7",
+    "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.1",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
