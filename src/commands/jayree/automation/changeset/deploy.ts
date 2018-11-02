@@ -10,7 +10,7 @@ if (Symbol['asyncIterator'] === undefined) {
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
-export default class UserSyncStatus extends SfdxCommand {
+export default class DeployChangeSet extends SfdxCommand {
 
   public static description = messages.getMessage('commandDescription');
 
@@ -44,84 +44,90 @@ export default class UserSyncStatus extends SfdxCommand {
       headless: true
     });
 
-    const page = await browser.newPage();
+    let jobid;
 
-    await this.login(conn, page);
+    try {
+      const page = await browser.newPage();
 
-    let jobid = await this.getjobid(conn, page);
+      await this.login(conn, page);
 
-    if (jobid) {
-      throw Error('a deployment is already running with jobid ' + jobid);
-    } else {
-      await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
-        waitUntil: 'networkidle2'
-      });
+      jobid = await this.getjobid(conn, page);
 
-      const tables = await this.gettables(page);
-
-      let sCS;
-
-      if (!this.flags.nodialog) {
-        const questions = [
-          {
-            type: 'list',
-            message: 'Change Sets Awaiting Deployment',
-            name: 'selectedChangeSet',
-            choices: tables.csad.map(element => ({ name: element['Change Set Name'] })),
-            default: this.flags.changeset
-          },
-          {
-            type: 'list',
-            name: 'selectedMode',
-            message: 'Validate or Deploy?',
-            choices: ['Validate', 'Deploy'],
-            default: () => this.flags.checkonly ? 'Validate' : 'Deploy'
-          },
-          {
-            type: 'list',
-            name: 'testlevel',
-            message: 'Choose a Test Option',
-            choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
-            default: () => this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default',
-            filter: val => {
-              return val.replace(/( )/g, '');
-            }
-          },
-          {
-            type: 'input',
-            name: 'runtests',
-            message: 'Only the tests that you specify are run. Provide the names of test classes in a comma-separated list:',
-            default: this.flags.runtests,
-            when: answers => {
-              return answers.testlevel === 'RunSpecifiedTests';
-            },
-            validate: answer => {
-              if (answer.length < 1) {
-                return 'You must specify at least one test.';
-              }
-              return true;
-            }
-          }
-        ];
-
-        sCS = await inquirer.prompt(questions).then(answers => {
-          return answers;
-        });
+      if (jobid) {
+        throw Error('a deployment is already running with jobid ' + jobid);
       } else {
-        sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', testlevel: this.flags.testlevel };
-        if (this.flags.testlevel === 'RunSpecifiedTests') {
-          if (!this.flags.runtests) {
-            throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
-          } else {
-            sCS['runtests'] = this.flags.runtests;
+        await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
+          waitUntil: 'networkidle2'
+        });
+
+        const tables = await this.gettables(page);
+
+        let sCS;
+
+        if (!this.flags.nodialog) {
+          const questions = [
+            {
+              type: 'list',
+              message: 'Change Sets Awaiting Deployment',
+              name: 'selectedChangeSet',
+              choices: tables.csad.map(element => ({ name: element['Change Set Name'] })),
+              default: this.flags.changeset
+            },
+            {
+              type: 'list',
+              name: 'selectedMode',
+              message: 'Validate or Deploy?',
+              choices: ['Validate', 'Deploy'],
+              default: () => this.flags.checkonly ? 'Validate' : 'Deploy'
+            },
+            {
+              type: 'list',
+              name: 'testlevel',
+              message: 'Choose a Test Option',
+              choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
+              default: () => this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default',
+              filter: val => {
+                return val.replace(/( )/g, '');
+              }
+            },
+            {
+              type: 'input',
+              name: 'runtests',
+              message: 'Only the tests that you specify are run. Provide the names of test classes in a comma-separated list:',
+              default: this.flags.runtests,
+              when: answers => {
+                return answers.testlevel === 'RunSpecifiedTests';
+              },
+              validate: answer => {
+                if (answer.length < 1) {
+                  return 'You must specify at least one test.';
+                }
+                return true;
+              }
+            }
+          ];
+
+          sCS = await inquirer.prompt(questions).then(answers => {
+            return answers;
+          });
+        } else {
+          sCS = { selectedChangeSet: this.flags.changeset, selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy', testlevel: this.flags.testlevel };
+          if (this.flags.testlevel === 'RunSpecifiedTests') {
+            if (!this.flags.runtests) {
+              throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
+            } else {
+              sCS['runtests'] = this.flags.runtests;
+            }
           }
         }
-      }
 
-      console.log(sCS);
-
-      for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
+        // console.log(sCS);
+        const changeset = tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))[0];
+        // for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
         // console.log(changeset);
+        if (!changeset) {
+          throw Error('Change Set ' + sCS.selectedChangeSet + ' not found!');
+        }
         // open detail page
         await page.goto(conn.instanceUrl + changeset.DetailPage, {
           waitUntil: 'networkidle2'
@@ -156,11 +162,14 @@ export default class UserSyncStatus extends SfdxCommand {
         this.ux.styledHeader('Status');
         this.ux.log('Status:  Queued');
         this.ux.log('jobid:  ' + jobid);
+        // }
+
       }
-
+    } catch (error) {
+      throw error;
+    } finally {
+      await browser.close();
     }
-
-    await browser.close();
 
     return { done: false, id: jobid, state: 'Queued', status: 'Queued', timedOut: true };
   }
