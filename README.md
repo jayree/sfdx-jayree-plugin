@@ -22,7 +22,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.2.0 darwin-x64 node-v10.12.0
+sfdx-jayree/0.2.0 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
