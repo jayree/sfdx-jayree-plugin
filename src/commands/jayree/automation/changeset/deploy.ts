@@ -72,13 +72,13 @@ jobid:  0Xxx100000xx1x1
             type: 'list',
             message: 'Change Sets Awaiting Deployment',
             name: 'selectedChangeSet',
-            choices: tables.csad.map(element => ({ name: element.ChangeSetName })),
+            choices: tables.csad.map(element => ({ value: element.ChangeSetName, name: `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate}`, short: element.ChangeSetName })),
             default: this.flags.changeset
           },
           {
             type: 'list',
             name: 'selectedMode',
-            message: 'Validate or Deploy?',
+            message: 'Choose Validate or Deploy',
             choices: ['Validate', 'Deploy'],
             default: () => this.flags.checkonly ? 'Validate' : 'Deploy'
           },
