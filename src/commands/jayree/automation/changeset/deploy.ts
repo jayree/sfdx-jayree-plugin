@@ -72,7 +72,11 @@ jobid:  0Xxx100000xx1x1
             type: 'list',
             message: 'Change Sets Awaiting Deployment',
             name: 'selectedChangeSet',
-            choices: tables.csad.map(element => ({ value: element.ChangeSetName, name: `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate}`, short: element.ChangeSetName })),
+            choices: tables.csad.map(element => (
+              { value: element.ChangeSetName,
+                name: element.Description ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate} - ${element.Description}` : `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate}`,
+                short: element.ChangeSetName
+              })),
             default: this.flags.changeset
           },
           {
@@ -186,7 +190,7 @@ jobid:  0Xxx100000xx1x1
     });
   }
 
-  private async selecttest(page: puppeteer.Page, index: string, runtests: string = '') {
+  private async selecttest(page: puppeteer.Page, index: string, runtests = '') {
     await page.evaluate((i: string) => {
       document.getElementById('inboundChangeSetTestOptions:pageForm:ics_test_level_block:testLevel_section:test_level_sub_section:deploymentTestLevel:' + i).click();
     }, index);
@@ -251,7 +255,7 @@ jobid:  0Xxx100000xx1x1
       let pendingid;
       let running = false;
       if (typeof document.getElementById('viewErrors') !== 'undefined' && document.getElementById('viewErrors')) {
-        id = (document.getElementById('viewErrors') as HTMLElement).getAttribute('onclick').split('asyncId=')[1].split("'")[0];
+        id = (document.getElementById('viewErrors')).getAttribute('onclick').split('asyncId=')[1].split("'")[0];
         running = true;
       }
       if (typeof document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)') !== 'undefined' && document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)')) {

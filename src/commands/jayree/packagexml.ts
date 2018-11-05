@@ -156,7 +156,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       }
     }
 
-    let ipRegexStr: string = '^(';
+    let ipRegexStr = '^(';
     const nsPrefixes = [];
     (await ipPromise).forEach(pkg => { nsPrefixes.pushUniqueValue(pkg.namespacePrefix); });
     nsPrefixes.forEach(prefix => { ipRegexStr += prefix + '|'; });
