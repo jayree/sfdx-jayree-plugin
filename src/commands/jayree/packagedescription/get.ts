@@ -1,13 +1,15 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import {AnyJson} from '@salesforce/ts-types';
+import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
+const messages = core.Messages.loadMessages(
+  'sfdx-jayree',
+  'getpackagedescription'
+);
 
 export default class GetPackageDescription extends SfdxCommand {
-
   // hotfix to receive only one help page
   // public static hidden = true;
 
@@ -22,7 +24,11 @@ export default class GetPackageDescription extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true })
+    file: flags.string({
+      char: 'f',
+      description: messages.getMessage('fileFlagDescription'),
+      required: true
+    })
   };
 
   protected static requiresUsername = false;
@@ -30,7 +36,6 @@ export default class GetPackageDescription extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-
     const inputfile = this.args.file || this.flags.file;
 
     const zip = new AdmZip(inputfile);
@@ -51,6 +56,5 @@ export default class GetPackageDescription extends SfdxCommand {
       }
     });
     return { description: text };
-
   }
 }

@@ -4,13 +4,12 @@ import puppeteer = require('puppeteer');
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
-  ((Symbol as any)['asyncIterator']) = Symbol.for('asyncIterator');
+  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
 }
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'listchangeset');
 export default class ViewChangeSets extends SfdxCommand {
-
   public static description = messages.getMessage('commandDescription');
 
   /*   public static examples = [
@@ -27,7 +26,6 @@ export default class ViewChangeSets extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-
     await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
@@ -39,9 +37,12 @@ export default class ViewChangeSets extends SfdxCommand {
 
     await this.login(conn, page);
 
-    await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
-      waitUntil: 'networkidle2'
-    });
+    await page.goto(
+      conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp',
+      {
+        waitUntil: 'networkidle2'
+      }
+    );
 
     const tables = await this.gettables(page);
 
@@ -61,37 +62,64 @@ export default class ViewChangeSets extends SfdxCommand {
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
-    await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-      waitUntil: 'networkidle2'
-    });
+    await page.goto(
+      conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken,
+      {
+        waitUntil: 'networkidle2'
+      }
+    );
   }
 
   private async gettables(page: puppeteer.Page) {
     return await page.evaluate(() => {
-
       const converttable = (document: Document, tableid: string) => {
         const rows = [];
-        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
+        if (
+          typeof document.getElementById(tableid) !== 'undefined' &&
+          document.getElementById(tableid)
+        ) {
           const table = document.getElementById(tableid) as HTMLTableElement;
           for (let r = 1, n = table.rows.length; r < n; r++) {
             const cells = {};
             for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
-              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
-              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Uploaded By') {
-                cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[c].innerText.replace(/( @.*)/g, '');
+              cells[
+                table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')
+              ] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
+              if (
+                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
+                'Uploaded By'
+              ) {
+                cells[
+                  table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')
+                ] = table.rows[r].cells[c].innerText.replace(/( @.*)/g, '');
               }
-              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Description') {
+              if (
+                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
+                'Description'
+              ) {
                 cells['HTMLDescription'] = table.rows[r].cells[c].innerHTML;
               }
-              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
+              if (
+                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
+                'Change Set Name'
+              ) {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
-                cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
+                cells['DetailPage'] = (div.firstChild as Element).getAttribute(
+                  'href'
+                );
               }
-              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Source Organization') {
+              if (
+                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
+                'Source Organization'
+              ) {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
-                cells['SourceOrganizationID'] = (div.firstChild as Element).getAttribute('href').split('id=')[1];
+                cells[
+                  'SourceOrganizationID'
+                ] = (div.firstChild as Element)
+                  .getAttribute('href')
+                  .split('id=')[1];
               }
             }
             rows.push(cells);
@@ -100,10 +128,15 @@ export default class ViewChangeSets extends SfdxCommand {
         return rows;
       };
       return {
-        csad: converttable(document, 'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:AwaitingDeploymentPageBlock:ListUnDeployedInboundChangeSetBlockSection:UnDeployedInboundChangeSetList'),
-        dcs: converttable(document, 'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:DeployedPageBlock:ListDeployedInboundChangeSetBlockSection:DeployedInboundChangeSetList')
+        csad: converttable(
+          document,
+          'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:AwaitingDeploymentPageBlock:ListUnDeployedInboundChangeSetBlockSection:UnDeployedInboundChangeSetList'
+        ),
+        dcs: converttable(
+          document,
+          'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:DeployedPageBlock:ListDeployedInboundChangeSetBlockSection:DeployedInboundChangeSetList'
+        )
       };
     });
   }
-
 }
