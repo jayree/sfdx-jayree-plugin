@@ -27,6 +27,12 @@ export default class UserSyncStatus extends SfdxCommand {
       description: messages.getMessage('UserFlagDescription'),
       required: false,
       dependsOn: ['officeuser']
+    }),
+    wait: flags.integer({
+      char: 'w',
+      description: messages.getMessage('waitFlagDescription'),
+      required: false,
+      dependsOn: ['officeuser']
     })
   };
 
@@ -183,6 +189,7 @@ export default class UserSyncStatus extends SfdxCommand {
     let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
     let status = '';
     this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
+    const end = Date.now() + this.flags.wait * 1000 * 60;
     if (
       !finalstate.includes(userContactsItem) ||
       !finalstate.includes(userEventsItem)
@@ -196,11 +203,16 @@ export default class UserSyncStatus extends SfdxCommand {
           this.ux.setSpinnerStatus(status);
         }
       } while (
-        !finalstate.includes(userContactsItem) ||
-        !finalstate.includes(userEventsItem)
+        (!finalstate.includes(userContactsItem) ||
+          !finalstate.includes(userEventsItem)) &&
+        !(Date.now() > end && typeof this.flags.wait !== 'undefined')
       );
     }
-    this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+    if (Date.now() > end && typeof this.flags.wait !== 'undefined') {
+      this.ux.stopSpinner('timeout!');
+    } else {
+      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+    }
     return { tables, userContactsItem, userEventsItem };
   }
 

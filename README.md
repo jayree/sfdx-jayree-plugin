@@ -22,7 +22,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.2.0 darwin-x64 node-v8.9.4
+sfdx-jayree/0.2.1 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -88,7 +88,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ## `sfdx-jayree jayree:automation:changeset:list`
 
@@ -105,7 +105,7 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 ```
 
-_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/automation/changeset/list.ts)_
 
 ## `sfdx-jayree jayree:automation:ltngsyncstatus`
 
@@ -119,8 +119,14 @@ OPTIONS
   -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
   -s, --statusonly                                'name' (firstname lastname) of the SF user
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+
+  -w, --wait=wait                                 wait time for command to wait for status change in minutes (default:
+                                                  infinitely)
+
   --apiversion=apiversion                         override the api version used for api requests made by this command
+
   --json                                          format output as json
+
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
@@ -131,7 +137,7 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/automation/ltngsyncstatus.ts)_
+_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/automation/ltngsyncstatus.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
@@ -151,7 +157,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/packagedescription/create.ts)_
+_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/packagedescription/create.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:get [FILE]`
 
@@ -171,7 +177,7 @@ EXAMPLE
        Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/packagedescription/get.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:remove [FILE]`
 
@@ -190,7 +196,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/packagedescription/remove.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:set [FILE]`
 
@@ -210,7 +216,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/packagedescription/set.ts)_
 
 ## `sfdx-jayree jayree:packagexml [FILE]`
 
@@ -238,5 +244,5 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.0/src/commands/jayree/packagexml.ts)_
+_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.1/src/commands/jayree/packagexml.ts)_
 <!-- commandsstop -->

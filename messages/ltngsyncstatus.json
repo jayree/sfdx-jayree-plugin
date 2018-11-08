@@ -5,5 +5,5 @@
   "configFlagDescription": "path to config file",
   "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
   "errorNoOrgResults": "no results found for the organization '%s'.",
-  "excludeManagedFlagDescription": "exclude Managed Packages from output"
+  "waitFlagDescription": "wait time for command to wait for status change in minutes (default: infinitely)"
 }
