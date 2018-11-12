@@ -42,26 +42,6 @@ describe('jayree:openorg', () => {
       '--targetusername',
       'test@org.com',
       '-r',
-      '-b',
-      'safari'
-    ])
-    .it(
-      'runs jayree:openorg --targetusername test@org.com -r -b safari',
-      ctx => {
-        expect(ctx.stdout).to.contain('safari');
-      }
-    );
-  test
-    .withOrg({ username: 'test@org.com' }, true)
-    .withConnectionRequest(request => {
-      return Promise.resolve({ records: [] });
-    })
-    .stdout()
-    .command([
-      'jayree:openorg',
-      '--targetusername',
-      'test@org.com',
-      '-r',
       '-p',
       'lightning'
     ])
