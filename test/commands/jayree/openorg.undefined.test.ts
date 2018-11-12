@@ -1,7 +1,7 @@
 import { expect, test } from '@salesforce/command/dist/test';
 
 describe('jayree:openorg', () => {
-  before(function () {
+  before(function() {
     // save original process.platform
     this.originalPlatform = Object.getOwnPropertyDescriptor(
       process,
@@ -14,7 +14,7 @@ describe('jayree:openorg', () => {
     });
   });
 
-  after(function () {
+  after(function() {
     // restore original process.platfork
     Object.defineProperty(process, 'platform', this.originalPlatform);
   });
