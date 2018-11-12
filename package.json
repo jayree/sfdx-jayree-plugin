@@ -1,7 +1,7 @@
 {
   "name": "sfdx-jayree",
   "description": "some sfdx plugins",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
@@ -11,6 +11,7 @@
     "@salesforce/command": "0.2.5",
     "adm-zip": "0.4.11",
     "inquirer": "6.2.0",
+    "opn": "5.4.0",
     "puppeteer": "1.10.0",
     "tabletojson": "0.9.8",
     "tslib": "1.9.3",
@@ -28,7 +29,7 @@
     "@types/jsforce": "1.9.1",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
-    "@types/node": "10.12.3",
+    "@types/node": "10.12.5",
     "@types/puppeteer": "1.10.0",
     "chai": "4.2.0",
     "codecov": "4.0.0-0",

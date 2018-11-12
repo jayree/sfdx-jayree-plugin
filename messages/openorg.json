@@ -1,0 +1,12 @@
+{
+  "commandDescription": "open an org in your browser with specified browser",
+  "browserFlagDescription": "browser to be launched",
+  "pathFlagDescription": "navigation URL path",
+  "urlonlyFlagDescription": "display navigation URL, but don’t launch browser",
+  "quickfilterFlagDescription": "csv separated list of metadata type, member or file names to filter on",
+  "matchCaseFlagDescription": "enable 'match case' for the quickfilter",
+  "matchWholeWordFlagDescription": "enable 'match whole word' for the quickfilter",
+  "fileFlagDescription": "write to 'file' instead of stdout",
+  "errorNoOrgResults": "no results found for the organization '%s'.",
+  "excludeManagedFlagDescription": "exclude managed packages from output"
+}
