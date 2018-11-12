@@ -7,8 +7,8 @@ describe('jayree:openorg', () => {
       return Promise.resolve({ records: [] });
     })
     .stdout()
-    .command(['jayree:openorg', '--targetusername', 'test@org.com'])
-    .it('runs jayree:openorg --targetusername test@org.com', ctx => {
+    .command(['jayree:openorg', '--targetusername', 'test@org.com', '-r'])
+    .it('runs jayree:openorg --targetusername test@org.com -r', ctx => {
       expect(ctx.stdout).to.contain('test@org.com');
     });
   test
