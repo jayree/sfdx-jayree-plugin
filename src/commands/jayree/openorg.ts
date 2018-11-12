@@ -49,8 +49,6 @@ $ sfdx jayree:openorg -u me@my.org`
           case 'firefox':
             browser = 'firefox';
             break;
-          default:
-            browser = 'chrome';
         }
         break;
       case 'darwin':
@@ -64,8 +62,6 @@ $ sfdx jayree:openorg -u me@my.org`
           case 'safari':
             browser = 'safari';
             break;
-          default:
-            browser = 'chrome';
         }
         break;
       default:
