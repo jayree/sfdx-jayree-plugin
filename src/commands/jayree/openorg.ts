@@ -49,6 +49,10 @@ $ sfdx jayree:openorg -u me@my.org`
           case 'firefox':
             browser = 'firefox';
             break;
+          case 'safari':
+            throw Error(
+              this.flags.browser + ' is not supported on ' + process.platform
+            );
         }
         break;
       case 'darwin':
@@ -62,6 +66,20 @@ $ sfdx jayree:openorg -u me@my.org`
           case 'safari':
             browser = 'safari';
             break;
+        }
+        break;
+      case 'linux':
+        switch (this.flags.browser) {
+          case 'chrome':
+            browser = 'google-chrome';
+            break;
+          case 'firefox':
+            browser = 'firefox';
+            break;
+          case 'safari':
+            throw Error(
+              this.flags.browser + ' is not supported on ' + process.platform
+            );
         }
         break;
       default:
