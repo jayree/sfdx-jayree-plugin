@@ -106,6 +106,7 @@ $ sfdx jayree:openorg -u me@my.org`
         "'"
     );
 
+    /* istanbul ignore next */
     if (!this.flags.urlonly) {
       opn(url, {
         app: browser,
