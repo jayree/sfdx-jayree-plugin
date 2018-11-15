@@ -1,10 +1,7 @@
-*-debug.log
-*-error.log
 .sfdx
 /.nyc_output
-/dist
 /lib
-/package-lock.json
-/tmp
+package-lock.json
 node_modules
 coverage
+yarn.lock
