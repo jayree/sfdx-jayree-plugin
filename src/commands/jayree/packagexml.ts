@@ -484,11 +484,10 @@ export default class GeneratePackageXML extends SfdxCommand {
                 value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
               )
               .filter(value =>
-                quickFilters.some(
-                  element =>
-                    this.flags.matchwholeword
-                      ? value === element
-                      : value.includes(element)
+                quickFilters.some(element =>
+                  this.flags.matchwholeword
+                    ? value === element
+                    : value.includes(element)
                 )
               )
               .filter((value, index, self) => self.indexOf(value) === index)
@@ -498,11 +497,10 @@ export default class GeneratePackageXML extends SfdxCommand {
         quickFilters.length > 0
           ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
               .filter(value =>
-                quickFilters.some(
-                  element =>
-                    this.flags.matchwholeword
-                      ? value === element
-                      : value.includes(element)
+                quickFilters.some(element =>
+                  this.flags.matchwholeword
+                    ? value === element
+                    : value.includes(element)
                 )
               )
               .filter((value, index, self) => self.indexOf(value) === index)
@@ -515,11 +513,10 @@ export default class GeneratePackageXML extends SfdxCommand {
                 value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
               )
               .filter(value =>
-                quickFilters.some(
-                  element =>
-                    this.flags.matchwholeword
-                      ? value === element
-                      : value.includes(element)
+                quickFilters.some(element =>
+                  this.flags.matchwholeword
+                    ? value === element
+                    : value.includes(element)
                 )
               )
               .filter((value, index, self) => self.indexOf(value) === index)
