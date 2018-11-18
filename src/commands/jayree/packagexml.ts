@@ -476,83 +476,86 @@ export default class GeneratePackageXML extends SfdxCommand {
     };
 
     const filteredwarnings = [];
-    Object.keys(packageTypes).forEach(mdtype => {
-      const fileFilters =
-        quickFilters.length > 0
-          ? packageTypes[mdtype]
-              .map(value =>
-                value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
-              )
-              .filter(value =>
-                quickFilters.some(element =>
-                  this.flags.matchwholeword
-                    ? value === element
-                    : value.includes(element)
-                )
-              )
-              .filter((value, index, self) => self.indexOf(value) === index)
-          : [];
-
-      const mdFilters =
-        quickFilters.length > 0
-          ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
-              .filter(value =>
-                quickFilters.some(element =>
-                  this.flags.matchwholeword
-                    ? value === element
-                    : value.includes(element)
-                )
-              )
-              .filter((value, index, self) => self.indexOf(value) === index)
-          : [];
-
-      const mFilters =
-        quickFilters.length > 0
-          ? packageTypes[mdtype]
-              .map(value =>
-                value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
-              )
-              .filter(value =>
-                quickFilters.some(element =>
-                  this.flags.matchwholeword
-                    ? value === element
-                    : value.includes(element)
-                )
-              )
-              .filter((value, index, self) => self.indexOf(value) === index)
-          : [];
-
-      if (
-        quickFilters.length === 0 ||
-        mdFilters.length > 0 ||
-        fileFilters.length > 0 ||
-        mFilters.length > 0
-      ) {
-        packageJson.Package.types.push({
-          name: mdtype,
-          members: packageTypes[mdtype]
-            .filter(
-              value =>
-                quickFilters.length === 0 ||
-                mdFilters.includes(
-                  mdtype.toLowerCaseifTrue(!this.flags.matchcase)
-                ) ||
-                fileFilters.includes(
+    Object.keys(packageTypes)
+      .sort()
+      .forEach(mdtype => {
+        const fileFilters =
+          quickFilters.length > 0
+            ? packageTypes[mdtype]
+                .map(value =>
                   value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
-                ) ||
-                mFilters.includes(
+                )
+                .filter(value =>
+                  quickFilters.some(element =>
+                    this.flags.matchwholeword
+                      ? value === element
+                      : value.includes(element)
+                  )
+                )
+                .filter((value, index, self) => self.indexOf(value) === index)
+            : [];
+
+        const mdFilters =
+          quickFilters.length > 0
+            ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
+                .filter(value =>
+                  quickFilters.some(element =>
+                    this.flags.matchwholeword
+                      ? value === element
+                      : value.includes(element)
+                  )
+                )
+                .filter((value, index, self) => self.indexOf(value) === index)
+            : [];
+
+        const mFilters =
+          quickFilters.length > 0
+            ? packageTypes[mdtype]
+                .map(value =>
                   value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
                 )
-            )
-            .map(value => {
-              if (value.warning) {
-                filteredwarnings.push(value.warning);
-              }
-              return value.fullName;
-            })
-        });
-      }
-    });
+                .filter(value =>
+                  quickFilters.some(element =>
+                    this.flags.matchwholeword
+                      ? value === element
+                      : value.includes(element)
+                  )
+                )
+                .filter((value, index, self) => self.indexOf(value) === index)
+            : [];
+
+        if (
+          quickFilters.length === 0 ||
+          mdFilters.length > 0 ||
+          fileFilters.length > 0 ||
+          mFilters.length > 0
+        ) {
+          packageJson.Package.types.push({
+            name: mdtype,
+            members: packageTypes[mdtype]
+              .filter(
+                value =>
+                  quickFilters.length === 0 ||
+                  mdFilters.includes(
+                    mdtype.toLowerCaseifTrue(!this.flags.matchcase)
+                  ) ||
+                  fileFilters.includes(
+                    value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
+                  ) ||
+                  mFilters.includes(
+                    value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
+                  )
+              )
+              .map(value => {
+                if (value.warning) {
+                  filteredwarnings.push(value.warning);
+                }
+                return value.fullName;
+              })
+              .sort()
+          });
+        }
+      });
 
     // const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
     const builder = new xml2js.Builder({
