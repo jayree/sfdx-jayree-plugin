@@ -91,6 +91,18 @@ Coverage: 82%
       );
     }
 
-    return { orgId: this.org.getOrgId(), username: this.org.getUsername() };
+    return {
+      orgId: this.org.getOrgId(),
+      Coverage:
+        Math.floor(
+          (numberOfCoveredActiveAutolaunchedFlowsAndProcesses /
+            numberOfActiveAutolaunchedFlowsAndProcesses) *
+            100
+        ) + '%',
+      numberOfActiveAutolaunchedFlowsAndProcesses,
+      numberOfCoveredActiveAutolaunchedFlowsAndProcesses,
+      'all active autolaunched flows and processes that don’t have test coverage': uncovered,
+      'all flows and processes that have test coverage': covered
+    };
   }
 }
