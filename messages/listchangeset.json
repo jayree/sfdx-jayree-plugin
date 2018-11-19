@@ -1,8 +1,3 @@
 {
-  "commandDescription": "list incomming change sets of an org",
-  "changesetFlagDescription": "name of changeset to deploy",
-  "runtestsFlagDescription": "tests to run if --testlevel RunSpecifiedTests",
-  "testlevelFlagDescription": "deployment testing level (Default,RunSpecifiedTests,RunLocalTests,RunAllTestsInOrg)",
-  "checkonlyFlagDescription": "validate deploy but don’t save to the org (default:false)",
-  "nodialogFlagDescription": "don't show the dialog wizard"
+  "commandDescription": "list incomming change sets of an org"
 }

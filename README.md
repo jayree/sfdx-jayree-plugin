@@ -119,7 +119,7 @@ USAGE
 
 OPTIONS
   -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
-  -s, --statusonly                                'name' (firstname lastname) of the SF user
+  -s, --statusonly                                get Lightning Sync status of the SF user, only
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
 
   -w, --wait=wait                                 wait time for command to wait for status change in minutes (default:
@@ -184,8 +184,8 @@ OPTIONS
 EXAMPLE
   $ sfdx jayree:openorg
   $ sfdx jayree:openorg -u me@my.org
-  $ sfdx jayree:openorg -u MyTestOrg1
-  $ sfdx jayree:openorg -r -p lightning
+  $ sfdx jayree:openorg -u MyTestOrg1 -b firefox
+  $ sfdx jayree:openorg -r -p lightning -b safari
   $ sfdx jayree:openorg -u me@my.org
 ```
 
@@ -240,7 +240,7 @@ USAGE
   $ sfdx-jayree jayree:packagedescription:remove [FILE]
 
 OPTIONS
-  -f, --file=file                                 (required) file to cead
+  -f, --file=file                                 (required) file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
@@ -260,7 +260,7 @@ USAGE
 
 OPTIONS
   -d, --description=description                   (required) new description value
-  -f, --file=file                                 (required) file to cead
+  -f, --file=file                                 (required) file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 

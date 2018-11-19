@@ -12,8 +12,8 @@ export default class Org extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:openorg
 $ sfdx jayree:openorg -u me@my.org
-$ sfdx jayree:openorg -u MyTestOrg1
-$ sfdx jayree:openorg -r -p lightning
+$ sfdx jayree:openorg -u MyTestOrg1 -b firefox
+$ sfdx jayree:openorg -r -p lightning -b safari
 $ sfdx jayree:openorg -u me@my.org`
   ];
 
