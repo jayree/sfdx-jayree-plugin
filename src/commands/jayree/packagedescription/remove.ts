@@ -4,10 +4,12 @@ import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'removepackagedescription');
+const messages = core.Messages.loadMessages(
+  'sfdx-jayree',
+  'removepackagedescription'
+);
 
 export default class RemovePackageDescription extends SfdxCommand {
-
   // hotfix to receive only one help page
   // public static hidden = true;
 
@@ -21,7 +23,11 @@ export default class RemovePackageDescription extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    file: flags.string({ char: 'f', description: messages.getMessage('fileFlagDescription'), required: true })
+    file: flags.string({
+      char: 'f',
+      description: messages.getMessage('fileFlagDescription'),
+      required: true
+    })
   };
 
   protected static requiresUsername = false;
@@ -29,7 +35,6 @@ export default class RemovePackageDescription extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
 
@@ -50,14 +55,27 @@ export default class RemovePackageDescription extends SfdxCommand {
           action = 'removed';
           this.ux.log(action + ' description: ' + text);
           fileContentjs = {
-            _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-            Package: [{
-              _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-              types: xml['Package']['types'],
-              version: xml['Package']['version']
-            }]
+            _declaration: {
+              _attributes: { version: '1.0', encoding: 'utf-8' }
+            },
+            Package: [
+              {
+                _attributes: {
+                  xmlns: 'http://soap.sforce.com/2006/04/metadata'
+                },
+                types: xml['Package']['types'],
+                version: xml['Package']['version']
+              }
+            ]
           };
-          newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+          newZip.addFile(
+            fileName,
+            Buffer.from(
+              convert.js2xml(fileContentjs, { compact: true, spaces: 4 })
+            ),
+            '',
+            0o644
+          );
         } else {
           action = '';
           this.ux.log('no description found');
@@ -71,6 +89,5 @@ export default class RemovePackageDescription extends SfdxCommand {
     }
 
     return { old_description: text, task: action };
-
   }
 }

@@ -22,7 +22,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.1.1 darwin-x64 node-v8.9.4
+sfdx-jayree/0.2.5 darwin-x64 node-v8.9.4
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -31,12 +31,83 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
+* [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
 * [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
+* [`sfdx-jayree jayree:flowtestcoverage`](#sfdx-jayree-jayreeflowtestcoverage)
+* [`sfdx-jayree jayree:org:open`](#sfdx-jayree-jayreeorgopen)
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
 * [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
 * [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
 * [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
+
+## `sfdx-jayree jayree:automation:changeset:deploy`
+
+deploy incomming change set to an org
+
+```
+USAGE
+  $ sfdx-jayree jayree:automation:changeset:deploy
+
+OPTIONS
+  -c, --checkonly                                                           validate deploy but don’t save to the org
+                                                                            (default:false)
+
+  -l, --testlevel=Default|RunSpecifiedTests|RunLocalTests|RunAllTestsInOrg  deployment testing level
+                                                                            (Default,RunSpecifiedTests,RunLocalTests,Run
+                                                                            AllTestsInOrg)
+
+  -r, --runtests=runtests                                                   tests to run if --testlevel
+                                                                            RunSpecifiedTests
+
+  -s, --changeset=changeset                                                 name of changeset to deploy
+
+  -u, --targetusername=targetusername                                       username or alias for the target org;
+                                                                            overrides default target org
+
+  --apiversion=apiversion                                                   override the api version used for api
+                                                                            requests made by this command
+
+  --json                                                                    format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal)                            logging level for this command invocation
+
+  --nodialog                                                                don't show the dialog wizard
+
+EXAMPLES
+  $ sfdx jayree:automation:changeset:deploy -s ChangeSet -l RunLocalTests --nodialog
+  Deploying Change Set 'ChangeSet'...
+
+  === Status
+  Status: Pending
+  jobid:  0Xxx100000xx1x1
+
+  $ sfdx jayree:automation:changeset:deploy
+  ? Change Sets Awaiting Deployment (Use arrow keys)
+    ChangeSet3
+    ChangeSet2
+  ❯ ChangeSet1
+```
+
+_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/automation/changeset/deploy.ts)_
+
+## `sfdx-jayree jayree:automation:changeset:list`
+
+list incomming change sets of an org
+
+```
+USAGE
+  $ sfdx-jayree jayree:automation:changeset:list
+
+OPTIONS
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+```
+
+_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/automation/changeset/list.ts)_
 
 ## `sfdx-jayree jayree:automation:ltngsyncstatus`
 
@@ -48,10 +119,16 @@ USAGE
 
 OPTIONS
   -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
-  -s, --statusonly                                'name' (firstname lastname) of the SF user
+  -s, --statusonly                                get Lightning Sync status of the SF user, only
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+
+  -w, --wait=wait                                 wait time for command to wait for status change in minutes (default:
+                                                  infinitely)
+
   --apiversion=apiversion                         override the api version used for api requests made by this command
+
   --json                                          format output as json
+
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
@@ -62,7 +139,57 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/automation/ltngsyncstatus.ts)_
+_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/automation/ltngsyncstatus.ts)_
+
+## `sfdx-jayree jayree:flowtestcoverage`
+
+check the flow test coverage of an org
+
+```
+USAGE
+  $ sfdx-jayree jayree:flowtestcoverage
+
+OPTIONS
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  $ sfdx jayree:flowtestcoverage
+  === Flow Test Coverage
+  Coverage: 82%
+  ...
+```
+
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/flowtestcoverage.ts)_
+
+## `sfdx-jayree jayree:org:open`
+
+open an org in your preferred browser
+
+```
+USAGE
+  $ sfdx-jayree jayree:org:open
+
+OPTIONS
+  -b, --browser=firefox|chrome|safari             [default: chrome] browser to be launched
+  -p, --path=path                                 navigation URL path
+  -r, --urlonly                                   display navigation URL, but don’t launch browser
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+  $ sfdx jayree:org:open
+  $ sfdx jayree:org:open -u me@my.org
+  $ sfdx jayree:org:open -u MyTestOrg1 -b firefox
+  $ sfdx jayree:org:open -r -p lightning -b safari
+  $ sfdx jayree:org:open -u me@my.org
+```
+
+_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/org/open.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
@@ -82,7 +209,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/packagedescription/create.ts)_
+_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/packagedescription/create.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:get [FILE]`
 
@@ -102,7 +229,7 @@ EXAMPLE
        Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/packagedescription/get.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:remove [FILE]`
 
@@ -113,7 +240,7 @@ USAGE
   $ sfdx-jayree jayree:packagedescription:remove [FILE]
 
 OPTIONS
-  -f, --file=file                                 (required) file to cead
+  -f, --file=file                                 (required) file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
@@ -121,7 +248,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/packagedescription/remove.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:set [FILE]`
 
@@ -133,7 +260,7 @@ USAGE
 
 OPTIONS
   -d, --description=description                   (required) new description value
-  -f, --file=file                                 (required) file to cead
+  -f, --file=file                                 (required) file to read
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
@@ -141,7 +268,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/packagedescription/set.ts)_
 
 ## `sfdx-jayree jayree:packagexml [FILE]`
 
@@ -169,5 +296,5 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.1.1/src/commands/jayree/packagexml.ts)_
+_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/packagexml.ts)_
 <!-- commandsstop -->

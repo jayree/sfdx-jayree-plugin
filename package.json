@@ -1,43 +1,48 @@
 {
   "name": "sfdx-jayree",
   "description": "some sfdx plugins",
-  "version": "0.1.1",
+  "version": "0.2.5",
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
-    "@oclif/command": "1.5.4",
-    "@oclif/config": "1.8.8",
+    "@oclif/command": "1.5.6",
+    "@oclif/config": "1.9.0",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "0.2.5",
-    "adm-zip": "0.4.11",
-    "puppeteer": "1.9.0",
+    "adm-zip": "0.4.13",
+    "inquirer": "6.2.0",
+    "opn": "5.4.0",
+    "puppeteer": "1.10.0",
+    "tabletojson": "0.9.8",
     "tslib": "1.9.3",
     "xml-js": "1.6.8"
   },
   "devDependencies": {
     "@oclif/dev-cli": "1.19.4",
-    "@oclif/plugin-help": "2.1.3",
+    "@oclif/plugin-help": "2.1.4",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
-    "@salesforce/dev-config": "1.1.5",
+    "@salesforce/dev-config": "1.4.1",
     "@types/adm-zip": "0.4.31",
     "@types/chai": "4.1.7",
+    "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.1",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
-    "@types/node": "10.12.1",
-    "@types/puppeteer": "1.9.1",
+    "@types/node": "10.12.9",
+    "@types/puppeteer": "1.10.0",
     "chai": "4.2.0",
     "codecov": "4.0.0-0",
     "globby": "8.0.1",
     "mocha": "5.2.0",
     "nyc": "13.1.0",
     "path-exists-cli": "1.0.0",
-    "sinon": "7.1.0",
+    "sinon": "7.1.1",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
-    "typescript": "3.1.4",
-    "typescript-tslint-plugin": "0.0.4"
+    "tslint-config-prettier": "1.16.0",
+    "typescript": "3.1.6",
+    "typescript-tslint-plugin": "0.1.0"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -58,11 +63,29 @@
     "topics": {
       "jayree": {
         "name": "jayree",
-        "description": "Tools to generate and modify packages",
+        "description": "packages and automation toolset",
         "subtopics": {
           "packagedescription": {
             "name": "packagedescription",
-            "description": "Tools to add/modify/remove the description in a package"
+            "description": "add/modify/remove the description of a package"
+          },
+          "org": {
+            "name": "org",
+            "description": "manage your orgs"
+          },
+          "automation": {
+            "name": "automation",
+            "description": "headless browser automation tools",
+            "subtopics": {
+              "changeset": {
+                "name": "changeset",
+                "description": "deploy/list incomming change sets"
+              },
+              "ltngsyncstatus": {
+                "name": "ltngsyncstatus",
+                "description": "check the Lightning Sync User Sync Status and reset sync if needed"
+              }
+            }
           }
         }
       }

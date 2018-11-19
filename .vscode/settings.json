@@ -9,5 +9,9 @@
     "terminal.integrated.env.windows": {
         "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
     },
-    "markdown.extension.toc.githubCompatibility": true
+    "eslint.enable": false,
+    "prettier.tslintIntegration": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 }

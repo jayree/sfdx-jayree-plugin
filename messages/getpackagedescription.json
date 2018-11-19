@@ -1,9 +1,4 @@
 {
   "commandDescription": "get the description within a package",
-  "fileFlagDescription": "file to read",
-  "forceFlagDescription": "example boolean flag",
-  "configFlagDescription": "path to config file",
-  "quickfilterFlagDescription": "csv separated list of metadata types to filter on",
-  "errorNoOrgResults": "no results found for the organization '%s'.",
-  "excludeManagedFlagDescription": "exclude Managed Packages from output"
+  "fileFlagDescription": "file to read"
 }

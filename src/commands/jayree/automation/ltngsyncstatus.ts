@@ -5,7 +5,6 @@ import puppeteer = require('puppeteer');
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'ltngsyncstatus');
 export default class UserSyncStatus extends SfdxCommand {
-
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
@@ -18,8 +17,23 @@ export default class UserSyncStatus extends SfdxCommand {
   ];
 
   protected static flagsConfig = {
-    officeuser: flags.string({ char: 'o', description: messages.getMessage('UserFlagDescription'), required: false }),
-    statusonly: flags.boolean({ char: 's', description: messages.getMessage('UserFlagDescription'), required: false , dependsOn: ['officeuser']})
+    officeuser: flags.string({
+      char: 'o',
+      description: messages.getMessage('UserFlagDescription'),
+      required: false
+    }),
+    statusonly: flags.boolean({
+      char: 's',
+      description: messages.getMessage('StatusFlagDescription'),
+      required: false,
+      dependsOn: ['officeuser']
+    }),
+    wait: flags.integer({
+      char: 'w',
+      description: messages.getMessage('waitFlagDescription'),
+      required: false,
+      dependsOn: ['officeuser']
+    })
   };
 
   protected static requiresUsername = true;
@@ -27,7 +41,6 @@ export default class UserSyncStatus extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-
     await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
@@ -43,24 +56,51 @@ export default class UserSyncStatus extends SfdxCommand {
       waitUntil: 'networkidle2'
     });
 
-    let tables = (await this.gettables(page));
+    let tables = await this.gettables(page);
 
-    if ((!(tables.System.orgConfigInfo['Connection method configured'] === 'No') || (tables.System.orgConfigInfo['Outlook Integration enabled'] === 'Yes')) && (this.flags.officeuser)) {
+    if (
+      (!(
+        tables.System.orgConfigInfo['Connection method configured'] === 'No'
+      ) ||
+        tables.System.orgConfigInfo['Outlook Integration enabled'] === 'Yes') &&
+      this.flags.officeuser
+    ) {
       let userSetup;
       ({ tables, userSetup } = await this.checkUserSetup(page));
 
       if (userSetup === 'Yes' && !this.flags.statusonly) {
-        ({ tables } = await this.checkUserReset(page, tables, 'Salesforce and Exchange email addresses linked'));
-        ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce and Exchange email addresses linked', ['Linked']));
-        ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce to Exchange sync status', ['Initial sync completed', 'In sync']));
-        ({ tables } = await this.checkContactsEvents(page, tables, 'Exchange to Salesforce sync status', ['Initial sync completed', 'In sync']));
+        ({ tables } = await this.checkUserReset(
+          page,
+          tables,
+          'Salesforce and Exchange email addresses linked'
+        ));
+        ({ tables } = await this.checkContactsEvents(
+          page,
+          tables,
+          'Salesforce and Exchange email addresses linked',
+          ['Linked']
+        ));
+        ({ tables } = await this.checkContactsEvents(
+          page,
+          tables,
+          'Salesforce to Exchange sync status',
+          ['Initial sync completed', 'In sync']
+        ));
+        ({ tables } = await this.checkContactsEvents(
+          page,
+          tables,
+          'Exchange to Salesforce sync status',
+          ['Initial sync completed', 'In sync']
+        ));
       }
     } else {
       this.flags.statusonly = true;
     }
 
     if (this.flags.statusonly) {
-      this.flags.officeuser ? this.ux.styledJSON(tables[this.flags.officeuser]) : this.ux.styledJSON(tables);
+      this.flags.officeuser
+        ? this.ux.styledJSON(tables[this.flags.officeuser])
+        : this.ux.styledJSON(tables);
     }
 
     await browser.close();
@@ -71,34 +111,64 @@ export default class UserSyncStatus extends SfdxCommand {
   private async checkUserSetup(page: puppeteer.Page) {
     await page.focus('#resetExchangeSyncUser');
     await page.keyboard.type(this.flags.officeuser);
-    this.ux.startSpinner('configSetup: User assigned to active Lightning Sync configuration');
+    this.ux.startSpinner(
+      'configSetup: User assigned to active Lightning Sync configuration'
+    );
     const tables = await this.checkstatus(page);
     let configSetupItem;
     try {
-      configSetupItem = tables[this.flags.officeuser].configSetup['User assigned to active Lightning Sync configuration'];
+      configSetupItem =
+        tables[this.flags.officeuser].configSetup[
+          'User assigned to active Lightning Sync configuration'
+        ];
     } catch {
-      tables[this.flags.officeuser] = {configSetup: {'User assigned to active Lightning Sync configuration': 'No'}};
+      tables[this.flags.officeuser] = {
+        configSetup: {
+          'User assigned to active Lightning Sync configuration': 'No'
+        }
+      };
       configSetupItem = 'No';
     }
     this.ux.stopSpinner(configSetupItem);
-    return { tables, userSetup: configSetupItem};
+    return { tables, userSetup: configSetupItem };
   }
 
-  private async checkUserReset(page: puppeteer.Page, tables: {}, itemtext: string) {
-    const userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
+  private async checkUserReset(
+    page: puppeteer.Page,
+    tables: {},
+    itemtext: string
+  ) {
+    const userContactsItem =
+      tables[this.flags.officeuser].userContacts[itemtext];
     const userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
     let status = '';
-    if (!['Linked'].includes(userContactsItem) || !['Linked'].includes(userEventsItem)) {
-      this.ux.log('userContacts/userEvents: ' + itemtext + '... ' + userContactsItem + '/' + userEventsItem);
-      if (await this.ux.confirm('Do you want to perform a sync reset? (yes/no)')) {
+    if (
+      !['Linked'].includes(userContactsItem) ||
+      !['Linked'].includes(userEventsItem)
+    ) {
+      this.ux.log(
+        'userContacts/userEvents: ' +
+          itemtext +
+          '... ' +
+          userContactsItem +
+          '/' +
+          userEventsItem
+      );
+      if (
+        await this.ux.confirm('Do you want to perform a sync reset? (yes/no)')
+      ) {
         await this.resetuser(page);
         itemtext = 'Reset sync status';
-        let configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
+        let configSetupItem =
+          tables[this.flags.officeuser].configSetup[itemtext];
         this.ux.startSpinner('configSetup: ' + itemtext);
         do {
           tables = await this.checkstatus(page);
           configSetupItem = tables[this.flags.officeuser].configSetup[itemtext];
-          if (status !== configSetupItem && typeof configSetupItem !== 'undefined') {
+          if (
+            status !== configSetupItem &&
+            typeof configSetupItem !== 'undefined'
+          ) {
             status = configSetupItem;
             this.ux.setSpinnerStatus(status);
           }
@@ -109,12 +179,21 @@ export default class UserSyncStatus extends SfdxCommand {
     return { tables };
   }
 
-  private async checkContactsEvents(page: puppeteer.Page, tables: {}, itemtext: string, finalstate: string[]) {
+  private async checkContactsEvents(
+    page: puppeteer.Page,
+    tables: {},
+    itemtext: string,
+    finalstate: string[]
+  ) {
     let userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
     let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
     let status = '';
     this.ux.startSpinner('userContacts/userEvents: ' + itemtext);
-    if (!finalstate.includes(userContactsItem) || !finalstate.includes(userEventsItem)) {
+    const end = Date.now() + this.flags.wait * 1000 * 60;
+    if (
+      !finalstate.includes(userContactsItem) ||
+      !finalstate.includes(userEventsItem)
+    ) {
       do {
         tables = await this.checkstatus(page);
         userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
@@ -123,23 +202,36 @@ export default class UserSyncStatus extends SfdxCommand {
           status = userContactsItem + '/' + userEventsItem;
           this.ux.setSpinnerStatus(status);
         }
-      } while (!finalstate.includes(userContactsItem) || !finalstate.includes(userEventsItem));
+      } while (
+        (!finalstate.includes(userContactsItem) ||
+          !finalstate.includes(userEventsItem)) &&
+        !(Date.now() > end && typeof this.flags.wait !== 'undefined')
+      );
     }
-    this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+    if (Date.now() > end && typeof this.flags.wait !== 'undefined') {
+      this.ux.stopSpinner('timeout!');
+    } else {
+      this.ux.stopSpinner(userContactsItem + '/' + userEventsItem);
+    }
     return { tables, userContactsItem, userEventsItem };
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
-    await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-      waitUntil: 'networkidle2'
-    });
+    await page.goto(
+      conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken,
+      {
+        waitUntil: 'networkidle2'
+      }
+    );
   }
   private async resetuser(page: puppeteer.Page) {
     page.on('dialog', async dialog => {
       await dialog.accept();
     });
     await page.evaluate(() => {
-      document.getElementById('thePage:theForm:thePageBlock:pageBlock:resetButton').click();
+      document
+        .getElementById('thePage:theForm:thePageBlock:pageBlock:resetButton')
+        .click();
     });
     await page.waitForNavigation({
       waitUntil: 'networkidle2'
@@ -148,19 +240,27 @@ export default class UserSyncStatus extends SfdxCommand {
 
   private async gettables(page: puppeteer.Page) {
     return await page.evaluate(() => {
-
       const converttables = (document: Document, tables: string[]) => {
         const convertedtables = {};
         tables.forEach(tableid => {
           const object = {};
-          if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
+          if (
+            typeof document.getElementById(tableid) !== 'undefined' &&
+            document.getElementById(tableid)
+          ) {
             // tslint:disable-next-line:no-any
             for (const row of (document.getElementById(tableid) as any).rows) {
               if (typeof row.cells[1] !== 'undefined') {
-                if (typeof row.cells[1].getElementsByTagName('img')[0] !== 'undefined') {
-                  object[row.cells[0].innerText.replace(/(:\t|\t)/g, '')] = row.cells[1].getElementsByTagName('img')[0].alt;
+                if (
+                  typeof row.cells[1].getElementsByTagName('img')[0] !==
+                  'undefined'
+                ) {
+                  object[
+                    row.cells[0].innerText.replace(/(:\t|\t)/g, '')
+                  ] = row.cells[1].getElementsByTagName('img')[0].alt;
                 } else {
-                  object[row.cells[0].innerText.replace(/(:\t|\t)/g, '')] = row.cells[1].innerText;
+                  object[row.cells[0].innerText.replace(/(:\t|\t)/g, '')] =
+                    row.cells[1].innerText;
                 }
               }
             }
@@ -170,11 +270,27 @@ export default class UserSyncStatus extends SfdxCommand {
         return convertedtables;
       };
 
-      const returntables = { System: converttables(document, ['orgConfigInfo', 'orgContacts', 'orgEvents']) };
-      if (typeof document.getElementById('resetExchangeSyncUser') !== 'undefined' && document.getElementById('resetExchangeSyncUser')) {
-        const user = (document.getElementById('resetExchangeSyncUser') as HTMLInputElement).value;
+      const returntables = {
+        System: converttables(document, [
+          'orgConfigInfo',
+          'orgContacts',
+          'orgEvents'
+        ])
+      };
+      if (
+        typeof document.getElementById('resetExchangeSyncUser') !==
+          'undefined' &&
+        document.getElementById('resetExchangeSyncUser')
+      ) {
+        const user = (document.getElementById(
+          'resetExchangeSyncUser'
+        ) as HTMLInputElement).value;
         if (user !== '') {
-            returntables[user] = converttables(document, ['configSetup', 'userContacts', 'userEvents']);
+          returntables[user] = converttables(document, [
+            'configSetup',
+            'userContacts',
+            'userEvents'
+          ]);
         }
       }
       return returntables;
@@ -183,12 +299,15 @@ export default class UserSyncStatus extends SfdxCommand {
 
   private async checkstatus(page: puppeteer.Page) {
     await page.evaluate(() => {
-      document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
+      document
+        .getElementById(
+          'thePage:theForm:thePageBlock:pageBlock:checkStatusButton'
+        )
+        .click();
     });
     await page.waitForNavigation({
       waitUntil: 'networkidle2'
     });
     return this.gettables(page);
   }
-
 }
