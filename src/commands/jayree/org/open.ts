@@ -10,11 +10,11 @@ export default class OrgOpen extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:openorg
-$ sfdx jayree:openorg -u me@my.org
-$ sfdx jayree:openorg -u MyTestOrg1 -b firefox
-$ sfdx jayree:openorg -r -p lightning -b safari
-$ sfdx jayree:openorg -u me@my.org`
+    `$ sfdx jayree:org:open
+$ sfdx jayree:org:open -u me@my.org
+$ sfdx jayree:org:open -u MyTestOrg1 -b firefox
+$ sfdx jayree:org:open -r -p lightning -b safari
+$ sfdx jayree:org:open -u me@my.org`
   ];
 
   protected static flagsConfig = {

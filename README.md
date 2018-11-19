@@ -182,11 +182,11 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:openorg
-  $ sfdx jayree:openorg -u me@my.org
-  $ sfdx jayree:openorg -u MyTestOrg1 -b firefox
-  $ sfdx jayree:openorg -r -p lightning -b safari
-  $ sfdx jayree:openorg -u me@my.org
+  $ sfdx jayree:org:open
+  $ sfdx jayree:org:open -u me@my.org
+  $ sfdx jayree:org:open -u MyTestOrg1 -b firefox
+  $ sfdx jayree:org:open -r -p lightning -b safari
+  $ sfdx jayree:org:open -u me@my.org
 ```
 
 _See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/org/open.ts)_

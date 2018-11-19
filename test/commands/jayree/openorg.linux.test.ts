@@ -1,6 +1,6 @@
 import { expect, test } from '@salesforce/command/dist/test';
 
-describe('jayree:openorg', () => {
+describe('jayree:org:open', () => {
   before(function() {
     // save original process.platform
     this.originalPlatform = Object.getOwnPropertyDescriptor(
@@ -21,15 +21,15 @@ describe('jayree:openorg', () => {
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command(['jayree:openorg', '--targetusername', 'test@org.com', '-r'])
-    .it('runs jayree:openorg --targetusername test@org.com -r', ctx => {
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r'])
+    .it('runs jayree:org:open --targetusername test@org.com -r', ctx => {
       expect(ctx.stdout).to.contain('test@org.com');
     });
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
     .command([
-      'jayree:openorg',
+      'jayree:org:open',
       '--targetusername',
       'test@org.com',
       '-r',
@@ -37,7 +37,7 @@ describe('jayree:openorg', () => {
       'firefox'
     ])
     .it(
-      'runs jayree:openorg --targetusername test@org.com -r -b firefox',
+      'runs jayree:org:open --targetusername test@org.com -r -b firefox',
       ctx => {
         expect(ctx.stdout).to.contain('firefox');
       }
@@ -46,7 +46,7 @@ describe('jayree:openorg', () => {
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
     .command([
-      'jayree:openorg',
+      'jayree:org:open',
       '--targetusername',
       'test@org.com',
       '-r',
@@ -54,7 +54,7 @@ describe('jayree:openorg', () => {
       'safari'
     ])
     .it(
-      'runs jayree:openorg --targetusername test@org.com -r -b safari',
+      'runs jayree:org:open --targetusername test@org.com -r -b safari',
       ctx => {
         expect(ctx.stdout).to.contain('');
       }
@@ -63,7 +63,7 @@ describe('jayree:openorg', () => {
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
     .command([
-      'jayree:openorg',
+      'jayree:org:open',
       '--targetusername',
       'test@org.com',
       '-r',
@@ -71,7 +71,7 @@ describe('jayree:openorg', () => {
       'lightning'
     ])
     .it(
-      'runs jayree:openorg --targetusername test@org.com -r -p lightning',
+      'runs jayree:org:open --targetusername test@org.com -r -p lightning',
       ctx => {
         expect(ctx.stdout).to.contain('lightning');
       }

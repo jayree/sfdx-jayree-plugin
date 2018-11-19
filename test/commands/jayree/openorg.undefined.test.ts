@@ -1,6 +1,6 @@
 import { expect, test } from '@salesforce/command/dist/test';
 
-describe('jayree:openorg', () => {
+describe('jayree:org:open', () => {
   before(function() {
     // save original process.platform
     this.originalPlatform = Object.getOwnPropertyDescriptor(
@@ -21,8 +21,8 @@ describe('jayree:openorg', () => {
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command(['jayree:openorg', '--targetusername', 'test@org.com', '-r'])
-    .it('runs jayree:openorg --targetusername test@org.com -r', ctx => {
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r'])
+    .it('runs jayree:org:open --targetusername test@org.com -r', ctx => {
       expect(ctx.stdout).to.contain('');
     });
 });
