@@ -10,5 +10,8 @@
         "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
     },
     "eslint.enable": false,
-    "javascript.format.enable": false
+    "prettier.tslintIntegration": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 }
