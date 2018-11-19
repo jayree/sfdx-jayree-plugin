@@ -35,7 +35,7 @@ USAGE
 * [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
 * [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
 * [`sfdx-jayree jayree:flowtestcoverage`](#sfdx-jayree-jayreeflowtestcoverage)
-* [`sfdx-jayree jayree:openorg`](#sfdx-jayree-jayreeopenorg)
+* [`sfdx-jayree jayree:org:open`](#sfdx-jayree-jayreeorgopen)
 * [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
 * [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
 * [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
@@ -164,13 +164,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/flowtestcoverage.ts)_
 
-## `sfdx-jayree jayree:openorg`
+## `sfdx-jayree jayree:org:open`
 
-open an org in your browser with specified browser
+open an org in your preferred browser
 
 ```
 USAGE
-  $ sfdx-jayree jayree:openorg
+  $ sfdx-jayree jayree:org:open
 
 OPTIONS
   -b, --browser=firefox|chrome|safari             [default: chrome] browser to be launched
@@ -189,7 +189,7 @@ EXAMPLE
   $ sfdx jayree:openorg -u me@my.org
 ```
 
-_See code: [src/commands/jayree/openorg.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/openorg.ts)_
+_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.2.5/src/commands/jayree/org/open.ts)_
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 

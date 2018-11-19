@@ -69,6 +69,10 @@
             "name": "packagedescription",
             "description": "add/modify/remove the description of a package"
           },
+          "org": {
+            "name": "org",
+            "description": "manage your orgs"
+          },
           "automation": {
             "name": "automation",
             "description": "headless browser automation tools",

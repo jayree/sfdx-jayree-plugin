@@ -1,5 +1,5 @@
 {
-  "commandDescription": "open an org in your browser with specified browser",
+  "commandDescription": "open an org in your preferred browser",
   "browserFlagDescription": "browser to be launched",
   "pathFlagDescription": "navigation URL path",
   "urlonlyFlagDescription": "display navigation URL, but don’t launch browser"

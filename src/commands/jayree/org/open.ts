@@ -6,7 +6,7 @@ core.Messages.importMessagesDirectory(__dirname);
 
 const messages = core.Messages.loadMessages('sfdx-jayree', 'openorg');
 
-export default class Org extends SfdxCommand {
+export default class OrgOpen extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
