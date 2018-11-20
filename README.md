@@ -1,7 +1,7 @@
 sfdx-jayree
 ===========
 
-some sfdx plugins
+some sfdx commands
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
