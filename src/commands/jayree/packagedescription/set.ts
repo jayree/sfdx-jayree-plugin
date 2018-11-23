@@ -47,7 +47,7 @@ export default class SetPackageDescription extends SfdxCommand {
     const zip = new AdmZip(inputfile);
     const zipEntries = zip.getEntries();
 
-    const text = this.flags.description;
+    const text = this.flags.description.replace(/\\n/g, '\n');
     let action;
     zipEntries.forEach(zipEntry => {
       const fileName = zipEntry.entryName;

@@ -43,7 +43,7 @@ export default class CreatePackageDescription extends SfdxCommand {
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
-    const text = this.flags.description;
+    const text = this.flags.description.replace(/\\n/g, '\n')
 
     const fileContentjs = {
       _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
