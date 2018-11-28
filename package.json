@@ -9,7 +9,7 @@
     "@oclif/config": "1.9.0",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "0.2.5",
-    "adm-zip": "0.4.13",
+    "adm-zip": "0.4.11",
     "inquirer": "6.2.0",
     "opn": "5.4.0",
     "puppeteer": "1.10.0",
@@ -18,7 +18,7 @@
     "xml-js": "1.6.8"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "1.19.4",
+    "@oclif/dev-cli": "1.19.5",
     "@oclif/plugin-help": "2.1.4",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
@@ -30,7 +30,7 @@
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
     "@types/node": "10.12.10",
-    "@types/puppeteer": "1.10.0",
+    "@types/puppeteer": "1.10.1",
     "chai": "4.2.0",
     "codecov": "4.0.0-0",
     "globby": "8.0.1",
@@ -40,9 +40,9 @@
     "sinon": "7.1.1",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
-    "tslint-config-prettier": "1.16.0",
+    "tslint-config-prettier": "1.17.0",
     "typescript": "3.1.6",
-    "typescript-tslint-plugin": "0.1.0"
+    "typescript-tslint-plugin": "0.1.1"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -97,6 +97,7 @@
   },
   "repository": "jayree/sfdx-jayree-plugin",
   "scripts": {
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
