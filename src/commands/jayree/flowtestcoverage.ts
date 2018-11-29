@@ -87,7 +87,7 @@ Coverage: 82%
 
     if (covered.length !== numberOfCoveredActiveAutolaunchedFlowsAndProcesses) {
       this.ux.warn(
-        'Error in FlowTestCoverage table found, please delete all records in the FlowTestCoverage table, then run all tests, and use this command to check the Flow Test Coverage again'
+        'Error in the FlowTestCoverage table found, please delete all records in the FlowTestCoverage table, then run all tests, and use this command to check the Flow Test Coverage again'
       );
     }
 
