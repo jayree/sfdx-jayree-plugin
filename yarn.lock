@@ -3509,9 +3509,9 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript-tslint-plugin@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.1.1.tgz#e63691f05512e59e01110473c7cad3fcbb01e32b"
+typescript-tslint-plugin@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.1.2.tgz#2523a003ad399eeaf8b0b97fe1f0d80614cc5ecd"
   dependencies:
     minimatch "^3.0.4"
     mock-require "^3.0.2"
