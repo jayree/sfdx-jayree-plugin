@@ -1,7 +1,7 @@
 {
   "name": "sfdx-jayree",
   "description": "some sfdx commands",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
@@ -10,9 +10,9 @@
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "0.2.5",
     "adm-zip": "0.4.11",
-    "inquirer": "6.2.0",
+    "inquirer": "6.2.1",
     "opn": "5.4.0",
-    "puppeteer": "1.10.0",
+    "puppeteer": "1.11.0",
     "tabletojson": "0.9.8",
     "tslib": "1.9.3",
     "xml-js": "1.6.8"
@@ -29,7 +29,7 @@
     "@types/jsforce": "1.9.1",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
-    "@types/node": "10.12.10",
+    "@types/node": "10.12.11",
     "@types/puppeteer": "1.10.1",
     "chai": "4.2.0",
     "codecov": "4.0.0-0",
@@ -41,7 +41,7 @@
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.17.0",
-    "typescript": "3.1.6",
+    "typescript": "3.2.1",
     "typescript-tslint-plugin": "0.1.2"
   },
   "engines": {
