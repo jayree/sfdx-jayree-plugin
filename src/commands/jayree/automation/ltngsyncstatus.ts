@@ -41,93 +41,112 @@ export default class UserSyncStatus extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    await this.org.refreshAuth();
-    const conn = this.org.getConnection();
-
     const browser = await puppeteer.launch({
       headless: true
     });
+    try {
+      await this.org.refreshAuth();
+      const conn = this.org.getConnection();
 
-    const page = await browser.newPage();
+      const page = await browser.newPage();
 
-    await this.login(conn, page);
+      await this.login(conn, page);
 
-    await page.goto(conn.instanceUrl + '/s2x/resetExchangeSyncUser.apexp', {
-      waitUntil: 'networkidle2'
-    });
+      await page.goto(conn.instanceUrl + '/s2x/resetExchangeSyncUser.apexp', {
+        waitUntil: 'networkidle2'
+      });
 
-    let tables = await this.gettables(page);
+      let tables = await this.gettables(page);
 
-    if (
-      (!(
-        tables.System.orgConfigInfo['Connection method configured'] === 'No'
-      ) ||
-        tables.System.orgConfigInfo['Outlook Integration enabled'] === 'Yes') &&
-      this.flags.officeuser
-    ) {
-      let userSetup;
-      ({ tables, userSetup } = await this.checkUserSetup(page));
+      if (
+        (!(
+          tables.System.orgConfigInfo['Connection method configured'] === 'No'
+        ) ||
+          tables.System.orgConfigInfo['Outlook Integration enabled'] ===
+            'Yes') &&
+        this.flags.officeuser
+      ) {
+        let userSetup;
+        ({ tables, userSetup } = await this.checkUserSetup(page));
 
-      if (userSetup === 'Yes' && !this.flags.statusonly) {
-        ({ tables } = await this.checkUserReset(
-          page,
-          tables,
-          'Salesforce and Exchange email addresses linked'
-        ));
-        ({ tables } = await this.checkContactsEvents(
-          page,
-          tables,
-          'Salesforce and Exchange email addresses linked',
-          ['Linked']
-        ));
-        ({ tables } = await this.checkContactsEvents(
-          page,
-          tables,
-          'Salesforce to Exchange sync status',
-          ['Initial sync completed', 'In sync']
-        ));
-        ({ tables } = await this.checkContactsEvents(
-          page,
-          tables,
-          'Exchange to Salesforce sync status',
-          ['Initial sync completed', 'In sync']
-        ));
+        if (userSetup === 'Yes' && !this.flags.statusonly) {
+          ({ tables } = await this.checkUserReset(
+            page,
+            tables,
+            'Salesforce and Exchange email addresses linked'
+          ));
+          ({ tables } = await this.checkContactsEvents(
+            page,
+            tables,
+            'Salesforce and Exchange email addresses linked',
+            ['Linked']
+          ));
+          ({ tables } = await this.checkContactsEvents(
+            page,
+            tables,
+            'Salesforce to Exchange sync status',
+            ['Initial sync completed', 'In sync']
+          ));
+          ({ tables } = await this.checkContactsEvents(
+            page,
+            tables,
+            'Exchange to Salesforce sync status',
+            ['Initial sync completed', 'In sync']
+          ));
+        }
+      } else {
+        this.flags.statusonly = true;
       }
-    } else {
-      this.flags.statusonly = true;
+
+      if (this.flags.statusonly) {
+        this.flags.officeuser
+          ? this.ux.styledJSON(tables[this.flags.officeuser])
+          : this.ux.styledJSON(tables);
+      }
+
+      await browser.close();
+
+      return tables;
+    } catch (error) {
+      this.ux.stopSpinner();
+      await browser.close();
+      throw error;
     }
-
-    if (this.flags.statusonly) {
-      this.flags.officeuser
-        ? this.ux.styledJSON(tables[this.flags.officeuser])
-        : this.ux.styledJSON(tables);
-    }
-
-    await browser.close();
-
-    return tables;
   }
 
   private async checkUserSetup(page: puppeteer.Page) {
-    await page.focus('#resetExchangeSyncUser');
-    await page.keyboard.type(this.flags.officeuser);
     this.ux.startSpinner(
       'configSetup: User assigned to active Lightning Sync configuration'
     );
-    const tables = await this.checkstatus(page);
+    let tables = await this.checkstatus(page);
     let configSetupItem;
-    try {
-      configSetupItem =
-        tables[this.flags.officeuser].configSetup[
-          'User assigned to active Lightning Sync configuration'
-        ];
-    } catch {
-      tables[this.flags.officeuser] = {
-        configSetup: {
-          'User assigned to active Lightning Sync configuration': 'No'
-        }
-      };
-      configSetupItem = 'No';
+    if (
+      tables.System.orgConfigInfo[
+        'Users with linked Exchange and Salesforce email addresses'
+      ] !== '0'
+    ) {
+      await page.focus('#resetExchangeSyncUser');
+      await page.keyboard.type(this.flags.officeuser);
+
+      tables = await this.checkstatus(page);
+      try {
+        configSetupItem =
+          tables[this.flags.officeuser].configSetup[
+            'User assigned to active Lightning Sync configuration'
+          ];
+      } catch {
+        tables[this.flags.officeuser] = {
+          configSetup: {
+            'User assigned to active Lightning Sync configuration': 'No'
+          }
+        };
+        configSetupItem = 'No';
+      }
+    } else {
+      this.ux.stopSpinner();
+      throw Error(
+        'Users with linked Exchange and Salesforce email addresses: 0'
+      );
     }
     this.ux.stopSpinner(configSetupItem);
     return { tables, userSetup: configSetupItem };
@@ -256,10 +275,10 @@ export default class UserSyncStatus extends SfdxCommand {
                   'undefined'
                 ) {
                   object[
-                    row.cells[0].innerText.replace(/(:\t|\t)/g, '')
+                    row.cells[0].innerText.replace(/(:|:\t|\t)/g, '')
                   ] = row.cells[1].getElementsByTagName('img')[0].alt;
                 } else {
-                  object[row.cells[0].innerText.replace(/(:\t|\t)/g, '')] =
+                  object[row.cells[0].innerText.replace(/(:|:\t|\t)/g, '')] =
                     row.cells[1].innerText;
                 }
               }
