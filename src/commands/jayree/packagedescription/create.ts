@@ -43,7 +43,7 @@ export default class CreatePackageDescription extends SfdxCommand {
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
-    const text = this.flags.description.replace(/\\n/g, '\n')
+    const text = this.flags.description.replace(/\\n/g, '\n');
 
     const fileContentjs = {
       _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
@@ -64,6 +64,7 @@ export default class CreatePackageDescription extends SfdxCommand {
     );
 
     newZip.writeZip(inputfile);
+    // this.ux.log(newZip.getEntries()[0].header.toString());
     this.ux.log(text);
 
     return { description: text, task: 'created' };
