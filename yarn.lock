@@ -326,13 +326,13 @@
   version "10.12.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.8.tgz#d0a3ab5a6e61458c492304e2776ac136b81db927"
 
-"@types/node@10.12.11":
-  version "10.12.11"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.11.tgz#715c476c99a5f6898a1ae61caf9825e43c03912e"
+"@types/node@10.12.12":
+  version "10.12.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.12.tgz#e15a9d034d9210f00320ef718a50c4a799417c47"
 
-"@types/puppeteer@1.10.1":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.10.1.tgz#03b3fa9f4591ccdda70970bf13767681429de99a"
+"@types/puppeteer@1.10.2":
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-1.10.2.tgz#508c36b4b3799b117142d2d2af2a39e32040845e"
   dependencies:
     "@types/node" "*"
 
