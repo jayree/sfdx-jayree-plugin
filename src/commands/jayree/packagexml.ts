@@ -49,6 +49,9 @@ if (Symbol['asyncIterator'] === undefined) {
   (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
 }
 
+/**
+ * This code was based on the original github:sfdx-hydrate project
+ */
 export default class GeneratePackageXML extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
@@ -97,6 +100,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     const outputFile = this.flags.file || this.args.file || null;
 
     try {
+      await this.org.refreshAuth();
       let apiVersion =
         this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
       let quickFilters = this.flags.quickfilter
@@ -130,7 +134,6 @@ export default class GeneratePackageXML extends SfdxCommand {
       outputFile
         ? this.ux.startSpinner(`Generating ${outputFile}`)
         : this.ux.startSpinner('Generating package.xml');
-      await this.org.refreshAuth();
       const conn = this.org.getConnection();
       const describe = await conn.metadata.describe(apiVersion);
 
@@ -198,14 +201,21 @@ export default class GeneratePackageXML extends SfdxCommand {
         }
       }
 
+      /**
+       * This part was taken from the github:sfdx-collate project
+       */
       let ipRegexStr = '^(';
-      const nsPrefixes = [];
-      (await ipPromise).forEach(pkg => {
-        nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
-      });
-      nsPrefixes.forEach(prefix => {
-        ipRegexStr += prefix + '|';
-      });
+
+      if (ipPromise.length > 0) {
+        const nsPrefixes = [];
+        (await ipPromise).forEach(pkg => {
+          nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
+        });
+        nsPrefixes.forEach(prefix => {
+          ipRegexStr += prefix + '|';
+        });
+      }
+
       ipRegexStr += ')+__';
 
       const flowDefinitionQuery = await conn.tooling.query(
