@@ -1,0 +1,14 @@
+patch-package
+--- a/node_modules/@salesforce/core/lib/org.js
++++ b/node_modules/@salesforce/core/lib/org.js
+@@ -337,8 +337,9 @@ class Org extends kit_1.AsyncCreatable {
+                 this.options.aliasOrUsername = aliasOrUsername || undefined;
+             }
+             // If no username is provided AuthInfo will throw an SfdxError.
++            const aliasValue = await aliases_1.Aliases.fetch(this.options.aliasOrUsername);
+             this.connection = await connection_1.Connection.create({
+-                authInfo: await authInfo_1.AuthInfo.create({ username: this.options.aliasOrUsername })
++                authInfo: await authInfo_1.AuthInfo.create({ username: aliasValue || this.options.aliasOrUsername })
+             });
+         }
+         else {
