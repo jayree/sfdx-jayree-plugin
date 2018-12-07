@@ -307,9 +307,9 @@
   dependencies:
     "@types/events" "*"
 
-"@types/jsforce@1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@types/jsforce/-/jsforce-1.9.1.tgz#285058a41a833e6280b865a3faaf2b8a18a7a550"
+"@types/jsforce@1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@types/jsforce/-/jsforce-1.9.2.tgz#a321866dcb7c9c4c57a1d794d54ec52e3f07ff0b"
 
 "@types/jsonfile@4.0.1":
   version "4.0.1"
@@ -439,9 +439,9 @@
   dependencies:
     "@types/node" "*"
 
-adm-zip@0.4.11:
-  version "0.4.11"
-  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.11.tgz#2aa54c84c4b01a9d0fb89bb11982a51f13e3d62a"
+adm-zip@0.4.13:
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.13.tgz#597e2f8cc3672151e1307d3e95cddbc75672314a"
 
 agent-base@^4.1.0:
   version "4.2.1"
@@ -3613,7 +3613,11 @@ typescript-tslint-plugin@0.1.2:
     mock-require "^3.0.2"
     vscode-languageserver "^5.1.0"
 
-typescript@3.2.1, typescript@^3:
+typescript@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
+
+typescript@^3:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.1.tgz#0b7a04b8cf3868188de914d9568bd030f0c56192"
 
