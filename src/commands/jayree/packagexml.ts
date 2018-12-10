@@ -2,6 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { fs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as jf from 'jsonfile';
+import serializeError = require('serialize-error');
 // import * as notifier from 'node-notifier';
 // import * as convert from 'xml-js';
 import * as xml2js from 'xml2js';
@@ -114,6 +115,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         jf.readFile(configFile, (error, obj) => {
           if (error) {
             this.ux.stopSpinner();
+            this.logger.error({error: serializeError(error)});
             throw error;
           } else {
             /* cli parameters still override whats in the config file */
@@ -359,6 +361,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         } catch (error) {
           this.ux.stopSpinner();
+          this.logger.error({error: serializeError(error)});
           throw error;
         }
       });
@@ -399,6 +402,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         } catch (error) {
           this.ux.stopSpinner();
+          this.logger.error({error: serializeError(error)});
           throw error;
         }
       });
@@ -593,6 +597,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           .then(() => this.ux.stopSpinner())
           .catch(error => {
             this.ux.stopSpinner('!');
+            this.logger.error({error: serializeError(error)});
             throw error;
           });
       } else {
@@ -608,6 +613,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       };
     } catch (error) {
       this.ux.stopSpinner();
+      this.logger.error({error: serializeError(error)});
       throw error;
     }
   }

@@ -1,6 +1,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
+import serializeError = require('serialize-error');
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'ltngsyncstatus');
@@ -44,6 +45,8 @@ export default class UserSyncStatus extends SfdxCommand {
     const browser = await puppeteer.launch({
       headless: true
     });
+    let tables;
+
     try {
       await this.org.refreshAuth();
       const conn = this.org.getConnection();
@@ -56,7 +59,7 @@ export default class UserSyncStatus extends SfdxCommand {
         waitUntil: 'networkidle2'
       });
 
-      let tables = await this.gettables(page);
+      tables = await this.gettables(page);
 
       if (
         (!(
@@ -103,15 +106,15 @@ export default class UserSyncStatus extends SfdxCommand {
           ? this.ux.styledJSON(tables[this.flags.officeuser])
           : this.ux.styledJSON(tables);
       }
-
-      await browser.close();
-
-      return tables;
     } catch (error) {
       this.ux.stopSpinner();
-      await browser.close();
+      this.logger.error({ error: serializeError(error) });
       throw error;
+    } finally {
+      await browser.close();
     }
+
+    return tables;
   }
 
   private async checkUserSetup(page: puppeteer.Page) {

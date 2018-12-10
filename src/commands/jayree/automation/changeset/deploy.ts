@@ -2,6 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import inquirer = require('inquirer');
 import puppeteer = require('puppeteer');
+import serializeError = require('serialize-error');
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
@@ -226,6 +227,7 @@ jobid:  0Xxx100000xx1x1
       this.ux.log('jobid:  ' + job.id);
       // }
     } catch (error) {
+      this.logger.error({ error: serializeError(error) });
       throw error;
     } finally {
       await browser.close();
