@@ -336,7 +336,7 @@ jobid:  0Xxx100000xx1x1
   private async getjob(conn: core.Connection, page: puppeteer.Page, cs: any) {
     // open deployment status
     await page.goto(conn.instanceUrl + '/changemgmt/monitorDeployment.apexp', {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle0'
     });
     // try {
 
@@ -401,6 +401,8 @@ jobid:  0Xxx100000xx1x1
 
       return { id, currentname, pendingid, running };
     }, cs.ChangeSetName);
+
+    this.logger.warn(JSON.stringify(job));
 
     if (!job.running) {
       // open detail page
