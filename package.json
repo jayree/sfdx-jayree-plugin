@@ -8,8 +8,8 @@
     "@oclif/command": "1.5.6",
     "@oclif/config": "1.9.0",
     "@oclif/errors": "1.2.2",
-    "@salesforce/command": "1.0.2",
-    "@salesforce/core": "1.0.2",
+    "@salesforce/command": "1.1.1",
+    "@salesforce/core": "1.1.0",
     "adm-zip": "0.4.13",
     "inquirer": "6.2.1",
     "opn": "5.4.0",
@@ -23,14 +23,14 @@
     "@oclif/plugin-help": "2.1.4",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
-    "@salesforce/dev-config": "1.4.1",
+    "@salesforce/dev-config": "1.4.2",
     "@types/adm-zip": "0.4.31",
     "@types/chai": "4.1.7",
     "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.2",
     "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
-    "@types/node": "10.12.12",
+    "@types/node": "10.12.15",
     "@types/puppeteer": "1.11.1",
     "chai": "4.2.0",
     "codecov": "4.0.0-0",
@@ -45,7 +45,7 @@
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.17.0",
     "typescript": "3.2.2",
-    "typescript-tslint-plugin": "0.1.2"
+    "typescript-tslint-plugin": "0.2.0"
   },
   "engines": {
     "node": ">=8.0.0"

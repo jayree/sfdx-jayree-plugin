@@ -192,9 +192,9 @@
     tslint-eslint-rules "^5.4.0"
     tslint-xo "^0.9.0"
 
-"@salesforce/command@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-1.0.2.tgz#abd28b00208b623002632a4f684d5df4e95b0ef3"
+"@salesforce/command@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-1.1.1.tgz#7da0035a7d1d8d7ccaca4b3f9fac28b1d2dbc95b"
   dependencies:
     "@oclif/command" "^1.5.0"
     "@oclif/errors" "^1.2.0"
@@ -207,29 +207,29 @@
     chalk "^2.4.0"
     cli-ux "^4.8.0"
 
-"@salesforce/core@1.0.2", "@salesforce/core@^1.0.0":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.0.2.tgz#efd245bac1817fc605b408e9f52f186d8da6eb5c"
+"@salesforce/core@1.1.0", "@salesforce/core@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.1.0.tgz#52caac5e5ce24a1cd0bc152924c515ac0945cf86"
   dependencies:
     "@salesforce/kit" "0.13.3"
     "@salesforce/ts-sinon" "0.2.7"
     "@salesforce/ts-types" "0.19.3"
-    "@types/jsforce" "1.8.12"
+    "@types/jsforce" "1.9.2"
     bunyan-sfdx-no-dtrace "1.8.2"
     debug "^3.1.0"
     jsen "0.6.6"
-    jsforce "1.8.4"
+    jsforce "1.9.1"
     jsonwebtoken "7.0.0"
     mkdirp "0.5.1"
     sfdx-faye "^1.0.9"
 
-"@salesforce/dev-config@1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.4.1.tgz#5dfc29bac8c73acfd29f0545a208f1b42b0045a9"
+"@salesforce/dev-config@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.4.2.tgz#8c5fe7083add4b9b26c76f86bb7dd9d19215b209"
   dependencies:
     tslint "^5"
     tslint-microsoft-contrib "^5"
-    typescript "^3"
+    typescript "3.1.6"
 
 "@salesforce/kit@0.13.3":
   version "0.13.3"
@@ -252,23 +252,11 @@
   dependencies:
     tslib "^1"
 
-"@sinonjs/commons@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.0.2.tgz#3e0ac737781627b8844257fadc3d803997d0526e"
-  dependencies:
-    type-detect "4.0.8"
-
 "@sinonjs/commons@^1.0.2", "@sinonjs/commons@^1.2.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.3.0.tgz#50a2754016b6f30a994ceda6d9a0a8c36adda849"
   dependencies:
     type-detect "4.0.8"
-
-"@sinonjs/formatio@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@sinonjs/formatio/-/formatio-3.0.0.tgz#9d282d81030a03a03fa0c5ce31fd8786a4da311a"
-  dependencies:
-    "@sinonjs/samsam" "2.1.0"
 
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
@@ -282,21 +270,7 @@
   dependencies:
     "@sinonjs/samsam" "^2 || ^3"
 
-"@sinonjs/samsam@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.1.0.tgz#b8b8f5b819605bd63601a6ede459156880f38ea3"
-  dependencies:
-    array-from "^2.1.1"
-
-"@sinonjs/samsam@^2 || ^3":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-3.0.1.tgz#1302682a71ad74308ba614582ad1768618347e1d"
-  dependencies:
-    "@sinonjs/commons" "1.0.2"
-    array-from "^2.1.1"
-    lodash.get "4.4.2"
-
-"@sinonjs/samsam@^3.0.2":
+"@sinonjs/samsam@^2 || ^3", "@sinonjs/samsam@^3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-3.0.2.tgz#304fb33bd5585a0b2df8a4c801fcb47fa84d8e43"
   dependencies:
@@ -314,22 +288,12 @@
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.7.tgz#1b8e33b61a8c09cbe1f85133071baa0dbf9fa71a"
 
-"@types/events@*":
-  version "1.2.0"
-  resolved "http://registry.npmjs.org/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
-
 "@types/inquirer@0.0.43":
   version "0.0.43"
   resolved "https://registry.yarnpkg.com/@types/inquirer/-/inquirer-0.0.43.tgz#1eb0bbb4648e6cc568bd396c1e989f620ad01273"
   dependencies:
     "@types/rx" "*"
     "@types/through" "*"
-
-"@types/jsforce@1.8.12":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@types/jsforce/-/jsforce-1.8.12.tgz#ff7554feaf2a962513d7167a34975842930a8b6c"
-  dependencies:
-    "@types/events" "*"
 
 "@types/jsforce@1.9.2":
   version "1.9.2"
@@ -355,9 +319,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@10.12.12", "@types/node@^10.9.4":
-  version "10.12.12"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.12.tgz#e15a9d034d9210f00320ef718a50c4a799417c47"
+"@types/node@*", "@types/node@10.12.15", "@types/node@^10.9.4":
+  version "10.12.15"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.15.tgz#20e85651b62fd86656e57c9c9bc771ab1570bc59"
 
 "@types/puppeteer@1.11.1":
   version "1.11.1"
@@ -631,6 +595,10 @@ babel-code-frame@^6.22.0:
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
+
+base64-url@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/base64-url/-/base64-url-2.2.0.tgz#4bbd6a825df1be522d39e566a721ede51144041a"
 
 base@^0.11.1:
   version "0.11.2"
@@ -1496,8 +1464,8 @@ get-caller-file@^1.0.1, get-caller-file@^1.0.2:
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.3.tgz#f978fa4c90d1dfe7ff2d6beda2a515e713bdcf4a"
 
 get-caller-file@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.0.tgz#1e119be08623cdb28fb6b2873e671a758aa2b6eb"
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.1.tgz#25835260d3a2b9665fcdbb08cb039a7bbf7011c0"
 
 get-func-name@^2.0.0:
   version "2.0.0"
@@ -1788,7 +1756,7 @@ invert-kv@^1.0.0:
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
-  resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
+  resolved "http://registry.npmjs.org/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
   dependencies:
     kind-of "^3.0.2"
 
@@ -1820,7 +1788,7 @@ is-ci@^1.0.10:
 
 is-data-descriptor@^0.1.4:
   version "0.1.4"
-  resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
+  resolved "http://registry.npmjs.org/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
   dependencies:
     kind-of "^3.0.2"
 
@@ -2069,10 +2037,11 @@ jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
 
-jsforce@1.8.4:
-  version "1.8.4"
-  resolved "http://registry.npmjs.org/jsforce/-/jsforce-1.8.4.tgz#7c1a32cd799205e77706fa99229e4dd207030fc6"
+jsforce@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-1.9.1.tgz#a112fb0b9ece04fe14d2e14bc72a76e46ff544de"
   dependencies:
+    base64-url "^2.2.0"
     co-prompt "^1.0.0"
     coffeescript "^1.10.0"
     commander "^2.9.0"
@@ -2082,7 +2051,7 @@ jsforce@1.8.4:
     inherits "^2.0.1"
     lodash "^4.11.1"
     multistream "^2.0.5"
-    open "0.0.5"
+    opn "^5.3.0"
     promise "^7.1.1"
     readable-stream "^2.1.0"
     request "^2.72.0"
@@ -2128,9 +2097,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-just-extend@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-3.0.0.tgz#cee004031eaabf6406da03a7b84e4fe9d78ef288"
+just-extend@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-4.0.2.tgz#f3f47f7dfca0f989c55410a7ebc8854b07108afc"
 
 jwa@^1.1.5:
   version "1.1.6"
@@ -2239,7 +2208,7 @@ lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
 
-lodash.get@4.4.2, lodash.get@^4.4.2, lodash.get@~4.4.2:
+lodash.get@^4.4.2, lodash.get@~4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
@@ -2446,8 +2415,8 @@ mock-stdin@^0.3.1:
   resolved "https://registry.yarnpkg.com/mock-stdin/-/mock-stdin-0.3.1.tgz#c657d9642d90786435c64ca5e99bbd4d09bd7dd3"
 
 moment@2.x.x, moment@^2.10.6:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
 
 ms@2.0.0:
   version "2.0.0"
@@ -2508,22 +2477,12 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
 
-nise@^1.2.0:
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.6.tgz#76cc3915925056ae6c405dd8ad5d12bde570c19f"
-  dependencies:
-    "@sinonjs/formatio" "3.0.0"
-    just-extend "^3.0.0"
-    lolex "^2.3.2"
-    path-to-regexp "^1.7.0"
-    text-encoding "^0.6.4"
-
-nise@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.7.tgz#180d723df5071a3d3fc0e83fe8eb0c02b7db1f59"
+nise@^1.2.0, nise@^1.4.7:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.8.tgz#ce91c31e86cf9b2c4cac49d7fcd7f56779bfd6b0"
   dependencies:
     "@sinonjs/formatio" "^3.1.0"
-    just-extend "^3.0.0"
+    just-extend "^4.0.2"
     lolex "^2.3.2"
     path-to-regexp "^1.7.0"
     text-encoding "^0.6.4"
@@ -2623,11 +2582,7 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-open@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/open/-/open-0.0.5.tgz#42c3e18ec95466b6bf0dc42f3a2945c3f0cad8fc"
-
-opn@5.4.0:
+opn@5.4.0, opn@^5.3.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/opn/-/opn-5.4.0.tgz#cb545e7aab78562beb11aa3bfabc7042e1761035"
   dependencies:
@@ -2882,8 +2837,8 @@ pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 psl@^1.1.24, psl@^1.1.28:
-  version "1.1.29"
-  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.29.tgz#60f580d360170bb722a797cc704411e6da850c67"
+  version "1.1.31"
+  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.31.tgz#e9aa86d0101b5b105cbe93ac6b784cd547276184"
 
 pump@^1.0.0:
   version "1.0.3"
@@ -3350,7 +3305,7 @@ split-string@^3.0.1, split-string@^3.0.2:
 
 sprintf-js@~1.0.2:
   version "1.0.3"
-  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+  resolved "http://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
   version "1.15.2"
@@ -3696,15 +3651,19 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
-typescript-tslint-plugin@0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.1.2.tgz#2523a003ad399eeaf8b0b97fe1f0d80614cc5ecd"
+typescript-tslint-plugin@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.2.0.tgz#b2ca6771a50503245df3d64d19a3925a07ae1b0e"
   dependencies:
     minimatch "^3.0.4"
     mock-require "^3.0.2"
     vscode-languageserver "^5.1.0"
 
-typescript@3.2.2, typescript@^3:
+typescript@3.1.6:
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
+
+typescript@3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
 
@@ -3807,22 +3766,22 @@ vscode-jsonrpc@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-4.0.0.tgz#a7bf74ef3254d0a0c272fab15c82128e378b3be9"
 
-vscode-languageserver-protocol@3.13.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.13.0.tgz#710d8e42119bb3affb1416e1e104bd6b4d503595"
+vscode-languageserver-protocol@3.14.1:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.14.1.tgz#b8aab6afae2849c84a8983d39a1cf742417afe2f"
   dependencies:
     vscode-jsonrpc "^4.0.0"
-    vscode-languageserver-types "3.13.0"
+    vscode-languageserver-types "3.14.0"
 
-vscode-languageserver-types@3.13.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.13.0.tgz#b704b024cef059f7b326611c99b9c8753c0a18b4"
+vscode-languageserver-types@3.14.0:
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.14.0.tgz#d3b5952246d30e5241592b6dde8280e03942e743"
 
 vscode-languageserver@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/vscode-languageserver/-/vscode-languageserver-5.1.0.tgz#012a28f154cc7a848c443d217894942e4c3eeb39"
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver/-/vscode-languageserver-5.2.1.tgz#0d2feddd33f92aadf5da32450df498d52f6f14eb"
   dependencies:
-    vscode-languageserver-protocol "3.13.0"
+    vscode-languageserver-protocol "3.14.1"
     vscode-uri "^1.0.6"
 
 vscode-uri@^1.0.6:
