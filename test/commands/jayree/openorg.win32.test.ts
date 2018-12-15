@@ -1,4 +1,4 @@
-import { expect, test } from '@salesforce/command/dist/test';
+import { expect, test } from '@salesforce/command/lib/test';
 
 describe('jayree:org:open', () => {
   before(function() {
