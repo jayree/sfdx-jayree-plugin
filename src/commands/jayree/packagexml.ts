@@ -1,7 +1,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { fs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import * as jf from 'jsonfile';
+import * as jsforce from 'jsforce';
 import serializeError = require('serialize-error');
 // import * as notifier from 'node-notifier';
 // import * as convert from 'xml-js';
@@ -20,6 +20,7 @@ declare global {
   }
 }
 
+/* istanbul ignore else*/
 if (!Array.prototype.pushUniqueValueKey) {
   Array.prototype.pushUniqueValueKey = function<T>(elem: T, key: string): T[] {
     if (!this.map(value => value[key]).includes(elem[key])) {
@@ -29,8 +30,10 @@ if (!Array.prototype.pushUniqueValueKey) {
   };
 }
 
+/* istanbul ignore else*/
 if (!Array.prototype.pushUniqueValue) {
   Array.prototype.pushUniqueValue = function<T>(elem: T): T[] {
+    /* istanbul ignore else*/
     if (!this.includes(elem)) {
       this.push(elem);
     }
@@ -38,6 +41,7 @@ if (!Array.prototype.pushUniqueValue) {
   };
 }
 
+/* istanbul ignore else*/
 if (!String.prototype.toLowerCaseifTrue) {
   // tslint:disable-next-line:space-before-function-paren
   String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
@@ -45,9 +49,9 @@ if (!String.prototype.toLowerCaseifTrue) {
   };
 }
 
+/* istanbul ignore else*/
 if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line:no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
+  (Symbol as AsyncIterableIterator<{}>)['asyncIterator'] = Symbol.for('asyncIterator');
 }
 
 /**
@@ -102,75 +106,49 @@ export default class GeneratePackageXML extends SfdxCommand {
 
     try {
       await this.org.refreshAuth();
-      let apiVersion =
-        this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
+      let apiVersion = this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
       let quickFilters = this.flags.quickfilter
-        ? this.flags.quickfilter
-            .toLowerCaseifTrue(!this.flags.matchcase)
-            .split(',')
+        ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',')
         : [];
       let excludeManaged = this.flags.excludemanaged || false;
 
       if (configFile) {
-        jf.readFile(configFile, (error, obj) => {
-          if (error) {
-            this.ux.stopSpinner();
-            this.logger.error({error: serializeError(error)});
-            throw error;
-          } else {
+        await fs
+          .readFile(configFile, 'utf8')
+          .then(data => {
+            const obj = JSON.parse(data);
             /* cli parameters still override whats in the config file */
             apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
             quickFilters = this.flags.quickfilter
-              ? this.flags.quickfilter
-                  .toLowerCaseifTrue(!this.flags.matchcase)
-                  .split(',')
+              ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',')
               : obj.quickfilter || [];
-            excludeManaged =
-              this.flags.excludeManaged ||
-              obj.excludeManaged === 'true' ||
-              false;
-          }
-        });
+            excludeManaged = this.flags.excludeManaged || obj.excludeManaged === 'true' || false;
+          })
+          .catch(err => {
+            this.throwError(err);
+          });
       }
 
-      outputFile
-        ? this.ux.startSpinner(`Generating ${outputFile}`)
-        : this.ux.startSpinner('Generating package.xml');
+      outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
       const conn = this.org.getConnection();
-      const describe = await conn.metadata.describe(apiVersion);
-
+      const describe = await this.getMetaData(conn, apiVersion);
       const folders = [];
       const unfolderedObjects = [];
-      let ipPromise;
+      const ipPromise = [];
       for await (const object of describe.metadataObjects) {
         if (object.inFolder) {
           const objectType = object.xmlName.replace('Template', '');
-          const promise = conn.metadata.list(
-            {
-              type: `${objectType}Folder`
-            },
-            apiVersion
-          );
+          const promise = this.listMetaData(conn, { type: `${objectType}Folder` }, apiVersion);
           folders.push(promise);
         } else {
-          let promise = conn.metadata.list(
-            {
-              type: object.xmlName
-            },
-            apiVersion
-          );
+          let promise = this.listMetaData(conn, { type: object.xmlName }, apiVersion);
           if (object.xmlName === 'InstalledPackage') {
-            ipPromise = promise;
+            ipPromise.push(promise);
           }
           unfolderedObjects.push(promise);
           if (Array.isArray(object.childXmlNames)) {
             for (const childXmlNames of object.childXmlNames) {
-              promise = conn.metadata.list(
-                {
-                  type: childXmlNames
-                },
-                apiVersion
-              );
+              promise = this.listMetaData(conn, { type: childXmlNames }, apiVersion);
               unfolderedObjects.push(promise);
             }
           }
@@ -182,24 +160,16 @@ export default class GeneratePackageXML extends SfdxCommand {
         let folderItems = [];
         if (Array.isArray(folder)) {
           folderItems = folder;
-        } else if (folder) {
+        } else {
           folderItems = [folder];
         }
-        if (folderItems.length > 0) {
-          for await (const folderItem of folderItems) {
-            let objectType = folderItem.type.replace('Folder', '');
-            if (objectType === 'Email') {
-              objectType += 'Template';
-            }
-            const promise = conn.metadata.list(
-              {
-                type: objectType,
-                folder: folderItem.fullName
-              },
-              apiVersion
-            );
-            folderedObjects.push(promise);
+        for await (const folderItem of folderItems) {
+          let objectType = folderItem.type.replace('Folder', '');
+          if (objectType === 'Email') {
+            objectType += 'Template';
           }
+          const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
+          folderedObjects.push(promise);
         }
       }
 
@@ -220,12 +190,14 @@ export default class GeneratePackageXML extends SfdxCommand {
 
       ipRegexStr += ')+__';
 
-      const flowDefinitionQuery = await conn.tooling.query(
-        'SELECT DeveloperName,ActiveVersion.VersionNumber,LatestVersion.VersionNumber FROM FlowDefinition'
+      const flowDefinitionQuery = await this.toolingQuery(
+        conn,
+        'SELECT DeveloperName, ActiveVersion.VersionNumber, LatestVersion.VersionNumber FROM FlowDefinition'
       );
       const activeFlowVersions = {};
       for await (const record of flowDefinitionQuery.records) {
         if (record['ActiveVersion'] && record['LatestVersion']) {
+          /* istanbul ignore else*/
           if (!activeFlowVersions[record['DeveloperName']]) {
             activeFlowVersions[record['DeveloperName']] = [];
           }
@@ -237,176 +209,152 @@ export default class GeneratePackageXML extends SfdxCommand {
       }
 
       (await Promise.all(unfolderedObjects)).forEach(unfolderedObject => {
-        try {
-          if (unfolderedObject) {
-            let unfolderedObjectItems = [];
-            if (Array.isArray(unfolderedObject)) {
-              unfolderedObjectItems = unfolderedObject;
-            } else {
-              unfolderedObjectItems = [unfolderedObject];
-            }
-            unfolderedObjectItems.forEach(metadataEntries => {
-              // if (metadataEntries) {
-              // if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
-              if (
-                metadataEntries.type &&
-                !(
-                  excludeManaged &&
-                  (RegExp(ipRegexStr).test(metadataEntries.fullName) ||
-                    metadataEntries.namespacePrefix ||
-                    metadataEntries.manageableState === 'installed')
-                )
-              ) {
-                if (metadataEntries.fileName.includes('ValueSetTranslation')) {
-                  const x =
-                    metadataEntries.fileName
-                      .split('.')[1]
-                      .substring(0, 1)
-                      .toUpperCase() +
-                    metadataEntries.fileName.split('.')[1].substring(1);
-                  if (!packageTypes[x]) {
-                    packageTypes[x] = [];
-                  }
-                  packageTypes[x].pushUniqueValueKey(
-                    {
-                      fullName: metadataEntries.fullName,
-                      fileName: metadataEntries.fileName
-                    },
-                    'fullName'
-                  );
-                } else {
-                  if (!packageTypes[metadataEntries.type]) {
-                    packageTypes[metadataEntries.type] = [];
-                  }
-
-                  if (
-                    metadataEntries.type === 'Flow' &&
-                    activeFlowVersions[metadataEntries.fullName]
-                  ) {
-                    if (apiVersion >= 44.0) {
-                      if (
-                        activeFlowVersions[metadataEntries.fullName]
-                          .ActiveVersion !==
-                        activeFlowVersions[metadataEntries.fullName]
-                          .LatestVersion
-                      ) {
-                        // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
-                        packageTypes[metadataEntries.type].pushUniqueValueKey(
-                          {
-                            fullName: metadataEntries.fullName,
-                            fileName: metadataEntries.fileName,
-                            warning: `${metadataEntries.type}: ActiveVersion (${
-                              activeFlowVersions[metadataEntries.fullName]
-                                .ActiveVersion
-                            }) differs from LatestVersion (${
-                              activeFlowVersions[metadataEntries.fullName]
-                                .LatestVersion
-                            }) for '${
-                              metadataEntries.fullName
-                            }' - you will retrieve LatestVersion (${
-                              activeFlowVersions[metadataEntries.fullName]
-                                .LatestVersion
-                            })!`
-                          },
-                          'fullName'
-                        );
-                      } else {
-                        packageTypes[metadataEntries.type].pushUniqueValueKey(
-                          {
-                            fullName: metadataEntries.fullName,
-                            fileName: metadataEntries.fileName
-                          },
-                          'fullName'
-                        );
-                      }
-                    } else {
-                      packageTypes[metadataEntries.type].pushUniqueValueKey(
-                        {
-                          fullName: `${metadataEntries.fullName}-${
-                            activeFlowVersions[metadataEntries.fullName]
-                              .ActiveVersion
-                          }`,
-                          fileName: metadataEntries.fileName,
-                          warning: `${metadataEntries.type}: ActiveVersion (${
-                            activeFlowVersions[metadataEntries.fullName]
-                              .ActiveVersion
-                          }) for '${
-                            metadataEntries.fullName
-                          }' found - changing '${
-                            metadataEntries.fullName
-                          }' to '${metadataEntries.fullName}-${
-                            activeFlowVersions[metadataEntries.fullName]
-                              .ActiveVersion
-                          }'`
-                        },
-                        'fullName'
-                      );
-                      // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
-                    }
-                  } else {
-                    packageTypes[metadataEntries.type].pushUniqueValueKey(
-                      {
-                        fullName: metadataEntries.fullName,
-                        fileName: metadataEntries.fileName
-                      },
-                      'fullName'
-                    );
-                  }
-                }
-              }
-              /*             } else {
-                          this.ux.error('No metadataEntry available');
-                        } */
-            });
+        /* istanbul ignore else*/
+        if (unfolderedObject) {
+          let unfolderedObjectItems = [];
+          if (Array.isArray(unfolderedObject)) {
+            unfolderedObjectItems = unfolderedObject;
+          } else {
+            unfolderedObjectItems = [unfolderedObject];
           }
-        } catch (error) {
-          this.ux.stopSpinner();
-          this.logger.error({error: serializeError(error)});
-          throw error;
-        }
-      });
-
-      (await Promise.all(folderedObjects)).forEach(folderedObject => {
-        try {
-          if (folderedObject) {
-            let folderedObjectItems = [];
-            if (Array.isArray(folderedObject)) {
-              folderedObjectItems = folderedObject;
-            } else {
-              folderedObjectItems = [folderedObject];
-            }
-            folderedObjectItems.forEach(metadataEntries => {
-              // if (metadataEntries) {
-              if (
-                (metadataEntries.type &&
-                  metadataEntries.manageableState !== 'installed') ||
-                (metadataEntries.type &&
-                  metadataEntries.manageableState === 'installed' &&
-                  !excludeManaged)
-              ) {
-                if (!packageTypes[metadataEntries.type]) {
-                  packageTypes[metadataEntries.type] = [];
+          unfolderedObjectItems.forEach(metadataEntries => {
+            // if (metadataEntries) {
+            // if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
+            if (
+              metadataEntries.type &&
+              !(
+                excludeManaged &&
+                (RegExp(ipRegexStr).test(metadataEntries.fullName) ||
+                  metadataEntries.namespacePrefix ||
+                  metadataEntries.manageableState === 'installed')
+              )
+            ) {
+              if (metadataEntries.fileName.includes('ValueSetTranslation')) {
+                const x =
+                  metadataEntries.fileName
+                    .split('.')[1]
+                    .substring(0, 1)
+                    .toUpperCase() + metadataEntries.fileName.split('.')[1].substring(1);
+                if (!packageTypes[x]) {
+                  packageTypes[x] = [];
                 }
-                packageTypes[metadataEntries.type].pushUniqueValueKey(
+                // this.ux.logJson(metadataEntries);
+                packageTypes[x].pushUniqueValueKey(
                   {
                     fullName: metadataEntries.fullName,
                     fileName: metadataEntries.fileName
                   },
                   'fullName'
                 );
+              } else {
+                if (!packageTypes[metadataEntries.type]) {
+                  packageTypes[metadataEntries.type] = [];
+                }
+
+                if (metadataEntries.type === 'Flow' && activeFlowVersions[metadataEntries.fullName]) {
+                  if (apiVersion >= 44.0) {
+                    if (
+                      activeFlowVersions[metadataEntries.fullName].ActiveVersion !==
+                      activeFlowVersions[metadataEntries.fullName].LatestVersion
+                    ) {
+                      // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`);
+                      packageTypes[metadataEntries.type].pushUniqueValueKey(
+                        {
+                          fullName: metadataEntries.fullName,
+                          fileName: metadataEntries.fileName,
+                          warning: `${metadataEntries.type}: ActiveVersion (${
+                            activeFlowVersions[metadataEntries.fullName].ActiveVersion
+                          }) differs from LatestVersion (${
+                            activeFlowVersions[metadataEntries.fullName].LatestVersion
+                          }) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${
+                            activeFlowVersions[metadataEntries.fullName].LatestVersion
+                          })!`
+                        },
+                        'fullName'
+                      );
+                    } else {
+                      packageTypes[metadataEntries.type].pushUniqueValueKey(
+                        {
+                          fullName: metadataEntries.fullName,
+                          fileName: metadataEntries.fileName
+                        },
+                        'fullName'
+                      );
+                    }
+                  } else {
+                    packageTypes[metadataEntries.type].pushUniqueValueKey(
+                      {
+                        fullName: `${metadataEntries.fullName}-${
+                          activeFlowVersions[metadataEntries.fullName].ActiveVersion
+                        }`,
+                        fileName: metadataEntries.fileName,
+                        warning: `${metadataEntries.type}: ActiveVersion (${
+                          activeFlowVersions[metadataEntries.fullName].ActiveVersion
+                        }) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${
+                          metadataEntries.fullName
+                        }-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`
+                      },
+                      'fullName'
+                    );
+                    // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
+                  }
+                } else {
+                  packageTypes[metadataEntries.type].pushUniqueValueKey(
+                    {
+                      fullName: metadataEntries.fullName,
+                      fileName: metadataEntries.fileName
+                    },
+                    'fullName'
+                  );
+                }
               }
-              /*             } else {
-                          this.ux.error('No metadataEntry available');
-                        } */
-            });
-          }
-        } catch (error) {
-          this.ux.stopSpinner();
-          this.logger.error({error: serializeError(error)});
-          throw error;
+            }
+            /*             } else {
+                            this.ux.error('No metadataEntry available');
+                          } */
+          });
         }
       });
 
+      (await Promise.all(folderedObjects)).forEach(folderedObject => {
+        /* istanbul ignore else*/
+        if (folderedObject) {
+          let folderedObjectItems = [];
+          if (Array.isArray(folderedObject)) {
+            folderedObjectItems = folderedObject;
+          } else {
+            folderedObjectItems = [folderedObject];
+          }
+          folderedObjectItems.forEach(metadataEntries => {
+            // if (metadataEntries) {
+            if (
+              metadataEntries.type &&
+              !(
+                excludeManaged &&
+                (RegExp(ipRegexStr).test(metadataEntries.fullName) ||
+                  metadataEntries.namespacePrefix ||
+                  metadataEntries.manageableState === 'installed')
+              )
+            ) {
+              if (!packageTypes[metadataEntries.type]) {
+                packageTypes[metadataEntries.type] = [];
+              }
+              packageTypes[metadataEntries.type].pushUniqueValueKey(
+                {
+                  fullName: metadataEntries.fullName,
+                  fileName: metadataEntries.fileName
+                },
+                'fullName'
+              );
+            }
+            /*             } else {
+                            this.ux.error('No metadataEntry available');
+                          } */
+          });
+        }
+      });
+
+      /* istanbul ignore else*/
       if (!packageTypes['StandardValueSet']) {
         packageTypes['StandardValueSet'] = [];
       }
@@ -502,14 +450,10 @@ export default class GeneratePackageXML extends SfdxCommand {
           const fileFilters =
             quickFilters.length > 0
               ? packageTypes[mdtype]
-                  .map(value =>
-                    value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
-                  )
+                  .map(value => value.fileName.toLowerCaseifTrue(!this.flags.matchcase))
                   .filter(value =>
                     quickFilters.some(element =>
-                      this.flags.matchwholeword
-                        ? value === element
-                        : value.includes(element)
+                      this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
                   .filter((value, index, self) => self.indexOf(value) === index)
@@ -520,9 +464,7 @@ export default class GeneratePackageXML extends SfdxCommand {
               ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
                   .filter(value =>
                     quickFilters.some(element =>
-                      this.flags.matchwholeword
-                        ? value === element
-                        : value.includes(element)
+                      this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
                   .filter((value, index, self) => self.indexOf(value) === index)
@@ -531,40 +473,25 @@ export default class GeneratePackageXML extends SfdxCommand {
           const mFilters =
             quickFilters.length > 0
               ? packageTypes[mdtype]
-                  .map(value =>
-                    value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
-                  )
+                  .map(value => value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
                   .filter(value =>
                     quickFilters.some(element =>
-                      this.flags.matchwholeword
-                        ? value === element
-                        : value.includes(element)
+                      this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
                   .filter((value, index, self) => self.indexOf(value) === index)
               : [];
 
-          if (
-            quickFilters.length === 0 ||
-            mdFilters.length > 0 ||
-            fileFilters.length > 0 ||
-            mFilters.length > 0
-          ) {
+          if (quickFilters.length === 0 || mdFilters.length > 0 || fileFilters.length > 0 || mFilters.length > 0) {
             packageJson.Package.types.push({
               name: mdtype,
               members: packageTypes[mdtype]
                 .filter(
                   value =>
                     quickFilters.length === 0 ||
-                    mdFilters.includes(
-                      mdtype.toLowerCaseifTrue(!this.flags.matchcase)
-                    ) ||
-                    fileFilters.includes(
-                      value.fileName.toLowerCaseifTrue(!this.flags.matchcase)
-                    ) ||
-                    mFilters.includes(
-                      value.fullName.toLowerCaseifTrue(!this.flags.matchcase)
-                    )
+                    mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) ||
+                    fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) ||
+                    mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
                 )
                 .map(value => {
                   if (value.warning) {
@@ -596,9 +523,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           .writeFile(outputFile, packageXml)
           .then(() => this.ux.stopSpinner())
           .catch(error => {
-            this.ux.stopSpinner('!');
-            this.logger.error({error: serializeError(error)});
-            throw error;
+            this.throwError(error);
           });
       } else {
         this.ux.stopSpinner();
@@ -612,9 +537,32 @@ export default class GeneratePackageXML extends SfdxCommand {
         warnings: filteredwarnings
       };
     } catch (error) {
-      this.ux.stopSpinner();
-      this.logger.error({error: serializeError(error)});
-      throw error;
+      this.throwError(error);
     }
+  }
+
+  /* istanbul ignore next */
+  public toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<{}>> {
+    return conn.tooling.query(soql);
+  }
+
+  /* istanbul ignore next */
+  public getMetaData(conn: core.Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult> {
+    return conn.metadata.describe(apiVersion);
+  }
+
+  /* istanbul ignore next */
+  public listMetaData(
+    conn: core.Connection,
+    query: jsforce.ListMetadataQuery | jsforce.ListMetadataQuery[],
+    apiVersion: string
+  ): Promise<jsforce.FileProperties | jsforce.FileProperties[]> {
+    return conn.metadata.list(query, apiVersion);
+  }
+
+  private throwError(err: Error) {
+    this.ux.stopSpinner();
+    this.logger.error({ err: serializeError(err) });
+    throw err;
   }
 }

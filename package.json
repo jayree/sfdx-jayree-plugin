@@ -5,8 +5,8 @@
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
-    "@oclif/command": "1.5.6",
-    "@oclif/config": "1.9.0",
+    "@oclif/command": "1.5.8",
+    "@oclif/config": "1.10.2",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "1.1.1",
     "@salesforce/core": "1.1.0",
@@ -19,7 +19,7 @@
     "xml-js": "1.6.8"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "1.19.5",
+    "@oclif/dev-cli": "1.21.0",
     "@oclif/plugin-help": "2.1.4",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
@@ -28,7 +28,6 @@
     "@types/chai": "4.1.7",
     "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.2",
-    "@types/jsonfile": "4.0.1",
     "@types/mocha": "5.2.5",
     "@types/node": "10.12.15",
     "@types/puppeteer": "1.11.1",
@@ -42,7 +41,7 @@
     "postinstall-prepare": "1.0.1",
     "sinon": "7.2.2",
     "ts-node": "7.0.1",
-    "tslint": "5.11.0",
+    "tslint": "5.12.0",
     "tslint-config-prettier": "1.17.0",
     "typescript": "3.2.2",
     "typescript-tslint-plugin": "0.2.1"
