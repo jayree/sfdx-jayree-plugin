@@ -50,9 +50,7 @@ $ sfdx jayree:org:open -u me@my.org`
             browser = 'firefox';
             break;
           case 'safari':
-            throw Error(
-              this.flags.browser + ' is not supported on ' + process.platform
-            );
+            throw Error(this.flags.browser + ' is not supported on ' + process.platform);
         }
         break;
       case 'darwin':
@@ -77,9 +75,7 @@ $ sfdx jayree:org:open -u me@my.org`
             browser = 'firefox';
             break;
           case 'safari':
-            throw Error(
-              this.flags.browser + ' is not supported on ' + process.platform
-            );
+            throw Error(this.flags.browser + ' is not supported on ' + process.platform);
         }
         break;
       default:

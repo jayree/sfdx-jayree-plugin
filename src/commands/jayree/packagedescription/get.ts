@@ -4,10 +4,7 @@ import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages(
-  'sfdx-jayree',
-  'getpackagedescription'
-);
+const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
 
 export default class GetPackageDescription extends SfdxCommand {
   // hotfix to receive only one help page

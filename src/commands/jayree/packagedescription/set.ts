@@ -4,10 +4,7 @@ import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages(
-  'sfdx-jayree',
-  'setpackagedescription'
-);
+const messages = core.Messages.loadMessages('sfdx-jayree', 'setpackagedescription');
 
 export default class SetPackageDescription extends SfdxCommand {
   // hotfix to receive only one help page
@@ -79,14 +76,7 @@ export default class SetPackageDescription extends SfdxCommand {
           action = 'added';
         }
         this.ux.log(action + ' description: ' + text);
-        newZip.addFile(
-          fileName,
-          Buffer.from(
-            convert.js2xml(fileContentjs, { compact: true, spaces: 4 })
-          ),
-          '',
-          0o644
-        );
+        newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
       } else {
         newZip.addFile(fileName, fileContent, '', 0o644);
       }

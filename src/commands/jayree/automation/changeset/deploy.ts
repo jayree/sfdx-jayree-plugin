@@ -46,12 +46,7 @@ jobid:  0Xxx100000xx1x1
       char: 'l',
       description: messages.getMessage('testlevelFlagDescription'),
       required: false,
-      options: [
-        'Default',
-        'RunSpecifiedTests',
-        'RunLocalTests',
-        'RunAllTestsInOrg'
-      ]
+      options: ['Default', 'RunSpecifiedTests', 'RunLocalTests', 'RunAllTestsInOrg']
     }),
     checkonly: flags.boolean({
       char: 'c',
@@ -84,12 +79,9 @@ jobid:  0Xxx100000xx1x1
 
       await this.login(conn, page);
 
-      await page.goto(
-        conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp',
-        {
-          waitUntil: 'networkidle2'
-        }
-      );
+      await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
+        waitUntil: 'networkidle2'
+      });
 
       const tables = await this.gettables(page);
 
@@ -104,12 +96,12 @@ jobid:  0Xxx100000xx1x1
             choices: tables.csad.map(element => ({
               value: element.ChangeSetName,
               name: element.Description
-                ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${
-                    element.UploadedBy
-                  } - ${element.UploadedDate} - ${element.Description}`
-                : `${element.ChangeSetName} - ${element.SourceOrganization} - ${
-                    element.UploadedBy
-                  } - ${element.UploadedDate}`,
+                ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${
+                    element.UploadedDate
+                  } - ${element.Description}`
+                : `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${
+                    element.UploadedDate
+                  }`,
               short: element.ChangeSetName
             })),
             default: this.flags.changeset
@@ -125,16 +117,8 @@ jobid:  0Xxx100000xx1x1
             type: 'list',
             name: 'testlevel',
             message: 'Choose a Test Option',
-            choices: [
-              'Default',
-              'Run Local Tests',
-              'Run All Tests In Org',
-              'Run Specified Tests'
-            ],
-            default: () =>
-              this.flags.testlevel
-                ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim()
-                : 'Default',
+            choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
+            default: () => (this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default'),
             filter: val => {
               return val.replace(/( )/g, '');
             }
@@ -168,9 +152,7 @@ jobid:  0Xxx100000xx1x1
         };
         if (this.flags.testlevel === 'RunSpecifiedTests') {
           if (!this.flags.runtests) {
-            throw Error(
-              'INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.'
-            );
+            throw Error('INVALID_OPERATION: runTests must not be empty when a testLevel of RunSpecifiedTests is used.');
           } else {
             sCS['runtests'] = this.flags.runtests;
           }
@@ -178,9 +160,7 @@ jobid:  0Xxx100000xx1x1
       }
 
       // console.log(sCS);
-      const changeset = tables.csad.filter(element =>
-        sCS.selectedChangeSet.includes(element.ChangeSetName)
-      )[0];
+      const changeset = tables.csad.filter(element => sCS.selectedChangeSet.includes(element.ChangeSetName))[0];
       // for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
       // console.log(changeset);
       if (!changeset) {
@@ -243,12 +223,9 @@ jobid:  0Xxx100000xx1x1
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
-    await page.goto(
-      conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken,
-      {
-        waitUntil: 'networkidle2'
-      }
-    );
+    await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
+      waitUntil: 'networkidle2'
+    });
   }
 
   private async selecttest(page: puppeteer.Page, index: string, runtests = '') {
@@ -271,10 +248,7 @@ jobid:  0Xxx100000xx1x1
     }
   }
 
-  private async clickvalidateordeploy(
-    page: puppeteer.Page,
-    selectedMode: string
-  ) {
+  private async clickvalidateordeploy(page: puppeteer.Page, selectedMode: string) {
     if (selectedMode === 'Validate') {
       // click on validate
       await page.evaluate(() => {
@@ -299,26 +273,19 @@ jobid:  0Xxx100000xx1x1
     });
   }
 
-  private async clickvalidateordeploy2(
-    page: puppeteer.Page,
-    selectedMode: string
-  ) {
+  private async clickvalidateordeploy2(page: puppeteer.Page, selectedMode: string) {
     if (selectedMode === 'Validate') {
       // click on validate
       await page.evaluate(() => {
         document
-          .getElementById(
-            'inboundChangeSetTestOptions:pageForm:ics_test_level_block:form_buttons:validate_button'
-          )
+          .getElementById('inboundChangeSetTestOptions:pageForm:ics_test_level_block:form_buttons:validate_button')
           .click();
       });
     } else {
       // click on deploy
       await page.evaluate(() => {
         document
-          .getElementById(
-            'inboundChangeSetTestOptions:pageForm:ics_test_level_block:form_buttons:deploy_button'
-          )
+          .getElementById('inboundChangeSetTestOptions:pageForm:ics_test_level_block:form_buttons:deploy_button')
           .click();
       });
     }
@@ -346,10 +313,7 @@ jobid:  0Xxx100000xx1x1
       // let pendinglist;
       let pendingid;
       let running = false;
-      if (
-        typeof document.getElementById('viewErrors') !== 'undefined' &&
-        document.getElementById('viewErrors')
-      ) {
+      if (typeof document.getElementById('viewErrors') !== 'undefined' && document.getElementById('viewErrors')) {
         id = document
           .getElementById('viewErrors')
           .getAttribute('onclick')
@@ -358,12 +322,8 @@ jobid:  0Xxx100000xx1x1
         running = true;
       }
       if (
-        typeof document.querySelector(
-          '#inProgressSummaryContainer > ul > li:nth-child(1)'
-        ) !== 'undefined' &&
-        document.querySelector(
-          '#inProgressSummaryContainer > ul > li:nth-child(1)'
-        )
+        typeof document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)') !== 'undefined' &&
+        document.querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)')
       ) {
         currentname = document
           .querySelector('#inProgressSummaryContainer > ul > li:nth-child(1)')
@@ -375,25 +335,17 @@ jobid:  0Xxx100000xx1x1
 
       // const rows = [];
       if (
-        typeof document.getElementById(
-          'MonitorDeploymentsPage:pendingDeploymentsList'
-        ) !== 'undefined' &&
+        typeof document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') !== 'undefined' &&
         document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList')
       ) {
-        const table = document.getElementById(
-          'MonitorDeploymentsPage:pendingDeploymentsList'
-        ) as HTMLTableElement;
+        const table = document.getElementById('MonitorDeploymentsPage:pendingDeploymentsList') as HTMLTableElement;
         running = true;
         for (let r = 0, n = table.rows.length; r < n; r++) {
           const div = document.createElement('div');
           div.innerHTML = table.rows[r].cells[0].innerHTML;
           // rows.push({ Action: (div.firstChild as Element).getAttribute('href').split("\'")[1], Name: table.rows[r].cells[1].innerText.replace(/(:\t|\t)/g, '') });
-          if (
-            table.rows[r].cells[1].innerText.replace(/(:\t|\t)/g, '') === csN
-          ) {
-            pendingid = (div.firstChild as Element)
-              .getAttribute('href')
-              .split("'")[1];
+          if (table.rows[r].cells[1].innerText.replace(/(:\t|\t)/g, '') === csN) {
+            pendingid = (div.firstChild as Element).getAttribute('href').split("'")[1];
           }
         }
       }
@@ -414,10 +366,7 @@ jobid:  0Xxx100000xx1x1
         const tableid =
           'inboundChangeSetDetailPage:inboundChangeSetDetailPageBody:inboundChangeSetDetailPageBody:detail_form:ics_deploy_history:ics_deploy_history_BlockSection:ics_deploy_history_table';
         // const rows = [];
-        if (
-          typeof document.getElementById(tableid) !== 'undefined' &&
-          document.getElementById(tableid)
-        ) {
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
           const table = document.getElementById(tableid) as HTMLTableElement;
           const div = document.createElement('div');
           div.innerHTML = table.rows[1].cells[0].innerHTML;
@@ -426,9 +375,7 @@ jobid:  0Xxx100000xx1x1
               .getAttribute('href')
               .split('asyncId=')[1]
               .split('&')[0],
-            status: table.rows[1].cells[1].innerText
-              .replace(/(:\t|\t)/g, '')
-              .split(': ')[1]
+            status: table.rows[1].cells[1].innerText.replace(/(:\t|\t)/g, '').split(': ')[1]
           };
         }
       });
@@ -464,52 +411,31 @@ jobid:  0Xxx100000xx1x1
     return await page.evaluate(() => {
       const converttable = (document: Document, tableid: string) => {
         const rows = [];
-        if (
-          typeof document.getElementById(tableid) !== 'undefined' &&
-          document.getElementById(tableid)
-        ) {
+        if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
           const table = document.getElementById(tableid) as HTMLTableElement;
           for (let r = 1, n = table.rows.length; r < n; r++) {
             const cells = {};
             for (let c = 1, m = table.rows[r].cells.length; c < m; c++) {
-              cells[
-                table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')
-              ] = table.rows[r].cells[c].innerText.replace(/(:\t|\t)/g, '');
-              if (
-                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
-                'Uploaded By'
-              ) {
-                cells[
-                  table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')
-                ] = table.rows[r].cells[c].innerText.replace(/( @.*)/g, '');
+              cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[
+                c
+              ].innerText.replace(/(:\t|\t)/g, '');
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Uploaded By') {
+                cells[table.rows[0].cells[c].innerText.replace(/(\n|\t| )/g, '')] = table.rows[r].cells[
+                  c
+                ].innerText.replace(/( @.*)/g, '');
               }
-              if (
-                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
-                'Description'
-              ) {
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Description') {
                 cells['HTMLDescription'] = table.rows[r].cells[c].innerHTML;
               }
-              if (
-                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
-                'Change Set Name'
-              ) {
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Change Set Name') {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
-                cells['DetailPage'] = (div.firstChild as Element).getAttribute(
-                  'href'
-                );
+                cells['DetailPage'] = (div.firstChild as Element).getAttribute('href');
               }
-              if (
-                table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') ===
-                'Source Organization'
-              ) {
+              if (table.rows[0].cells[c].innerText.replace(/(\n|\t)/g, '') === 'Source Organization') {
                 const div = document.createElement('div');
                 div.innerHTML = table.rows[r].cells[c].innerHTML;
-                cells[
-                  'SourceOrganizationID'
-                ] = (div.firstChild as Element)
-                  .getAttribute('href')
-                  .split('id=')[1];
+                cells['SourceOrganizationID'] = (div.firstChild as Element).getAttribute('href').split('id=')[1];
               }
             }
             rows.push(cells);
