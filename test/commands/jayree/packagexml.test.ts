@@ -1,9 +1,10 @@
 // import { core } from '@salesforce/command';
 import { $$, expect, test } from '@salesforce/command/lib/test';
+import * as core from '@salesforce/core';
 import * as crypto_1 from 'crypto';
-// import * as core from '@salesforce/core';
 import * as jsforce from 'jsforce';
 import * as packagexml from '../../../src/commands/jayree/packagexml';
+
 const _uniqid = () => {
   return crypto_1.randomBytes(16).toString('hex');
 };
@@ -459,7 +460,7 @@ describe('ConfigFile does not exist', () => {
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--config', 'test/assets/does_not_exist.json'])
     .it('runs jayree:packagexml --targetusername test@org.com --config=test/assets/config.json', ctx => {
-      expect(ctx.stderr).to.contain("ENOENT: no such file or directory, open 'test/assets/does_not_exist.json'");
+      expect(ctx.stderr).to.contain('ENOENT: no such file or directory');
     });
 });
 
@@ -1094,6 +1095,9 @@ describe('Write File', () => {
 
 describe('Write File - Error', () => {
   beforeEach(() => {
+    $$.SANDBOX.stub(core.fs, 'writeFile').callsFake(async () => {
+      throw Error('EACCES: permission denied');
+    });
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
       return Promise.resolve({
         metadataObjects: [
@@ -1139,9 +1143,9 @@ describe('Write File - Error', () => {
   test
     .stdout()
     .stderr()
-    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-f', '/invalid_file_name'])
-    .it("runs jayree:packagexml --targetusername test@org.com -f '/invalid_file_name'", ctx => {
-      expect(ctx.stderr).to.contain("EACCES: permission denied, open '/invalid_file_name'");
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-f', 'test/assets/test.xml'])
+    .it('runs jayree:packagexml --targetusername test@org.com -f test/assets/test.xml', ctx => {
+      expect(ctx.stderr).to.contain('EACCES: permission denied');
     });
 });
 
