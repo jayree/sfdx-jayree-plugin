@@ -12,6 +12,7 @@ some sfdx commands
 
 <!-- toc -->
 
+- [sfdx-jayree](#sfdx-jayree)
 - [Usage](#usage)
 - [Commands](#commands)
   <!-- tocstop -->
@@ -25,7 +26,7 @@ $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
 running command...
 $ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.3.9 darwin-x64 node-v8.14.0
+sfdx-jayree/0.4.0 darwin-x64 node-v8.14.0
 $ sfdx-jayree --help [COMMAND]
 USAGE
   $ sfdx-jayree COMMAND
@@ -97,7 +98,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [lib/commands/jayree/automation/changeset/deploy.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/automation/changeset/deploy.js)_
+_See code: [lib/commands/jayree/automation/changeset/deploy.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/automation/changeset/deploy.js)_
 
 ## `sfdx-jayree jayree:automation:changeset:list`
 
@@ -114,7 +115,7 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 ```
 
-_See code: [lib/commands/jayree/automation/changeset/list.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/automation/changeset/list.js)_
+_See code: [lib/commands/jayree/automation/changeset/list.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/automation/changeset/list.js)_
 
 ## `sfdx-jayree jayree:automation:ltngsyncstatus`
 
@@ -146,7 +147,7 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [lib/commands/jayree/automation/ltngsyncstatus.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/automation/ltngsyncstatus.js)_
+_See code: [lib/commands/jayree/automation/ltngsyncstatus.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/automation/ltngsyncstatus.js)_
 
 ## `sfdx-jayree jayree:flowtestcoverage`
 
@@ -169,7 +170,7 @@ EXAMPLE
   ...
 ```
 
-_See code: [lib/commands/jayree/flowtestcoverage.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/flowtestcoverage.js)_
+_See code: [lib/commands/jayree/flowtestcoverage.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/flowtestcoverage.js)_
 
 ## `sfdx-jayree jayree:org:open`
 
@@ -196,7 +197,7 @@ EXAMPLE
   $ sfdx jayree:org:open -u me@my.org
 ```
 
-_See code: [lib/commands/jayree/org/open.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/org/open.js)_
+_See code: [lib/commands/jayree/org/open.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/org/open.js)_
 
 ## `sfdx-jayree jayree:packagedescription:create [FILE]`
 
@@ -216,7 +217,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [lib/commands/jayree/packagedescription/create.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/packagedescription/create.js)_
+_See code: [lib/commands/jayree/packagedescription/create.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/packagedescription/create.js)_
 
 ## `sfdx-jayree jayree:packagedescription:get [FILE]`
 
@@ -236,7 +237,7 @@ EXAMPLE
        Description of Package FILENAME
 ```
 
-_See code: [lib/commands/jayree/packagedescription/get.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/packagedescription/get.js)_
+_See code: [lib/commands/jayree/packagedescription/get.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/packagedescription/get.js)_
 
 ## `sfdx-jayree jayree:packagedescription:remove [FILE]`
 
@@ -255,7 +256,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [lib/commands/jayree/packagedescription/remove.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/packagedescription/remove.js)_
+_See code: [lib/commands/jayree/packagedescription/remove.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/packagedescription/remove.js)_
 
 ## `sfdx-jayree jayree:packagedescription:set [FILE]`
 
@@ -275,7 +276,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [lib/commands/jayree/packagedescription/set.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/packagedescription/set.js)_
+_See code: [lib/commands/jayree/packagedescription/set.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/packagedescription/set.js)_
 
 ## `sfdx-jayree jayree:packagexml [FILE]`
 
@@ -303,6 +304,6 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [lib/commands/jayree/packagexml.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.3.9/lib/commands/jayree/packagexml.js)_
+_See code: [lib/commands/jayree/packagexml.js](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/lib/commands/jayree/packagexml.js)_
 
 <!-- commandsstop -->
