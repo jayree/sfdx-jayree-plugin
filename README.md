@@ -12,7 +12,6 @@ some sfdx commands
 
 <!-- toc -->
 
-- [sfdx-jayree](#sfdx-jayree)
 - [Usage](#usage)
 - [Commands](#commands)
   <!-- tocstop -->
