@@ -107,7 +107,7 @@
     "test": "yarn sfdx-test",
     "posttest": "git checkout -q -- test/assets/*",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "version": "oclif-dev readme && git add README.md"
+    "version": "oclif-dev manifest && oclif-dev readme && git add README.md"
   },
   "husky": {
     "hooks": {
