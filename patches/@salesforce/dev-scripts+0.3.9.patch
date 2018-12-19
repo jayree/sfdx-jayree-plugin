@@ -1,0 +1,21 @@
+patch-package
+--- a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
+@@ -10,14 +10,13 @@ const shell = require('../utils/shelljs');
+ 
+ const exists = require('../utils/exists');
+ const packageRoot = require('../utils/package-path');
+-const tsc = require.resolve('typescript/bin/tsc');
+ 
+-shell.exec(`${tsc} -p . --pretty`, {
++shell.exec('tsc -p . --pretty', {
+   cwd: packageRoot
+ });
+ 
+ if (exists('./test')) {
+-  shell.exec(`${tsc} -p ./test --pretty`, {
++  shell.exec('tsc -p ./test --pretty', {
+     cwd: packageRoot
+   });
+ }
+new file mode 120000
