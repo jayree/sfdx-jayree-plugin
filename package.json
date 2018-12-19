@@ -92,7 +92,7 @@
   },
   "repository": "jayree/sfdx-jayree-plugin",
   "scripts": {
-    "build": "yarn sfdx-build && oclif-dev manifest && oclif-dev readme",
+    "build": "yarn sfdx-build",
     "clean": "yarn sfdx-clean",
     "clean-all": "yarn sfdx-clean all",
     "compile": "yarn sfdx-compile",
@@ -102,12 +102,12 @@
     "lint-fix": "yarn sfdx-lint --fix",
     "postcompile": "tsc -p test",
     "postpack": "rimraf oclif.manifest.json",
-    "prepack": "yarn sfdx-build",
-    "prepare": "path-exists src && yarn sfdx-build || path-exists lib",
+    "prepack": "yarn sfdx-build && oclif-dev manifest && oclif-dev readme && pretty-quick",
+    "prepare": "path-exists src && yarn prepack || path-exists lib",
     "test": "yarn sfdx-test",
     "posttest": "git checkout -q -- test/assets/*",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "version": "oclif-dev manifest && oclif-dev readme && git add README.md"
+    "version": "oclif-dev readme && git add README.md"
   },
   "husky": {
     "hooks": {

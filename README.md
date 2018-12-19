@@ -1,4 +1,6 @@
-# sfdx-jayree
+<!-- prettier-ignore -->
+sfdx-jayree
+===========
 
 some sfdx commands
 
@@ -12,7 +14,6 @@ some sfdx commands
 
 <!-- toc -->
 
-- [sfdx-jayree](#sfdx-jayree)
 - [Usage](#usage)
 - [Commands](#commands)
   <!-- tocstop -->
