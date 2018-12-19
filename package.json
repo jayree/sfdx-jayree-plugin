@@ -99,7 +99,7 @@
     "build": "yarn sfdx-build",
     "clean": "yarn sfdx-clean",
     "clean-all": "yarn sfdx-clean all",
-    "compile": "yarn sfdx-compile && oclif-dev manifest && oclif-dev readme && yarn format",
+    "compile": "yarn sfdx-compile && oclif-dev manifest && oclif-dev readme",
     "docs": "yarn sfdx-docs",
     "format": "yarn sfdx-format && pretty-quick",
     "lint": "yarn sfdx-lint",

@@ -13,15 +13,13 @@ some sfdx commands
 [![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
 
 <!-- toc -->
-
-- [Usage](#usage)
-- [Commands](#commands)
-  <!-- tocstop -->
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g sfdx-jayree
 $ sfdx-jayree COMMAND
@@ -33,23 +31,21 @@ USAGE
   $ sfdx-jayree COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-
-- [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
-- [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
-- [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
-- [`sfdx-jayree jayree:flowtestcoverage`](#sfdx-jayree-jayreeflowtestcoverage)
-- [`sfdx-jayree jayree:org:open`](#sfdx-jayree-jayreeorgopen)
-- [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
-- [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
-- [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
-- [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-- [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
+* [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
+* [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
+* [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
+* [`sfdx-jayree jayree:flowtestcoverage`](#sfdx-jayree-jayreeflowtestcoverage)
+* [`sfdx-jayree jayree:org:open`](#sfdx-jayree-jayreeorgopen)
+* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
+* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
+* [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
+* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
+* [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
 
 ## `sfdx-jayree jayree:automation:changeset:deploy`
 
@@ -306,5 +302,4 @@ EXAMPLE
 ```
 
 _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.0/src/commands/jayree/packagexml.ts)_
-
 <!-- commandsstop -->
