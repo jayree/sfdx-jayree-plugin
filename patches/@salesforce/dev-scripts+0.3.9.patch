@@ -18,4 +18,19 @@ patch-package
      cwd: packageRoot
    });
  }
-new file mode 120000
+--- a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
+@@ -11,12 +11,10 @@ const shell = require('../utils/shelljs');
+ const packageRoot = require('../utils/package-path');
+ const SfdxDevConfig = require('../utils/sfdx-dev-config');
+ 
+-const nyc = require.resolve('nyc/bin/nyc');
+-
+ const config = new SfdxDevConfig(packageRoot);
+ const testConfig = config.get('test') || {};
+ 
+-let command = `${nyc} mocha`;
++let command = 'nyc mocha';
+ 
+ if (!testConfig.mochaOpts) {
+   command +=
