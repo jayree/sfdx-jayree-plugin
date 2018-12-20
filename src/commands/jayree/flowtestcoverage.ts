@@ -28,22 +28,16 @@ Coverage: 82%
       "SELECT count_distinct(DefinitionId) FROM Flow WHERE Status = 'Active' AND(ProcessType = 'AutolaunchedFlow' OR ProcessType = 'Workflow' OR ProcessType = 'CustomEvent' OR ProcessType = 'InvocableProcess')"
     );
 
-    const numberOfActiveAutolaunchedFlowsAndProcesses =
-      query1.records[0]['expr0'];
+    const numberOfActiveAutolaunchedFlowsAndProcesses = query1.records[0]['expr0'];
 
-    const query2 = await conn.tooling.query(
-      'SELECT count_distinct(FlowVersionId) FROM FlowTestCoverage'
-    );
+    const query2 = await conn.tooling.query('SELECT count_distinct(FlowVersionId) FROM FlowTestCoverage');
 
-    const numberOfCoveredActiveAutolaunchedFlowsAndProcesses =
-      query2.records[0]['expr0'];
+    const numberOfCoveredActiveAutolaunchedFlowsAndProcesses = query2.records[0]['expr0'];
 
     const query3 = await conn.tooling.query(
       "SELECT Definition.DeveloperName FROM Flow WHERE Status = 'Active' AND(ProcessType = 'AutolaunchedFlow' OR ProcessType = 'Workflow' OR ProcessType = 'CustomEvent' OR ProcessType = 'InvocableProcess') AND Id NOT IN(SELECT FlowVersionId FROM FlowTestCoverage)"
     );
-    const uncovered = query3.records.map(
-      value => value['Definition']['DeveloperName']
-    );
+    const uncovered = query3.records.map(value => value['Definition']['DeveloperName']);
 
     const query4 = await conn.tooling.query(
       'SELECT FlowVersion.Definition.DeveloperName FROM FlowTestCoverage GROUP BY FlowVersion.Definition.DeveloperName'
@@ -56,19 +50,15 @@ Coverage: 82%
       'number of covered active autolaunched flows and processes': numberOfCoveredActiveAutolaunchedFlowsAndProcesses,
       Coverage:
         Math.floor(
-          (numberOfCoveredActiveAutolaunchedFlowsAndProcesses /
-            numberOfActiveAutolaunchedFlowsAndProcesses) *
-            100
+          (numberOfCoveredActiveAutolaunchedFlowsAndProcesses / numberOfActiveAutolaunchedFlowsAndProcesses) * 100
         ) + '%'
     });
 
     const x = [];
-    const length =
-      uncovered.length > covered.length ? uncovered.length : covered.length;
+    const length = uncovered.length > covered.length ? uncovered.length : covered.length;
     for (let i = 0; i < length; i++) {
       x.push({
-        'all active autolaunched flows and processes that don’t have test coverage':
-          uncovered[i],
+        'all active autolaunched flows and processes that don’t have test coverage': uncovered[i],
         'all flows and processes that have test coverage': covered[i]
       });
     }
@@ -79,8 +69,7 @@ Coverage: 82%
           key: 'all flows and processes that have test coverage'
         },
         {
-          key:
-            'all active autolaunched flows and processes that don’t have test coverage'
+          key: 'all active autolaunched flows and processes that don’t have test coverage'
         }
       ]
     });
@@ -95,9 +84,7 @@ Coverage: 82%
       orgId: this.org.getOrgId(),
       Coverage:
         Math.floor(
-          (numberOfCoveredActiveAutolaunchedFlowsAndProcesses /
-            numberOfActiveAutolaunchedFlowsAndProcesses) *
-            100
+          (numberOfCoveredActiveAutolaunchedFlowsAndProcesses / numberOfActiveAutolaunchedFlowsAndProcesses) * 100
         ) + '%',
       numberOfActiveAutolaunchedFlowsAndProcesses,
       numberOfCoveredActiveAutolaunchedFlowsAndProcesses,

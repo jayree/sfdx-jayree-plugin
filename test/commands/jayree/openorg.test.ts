@@ -70,12 +70,9 @@ describe('platform.undefined', () => {
 });
 
 describe('platform.linux', () => {
-  before(function () {
+  before(function() {
     // save original process.platform
-    this.originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      'platform'
-    );
+    this.originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
@@ -83,7 +80,7 @@ describe('platform.linux', () => {
     });
   });
 
-  after(function () {
+  after(function() {
     // restore original process.platfork
     Object.defineProperty(process, 'platform', this.originalPlatform);
   });
@@ -97,63 +94,30 @@ describe('platform.linux', () => {
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-b',
-      'firefox'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -b firefox',
-      ctx => {
-        expect(ctx.stdout).to.contain('firefox');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-b', 'firefox'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -b firefox', ctx => {
+      expect(ctx.stdout).to.contain('firefox');
+    });
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stderr()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-b',
-      'safari'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -b safari',
-      ctx => {
-        expect(ctx.stderr).to.contain('not supported');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-b', 'safari'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -b safari', ctx => {
+      expect(ctx.stderr).to.contain('not supported');
+    });
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-p',
-      'lightning'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -p lightning',
-      ctx => {
-        expect(ctx.stdout).to.contain('lightning');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-p', 'lightning'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -p lightning', ctx => {
+      expect(ctx.stdout).to.contain('lightning');
+    });
 });
 
 describe('platform.darwin', () => {
-  before(function () {
+  before(function() {
     // save original process.platform
-    this.originalPlatform = Object.getOwnPropertyDescriptor(
-      process,
-      'platform'
-    );
+    this.originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
@@ -161,7 +125,7 @@ describe('platform.darwin', () => {
     });
   });
 
-  after(function () {
+  after(function() {
     // restore original process.platfork
     Object.defineProperty(process, 'platform', this.originalPlatform);
   });
@@ -175,52 +139,22 @@ describe('platform.darwin', () => {
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-b',
-      'firefox'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -b firefox',
-      ctx => {
-        expect(ctx.stdout).to.contain('firefox');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-b', 'firefox'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -b firefox', ctx => {
+      expect(ctx.stdout).to.contain('firefox');
+    });
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-b',
-      'safari'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -b safari',
-      ctx => {
-        expect(ctx.stdout).to.contain('safari');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-b', 'safari'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -b safari', ctx => {
+      expect(ctx.stdout).to.contain('safari');
+    });
   test
     .withOrg({ username: 'test@org.com' }, true)
     .stdout()
-    .command([
-      'jayree:org:open',
-      '--targetusername',
-      'test@org.com',
-      '-r',
-      '-p',
-      'lightning'
-    ])
-    .it(
-      'runs jayree:org:open --targetusername test@org.com -r -p lightning',
-      ctx => {
-        expect(ctx.stdout).to.contain('lightning');
-      }
-    );
+    .command(['jayree:org:open', '--targetusername', 'test@org.com', '-r', '-p', 'lightning'])
+    .it('runs jayree:org:open --targetusername test@org.com -r -p lightning', ctx => {
+      expect(ctx.stdout).to.contain('lightning');
+    });
 });

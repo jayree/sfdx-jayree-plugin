@@ -4,10 +4,7 @@ import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages(
-  'sfdx-jayree',
-  'removepackagedescription'
-);
+const messages = core.Messages.loadMessages('sfdx-jayree', 'removepackagedescription');
 
 export default class RemovePackageDescription extends SfdxCommand {
   // hotfix to receive only one help page
@@ -68,14 +65,7 @@ export default class RemovePackageDescription extends SfdxCommand {
               }
             ]
           };
-          newZip.addFile(
-            fileName,
-            Buffer.from(
-              convert.js2xml(fileContentjs, { compact: true, spaces: 4 })
-            ),
-            '',
-            0o644
-          );
+          newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
         } else {
           action = '';
           this.ux.log('no description found');
