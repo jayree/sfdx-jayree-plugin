@@ -34,3 +34,61 @@ patch-package
  
  if (!testConfig.mochaOpts) {
    command +=
+--- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
++++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
+@@ -11,14 +11,24 @@ const SfdxDevConfig = require('./sfdx-dev-config');
+ 
+ module.exports = (projectPath, inLernaProject) => {
+   const pjson = new PackageJson(projectPath);
++  const pjson_devconfig = new PackageJson(process.cwd() + '/node_modules/@salesforce/dev-config');
+ 
+   log(`Checking dependencies for ${pjson.name}`);
+ 
+   const config = new SfdxDevConfig(projectPath);
+   const dependencies = pjson.get('devDependencies');
++  const dependencies_devconfig = pjson_devconfig.get('dependencies');
+ 
+   const added = [];
+   const removed = [];
++  const synced = [];
++
++  const sync = name => {
++    if (dependencies[name] !== dependencies_devconfig[name]) {
++      synced.push(name + ' ' + dependencies[name] + ' => ' + dependencies_devconfig[name]);
++      dependencies[name] = dependencies_devconfig[name];
++    }
++  };
+ 
+   const remove = name => {
+     if (dependencies[name]) {
+@@ -40,12 +50,15 @@ module.exports = (projectPath, inLernaProject) => {
+ 
+   // Included by dev-scripts
+   remove('nyc');
+-  remove('typescript');
++  // remove('typescript');
++  sync('typescript')
+   remove('ts-node');
+   remove('@commitlint/cli');
+   remove('@commitlint/config-conventional');
+   remove('source-map-support');
+-  remove('tslint');
++  // remove('tslint');
++  sync('tslint');
++  sync('tslint-microsoft-contrib');
+   remove('xunit-file');
+   remove('sinon');
+   remove('mocha');
+@@ -65,6 +78,11 @@ module.exports = (projectPath, inLernaProject) => {
+     added.forEach(dep => log(dep, 2));
+   }
+ 
++  if (synced.length > 0) {
++    log(`synced`);
++    synced.forEach(dep => log(dep, 2));
++  }
++
+   pjson.write();
+-  return added.length > 0;
++  return added.length > 0 || synced.length > 0;
+ };
