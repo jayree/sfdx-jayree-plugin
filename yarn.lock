@@ -431,24 +431,7 @@
     chalk "^2.4.0"
     cli-ux "^4.8.0"
 
-"@salesforce/core@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.1.0.tgz#52caac5e5ce24a1cd0bc152924c515ac0945cf86"
-  integrity sha512-3FQO9oCrN52UciieFJE4eXYeq9P2iLmAhd3JGJblRSYyOVPay9nqcZp/qvyG1XLK5p81W7HwstZT6R/FgwMoyQ==
-  dependencies:
-    "@salesforce/kit" "0.13.3"
-    "@salesforce/ts-sinon" "0.2.7"
-    "@salesforce/ts-types" "0.19.3"
-    "@types/jsforce" "1.9.2"
-    bunyan-sfdx-no-dtrace "1.8.2"
-    debug "^3.1.0"
-    jsen "0.6.6"
-    jsforce "1.9.1"
-    jsonwebtoken "7.0.0"
-    mkdirp "0.5.1"
-    sfdx-faye "^1.0.9"
-
-"@salesforce/core@^1.0.0":
+"@salesforce/core@1.1.1", "@salesforce/core@^1.0.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.1.1.tgz#35f567419758e988571a8ac62b4f895fea1303e4"
   integrity sha512-v5g7CERWGleGH6yILk2MkWUeuxIEzQCfqMonH2T/MiZBZ52gw8CABjDOn45mmVUKWpnK5j6oqaZ7p4JTyNxkNA==
@@ -524,15 +507,6 @@
   integrity sha512-Pr3/V+IbBC+2VpkQccUnAeedyyWVSnlp4w+g6dh5JLAh+paOQSjY79KrvYc/8om7jDnY3opTnriMvy7bXLo/lg==
   dependencies:
     "@salesforce/ts-types" "^0.20.2"
-    sinon "5.0.7"
-    tslib "^1.9.3"
-
-"@salesforce/ts-sinon@0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-0.2.7.tgz#52032445e32eac13b7b89965d434df7bc27b80b1"
-  integrity sha512-D5YGBqLi7Mfsq4A1LMVW6ctAZjzrht6/ZCpQaHHt05yvcWtLG4tHJYWCSNlbFRF3hiy1i8KmpxqjfbM106jBEw==
-  dependencies:
-    "@salesforce/ts-types" "^0.19.3"
     sinon "5.0.7"
     tslib "^1.9.3"
 
@@ -1227,11 +1201,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
-
-base64-url@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/base64-url/-/base64-url-2.2.0.tgz#4bbd6a825df1be522d39e566a721ede51144041a"
-  integrity sha512-Y4qHHAE+rWjmAFPQmHPiiD+hWwM/XvuFLlP6kVxlwZJK7rjiE2uIQR9tZ37iEr1E6iCj9799yxMAmiXzITb3lQ==
 
 base@^0.11.1:
   version "0.11.2"
@@ -3826,27 +3795,6 @@ jsforce@1.8.5:
     request "^2.72.0"
     xml2js "^0.4.16"
 
-jsforce@1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-1.9.1.tgz#a112fb0b9ece04fe14d2e14bc72a76e46ff544de"
-  integrity sha512-AP4wVnz8guvF8zvHdk2xA2DZxvOq3MGbLNPu7tPVOyO38D1qt+psWpYmHgncjkmy9LoSk58K+dU56YE38zqMlg==
-  dependencies:
-    base64-url "^2.2.0"
-    co-prompt "^1.0.0"
-    coffeescript "^1.10.0"
-    commander "^2.9.0"
-    csv-parse "^1.1.1"
-    csv-stringify "^1.0.4"
-    faye "^1.2.0"
-    inherits "^2.0.1"
-    lodash "^4.11.1"
-    multistream "^2.0.5"
-    opn "^5.3.0"
-    promise "^7.1.1"
-    readable-stream "^2.1.0"
-    request "^2.72.0"
-    xml2js "^0.4.16"
-
 json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -5604,11 +5552,6 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
-
-postinstall-postinstall@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/postinstall-postinstall/-/postinstall-postinstall-2.0.0.tgz#7ba6711b4420575c4f561638836a81faad47f43f"
-  integrity sha512-3f6qWexsHiT4WKtZc5DRb0FPLilHtARi5KpY4fqban/DJNn8/YhZH8U7dVKVz51WbOxEnR31gV+qYQhvEdHtdQ==
 
 prepend-http@^1.0.1:
   version "1.0.4"
