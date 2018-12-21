@@ -9,7 +9,7 @@
     "@oclif/config": "1.10.3",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "1.1.1",
-    "@salesforce/core": "1.1.1",
+    "@salesforce/core": "1.1.2",
     "adm-zip": "0.4.11",
     "inquirer": "6.2.1",
     "opn": "5.4.0",

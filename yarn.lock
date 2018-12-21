@@ -431,14 +431,14 @@
     chalk "^2.4.0"
     cli-ux "^4.8.0"
 
-"@salesforce/core@1.1.1", "@salesforce/core@^1.0.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.1.1.tgz#35f567419758e988571a8ac62b4f895fea1303e4"
-  integrity sha512-v5g7CERWGleGH6yILk2MkWUeuxIEzQCfqMonH2T/MiZBZ52gw8CABjDOn45mmVUKWpnK5j6oqaZ7p4JTyNxkNA==
+"@salesforce/core@1.1.2", "@salesforce/core@^1.0.0":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.1.2.tgz#717c25351c4fe8ee8627179b93debcc54e436252"
+  integrity sha512-/JUu6jMP3HPVPDcQ747XhALifPl0t+GWpBr7iKS0xVPoWuxDJj6BKNzS2jYRoSZQDW4N05k/8aZOnW2c5kw2ag==
   dependencies:
-    "@salesforce/kit" "0.13.6"
-    "@salesforce/ts-sinon" "0.2.10"
-    "@salesforce/ts-types" "0.20.2"
+    "@salesforce/kit" "^1.0.0"
+    "@salesforce/ts-sinon" "^1.0.0"
+    "@salesforce/ts-types" "^1.0.0"
     "@types/jsforce" "1.9.2"
     bunyan-sfdx-no-dtrace "1.8.2"
     debug "^3.1.0"
@@ -448,23 +448,23 @@
     mkdirp "0.5.1"
     sfdx-faye "^1.0.9"
 
-"@salesforce/dev-config@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.4.3.tgz#23e17198fdbf08d30813696db74a8f669291ab64"
-  integrity sha512-H9dqh/Pfh5OPIXWVXvBfaMF8fhnLeB1gHqiRc/cWy+N3Yr0IjALdXdEwm7kE8wuOa50YgR+qpN+p4PkE8toxeA==
+"@salesforce/dev-config@^1.4.4":
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-1.4.4.tgz#89f8283781c525491ed4ed8c4e38ea4b94621373"
+  integrity sha512-XDyT4DqAJb+IvD6i1Ly3vuOptwsqSkvC0tnDRkGsVi0R+YinR1HU7dbaJtaw/wSDFW8Me5HKseBqcUN6tu1P3w==
   dependencies:
     tslint "^5"
     tslint-microsoft-contrib "^5"
     typescript "3.1.6"
 
-"@salesforce/dev-scripts@0.3.10":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-0.3.10.tgz#4a3f496dae1c5e6f0cf1d0fa31e9156065d6c9bd"
-  integrity sha512-qXt5J1sEverG2VSqCm8RaZjTbdAOdH48RUKsoECcUxDvk2LpHq9lPXeqyTiNE3pb/zrAg5fM9Nsh0lWLOXc9+Q==
+"@salesforce/dev-scripts@0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-0.3.11.tgz#6b7a571f8be5ecb6de795e00197dc67e3f0e02cd"
+  integrity sha512-h0uxEXk4H/g2mhicOWx9bIW8C8tDRrUcU7ZS9G/C6xt0pwEWwrEw8cSFrPxiP9UxWRx/GgwRMl4yYBoMn4X1CQ==
   dependencies:
     "@commitlint/cli" "^7"
     "@commitlint/config-conventional" "^7"
-    "@salesforce/dev-config" "^1.4.3"
+    "@salesforce/dev-config" "^1.4.4"
     "@types/chai" "^4"
     "@types/mocha" "^5"
     "@types/node" "^10"
@@ -493,20 +493,20 @@
     "@salesforce/ts-types" "^0.19.3"
     tslib "^1"
 
-"@salesforce/kit@0.13.6":
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-0.13.6.tgz#7abea535f79cee4093a51abceef62574e9081611"
-  integrity sha512-pxBl/OX206OU2KjbLrke0jcJrA9Yh+W4E9j7iqHqFxTaDwA1sq3QB/+En+IcbDqQgaLwfKVlMdyUKe4AZhICnA==
+"@salesforce/kit@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-1.0.1.tgz#ff8322e5ae886dd7521ff487e368fc13e626e026"
+  integrity sha512-Zlg++rzg45ISlrVt692oNcG7NPMzvPhrlcMPabPeztRezayN9rpilG6C3G/JFLoEkrkmTTbC/EtjbsfRaLQIAw==
   dependencies:
-    "@salesforce/ts-types" "^0.20.2"
+    "@salesforce/ts-types" "^1.0.1"
     tslib "^1"
 
-"@salesforce/ts-sinon@0.2.10":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-0.2.10.tgz#188a2cc5581fdd43c4fa8978b331ba28de24e4c8"
-  integrity sha512-Pr3/V+IbBC+2VpkQccUnAeedyyWVSnlp4w+g6dh5JLAh+paOQSjY79KrvYc/8om7jDnY3opTnriMvy7bXLo/lg==
+"@salesforce/ts-sinon@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.0.1.tgz#4add6d833698369406bbcc40a1a43b7b7f94e9a2"
+  integrity sha512-+ZB7LbiC6N1s16I32+AvOAD06ZbugWsDVToQa/f/QZN7WQHklGNsbx6Em/iwAOlSl8hi3hfcNZBs3Ak+s+lu1w==
   dependencies:
-    "@salesforce/ts-types" "^0.20.2"
+    "@salesforce/ts-types" "^1.0.1"
     sinon "5.0.7"
     tslib "^1.9.3"
 
@@ -517,10 +517,10 @@
   dependencies:
     tslib "^1"
 
-"@salesforce/ts-types@0.20.2", "@salesforce/ts-types@^0.20.2":
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-0.20.2.tgz#0e788723b4c50dd36cd4bfd68988a27d089b3edd"
-  integrity sha512-S/UkSMk1pPcGxxzkuIMINAaTBtmaOLBU4YLfbbpgazXMJJ2YGWtoTUJCeGummuuvnCNv0VmZBqeG60DKHuHiKg==
+"@salesforce/ts-types@^1.0.0", "@salesforce/ts-types@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-1.0.1.tgz#886f7a71f5addaa38effa4f340ac59cf78c294ff"
+  integrity sha512-1/8yquBXBK9ywpoNspzOYjPStacBsI0ASf3+GSSTy6yYuV3/0j3EJ+3Ozo4bD3LJbOJlB2x6ix5iiaLrl5zqNQ==
   dependencies:
     tslib "^1"
 
@@ -1373,23 +1373,23 @@ cacache@^10.0.4:
     y18n "^4.0.0"
 
 cacache@^11.0.1, cacache@^11.0.2, cacache@^11.2.0:
-  version "11.3.1"
-  resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.1.tgz#d09d25f6c4aca7a6d305d141ae332613aa1d515f"
-  integrity sha512-2PEw4cRRDu+iQvBTTuttQifacYjLPhET+SYO/gEFMy8uhi+jlJREDAjSF5FWSdV/Aw5h18caHA7vMTw2c+wDzA==
+  version "11.3.2"
+  resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.2.tgz#2d81e308e3d258ca38125b676b98b2ac9ce69bfa"
+  integrity sha512-E0zP4EPGDOaT2chM08Als91eYnf8Z+eH1awwwVsngUmgppfM5jjJ8l3z5vO5p5w/I3LsiXawb1sW0VY65pQABg==
   dependencies:
-    bluebird "^3.5.1"
-    chownr "^1.0.1"
-    figgy-pudding "^3.1.0"
-    glob "^7.1.2"
-    graceful-fs "^4.1.11"
-    lru-cache "^4.1.3"
+    bluebird "^3.5.3"
+    chownr "^1.1.1"
+    figgy-pudding "^3.5.1"
+    glob "^7.1.3"
+    graceful-fs "^4.1.15"
+    lru-cache "^5.1.1"
     mississippi "^3.0.0"
     mkdirp "^0.5.1"
     move-concurrently "^1.0.1"
     promise-inflight "^1.0.1"
     rimraf "^2.6.2"
-    ssri "^6.0.0"
-    unique-filename "^1.1.0"
+    ssri "^6.0.1"
+    unique-filename "^1.1.1"
     y18n "^4.0.0"
 
 cache-base@^1.0.1:
@@ -4229,6 +4229,13 @@ lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.2, lru-cache@^4.1.3:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
+
+lru-cache@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-5.1.1.tgz#1da27e6710271947695daf6848e847f01d84b920"
+  integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
+  dependencies:
+    yallist "^3.0.2"
 
 macos-release@^2.0.0:
   version "2.0.0"
@@ -7169,7 +7176,7 @@ union-value@^1.0.0:
     is-extendable "^0.1.1"
     set-value "^0.4.3"
 
-unique-filename@^1.1.0, unique-filename@~1.1.0:
+unique-filename@^1.1.0, unique-filename@^1.1.1, unique-filename@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unique-filename/-/unique-filename-1.1.1.tgz#1d69769369ada0583103a1e6ae87681b56573230"
   integrity sha512-Vmp0jIp2ln35UTXuryvjzkjGdRyf9b2lTXuSYUiPmzRcl3FDtYqAwOnTJkAngD9SWhnoJzDbTKwaOrZ+STtxNQ==
