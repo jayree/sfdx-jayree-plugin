@@ -26,7 +26,7 @@ $ sfdx jayree:COMMAND
 running command...
 $ sfdx plugins
 sfdx-jayree 0.4.5
-$ sfdx help jayree:[COMMAND]
+$ sfdx help jayree:COMMAND
 USAGE
   $ sfdx jayree:COMMAND
 ...
@@ -36,24 +36,24 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`sfdx-jayree jayree:automation:changeset:deploy`](#sfdx-jayree-jayreeautomationchangesetdeploy)
-* [`sfdx-jayree jayree:automation:changeset:list`](#sfdx-jayree-jayreeautomationchangesetlist)
-* [`sfdx-jayree jayree:automation:ltngsyncstatus`](#sfdx-jayree-jayreeautomationltngsyncstatus)
-* [`sfdx-jayree jayree:flowtestcoverage`](#sfdx-jayree-jayreeflowtestcoverage)
-* [`sfdx-jayree jayree:org:open`](#sfdx-jayree-jayreeorgopen)
-* [`sfdx-jayree jayree:packagedescription:create [FILE]`](#sfdx-jayree-jayreepackagedescriptioncreate-file)
-* [`sfdx-jayree jayree:packagedescription:get [FILE]`](#sfdx-jayree-jayreepackagedescriptionget-file)
-* [`sfdx-jayree jayree:packagedescription:remove [FILE]`](#sfdx-jayree-jayreepackagedescriptionremove-file)
-* [`sfdx-jayree jayree:packagedescription:set [FILE]`](#sfdx-jayree-jayreepackagedescriptionset-file)
-* [`sfdx-jayree jayree:packagexml [FILE]`](#sfdx-jayree-jayreepackagexml-file)
+* [`sfdx jayree:automation:changeset:deploy`](#sfdx-jayreeautomationchangesetdeploy)
+* [`sfdx jayree:automation:changeset:list`](#sfdx-jayreeautomationchangesetlist)
+* [`sfdx jayree:automation:ltngsyncstatus`](#sfdx-jayreeautomationltngsyncstatus)
+* [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
+* [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
+* [`sfdx jayree:packagedescription:create [FILE]`](#sfdx-jayreepackagedescriptioncreate-file)
+* [`sfdx jayree:packagedescription:get [FILE]`](#sfdx-jayreepackagedescriptionget-file)
+* [`sfdx jayree:packagedescription:remove [FILE]`](#sfdx-jayreepackagedescriptionremove-file)
+* [`sfdx jayree:packagedescription:set [FILE]`](#sfdx-jayreepackagedescriptionset-file)
+* [`sfdx jayree:packagexml [FILE]`](#sfdx-jayreepackagexml-file)
 
-## `sfdx-jayree jayree:automation:changeset:deploy`
+## `sfdx jayree:automation:changeset:deploy`
 
 deploy incomming change set to an org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:automation:changeset:deploy
+  $ sfdx jayree:automation:changeset:deploy
 
 OPTIONS
   -c, --checkonly                                                           validate deploy but don’t save to the org
@@ -97,13 +97,13 @@ EXAMPLES
 
 _See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/automation/changeset/deploy.ts)_
 
-## `sfdx-jayree jayree:automation:changeset:list`
+## `sfdx jayree:automation:changeset:list`
 
 list incomming change sets of an org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:automation:changeset:list
+  $ sfdx jayree:automation:changeset:list
 
 OPTIONS
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
@@ -114,13 +114,13 @@ OPTIONS
 
 _See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/automation/changeset/list.ts)_
 
-## `sfdx-jayree jayree:automation:ltngsyncstatus`
+## `sfdx jayree:automation:ltngsyncstatus`
 
 check the Lightning Sync User Sync Status and reset sync if needed
 
 ```
 USAGE
-  $ sfdx-jayree jayree:automation:ltngsyncstatus
+  $ sfdx jayree:automation:ltngsyncstatus
 
 OPTIONS
   -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
@@ -146,13 +146,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/automation/ltngsyncstatus.ts)_
 
-## `sfdx-jayree jayree:flowtestcoverage`
+## `sfdx jayree:flowtestcoverage`
 
 check the flow test coverage of an org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:flowtestcoverage
+  $ sfdx jayree:flowtestcoverage
 
 OPTIONS
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
@@ -169,13 +169,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/flowtestcoverage.ts)_
 
-## `sfdx-jayree jayree:org:open`
+## `sfdx jayree:org:open`
 
 open an org in your preferred browser
 
 ```
 USAGE
-  $ sfdx-jayree jayree:org:open
+  $ sfdx jayree:org:open
 
 OPTIONS
   -b, --browser=firefox|chrome|safari             [default: chrome] browser to be launched
@@ -196,13 +196,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/org/open.ts)_
 
-## `sfdx-jayree jayree:packagedescription:create [FILE]`
+## `sfdx jayree:packagedescription:create [FILE]`
 
 creates an empty package with the description
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:create [FILE]
+  $ sfdx jayree:packagedescription:create [FILE]
 
 OPTIONS
   -d, --description=description                   (required) new description value
@@ -216,13 +216,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/packagedescription/create.ts)_
 
-## `sfdx-jayree jayree:packagedescription:get [FILE]`
+## `sfdx jayree:packagedescription:get [FILE]`
 
 get the description within a package
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:get [FILE]
+  $ sfdx jayree:packagedescription:get [FILE]
 
 OPTIONS
   -f, --file=file                                 (required) file to read
@@ -236,13 +236,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/packagedescription/get.ts)_
 
-## `sfdx-jayree jayree:packagedescription:remove [FILE]`
+## `sfdx jayree:packagedescription:remove [FILE]`
 
 remove the description within a package
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:remove [FILE]
+  $ sfdx jayree:packagedescription:remove [FILE]
 
 OPTIONS
   -f, --file=file                                 (required) file to read
@@ -255,13 +255,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/packagedescription/remove.ts)_
 
-## `sfdx-jayree jayree:packagedescription:set [FILE]`
+## `sfdx jayree:packagedescription:set [FILE]`
 
 set the description within a package
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagedescription:set [FILE]
+  $ sfdx jayree:packagedescription:set [FILE]
 
 OPTIONS
   -d, --description=description                   (required) new description value
@@ -275,13 +275,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.4.5/src/commands/jayree/packagedescription/set.ts)_
 
-## `sfdx-jayree jayree:packagexml [FILE]`
+## `sfdx jayree:packagexml [FILE]`
 
 generate a complete package xml form the specified org
 
 ```
 USAGE
-  $ sfdx-jayree jayree:packagexml [FILE]
+  $ sfdx jayree:packagexml [FILE]
 
 OPTIONS
   -c, --matchcase                                 enable 'match case' for the quickfilter

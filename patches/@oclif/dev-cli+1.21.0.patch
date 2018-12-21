@@ -7,18 +7,18 @@ patch-package
              `\`\`\`sh-session
 -$ npm install -g ${config.name}
 -$ ${config.bin} COMMAND
-+$ sfdx plugins:install ${config.name}
-+$ sfdx ${config.bin.split('-')[1]}:COMMAND
++$ ${config.bin} plugins:install ${config.name}
++$ ${config.bin} ${config.topics[0].name}:COMMAND
  running command...
 -$ ${config.bin} (-v|--version|version)
 -${config.name}/${process.env.OCLIF_NEXT_VERSION || config.version} ${process.platform}-${process.arch} node-v${process.versions.node}
 -$ ${config.bin} --help [COMMAND]
-+$ sfdx plugins
++$ ${config.bin} plugins
 +${config.name} ${process.env.OCLIF_NEXT_VERSION || config.version}
-+$ sfdx help ${config.bin.split('-')[1]}:[COMMAND]
++$ ${config.bin} help ${config.topics[0].name}:COMMAND
  USAGE
 -  $ ${config.bin} COMMAND
-+  $ sfdx ${config.bin.split('-')[1]}:COMMAND
++  $ ${config.bin} ${config.topics[0].name}:COMMAND
  ...
  \`\`\`\n`,
          ].join('\n').trim();
