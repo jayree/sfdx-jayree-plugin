@@ -21,14 +21,14 @@ some sfdx commands
 
 <!-- usage -->
 ```sh-session
-$ npm install -g sfdx-jayree
-$ sfdx-jayree COMMAND
+$ sfdx plugins:install sfdx-jayree
+$ sfdx jayree:COMMAND
 running command...
-$ sfdx-jayree (-v|--version|version)
-sfdx-jayree/0.4.0 darwin-x64 node-v8.9.4
-$ sfdx-jayree --help [COMMAND]
+$ sfdx plugins
+sfdx-jayree 0.4.0
+$ sfdx help jayree:[COMMAND]
 USAGE
-  $ sfdx-jayree COMMAND
+  $ sfdx jayree:COMMAND
 ...
 ```
 <!-- usagestop -->
