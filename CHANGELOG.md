@@ -1,3 +1,10 @@
+## [0.4.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.4...v0.4.5) (2018-12-21)
+
+
+### Bug Fixes
+
+* update salesforce/command ([21e4685](https://github.com/jayree/sfdx-jayree-plugin/commit/21e4685))
+
 ## [0.4.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.3...v0.4.4) (2018-12-21)
 
 
