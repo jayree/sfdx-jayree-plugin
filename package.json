@@ -109,10 +109,11 @@
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "yarn sfdx-build",
-    "prepare": "path-exists src && yarn compile || path-exists lib",
+    "prepare": "path-exists src && yarn build || path-exists lib",
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
+    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json",
+    "semantic-release": "semantic-release"
   },
   "husky": {
     "hooks": {

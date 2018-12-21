@@ -18,6 +18,27 @@ patch-package
      cwd: packageRoot
    });
  }
+--- a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
+@@ -11,16 +11,14 @@ const shell = require('../utils/shelljs');
+ const exists = require('../utils/exists');
+ const packageRoot = require('../utils/package-path');
+ 
+-const lint = require.resolve('tslint/bin/tslint');
+-
+ const extras = process.argv.slice(2).join(' ');
+ 
+-shell.exec(`${lint} -p . -t stylish ${extras}`, {
++shell.exec(`tslint -p . -t stylish ${extras}`, {
+   cwd: packageRoot
+ });
+ 
+ if (exists('./test')) {
+-  shell.exec(`${lint} -p ./test -t stylish ${extras}`, {
++  shell.exec(`tslint -p ./test -t stylish ${extras}`, {
+     cwd: packageRoot
+   });
+ }
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
 @@ -11,12 +11,10 @@ const shell = require('../utils/shelljs');
