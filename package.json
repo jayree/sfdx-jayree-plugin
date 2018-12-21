@@ -6,7 +6,7 @@
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
     "@oclif/command": "1.5.8",
-    "@oclif/config": "1.10.2",
+    "@oclif/config": "1.10.3",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "1.1.1",
     "@salesforce/core": "1.1.1",
@@ -25,7 +25,7 @@
     "@oclif/semantic-release": "3.1.1",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
-    "@salesforce/dev-scripts": "0.3.9",
+    "@salesforce/dev-scripts": "0.3.10",
     "@types/adm-zip": "0.4.31",
     "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.2",
@@ -110,10 +110,10 @@
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "yarn sfdx-build",
     "prepare": "path-exists src && yarn build || path-exists lib",
+    "semantic-release": "semantic-release",
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json",
-    "semantic-release": "semantic-release"
+    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
   },
   "husky": {
     "hooks": {
