@@ -10,7 +10,7 @@
 
 ### Bug Fixes
 
-* update [@salesforce](https://github.com/salesforce)/core ([7879cb3](https://github.com/jayree/sfdx-jayree-plugin/commit/7879cb3))
+* update salesforce/core ([7879cb3](https://github.com/jayree/sfdx-jayree-plugin/commit/7879cb3))
 
 ## [0.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.1...v0.4.2) (2018-12-21)
 
