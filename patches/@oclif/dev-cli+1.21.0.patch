@@ -1,0 +1,24 @@
+patch-package
+--- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
++++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
+@@ -59,14 +59,14 @@ class Readme extends command_1.Command {
+     usage(config) {
+         return [
+             `\`\`\`sh-session
+-$ npm install -g ${config.name}
+-$ ${config.bin} COMMAND
++$ sfdx plugins:install ${config.name}
++$ sfdx ${config.bin.split('-')[1]}:COMMAND
+ running command...
+-$ ${config.bin} (-v|--version|version)
+-${config.name}/${process.env.OCLIF_NEXT_VERSION || config.version} ${process.platform}-${process.arch} node-v${process.versions.node}
+-$ ${config.bin} --help [COMMAND]
++$ sfdx plugins
++${config.name} ${process.env.OCLIF_NEXT_VERSION || config.version}
++$ sfdx help ${config.bin.split('-')[1]}:[COMMAND]
+ USAGE
+-  $ ${config.bin} COMMAND
++  $ sfdx ${config.bin.split('-')[1]}:COMMAND
+ ...
+ \`\`\`\n`,
+         ].join('\n').trim();
