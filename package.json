@@ -25,7 +25,7 @@
     "@oclif/semantic-release": "3.1.1",
     "@oclif/test": "1.2.2",
     "@oclif/tslint": "3.1.1",
-    "@salesforce/dev-scripts": "0.3.10",
+    "@salesforce/dev-scripts": "0.3.11",
     "@types/adm-zip": "0.4.31",
     "@types/inquirer": "0.0.43",
     "@types/jsforce": "1.9.2",
