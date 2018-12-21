@@ -15,9 +15,6 @@ _refs:
   install: &install
     name: Install dependencies
     command: yarn
-  build: &build
-    name: Building
-    command: yarn build
   test: &test
     name: Testing
     command: yarn test
@@ -45,7 +42,6 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *install
-      - run: *build
       - run: *test
       - run: *coverage
       - save_cache: *save-cache
@@ -59,10 +55,9 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
-      - run: *install
       - run: yarn global add semantic-release@15
       - run: yarn global add @oclif/semantic-release@3
-      - run: *build
+      - run: *install
       - run: semantic-release -e @oclif/semantic-release
       - run: git status
       - save_cache: *save-cache
@@ -72,7 +67,6 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *install
-      - run: *build
       - run: *gh-config
       - run:
           name: Merging
