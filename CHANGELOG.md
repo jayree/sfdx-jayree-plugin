@@ -1,3 +1,10 @@
+## [0.4.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.5...v0.4.6) (2018-12-22)
+
+
+### Bug Fixes
+
+* patch dev-cli to create README.md for sfdx ([02bc2c3](https://github.com/jayree/sfdx-jayree-plugin/commit/02bc2c3))
+
 ## [0.4.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.4...v0.4.5) (2018-12-21)
 
 
