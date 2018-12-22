@@ -7,6 +7,7 @@
   "dependencies": {
     "@oclif/command": "1.5.8",
     "@oclif/config": "1.10.3",
+    "@oclif/dev-cli": "1.21.0",
     "@oclif/errors": "1.2.2",
     "@salesforce/command": "1.2.0",
     "@salesforce/core": "1.1.2",
@@ -22,7 +23,6 @@
     "xml2js": "0.4.19"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "1.21.0",
     "@oclif/plugin-help": "2.1.4",
     "@oclif/semantic-release": "3.1.1",
     "@oclif/test": "1.2.2",
@@ -109,7 +109,7 @@
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "yarn sfdx-build",
-    "prepare": "path-exists src && yarn build || path-exists lib",
+    "prepare": "path-exists src && yarn build || path-exists lib && oclif-dev manifest && oclif-dev readme",
     "semantic-release": "semantic-release",
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
