@@ -1,3 +1,10 @@
+## [0.4.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.6...v0.4.7) (2018-12-22)
+
+
+### Bug Fixes
+
+* error - mismatched version in plugin manifest ([542ed9f](https://github.com/jayree/sfdx-jayree-plugin/commit/542ed9f))
+
 ## [0.4.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.5...v0.4.6) (2018-12-22)
 
 
