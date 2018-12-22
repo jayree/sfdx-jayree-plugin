@@ -93,7 +93,7 @@
     "devPlugins": [
       "@oclif/plugin-help"
     ],
-    "bin": "sfdx-jayree"
+    "bin": "sfdx"
   },
   "repository": "jayree/sfdx-jayree-plugin",
   "scripts": {
