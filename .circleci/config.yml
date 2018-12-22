@@ -3,7 +3,7 @@ version: 2.1
 _refs:
   cwd: &cwd ~/jobs
   cache-config: &cache-config
-    key: dependency-cache-{{ checksum "yarn.lock" }}
+    key: dependency-{{ .Environment.CACHE_VERSION }}-cache-{{ checksum "yarn.lock" }}
   restore-cache: &restore-cache
     <<: *cache-config
   save-cache: &save-cache
