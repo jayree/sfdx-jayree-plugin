@@ -1,17 +1,19 @@
 {
-    "typescript.tsdk": "node_modules/typescript/lib",
-    "terminal.integrated.env.osx": {
-        "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
-    },
-    "terminal.integrated.env.linux": {
-        "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
-    },
-    "terminal.integrated.env.windows": {
-        "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
-    },
-    "eslint.enable": false,
-    "prettier.tslintIntegration": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "terminal.integrated.env.osx": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+  },
+  "terminal.integrated.env.linux": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+  },
+  "terminal.integrated.env.windows": {
+    "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
+  },
+  "eslint.enable": false,
+  "prettier.tslintIntegration": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true
+  // "mocha.files.glob": "test/**/*test.ts",
+  // "mocha.requires": ["ts-node/register", "source-map-support/register"]
 }

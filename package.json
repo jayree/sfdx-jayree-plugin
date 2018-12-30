@@ -59,7 +59,7 @@
   ],
   "license": "MIT",
   "oclif": {
-    "commands": "./lib/commands",
+    "commands": "./lib/src/commands",
     "topics": {
       "jayree": {
         "name": "jayree",
@@ -105,11 +105,10 @@
     "lint": "yarn sfdx-lint",
     "lint-fix": "yarn sfdx-lint --fix",
     "postcompile": "tsc -p test",
-    "postinstall": "path-exists src && patch-package && yarn sfdx-install || path-exists lib",
+    "postinstall": "(path-exists lib && node ./lib/bin/sfdx-postinstall.js) || (patch-package && sfdx-install)",
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "yarn sfdx-build",
-    "prepare": "path-exists src && yarn build || path-exists lib && oclif-dev manifest && oclif-dev readme",
     "semantic-release": "semantic-release",
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",

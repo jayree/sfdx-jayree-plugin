@@ -1,6 +1,6 @@
 {
   "test": {
-    "testsPath": "test/**/*test.ts"
+    "testsPath": "lib/test/**/*test.js"
   },
   "scripts": [
     ["compile", "compile-&& oclif-dev manifest && oclif-dev readme"],
