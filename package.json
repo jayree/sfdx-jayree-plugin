@@ -47,10 +47,9 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "/lib",
+    "/lib/src",
     "/messages",
     "/oclif.manifest.json",
-    "/patches",
     "/yarn.lock"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
@@ -109,6 +108,7 @@
     "postpack": "rimraf oclif.manifest.json",
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "yarn sfdx-build",
+    "prepare": "path-exists src && ts-node ./src/bin/sfdx-prepare.ts || path-exists lib",
     "semantic-release": "semantic-release",
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
