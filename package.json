@@ -75,10 +75,6 @@
               "changeset": {
                 "name": "changeset",
                 "description": "deploy/list incomming change sets"
-              },
-              "ltngsyncstatus": {
-                "name": "ltngsyncstatus",
-                "description": "check the Lightning Sync User Sync Status and reset sync if needed"
               }
             }
           }
