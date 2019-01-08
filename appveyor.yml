@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: '8'
+  nodejs_version: '9'
 cache:
   - '%LOCALAPPDATA%\Yarn -> appveyor.yml'
   - node_modules -> yarn.lock
@@ -7,11 +7,9 @@ cache:
 install:
   - ps: Install-Product node $env:nodejs_version x64
   - yarn
-
 test_script:
   - .\bin\run --help
   - yarn test
-
 after_test:
   - .\node_modules\.bin\nyc report --reporter text-lcov > coverage.lcov
   - ps: |

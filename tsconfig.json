@@ -1,20 +1,13 @@
 {
   "extends": "./node_modules/@salesforce/dev-config/tsconfig",
   "compilerOptions": {
-    "plugins": [{
-      "name": "typescript-tslint-plugin"
-    }],
-    "declaration": true,
-    "importHelpers": true,
-    "module": "commonjs",
-    "outDir": "./lib",
-    "strict": false,
-    "target": "es2017",
-    "composite": true,
-    "lib": ["dom", "es2017"],
-    "rootDir": "./src"
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
+    "outDir": "lib",
+    "lib": ["dom", "es2017"]
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["src/**/*", "test/**/*"]
 }
