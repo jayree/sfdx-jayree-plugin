@@ -22,3 +22,12 @@ patch-package
  ...
  \`\`\`\n`,
          ].join('\n').trim();
+@@ -189,7 +189,7 @@ USAGE
+             return;
+         p = p.replace(plugin.root + path.sep, '');
+         if (plugin.pjson.devDependencies.typescript) {
+-            p = p.replace(libRegex, 'src' + path.sep);
++            p = p.replace(libRegex, '');
+             p = p.replace(/\.js$/, '.ts');
+         }
+         return p;

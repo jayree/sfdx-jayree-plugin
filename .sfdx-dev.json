@@ -1,16 +1,5 @@
 {
   "test": {
-    "testsPath": "test/**/*test.ts"
-  },
-  "scripts": [
-    ["compile", "compile-&& oclif-dev manifest && oclif-dev readme"],
-    ["lint-fix", "lint---fix"],
-    "build",
-    "clean",
-    "clean-all",
-    "format",
-    "test",
-    "lint",
-    ["prepack", "build"]
-  ]
+    "testsPath": "lib/test/**/*test.js"
+  }
 }
