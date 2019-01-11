@@ -1,6 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import { fs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
+import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import serializeError = require('serialize-error');
 // import * as notifier from 'node-notifier';

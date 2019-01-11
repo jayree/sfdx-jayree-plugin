@@ -1,7 +1,7 @@
 // import { core } from '@salesforce/command';
 import { $$, expect, test } from '@salesforce/command/lib/test';
-import * as core from '@salesforce/core';
 import * as crypto_1 from 'crypto';
+import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import * as packagexml from '../../../src/commands/jayree/packagexml';
 
@@ -1095,7 +1095,7 @@ describe('Write File', () => {
 
 describe('Write File - Error', () => {
   beforeEach(() => {
-    $$.SANDBOX.stub(core.fs, 'writeFile').callsFake(async () => {
+    $$.SANDBOX.stub(fs, 'writeFile').callsFake(async () => {
       throw Error('EACCES: permission denied');
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
