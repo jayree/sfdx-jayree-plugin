@@ -164,12 +164,14 @@ export default class GeneratePackageXML extends SfdxCommand {
           folderItems = [folder];
         }
         for await (const folderItem of folderItems) {
-          let objectType = folderItem.type.replace('Folder', '');
-          if (objectType === 'Email') {
-            objectType += 'Template';
+          if (typeof folderItem !== 'undefined') {
+            let objectType = folderItem.type.replace('Folder', '');
+            if (objectType === 'Email') {
+              objectType += 'Template';
+            }
+            const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
+            folderedObjects.push(promise);
           }
-          const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
-          folderedObjects.push(promise);
         }
       }
 
