@@ -16,7 +16,7 @@
     "per-env": "git+https://github.com/jayree/per-env.git#83c526deda58c8eca6070bb55e1194405a7538d6",
     "puppeteer": "^1.11.0",
     "serialize-error": "^3.0.0",
-    "xml-js": "^1.6.8",
+    "xml-js": "^1.6.9",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
