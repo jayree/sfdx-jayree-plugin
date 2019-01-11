@@ -1,78 +1,56 @@
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
-index d9f31b6..4b9c0cd 100755
+index d9f31b6..971c83b 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
-@@ -10,7 +10,7 @@ const shell = require('../utils/shelljs');
+@@ -10,7 +10,8 @@ const shell = require('../utils/shelljs');
  
  const exists = require('../utils/exists');
  const packageRoot = require('../utils/package-path');
 -const tsc = require.resolve('typescript/bin/tsc');
-+const tsc = JSON.stringify(require.resolve('typescript/bin/tsc'));
++const path = require('path');
++const tsc = path.resolve(require.resolve('typescript'),'../../../','.bin','tsc');
  
  shell.exec(`${tsc} -p . --pretty`, {
    cwd: packageRoot
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
-index 446c3a4..14f2fea 100755
+index 446c3a4..4f4c953 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
-@@ -12,7 +12,7 @@ const shell = require('../utils/shelljs');
+@@ -12,7 +12,8 @@ const shell = require('../utils/shelljs');
  
  const loadRootPath = require('../utils/load-root-path');
  const packageRoot = require('../utils/package-path');
 -const typedoc = require.resolve('typedoc/bin/typedoc');
-+const typedoc = JSON.stringify(require.resolve('typedoc/bin/typedoc'));
++const path = require('path');
++const typedoc = path.resolve(require.resolve('typedoc'), '../../../', '.bin', 'typedoc');
  
  const options = require('@salesforce/dev-config/typedoc');
  
-diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-format.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-format.js
-index d233ce4..4027c4c 100755
---- a/node_modules/@salesforce/dev-scripts/bin/sfdx-format.js
-+++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-format.js
-@@ -9,7 +9,7 @@
- const shell = require('../utils/shelljs');
- 
- const packageRoot = require('../utils/package-path');
--const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
-+const prettierConfig = JSON.stringify(require.resolve('@salesforce/dev-config/prettier'));
- 
- shell.exec(
-   `prettier --config ${prettierConfig} --write '+(src|test)/**/*.+(ts|js|json)'`,
-diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
-index 51d3fc7..bf3c504 100755
---- a/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
-+++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
-@@ -9,7 +9,7 @@
- const shell = require('../utils/shelljs');
- 
- const packageRoot = require('../utils/package-path');
--const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
-+const prettierConfig = JSON.stringify(require.resolve('@salesforce/dev-config/prettier'));
- 
- // double -- to pass through yarn then lerna
- shell.exec(`yarn lint-fix`, {
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
-index 68dc22e..c2abc4c 100755
+index 68dc22e..0efef65 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
-@@ -11,7 +11,7 @@ const shell = require('../utils/shelljs');
+@@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
  const exists = require('../utils/exists');
  const packageRoot = require('../utils/package-path');
  
 -const lint = require.resolve('tslint/bin/tslint');
-+const lint = JSON.stringify(require.resolve('tslint/bin/tslint'));
++const path = require('path');
++const lint = path.resolve(require.resolve('tslint'), '../../../', '.bin', 'tslint');
  
  const extras = process.argv.slice(2).join(' ');
  
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
-index 981a56d..1d10caa 100755
+index 981a56d..0b8dd7d 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
-@@ -11,7 +11,7 @@ const shell = require('../utils/shelljs');
+@@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
  const packageRoot = require('../utils/package-path');
  const SfdxDevConfig = require('../utils/sfdx-dev-config');
  
 -const nyc = require.resolve('nyc/bin/nyc');
-+const nyc = JSON.stringify(require.resolve('nyc/bin/nyc'));
++const path = require('path');
++const nyc = path.resolve(require.resolve('nyc'), '../../', '.bin', 'nyc');
  
  const config = new SfdxDevConfig(packageRoot);
  const testConfig = config.get('test') || {};
