@@ -1,4 +1,5 @@
-patch-package
+diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
+index d3abe19..71aa701 100644
 --- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
 +++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
 @@ -59,14 +59,14 @@ class Readme extends command_1.Command {
