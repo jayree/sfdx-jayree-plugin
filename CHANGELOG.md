@@ -1,3 +1,17 @@
+## [0.4.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.7...v0.4.8) (2019-01-13)
+
+
+### Bug Fixes
+
+* switch to fs-extra ([a7d56e3](https://github.com/jayree/sfdx-jayree-plugin/commit/a7d56e3))
+* undefined folderItem ([0811b82](https://github.com/jayree/sfdx-jayree-plugin/commit/0811b82))
+* update dependencies ([4adde95](https://github.com/jayree/sfdx-jayree-plugin/commit/4adde95))
+
+
+### Reverts
+
+* codecov version 3.1.0 ([a02e21f](https://github.com/jayree/sfdx-jayree-plugin/commit/a02e21f))
+
 ## [0.4.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.6...v0.4.7) (2018-12-22)
 
 
