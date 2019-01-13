@@ -836,6 +836,56 @@ describe('Foldered Objects - Single Object', () => {
     });
 });
 
+describe('Foldered Objects - undefined', () => {
+  beforeEach(() => {
+    $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+        resolve({
+          metadataObjects: [
+            {
+              directoryName: 'reports',
+              inFolder: true,
+              metaFile: false,
+              suffix: 'report',
+              xmlName: 'Report'
+            }
+          ],
+          organizationNamespace: '',
+          partialSaveAllowed: true,
+          testRequired: false
+        } as jsforce.DescribeMetadataResult);
+      });
+    });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+          resolve(undefined);
+        });
+      });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
+      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        resolve({
+          size: 0,
+          totalSize: 10,
+          done: true,
+          queryLocator: null,
+          entityTypeName: 'FlowDefinition',
+          records: []
+        } as jsforce.QueryResult<{}>);
+      });
+    });
+  });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
+    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+      expect(ctx.stdout).to.not.contain('<name>Report</name>');
+      expect(ctx.stdout).to.not.contain('<members>testreportfolder/testreport</members>');
+    });
+});
+
 describe('Unfoldered Objects', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
