@@ -1,60 +1,61 @@
-patch-package
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
+index d9f31b6..971c83b 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
-@@ -10,14 +10,13 @@ const shell = require('../utils/shelljs');
+@@ -10,7 +10,8 @@ const shell = require('../utils/shelljs');
  
  const exists = require('../utils/exists');
  const packageRoot = require('../utils/package-path');
 -const tsc = require.resolve('typescript/bin/tsc');
++const path = require('path');
++const tsc = path.resolve(require.resolve('typescript'),'../../../','.bin','tsc');
  
--shell.exec(`${tsc} -p . --pretty`, {
-+shell.exec('tsc -p . --pretty', {
+ shell.exec(`${tsc} -p . --pretty`, {
    cwd: packageRoot
- });
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
+index 446c3a4..4f4c953 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
+@@ -12,7 +12,8 @@ const shell = require('../utils/shelljs');
  
- if (exists('./test')) {
--  shell.exec(`${tsc} -p ./test --pretty`, {
-+  shell.exec('tsc -p ./test --pretty', {
-     cwd: packageRoot
-   });
- }
+ const loadRootPath = require('../utils/load-root-path');
+ const packageRoot = require('../utils/package-path');
+-const typedoc = require.resolve('typedoc/bin/typedoc');
++const path = require('path');
++const typedoc = path.resolve(require.resolve('typedoc'), '../../../', '.bin', 'typedoc');
+ 
+ const options = require('@salesforce/dev-config/typedoc');
+ 
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
+index 68dc22e..0efef65 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
-@@ -11,16 +11,14 @@ const shell = require('../utils/shelljs');
+@@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
  const exists = require('../utils/exists');
  const packageRoot = require('../utils/package-path');
  
 -const lint = require.resolve('tslint/bin/tslint');
--
++const path = require('path');
++const lint = path.resolve(require.resolve('tslint'), '../../../', '.bin', 'tslint');
+ 
  const extras = process.argv.slice(2).join(' ');
  
--shell.exec(`${lint} -p . -t stylish ${extras}`, {
-+shell.exec(`tslint -p . -t stylish ${extras}`, {
-   cwd: packageRoot
- });
- 
- if (exists('./test')) {
--  shell.exec(`${lint} -p ./test -t stylish ${extras}`, {
-+  shell.exec(`tslint -p ./test -t stylish ${extras}`, {
-     cwd: packageRoot
-   });
- }
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
+index 981a56d..0b8dd7d 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
-@@ -11,12 +11,10 @@ const shell = require('../utils/shelljs');
+@@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
  const packageRoot = require('../utils/package-path');
  const SfdxDevConfig = require('../utils/sfdx-dev-config');
  
 -const nyc = require.resolve('nyc/bin/nyc');
--
++const path = require('path');
++const nyc = path.resolve(require.resolve('nyc'), '../../', '.bin', 'nyc');
+ 
  const config = new SfdxDevConfig(packageRoot);
  const testConfig = config.get('test') || {};
- 
--let command = `${nyc} mocha`;
-+let command = 'nyc mocha';
- 
- if (!testConfig.mochaOpts) {
-   command +=
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+index 252ee33..a53119c 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 @@ -36,7 +36,10 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
@@ -69,6 +70,8 @@ patch-package
          if (scriptArgs.length > 1) {
            const scriptFileName = scriptArgs[0];
            scriptArgs = scriptArgs.splice(1).join(' ');
+diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
+index 36c9e8c..48e6417 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -11,14 +11,24 @@ const SfdxDevConfig = require('./sfdx-dev-config');

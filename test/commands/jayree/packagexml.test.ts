@@ -1,7 +1,7 @@
 // import { core } from '@salesforce/command';
 import { $$, expect, test } from '@salesforce/command/lib/test';
-import * as core from '@salesforce/core';
 import * as crypto_1 from 'crypto';
+import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import * as packagexml from '../../../src/commands/jayree/packagexml';
 
@@ -836,6 +836,56 @@ describe('Foldered Objects - Single Object', () => {
     });
 });
 
+describe('Foldered Objects - undefined', () => {
+  beforeEach(() => {
+    $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+        resolve({
+          metadataObjects: [
+            {
+              directoryName: 'reports',
+              inFolder: true,
+              metaFile: false,
+              suffix: 'report',
+              xmlName: 'Report'
+            }
+          ],
+          organizationNamespace: '',
+          partialSaveAllowed: true,
+          testRequired: false
+        } as jsforce.DescribeMetadataResult);
+      });
+    });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+          resolve(undefined);
+        });
+      });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
+      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        resolve({
+          size: 0,
+          totalSize: 10,
+          done: true,
+          queryLocator: null,
+          entityTypeName: 'FlowDefinition',
+          records: []
+        } as jsforce.QueryResult<{}>);
+      });
+    });
+  });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
+    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+      expect(ctx.stdout).to.not.contain('<name>Report</name>');
+      expect(ctx.stdout).to.not.contain('<members>testreportfolder/testreport</members>');
+    });
+});
+
 describe('Unfoldered Objects', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
@@ -1095,7 +1145,7 @@ describe('Write File', () => {
 
 describe('Write File - Error', () => {
   beforeEach(() => {
-    $$.SANDBOX.stub(core.fs, 'writeFile').callsFake(async () => {
+    $$.SANDBOX.stub(fs, 'writeFile').callsFake(async () => {
       throw Error('EACCES: permission denied');
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
