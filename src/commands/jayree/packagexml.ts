@@ -70,7 +70,7 @@ export default class GeneratePackageXML extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    config: flags.string({
+    configfile: flags.string({
       description: messages.getMessage('configFlagDescription')
     }),
     quickfilter: flags.string({
