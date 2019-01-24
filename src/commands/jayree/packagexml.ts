@@ -101,7 +101,7 @@ export default class GeneratePackageXML extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
     const packageTypes = {};
-    const configFile = this.flags.config || false;
+    const configFile = this.flags.configfile || false;
     const outputFile = this.flags.file || this.args.file || null;
 
     try {
