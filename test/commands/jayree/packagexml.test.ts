@@ -336,8 +336,8 @@ describe('ConfigFile with all parameters', () => {
   test
     .stdout()
     .stderr()
-    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--config', 'test/assets/config.json'])
-    .it('runs jayree:packagexml --targetusername test@org.com --config=test/assets/config.json', ctx => {
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--configfile', 'test/assets/config.json'])
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', ctx => {
       expect(ctx.stdout).to.contain('<version>43.0</version>');
     });
 });
@@ -373,8 +373,8 @@ describe('ConfigFile without any parameters', () => {
   test
     .stdout()
     .stderr()
-    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--config', 'test/assets/config2.json'])
-    .it('runs jayree:packagexml --targetusername test@org.com --config=test/assets/config.json', ctx => {
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--configfile', 'test/assets/config2.json'])
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', ctx => {
       expect(ctx.stdout).to.contain('<version>42.0</version>');
     });
 });
@@ -414,13 +414,13 @@ describe('ConfigFile without any parameters + cli parameter for QuickFilter', ()
       'jayree:packagexml',
       '--targetusername',
       'test@org.com',
-      '--config',
+      '--configfile',
       'test/assets/config2.json',
       '--quickfilter',
       'Report'
     ])
     .it(
-      'runs jayree:packagexml --targetusername test@org.com --config=test/assets/config.json --quickfilter=Report',
+      'runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json --quickfilter=Report',
       ctx => {
         expect(ctx.stdout).to.contain('<version>42.0</version>');
       }
@@ -458,8 +458,14 @@ describe('ConfigFile does not exist', () => {
   test
     .stdout()
     .stderr()
-    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--config', 'test/assets/does_not_exist.json'])
-    .it('runs jayree:packagexml --targetusername test@org.com --config=test/assets/config.json', ctx => {
+    .command([
+      'jayree:packagexml',
+      '--targetusername',
+      'test@org.com',
+      '--configfile',
+      'test/assets/does_not_exist.json'
+    ])
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/does_not_exist.json', ctx => {
       expect(ctx.stderr).to.contain('ENOENT: no such file or directory');
     });
 });

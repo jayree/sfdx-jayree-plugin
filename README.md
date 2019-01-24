@@ -291,7 +291,7 @@ OPTIONS
   -w, --matchwholeword                            enable 'match whole word' for the quickfilter
   -x, --excludemanaged                            exclude managed packages from output
   --apiversion=apiversion                         override the api version used for api requests made by this command
-  --config=config                                 path to config file
+  --configfile=configfile                         path to config file
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 

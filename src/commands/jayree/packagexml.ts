@@ -70,7 +70,7 @@ export default class GeneratePackageXML extends SfdxCommand {
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
-    config: flags.string({
+    configfile: flags.string({
       description: messages.getMessage('configFlagDescription')
     }),
     quickfilter: flags.string({
@@ -101,7 +101,7 @@ export default class GeneratePackageXML extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
     const packageTypes = {};
-    const configFile = this.flags.config || false;
+    const configFile = this.flags.configfile || false;
     const outputFile = this.flags.file || this.args.file || null;
 
     try {
@@ -171,6 +171,7 @@ export default class GeneratePackageXML extends SfdxCommand {
             }
             const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
             folderedObjects.push(promise);
+            folderedObjects.push(folder);
           }
         }
       }
@@ -338,10 +339,14 @@ export default class GeneratePackageXML extends SfdxCommand {
                   metadataEntries.manageableState === 'installed')
               )
             ) {
-              if (!packageTypes[metadataEntries.type]) {
-                packageTypes[metadataEntries.type] = [];
+              let objectType = metadataEntries.type.replace('Folder', '');
+              if (objectType === 'Email') {
+                objectType += 'Template';
               }
-              packageTypes[metadataEntries.type].pushUniqueValueKey(
+              if (!packageTypes[objectType]) {
+                packageTypes[objectType] = [];
+              }
+              packageTypes[objectType].pushUniqueValueKey(
                 {
                   fullName: metadataEntries.fullName,
                   fileName: metadataEntries.fileName
@@ -428,14 +433,9 @@ export default class GeneratePackageXML extends SfdxCommand {
         );
       });
 
-      /*     const packageJson = {
-          _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-          Package: {
-            _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-            types: [],
-            version: apiVersion
-          }
-        }; */
+      if (apiVersion >= 44.0) {
+        delete packageTypes['FlowDefinition'];
+      }
 
       const packageJson = {
         Package: {
