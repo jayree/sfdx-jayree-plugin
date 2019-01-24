@@ -171,6 +171,7 @@ export default class GeneratePackageXML extends SfdxCommand {
             }
             const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
             folderedObjects.push(promise);
+            folderedObjects.push(folder);
           }
         }
       }
@@ -338,10 +339,14 @@ export default class GeneratePackageXML extends SfdxCommand {
                   metadataEntries.manageableState === 'installed')
               )
             ) {
-              if (!packageTypes[metadataEntries.type]) {
-                packageTypes[metadataEntries.type] = [];
+              let objectType = metadataEntries.type.replace('Folder', '');
+              if (objectType === 'Email') {
+                objectType += 'Template';
               }
-              packageTypes[metadataEntries.type].pushUniqueValueKey(
+              if (!packageTypes[objectType]) {
+                packageTypes[objectType] = [];
+              }
+              packageTypes[objectType].pushUniqueValueKey(
                 {
                   fullName: metadataEntries.fullName,
                   fileName: metadataEntries.fileName
