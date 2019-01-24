@@ -1,3 +1,17 @@
+# [0.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.8...v0.5.0) (2019-01-24)
+
+
+### Bug Fixes
+
+* add folders to package.xml ([b4a2076](https://github.com/jayree/sfdx-jayree-plugin/commit/b4a2076))
+* remove FlowDefinition if apiVersion >= 44.0 ([bb7e363](https://github.com/jayree/sfdx-jayree-plugin/commit/bb7e363))
+* update dependencies ([e10070e](https://github.com/jayree/sfdx-jayree-plugin/commit/e10070e))
+
+
+### Features
+
+* rename config flag to configfile ([f4c8368](https://github.com/jayree/sfdx-jayree-plugin/commit/f4c8368))
+
 ## [0.4.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.7...v0.4.8) (2019-01-13)
 
 
