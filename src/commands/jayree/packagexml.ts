@@ -433,14 +433,9 @@ export default class GeneratePackageXML extends SfdxCommand {
         );
       });
 
-      /*     const packageJson = {
-          _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-          Package: {
-            _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-            types: [],
-            version: apiVersion
-          }
-        }; */
+      if (apiVersion >= 44.0) {
+        delete packageTypes['FlowDefinition'];
+      }
 
       const packageJson = {
         Package: {
