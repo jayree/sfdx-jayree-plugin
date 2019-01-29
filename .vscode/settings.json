@@ -14,7 +14,7 @@
   "prettier.tslintIntegration": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "editor.formatOnType": true
-  // "mocha.files.glob": "test/**/*test.ts",
-  // "mocha.requires": ["ts-node/register", "source-map-support/register"]
+  "editor.formatOnType": true,
+  "mocha.files.glob": "lib/test/**/*test.js",
+  "mocha.requires": ["ts-node/register", "source-map-support/register"]
 }
