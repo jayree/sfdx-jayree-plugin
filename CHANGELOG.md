@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.5.0...v0.5.1) (2019-01-29)
+
+
+### Bug Fixes
+
+* remove per-env as dependency to remove git as peer-dependency ([045bb1d](https://github.com/jayree/sfdx-jayree-plugin/commit/045bb1d))
+
 # [0.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.8...v0.5.0) (2019-01-24)
 
 
