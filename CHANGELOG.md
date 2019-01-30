@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.5.1...v0.6.0) (2019-01-30)
+
+
+### Features
+
+* **packagexml:** include only exinsting and valid StandardValueSets ([08a4f2c](https://github.com/jayree/sfdx-jayree-plugin/commit/08a4f2c))
+
 ## [0.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.5.0...v0.5.1) (2019-01-29)
 
 
