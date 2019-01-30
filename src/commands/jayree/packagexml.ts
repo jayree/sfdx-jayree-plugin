@@ -364,74 +364,89 @@ export default class GeneratePackageXML extends SfdxCommand {
       /* istanbul ignore else*/
       if (!packageTypes['StandardValueSet']) {
         packageTypes['StandardValueSet'] = [];
-      }
-      [
-        'AccountContactMultiRoles',
-        'AccountContactRole',
-        'AccountOwnership',
-        'AccountRating',
-        'AccountType',
-        'AddressCountryCode',
-        'AddressStateCode',
-        'AssetStatus',
-        'CampaignMemberStatus',
-        'CampaignStatus',
-        'CampaignType',
-        'CaseContactRole',
-        'CaseOrigin',
-        'CasePriority',
-        'CaseReason',
-        'CaseStatus',
-        'CaseType',
-        'ContactRole',
-        'ContractContactRole',
-        'ContractStatus',
-        'EntitlementType',
-        'EventSubject',
-        'EventType',
-        'FiscalYearPeriodName',
-        'FiscalYearPeriodPrefix',
-        'FiscalYearQuarterName',
-        'FiscalYearQuarterPrefix',
-        'IdeaCategory',
-        'IdeaMultiCategory',
-        'IdeaStatus',
-        'IdeaThemeStatus',
-        'Industry',
-        'InvoiceStatus',
-        'LeadSource',
-        'LeadStatus',
-        'OpportunityCompetitor',
-        'OpportunityStage',
-        'OpportunityType',
-        'OrderStatus',
-        'OrderType',
-        'PartnerRole',
-        'Product2Family',
-        'QuestionOrigin',
-        'QuickTextCategory',
-        'QuickTextChannel',
-        'QuoteStatus',
-        'SalesTeamRole',
-        'Salutation',
-        'ServiceContractApprovalStatus',
-        'SocialPostClassification',
-        'SocialPostEngagementLevel',
-        'SocialPostReviewedStatus',
-        'SolutionStatus',
-        'TaskPriority',
-        'TaskStatus',
-        'TaskSubject',
-        'TaskType',
-        'WorkOrderLineItemStatus',
-        'WorkOrderPriority',
-        'WorkOrderStatus'
-      ].forEach(member => {
-        packageTypes['StandardValueSet'].pushUniqueValueKey(
-          { fullName: member, fileName: `${member}.standardValueSet` },
-          'fullName'
+        await Promise.all(
+          [
+            'AccountContactMultiRoles',
+            'AccountContactRole',
+            'AccountOwnership',
+            'AccountRating',
+            'AccountType',
+            'AddressCountryCode',
+            'AddressStateCode',
+            'AssetStatus',
+            'CampaignMemberStatus',
+            'CampaignStatus',
+            'CampaignType',
+            'CaseContactRole',
+            'CaseOrigin',
+            'CasePriority',
+            'CaseReason',
+            'CaseStatus',
+            'CaseType',
+            'ContactRole',
+            'ContractContactRole',
+            'ContractStatus',
+            'EntitlementType',
+            'EventSubject',
+            'EventType',
+            'FiscalYearPeriodName',
+            'FiscalYearPeriodPrefix',
+            'FiscalYearQuarterName',
+            'FiscalYearQuarterPrefix',
+            'IdeaCategory',
+            'IdeaMultiCategory',
+            'IdeaStatus',
+            'IdeaThemeStatus',
+            'Industry',
+            'InvoiceStatus',
+            'LeadSource',
+            'LeadStatus',
+            'OpportunityCompetitor',
+            'OpportunityStage',
+            'OpportunityType',
+            'OrderStatus',
+            'OrderType',
+            'PartnerRole',
+            'Product2Family',
+            'QuestionOrigin',
+            'QuickTextCategory',
+            'QuickTextChannel',
+            'QuoteStatus',
+            'SalesTeamRole',
+            'Salutation',
+            'ServiceContractApprovalStatus',
+            'SocialPostClassification',
+            'SocialPostEngagementLevel',
+            'SocialPostReviewedStatus',
+            'SolutionStatus',
+            'TaskPriority',
+            'TaskStatus',
+            'TaskSubject',
+            'TaskType',
+            'WorkOrderLineItemStatus',
+            'WorkOrderPriority',
+            'WorkOrderStatus'
+          ].map(async member => {
+            try {
+              const standardvaluesets = await this.toolingQuery(
+                conn,
+                `SELECT metadata FROM StandardValueset WHERE masterlabel = '${member}'`
+              );
+              const meta = standardvaluesets.records[0]['Metadata']['standardValue'];
+              if (meta.length > 0) {
+                packageTypes['StandardValueSet'].pushUniqueValueKey(
+                  { fullName: member, fileName: `${member}.standardValueSet` },
+                  'fullName'
+                );
+              } else {
+                this.logger.error(member + ' - Required field is missing: standardValue');
+              }
+            } catch (err) {
+              this.logger.error({ err: serializeError(err) });
+            }
+          })
         );
-      });
+      }
 
       if (apiVersion >= 44.0) {
         delete packageTypes['FlowDefinition'];

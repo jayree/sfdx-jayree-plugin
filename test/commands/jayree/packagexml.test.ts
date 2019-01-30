@@ -1094,6 +1094,24 @@ describe('QuickFilter', () => {
       expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
     });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'customlabelname', '-w'])
+    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -w', ctx => {
+      expect(ctx.stdout).to.contain('<members>customlabelname</members>');
+      expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
+      expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
+    });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'customlabelname', '-c'])
+    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -c', ctx => {
+      expect(ctx.stdout).to.contain('<members>customlabelname</members>');
+      expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
+      expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
+    });
 });
 
 describe('Write File', () => {
@@ -1232,5 +1250,148 @@ describe('Unfoldered Objects - Error', () => {
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
     .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
       expect(ctx.stderr).to.contain("Cannot read property 'metadataObjects' of null");
+    });
+});
+
+describe('test valid standardValueSet', () => {
+  beforeEach(() => {
+    $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+        resolve({
+          metadataObjects: [],
+          organizationNamespace: '',
+          partialSaveAllowed: true,
+          testRequired: false
+        });
+      });
+    });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+          resolve(undefined);
+        });
+      });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+          resolve({
+            size: 0,
+            totalSize: 10,
+            done: true,
+            queryLocator: null,
+            entityTypeName: 'FlowDefinition',
+            records: []
+          } as jsforce.QueryResult<{}>);
+        });
+      })
+      .onCall(1)
+      .callsFake(async () => {
+        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+          resolve({
+            size: 1,
+            totalSize: 1,
+            done: true,
+            queryLocator: null,
+            entityTypeName: 'StandardValueSet',
+            records: [
+              {
+                attributes: {
+                  type: 'StandardValueSet',
+                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles'
+                },
+                Metadata: {
+                  groupingStringEnum: null,
+                  sorted: false,
+                  standardValue: [
+                    {
+                      label: 'User',
+                      valueName: 'User'
+                    }
+                  ],
+                  urls: null
+                }
+              }
+            ]
+          } as jsforce.QueryResult<{}>);
+        });
+      });
+  });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
+    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+      expect(ctx.stdout).to.contain('AccountContactMultiRoles');
+    });
+});
+
+describe('test invalid standardValueSet', () => {
+  beforeEach(() => {
+    $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+        resolve({
+          metadataObjects: [],
+          organizationNamespace: '',
+          partialSaveAllowed: true,
+          testRequired: false
+        });
+      });
+    });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+          resolve(undefined);
+        });
+      });
+    $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery')
+      .onCall(0)
+      .callsFake(async () => {
+        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+          resolve({
+            size: 0,
+            totalSize: 10,
+            done: true,
+            queryLocator: null,
+            entityTypeName: 'FlowDefinition',
+            records: []
+          } as jsforce.QueryResult<{}>);
+        });
+      })
+      .onCall(1)
+      .callsFake(async () => {
+        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+          resolve({
+            size: 1,
+            totalSize: 1,
+            done: true,
+            queryLocator: null,
+            entityTypeName: 'StandardValueSet',
+            records: [
+              {
+                attributes: {
+                  type: 'StandardValueSet',
+                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles'
+                },
+                Metadata: {
+                  groupingStringEnum: null,
+                  sorted: false,
+                  standardValue: [],
+                  urls: null
+                }
+              }
+            ]
+          } as jsforce.QueryResult<{}>);
+        });
+      });
+  });
+  test
+    .stdout()
+    .stderr()
+    .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
+    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+      expect(ctx.stdout).to.not.contain('AccountContactMultiRoles');
     });
 });
