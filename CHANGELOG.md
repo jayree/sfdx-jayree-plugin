@@ -17,22 +17,22 @@
 
 ### Bug Fixes
 
-* add folders to package.xml ([b4a2076](https://github.com/jayree/sfdx-jayree-plugin/commit/b4a2076))
-* remove FlowDefinition if apiVersion >= 44.0 ([bb7e363](https://github.com/jayree/sfdx-jayree-plugin/commit/bb7e363))
+* **packagexml:**  add folders to package.xml ([b4a2076](https://github.com/jayree/sfdx-jayree-plugin/commit/b4a2076))
+* **packagexml:**  remove FlowDefinition if apiVersion >= 44.0 ([bb7e363](https://github.com/jayree/sfdx-jayree-plugin/commit/bb7e363))
 * update dependencies ([e10070e](https://github.com/jayree/sfdx-jayree-plugin/commit/e10070e))
 
 
 ### Features
 
-* rename config flag to configfile ([f4c8368](https://github.com/jayree/sfdx-jayree-plugin/commit/f4c8368))
+* **packagexml:**  rename config flag to configfile ([f4c8368](https://github.com/jayree/sfdx-jayree-plugin/commit/f4c8368))
 
 ## [0.4.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.4.7...v0.4.8) (2019-01-13)
 
 
 ### Bug Fixes
 
-* switch to fs-extra ([a7d56e3](https://github.com/jayree/sfdx-jayree-plugin/commit/a7d56e3))
-* undefined folderItem ([0811b82](https://github.com/jayree/sfdx-jayree-plugin/commit/0811b82))
+* **packagexml:**  switch to fs-extra ([a7d56e3](https://github.com/jayree/sfdx-jayree-plugin/commit/a7d56e3))
+* **packagexml:**  undefined folderItem ([0811b82](https://github.com/jayree/sfdx-jayree-plugin/commit/0811b82))
 * update dependencies ([4adde95](https://github.com/jayree/sfdx-jayree-plugin/commit/4adde95))
 
 
