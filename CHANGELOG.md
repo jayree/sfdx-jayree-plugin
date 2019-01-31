@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.6.0...v0.6.1) (2019-01-31)
+
+
+### Bug Fixes
+
+* **packagexml:** exclude namespacePrefix ([3c34675](https://github.com/jayree/sfdx-jayree-plugin/commit/3c34675))
+
 # [0.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.5.1...v0.6.0) (2019-01-30)
 
 
