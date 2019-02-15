@@ -185,9 +185,13 @@ export default class GeneratePackageXML extends SfdxCommand {
         const nsPrefixes = [];
         await Promise.all(
           ipPromise.map(async promise => {
-            (await promise).forEach(pkg => {
-              nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
-            });
+            const ip = await promise;
+            /* istanbul ignore else*/
+            if (typeof ip !== 'undefined') {
+              ip.forEach(pkg => {
+                nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
+              });
+            }
           })
         );
         nsPrefixes.forEach(prefix => {
