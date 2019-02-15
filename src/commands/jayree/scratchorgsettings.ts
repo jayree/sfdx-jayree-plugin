@@ -41,11 +41,29 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    const removeEmpty = obj => {
+      Object.entries(obj).forEach(
+        ([key, val]) =>
+          (val && typeof val === 'object' && removeEmpty(val)) || ((val === null || val === '') && delete obj[key])
+      );
+      return obj;
+    };
+
+    const sortKeys = obj => {
+      const ordered = {};
+      Object.keys(obj)
+        .sort()
+        .forEach(key => {
+          ordered[key] = obj[key];
+        });
+      return ordered;
+    };
+
     this.ux.startSpinner('Generating settings');
     await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
-    const settings = {};
+    let settings = {};
 
     await Promise.all(
       [
@@ -103,14 +121,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       })
     );
 
-    const removeEmpty = obj => {
-      Object.entries(obj).forEach(
-        ([key, val]) =>
-          (val && typeof val === 'object' && removeEmpty(val)) || ((val === null || val === '') && delete obj[key])
-      );
-      return obj;
-    };
-
     this.ux.stopSpinner();
     // fix hard coded things
 
@@ -130,6 +140,9 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     }
 
     settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] = 'EmailMessageEvent';
+    settings = removeEmpty(settings);
+    settings = sortKeys(settings);
+    settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath = path.join(await this.project.getPath(), 'config', 'project-scratch-def.json');
@@ -139,7 +152,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         .readFile(deffilepath, 'utf8')
         .then(data => {
           deffile = JSON.parse(data);
-          deffile['settings'] = removeEmpty(settings);
+          deffile['settings'] = settings;
         })
         .catch(err => {
           this.throwError(err);
@@ -150,7 +163,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       });
     } else {
       this.ux.styledHeader('received settings from Org: ' + this.org.getUsername() + ' (' + this.org.getOrgId() + ')');
-      this.ux.styledJSON(removeEmpty(settings));
+      this.ux.styledJSON(settings);
     }
 
     return {
