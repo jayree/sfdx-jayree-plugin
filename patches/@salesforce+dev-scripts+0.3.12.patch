@@ -1,5 +1,5 @@
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
-index d9f31b6..971c83b 100755
+index d9f31b6..43e1026 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-compile.js
 @@ -10,7 +10,8 @@ const shell = require('../utils/shelljs');
@@ -13,13 +13,13 @@ index d9f31b6..971c83b 100755
  shell.exec(`${tsc} -p . --pretty`, {
    cwd: packageRoot
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
-index 446c3a4..4f4c953 100755
+index 939048a..93626f9 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-docs.js
-@@ -12,7 +12,8 @@ const shell = require('../utils/shelljs');
- 
+@@ -13,7 +13,8 @@ const shell = require('../utils/shelljs');
  const loadRootPath = require('../utils/load-root-path');
  const packageRoot = require('../utils/package-path');
+ const { isMultiPackageProject } = require('../utils/project-type');
 -const typedoc = require.resolve('typedoc/bin/typedoc');
 +const path = require('path');
 +const typedoc = path.resolve(require.resolve('typedoc'), '../../../', '.bin', 'typedoc');
@@ -27,7 +27,7 @@ index 446c3a4..4f4c953 100755
  const options = require('@salesforce/dev-config/typedoc');
  
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
-index 68dc22e..0efef65 100755
+index 68dc22e..80f42b7 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
 @@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
@@ -41,44 +41,30 @@ index 68dc22e..0efef65 100755
  const extras = process.argv.slice(2).join(' ');
  
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
-index 981a56d..0b8dd7d 100755
+index 981a56d..65efd29 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-test.js
-@@ -11,7 +11,8 @@ const shell = require('../utils/shelljs');
+@@ -10,8 +10,8 @@ const shell = require('../utils/shelljs');
+ 
  const packageRoot = require('../utils/package-path');
  const SfdxDevConfig = require('../utils/sfdx-dev-config');
- 
+-
 -const nyc = require.resolve('nyc/bin/nyc');
 +const path = require('path');
 +const nyc = path.resolve(require.resolve('nyc'), '../../', '.bin', 'nyc');
  
  const config = new SfdxDevConfig(packageRoot);
  const testConfig = config.get('test') || {};
-diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-index 252ee33..a53119c 100644
---- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-+++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-@@ -36,7 +36,10 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
-       if (isLernaProject) {
-         scripts[scriptName] = `lerna run ${scriptName}`;
-       } else {
--        let scriptArgs = scriptFile.split('-');
-+        let scriptArgs = [];
-+        if (scriptFile) {
-+          scriptArgs = scriptFile.replace(/\-/, '#').split('#');
-+        }
-         if (scriptArgs.length > 1) {
-           const scriptFileName = scriptArgs[0];
-           scriptArgs = scriptArgs.splice(1).join(' ');
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 36c9e8c..48e6417 100644
+index 36c9e8c..ba3ff1d 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-@@ -11,14 +11,24 @@ const SfdxDevConfig = require('./sfdx-dev-config');
+@@ -11,14 +11,25 @@ const SfdxDevConfig = require('./sfdx-dev-config');
  
  module.exports = (projectPath, inLernaProject) => {
    const pjson = new PackageJson(projectPath);
 +  const pjson_devconfig = new PackageJson(process.cwd() + '/node_modules/@salesforce/dev-config');
++
  
    log(`Checking dependencies for ${pjson.name}`);
  
@@ -89,35 +75,33 @@ index 36c9e8c..48e6417 100644
    const added = [];
    const removed = [];
 +  const synced = [];
-+
++    
 +  const sync = name => {
 +    if (dependencies[name] !== dependencies_devconfig[name]) {
-+      synced.push(name + ' ' + dependencies[name] + ' => ' + dependencies_devconfig[name]);
++      +synced.push(name + ' ' + dependencies[name] + ' => ' + dependencies_devconfig[name]);
 +      dependencies[name] = dependencies_devconfig[name];
-+    }
++    } 
 +  };
  
    const remove = name => {
      if (dependencies[name]) {
-@@ -40,12 +50,15 @@ module.exports = (projectPath, inLernaProject) => {
+@@ -40,12 +51,13 @@ module.exports = (projectPath, inLernaProject) => {
  
    // Included by dev-scripts
    remove('nyc');
 -  remove('typescript');
-+  // remove('typescript');
-+  sync('typescript')
++  sync('typescript');
    remove('ts-node');
    remove('@commitlint/cli');
    remove('@commitlint/config-conventional');
    remove('source-map-support');
 -  remove('tslint');
-+  // remove('tslint');
 +  sync('tslint');
 +  sync('tslint-microsoft-contrib');
    remove('xunit-file');
    remove('sinon');
    remove('mocha');
-@@ -65,6 +78,11 @@ module.exports = (projectPath, inLernaProject) => {
+@@ -65,6 +77,11 @@ module.exports = (projectPath, inLernaProject) => {
      added.forEach(dep => log(dep, 2));
    }
  

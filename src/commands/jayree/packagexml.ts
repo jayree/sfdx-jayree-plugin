@@ -51,7 +51,8 @@ if (!String.prototype.toLowerCaseifTrue) {
 
 /* istanbul ignore else*/
 if (Symbol['asyncIterator'] === undefined) {
-  (Symbol as AsyncIterableIterator<{}>)['asyncIterator'] = Symbol.for('asyncIterator');
+  // tslint:disable-next-line: no-any
+  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
 }
 
 /**
@@ -185,9 +186,13 @@ export default class GeneratePackageXML extends SfdxCommand {
         const nsPrefixes = [];
         await Promise.all(
           ipPromise.map(async promise => {
-            (await promise).forEach(pkg => {
-              nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
-            });
+            const ip = await promise;
+            /* istanbul ignore else*/
+            if (typeof ip !== 'undefined') {
+              ip.forEach(pkg => {
+                nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
+              });
+            }
           })
         );
         nsPrefixes.forEach(prefix => {
