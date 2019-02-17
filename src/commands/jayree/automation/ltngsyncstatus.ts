@@ -62,8 +62,8 @@ export default class UserSyncStatus extends SfdxCommand {
       tables = await this.gettables(page);
 
       if (
-        (!(tables.System.orgConfigInfo['Connection method configured'] === 'No') ||
-          tables.System.orgConfigInfo['Outlook Integration enabled'] === 'Yes') &&
+        (!(tables.System['orgConfigInfo']['Connection method configured'] === 'No') ||
+          tables.System['orgConfigInfo']['Outlook Integration enabled'] === 'Yes') &&
         this.flags.officeuser
       ) {
         let userSetup;
@@ -105,7 +105,7 @@ export default class UserSyncStatus extends SfdxCommand {
     this.ux.startSpinner('configSetup: User assigned to active Lightning Sync configuration');
     let tables = await this.checkstatus(page);
     let configSetupItem;
-    if (tables.System.orgConfigInfo['Users with linked Exchange and Salesforce email addresses'] !== '0') {
+    if (tables.System['orgConfigInfo']['Users with linked Exchange and Salesforce email addresses'] !== '0') {
       await page.focus('#resetExchangeSyncUser');
       await page.keyboard.type(this.flags.officeuser);
 
