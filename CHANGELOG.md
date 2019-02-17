@@ -1,3 +1,18 @@
+# [0.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.6.1...v0.7.0) (2019-02-17)
+
+
+### Bug Fixes
+
+* update dependencies ([c9eda0b](https://github.com/jayree/sfdx-jayree-plugin/commit/c9eda0b))
+* **automation:** update puppeteer and other deps ([c91b9a6](https://github.com/jayree/sfdx-jayree-plugin/commit/c91b9a6))
+* **ltngsyncstatus:** adjustments due to puppeteer changes ([bcf5c1c](https://github.com/jayree/sfdx-jayree-plugin/commit/bcf5c1c))
+* **packagexml:** generate manifest if no InstalledPackages are available ([14e8d8c](https://github.com/jayree/sfdx-jayree-plugin/commit/14e8d8c))
+
+
+### Features
+
+* **scratchorgsettings:** add scratchorgsettings command ([920e65a](https://github.com/jayree/sfdx-jayree-plugin/commit/920e65a))
+
 ## [0.6.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.6.0...v0.6.1) (2019-01-31)
 
 
