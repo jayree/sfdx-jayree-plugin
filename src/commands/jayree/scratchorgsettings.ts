@@ -10,7 +10,8 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgsettings')
 
 /* istanbul ignore else*/
 if (Symbol['asyncIterator'] === undefined) {
-  (Symbol as AsyncIterableIterator<{}>)['asyncIterator'] = Symbol.for('asyncIterator');
+  // tslint:disable-next-line: no-any
+  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
 }
 
 function camelize(str) {
