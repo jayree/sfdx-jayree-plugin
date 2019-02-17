@@ -33,6 +33,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     writetoprojectscratchdeffile: flags.boolean({
       char: 'w',
       description: messages.getMessage('writetoprojectscratchdeffile')
+    }),
+    file: flags.string({
+      char: 'f',
+      description: messages.getMessage('fileFlagDescription')
     })
   };
 
@@ -145,7 +149,8 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
 
     if (this.flags.writetoprojectscratchdeffile) {
-      const deffilepath = path.join(await this.project.getPath(), 'config', 'project-scratch-def.json');
+      const deffilepath =
+        this.flags.file || path.join(await this.project.getPath(), 'config', 'project-scratch-def.json');
       let deffile = {};
 
       await fs
@@ -155,7 +160,11 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           deffile['settings'] = settings;
         })
         .catch(err => {
-          this.throwError(err);
+          if (err.code === 'ENOENT' && !this.flags.file) {
+            throw Error("default file 'project-scratch-def.json' not found, please use --file flag");
+          } else {
+            this.throwError(err);
+          }
         });
 
       await fs.writeFile(deffilepath, JSON.stringify(deffile, null, 2)).catch(err => {

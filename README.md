@@ -313,6 +313,7 @@ USAGE
   $ sfdx jayree:scratchorgsettings
 
 OPTIONS
+  -f, --file=file                                 write to 'file' instead of project-scratch-def.json
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   -w, --writetoprojectscratchdeffile              write output to project-scratch-def.json file
   --apiversion=apiversion                         override the api version used for api requests made by this command
