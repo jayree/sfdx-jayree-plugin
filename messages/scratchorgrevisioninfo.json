@@ -1,0 +1,4 @@
+{
+  "commandDescription": "list changes in a scratch org by RevisionNum and show MAX(RevisionNum)",
+  "startfromrevision": "set startRevisionNum for the list of changes (default: 0)"
+}

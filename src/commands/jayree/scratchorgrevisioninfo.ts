@@ -4,7 +4,7 @@ import * as util from 'util';
 
 core.Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgsettings');
+const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgrevisioninfo');
 
 /* istanbul ignore else*/
 if (Symbol['asyncIterator'] === undefined) {
@@ -16,15 +16,16 @@ export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:scratchorgsettings
-$ sfdx jayree:scratchorgsettings -u me@my.org
-$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
+    `$ sfdx jayree:scratchorgrevisioninfo
+$ sfdx jayree:scratchorgrevisioninfo -u me@my.org
+$ sfdx jayree:scratchorgrevisioninfo -u MyTestOrg1 -w`
   ];
 
   protected static flagsConfig = {
-    localfromrevision: flags.integer({
+    startfromrevision: flags.integer({
       char: 'r',
-      description: messages.getMessage('writetoprojectscratchdeffile')
+      description: messages.getMessage('startfromrevision'),
+      default: 0
     })
   };
 
@@ -42,19 +43,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       return Promise.reject(Error('invalidResponseFromQuery'));
     });
     this.ux.styledHeader('MAX(RevisionNum): ' + maxRev);
-
-    const sourceMemberResults = await conn.tooling
-      .sobject('SourceMember')
-      .find({ RevisionNum: { $gt: this.flags.localfromrevision } }, ['RevisionNum', 'MemberType', 'MemberName'])
-      .then(results => {
-        return results.map(sourceMember => {
-          return {
-            MemberType: sourceMember['MemberType'],
-            MemberName: sourceMember['MemberName'],
-            RevisionNum: sourceMember['RevisionNum']
-          };
-        });
-      });
 
     const sortJson = (obj, key) => {
       return obj
@@ -78,9 +66,12 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         });
     };
 
-    const sortedSourceMemberResults = sortJson(sourceMemberResults, 'RevisionNum');
+    const sourceMemberResults = await conn.tooling
+      .sobject('SourceMember')
+      .find({ RevisionNum: { $gt: this.flags.startfromrevision } }, ['RevisionNum', 'MemberType', 'MemberName'])
+      .then(results => sortJson(results, 'RevisionNum'));
 
-    this.ux.table(sortedSourceMemberResults, {
+    this.ux.table(sourceMemberResults, {
       columns: [
         {
           key: 'RevisionNum'
@@ -96,7 +87,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     return {
       maxRev,
-      sourceMember: sortedSourceMemberResults,
+      sourceMember: sourceMemberResults,
       orgId: this.org.getOrgId(),
       username: this.org.getUsername()
     };

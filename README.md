@@ -307,23 +307,23 @@ _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-ja
 
 ## `sfdx jayree:scratchorgrevisioninfo`
 
-receive the current settings from an Org
+list changes in a scratch org by RevisionNum and show MAX(RevisionNum)
 
 ```
 USAGE
   $ sfdx jayree:scratchorgrevisioninfo
 
 OPTIONS
-  -r, --localfromrevision=localfromrevision       write output to project-scratch-def.json file
+  -r, --startfromrevision=startfromrevision       set startRevisionNum for the list of changes (default: 0)
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
   --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
-  $ sfdx jayree:scratchorgsettings
-  $ sfdx jayree:scratchorgsettings -u me@my.org
-  $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w
+  $ sfdx jayree:scratchorgrevisioninfo
+  $ sfdx jayree:scratchorgrevisioninfo -u me@my.org
+  $ sfdx jayree:scratchorgrevisioninfo -u MyTestOrg1 -w
 ```
 
 _See code: [src/commands/jayree/scratchorgrevisioninfo.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/scratchorgrevisioninfo.ts)_
