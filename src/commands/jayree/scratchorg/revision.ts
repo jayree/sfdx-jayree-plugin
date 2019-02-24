@@ -34,9 +34,9 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       char: 's',
       description: messages.getMessage('setlocalmaxrevision')
     }),
-    setlocalrevision: flags.integer({
+    setlocalrevisionvalue: flags.integer({
       char: 'v',
-      description: messages.getMessage('setlocalrevision'),
+      description: messages.getMessage('setlocalrevisionvalue'),
       default: 0,
       dependsOn: ['setlocalmaxrevision']
     })
@@ -81,7 +81,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     let newlocalmaxRev = maxrevfile;
 
     if (this.flags.setlocalmaxrevision) {
-      newlocalmaxRev = this.flags.setlocalrevision || maxRev;
+      newlocalmaxRev = this.flags.setlocalrevisionvalue || maxRev;
       await fs.ensureFile(maxrevpath);
       await fs.writeFile(maxrevpath, newlocalmaxRev).catch(err => {
         this.throwError(err);

@@ -46,8 +46,8 @@ USAGE
 * [`sfdx jayree:packagedescription:remove [FILE]`](#sfdx-jayreepackagedescriptionremove-file)
 * [`sfdx jayree:packagedescription:set [FILE]`](#sfdx-jayreepackagedescriptionset-file)
 * [`sfdx jayree:packagexml [FILE]`](#sfdx-jayreepackagexml-file)
-* [`sfdx jayree:scratchorgrevision`](#sfdx-jayreescratchorgrevision)
-* [`sfdx jayree:scratchorgsettings`](#sfdx-jayreescratchorgsettings)
+* [`sfdx jayree:scratchorg:revision`](#sfdx-jayreescratchorgrevision)
+* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
 
 ## `sfdx jayree:automation:changeset:deploy`
 
@@ -305,22 +305,22 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/packagexml.ts)_
 
-## `sfdx jayree:scratchorgrevision`
+## `sfdx jayree:scratchorg:revision`
 
 list changes in a scratch org by remote RevisionNum and set local maxrevision
 
 ```
 USAGE
-  $ sfdx jayree:scratchorgrevision
+  $ sfdx jayree:scratchorg:revision
 
 OPTIONS
-  -r, --startfromrevision=startfromrevision       set startRevisionNum for the list of changes (default: 0)
-  -s, --setlocalmaxrevision                       set local maxrevision (default: remote maxrevision)
-  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
-  -v, --setlocalrevision=setlocalrevision         set local maxrevision value
-  --apiversion=apiversion                         override the api version used for api requests made by this command
-  --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  -r, --startfromrevision=startfromrevision          set startRevisionNum for the list of changes (default: 0)
+  -s, --setlocalmaxrevision                          set local maxrevision (default: remote maxrevision)
+  -u, --targetusername=targetusername                username or alias for the target org; overrides default target org
+  -v, --setlocalrevisionvalue=setlocalrevisionvalue  set local maxrevision value
+  --apiversion=apiversion                            override the api version used for api requests made by this command
+  --json                                             format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)     logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:scratchorgrevision
@@ -328,15 +328,15 @@ EXAMPLE
   $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/scratchorgrevision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/scratchorgrevision.ts)_
+_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/scratchorg/revision.ts)_
 
-## `sfdx jayree:scratchorgsettings`
+## `sfdx jayree:scratchorg:settings`
 
-receive the current settings from an Org
+write the current settings from an Org to a scratch org def file
 
 ```
 USAGE
-  $ sfdx jayree:scratchorgsettings
+  $ sfdx jayree:scratchorg:settings
 
 OPTIONS
   -f, --file=file                                 write to 'file' instead of project-scratch-def.json
@@ -352,5 +352,5 @@ EXAMPLE
   $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/scratchorgsettings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/scratchorgsettings.ts)_
+_See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v0.7.0/src/commands/jayree/scratchorg/settings.ts)_
 <!-- commandsstop -->

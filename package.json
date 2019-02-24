@@ -73,6 +73,10 @@
             "name": "org",
             "description": "manage your orgs"
           },
+          "scratchorg": {
+            "name": "scratchorg",
+            "description": "scratch org tools"
+          },
           "automation": {
             "name": "automation",
             "description": "headless browser automation tools",

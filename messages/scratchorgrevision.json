@@ -2,5 +2,5 @@
   "commandDescription": "list changes in a scratch org by remote RevisionNum and set local maxrevision",
   "startfromrevision": "set startRevisionNum for the list of changes (default: 0)",
   "setlocalmaxrevision": "set local maxrevision (default: remote maxrevision)",
-  "setlocalrevision": "set local maxrevision value"
+  "setlocalrevisionvalue": "set local maxrevision value"
 }
