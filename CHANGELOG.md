@@ -1,3 +1,21 @@
+# [1.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.7.0...v1.0.0) (2019-02-27)
+
+
+### Bug Fixes
+
+* update dependencies ([0713bac](https://github.com/jayree/sfdx-jayree-plugin/commit/0713bac))
+
+
+### Features
+
+* **scratchorg:** add scratchorg topic ([7f19264](https://github.com/jayree/sfdx-jayree-plugin/commit/7f19264))
+* **scratchorgrevision:** add scratchorgrevision command ([#64](https://github.com/jayree/sfdx-jayree-plugin/issues/64)) ([c7ba5b8](https://github.com/jayree/sfdx-jayree-plugin/commit/c7ba5b8))
+
+
+### BREAKING CHANGES
+
+* **scratchorg:** The scratch org commands have been moved to the new scratchorg topic
+
 # [0.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.6.1...v0.7.0) (2019-02-17)
 
 
