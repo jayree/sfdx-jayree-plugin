@@ -241,7 +241,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                   metadataEntries.manageableState === 'installed')
               )
             ) {
-              if (metadataEntries.fileName.includes('ValueSetTranslation')) {
+              if (typeof metadataEntries.type !== 'string') {
                 const x =
                   metadataEntries.fileName
                     .split('.')[1]
