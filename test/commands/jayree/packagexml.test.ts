@@ -664,7 +664,7 @@ describe('ValueSetTranslations', () => {
           fullName: 'testvalueset1-xx',
           id: '',
           namespacePrefix: '',
-          type: 'globalValueSetTranslation'
+          type: { $: { 'xsi:nil': 'true' } }
         },
         {
           ...createdlastModifiedfields,
@@ -672,7 +672,7 @@ describe('ValueSetTranslations', () => {
           fullName: 'testvalueset2-xx',
           id: '',
           namespacePrefix: '',
-          type: 'globalValueSetTranslation'
+          type: { $: { 'xsi:nil': 'true' } }
         }
       ]);
     });

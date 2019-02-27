@@ -1,5 +1,5 @@
 {
-  "commandDescription": "receive the current settings from an Org",
+  "commandDescription": "write the current settings from an Org to a scratch org def file",
   "writetoprojectscratchdeffile": "write output to project-scratch-def.json file",
   "fileFlagDescription": "write to 'file' instead of project-scratch-def.json"
 }
