@@ -314,13 +314,15 @@ USAGE
   $ sfdx jayree:scratchorg:revision
 
 OPTIONS
-  -r, --startfromrevision=startfromrevision          set startRevisionNum for the list of changes (default: 0)
-  -s, --setlocalmaxrevision                          set local maxrevision (default: remote maxrevision)
-  -u, --targetusername=targetusername                username or alias for the target org; overrides default target org
-  -v, --setlocalrevisionvalue=setlocalrevisionvalue  set local maxrevision value
-  --apiversion=apiversion                            override the api version used for api requests made by this command
-  --json                                             format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)     logging level for this command invocation
+  -b, --storerevision                             set local maxrevision (default: remote maxrevision)
+  -r, --restorerevision                           set local maxrevision (default: remote maxrevision)
+  -r, --startfromrevision=startfromrevision       set startRevisionNum for the list of changes (default: 0)
+  -s, --setlocalmaxrevision                       set local maxrevision (default: remote maxrevision)
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  -v, --localrevisionvalue=localrevisionvalue     set local maxrevision value
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:scratchorgrevision

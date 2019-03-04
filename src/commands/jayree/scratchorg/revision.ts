@@ -34,10 +34,19 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       char: 's',
       description: messages.getMessage('setlocalmaxrevision')
     }),
-    setlocalrevisionvalue: flags.integer({
+    storerevision: flags.boolean({
+      char: 'b',
+      description: messages.getMessage('setlocalmaxrevision')
+    }),
+    restorerevision: flags.boolean({
+      char: 'r',
+      description: messages.getMessage('setlocalmaxrevision'),
+      dependsOn: ['setlocalmaxrevision'],
+      exclusive: ['localrevisionvalue', 'storerevision']
+    }),
+    localrevisionvalue: flags.integer({
       char: 'v',
-      description: messages.getMessage('setlocalrevisionvalue'),
-      default: 0,
+      description: messages.getMessage('localrevisionvalue'),
       dependsOn: ['setlocalmaxrevision']
     })
   };
@@ -47,6 +56,20 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    if (!this.flags.setlocalmaxrevision) {
+      // workaround as 0 is not a valid flag value at all
+      if (this.flags.localrevisionvalue === 0) {
+        throw Error('--setlocalmaxrevision= must also be provided when using --localrevisionvalue=');
+      }
+    }
+
+    if (this.flags.restorerevision) {
+      // workaround as 0 is not a valid flag value at all
+      if (this.flags.localrevisionvalue === 0) {
+        throw Error('--localrevisionvalue= cannot also be provided when using --restorerevision=');
+      }
+    }
+
     const conn = this.org.getConnection();
 
     const maxRev = await conn.tooling.query('SELECT MAX(RevisionNum) maxRev from SourceMember').then(result => {
@@ -63,6 +86,15 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       this.org.getUsername(),
       'maxrevision.json'
     );
+
+    const storedmaxrevpath = path.join(
+      await this.project.getPath(),
+      '.sfdx-jayree',
+      'orgs',
+      this.org.getUsername(),
+      'storedmaxrevision.json'
+    );
+
     let maxrevfile;
 
     await fs
@@ -78,12 +110,41 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         }
       });
 
+    let storedmaxrevfile;
+
+    await fs
+      .readFile(storedmaxrevpath, 'utf8')
+      .then(data => {
+        storedmaxrevfile = parseInt(data, 10);
+      })
+      .catch(err => {
+        if (err.code === 'ENOENT') {
+          storedmaxrevfile = null;
+        } else {
+          this.throwError(err);
+        }
+      });
+
     let newlocalmaxRev = maxrevfile;
+    let newstoredmaxrev = storedmaxrevfile;
 
     if (this.flags.setlocalmaxrevision) {
-      newlocalmaxRev = this.flags.setlocalrevisionvalue || maxRev;
+      // newlocalmaxRev = this.flags.localrevisionvalue >= 0 ? this.flags.localrevisionvalue : maxRev;
+      newlocalmaxRev = this.flags.restorerevision
+        ? storedmaxrevfile
+        : this.flags.localrevisionvalue >= 0
+        ? this.flags.localrevisionvalue
+        : maxRev;
+      newstoredmaxrev = this.flags.storerevision ? newlocalmaxRev : newstoredmaxrev;
       await fs.ensureFile(maxrevpath);
       await fs.writeFile(maxrevpath, newlocalmaxRev).catch(err => {
+        this.throwError(err);
+      });
+    }
+
+    if (this.flags.storerevision) {
+      await fs.ensureFile(storedmaxrevpath);
+      await fs.writeFile(storedmaxrevpath, newstoredmaxrev).catch(err => {
         this.throwError(err);
       });
     }
@@ -98,21 +159,74 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     const sourceMemberResults = (await conn.tooling
       .sobject('SourceMember')
       .find({ RevisionNum: { $gt: this.flags.startfromrevision } }, ['RevisionNum', 'MemberType', 'MemberName'])
-      .then(results =>
-        results
-          .map(value => {
-            const keyval = value['RevisionNum'];
+      .then(results => {
+        let islocalinmap = false;
+        let isstoredinmap = false;
+
+        const tablemap = results.map(value => {
+          const keyval = value['RevisionNum'];
+          if (keyval === newlocalmaxRev) {
+            islocalinmap = true;
+          }
+          if (keyval === newstoredmaxrev) {
+            isstoredinmap = true;
+          }
+          if (keyval === maxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
+          }
+          if (keyval === newlocalmaxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [local]';
+          }
+          if (keyval === newstoredmaxrev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+          }
+          if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
+          }
+          return [keyval, value];
+        });
+
+        if (!islocalinmap) {
+          const keyval = newlocalmaxRev;
+          const value = [];
+          value['RevisionNum'] = newlocalmaxRev;
+          if (keyval === maxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
+          }
+          if (keyval === newlocalmaxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [local]';
+          }
+          if (keyval === newstoredmaxrev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+          }
+          if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
+            value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
+          }
+          tablemap.push([keyval, value]);
+        }
+
+        if (newstoredmaxrev !== newlocalmaxRev) {
+          if (!isstoredinmap) {
+            const keyval = newstoredmaxrev;
+            const value = [];
+            value['RevisionNum'] = newstoredmaxrev;
             if (keyval === maxRev) {
               value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
             }
             if (keyval === newlocalmaxRev) {
               value['RevisionNum'] = value['RevisionNum'] + ' [local]';
             }
+            if (keyval === newstoredmaxrev) {
+              value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+            }
             if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
               value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
             }
-            return [keyval, value];
-          })
+            tablemap.push([keyval, value]);
+          }
+        }
+
+        return tablemap
           .sort((a, b) => {
             if (a[0] === b[0]) {
               return 0;
@@ -124,8 +238,8 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
             return {
               ...(value[1] as {})
             };
-          })
-      )) as [];
+          });
+      })) as [];
 
     this.ux.table(sourceMemberResults, {
       columns: [
