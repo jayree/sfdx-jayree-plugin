@@ -65,7 +65,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     };
 
     this.ux.startSpinner('Generating settings');
-    await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
     let settings = {};

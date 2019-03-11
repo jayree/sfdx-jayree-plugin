@@ -48,7 +48,6 @@ export default class UserSyncStatus extends SfdxCommand {
     let tables;
 
     try {
-      await this.org.refreshAuth();
       const conn = this.org.getConnection();
 
       const page = await browser.newPage();
