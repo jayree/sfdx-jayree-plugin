@@ -312,6 +312,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                       // this.ux.warn(`${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`);
                     }
                   } else {
+                    /* istanbul ignore next */
                     if (
                       metadataEntries.fullName === 'Account.PersonAccount' &&
                       metadataEntries.fileName === 'objects/Account.object' &&
@@ -602,6 +603,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           warnings: filteredwarnings
         };
       } catch (error) {
+        /* istanbul ignore next */
         if (error.code === 'ENOTFOUND' && retries < 10) {
           this.ux.setSpinnerStatus('retry: ' + (retries + 1).toString());
           continue;
