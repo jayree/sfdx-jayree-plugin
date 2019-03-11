@@ -314,8 +314,8 @@ USAGE
   $ sfdx jayree:scratchorg:revision
 
 OPTIONS
-  -b, --storerevision                             set local maxrevision (default: remote maxrevision)
-  -r, --restorerevision                           set local maxrevision (default: remote maxrevision)
+  -b, --storerevision                             store maxrevision value
+  -r, --restorerevision                           restore maxrevision value
   -r, --startfromrevision=startfromrevision       set startRevisionNum for the list of changes (default: 0)
   -s, --setlocalmaxrevision                       set local maxrevision (default: remote maxrevision)
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org

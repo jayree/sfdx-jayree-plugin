@@ -36,11 +36,11 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     }),
     storerevision: flags.boolean({
       char: 'b',
-      description: messages.getMessage('setlocalmaxrevision')
+      description: messages.getMessage('storerevision')
     }),
     restorerevision: flags.boolean({
       char: 'r',
-      description: messages.getMessage('setlocalmaxrevision'),
+      description: messages.getMessage('restorerevision'),
       dependsOn: ['setlocalmaxrevision'],
       exclusive: ['localrevisionvalue', 'storerevision']
     }),
@@ -104,7 +104,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       })
       .catch(err => {
         if (err.code === 'ENOENT') {
-          maxrevfile = null;
+          maxrevfile = 0;
         } else {
           this.throwError(err);
         }
@@ -119,7 +119,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       })
       .catch(err => {
         if (err.code === 'ENOENT') {
-          storedmaxrevfile = null;
+          storedmaxrevfile = 0;
         } else {
           this.throwError(err);
         }
