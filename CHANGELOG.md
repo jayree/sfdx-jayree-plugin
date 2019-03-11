@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.0.0...v1.1.0) (2019-03-11)
+
+
+### Bug Fixes
+
+* **packagexml:** fix ENOTFOUND error and PersonAccount references ([7512cf1](https://github.com/jayree/sfdx-jayree-plugin/commit/7512cf1))
+
+
+### Features
+
+* **scratchorg:** enhance revision command ([#66](https://github.com/jayree/sfdx-jayree-plugin/issues/66)) ([7c86d35](https://github.com/jayree/sfdx-jayree-plugin/commit/7c86d35))
+
 # [1.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v0.7.0...v1.0.0) (2019-02-27)
 
 
