@@ -21,7 +21,6 @@ Coverage: 82%
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
     const query1 = await conn.tooling.query(

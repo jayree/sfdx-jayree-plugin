@@ -82,7 +82,6 @@ $ sfdx jayree:org:open -u me@my.org`
         throw Error('OS ' + process.platform + ' is not supported yet.');
     }
 
-    await this.org.refreshAuth();
     const conn = this.org.getConnection();
     let url = conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken;
 

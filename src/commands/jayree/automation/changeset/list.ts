@@ -26,7 +26,6 @@ export default class ViewChangeSets extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({

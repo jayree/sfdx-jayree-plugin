@@ -132,7 +132,6 @@ export default class GeneratePackageXML extends SfdxCommand {
 
     for (let retries = 0; ; retries++) {
       try {
-        await this.org.refreshAuth();
         const conn = this.org.getConnection();
         const describe = await this.getMetaData(conn, apiVersion);
         const folders = [];
@@ -603,7 +602,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           warnings: filteredwarnings
         };
       } catch (error) {
-        if (error.code === 'ENOTFOUND' && retries < 6) {
+        if (error.code === 'ENOTFOUND' && retries < 10) {
           this.ux.setSpinnerStatus('retry: ' + (retries + 1).toString());
           continue;
         } else {

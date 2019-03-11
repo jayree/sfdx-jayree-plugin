@@ -65,7 +65,6 @@ jobid:  0Xxx100000xx1x1
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({
