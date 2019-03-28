@@ -30,10 +30,9 @@ if (!Array.prototype.pushUniqueValueKey) {
   };
 }
 
-/* istanbul ignore else*/
+/* istanbul ignore next*/
 if (!Array.prototype.pushUniqueValue) {
   Array.prototype.pushUniqueValue = function<T>(elem: T): T[] {
-    /* istanbul ignore else*/
     if (!this.includes(elem)) {
       this.push(elem);
     }
@@ -183,23 +182,23 @@ export default class GeneratePackageXML extends SfdxCommand {
          */
         let ipRegexStr = '^(';
 
-        if (ipPromise.length > 0) {
-          const nsPrefixes = [];
-          await Promise.all(
-            ipPromise.map(async promise => {
-              const ip = await promise;
-              /* istanbul ignore else*/
-              if (typeof ip !== 'undefined') {
-                ip.forEach(pkg => {
-                  nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
-                });
-              }
-            })
-          );
-          nsPrefixes.forEach(prefix => {
-            ipRegexStr += prefix + '|';
-          });
-        }
+        // if (ipPromise.length > 0) {
+        //   const nsPrefixes = [];
+        //   await Promise.all(
+        //     ipPromise.map(async promise => {
+        //       const ip = await promise;
+        //       /* istanbul ignore else*/
+        //       if (typeof ip !== 'undefined') {
+        //         ip.forEach(pkg => {
+        //           nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
+        //         });
+        //       }
+        //     })
+        //   );
+        //   nsPrefixes.forEach(prefix => {
+        //     ipRegexStr += prefix + '|';
+        //   });
+        // }
 
         ipRegexStr += ')+__';
 
@@ -605,7 +604,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       } catch (error) {
         /* istanbul ignore next */
         if (error.code === 'ENOTFOUND' && retries < 10) {
-          this.ux.setSpinnerStatus('retry: ' + (retries + 1).toString());
+          this.logger.error('retry: ' + (retries + 1).toString());
           continue;
         } else {
           this.throwError(error);
