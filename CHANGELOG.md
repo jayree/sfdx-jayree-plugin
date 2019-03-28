@@ -1,3 +1,14 @@
+## [1.1.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.1.0...v1.1.1) (2019-03-28)
+
+
+### Bug Fixes
+
+* update dependencies ([e026a47](https://github.com/jayree/sfdx-jayree-plugin/commit/e026a47))
+* **automation:** align flag behaviour with upcomming changes ([c92b333](https://github.com/jayree/sfdx-jayree-plugin/commit/c92b333))
+* **ltngsyncstatus:** align flag behaviour with upcomming changes ([feaab03](https://github.com/jayree/sfdx-jayree-plugin/commit/feaab03))
+* **packagexml:** not exclude content of pkgs with excludemanaged flag ([629fa51](https://github.com/jayree/sfdx-jayree-plugin/commit/629fa51))
+* **scratchorg:** align flag behaviour with upcomming changes ([8673210](https://github.com/jayree/sfdx-jayree-plugin/commit/8673210))
+
 # [1.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.0.0...v1.1.0) (2019-03-11)
 
 
