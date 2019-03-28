@@ -56,7 +56,7 @@ jobid:  0Xxx100000xx1x1
     nodialog: flags.boolean({
       description: messages.getMessage('nodialogFlagDescription'),
       required: false,
-      dependsOn: ['changeset', 'testlevel']
+      dependsOn: ['changeset']
     })
   };
 
