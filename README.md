@@ -125,7 +125,7 @@ USAGE
   $ sfdx jayree:automation:ltngsyncstatus
 
 OPTIONS
-  -o, --officeuser=officeuser                     'name' (firstname lastname) of the SF user
+  -o, --officeuser=officeuser                     (required) 'name' (firstname lastname) of the SF user
   -s, --statusonly                                get Lightning Sync status of the SF user, only
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
 
@@ -316,7 +316,6 @@ USAGE
 OPTIONS
   -b, --storerevision                             store maxrevision value
   -r, --restorerevision                           restore maxrevision value
-  -r, --startfromrevision=startfromrevision       set startRevisionNum for the list of changes (default: 0)
   -s, --setlocalmaxrevision                       set local maxrevision (default: remote maxrevision)
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   -v, --localrevisionvalue=localrevisionvalue     set local maxrevision value

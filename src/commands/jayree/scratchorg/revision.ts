@@ -26,7 +26,8 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
   protected static flagsConfig = {
     startfromrevision: flags.integer({
-      char: 'r',
+      char: 'i',
+      hidden: true,
       description: messages.getMessage('startfromrevision'),
       default: 0
     }),
@@ -36,7 +37,8 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     }),
     storerevision: flags.boolean({
       char: 'b',
-      description: messages.getMessage('storerevision')
+      description: messages.getMessage('storerevision'),
+      exclusive: ['restorerevision']
     }),
     restorerevision: flags.boolean({
       char: 'r',

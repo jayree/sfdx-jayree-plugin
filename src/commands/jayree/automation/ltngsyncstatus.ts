@@ -21,19 +21,17 @@ export default class UserSyncStatus extends SfdxCommand {
     officeuser: flags.string({
       char: 'o',
       description: messages.getMessage('UserFlagDescription'),
-      required: false
+      required: true
     }),
     statusonly: flags.boolean({
       char: 's',
       description: messages.getMessage('StatusFlagDescription'),
-      required: false,
-      dependsOn: ['officeuser']
+      required: false
     }),
     wait: flags.integer({
       char: 'w',
       description: messages.getMessage('waitFlagDescription'),
-      required: false,
-      dependsOn: ['officeuser']
+      required: false
     })
   };
 
