@@ -5,31 +5,31 @@
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
-    "@oclif/command": "^1.5.11",
-    "@oclif/config": "^1.12.9",
+    "@oclif/command": "^1.5.12",
+    "@oclif/config": "^1.12.11",
     "@oclif/errors": "^1.2.2",
-    "@salesforce/command": "^1.2.0",
+    "@salesforce/command": "1.2.0",
     "adm-zip": "0.4.11",
     "fs-extra": "^7.0.1",
     "inquirer": "^6.2.2",
-    "opn": "^5.4.0",
-    "puppeteer": "^1.12.2",
+    "opn": "^6.0.0",
+    "puppeteer": "^1.13.0",
     "serialize-error": "^3.0.0",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "^1.21.2",
+    "@oclif/dev-cli": "^1.22.0",
     "@oclif/plugin-help": "^2.1.6",
     "@oclif/semantic-release": "^3.1.1",
-    "@salesforce/dev-scripts": "^0.3.12",
+    "@salesforce/dev-scripts": "^0.3.13",
     "@types/adm-zip": "^0.4.32",
     "@types/fs-extra": "^5.0.5",
-    "@types/inquirer": "^0.0.44",
-    "@types/puppeteer": "^1.12.1",
+    "@types/inquirer": "^6.0.0",
+    "@types/puppeteer": "^1.12.3",
     "codecov": "^3.2.0",
     "husky": "^1.3.1",
-    "patch-package": "^6.0.5",
+    "patch-package": "^6.0.7",
     "tslib": "^1.9.3",
     "tslint": "^5",
     "tslint-config-prettier": "^1.18.0",
@@ -38,28 +38,36 @@
     "typescript-tslint-plugin": "^0.3.1"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=8.4.0"
   },
   "files": [
+    "/bin/per-env.js",
     "/lib/src",
     "/messages",
     "/oclif.manifest.json",
-    "/yarn.lock",
-    "/bin/per-env.js"
+    "/yarn.lock"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
+  "husky": {
+    "hooks": {
+      "commit-msg": "yarn sfdx-husky-commit-msg",
+      "pre-commit": "yarn sfdx-husky-pre-commit",
+      "pre-push": "yarn sfdx-husky-pre-push"
+    }
+  },
   "keywords": [
-    "sfdx-plugin",
-    "sfdx",
-    "package xml",
-    "package description",
     "change set",
     "flow test coverage",
-    "lightning sync status"
+    "lightning sync status",
+    "package description",
+    "package xml",
+    "sfdx",
+    "sfdx-plugin"
   ],
   "license": "MIT",
   "oclif": {
     "commands": "./lib/src/commands",
+    "bin": "sfdx",
     "topics": {
       "jayree": {
         "name": "jayree",
@@ -92,8 +100,7 @@
     },
     "devPlugins": [
       "@oclif/plugin-help"
-    ],
-    "bin": "sfdx"
+    ]
   },
   "repository": "jayree/sfdx-jayree-plugin",
   "scripts": {
@@ -117,12 +124,5 @@
     "test": "yarn sfdx-test",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "yarn sfdx-husky-commit-msg",
-      "pre-commit": "yarn sfdx-husky-pre-commit",
-      "pre-push": "yarn sfdx-husky-pre-push"
-    }
   }
 }
