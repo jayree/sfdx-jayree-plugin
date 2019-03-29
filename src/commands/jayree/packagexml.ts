@@ -48,7 +48,7 @@ if (!String.prototype.toLowerCaseifTrue) {
   };
 }
 
-/* istanbul ignore else*/
+/* istanbul ignore next*/
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line: no-any
   (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
