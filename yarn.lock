@@ -271,6 +271,14 @@
     debug "^4.1.1"
     tslib "^1.9.3"
 
+"@oclif/config@^1.12.12":
+  version "1.12.12"
+  resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.12.12.tgz#09e6628fe454214bbd7630ae18d2bee0db6bd533"
+  integrity sha512-0vlX5VYvOfF9QbkCqMyPSzH9GMp6at4Mbqn8CxCskxhKvNZoPD5ocda2ku0zEnoqxGAQ4VfQP7NCqJthuiStfg==
+  dependencies:
+    debug "^4.1.1"
+    tslib "^1.9.3"
+
 "@oclif/dev-cli@^1.22.0":
   version "1.22.0"
   resolved "https://registry.yarnpkg.com/@oclif/dev-cli/-/dev-cli-1.22.0.tgz#ee8f13cea19affa5727ba17a85cc323f1f142c4f"
@@ -399,23 +407,23 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@salesforce/command@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-1.2.0.tgz#1bfe9b35095a86861aa240d55a9bf712b810ac90"
-  integrity sha512-OVJTLTB1J2DU7BJP8A76fmAvEWl8tKQna5kkEGInIMwXc1vqUCDemxUYTDgircRBulst4Coc/BOvSw7kFXeuaw==
+"@salesforce/command@1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-1.4.2.tgz#cb46701695bf784217db1de4d973bad954b28086"
+  integrity sha512-AzP4GOBPKykCTmQgfBz1OlHIpVk3e2fMk/qam2/lsRZaaRy6aPVZL7Q5o4m+0OgillF8Ef1Yxg6CtlUqRfDvZA==
   dependencies:
     "@oclif/command" "^1.5.0"
     "@oclif/errors" "^1.2.0"
     "@oclif/parser" "^3.6.0"
     "@oclif/plugin-help" "^2.1.0"
     "@oclif/test" "^1.2.0"
-    "@salesforce/core" "^1.0.0"
-    "@salesforce/kit" "^1.0.0"
+    "@salesforce/core" "^1.2.3"
+    "@salesforce/kit" "^1.1.0"
     "@salesforce/ts-types" "^1.0.0"
     chalk "^2.4.0"
     cli-ux "^4.8.0"
 
-"@salesforce/core@^1.0.0":
+"@salesforce/core@^1.2.3":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-1.3.2.tgz#ebc25c5364b5819b390b38adb7a765618d9210e3"
   integrity sha512-XU+4E8bz5lic27kAW3FQkW4rEbLRVf9XnvkDkjSeo6gn5cG1Dfp9NHvez3AV6t0CFSjj5D1Q9LywtfSCqitWzw==
@@ -476,6 +484,14 @@
     "@salesforce/ts-types" "^1.1.1"
     tslib "^1"
 
+"@salesforce/kit@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-1.1.0.tgz#3afe32637e80f5332d7c92c403d75ba0467d8ee3"
+  integrity sha512-FZEy85jMSDCdi0GkBahizlRQpKCs3XLOxiu+Z1Yg6ViwU4z980/RG7zERMRc4H4OUs4n5U2N2Wx6U0wfA+2HJA==
+  dependencies:
+    "@salesforce/ts-types" "^1.1.3"
+    tslib "^1"
+
 "@salesforce/ts-sinon@^1.0.0":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.0.3.tgz#703b62e8776de6fb725bf4ab97f7b4b4d76fd100"
@@ -489,6 +505,13 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-1.1.1.tgz#7e61050ff6dc7ce6b73e6b1fdca53392fe17ab27"
   integrity sha512-w9+5wpCRmbxWV/WiYOVnY9Y13zXzbcfC5rabVC/1Lvd2Qp9mcRVHQyWZt+9668OYYTVNLqRjA+bq4wLtaS1CQw==
+  dependencies:
+    tslib "^1"
+
+"@salesforce/ts-types@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-1.1.3.tgz#33f32723b33574cd29f9504df5db5c0b4e88169e"
+  integrity sha512-S3AV5a/OE0vMSgxE5eqwZ+cL1wvNk6ANSKa1m++6NILHsebvznVFnHSeK886nir2SI79yeYmUVDWvqPb6G8WMA==
   dependencies:
     tslib "^1"
 
@@ -2553,6 +2576,14 @@ find-versions@^3.0.0:
     array-uniq "^2.0.0"
     semver-regex "^2.0.0"
 
+find-yarn-workspace-root@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/find-yarn-workspace-root/-/find-yarn-workspace-root-1.2.1.tgz#40eb8e6e7c2502ddfaa2577c176f221422f860db"
+  integrity sha512-dVtfb0WuQG+8Ag2uWkbG79hOUzEsRrhBzgfn86g2sJPkzmcpGdghbNTfUKGTxymFrY/tLIodDzLoW9nOJ4FY8Q==
+  dependencies:
+    fs-extra "^4.0.3"
+    micromatch "^3.1.4"
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -2615,6 +2646,15 @@ fs-constants@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs-constants/-/fs-constants-1.0.0.tgz#6be0de9be998ce16af8afc24497b9ee9b7ccd9ad"
   integrity sha512-y6OAwoSIf7FyjMIv94u+b5rdheZEjzR63GTyZJm5qh4Bi+2YgwLCcI/fPFZkL5PSixOt6ZNKm+w+Hfp/Bciwow==
+
+fs-extra@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
+  integrity sha512-q6rbdDd1o2mAnQreO7YADIxf/Whx4AHBiRf6d+/cVT8h44ss+lHgxf1FemcqDnQt9X3ct4McHr+JMGlYSsK7Cg==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
 
 fs-extra@^6.0.1:
   version "6.0.1"
@@ -5200,14 +5240,15 @@ password-prompt@^1.0.7, password-prompt@^1.1.2:
     ansi-escapes "^3.1.0"
     cross-spawn "^6.0.5"
 
-patch-package@^6.0.7:
-  version "6.0.7"
-  resolved "https://registry.yarnpkg.com/patch-package/-/patch-package-6.0.7.tgz#1ebb8b6de908c977758ab2e2ba6def97fce42195"
-  integrity sha512-t+prvQ2/zDszNINB/DwAs2HW6mLXw1VJz0ZnguqqtxxVHpbt8uwhwqyatbWNI/Q2crUSzOqyy+Y8y6yHc2isgw==
+patch-package@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/patch-package/-/patch-package-6.1.0.tgz#80985dc5c2042c42bcf34c8c35622ce95e5c16dc"
+  integrity sha512-YbnG+p2d96E5A/WJ7kNJRWegpxyN7L0BWZ7FnYwC3ighfD2nr3vZYvl33oJmL9ZrFEP1bhQvJPV6iKHdRIro7A==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     chalk "^2.4.2"
     cross-spawn "^6.0.5"
+    find-yarn-workspace-root "^1.2.1"
     fs-extra "^7.0.1"
     is-ci "^2.0.0"
     klaw-sync "^6.0.0"
@@ -5488,10 +5529,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.13.0.tgz#187ccf5ed5caf08ed1291b262d033cc364bf88ab"
-  integrity sha512-LUXgvhjfB/P6IOUDAKxOcbCz9ISwBLL9UpKghYrcBDwrOGx1m60y0iN2M64mdAUbT4+7oZM5DTxOW7equa2fxQ==
+puppeteer@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.14.0.tgz#828c1926b307200d5fc8289b99df4e13e962d339"
+  integrity sha512-SayS2wUX/8LF8Yo2Rkpc5nkAu4Jg3qu+OLTDSOZtisVQMB2Z5vjlY2TdPi/5CgZKiZroYIiyUN3sRX63El9iaw==
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"

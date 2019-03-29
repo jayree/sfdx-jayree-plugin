@@ -36,26 +36,27 @@ USAGE
 # Commands
 
 <!-- commands -->
-* [`sfdx jayree:automation:changeset:deploy`](#sfdx-jayreeautomationchangesetdeploy)
-* [`sfdx jayree:automation:changeset:list`](#sfdx-jayreeautomationchangesetlist)
-* [`sfdx jayree:automation:ltngsyncstatus`](#sfdx-jayreeautomationltngsyncstatus)
-* [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
-* [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
-* [`sfdx jayree:packagedescription:create [FILE]`](#sfdx-jayreepackagedescriptioncreate-file)
-* [`sfdx jayree:packagedescription:get [FILE]`](#sfdx-jayreepackagedescriptionget-file)
-* [`sfdx jayree:packagedescription:remove [FILE]`](#sfdx-jayreepackagedescriptionremove-file)
-* [`sfdx jayree:packagedescription:set [FILE]`](#sfdx-jayreepackagedescriptionset-file)
-* [`sfdx jayree:packagexml [FILE]`](#sfdx-jayreepackagexml-file)
-* [`sfdx jayree:scratchorg:revision`](#sfdx-jayreescratchorgrevision)
-* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
+* [`sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationchangesetdeploy--r-string--l-string--c---nodialog--s-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationchangesetlist--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:automation:ltngsyncstatus -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationltngsyncstatus--o-string--s--w-integer--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeflowtestcoverage--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeorgopen--b-string--p-string--r--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagedescriptioncreate--d-string--f-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagedescriptionget--f-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagedescriptionremove--f-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagedescriptionset--d-string--f-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:packagexml [--configfile <string>] [-q <string>] [-c] [-w] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagexml---configfile-string--q-string--c--w--f-string--x--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreescratchorgrevision--b---r--v-integer--s--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreescratchorgsettings--w--f-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 
-## `sfdx jayree:automation:changeset:deploy`
+## `sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 deploy incomming change set to an org
 
 ```
 USAGE
-  $ sfdx jayree:automation:changeset:deploy
+  $ sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] 
+  [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -c, --checkonly                                                           validate deploy but don’t save to the org
@@ -78,7 +79,8 @@ OPTIONS
 
   --json                                                                    format output as json
 
-  --loglevel=(trace|debug|info|warn|error|fatal)                            logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)                            [default: warn] logging level for this
+                                                                            command invocation
 
   --nodialog                                                                don't show the dialog wizard
 
@@ -99,30 +101,32 @@ EXAMPLES
 
 _See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/changeset/deploy.ts)_
 
-## `sfdx jayree:automation:changeset:list`
+## `sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 list incomming change sets of an org
 
 ```
 USAGE
-  $ sfdx jayree:automation:changeset:list
+  $ sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 ```
 
 _See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/changeset/list.ts)_
 
-## `sfdx jayree:automation:ltngsyncstatus`
+## `sfdx jayree:automation:ltngsyncstatus -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 check the Lightning Sync User Sync Status and reset sync if needed
 
 ```
 USAGE
-  $ sfdx jayree:automation:ltngsyncstatus
+  $ sfdx jayree:automation:ltngsyncstatus -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] 
+  [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -o, --officeuser=officeuser                     (required) 'name' (firstname lastname) of the SF user
@@ -136,7 +140,7 @@ OPTIONS
 
   --json                                          format output as json
 
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:automation:usersyncstatus -o 'Name'
@@ -148,19 +152,20 @@ EXAMPLE
 
 _See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/ltngsyncstatus.ts)_
 
-## `sfdx jayree:flowtestcoverage`
+## `sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 check the flow test coverage of an org
 
 ```
 USAGE
-  $ sfdx jayree:flowtestcoverage
+  $ sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:flowtestcoverage
@@ -171,13 +176,14 @@ EXAMPLE
 
 _See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/flowtestcoverage.ts)_
 
-## `sfdx jayree:org:open`
+## `sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 open an org in your preferred browser
 
 ```
 USAGE
-  $ sfdx jayree:org:open
+  $ sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -b, --browser=firefox|chrome|safari             [default: chrome] browser to be launched
@@ -186,7 +192,7 @@ OPTIONS
   -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:org:open
@@ -198,19 +204,20 @@ EXAMPLE
 
 _See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/org/open.ts)_
 
-## `sfdx jayree:packagedescription:create [FILE]`
+## `sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 creates an empty package with the description
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:create [FILE]
+  $ sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -d, --description=description                   (required) new description value
   -f, --file=file                                 (required) file to create
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
@@ -218,18 +225,18 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/create.ts)_
 
-## `sfdx jayree:packagedescription:get [FILE]`
+## `sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 get the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:get [FILE]
+  $ sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -f, --file=file                                 (required) file to read
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:packagedescription:get --file FILENAME
@@ -238,18 +245,18 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/get.ts)_
 
-## `sfdx jayree:packagedescription:remove [FILE]`
+## `sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 remove the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:remove [FILE]
+  $ sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -f, --file=file                                 (required) file to read
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
@@ -257,19 +264,19 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/remove.ts)_
 
-## `sfdx jayree:packagedescription:set [FILE]`
+## `sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 set the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:set [FILE]
+  $ sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -d, --description=description                   (required) new description value
   -f, --file=file                                 (required) file to read
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
@@ -277,13 +284,14 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/set.ts)_
 
-## `sfdx jayree:packagexml [FILE]`
+## `sfdx jayree:packagexml [--configfile <string>] [-q <string>] [-c] [-w] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 generate a complete package xml form the specified org
 
 ```
 USAGE
-  $ sfdx jayree:packagexml [FILE]
+  $ sfdx jayree:packagexml [--configfile <string>] [-q <string>] [-c] [-w] [-f <string>] [-x] [-u <string>] 
+  [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -c, --matchcase                                 enable 'match case' for the quickfilter
@@ -295,7 +303,7 @@ OPTIONS
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --configfile=configfile                         path to config file
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:packagexml --targetusername myOrg@example.com
@@ -305,13 +313,14 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagexml.ts)_
 
-## `sfdx jayree:scratchorg:revision`
+## `sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 list changes in a scratch org by remote RevisionNum and set local maxrevision
 
 ```
 USAGE
-  $ sfdx jayree:scratchorg:revision
+  $ sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] 
+  [--loglevel trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -b, --storerevision                             store maxrevision value
@@ -321,7 +330,7 @@ OPTIONS
   -v, --localrevisionvalue=localrevisionvalue     set local maxrevision value
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:scratchorgrevision
@@ -331,13 +340,14 @@ EXAMPLE
 
 _See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/scratchorg/revision.ts)_
 
-## `sfdx jayree:scratchorg:settings`
+## `sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
 write the current settings from an Org to a scratch org def file
 
 ```
 USAGE
-  $ sfdx jayree:scratchorg:settings
+  $ sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal]
 
 OPTIONS
   -f, --file=file                                 write to 'file' instead of project-scratch-def.json
@@ -345,7 +355,7 @@ OPTIONS
   -w, --writetoprojectscratchdeffile              write output to project-scratch-def.json file
   --apiversion=apiversion                         override the api version used for api requests made by this command
   --json                                          format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 
 EXAMPLE
   $ sfdx jayree:scratchorgsettings
