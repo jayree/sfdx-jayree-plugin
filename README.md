@@ -25,7 +25,7 @@ $ sfdx plugins:install sfdx-jayree
 $ sfdx jayree:COMMAND
 running command...
 $ sfdx plugins
-sfdx-jayree 1.1.1
+sfdx-jayree 1.1.2
 $ sfdx help jayree:COMMAND
 USAGE
   $ sfdx jayree:COMMAND
@@ -99,7 +99,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ## `sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -117,7 +117,7 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
 ```
 
-_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/automation/changeset/list.ts)_
 
 ## `sfdx jayree:automation:ltngsyncstatus -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -150,7 +150,7 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/automation/ltngsyncstatus.ts)_
+_See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/automation/ltngsyncstatus.ts)_
 
 ## `sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -174,7 +174,7 @@ EXAMPLE
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/flowtestcoverage.ts)_
 
 ## `sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -202,7 +202,7 @@ EXAMPLE
   $ sfdx jayree:org:open -u me@my.org
 ```
 
-_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/org/open.ts)_
+_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/org/open.ts)_
 
 ## `sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -223,7 +223,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/create.ts)_
+_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/packagedescription/create.ts)_
 
 ## `sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -243,7 +243,7 @@ EXAMPLE
        Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/packagedescription/get.ts)_
 
 ## `sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -262,7 +262,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/packagedescription/remove.ts)_
 
 ## `sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -282,7 +282,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/packagedescription/set.ts)_
 
 ## `sfdx jayree:packagexml [--configfile <string>] [-q <string>] [-c] [-w] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -311,7 +311,7 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/packagexml.ts)_
+_See code: [src/commands/jayree/packagexml.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/packagexml.ts)_
 
 ## `sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -338,7 +338,7 @@ EXAMPLE
   $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/scratchorg/revision.ts)_
+_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/scratchorg/revision.ts)_
 
 ## `sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
@@ -363,5 +363,5 @@ EXAMPLE
   $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.1/src/commands/jayree/scratchorg/settings.ts)_
+_See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/scratchorg/settings.ts)_
 <!-- commandsstop -->
