@@ -31,7 +31,9 @@ var script = [
 
 // Check If the script exists
 if (!pkg || !pkg.scripts || !pkg.scripts[script]) {
-  console.warn('[per-env] [Warning] Cannot find the script: ' + script);
+  if (env.NODE_ENV !== 'production') {
+    console.warn('[per-env] [Warning] Cannot find the script: ' + script);
+  }
   process.exit(0);
 }
 
