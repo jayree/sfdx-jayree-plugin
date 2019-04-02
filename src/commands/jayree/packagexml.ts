@@ -2,7 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-import serializeError = require('serialize-error');
+// import serializeError = require('serialize-error');
 // import * as notifier from 'node-notifier';
 // import * as convert from 'xml-js';
 import * as xml2js from 'xml2js';
@@ -490,7 +490,8 @@ export default class GeneratePackageXML extends SfdxCommand {
                   this.logger.error(member + ' - Required field is missing: standardValue');
                 }
               } catch (err) {
-                this.logger.error({ err: serializeError(err) });
+                // this.logger.error({ stack: err.stack }, err.message);
+                this.logger.error(err.stack);
               }
             })
           );
@@ -634,7 +635,8 @@ export default class GeneratePackageXML extends SfdxCommand {
 
   private throwError(err: Error) {
     this.ux.stopSpinner();
-    this.logger.error({ err: serializeError(err) });
+    // this.logger.error({ err: serializeError(err) });
+    this.logger.error(err.stack);
     throw err;
   }
 }
