@@ -8,8 +8,6 @@
 **/yarn-error.log
 **/lerna-debug.log
 
-**/lib
-
 **/*xunit.xml
 **/*checkstyle.xml
 **/*unitcoverage
