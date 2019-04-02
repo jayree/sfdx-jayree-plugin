@@ -1,0 +1,8 @@
+{
+  "commandDescription": "create State/Country Picklists (beta)",
+  "countrycodeFlagDescription": "Alpha-2 code",
+  "categoryFlagDescription": "Subdivision category",
+  "languageFlagDescription": "Language code",
+  "updateFlagDescription": "Update values? (default:false)",
+  "uselocalvariantFlagDescription": "Use Local variant? (default:false)"
+}
