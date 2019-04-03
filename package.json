@@ -14,7 +14,7 @@
     "inquirer": "^6.2.2",
     "opn": "^6.0.0",
     "puppeteer": "^1.14.0",
-    "serialize-error": "^3.0.0",
+    "serialize-error": "^4.1.0",
     "tabletojson": "1.0.4",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.19"

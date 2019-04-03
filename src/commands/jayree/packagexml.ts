@@ -604,8 +604,8 @@ export default class GeneratePackageXML extends SfdxCommand {
         };
       } catch (error) {
         /* istanbul ignore next */
-        if (error.code === 'ENOTFOUND' && retries < 10) {
-          this.logger.error('retry: ' + (retries + 1).toString());
+        if ((error.code === 'ENOTFOUND' || error.code === 'ECONNRESET') && retries < 10) {
+          this.logger.error('retry: ' + error.code + ' ' + (retries + 1).toString());
           continue;
         } else {
           this.throwError(error);
