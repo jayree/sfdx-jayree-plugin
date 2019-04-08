@@ -1,2 +1,5 @@
 oclif.manifest.json
 README.md
+test/helpers/init.js
+test/helpers/runtest.js
+lib/**

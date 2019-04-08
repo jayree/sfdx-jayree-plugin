@@ -39,6 +39,7 @@ USAGE
 * [`sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationchangesetdeploy--r-string--l-string--c---nodialog--s-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 * [`sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationchangesetlist--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 * [`sfdx jayree:automation:ltngsyncstatus -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationltngsyncstatus--o-string--s--w-integer--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
+* [`sfdx jayree:automation:statecountry:create --countrycode <string> --category <string> --language <string> [--update] [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeautomationstatecountrycreate---countrycode-string---category-string---language-string---update---uselocalvariant--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 * [`sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeflowtestcoverage--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 * [`sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreeorgopen--b-string--p-string--r--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfatal)
 * [`sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal]`](#sfdx-jayreepackagedescriptioncreate--d-string--f-string---json---loglevel-tracedebuginfowarnerrorfatal)
@@ -51,7 +52,7 @@ USAGE
 
 ## `sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
-deploy incomming change set to an org
+deploy incomming change set to an org (beta)
 
 ```
 USAGE
@@ -103,7 +104,7 @@ _See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.c
 
 ## `sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
-list incomming change sets of an org
+list incomming change sets of an org (beta)
 
 ```
 USAGE
@@ -151,6 +152,29 @@ EXAMPLE
 ```
 
 _See code: [src/commands/jayree/automation/ltngsyncstatus.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/automation/ltngsyncstatus.ts)_
+
+## `sfdx jayree:automation:statecountry:create --countrycode <string> --category <string> --language <string> [--update] [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
+
+create State/Country Picklists (beta)
+
+```
+USAGE
+  $ sfdx jayree:automation:statecountry:create --countrycode <string> --category <string> --language <string> [--update] 
+  [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]
+
+OPTIONS
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --category=category                             (required) Subdivision category
+  --countrycode=countrycode                       (required) Alpha-2 code
+  --json                                          format output as json
+  --language=language                             (required) Language code
+  --loglevel=(trace|debug|info|warn|error|fatal)  [default: warn] logging level for this command invocation
+  --update                                        Update values? (default:false)
+  --uselocalvariant                               Use Local variant? (default:false)
+```
+
+_See code: [src/commands/jayree/automation/statecountry/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.1.2/src/commands/jayree/automation/statecountry/create.ts)_
 
 ## `sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
