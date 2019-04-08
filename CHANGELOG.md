@@ -1,3 +1,16 @@
+# [1.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.1.2...v1.2.0) (2019-04-08)
+
+
+### Bug Fixes
+
+* fix ECONNRESET error ([2bd714e](https://github.com/jayree/sfdx-jayree-plugin/commit/2bd714e))
+* update dependencies ([1b3023b](https://github.com/jayree/sfdx-jayree-plugin/commit/1b3023b))
+
+
+### Features
+
+* add statecountry:create command ([cbebccb](https://github.com/jayree/sfdx-jayree-plugin/commit/cbebccb))
+
 ## [1.1.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.1.1...v1.1.2) (2019-03-29)
 
 
