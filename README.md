@@ -52,7 +52,7 @@ USAGE
 
 ## `sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
-deploy incomming change set to an org
+deploy incomming change set to an org (beta)
 
 ```
 USAGE
@@ -104,7 +104,7 @@ _See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.c
 
 ## `sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal]`
 
-list incomming change sets of an org
+list incomming change sets of an org (beta)
 
 ```
 USAGE
