@@ -89,11 +89,19 @@
           },
           "automation": {
             "name": "automation",
-            "description": "headless browser automation tools",
+            "description": "headless browser automation tools (beta)",
             "subtopics": {
               "changeset": {
                 "name": "changeset",
-                "description": "deploy/list incomming change sets"
+                "description": "deploy/list incomming change sets (beta)"
+              },
+              "ltngsync": {
+                "name": "ltngsync",
+                "description": "check the Lightning Sync User Sync Status and reset sync if needed (beta)"
+              },
+              "statecountry": {
+                "name": "statecountry",
+                "description": "create State/Country Picklists (beta)"
               }
             }
           }
