@@ -1,6 +1,6 @@
 import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-export default class UserSyncStatus extends SfdxCommand {
+export default class LtngSyncStatus extends SfdxCommand {
     static description: string;
     static examples: string[];
     protected static flagsConfig: {

@@ -1,5 +1,5 @@
 {
-  "commandDescription": "check the Lightning Sync User Sync Status and reset sync if needed",
+  "commandDescription": "check the Lightning Sync User Sync Status and reset sync if needed (beta)",
   "UserFlagDescription": "'name' (firstname lastname) of the SF user",
   "StatusFlagDescription": "get Lightning Sync status of the SF user, only",
   "waitFlagDescription": "wait time for command to wait for status change in minutes (default: infinitely)"

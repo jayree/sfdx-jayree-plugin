@@ -5,11 +5,11 @@ import serializeError = require('serialize-error');
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'ltngsyncstatus');
-export default class UserSyncStatus extends SfdxCommand {
+export default class LtngSyncStatus extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:automation:usersyncstatus -o 'Name'
+    `$ sfdx jayree:automation:ltngsync:status -o 'Name'
     configSetup: User assigned to active Lightning Sync configuration... Yes
     userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
     userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
