@@ -242,6 +242,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                 )
               ) {
                 if (typeof metadataEntries.type !== 'string') {
+                  this.logger.error('type missing for: ' + metadataEntries.fileName);
                   const x =
                     metadataEntries.fileName
                       .split('.')[1]
@@ -499,6 +500,28 @@ export default class GeneratePackageXML extends SfdxCommand {
 
         if (apiVersion >= 44.0) {
           delete packageTypes['FlowDefinition'];
+        }
+
+        // fix Product / Product2
+        /* istanbul ignore next */
+        if (packageTypes['CustomObjectTranslation']) {
+          const allcustomlang = packageTypes['CustomObjectTranslation']
+            .filter(element => {
+              const x = element.fullName.split('__');
+              return x.length === 2;
+            })
+            .map(element => element.fullName.split('-')[1])
+            .filter((value, index, self) => self.indexOf(value) === index);
+
+          allcustomlang.forEach(lng => {
+            packageTypes['CustomObjectTranslation'].pushUniqueValueKey(
+              {
+                fullName: 'Product-' + lng,
+                fileName: 'objectTranslations/Product-' + lng + '.objectTranslation'
+              },
+              'fullName'
+            );
+          });
         }
 
         const packageJson = {
