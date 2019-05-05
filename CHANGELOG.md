@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.2.0...v1.2.1) (2019-05-05)
+
+
+### Bug Fixes
+
+* include CustomObjectTranslation for Product ([816402d](https://github.com/jayree/sfdx-jayree-plugin/commit/816402d))
+* update dependencies ([43cb6f4](https://github.com/jayree/sfdx-jayree-plugin/commit/43cb6f4))
+* **ltngsyncstatus:** align automation command tree ([9db2b65](https://github.com/jayree/sfdx-jayree-plugin/commit/9db2b65))
+
 # [1.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.1.2...v1.2.0) (2019-04-08)
 
 
