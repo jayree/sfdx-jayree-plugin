@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.2.1...v1.3.0) (2019-05-06)
+
+
+### Features
+
+* respect SfdxProjectJson configuration ([cfde517](https://github.com/jayree/sfdx-jayree-plugin/commit/cfde517))
+
 ## [1.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.2.0...v1.2.1) (2019-05-05)
 
 
