@@ -1,4 +1,5 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
+import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
@@ -105,6 +106,11 @@ export default class GeneratePackageXML extends SfdxCommand {
     const outputFile = this.flags.file || this.args.file || null;
 
     let apiVersion = this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
+    try {
+      this.project = await SfdxProject.resolve();
+      const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
+      apiVersion = sfdxProjectJson.getContents().sourceApiVersion;
+    } catch (error) {}
     let quickFilters = this.flags.quickfilter
       ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',')
       : [];
@@ -116,7 +122,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         .then(data => {
           const obj = JSON.parse(data);
           /* cli parameters still override whats in the config file */
-          apiVersion = this.flags.apiversion || obj.apiVersion || apiVersion;
+          apiVersion = obj.apiVersion || apiVersion;
           quickFilters = this.flags.quickfilter
             ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',')
             : obj.quickfilter || [];
