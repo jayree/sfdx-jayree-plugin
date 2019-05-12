@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.3.0...v1.4.0) (2019-05-12)
+
+
+### Bug Fixes
+
+* update dependencies ([d256015](https://github.com/jayree/sfdx-jayree-plugin/commit/d256015))
+* update dependencies ([f8b8bb6](https://github.com/jayree/sfdx-jayree-plugin/commit/f8b8bb6))
+
+
+### Features
+
+* **statecountry:** identify if stateIsoCode needs to be updated/created ([eb05002](https://github.com/jayree/sfdx-jayree-plugin/commit/eb05002))
+* **statecountry:** rename cmd. create to import (alias: create,update) ([5fc03ab](https://github.com/jayree/sfdx-jayree-plugin/commit/5fc03ab))
+
 # [1.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.2.1...v1.3.0) (2019-05-06)
 
 
