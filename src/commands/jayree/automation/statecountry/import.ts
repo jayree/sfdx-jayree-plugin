@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+// import ProgressBar = require('progress');
 import puppeteer = require('puppeteer');
 import tabletojson = require('tabletojson');
 import config = require('../../../../../config/countrystate.json');
@@ -51,13 +52,12 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
+    let spinnermessage = '';
+
     const browser = await puppeteer.launch({
-      headless: true
+      headless: false
     });
     try {
-      this.ux.startSpinner('create State and Country/Territory Picklists ' + this.flags.countrycode.toUpperCase());
-
-      this.ux.setSpinnerStatus('receive ISO data');
       const page = await browser.newPage();
 
       const setHTMLInputElementValue = async (newvalue, element) => {
@@ -107,6 +107,9 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         }
       };
 
+      this.ux.startSpinner('State and Country/Territory Picklist: ' + this.flags.countrycode.toUpperCase());
+      spinnermessage = 'get data from ISO.org';
+      this.ux.setSpinnerStatus(spinnermessage);
       await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
         waitUntil: 'networkidle0'
       });
@@ -130,15 +133,31 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         const languagecodes = jsonParsed[this.flags.category]
           .map(v => v['Language code'])
           .filter((v, i, s) => s.indexOf(v) === i);
+
         if (!languagecodes.includes(this.flags.language)) {
           throw Error('Expected --language to be one of: ' + languagecodes.toString());
         }
         const conn = this.org.getConnection();
 
-        this.ux.setSpinnerStatus('login to ' + conn.instanceUrl);
+        spinnermessage = 'login to ' + conn.instanceUrl;
+        this.ux.setSpinnerStatus(spinnermessage);
         await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
           waitUntil: 'networkidle0'
         });
+
+        const total = jsonParsed[this.flags.category].map(v => v['Language code']).length;
+        const start = new Date();
+        let percent = 0;
+        let eta = 0;
+        let elapsed = 0;
+        let curr = 0;
+        let ratio = 0;
+
+        /*         const bar = new ProgressBar('[:bar] :percent :etas', {
+          complete: '=',
+          incomplete: ' ',
+          total: jsonParsed[this.flags.category].map(v => v['Language code']).length
+        }); */
 
         for await (const value of jsonParsed[this.flags.category]) {
           const language = value['Language code'];
@@ -157,9 +176,9 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
                 stateIsoCode = config.fix[countrycode][stateIsoCode];
               }
             }
-
-            let update = false;
+            let update;
             try {
+              update = true;
               await page.goto(
                 conn.instanceUrl +
                   `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
@@ -178,8 +197,8 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
               if (updatecheck === 'Unable to Access Page') {
                 throw Error('no update possible');
               }
-              update = true;
             } catch (error) {
+              update = false;
               await page.goto(
                 conn.instanceUrl +
                   `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
@@ -188,7 +207,18 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
                 }
               );
             } finally {
-              this.ux.setSpinnerStatus((update ? 'update ' : 'create ') + stateName + '/' + stateintVal);
+              spinnermessage =
+                percent.toFixed(0) +
+                '% - ' +
+                (elapsed / 1000).toFixed(1) +
+                's/' +
+                (isNaN(eta) || !isFinite(eta) ? '0.0' : (eta / 1000).toFixed(1)) +
+                's - ' +
+                (update ? 'update ' : 'create ') +
+                stateName +
+                '/' +
+                stateintVal;
+              this.ux.setSpinnerStatus(spinnermessage);
 
               const selector = update ? config.update : config.create;
 
@@ -204,14 +234,24 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
               });
             }
           }
+          // bar.tick();
+          curr = curr + 1;
+          ratio = curr / total;
+          ratio = Math.min(Math.max(ratio, 0), 1);
+          percent = Math.floor(ratio * 100);
+          // tslint:disable-next-line: no-any
+          elapsed = (new Date() as any) - (start as any);
+          eta = percent === 100 ? 0 : elapsed * (total / curr - 1);
         }
+        spinnermessage = percent.toFixed(0) + '% - ' + (elapsed / 1000).toFixed(1) + 's';
+        // this.ux.stopSpinner(spinnermessage);
       } else {
         throw Error('Expected --category= to be one of: ' + Object.keys(jsonParsed).toString());
       }
     } catch (error) {
-      this.ux.stopSpinner('error');
       throw error;
     } finally {
+      this.ux.stopSpinner(spinnermessage);
       await browser.close();
     }
 
