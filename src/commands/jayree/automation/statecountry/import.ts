@@ -44,6 +44,12 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       description: messages.getMessage('uselocalvariantFlagDescription'),
       required: false,
       default: false
+    }),
+    silent: flags.boolean({
+      description: messages.getMessage('uselocalvariantFlagDescription'),
+      required: false,
+      default: false,
+      hidden: true
     })
   };
 
@@ -107,9 +113,12 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         }
       };
 
-      this.ux.startSpinner('State and Country/Territory Picklist: ' + this.flags.countrycode.toUpperCase());
-      spinnermessage = 'get data from ISO.org';
-      this.ux.setSpinnerStatus(spinnermessage);
+      !this.flags.silent
+        ? this.ux.startSpinner(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`)
+        : process.stdout.write(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`);
+
+      spinnermessage = `get data from ISO.org`;
+      !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
       try {
         await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
@@ -145,8 +154,8 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         }
         const conn = this.org.getConnection();
 
-        spinnermessage = 'login to ' + conn.instanceUrl;
-        this.ux.setSpinnerStatus(spinnermessage);
+        spinnermessage = `login to ${conn.instanceUrl}`;
+        !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
         await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
           waitUntil: 'networkidle0'
         });
@@ -178,7 +187,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
 
             if (Object.keys(config.fix).includes(countrycode)) {
               if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
-                this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
+                // this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
                 stateIsoCode = config.fix[countrycode][stateIsoCode];
               }
             }
@@ -224,7 +233,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
                 stateName +
                 '/' +
                 stateintVal;
-              this.ux.setSpinnerStatus(spinnermessage);
+              !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
               const selector = update ? config.update : config.create;
 
@@ -257,7 +266,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     } catch (error) {
       throw error;
     } finally {
-      this.ux.stopSpinner(spinnermessage);
+      !this.flags.silent ? this.ux.stopSpinner(spinnermessage) : process.stdout.write('.');
       await browser.close();
     }
 

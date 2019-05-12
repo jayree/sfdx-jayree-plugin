@@ -8,6 +8,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         category: flags.Discriminated<flags.Option<string>>;
         language: flags.Discriminated<flags.Option<string>>;
         uselocalvariant: flags.Discriminated<flags.Boolean<boolean>>;
+        silent: flags.Discriminated<flags.Boolean<boolean>>;
     };
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;
