@@ -55,7 +55,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     let spinnermessage = '';
 
     const browser = await puppeteer.launch({
-      headless: false
+      headless: true
     });
     try {
       const page = await browser.newPage();
@@ -110,10 +110,16 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       this.ux.startSpinner('State and Country/Territory Picklist: ' + this.flags.countrycode.toUpperCase());
       spinnermessage = 'get data from ISO.org';
       this.ux.setSpinnerStatus(spinnermessage);
-      await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
-        waitUntil: 'networkidle0'
-      });
-      await page.waitFor('.tablesorter');
+
+      try {
+        await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
+          waitUntil: 'networkidle0'
+        });
+        await page.waitFor('.tablesorter');
+      } catch (error) {
+        throw Error(`The country code element (${this.flags.countrycode.toUpperCase()}) was not found`);
+      }
+
       const table = await page.evaluate(() => document.querySelector('table#subdivision').outerHTML);
 
       const converted = tabletojson.convert(table)[0];
