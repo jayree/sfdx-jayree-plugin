@@ -3,5 +3,6 @@
   "countrycodeFlagDescription": "Alpha-2 code",
   "categoryFlagDescription": "Subdivision category",
   "languageFlagDescription": "Language code",
-  "uselocalvariantFlagDescription": "Use Local variant? (default:false)"
+  "uselocalvariantFlagDescription": "Use Local variant? (default:false)",
+  "silentFlagDescription": "silent mode"
 }

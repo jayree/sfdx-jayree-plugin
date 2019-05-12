@@ -46,7 +46,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       default: false
     }),
     silent: flags.boolean({
-      description: messages.getMessage('uselocalvariantFlagDescription'),
+      description: messages.getMessage('silentFlagDescription'),
       required: false,
       default: false,
       hidden: true
