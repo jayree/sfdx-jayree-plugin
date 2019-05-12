@@ -253,10 +253,18 @@
     debug "^4.1.1"
     semver "^5.6.0"
 
-"@oclif/config@^1.12.11", "@oclif/config@^1.12.12":
+"@oclif/config@^1.12.11":
   version "1.12.12"
   resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.12.12.tgz#09e6628fe454214bbd7630ae18d2bee0db6bd533"
   integrity sha512-0vlX5VYvOfF9QbkCqMyPSzH9GMp6at4Mbqn8CxCskxhKvNZoPD5ocda2ku0zEnoqxGAQ4VfQP7NCqJthuiStfg==
+  dependencies:
+    debug "^4.1.1"
+    tslib "^1.9.3"
+
+"@oclif/config@^1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.13.0.tgz#fc2bd82a9cb30a73faf7d2aa5ae937c719492bd1"
+  integrity sha512-ttb4l85q7SBx+WlUJY4A9eXLgv4i7hGDNGaXnY9fDKrYD7PBMwNOQ3Ssn2YT2yARAjyOxVE/5LfcwhQGq4kzqg==
   dependencies:
     debug "^4.1.1"
     tslib "^1.9.3"
@@ -1610,15 +1618,15 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codecov@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.3.0.tgz#7bf337b3f7b0474606b5c31c56dd9e44e395e15d"
-  integrity sha512-S70c3Eg9SixumOvxaKE/yKUxb9ihu/uebD9iPO2IR73IdP4i6ZzjXEULj3d0HeyWPr0DqBfDkjNBWxURjVO5hw==
+codecov@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.4.0.tgz#7d16d9d82b0ce20efe5dbf66245a9740779ff61b"
+  integrity sha512-+vtyL1B11MWiRIBaPnsIALKKpLFck9m6QdyI20ZnG8WqLG2cxwCTW9x/LbG4Ht8b81equZWw5xLcr+0BIvmdJQ==
   dependencies:
     argv "^0.0.2"
     ignore-walk "^3.0.1"
-    js-yaml "^3.12.0"
-    teeny-request "^3.7.0"
+    js-yaml "^3.13.0"
+    teeny-request "^3.11.3"
     urlgrey "^0.4.4"
 
 coffeescript@^1.10.0:
@@ -2692,6 +2700,15 @@ fs-extra@^7.0.0, fs-extra@^7.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.0.0.tgz#3660bea66719e3a3c46bf7a4b1249fb658db3f0c"
+  integrity sha512-3hU7dzpfqG+A7gloPULls7j9mKDzpCyMOTBvQS0lZfqVfjA6/m0AkLXq0O1vnfP5roXjjL1DuUGKapr8vJWmQw==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-minipass@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.5.tgz#06c277218454ec288df77ada54a03b8702aacb9d"
@@ -3663,7 +3680,7 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@^3.12.0, js-yaml@^3.13.0, js-yaml@^3.9.0:
+js-yaml@^3.13.0, js-yaml@^3.9.0:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
@@ -6799,7 +6816,7 @@ tar@^4.4.3, tar@^4.4.8:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-teeny-request@^3.7.0:
+teeny-request@^3.11.3:
   version "3.11.3"
   resolved "https://registry.yarnpkg.com/teeny-request/-/teeny-request-3.11.3.tgz#335c629f7645e5d6599362df2f3230c4cbc23a55"
   integrity sha512-CKncqSF7sH6p4rzCgkb/z/Pcos5efl0DmolzvlqRQUNcpRIruOhY9+T1FsIlyEbfWd7MsFpodROOwHYh2BaXzw==
