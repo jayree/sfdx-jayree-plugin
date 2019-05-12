@@ -57,10 +57,58 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     try {
       this.ux.startSpinner('create State and Country/Territory Picklists ' + this.flags.countrycode.toUpperCase());
 
-      this.ux.setSpinnerStatus('receive iso data');
+      this.ux.setSpinnerStatus('receive ISO data');
       const page = await browser.newPage();
+
+      const setHTMLInputElementValue = async (newvalue, element) => {
+        const elementDisabled = await page.evaluate(s => {
+          const result = document.querySelector(s.replace(/:/g, '\\:'));
+          if (result != null) {
+            return result['disabled'];
+          } else {
+            return true;
+          }
+        }, element);
+        if (!elementDisabled) {
+          return page.evaluate(
+            (val, s) => ((document.querySelector(s.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+            newvalue,
+            element
+          );
+        } else {
+          return new Promise(resolve => {
+            resolve();
+          });
+        }
+      };
+
+      const checkHTMLInputElement = async (element, waitForEnable) => {
+        const elementState = await page.evaluate(s => {
+          return document.querySelector(s.replace(/:/g, '\\:'))['checked'];
+        }, element);
+        if (!elementState) {
+          if (waitForEnable) {
+            await page.waitFor(
+              s => {
+                const val = document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
+                return (val as boolean) === false;
+              },
+              {
+                timeout: 0
+              },
+              element
+            );
+          }
+          return page.click(element.replace(/:/g, '\\:'));
+        } else {
+          return new Promise(resolve => {
+            resolve();
+          });
+        }
+      };
+
       await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
-        waitUntil: 'networkidle2'
+        waitUntil: 'networkidle0'
       });
       await page.waitFor('.tablesorter');
       const table = await page.evaluate(() => document.querySelector('table#subdivision').outerHTML);
@@ -86,9 +134,10 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           throw Error('Expected --language to be one of: ' + languagecodes.toString());
         }
         const conn = this.org.getConnection();
+
         this.ux.setSpinnerStatus('login to ' + conn.instanceUrl);
         await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-          waitUntil: 'networkidle2'
+          waitUntil: 'networkidle0'
         });
 
         for await (const value of jsonParsed[this.flags.category]) {
@@ -111,10 +160,13 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
 
             let update = false;
             try {
-              const updateurl = `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`;
-              await page.goto(conn.instanceUrl + updateurl, {
-                waitUntil: 'networkidle2'
-              });
+              await page.goto(
+                conn.instanceUrl +
+                  `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
+                {
+                  waitUntil: 'networkidle0'
+                }
+              );
               const updatecheck = await page.evaluate(c => {
                 const result = document.querySelector(c.updatecheck) as HTMLElement;
                 if (result != null) {
@@ -128,77 +180,27 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
               }
               update = true;
             } catch (error) {
-              const createurl = `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`;
-              await page.goto(conn.instanceUrl + createurl, {
-                waitUntil: 'networkidle2'
-              });
+              await page.goto(
+                conn.instanceUrl +
+                  `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
+                {
+                  waitUntil: 'networkidle0'
+                }
+              );
             } finally {
               this.ux.setSpinnerStatus((update ? 'update ' : 'create ') + stateName + '/' + stateintVal);
 
               const selector = update ? config.update : config.create;
 
-              await page.evaluate(
-                (val, s) => ((document.querySelector(s.editName.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
-                stateName,
-                selector
-              );
-
-              const editIsoCodeDisabled = await page.evaluate(s => {
-                const result = document.querySelector(s.editIsoCode.replace(/:/g, '\\:'));
-                if (result != null) {
-                  return result['disabled'];
-                } else {
-                  return true;
-                }
-              }, selector);
-
-              if (!editIsoCodeDisabled) {
-                await page.evaluate(
-                  (val, s) =>
-                    ((document.querySelector(s.editIsoCode.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
-                  stateIsoCode,
-                  selector
-                );
-              }
-
-              await page.evaluate(
-                (val, s) =>
-                  ((document.querySelector(s.editIntVal.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
-                stateintVal,
-                selector
-              );
-
-              const editActiveState = await page.evaluate(s => {
-                return document.querySelector(s.editVisible.replace(/:/g, '\\:'))['checked'];
-              }, selector);
-
-              if (!editActiveState) {
-                await page.click(selector.editActive.replace(/:/g, '\\:'));
-              }
-
-              await page.waitFor(
-                s => {
-                  const val = document.querySelector(s.editVisible.replace(/:/g, '\\:'))['disabled'];
-                  return (val as boolean) === false;
-                },
-                {
-                  timeout: 0
-                },
-                selector
-              );
-
-              const editVisibleState = await page.evaluate(s => {
-                return document.querySelector(s.editVisible.replace(/:/g, '\\:'))['checked'];
-              }, selector);
-
-              if (!editVisibleState) {
-                await page.click(selector.editVisible.replace(/:/g, '\\:'));
-              }
+              await setHTMLInputElementValue(stateName, selector.editName);
+              await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
+              await setHTMLInputElementValue(stateintVal, selector.editIntVal);
+              await checkHTMLInputElement(selector.editActive, false);
+              await checkHTMLInputElement(selector.editVisible, true);
 
               await page.click(selector.save.replace(/:/g, '\\:'));
               await page.waitForNavigation({
-                waitUntil: 'networkidle0',
-                timeout: 0
+                waitUntil: 'networkidle0'
               });
             }
           }
