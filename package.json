@@ -102,7 +102,7 @@
               },
               "statecountry": {
                 "name": "statecountry",
-                "description": "create State/Country Picklists (beta)"
+                "description": "import (create/update) State/Country Picklists (beta)"
               }
             }
           }

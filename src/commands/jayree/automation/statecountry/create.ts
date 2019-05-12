@@ -2,6 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
 import tabletojson = require('tabletojson');
+import config = require('../../../../../config/countrystate.json');
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
@@ -11,7 +12,7 @@ if (Symbol['asyncIterator'] === undefined) {
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
-export default class CreateStateCountry extends SfdxCommand {
+export default class CreateUpdateStateCountry extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   /*   public static examples = [
@@ -35,11 +36,6 @@ export default class CreateStateCountry extends SfdxCommand {
     language: flags.string({
       description: messages.getMessage('languageFlagDescription'),
       required: true
-    }),
-    update: flags.boolean({
-      description: messages.getMessage('updateFlagDescription'),
-      required: false,
-      default: false
     }),
     uselocalvariant: flags.boolean({
       description: messages.getMessage('uselocalvariantFlagDescription'),
@@ -80,78 +76,129 @@ export default class CreateStateCountry extends SfdxCommand {
         });
       }
 
-      if (Object.keys(jsonParsed).includes(this.flags.category.toLowerCase())) {
+      if (Object.keys(jsonParsed).includes(this.flags.category)) {
+        const languagecodes = jsonParsed[this.flags.category]
+          .map(v => v['Language code'])
+          .filter((v, i, s) => s.indexOf(v) === i);
+        if (!languagecodes.includes(this.flags.language)) {
+          throw Error('Expected --language to be one of: ' + languagecodes.toString());
+        }
         const conn = this.org.getConnection();
         this.ux.setSpinnerStatus('login to ' + conn.instanceUrl);
         await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
           waitUntil: 'networkidle2'
         });
 
-        for await (const value of jsonParsed[this.flags.category.toLowerCase()]) {
+        for await (const value of jsonParsed[this.flags.category]) {
           const language = value['Language code'];
-          if (this.flags.language.toLowerCase() === language) {
+          if (this.flags.language === language) {
             const countrycode = value['3166-2 code'].split('-')[0];
             const stateintVal = value['3166-2 code'].split('*')[0];
-            const stateIsoCode = value['3166-2 code'].split('-')[1].split('*')[0];
+            let stateIsoCode = value['3166-2 code'].split('-')[1].split('*')[0];
             const stateName =
               this.flags.uselocalvariant && value['Local variant'] !== ''
                 ? value['Local variant']
                 : value['Subdivision name'];
 
-            this.ux.setSpinnerStatus((this.flags.update ? 'update ' : 'create ') + stateName + '/' + stateintVal);
-
-            const setupurl = this.flags.update
-              ? `i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`
-              : `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`;
-
-            await page.goto(conn.instanceUrl + setupurl, {
-              waitUntil: 'networkidle2'
-            });
-
-            await page.evaluate(
-              val =>
-                ((document.querySelector(
-                  '#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a nameSectionItem\\3a editName'
-                ) as HTMLInputElement).value = val),
-              stateName
-            );
-
-            await page.evaluate(
-              val =>
-                ((document.querySelector(
-                  '#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a codeSectionItem\\3a editIsoCode'
-                ) as HTMLInputElement).value = val),
-              stateIsoCode
-            );
-
-            await page.evaluate(
-              val =>
-                ((document.querySelector(
-                  '#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a intValSectionItem\\3a editIntVal'
-                ) as HTMLInputElement).value = val),
-              stateintVal
-            );
-
-            await page.click('#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a activeSectionItem\\3a editActive');
-
-            await page.waitFor(
-              () => {
-                const val = document.querySelector(
-                  '#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a visibleSectionItem\\3a editVisible'
-                )['disabled'];
-                return (val as boolean) === false;
-              },
-              {
-                timeout: 0
+            if (Object.keys(config.fix).includes(countrycode)) {
+              if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
+                this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
+                stateIsoCode = config.fix[countrycode][stateIsoCode];
               }
-            );
+            }
 
-            await page.click('#configurenew\\3a j_id1\\3a blockNew\\3a j_id9\\3a visibleSectionItem\\3a editVisible');
-            await page.click('#configurenew\\3a j_id1\\3a blockNew\\3a j_id43\\3a addButton');
-            await page.waitForNavigation({
-              waitUntil: 'networkidle0',
-              timeout: 0
-            });
+            let update = false;
+            try {
+              const updateurl = `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`;
+              await page.goto(conn.instanceUrl + updateurl, {
+                waitUntil: 'networkidle2'
+              });
+              const updatecheck = await page.evaluate(c => {
+                const result = document.querySelector(c.updatecheck) as HTMLElement;
+                if (result != null) {
+                  return result.innerText;
+                } else {
+                  return null;
+                }
+              }, config);
+              if (updatecheck === 'Unable to Access Page') {
+                throw Error('no update possible');
+              }
+              update = true;
+            } catch (error) {
+              const createurl = `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`;
+              await page.goto(conn.instanceUrl + createurl, {
+                waitUntil: 'networkidle2'
+              });
+            } finally {
+              this.ux.setSpinnerStatus((update ? 'update ' : 'create ') + stateName + '/' + stateintVal);
+
+              const selector = update ? config.update : config.create;
+
+              await page.evaluate(
+                (val, s) => ((document.querySelector(s.editName.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+                stateName,
+                selector
+              );
+
+              const editIsoCodeDisabled = await page.evaluate(s => {
+                const result = document.querySelector(s.editIsoCode.replace(/:/g, '\\:'));
+                if (result != null) {
+                  return result['disabled'];
+                } else {
+                  return true;
+                }
+              }, selector);
+
+              if (!editIsoCodeDisabled) {
+                await page.evaluate(
+                  (val, s) =>
+                    ((document.querySelector(s.editIsoCode.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+                  stateIsoCode,
+                  selector
+                );
+              }
+
+              await page.evaluate(
+                (val, s) =>
+                  ((document.querySelector(s.editIntVal.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+                stateintVal,
+                selector
+              );
+
+              const editActiveState = await page.evaluate(s => {
+                return document.querySelector(s.editVisible.replace(/:/g, '\\:'))['checked'];
+              }, selector);
+
+              if (!editActiveState) {
+                await page.click(selector.editActive.replace(/:/g, '\\:'));
+              }
+
+              await page.waitFor(
+                s => {
+                  const val = document.querySelector(s.editVisible.replace(/:/g, '\\:'))['disabled'];
+                  return (val as boolean) === false;
+                },
+                {
+                  timeout: 0
+                },
+                selector
+              );
+
+              const editVisibleState = await page.evaluate(s => {
+                return document.querySelector(s.editVisible.replace(/:/g, '\\:'))['checked'];
+              }, selector);
+
+              if (!editVisibleState) {
+                await page.click(selector.editVisible.replace(/:/g, '\\:'));
+              }
+
+              await page.click(selector.save.replace(/:/g, '\\:'));
+              await page.waitForNavigation({
+                waitUntil: 'networkidle0',
+                timeout: 0
+              });
+            }
           }
         }
       } else {
