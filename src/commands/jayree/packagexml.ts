@@ -106,6 +106,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     const outputFile = this.flags.file || this.args.file || null;
 
     let apiVersion = this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
+    /* istanbul ignore next*/
     try {
       this.project = await SfdxProject.resolve();
       const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
@@ -145,7 +146,13 @@ export default class GeneratePackageXML extends SfdxCommand {
         for await (const object of describe.metadataObjects) {
           if (object.inFolder) {
             const objectType = object.xmlName.replace('Template', '');
-            const promise = this.listMetaData(conn, { type: `${objectType}Folder` }, apiVersion);
+            const promise = this.listMetaData(
+              conn,
+              {
+                type: `${objectType}Folder`
+              },
+              apiVersion
+            );
             folders.push(promise);
           } else {
             let promise = this.listMetaData(conn, { type: object.xmlName }, apiVersion);
@@ -176,7 +183,14 @@ export default class GeneratePackageXML extends SfdxCommand {
               if (objectType === 'Email') {
                 objectType += 'Template';
               }
-              const promise = this.listMetaData(conn, { type: objectType, folder: folderItem.fullName }, apiVersion);
+              const promise = this.listMetaData(
+                conn,
+                {
+                  type: objectType,
+                  folder: folderItem.fullName
+                },
+                apiVersion
+              );
               folderedObjects.push(promise);
               folderedObjects.push(folder);
             }
@@ -490,7 +504,10 @@ export default class GeneratePackageXML extends SfdxCommand {
                 const meta = standardvaluesets.records[0]['Metadata']['standardValue'];
                 if (meta.length > 0) {
                   packageTypes['StandardValueSet'].pushUniqueValueKey(
-                    { fullName: member, fileName: `${member}.standardValueSet` },
+                    {
+                      fullName: member,
+                      fileName: `${member}.standardValueSet`
+                    },
                     'fullName'
                   );
                 } else {
@@ -532,7 +549,9 @@ export default class GeneratePackageXML extends SfdxCommand {
 
         const packageJson = {
           Package: {
-            $: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+            $: {
+              xmlns: 'http://soap.sforce.com/2006/04/metadata'
+            },
             types: [],
             version: apiVersion
           }
@@ -601,7 +620,10 @@ export default class GeneratePackageXML extends SfdxCommand {
 
         // const packageXml = convert.js2xml(packageJson, { compact: true, spaces: 4 });
         const builder = new xml2js.Builder({
-          xmldec: { version: '1.0', encoding: 'UTF-8' },
+          xmldec: {
+            version: '1.0',
+            encoding: 'UTF-8'
+          },
           xmlns: true
         });
         const packageXml = builder.buildObject(packageJson);
