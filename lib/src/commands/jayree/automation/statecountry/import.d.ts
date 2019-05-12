@@ -1,6 +1,7 @@
 import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 export default class CreateUpdateStateCountry extends SfdxCommand {
+    static aliases: string[];
     static description: string;
     protected static flagsConfig: {
         countrycode: flags.Discriminated<flags.Option<string>>;

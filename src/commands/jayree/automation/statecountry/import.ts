@@ -13,6 +13,8 @@ core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
 export default class CreateUpdateStateCountry extends SfdxCommand {
+  public static aliases = ['jayree:automation:statecountry:create', 'jayree:automation:statecountry:update'];
+
   public static description = messages.getMessage('commandDescription');
 
   /*   public static examples = [
