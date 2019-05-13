@@ -63,56 +63,68 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     const browser = await puppeteer.launch({
       headless: true
     });
-    try {
-      const page = await browser.newPage();
 
-      const setHTMLInputElementValue = async (newvalue, element) => {
-        const elementDisabled = await page.evaluate(s => {
-          const result = document.querySelector(s.replace(/:/g, '\\:'));
-          if (result != null) {
-            return result['disabled'];
-          } else {
-            return true;
-          }
-        }, element);
-        if (!elementDisabled) {
-          return page.evaluate(
-            (val, s) => ((document.querySelector(s.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
-            newvalue,
+    const page = await browser.newPage();
+
+    const setHTMLInputElementValue = async (newvalue, element) => {
+      const elementDisabled = await page.evaluate(s => {
+        const result = document.querySelector(s.replace(/:/g, '\\:'));
+        if (result != null) {
+          return result['disabled'];
+        } else {
+          return true;
+        }
+      }, element);
+      if (!elementDisabled) {
+        return page.evaluate(
+          (val, s) => ((document.querySelector(s.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+          newvalue,
+          element
+        );
+      } else {
+        return new Promise(resolve => {
+          resolve();
+        });
+      }
+    };
+
+    const setHTMLInputElementChecked = async (element, newstate, waitForEnable) => {
+      const elementCheckedState = await page.evaluate(s => {
+        return document.querySelector(s.replace(/:/g, '\\:'))['checked'];
+      }, element);
+      // this.ux.log('elementCheckedState: ' + element + ' ' + elementCheckedState);
+      if (!elementCheckedState === newstate) {
+        if (waitForEnable) {
+          await page.waitFor(
+            s => {
+              const val = document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
+              return (val as boolean) === false;
+            },
+            {
+              timeout: 0
+            },
             element
           );
-        } else {
-          return new Promise(resolve => {
-            resolve();
-          });
         }
-      };
-
-      const checkHTMLInputElement = async (element, waitForEnable) => {
-        const elementState = await page.evaluate(s => {
-          return document.querySelector(s.replace(/:/g, '\\:'))['checked'];
+        const elementDisabledState = await page.evaluate(s => {
+          return document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
         }, element);
-        if (!elementState) {
-          if (waitForEnable) {
-            await page.waitFor(
-              s => {
-                const val = document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
-                return (val as boolean) === false;
-              },
-              {
-                timeout: 0
-              },
-              element
-            );
-          }
+        // this.ux.log('elementDisabledState: ' + element + ' ' + elementDisabledState);
+        if (!elementDisabledState) {
           return page.click(element.replace(/:/g, '\\:'));
         } else {
           return new Promise(resolve => {
             resolve();
           });
         }
-      };
+      } else {
+        return new Promise(resolve => {
+          resolve();
+        });
+      }
+    };
 
+    try {
       !this.flags.silent
         ? this.ux.startSpinner(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`)
         : process.stdout.write(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`);
@@ -160,13 +172,72 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           waitUntil: 'networkidle0'
         });
 
-        const total = jsonParsed[this.flags.category].map(v => v['Language code']).length;
+        let total = jsonParsed[this.flags.category].map(v => v['Language code']).length;
         const start = new Date();
         let percent = 0;
         let eta = 0;
         let elapsed = 0;
         let curr = 0;
         let ratio = 0;
+
+        if (config.deactivate[this.flags.countrycode.toUpperCase()]) {
+          if (config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
+            total = total + config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category].length;
+            for await (const value of config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
+              const countrycode = value.split('-')[0];
+              const stateIsoCode = value.split('-')[1].split('*')[0];
+              try {
+                await page.goto(
+                  conn.instanceUrl +
+                    `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
+                  {
+                    waitUntil: 'networkidle0'
+                  }
+                );
+                const updatecheck = await page.evaluate(c => {
+                  const result = document.querySelector(c.updatecheck) as HTMLElement;
+                  if (result != null) {
+                    return result.innerText;
+                  } else {
+                    return null;
+                  }
+                }, config);
+                if (updatecheck === 'Unable to Access Page') {
+                  throw Error('no update possible');
+                }
+              } catch (error) {
+                continue;
+              }
+              spinnermessage =
+                percent.toFixed(0) +
+                '% - ' +
+                (elapsed / 1000).toFixed(1) +
+                's/' +
+                (isNaN(eta) || !isFinite(eta) ? '0.0' : (eta / 1000).toFixed(1)) +
+                's - ' +
+                'deactivate ' +
+                value;
+              !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
+
+              const selector = config.update;
+
+              await setHTMLInputElementChecked(selector.editVisible, false, false);
+              await setHTMLInputElementChecked(selector.editActive, false, false);
+
+              await page.click(selector.save.replace(/:/g, '\\:'));
+              await page.waitForNavigation({
+                waitUntil: 'networkidle0'
+              });
+              curr = curr + 1;
+              ratio = curr / total;
+              ratio = Math.min(Math.max(ratio, 0), 1);
+              percent = Math.floor(ratio * 100);
+              // tslint:disable-next-line: no-any
+              elapsed = (new Date() as any) - (start as any);
+              eta = percent === 100 ? 0 : elapsed * (total / curr - 1);
+            }
+          }
+        }
 
         /*         const bar = new ProgressBar('[:bar] :percent :etas', {
           complete: '=',
@@ -240,8 +311,8 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
               await setHTMLInputElementValue(stateName, selector.editName);
               await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
               await setHTMLInputElementValue(stateintVal, selector.editIntVal);
-              await checkHTMLInputElement(selector.editActive, false);
-              await checkHTMLInputElement(selector.editVisible, true);
+              await setHTMLInputElementChecked(selector.editActive, true, false);
+              await setHTMLInputElementChecked(selector.editVisible, true, true);
 
               await page.click(selector.save.replace(/:/g, '\\:'));
               await page.waitForNavigation({

@@ -87,5 +87,8 @@
       "YN": "53",
       "ZJ": "33"
     }
+  },
+  "deactivate": {
+    "IT": { "province": ["IT-CI", "IT-GO", "IT-OG", "IT-OT", "IT-PN", "IT-TS", "IT-UD", "IT-VS"] }
   }
 }
