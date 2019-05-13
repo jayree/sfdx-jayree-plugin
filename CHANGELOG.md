@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.0...v1.4.1) (2019-05-13)
+
+
+### Bug Fixes
+
+* **statecountry:** fix for italy ([554e5ec](https://github.com/jayree/sfdx-jayree-plugin/commit/554e5ec))
+
 # [1.4.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.3.0...v1.4.0) (2019-05-12)
 
 
