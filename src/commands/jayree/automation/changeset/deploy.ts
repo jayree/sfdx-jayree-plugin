@@ -1,6 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import inquirer = require('inquirer');
+import { prompt, Questions } from 'inquirer';
 import puppeteer = require('puppeteer');
 import serializeError = require('serialize-error');
 
@@ -95,12 +95,8 @@ jobid:  0Xxx100000xx1x1
             choices: tables.csad.map(element => ({
               value: element.ChangeSetName,
               name: element.Description
-                ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${
-                    element.UploadedDate
-                  } - ${element.Description}`
-                : `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${
-                    element.UploadedDate
-                  }`,
+                ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate} - ${element.Description}`
+                : `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate}`,
               short: element.ChangeSetName
             })),
             default: this.flags.changeset
@@ -138,9 +134,9 @@ jobid:  0Xxx100000xx1x1
               return true;
             }
           }
-        ];
+        ] as Questions;
 
-        sCS = await inquirer.prompt(questions).then(answers => {
+        sCS = await prompt(questions).then(answers => {
           return answers;
         });
       } else {
