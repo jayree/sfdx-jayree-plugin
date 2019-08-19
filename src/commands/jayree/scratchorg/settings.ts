@@ -135,6 +135,32 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       );
     }
 
+    if (settings['pathAssistantSettings']) {
+      delete settings['pathAssistantSettings'];
+      this.ux.warn(
+        'pathAssistantSettings seems to be not supportet, please create an issue on github if you see this message.'
+      );
+    }
+
+    if (settings['territory2Settings']) {
+      delete settings['territory2Settings'];
+      this.ux.warn(
+        'territory2Settings are not available for deploy during Scratch Org creation, you can deploy territory2Settings afterwards.'
+      );
+    }
+
+    if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
+      delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
+    }
+
+    if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
+      delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
+    }
+
+    if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
+      delete settings['orgPreferenceSettings']['packaging2'];
+    }
+
     if (settings['forecastingSettings']['forecastingCategoryMappings']) {
       delete settings['forecastingSettings']['forecastingCategoryMappings'];
     }
