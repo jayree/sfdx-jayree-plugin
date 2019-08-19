@@ -1,3 +1,13 @@
+## [1.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.1...v1.4.2) (2019-08-19)
+
+
+### Bug Fixes
+
+* **packagexml:** too much metadata was excluded with excludemanaged flag ([8a0f0e8](https://github.com/jayree/sfdx-jayree-plugin/commit/8a0f0e8))
+* **scratchorgsettings:** new excludes ([f9d1d86](https://github.com/jayree/sfdx-jayree-plugin/commit/f9d1d86))
+* update dependencies ([276beb9](https://github.com/jayree/sfdx-jayree-plugin/commit/276beb9))
+* update dependencies ([c463d67](https://github.com/jayree/sfdx-jayree-plugin/commit/c463d67))
+
 ## [1.4.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.0...v1.4.1) (2019-05-13)
 
 
