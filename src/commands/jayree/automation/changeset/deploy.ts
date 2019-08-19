@@ -1,6 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { prompt, Questions } from 'inquirer';
+import { prompt, QuestionCollection } from 'inquirer';
 import puppeteer = require('puppeteer');
 import serializeError = require('serialize-error');
 
@@ -134,7 +134,7 @@ jobid:  0Xxx100000xx1x1
               return true;
             }
           }
-        ] as Questions;
+        ] as QuestionCollection;
 
         sCS = await prompt(questions).then(answers => {
           return answers;
