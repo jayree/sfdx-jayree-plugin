@@ -250,14 +250,16 @@ export default class GeneratePackageXML extends SfdxCommand {
               unfolderedObjectItems = [unfolderedObject];
             }
             unfolderedObjectItems.forEach(metadataEntries => {
+              /*               if (metadataEntries.type === 'CustomApplication') {
+                console.log(metadataEntries);
+              } */
               // if (metadataEntries) {
               // if ((metadataEntries.type && metadataEntries.manageableState !== 'installed') || (metadataEntries.type && metadataEntries.manageableState === 'installed' && !excludeManaged)) {
               if (
                 metadataEntries.type &&
                 !(
-                  excludeManaged &&
-                  (RegExp(ipRegexStr).test(metadataEntries.fullName) ||
-                    metadataEntries.namespacePrefix ||
+                  excludeManaged && // RegExp(ipRegexStr).test(metadataEntries.fullName) ||
+                  ((metadataEntries.namespacePrefix && metadataEntries.manageableState !== 'unmanaged') ||
                     metadataEntries.manageableState === 'installed')
                 )
               ) {
@@ -295,13 +297,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                           {
                             fullName: metadataEntries.fullName,
                             fileName: metadataEntries.fileName,
-                            warning: `${metadataEntries.type}: ActiveVersion (${
-                              activeFlowVersions[metadataEntries.fullName].ActiveVersion
-                            }) differs from LatestVersion (${
-                              activeFlowVersions[metadataEntries.fullName].LatestVersion
-                            }) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${
-                              activeFlowVersions[metadataEntries.fullName].LatestVersion
-                            })!`
+                            warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) differs from LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion}) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${activeFlowVersions[metadataEntries.fullName].LatestVersion})!`
                           },
                           'fullName'
                         );
@@ -317,15 +313,9 @@ export default class GeneratePackageXML extends SfdxCommand {
                     } else {
                       packageTypes[metadataEntries.type].pushUniqueValueKey(
                         {
-                          fullName: `${metadataEntries.fullName}-${
-                            activeFlowVersions[metadataEntries.fullName].ActiveVersion
-                          }`,
+                          fullName: `${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}`,
                           fileName: metadataEntries.fileName,
-                          warning: `${metadataEntries.type}: ActiveVersion (${
-                            activeFlowVersions[metadataEntries.fullName].ActiveVersion
-                          }) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${
-                            metadataEntries.fullName
-                          }-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`
+                          warning: `${metadataEntries.type}: ActiveVersion (${activeFlowVersions[metadataEntries.fullName].ActiveVersion}) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${metadataEntries.fullName}-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`
                         },
                         'fullName'
                       );
