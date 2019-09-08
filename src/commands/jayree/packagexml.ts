@@ -159,11 +159,21 @@ export default class GeneratePackageXML extends SfdxCommand {
             if (object.xmlName === 'InstalledPackage') {
               ipPromise.push(promise);
             }
-            unfolderedObjects.push(promise);
+            try {
+              unfolderedObjects.push(await promise);
+            } catch (error) {
+              /* istanbul ignore next */
+              this.logger.error('unfolderedObjects promise error: ' + error);
+            }
             if (Array.isArray(object.childXmlNames)) {
               for (const childXmlNames of object.childXmlNames) {
                 promise = this.listMetaData(conn, { type: childXmlNames }, apiVersion);
-                unfolderedObjects.push(promise);
+                try {
+                  unfolderedObjects.push(await promise);
+                } catch (error) {
+                  /* istanbul ignore next */
+                  this.logger.error('unfolderedObjects promise error: ' + error);
+                }
               }
             }
           }
@@ -191,7 +201,12 @@ export default class GeneratePackageXML extends SfdxCommand {
                 },
                 apiVersion
               );
-              folderedObjects.push(promise);
+              try {
+                folderedObjects.push(await promise);
+              } catch (error) {
+                /* istanbul ignore next */
+                this.logger.error('folderedObjects promise error: ' + error);
+              }
               folderedObjects.push(folder);
             }
           }
@@ -240,7 +255,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         }
 
-        (await Promise.all(unfolderedObjects)).forEach(unfolderedObject => {
+        unfolderedObjects.forEach(unfolderedObject => {
           /* istanbul ignore else*/
           if (unfolderedObject) {
             let unfolderedObjectItems = [];
@@ -366,7 +381,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         });
 
-        (await Promise.all(folderedObjects)).forEach(folderedObject => {
+        folderedObjects.forEach(folderedObject => {
           /* istanbul ignore else*/
           if (folderedObject) {
             let folderedObjectItems = [];
