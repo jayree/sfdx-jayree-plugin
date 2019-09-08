@@ -161,6 +161,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       delete settings['orgPreferenceSettings']['packaging2'];
     }
 
+    if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
+      delete settings['orgPreferenceSettings']['compileOnDeploy'];
+    }
+
     if (settings['forecastingSettings']['forecastingCategoryMappings']) {
       delete settings['forecastingSettings']['forecastingCategoryMappings'];
     }
