@@ -1,3 +1,12 @@
+## [1.4.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.2...v1.4.3) (2019-09-08)
+
+
+### Bug Fixes
+
+* **packagexml:** fix "UNKNOWN_EXCEPTION: An unexpected error occurred." ([f4ac845](https://github.com/jayree/sfdx-jayree-plugin/commit/f4ac845))
+* update dependencies ([71686db](https://github.com/jayree/sfdx-jayree-plugin/commit/71686db))
+* **scratchorgsettings:** exclude compileOnDeploy ([100e036](https://github.com/jayree/sfdx-jayree-plugin/commit/100e036))
+
 ## [1.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.1...v1.4.2) (2019-08-19)
 
 
