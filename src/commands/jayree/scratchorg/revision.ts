@@ -2,7 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import serializeError = require('serialize-error');
+import { serializeError } from 'serialize-error';
 import * as util from 'util';
 
 core.Messages.importMessagesDirectory(__dirname);

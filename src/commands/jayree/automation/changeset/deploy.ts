@@ -2,7 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { prompt, QuestionCollection } from 'inquirer';
 import puppeteer = require('puppeteer');
-import serializeError = require('serialize-error');
+import { serializeError } from 'serialize-error';
 
 if (Symbol['asyncIterator'] === undefined) {
   // tslint:disable-next-line:no-any
