@@ -13,6 +13,8 @@
     "adm-zip": "0.4.11",
     "fs-extra": "^8.1.0",
     "inquirer": "^7.0.0",
+    "marked": "0.7.0",
+    "marked-terminal": "3.3.0",
     "open": "^6.4.0",
     "puppeteer": "^1.20.0",
     "serialize-error": "^5.0.0",
@@ -71,6 +73,9 @@
   "oclif": {
     "commands": "./lib/src/commands",
     "bin": "sfdx",
+    "hooks": {
+      "update": "./lib/src/hooks/changelog"
+    },
     "topics": {
       "jayree": {
         "name": "jayree",
