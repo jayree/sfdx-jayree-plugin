@@ -1,53 +1,41 @@
 import { Hook } from '@oclif/config';
-import { accessSync, readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { ensureDirSync } from 'fs-extra';
 import marked = require('marked');
 import terminalRenderer = require('marked-terminal');
-import { dirname, join } from 'path';
+import { join } from 'path';
 
 // tslint:disable-next-line: no-any
 export const changelog: Hook<any> = async function() {
-  let currentPath = __dirname;
-
-  let moduleRootPath;
-  while (!moduleRootPath) {
-    try {
-      const path = join(currentPath, 'package.json');
-      accessSync(path);
-      moduleRootPath = currentPath;
-    } catch (err) {
-      currentPath = dirname(currentPath);
-      if (currentPath === '/') {
-        throw new Error(`package.json root not found`);
-      }
-    }
-  }
-
   marked.setOptions({ renderer: new terminalRenderer() });
 
-  const cachedir = join(this.config.cacheDir, 'sfdx-jayree');
-  ensureDirSync(cachedir);
-  const versionfile = join(cachedir, 'version');
+  const cacheDir = join(this.config.cacheDir, 'sfdx-jayree');
+  ensureDirSync(cacheDir);
+  const versionFile = join(cacheDir, 'version');
 
-  const changelogfile = readFileSync(join(moduleRootPath, 'CHANGELOG.md'), 'utf8');
-  let changelogtext;
-
-  const packagejson = JSON.parse(readFileSync(join(moduleRootPath, 'package.json'), 'utf8'));
+  const moduleRootPath = join(__dirname, '/..', '/..', '/..');
 
   try {
-    const latestversion = JSON.parse(readFileSync(versionfile, 'utf8'));
-    changelogtext = changelogfile.substring(0, changelogfile.indexOf(`[${latestversion.version}]`));
-    if (changelogtext.length === 0) {
-      throw new Error(`version not found`);
+    const changelogFile = readFileSync(join(moduleRootPath, 'CHANGELOG.md'), 'utf8');
+    const packageJson = JSON.parse(readFileSync(join(moduleRootPath, 'package.json'), 'utf8'));
+    let changelogText;
+    try {
+      const latestVersion = JSON.parse(readFileSync(versionFile, 'utf8'));
+      changelogText = changelogFile.substring(0, changelogFile.indexOf(`[${latestVersion.version}]`));
+      if (changelogText.length === 0) {
+        throw new Error(`version not found`);
+      }
+    } catch (err) {
+      changelogText = changelogFile.substring(0, changelogFile.indexOf('# [', 2));
+    } finally {
+      changelogText = changelogText.substring(0, changelogText.lastIndexOf('\n'));
+      if (changelogText.length > 0) {
+        console.log(marked('# CHANGELOG (sfdx-jayree)'));
+        console.log(marked(changelogText));
+      }
+      writeFileSync(versionFile, JSON.stringify({ version: packageJson.version }), 'utf8');
     }
-  } catch (err) {
-    changelogtext = changelogfile.substring(0, changelogfile.indexOf('# [', 2));
-  } finally {
-    changelogtext = changelogtext.substring(0, changelogtext.lastIndexOf('\n'));
-    if (changelogtext.length > 0) {
-      console.log(marked('# CHANGELOG (sfdx-jayree)'));
-      console.log(marked(changelogtext));
-    }
-    writeFileSync(versionfile, JSON.stringify({ version: packagejson.version }), 'utf8');
+  } catch (error) {
+    console.log('CHANGELOG.md not found');
   }
 };
