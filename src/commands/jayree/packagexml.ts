@@ -3,7 +3,7 @@ import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-// import serializeError = require('serialize-error');
+// import { serializeError } from 'serialize-error';
 // import * as notifier from 'node-notifier';
 // import * as convert from 'xml-js';
 import * as xml2js from 'xml2js';

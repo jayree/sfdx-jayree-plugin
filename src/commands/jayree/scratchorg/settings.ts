@@ -2,7 +2,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import serializeError = require('serialize-error');
+import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -107,15 +107,19 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       ].map(async member => {
         try {
           const settingsQuery = await conn.tooling.query('SELECT Metadata FROM ' + member);
-          for await (const record of settingsQuery.records) {
-            if (member === 'OrgPreferenceSettings') {
-              settings[camelize(member)] = {};
-              record['Metadata']['preferences'].forEach(element => {
-                settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
-              });
-            } else {
-              settings[camelize(member)] = record['Metadata'];
+          if (typeof settingsQuery.records !== 'undefined') {
+            for await (const record of settingsQuery.records) {
+              if (member === 'OrgPreferenceSettings') {
+                settings[camelize(member)] = {};
+                record['Metadata']['preferences'].forEach(element => {
+                  settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
+                });
+              } else {
+                settings[camelize(member)] = record['Metadata'];
+              }
             }
+          } else {
+            this.logger.error('query ' + member + ' not possible');
           }
         } catch (error) {
           if (!['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION'].includes((error as Error).name)) {
@@ -137,7 +141,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     if (settings['pathAssistantSettings']) {
       delete settings['pathAssistantSettings'];
-      this.ux.warn(
+      this.logger.error(
         'pathAssistantSettings seems to be not supportet, please create an issue on github if you see this message.'
       );
     }

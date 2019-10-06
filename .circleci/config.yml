@@ -86,7 +86,7 @@ jobs:
 
 workflows:
   version: 2
-  sfdx-autocomplete:
+  sfdx-jayree:
     jobs:
       - node-latest
       - node-8
