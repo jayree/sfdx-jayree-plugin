@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.3...v1.5.0) (2019-10-06)
+
+
+### Bug Fixes
+
+* update dependencies ([1363742](https://github.com/jayree/sfdx-jayree-plugin/commit/1363742))
+
+
+### Features
+
+* **hook:** add update hook to print changelog in terminal ([e8c9dfa](https://github.com/jayree/sfdx-jayree-plugin/commit/e8c9dfa))
+
 ## [1.4.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.2...v1.4.3) (2019-09-08)
 
 
