@@ -47,10 +47,14 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
   public async run(): Promise<AnyJson> {
     const removeEmpty = obj => {
-      Object.entries(obj).forEach(
-        ([key, val]) =>
-          (val && typeof val === 'object' && removeEmpty(val)) || ((val === null || val === '') && delete obj[key])
-      );
+      Object.entries(obj).forEach(([key, val]) => {
+        if (val && typeof val === 'object') {
+          val = removeEmpty(val);
+        }
+        if (val === null || val === '' || (typeof val === 'object' && !Object.keys(val).length)) {
+          delete obj[key];
+        }
+      });
       return obj;
     };
 
@@ -67,90 +71,70 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     this.ux.startSpinner('Generating settings');
     const conn = this.org.getConnection();
 
+    const settingsarray = (await conn.tooling.describeGlobal()).sobjects
+      .filter(a => a.name.includes('Settings'))
+      .map(a => a.name);
+
     let settings = {};
 
-    await Promise.all(
-      [
-        'AccountSettings',
-        'ActivitiesSettings',
-        // 'AddressSettings',
-        'BusinessHoursSettings',
-        'CaseSettings',
-        'ChatterAnswersSettings',
-        'CompanySettings',
-        'ContractSettings',
-        'EntitlementSettings',
-        'FieldServiceSettings',
-        'FileUploadAndDownloadSecuritySettings',
-        'ForecastingSettings',
-        'IdeasSettings',
-        'IoTSettings',
-        'KnowledgeSettings',
-        // 'LeadConvertSettings',
-        'LiveAgentSettings',
-        'LiveMessageSettings',
-        'MacroSettings',
-        'MobileSettings',
-        'NameSettings',
-        'OmniChannelSettings',
-        'OpportunitySettings',
-        'OrderSettings',
-        'OrgPreferenceSettings',
-        'PathAssistantSettings',
-        'ProductSettings',
-        'ProfileSessionSetting',
-        'QuoteSettings',
-        // 'SearchSettings',
-        'SecuritySettings',
-        // 'SocialCustomerServiceSettings',
-        'Territory2Settings'
-      ].map(async member => {
-        try {
-          const settingsQuery = await conn.tooling.query('SELECT Metadata FROM ' + member);
-          if (typeof settingsQuery.records !== 'undefined') {
-            for await (const record of settingsQuery.records) {
-              if (member === 'OrgPreferenceSettings') {
-                settings[camelize(member)] = {};
-                record['Metadata']['preferences'].forEach(element => {
-                  settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
-                });
-              } else {
-                settings[camelize(member)] = record['Metadata'];
-              }
+    for await (const member of settingsarray) {
+      try {
+        const settingsQuery = await conn.tooling.query('SELECT Metadata FROM ' + member);
+        if (typeof settingsQuery.records !== 'undefined') {
+          for await (const record of settingsQuery.records) {
+            if (member === 'OrgPreferenceSettings') {
+              settings[camelize(member)] = {};
+              record['Metadata']['preferences'].forEach(element => {
+                settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
+              });
+            } else {
+              settings[camelize(member)] = record['Metadata'];
             }
-          } else {
-            this.logger.error('query ' + member + ' not possible');
           }
-        } catch (error) {
-          if (!['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION'].includes((error as Error).name)) {
-            this.ux.error(error);
-          }
+        } else {
+          this.logger.error('query ' + member + ' not possible');
         }
-      })
-    );
+      } catch (error) {
+        if (!['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD'].includes((error as Error).name)) {
+          this.ux.error(error);
+        }
+      }
+    }
 
     this.ux.stopSpinner();
     // fix hard coded things
 
-    if (settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents']) {
-      delete settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'];
-      this.ux.warn(
-        "You can't use the Tooling API or Metadata API to enable or disable Shared Activities.To enable this feature, visit the Activity Settings page in Setup.To disable this feature, contact Salesforce."
-      );
+    if (typeof settings['addressSettings'] !== 'undefined') {
+      delete settings['addressSettings'];
     }
 
-    if (settings['pathAssistantSettings']) {
-      delete settings['pathAssistantSettings'];
-      this.logger.error(
-        'pathAssistantSettings seems to be not supportet, please create an issue on github if you see this message.'
-      );
+    if (typeof settings['leadConvertSettings'] !== 'undefined') {
+      delete settings['leadConvertSettings'];
     }
 
-    if (settings['territory2Settings']) {
-      delete settings['territory2Settings'];
-      this.ux.warn(
-        'territory2Settings are not available for deploy during Scratch Org creation, you can deploy territory2Settings afterwards.'
-      );
+    if (typeof settings['searchSettings'] !== 'undefined') {
+      delete settings['searchSettings'];
+    }
+
+    if (typeof settings['analyticsSettings'] !== 'undefined') {
+      delete settings['analyticsSettings'];
+    }
+
+    if (typeof settings['activitiesSettings'] !== 'undefined') {
+      if (typeof settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'] !== 'undefined') {
+        delete settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'];
+        this.ux.warn(
+          "You can't use the Tooling API or Metadata API to enable or disable Shared Activities.To enable this feature, visit the Activity Settings page in Setup.To disable this feature, contact Salesforce."
+        );
+      }
+    }
+
+    if (typeof settings['territory2Settings'] !== 'undefined') {
+      if (typeof settings['territory2Settings']['enableTerritoryManagement2'] !== 'undefined') {
+        settings['territory2Settings'] = {
+          enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2']
+        };
+      }
     }
 
     if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
@@ -169,15 +153,27 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       delete settings['orgPreferenceSettings']['compileOnDeploy'];
     }
 
-    if (settings['forecastingSettings']['forecastingCategoryMappings']) {
-      delete settings['forecastingSettings']['forecastingCategoryMappings'];
+    if (typeof settings['forecastingSettings'] !== 'undefined') {
+      if (typeof settings['forecastingSettings']['forecastingCategoryMappings'] !== 'undefined') {
+        delete settings['forecastingSettings']['forecastingCategoryMappings'];
+      }
+      if (typeof settings['forecastingSettings']['forecastingTypeSettings'] !== 'undefined') {
+        delete settings['forecastingSettings']['forecastingTypeSettings'];
+      }
     }
 
-    if (settings['forecastingSettings']['forecastingTypeSettings']) {
-      delete settings['forecastingSettings']['forecastingTypeSettings'];
+    if (typeof settings['caseSettings'] !== 'undefined') {
+      if (typeof settings['caseSettings']['caseFeedItemSettings'] !== 'undefined') {
+        if (typeof settings['caseSettings']['caseFeedItemSettings'][0] !== 'undefined') {
+          if (typeof settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] !== 'undefined') {
+            if (settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] === 'EMAIL_MESSAGE_EVENT') {
+              settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] = 'EmailMessageEvent';
+            }
+          }
+        }
+      }
     }
 
-    settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] = 'EmailMessageEvent';
     settings = removeEmpty(settings);
     settings = sortKeys(settings);
     settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
@@ -191,6 +187,40 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         .readFile(deffilepath, 'utf8')
         .then(data => {
           deffile = JSON.parse(data);
+
+          if (deffile['edition'] === 'Enterprise') {
+            if (!deffile['features'].includes('LiveAgent')) {
+              if (typeof settings['liveAgentSettings'] !== 'undefined') {
+                if (typeof settings['liveAgentSettings']['enableLiveAgent'] !== 'undefined') {
+                  if (settings['liveAgentSettings']['enableLiveAgent'] === false) {
+                    delete settings['liveAgentSettings'];
+                    this.ux.warn('liveAgentSettings: Not available for deploy for this organization');
+                  }
+                }
+              }
+            }
+
+            if (typeof settings['knowledgeSettings'] !== 'undefined') {
+              if (typeof settings['knowledgeSettings']['enableKnowledge'] !== 'undefined') {
+                if (settings['knowledgeSettings']['enableKnowledge'] === false) {
+                  delete settings['knowledgeSettings'];
+                  this.ux.warn("knowledgeSettings: Once enabled, Salesforce Knowledge can't be disabled.");
+                }
+              }
+            }
+
+            if (typeof settings['caseSettings'] !== 'undefined') {
+              if (typeof settings['caseSettings']['emailToCase'] !== 'undefined') {
+                if (typeof settings['caseSettings']['emailToCase']['enableEmailToCase'] !== 'undefined') {
+                  if (settings['caseSettings']['emailToCase']['enableEmailToCase'] === false) {
+                    delete settings['caseSettings']['emailToCase'];
+                    this.ux.warn('EmailToCaseSettings: Email to case cannot be disabled once it has been enabled.');
+                  }
+                }
+              }
+            }
+          }
+
           deffile['settings'] = settings;
         })
         .catch(err => {
