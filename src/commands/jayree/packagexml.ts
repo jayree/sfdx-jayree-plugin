@@ -49,12 +49,6 @@ if (!String.prototype.toLowerCaseifTrue) {
   };
 }
 
-/* istanbul ignore next*/
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line: no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 /**
  * This code was based on the original github:sfdx-hydrate project
  */
@@ -212,31 +206,6 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         }
 
-        /**
-         * This part was taken from the github:sfdx-collate project
-         */
-        let ipRegexStr = '^(';
-
-        // if (ipPromise.length > 0) {
-        //   const nsPrefixes = [];
-        //   await Promise.all(
-        //     ipPromise.map(async promise => {
-        //       const ip = await promise;
-        //       /* istanbul ignore else*/
-        //       if (typeof ip !== 'undefined') {
-        //         ip.forEach(pkg => {
-        //           nsPrefixes.pushUniqueValue(pkg.namespacePrefix);
-        //         });
-        //       }
-        //     })
-        //   );
-        //   nsPrefixes.forEach(prefix => {
-        //     ipRegexStr += prefix + '|';
-        //   });
-        // }
-
-        ipRegexStr += ')+__';
-
         const flowDefinitionQuery = await this.toolingQuery(
           conn,
           'SELECT DeveloperName, ActiveVersion.VersionNumber, LatestVersion.VersionNumber FROM FlowDefinition'
@@ -273,7 +242,7 @@ export default class GeneratePackageXML extends SfdxCommand {
               if (
                 metadataEntries.type &&
                 !(
-                  excludeManaged && // RegExp(ipRegexStr).test(metadataEntries.fullName) ||
+                  excludeManaged &&
                   ((metadataEntries.namespacePrefix && metadataEntries.manageableState !== 'unmanaged') ||
                     metadataEntries.manageableState === 'installed')
                 )
@@ -396,9 +365,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                 metadataEntries.type &&
                 !(
                   excludeManaged &&
-                  (RegExp(ipRegexStr).test(metadataEntries.fullName) ||
-                    metadataEntries.namespacePrefix ||
-                    metadataEntries.manageableState === 'installed')
+                  (metadataEntries.namespacePrefix || metadataEntries.manageableState === 'installed')
                 )
               ) {
                 let objectType = metadataEntries.type.replace('Folder', '');
@@ -438,92 +405,92 @@ export default class GeneratePackageXML extends SfdxCommand {
         /* istanbul ignore else*/
         if (!packageTypes['StandardValueSet']) {
           packageTypes['StandardValueSet'] = [];
-          await Promise.all(
-            [
-              'AccountContactMultiRoles',
-              'AccountContactRole',
-              'AccountOwnership',
-              'AccountRating',
-              'AccountType',
-              'AddressCountryCode',
-              'AddressStateCode',
-              'AssetStatus',
-              'CampaignMemberStatus',
-              'CampaignStatus',
-              'CampaignType',
-              'CaseContactRole',
-              'CaseOrigin',
-              'CasePriority',
-              'CaseReason',
-              'CaseStatus',
-              'CaseType',
-              'ContactRole',
-              'ContractContactRole',
-              'ContractStatus',
-              'EntitlementType',
-              'EventSubject',
-              'EventType',
-              'FiscalYearPeriodName',
-              'FiscalYearPeriodPrefix',
-              'FiscalYearQuarterName',
-              'FiscalYearQuarterPrefix',
-              'IdeaCategory',
-              'IdeaMultiCategory',
-              'IdeaStatus',
-              'IdeaThemeStatus',
-              'Industry',
-              'InvoiceStatus',
-              'LeadSource',
-              'LeadStatus',
-              'OpportunityCompetitor',
-              'OpportunityStage',
-              'OpportunityType',
-              'OrderStatus',
-              'OrderType',
-              'PartnerRole',
-              'Product2Family',
-              'QuestionOrigin',
-              'QuickTextCategory',
-              'QuickTextChannel',
-              'QuoteStatus',
-              'SalesTeamRole',
-              'Salutation',
-              'ServiceContractApprovalStatus',
-              'SocialPostClassification',
-              'SocialPostEngagementLevel',
-              'SocialPostReviewedStatus',
-              'SolutionStatus',
-              'TaskPriority',
-              'TaskStatus',
-              'TaskSubject',
-              'TaskType',
-              'WorkOrderLineItemStatus',
-              'WorkOrderPriority',
-              'WorkOrderStatus'
-            ].map(async member => {
-              try {
-                const standardvaluesets = await this.toolingQuery(
-                  conn,
-                  `SELECT metadata FROM StandardValueset WHERE masterlabel = '${member}'`
+          const standardvaluesetarray = [
+            'AccountContactMultiRoles',
+            'AccountContactRole',
+            'AccountOwnership',
+            'AccountRating',
+            'AccountType',
+            'AddressCountryCode',
+            'AddressStateCode',
+            'AssetStatus',
+            'CampaignMemberStatus',
+            'CampaignStatus',
+            'CampaignType',
+            'CaseContactRole',
+            'CaseOrigin',
+            'CasePriority',
+            'CaseReason',
+            'CaseStatus',
+            'CaseType',
+            'ContactRole',
+            'ContractContactRole',
+            'ContractStatus',
+            'EntitlementType',
+            'EventSubject',
+            'EventType',
+            'FiscalYearPeriodName',
+            'FiscalYearPeriodPrefix',
+            'FiscalYearQuarterName',
+            'FiscalYearQuarterPrefix',
+            'IdeaCategory',
+            'IdeaMultiCategory',
+            'IdeaStatus',
+            'IdeaThemeStatus',
+            'Industry',
+            'InvoiceStatus',
+            'LeadSource',
+            'LeadStatus',
+            'OpportunityCompetitor',
+            'OpportunityStage',
+            'OpportunityType',
+            'OrderStatus',
+            'OrderType',
+            'PartnerRole',
+            'Product2Family',
+            'QuestionOrigin',
+            'QuickTextCategory',
+            'QuickTextChannel',
+            'QuoteStatus',
+            'RoleInTerritory2',
+            'SalesTeamRole',
+            'Salutation',
+            'ServiceContractApprovalStatus',
+            'SocialPostClassification',
+            'SocialPostEngagementLevel',
+            'SocialPostReviewedStatus',
+            'SolutionStatus',
+            'TaskPriority',
+            'TaskStatus',
+            'TaskSubject',
+            'TaskType',
+            'WorkOrderLineItemStatus',
+            'WorkOrderPriority',
+            'WorkOrderStatus'
+          ];
+          for await (const member of standardvaluesetarray) {
+            try {
+              const standardvaluesets = await this.toolingQuery(
+                conn,
+                `SELECT metadata FROM StandardValueset WHERE masterlabel = '${member}'`
+              );
+              const meta = standardvaluesets.records[0]['Metadata']['standardValue'];
+              if (meta.length > 0) {
+                packageTypes['StandardValueSet'].pushUniqueValueKey(
+                  {
+                    fullName: member,
+                    fileName: `${member}.standardValueSet`
+                  },
+                  'fullName'
                 );
-                const meta = standardvaluesets.records[0]['Metadata']['standardValue'];
-                if (meta.length > 0) {
-                  packageTypes['StandardValueSet'].pushUniqueValueKey(
-                    {
-                      fullName: member,
-                      fileName: `${member}.standardValueSet`
-                    },
-                    'fullName'
-                  );
-                } else {
-                  this.logger.error(member + ' - Required field is missing: standardValue');
-                }
-              } catch (err) {
-                // this.logger.error({ stack: err.stack }, err.message);
-                this.logger.error(err.stack);
+              } else {
+                this.logger.error(member + ' - Required field is missing: standardValue');
               }
-            })
-          );
+            } catch (err) {
+              // this.logger.error({ stack: err.stack }, err.message);
+              this.logger.error(err.stack);
+            }
+          }
         }
 
         if (apiVersion >= 44.0) {
