@@ -1,3 +1,12 @@
+## [1.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.0...v1.5.1) (2019-10-18)
+
+
+### Bug Fixes
+
+* **packagexml:** add RoleInTerritory2 StandardValueSet ([3ff6943](https://github.com/jayree/sfdx-jayree-plugin/commit/3ff6943faf5b7db16f200521599d867d50b3c734))
+* **scratchorgsettings:** add Winter '20 settings ([49a0530](https://github.com/jayree/sfdx-jayree-plugin/commit/49a0530b3b364384917e3328de0a708035490042))
+* update dependencies ([0469280](https://github.com/jayree/sfdx-jayree-plugin/commit/0469280801bb6f18ce96d2b075c05de27be01692))
+
 # [1.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.4.3...v1.5.0) (2019-10-06)
 
 
