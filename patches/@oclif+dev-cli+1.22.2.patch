@@ -1,9 +1,19 @@
 diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-index d3abe19..71aa701 100644
+index 38f65a2..c9ff058 100644
 --- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
 +++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-@@ -59,14 +59,14 @@ class Readme extends command_1.Command {
-     usage(config) {  
+@@ -49,22 +49,22 @@ class Readme extends command_1.Command {
+         return readme.replace(`<!-- ${tag} -->`, `<!-- ${tag} -->\n${body}\n<!-- ${tag}stop -->`);
+     }
+     toc(__, readme) {
+-        return readme.split('\n').filter(l => l.startsWith('# '))
+-            .map(l => l.trim().slice(2))
++        return readme.split('\n').filter(l => l.startsWith('## '))
++            .map(l => l.trim().slice(3))
+             .map(l => `* [${l}](#${slugify.slug(l)})`)
+             .join('\n');
+     }
+     usage(config) {
          return [
              `\`\`\`sh-session
 -$ npm install -g ${config.name}
@@ -23,7 +33,25 @@ index d3abe19..71aa701 100644
  ...
  \`\`\`\n`,
          ].join('\n').trim();
-@@ -189,7 +189,7 @@ USAGE
+@@ -79,7 +79,7 @@ USAGE
+             this.createTopicFile(path.join('.', dir, topic.name.replace(/:/g, '/') + '.md'), config, topic, commands.filter(c => c.id === topic.name || c.id.startsWith(topic.name + ':')));
+         }
+         return [
+-            '# Command Topics\n',
++            '## Command Topics\n',
+             ...topics.map(t => {
+                 return util_1.compact([
+                     `* [\`${config.bin} ${t.name}\`](${dir}/${t.name.replace(/:/g, '/')}.md)`,
+@@ -114,7 +114,7 @@ USAGE
+         this.debug('rendering command', c.id);
+         let title = util_1.template({ config, command: c })(c.description || '').trim().split('\n')[0];
+         const help = new plugin_help_1.default(config, { stripAnsi: true, maxWidth: columns });
+-        const header = () => `## \`${config.bin} ${this.commandUsage(config, c)}\``;
++        const header = () => `### \`${config.bin} ${this.commandUsage(config, c)}\``;
+         return util_1.compact([
+             header(),
+             title,
+@@ -187,7 +187,7 @@ USAGE
              return;
          p = p.replace(plugin.root + path.sep, '');
          if (plugin.pjson.devDependencies.typescript) {
@@ -32,3 +60,15 @@ index d3abe19..71aa701 100644
              p = p.replace(/\.js$/, '.ts');
          }
          return p;
+@@ -213,9 +213,9 @@ USAGE
+ }
+ Readme.description = `adds commands to README.md in current directory
+ The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
+-# Usage
++## Usage
+ <!-- usage -->
+-# Commands
++## Commands
+ <!-- commands -->
+ 
+ Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
