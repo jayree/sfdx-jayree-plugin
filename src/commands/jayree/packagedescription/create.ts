@@ -1,6 +1,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as AdmZip from 'adm-zip';
+import * as fs from 'fs-extra';
+import * as JSZip from 'jszip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -39,7 +40,7 @@ export default class CreatePackageDescription extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
-    const newZip = new AdmZip();
+    const zip = new JSZip();
     const text = this.flags.description.replace(/\\n/g, '\n');
 
     const fileContentjs = {
@@ -53,15 +54,11 @@ export default class CreatePackageDescription extends SfdxCommand {
       ]
     };
 
-    newZip.addFile(
-      'unpackaged/package.xml',
-      Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })),
-      '',
-      0o644
-    );
+    const unpackaged = zip.folder('unpackaged');
+    unpackaged.file('package.xml', convert.js2xml(fileContentjs, { compact: true, spaces: 4 }));
 
-    newZip.writeZip(inputfile);
-    // this.ux.log(newZip.getEntries()[0].header.toString());
+    zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true }).pipe(fs.createWriteStream(inputfile));
+
     this.ux.log(text);
 
     return { description: text, task: 'created' };
