@@ -258,7 +258,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     });
 
     return {
-      maxrevision: { remote: maxRev, local: newlocalmaxRev },
+      maxrevision: { remote: maxRev, local: newlocalmaxRev, stored: newstoredmaxrev },
       orgId: this.org.getOrgId(),
       username: this.org.getUsername()
     };
