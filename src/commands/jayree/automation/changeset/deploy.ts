@@ -4,11 +4,6 @@ import { prompt, QuestionCollection } from 'inquirer';
 import puppeteer = require('puppeteer');
 import { serializeError } from 'serialize-error';
 
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line:no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
 export default class DeployChangeSet extends SfdxCommand {

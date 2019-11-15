@@ -2,11 +2,6 @@ import { core, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
 
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line:no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'listchangeset');
 export default class ViewChangeSets extends SfdxCommand {

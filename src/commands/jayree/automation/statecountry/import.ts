@@ -5,11 +5,6 @@ import puppeteer = require('puppeteer');
 import tabletojson = require('tabletojson');
 import config = require('../../../../../config/countrystate.json');
 
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line:no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 

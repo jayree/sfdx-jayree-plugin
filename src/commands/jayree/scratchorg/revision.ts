@@ -9,12 +9,6 @@ core.Messages.importMessagesDirectory(__dirname);
 
 const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgrevision');
 
-/* istanbul ignore else*/
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line: no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
