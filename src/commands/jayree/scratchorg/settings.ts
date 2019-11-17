@@ -8,12 +8,6 @@ core.Messages.importMessagesDirectory(__dirname);
 
 const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgsettings');
 
-/* istanbul ignore else*/
-if (Symbol['asyncIterator'] === undefined) {
-  // tslint:disable-next-line: no-any
-  (Symbol as any)['asyncIterator'] = Symbol.for('asyncIterator');
-}
-
 function camelize(str) {
   return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
     if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
