@@ -1,3 +1,13 @@
+## [1.5.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.1...v1.5.2) (2019-11-17)
+
+
+### Bug Fixes
+
+* cleanup code ([5461876](https://github.com/jayree/sfdx-jayree-plugin/commit/54618764af1e1659d26994c8b27905ffa385b1bd))
+* update dependencies ([bbe848d](https://github.com/jayree/sfdx-jayree-plugin/commit/bbe848d7b80cca66c7d114df7c3305b4b11dd3b4))
+* **packagedescription:** replace adm-zip with jszip and update dependencies ([b6bedd6](https://github.com/jayree/sfdx-jayree-plugin/commit/b6bedd6ed5fa90b88665c9329ad4765f4a48990f))
+* **scratchorgrevision:** add missing 'stored' value in json output ([e085d86](https://github.com/jayree/sfdx-jayree-plugin/commit/e085d86d1048b95a8bb8381e03a279199080ec8a))
+
 ## [1.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.0...v1.5.1) (2019-10-18)
 
 
