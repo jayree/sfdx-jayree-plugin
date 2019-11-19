@@ -68,7 +68,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     const conn = this.org.getConnection();
 
-    const maxRev = await conn.tooling.query('SELECT MAX(RevisionNum) maxRev from SourceMember').then(result => {
+    const maxRev = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember').then(result => {
       if (!util.isNullOrUndefined(result) && result.records.length > 0) {
         return Promise.resolve(result.records[0]['maxRev']);
       }
@@ -154,13 +154,13 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     const sourceMemberResults = (await conn.tooling
       .sobject('SourceMember')
-      .find({ RevisionNum: { $gt: this.flags.startfromrevision } }, ['RevisionNum', 'MemberType', 'MemberName'])
+      .find({ RevisionCounter: { $gt: this.flags.startfromrevision } }, ['RevisionCounter', 'MemberType', 'MemberName'])
       .then(results => {
         let islocalinmap = false;
         let isstoredinmap = false;
 
         const tablemap = results.map(value => {
-          const keyval = value['RevisionNum'];
+          const keyval = value['RevisionCounter'];
           if (keyval === newlocalmaxRev) {
             islocalinmap = true;
           }
@@ -168,16 +168,16 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
             isstoredinmap = true;
           }
           if (keyval === maxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [remote]';
           }
           if (keyval === newlocalmaxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [local]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [local]';
           }
           if (keyval === newstoredmaxrev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [stored]';
           }
           if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [local(old)]';
           }
           return [keyval, value];
         });
@@ -185,18 +185,18 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         if (!islocalinmap) {
           const keyval = newlocalmaxRev;
           const value = [];
-          value['RevisionNum'] = newlocalmaxRev;
+          value['RevisionCounter'] = newlocalmaxRev;
           if (keyval === maxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [remote]';
           }
           if (keyval === newlocalmaxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [local]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [local]';
           }
           if (keyval === newstoredmaxrev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [stored]';
           }
           if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
-            value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
+            value['RevisionCounter'] = value['RevisionCounter'] + ' [local(old)]';
           }
           tablemap.push([keyval, value]);
         }
@@ -205,18 +205,18 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
           if (!isstoredinmap) {
             const keyval = newstoredmaxrev;
             const value = [];
-            value['RevisionNum'] = newstoredmaxrev;
+            value['RevisionCounter'] = newstoredmaxrev;
             if (keyval === maxRev) {
-              value['RevisionNum'] = value['RevisionNum'] + ' [remote]';
+              value['RevisionCounter'] = value['RevisionCounter'] + ' [remote]';
             }
             if (keyval === newlocalmaxRev) {
-              value['RevisionNum'] = value['RevisionNum'] + ' [local]';
+              value['RevisionCounter'] = value['RevisionCounter'] + ' [local]';
             }
             if (keyval === newstoredmaxrev) {
-              value['RevisionNum'] = value['RevisionNum'] + ' [stored]';
+              value['RevisionCounter'] = value['RevisionCounter'] + ' [stored]';
             }
             if (keyval === maxrevfile && maxrevfile !== newlocalmaxRev) {
-              value['RevisionNum'] = value['RevisionNum'] + ' [local(old)]';
+              value['RevisionCounter'] = value['RevisionCounter'] + ' [local(old)]';
             }
             tablemap.push([keyval, value]);
           }
@@ -240,7 +240,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     this.ux.table(sourceMemberResults, {
       columns: [
         {
-          key: 'RevisionNum'
+          key: 'RevisionCounter'
         },
         {
           key: 'MemberType'
