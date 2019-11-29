@@ -4,7 +4,7 @@ export default class RetrieveProfiles extends SfdxCommand {
     static description: string;
     protected static flagsConfig: {
         keepcache: flags.Discriminated<flags.Boolean<boolean>>;
-        types: flags.Discriminated<flags.Array<string>>;
+        metadata: flags.Discriminated<flags.Array<string>>;
     };
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;
