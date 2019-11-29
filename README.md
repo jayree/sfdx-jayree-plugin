@@ -47,7 +47,7 @@ USAGE
 * [`sfdx jayree:packagexml [--configfile <string>] [-q <string>] [-c] [-w] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreepackagexml---configfile-string--q-string--c--w--f-string--x--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreescratchorgrevision--b---r--v-integer--s--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreescratchorgsettings--w--f-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
-* [`sfdx jayree:source:retrieve:full [-t <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreesourceretrievefull--t-array--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx jayree:source:retrieve:full [-m <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreesourceretrievefull--m-array--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
 ### `sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
@@ -479,18 +479,20 @@ EXAMPLE
 
 _See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.6.0/src/commands/jayree/scratchorg/settings.ts)_
 
-### `sfdx jayree:source:retrieve:full [-t <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+### `sfdx jayree:source:retrieve:full [-m <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
 retrieve full source (profiles, permission sets, custom labels) from an org
 
 ```
 USAGE
-  $ sfdx jayree:source:retrieve:full [-t <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  $ sfdx jayree:source:retrieve:full [-m <array>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -t, --types=types                                                                 [default: profiles,permsets,labels]
-                                                                                    types to retrieve
+  -m, --metadata=metadata                                                           [default:
+                                                                                    Profile,PermissionSet,CustomLabels]
+                                                                                    comma-separated list of metadata
+                                                                                    component names
 
   -u, --targetusername=targetusername                                               username or alias for the target
                                                                                     org; overrides default target org
