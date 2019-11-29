@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.6.0...v1.6.1) (2019-11-29)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** align parameter, options and output ([265e5d6](https://github.com/jayree/sfdx-jayree-plugin/commit/265e5d698676538d526693898f673ab27ea259b4))
+
 # [1.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.2...v1.6.0) (2019-11-29)
 
 
