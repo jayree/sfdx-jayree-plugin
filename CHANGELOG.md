@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.2...v1.6.0) (2019-11-29)
+
+
+### Bug Fixes
+
+* **scratchorgrevision:** use RevisionCounter instead of RevisionNum ([e4e5681](https://github.com/jayree/sfdx-jayree-plugin/commit/e4e5681b0f3a254a9a313dfa8c003f5069a878e5))
+
+
+### Features
+
+* **sourceretrievefull:** add new command jayree:source:retrieve:full ([b1882b2](https://github.com/jayree/sfdx-jayree-plugin/commit/b1882b24d2bb32ca9cd27f20704c2924ff86fae6))
+
 ## [1.5.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.5.1...v1.5.2) (2019-11-17)
 
 
