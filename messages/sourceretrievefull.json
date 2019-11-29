@@ -1,0 +1,5 @@
+{
+  "commandDescription": "retrieve full source (profiles, permission sets, custom labels) from an org",
+  "keepcache": "keep cache directory",
+  "types": "types to retrieve"
+}
