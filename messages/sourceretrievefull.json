@@ -1,5 +1,0 @@
-{
-  "commandDescription": "retrieve full source (profiles, permission sets, custom labels) from an org",
-  "keepcache": "keep cache directory",
-  "metadata": "comma-separated list of metadata component names"
-}
