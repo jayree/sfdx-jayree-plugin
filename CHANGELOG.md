@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.6.1...v1.7.0) (2019-12-09)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** add verbose parameter ([c298e9e](https://github.com/jayree/sfdx-jayree-plugin/commit/c298e9e2ab197fd645cbb3554440808bbfba530b))
+
+
+### Features
+
+* **sourceretrieveall:** add new command jayree:source:retrieve:all ([4d84d85](https://github.com/jayree/sfdx-jayree-plugin/commit/4d84d8562fc93da4dd4463450b54597cb2044b4a))
+
 ## [1.6.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.6.0...v1.6.1) (2019-11-29)
 
 
