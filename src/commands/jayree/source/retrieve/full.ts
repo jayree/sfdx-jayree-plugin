@@ -1,16 +1,16 @@
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
 import * as chalk from 'chalk';
 import * as path from 'path';
 import * as shell from 'shelljs';
-import { sourcedelete, sourcefix } from '../../../../utils/fixmdsource';
+import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 
 core.Messages.importMessagesDirectory(__dirname);
 
 const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrievefull');
 
-export default class RetrieveProfiles extends SfdxCommand {
+export default class RetrieveProfiles extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');
 
   /*   public static examples = [
@@ -32,6 +32,10 @@ Coverage: 82%
       description: messages.getMessage('metadata'),
       options: ['Profile', 'PermissionSet', 'CustomLabels'],
       default: ['Profile', 'PermissionSet', 'CustomLabels']
+    }),
+    verbose: flags.builtin({
+      description: messages.getMessage('log'),
+      longDescription: messages.getMessage('log')
     })
   };
 
@@ -62,7 +66,7 @@ Coverage: 82%
     );
 
     try {
-      this.logger.info(`Using ${orgretrievepath}`);
+      this.ux.log(`Using ${orgretrievepath}`);
 
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
 
@@ -193,11 +197,16 @@ Coverage: 82%
               for (const workaround of Object.keys(config[workarounds])) {
                 if (config[workarounds][workaround].isactive === true) {
                   if (config[workarounds][workaround].files) {
+                    this.log("'" + workaround + "'");
                     if (config[workarounds][workaround].files.delete) {
-                      await sourcedelete(config[workarounds][workaround].files.delete, orgretrievepath);
+                      await this.sourcedelete(config[workarounds][workaround].files.delete, orgretrievepath);
                     }
                     if (config[workarounds][workaround].files.modify) {
-                      await sourcefix(config[workarounds][workaround].files.modify, orgretrievepath);
+                      await this.sourcefix(
+                        config[workarounds][workaround].files.modify,
+                        orgretrievepath,
+                        this.org.getConnection()
+                      );
                     }
                   }
                 }
@@ -224,7 +233,6 @@ Coverage: 82%
         });
 
         if (this.flags.metadata.length > 0) {
-          this.logger.info('copy to project');
           const forceapppath = path.join(projectpath, 'force-app');
           shell.cp('-R', `${orgretrievepath}/force-app/main`, forceapppath);
         }
