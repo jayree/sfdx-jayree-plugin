@@ -46,6 +46,7 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
+    shell.env['FORCE_COLOR'] = 0;
     const json = raw => {
       try {
         return JSON.parse(raw).result;
