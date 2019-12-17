@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.7.0...v1.7.1) (2019-12-17)
+
+
+### Bug Fixes
+
+* **sourceretrieve*:** fix FORCE_COLOR issue ([960e3a7](https://github.com/jayree/sfdx-jayree-plugin/commit/960e3a75f1ffb2b01544a15e25dc58b668e18bcd))
+
 # [1.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.6.1...v1.7.0) (2019-12-09)
 
 
