@@ -5,6 +5,7 @@ export default class RetrieveMetadata extends SourceRetrieveBase {
     static description: string;
     protected static flagsConfig: {
         keepcache: flags.Discriminated<flags.Boolean<boolean>>;
+        skipfix: flags.Discriminated<flags.Boolean<boolean>>;
         verbose: flags.Builtin;
     };
     protected static requiresUsername: boolean;
