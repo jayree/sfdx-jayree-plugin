@@ -46,7 +46,6 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    shell.env['FORCE_COLOR'] = 0;
     const json = raw => {
       try {
         return JSON.parse(raw).result;
@@ -84,7 +83,7 @@ Coverage: 82%
             'manifest',
             'package-profiles.xml'
           )} --targetusername=${this.org.getUsername()} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true }
+          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
         )
       );
 
@@ -97,7 +96,8 @@ Coverage: 82%
             shell.exec(`sfdx force:mdapi:convert --metadata=Profile --outputdir=./src --rootdir=./unpackaged --json`, {
               cwd: orgretrievepath,
               fatal: false,
-              silent: true
+              silent: true,
+              env: { ...process.env, FORCE_COLOR: 0 }
             })
           );
           if (!out.length) {
@@ -127,7 +127,8 @@ Coverage: 82%
               {
                 cwd: orgretrievepath,
                 fatal: false,
-                silent: true
+                silent: true,
+                env: { ...process.env, FORCE_COLOR: 0 }
               }
             )
           );
@@ -158,7 +159,8 @@ Coverage: 82%
               {
                 cwd: orgretrievepath,
                 fatal: false,
-                silent: true
+                silent: true,
+                env: { ...process.env, FORCE_COLOR: 0 }
               }
             )
           );
