@@ -117,7 +117,7 @@ Coverage: 82%
           })
         );
         if (!out.length) {
-          throw new Error('Metadata conversion failed');
+          throw out;
         } else {
           out
             .map(p => {
@@ -180,7 +180,7 @@ Coverage: 82%
         const forceapppath = path.join(projectpath, 'force-app');
         shell.cp('-R', `${orgretrievepath}/force-app/main`, forceapppath);
       } else {
-        throw new Error(out.message);
+        throw out;
       }
     } catch (error) {
       throw error;

@@ -101,7 +101,7 @@ Coverage: 82%
             })
           );
           if (!out.length) {
-            throw new Error('Profile conversion failed');
+            throw out;
           } else {
             out
               .map(p => {
@@ -133,7 +133,7 @@ Coverage: 82%
             )
           );
           if (!out.length) {
-            throw new Error('PermissionSet conversion failed');
+            throw out;
           } else {
             out
               .map(p => {
@@ -165,7 +165,7 @@ Coverage: 82%
             )
           );
           if (!out.length) {
-            throw new Error('CustomLabels conversion failed');
+            throw out;
           } else {
             out
               .map(p => {
@@ -240,7 +240,7 @@ Coverage: 82%
           shell.cp('-R', `${orgretrievepath}/force-app/main`, forceapppath);
         }
       } else {
-        throw new Error(out.message);
+        throw out;
       }
     } catch (error) {
       throw error;
