@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -42,7 +43,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
   public async run(): Promise<AnyJson> {
     const debug = createDebug('jayree:scratchorg:settings');
-
     const removeEmpty = obj => {
       Object.entries(obj).forEach(([key, val]) => {
         if (val && typeof val === 'object') {
@@ -67,6 +67,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     this.ux.startSpinner('Generating settings');
     const conn = this.org.getConnection();
+    debug(conn.getApiVersion());
 
     const settingsarray = (await conn.tooling.describeGlobal()).sobjects
       .filter(a => a.name.includes('Settings'))
@@ -90,11 +91,26 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           }
         } else {
           this.logger.error('query ' + member + ' not possible');
-          debug('query ' + member + ' not possible');
+          // debug('query ' + member + ' not possible');
+          // tslint:disable-next-line: no-any
+          debug(chalk.red('Error: ' + member + ' - ' + (settingsQuery as any)));
         }
       } catch (error) {
-        if (!['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD'].includes((error as Error).name)) {
-          this.ux.error(error);
+        if (
+          !['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD', 'UNKNOWN_EXCEPTION'].includes(
+            (error as Error).name
+          )
+        ) {
+          this.ux.error(error as Error);
+        } else {
+          const e = (error as Error).message.split('\n');
+          if (e[e.length - 1].includes('Metadata')) {
+            debug(chalk.gray('Warning: ' + member + ' - ' + e[e.length - 1]));
+          } else if (e[e.length - 1].includes('Cannot access')) {
+            debug(chalk.yellow('Error: ' + member + ' - ' + e[e.length - 1]));
+          } else {
+            debug(chalk.red('Error: ' + member + ' - ' + e[e.length - 1]));
+          }
         }
       }
     }
@@ -142,24 +158,26 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       }
     }
 
-    if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
-      debug('delete ' + 'orgPreferenceSettings:expandedSourceTrackingPref');
-    }
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
+        debug('delete ' + 'orgPreferenceSettings:expandedSourceTrackingPref');
+      }
 
-    if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
-      debug('delete ' + 'orgPreferenceSettings:scratchOrgManagementPref');
-    }
+      if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
+        debug('delete ' + 'orgPreferenceSettings:scratchOrgManagementPref');
+      }
 
-    if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['packaging2'];
-      debug('delete ' + 'orgPreferenceSettings:packaging2');
-    }
+      if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['packaging2'];
+        debug('delete ' + 'orgPreferenceSettings:packaging2');
+      }
 
-    if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['compileOnDeploy'];
-      debug('delete ' + 'orgPreferenceSettings:compileOnDeploy');
+      if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['compileOnDeploy'];
+        debug('delete ' + 'orgPreferenceSettings:compileOnDeploy');
+      }
     }
 
     if (typeof settings['apexSettings']['enableCompileOnDeploy'] !== 'undefined') {
@@ -193,7 +211,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     settings = removeEmpty(settings);
     settings = sortKeys(settings);
-    settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
+
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
+    }
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath =
