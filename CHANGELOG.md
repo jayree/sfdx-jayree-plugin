@@ -1,3 +1,25 @@
+# [1.8.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.7.1...v1.8.0) (2020-01-10)
+
+
+### Bug Fixes
+
+* update dependencies ([34fcd58](https://github.com/jayree/sfdx-jayree-plugin/commit/34fcd585e1a17f1591705adeffc444d7fc1298f5))
+* **scratchorgsettings:** some fixes for apiversion 48.0 ([8239e8c](https://github.com/jayree/sfdx-jayree-plugin/commit/8239e8c5a83720cd5944c8c7424a8195331f8434))
+* **sourceretrieve*:** fix error handling ([210885e](https://github.com/jayree/sfdx-jayree-plugin/commit/210885e59d2e6d73c21e6b0e71819f80f5392624))
+* add/update missing dependencies ([b4f3e7e](https://github.com/jayree/sfdx-jayree-plugin/commit/b4f3e7e08128c37ff5c23c9209c2c89d3362269f))
+* **sourceretrieve*:** fix FORCE_COLOR issue ([992f107](https://github.com/jayree/sfdx-jayree-plugin/commit/992f1071e0b4ccfca6eedece37697fde96ea3c11))
+
+
+### Features
+
+* **sourcefix:** add new command jayree:source:fix ([5044929](https://github.com/jayree/sfdx-jayree-plugin/commit/5044929b174cababfdf46d1257661cf83492a45d))
+* **statecountry:** add ProgressBar ([a1e1969](https://github.com/jayree/sfdx-jayree-plugin/commit/a1e1969b972fa53bdf33b369b8a7ab087b8b5f7b))
+
+
+### Performance Improvements
+
+* **sourceretrieveall:** optimizations ([4c6d76e](https://github.com/jayree/sfdx-jayree-plugin/commit/4c6d76ecf231b368c20eab47715b6bb30fc495a4))
+
 ## [1.7.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.7.0...v1.7.1) (2019-12-17)
 
 
