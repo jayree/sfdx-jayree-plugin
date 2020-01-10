@@ -1,11 +1,10 @@
 import { flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
-export default class RetrieveMetadata extends SourceRetrieveBase {
+import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
+export default class FixMetadata extends SourceRetrieveBase {
     static description: string;
     protected static flagsConfig: {
-        keepcache: flags.Discriminated<flags.Boolean<boolean>>;
-        skipfix: flags.Discriminated<flags.Boolean<boolean>>;
+        tag: flags.Discriminated<flags.Array<string>>;
         verbose: flags.Builtin;
     };
     protected static requiresUsername: boolean;

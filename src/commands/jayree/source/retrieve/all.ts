@@ -27,6 +27,10 @@ Coverage: 82%
       hidden: true,
       description: messages.getMessage('keepcache')
     }),
+    skipfix: flags.boolean({
+      hidden: true,
+      description: messages.getMessage('keepcache')
+    }),
     verbose: flags.builtin({
       description: messages.getMessage('log'),
       longDescription: messages.getMessage('log')
@@ -40,7 +44,6 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    shell.env['FORCE_COLOR'] = 0;
     const json = raw => {
       try {
         return JSON.parse(raw).result;
@@ -73,32 +76,31 @@ Coverage: 82%
 
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
 
+      let packageXMLFile = path.join(orgretrievepath, 'package.xml');
+      if (config) {
+        if (config['source:retrieve:all']) {
+          if (config['source:retrieve:all'].manifest) {
+            packageXMLFile = path.join(projectpath, config['source:retrieve:all'].manifest);
+          }
+        }
+      }
+
       let out = shell.exec(
-        `sfdx jayree:packagexml --excludemanaged --file=${path.join(
-          orgretrievepath,
-          'package.xml'
-        )} --targetusername=${this.org.getUsername()} --json`,
-        { cwd: orgretrievepath, fatal: false, silent: true }
+        `sfdx jayree:packagexml --excludemanaged --file=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
+        { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
       );
       if (config) {
         if (config['source:retrieve:all']) {
           if (config['source:retrieve:all'].manifestignore) {
-            await this.cleanuppackagexml(
-              path.join(orgretrievepath, 'package.xml'),
-              config['source:retrieve:all'].manifestignore,
-              projectpath
-            );
+            await this.cleanuppackagexml(packageXMLFile, config['source:retrieve:all'].manifestignore, projectpath);
           }
         }
       }
 
       out = json(
         shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=. --unpackaged=${path.join(
-            orgretrievepath,
-            'package.xml'
-          )} --targetusername=${this.org.getUsername()} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true }
+          `sfdx force:mdapi:retrieve --retrievetargetdir=. --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
+          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
         )
       );
 
@@ -110,11 +112,12 @@ Coverage: 82%
           shell.exec(`sfdx force:mdapi:convert --outputdir=./src --rootdir=./unpackaged --json`, {
             cwd: orgretrievepath,
             fatal: false,
-            silent: true
+            silent: true,
+            env: { ...process.env, FORCE_COLOR: 0 }
           })
         );
         if (!out.length) {
-          throw new Error('Metadata conversion failed');
+          throw out;
         } else {
           out
             .map(p => {
@@ -134,32 +137,30 @@ Coverage: 82%
 
         shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
 
-        if (config) {
-          if (config['source:retrieve:all']) {
-            config = config['source:retrieve:all'];
-            for (const workarounds of Object.keys(config)) {
-              for (const workaround of Object.keys(config[workarounds])) {
-                if (config[workarounds][workaround].isactive === true) {
-                  if (config[workarounds][workaround].files) {
-                    this.log("'" + workaround + "'");
-                    if (config[workarounds][workaround].files.delete) {
-                      await this.sourcedelete(config[workarounds][workaround].files.delete, orgretrievepath);
-                    }
-                    if (config[workarounds][workaround].files.modify) {
-                      await this.sourcefix(
-                        config[workarounds][workaround].files.modify,
-                        orgretrievepath,
-                        this.org.getConnection()
-                      );
+        if (config && !this.flags.skipfix) {
+          for (const tag of ['source:retrieve:full', 'source:retrieve:all']) {
+            if (config[tag]) {
+              const c = config[tag];
+              for (const workarounds of Object.keys(c)) {
+                for (const workaround of Object.keys(c[workarounds])) {
+                  if (c[workarounds][workaround].isactive === true) {
+                    if (c[workarounds][workaround].files) {
+                      this.log("'" + workaround + "'");
+                      if (c[workarounds][workaround].files.delete) {
+                        await this.sourcedelete(c[workarounds][workaround].files.delete, orgretrievepath);
+                      }
+                      if (c[workarounds][workaround].files.modify) {
+                        await this.sourcefix(
+                          c[workarounds][workaround].files.modify,
+                          orgretrievepath,
+                          this.org.getConnection()
+                        );
+                      }
                     }
                   }
                 }
               }
             }
-          } else {
-            /* this.ux.warn(
-                  `Root object 'source:retrieve:full' missing in config file '${configfile}' - SKIPPING metadata fixes`
-                ); */
           }
         }
 
@@ -179,7 +180,7 @@ Coverage: 82%
         const forceapppath = path.join(projectpath, 'force-app');
         shell.cp('-R', `${orgretrievepath}/force-app/main`, forceapppath);
       } else {
-        throw new Error(out.message);
+        throw out;
       }
     } catch (error) {
       throw error;

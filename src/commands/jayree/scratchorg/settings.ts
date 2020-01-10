@@ -1,5 +1,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import * as chalk from 'chalk';
+import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { serializeError } from 'serialize-error';
@@ -40,6 +42,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = obj => {
       Object.entries(obj).forEach(([key, val]) => {
         if (val && typeof val === 'object') {
@@ -64,6 +67,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     this.ux.startSpinner('Generating settings');
     const conn = this.org.getConnection();
+    debug(conn.getApiVersion());
 
     const settingsarray = (await conn.tooling.describeGlobal()).sobjects
       .filter(a => a.name.includes('Settings'))
@@ -87,10 +91,26 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           }
         } else {
           this.logger.error('query ' + member + ' not possible');
+          // debug('query ' + member + ' not possible');
+          // tslint:disable-next-line: no-any
+          debug(chalk.red('Error: ' + member + ' - ' + (settingsQuery as any)));
         }
       } catch (error) {
-        if (!['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD'].includes((error as Error).name)) {
-          this.ux.error(error);
+        if (
+          !['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD', 'UNKNOWN_EXCEPTION'].includes(
+            (error as Error).name
+          )
+        ) {
+          this.ux.error(error as Error);
+        } else {
+          const e = (error as Error).message.split('\n');
+          if (e[e.length - 1].includes('Metadata')) {
+            debug(chalk.gray('Warning: ' + member + ' - ' + e[e.length - 1]));
+          } else if (e[e.length - 1].includes('Cannot access')) {
+            debug(chalk.yellow('Error: ' + member + ' - ' + e[e.length - 1]));
+          } else {
+            debug(chalk.red('Error: ' + member + ' - ' + e[e.length - 1]));
+          }
         }
       }
     }
@@ -100,23 +120,29 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     if (typeof settings['addressSettings'] !== 'undefined') {
       delete settings['addressSettings'];
+      debug('delete ' + 'addressSettings');
     }
 
     if (typeof settings['leadConvertSettings'] !== 'undefined') {
       delete settings['leadConvertSettings'];
+      debug('delete ' + 'leadConvertSettings');
     }
 
     if (typeof settings['searchSettings'] !== 'undefined') {
       delete settings['searchSettings'];
+      debug('delete ' + 'searchSettings');
     }
 
     if (typeof settings['analyticsSettings'] !== 'undefined') {
       delete settings['analyticsSettings'];
+      debug('delete ' + 'analyticsSettings');
     }
 
     if (typeof settings['activitiesSettings'] !== 'undefined') {
       if (typeof settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'] !== 'undefined') {
         delete settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'];
+        debug('delete ' + 'activitiesSettings:allowUsersToRelateMultipleContactsToTasksAndEvents');
+
         this.ux.warn(
           "You can't use the Tooling API or Metadata API to enable or disable Shared Activities.To enable this feature, visit the Activity Settings page in Setup.To disable this feature, contact Salesforce."
         );
@@ -128,31 +154,45 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         settings['territory2Settings'] = {
           enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2']
         };
+        debug('set ' + 'enableTerritoryManagement2');
       }
     }
 
-    if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
+        debug('delete ' + 'orgPreferenceSettings:expandedSourceTrackingPref');
+      }
+
+      if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
+        debug('delete ' + 'orgPreferenceSettings:scratchOrgManagementPref');
+      }
+
+      if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['packaging2'];
+        debug('delete ' + 'orgPreferenceSettings:packaging2');
+      }
+
+      if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['compileOnDeploy'];
+        debug('delete ' + 'orgPreferenceSettings:compileOnDeploy');
+      }
     }
 
-    if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
-    }
-
-    if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['packaging2'];
-    }
-
-    if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
-      delete settings['orgPreferenceSettings']['compileOnDeploy'];
+    if (typeof settings['apexSettings']['enableCompileOnDeploy'] !== 'undefined') {
+      delete settings['apexSettings']['enableCompileOnDeploy'];
+      debug('delete ' + 'apexSettings:enableCompileOnDeploy');
     }
 
     if (typeof settings['forecastingSettings'] !== 'undefined') {
       if (typeof settings['forecastingSettings']['forecastingCategoryMappings'] !== 'undefined') {
         delete settings['forecastingSettings']['forecastingCategoryMappings'];
+        debug('delete ' + 'forecastingSettings:forecastingCategoryMappings');
       }
       if (typeof settings['forecastingSettings']['forecastingTypeSettings'] !== 'undefined') {
         delete settings['forecastingSettings']['forecastingTypeSettings'];
+        debug('delete ' + 'forecastingSettings:forecastingTypeSettings');
       }
     }
 
@@ -162,6 +202,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           if (typeof settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] !== 'undefined') {
             if (settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] === 'EMAIL_MESSAGE_EVENT') {
               settings['caseSettings']['caseFeedItemSettings'][0]['feedItemType'] = 'EmailMessageEvent';
+              debug('set ' + 'caseSettings:caseFeedItemSettings:feedItemType');
             }
           }
         }
@@ -170,7 +211,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     settings = removeEmpty(settings);
     settings = sortKeys(settings);
-    settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
+
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
+    }
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath =
@@ -188,6 +232,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
                 if (typeof settings['liveAgentSettings']['enableLiveAgent'] !== 'undefined') {
                   if (settings['liveAgentSettings']['enableLiveAgent'] === false) {
                     delete settings['liveAgentSettings'];
+                    debug('delete ' + 'liveAgentSettings');
                     this.ux.warn('liveAgentSettings: Not available for deploy for this organization');
                   }
                 }
@@ -198,6 +243,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
               if (typeof settings['knowledgeSettings']['enableKnowledge'] !== 'undefined') {
                 if (settings['knowledgeSettings']['enableKnowledge'] === false) {
                   delete settings['knowledgeSettings'];
+                  debug('delete ' + 'knowledgeSettings');
                   this.ux.warn("knowledgeSettings: Once enabled, Salesforce Knowledge can't be disabled.");
                 }
               }
@@ -208,6 +254,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
                 if (typeof settings['caseSettings']['emailToCase']['enableEmailToCase'] !== 'undefined') {
                   if (settings['caseSettings']['emailToCase']['enableEmailToCase'] === false) {
                     delete settings['caseSettings']['emailToCase'];
+                    debug('delete ' + 'caseSettings:emailToCase');
                     this.ux.warn('EmailToCaseSettings: Email to case cannot be disabled once it has been enabled.');
                   }
                 }

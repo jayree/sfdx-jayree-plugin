@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import { cli } from 'cli-ux';
 // import ProgressBar = require('progress');
 import puppeteer = require('puppeteer');
 import tabletojson = require('tabletojson');
@@ -12,15 +13,6 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
   public static aliases = ['jayree:automation:statecountry:create', 'jayree:automation:statecountry:update'];
 
   public static description = messages.getMessage('commandDescription');
-
-  /*   public static examples = [
-      `$ sfdx jayree:automation:usersyncstatus -o 'Name'
-      configSetup: User assigned to active Lightning Sync configuration... Yes
-      userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
-      userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
-      userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
-      `
-    ]; */
 
   protected static flagsConfig = {
     countrycode: flags.string({
@@ -119,6 +111,13 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       }
     };
 
+    const bar = cli.progress({
+      barCompleteChar: '\u2588',
+      barIncompleteChar: '\u2591',
+      format: `State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()} | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}`,
+      stream: process.stdout
+    });
+
     try {
       !this.flags.silent
         ? this.ux.startSpinner(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`)
@@ -159,6 +158,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         if (!languagecodes.includes(this.flags.language)) {
           throw Error('Expected --language to be one of: ' + languagecodes.toString());
         }
+        await this.org.refreshAuth();
         const conn = this.org.getConnection();
 
         spinnermessage = `login to ${conn.instanceUrl}`;
@@ -167,99 +167,29 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           waitUntil: 'networkidle0'
         });
 
-        let total = jsonParsed[this.flags.category].map(v => v['Language code']).length;
-        const start = new Date();
-        let percent = 0;
-        let eta = 0;
-        let elapsed = 0;
+        const list = jsonParsed[this.flags.category].filter(v => v['Language code'] === this.flags.language);
         let curr = 0;
-        let ratio = 0;
 
-        if (config.deactivate[this.flags.countrycode.toUpperCase()]) {
-          if (config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
-            total = total + config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category].length;
-            for await (const value of config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
-              const countrycode = value.split('-')[0];
-              const stateIsoCode = value.split('-')[1].split('*')[0];
-              try {
-                await page.goto(
-                  conn.instanceUrl +
-                    `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
-                  {
-                    waitUntil: 'networkidle0'
-                  }
-                );
-                const updatecheck = await page.evaluate(c => {
-                  const result = document.querySelector(c.updatecheck) as HTMLElement;
-                  if (result != null) {
-                    return result.innerText;
-                  } else {
-                    return null;
-                  }
-                }, config);
-                if (updatecheck === 'Unable to Access Page') {
-                  throw Error('no update possible');
-                }
-              } catch (error) {
-                continue;
+        this.ux.stopSpinner();
+
+        if (
+          config.deactivate[this.flags.countrycode.toUpperCase()] &&
+          config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]
+        ) {
+          if (!this.flags.silent) {
+            bar.start(
+              list.length + config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category].length,
+              0,
+              {
+                text: ''
               }
-              spinnermessage =
-                percent.toFixed(0) +
-                '% - ' +
-                (elapsed / 1000).toFixed(1) +
-                's/' +
-                (isNaN(eta) || !isFinite(eta) ? '0.0' : (eta / 1000).toFixed(1)) +
-                's - ' +
-                'deactivate ' +
-                value;
-              !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
-
-              const selector = config.update;
-
-              await setHTMLInputElementChecked(selector.editVisible, false, false);
-              await setHTMLInputElementChecked(selector.editActive, false, false);
-
-              await page.click(selector.save.replace(/:/g, '\\:'));
-              await page.waitForNavigation({
-                waitUntil: 'networkidle0'
-              });
-              curr = curr + 1;
-              ratio = curr / total;
-              ratio = Math.min(Math.max(ratio, 0), 1);
-              percent = Math.floor(ratio * 100);
-              // tslint:disable-next-line: no-any
-              elapsed = (new Date() as any) - (start as any);
-              eta = percent === 100 ? 0 : elapsed * (total / curr - 1);
-            }
+            );
           }
-        }
 
-        /*         const bar = new ProgressBar('[:bar] :percent :etas', {
-          complete: '=',
-          incomplete: ' ',
-          total: jsonParsed[this.flags.category].map(v => v['Language code']).length
-        }); */
-
-        for await (const value of jsonParsed[this.flags.category]) {
-          const language = value['Language code'];
-          if (this.flags.language === language) {
-            const countrycode = value['3166-2 code'].split('-')[0];
-            const stateintVal = value['3166-2 code'].split('*')[0];
-            let stateIsoCode = value['3166-2 code'].split('-')[1].split('*')[0];
-            const stateName =
-              this.flags.uselocalvariant && value['Local variant'] !== ''
-                ? value['Local variant']
-                : value['Subdivision name'];
-
-            if (Object.keys(config.fix).includes(countrycode)) {
-              if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
-                // this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
-                stateIsoCode = config.fix[countrycode][stateIsoCode];
-              }
-            }
-            let update;
+          for await (const value of config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
+            const countrycode = value.split('-')[0];
+            const stateIsoCode = value.split('-')[1].split('*')[0];
             try {
-              update = true;
               await page.goto(
                 conn.instanceUrl +
                   `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
@@ -279,60 +209,104 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
                 throw Error('no update possible');
               }
             } catch (error) {
-              update = false;
-              await page.goto(
-                conn.instanceUrl +
-                  `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
-                {
-                  waitUntil: 'networkidle0'
-                }
-              );
-            } finally {
-              spinnermessage =
-                percent.toFixed(0) +
-                '% - ' +
-                (elapsed / 1000).toFixed(1) +
-                's/' +
-                (isNaN(eta) || !isFinite(eta) ? '0.0' : (eta / 1000).toFixed(1)) +
-                's - ' +
-                (update ? 'update ' : 'create ') +
-                stateName +
-                '/' +
-                stateintVal;
-              !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
+              continue;
+            }
 
-              const selector = update ? config.update : config.create;
+            curr = curr + 1;
+            !this.flags.silent ? bar.update(curr, { text: 'deactivate ' + value }) : process.stdout.write('.');
 
-              await setHTMLInputElementValue(stateName, selector.editName);
-              await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
-              await setHTMLInputElementValue(stateintVal, selector.editIntVal);
-              await setHTMLInputElementChecked(selector.editActive, true, false);
-              await setHTMLInputElementChecked(selector.editVisible, true, true);
+            const selector = config.update;
 
-              await page.click(selector.save.replace(/:/g, '\\:'));
-              await page.waitForNavigation({
-                waitUntil: 'networkidle0'
-              });
+            await setHTMLInputElementChecked(selector.editVisible, false, false);
+            await setHTMLInputElementChecked(selector.editActive, false, false);
+
+            await page.click(selector.save.replace(/:/g, '\\:'));
+            await page.waitForNavigation({
+              waitUntil: 'networkidle0'
+            });
+          }
+        } else {
+          if (!this.flags.silent) {
+            bar.start(list.length, 0, {
+              text: ''
+            });
+          }
+        }
+
+        for await (const value of list) {
+          const countrycode = value['3166-2 code'].split('-')[0];
+          const stateintVal = value['3166-2 code'].split('*')[0];
+          let stateIsoCode = value['3166-2 code'].split('-')[1].split('*')[0];
+          const stateName =
+            this.flags.uselocalvariant && value['Local variant'] !== ''
+              ? value['Local variant']
+              : value['Subdivision name'];
+
+          if (Object.keys(config.fix).includes(countrycode)) {
+            if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
+              // this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
+              stateIsoCode = config.fix[countrycode][stateIsoCode];
             }
           }
-          // bar.tick();
-          curr = curr + 1;
-          ratio = curr / total;
-          ratio = Math.min(Math.max(ratio, 0), 1);
-          percent = Math.floor(ratio * 100);
-          // tslint:disable-next-line: no-any
-          elapsed = (new Date() as any) - (start as any);
-          eta = percent === 100 ? 0 : elapsed * (total / curr - 1);
+          let update;
+          try {
+            update = true;
+            await page.goto(
+              conn.instanceUrl +
+                `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
+              {
+                waitUntil: 'networkidle0'
+              }
+            );
+            const updatecheck = await page.evaluate(c => {
+              const result = document.querySelector(c.updatecheck) as HTMLElement;
+              if (result != null) {
+                return result.innerText;
+              } else {
+                return null;
+              }
+            }, config);
+            if (updatecheck === 'Unable to Access Page') {
+              throw Error('no update possible');
+            }
+          } catch (error) {
+            update = false;
+            await page.goto(
+              conn.instanceUrl +
+                `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
+              {
+                waitUntil: 'networkidle0'
+              }
+            );
+          } finally {
+            curr = curr + 1;
+            !this.flags.silent
+              ? bar.update(curr, { text: (update ? 'update ' : 'create ') + stateName + '/' + stateintVal })
+              : process.stdout.write('.');
+
+            const selector = update ? config.update : config.create;
+
+            await setHTMLInputElementValue(stateName, selector.editName);
+            await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
+            await setHTMLInputElementValue(stateintVal, selector.editIntVal);
+            await setHTMLInputElementChecked(selector.editActive, true, false);
+            await setHTMLInputElementChecked(selector.editVisible, true, true);
+
+            await page.click(selector.save.replace(/:/g, '\\:'));
+            await page.waitForNavigation({
+              waitUntil: 'networkidle0'
+            });
+          }
         }
-        spinnermessage = percent.toFixed(0) + '% - ' + (elapsed / 1000).toFixed(1) + 's';
-        // this.ux.stopSpinner(spinnermessage);
       } else {
         throw Error('Expected --category= to be one of: ' + Object.keys(jsonParsed).toString());
       }
     } catch (error) {
+      this.ux.stopSpinner();
       throw error;
     } finally {
-      !this.flags.silent ? this.ux.stopSpinner(spinnermessage) : process.stdout.write('.');
+      !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
+      bar.stop();
       await browser.close();
     }
 
