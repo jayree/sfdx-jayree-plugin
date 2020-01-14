@@ -1,3 +1,11 @@
+## [1.8.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.0...v1.8.1) (2020-01-14)
+
+
+### Bug Fixes
+
+* update dependencies ([0068357](https://github.com/jayree/sfdx-jayree-plugin/commit/006835727599659e7610f11336f96f75be147a15))
+* **sourceretrievefull:** add missing manifest file ([d3d4c96](https://github.com/jayree/sfdx-jayree-plugin/commit/d3d4c963f4851be95e5f26d5ee44bfdd48ab6bf1))
+
 # [1.8.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.7.1...v1.8.0) (2020-01-10)
 
 
