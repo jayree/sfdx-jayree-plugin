@@ -58,7 +58,8 @@
     "/support",
     "/messages",
     "/oclif.manifest.json",
-    "/yarn.lock"
+    "/yarn.lock",
+    "/manifest"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
   "husky": {
