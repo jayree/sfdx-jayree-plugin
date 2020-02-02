@@ -136,6 +136,7 @@ Coverage: 82%
         }
 
         shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
+        await this.profileElementInjection(orgretrievepath);
 
         if (config && !this.flags.skipfix) {
           for (const tag of ['source:retrieve:full', 'source:retrieve:all']) {

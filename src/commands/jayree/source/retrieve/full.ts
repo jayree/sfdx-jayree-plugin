@@ -185,6 +185,7 @@ Coverage: 82%
         }
 
         shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
+        await this.profileElementInjection(orgretrievepath);
 
         const configfile = '.sfdx-jayree.json';
         let config;

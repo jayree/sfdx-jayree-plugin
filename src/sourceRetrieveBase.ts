@@ -1,11 +1,15 @@
 import { SfdxCommand } from '@salesforce/command';
 import * as chalk from 'chalk';
+import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as _glob from 'glob';
 import { join } from 'path';
 import * as shell from 'shelljs';
 import * as util from 'util';
 import * as xml2js from 'xml2js';
+import profileElementuserPermissionsInjectionFrom = require('../config/profileElementuserPermissionsInjection.json');
+
+const debug = createDebug('jayree:source');
 
 const parseString = util.promisify(xml2js.parseString);
 
@@ -54,6 +58,75 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
       this.logger.info(msg);
     }
   }
+
+  protected async profileElementInjection(root) {
+    const files = await glob(join(root, 'force-app/main/default/profiles/*'));
+    const profileElementInjectionFrom = await parseString(
+      fs.readFileSync(join(root, 'force-app/main/default/profiles/Admin.profile-meta.xml'), 'utf8')
+    );
+
+    for (const file of files) {
+      if (exists(file)) {
+        debug(file);
+        const data = await parseString(fs.readFileSync(file, 'utf8'));
+
+        if (!data.Profile.objectPermissions) {
+          data.Profile['objectPermissions'] = [];
+        }
+
+        profileElementInjectionFrom.Profile.objectPermissions.forEach(element => {
+          if (
+            data.Profile.objectPermissions &&
+            !data.Profile.objectPermissions.some(e => e.object.equals(element.object))
+          ) {
+            debug('inject objectPermission: ' + element.object);
+
+            Object.keys(element).forEach(k => {
+              if (element[k].equals(['true'])) {
+                element[k] = ['false'];
+              }
+            });
+
+            data.Profile.objectPermissions.push(element);
+          }
+        });
+
+        if (!data.Profile.userPermissions) {
+          data.Profile['userPermissions'] = [];
+        }
+
+        profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach(element => {
+          if (data.Profile.userPermissions && !data.Profile.userPermissions.some(e => e.name.equals(element.name))) {
+            debug('inject userPermission: ' + element.name);
+
+            Object.keys(element).forEach(k => {
+              if (element[k].equals(['true'])) {
+                element[k] = ['false'];
+              }
+            });
+
+            data.Profile.userPermissions.push(element);
+          }
+        });
+        if (data.Profile.objectPermissions) {
+          data.Profile.objectPermissions.sort((a, b) => (a.object > b.object ? 1 : -1));
+        }
+        if (data.Profile.userPermissions) {
+          data.Profile.userPermissions.sort((a, b) => (a.name > b.name ? 1 : -1));
+        }
+
+        data.Profile = Object.keys(data.Profile)
+          .sort()
+          .reduce((acc, key) => {
+            acc[key] = data.Profile[key];
+            return acc;
+          }, {});
+
+        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+      }
+    }
+  }
+
   protected async sourcefix(fixsources, root, conn) {
     for await (const filename of Object.keys(fixsources)) {
       const path = join(root, filename);
