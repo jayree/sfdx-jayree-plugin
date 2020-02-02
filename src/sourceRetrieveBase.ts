@@ -1,11 +1,15 @@
 import { SfdxCommand } from '@salesforce/command';
 import * as chalk from 'chalk';
+import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as _glob from 'glob';
 import { join } from 'path';
 import * as shell from 'shelljs';
 import * as util from 'util';
 import * as xml2js from 'xml2js';
+import profileElementuserPermissionsInjectionFrom = require('../config/profileElementuserPermissionsInjection.json');
+
+const debug = createDebug('jayree:source');
 
 const parseString = util.promisify(xml2js.parseString);
 
@@ -54,6 +58,75 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
       this.logger.info(msg);
     }
   }
+
+  protected async profileElementInjection(root) {
+    const files = await glob(join(root, 'force-app/main/default/profiles/*'));
+    const profileElementInjectionFrom = await parseString(
+      fs.readFileSync(join(root, 'force-app/main/default/profiles/Admin.profile-meta.xml'), 'utf8')
+    );
+
+    for (const file of files) {
+      if (exists(file)) {
+        debug(file);
+        const data = await parseString(fs.readFileSync(file, 'utf8'));
+
+        if (!data.Profile.objectPermissions) {
+          data.Profile['objectPermissions'] = [];
+        }
+
+        profileElementInjectionFrom.Profile.objectPermissions.forEach(element => {
+          if (
+            data.Profile.objectPermissions &&
+            !data.Profile.objectPermissions.some(e => e.object.equals(element.object))
+          ) {
+            debug('inject objectPermission: ' + element.object);
+
+            Object.keys(element).forEach(k => {
+              if (element[k].equals(['true'])) {
+                element[k] = ['false'];
+              }
+            });
+
+            data.Profile.objectPermissions.push(element);
+          }
+        });
+
+        if (!data.Profile.userPermissions) {
+          data.Profile['userPermissions'] = [];
+        }
+
+        profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach(element => {
+          if (data.Profile.userPermissions && !data.Profile.userPermissions.some(e => e.name.equals(element.name))) {
+            debug('inject userPermission: ' + element.name);
+
+            Object.keys(element).forEach(k => {
+              if (element[k].equals(['true'])) {
+                element[k] = ['false'];
+              }
+            });
+
+            data.Profile.userPermissions.push(element);
+          }
+        });
+        if (data.Profile.objectPermissions) {
+          data.Profile.objectPermissions.sort((a, b) => (a.object > b.object ? 1 : -1));
+        }
+        if (data.Profile.userPermissions) {
+          data.Profile.userPermissions.sort((a, b) => (a.name > b.name ? 1 : -1));
+        }
+
+        data.Profile = Object.keys(data.Profile)
+          .sort()
+          .reduce((acc, key) => {
+            acc[key] = data.Profile[key];
+            return acc;
+          }, {});
+
+        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+      }
+    }
+  }
+
   protected async sourcefix(fixsources, root, conn) {
     for await (const filename of Object.keys(fixsources)) {
       const path = join(root, filename);
@@ -151,7 +224,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
 
           if (fixsources[filename].set) {
             fixsources[filename].set.forEach(settask => {
-              const checkcondition = () => {
+              /*               const checkcondition = () => {
                 if (typeof settask.condition !== 'undefined') {
                   if (compareobj(objectPath.get(data, `${settask.path}`), settask.condition[1])) {
                     return true;
@@ -161,7 +234,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 } else {
                   return true;
                 }
-              };
+              }; */
 
               const setpath = () => {
                 if (objectPath.get(data, settask.path)) {
@@ -189,6 +262,9 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                           settask.condition[1]
                         )
                       ) {
+                        if (settask.object) {
+                          return `${settask.path}.${i}`;
+                        }
                         return `${settask.path}.${i}.${settask.condition[0]}`;
                       }
                     }
@@ -204,68 +280,84 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 settask.path = setpath();
               }
 
-              if (checkcondition()) {
-                if (settask.value) {
-                  if (settask.value.indexOf('<mydomain>') > -1) {
-                    settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
-                    settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
-                  }
-                  if (!compareobj(objectPath.get(data, settask.path), settask.value)) {
-                    this.log(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`, 2);
-                    objectPath.set(data, settask.path, settask.value);
-                    fs.writeFileSync(
-                      file,
-                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                    );
-                  }
-                } else if (typeof settask.object === 'object') {
-                  const validate = node => {
-                    const replaceArray = [];
-                    const recursive = (n, attpath) => {
-                      // tslint:disable-next-line: forin
-                      for (const attributename in n) {
-                        if (attpath.length === 0) {
-                          attpath = attributename;
-                        } else {
-                          attpath = attpath + '.' + attributename;
-                        }
-                        if (typeof n[attributename] === 'object') {
-                          recursive(n[attributename], attpath);
-                        } else {
-                          if (n[attributename] === '<username>') {
-                            replaceArray.push([n[attributename], attpath]);
-                          }
-                        }
-                      }
-                    };
-                    recursive(node, '');
-                    replaceArray.forEach(element => {
-                      if (element[0] === '<username>') {
-                        objectPath.set(node, element[1], conn.getUsername());
-                      }
-                    });
-                    return node;
-                  };
+              // if (checkcondition()) {
 
-                  settask.object = validate(settask.object);
-
-                  this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
-                  objectPath.insert(data, settask.path, settask.object);
+              if (settask.value) {
+                if (settask.value.indexOf('<mydomain>') > -1) {
+                  settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
+                  settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
+                }
+                if (!compareobj(objectPath.get(data, settask.path), settask.value)) {
+                  this.log(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`, 2);
+                  objectPath.set(data, settask.path, settask.value);
                   fs.writeFileSync(
                     file,
                     builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                   );
-                } else {
-                  this.log(`Set: value ${JSON.stringify(settask.value)} found at ${settask.path}`, 2);
                 }
+              } else if (typeof settask.object === 'object') {
+                const validate = node => {
+                  const replaceArray = [];
+                  const recursive = (n, attpath) => {
+                    // tslint:disable-next-line: forin
+                    for (const attributename in n) {
+                      if (attpath.length === 0) {
+                        attpath = attributename;
+                      } else {
+                        attpath = attpath + '.' + attributename;
+                      }
+                      if (typeof n[attributename] === 'object') {
+                        recursive(n[attributename], attpath);
+                      } else {
+                        if (n[attributename] === '<username>') {
+                          replaceArray.push([n[attributename], attpath]);
+                        }
+                      }
+                    }
+                  };
+                  recursive(node, '');
+                  replaceArray.forEach(element => {
+                    if (element[0] === '<username>') {
+                      objectPath.set(node, element[1], conn.getUsername());
+                    }
+                  });
+                  return node;
+                };
+
+                settask.object = validate(settask.object);
+                debug(settask.path);
+
+                debug(settask.object);
+
+                this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
+                if (settask.object) {
+                  Object.keys(settask.object).forEach(k => {
+                    debug(settask.path + '.' + k);
+                    if (objectPath.has(data, settask.path + '.' + k)) {
+                      debug(settask.object[k]);
+                      objectPath.set(data, settask.path + '.' + k, settask.object[k]);
+                      debug(objectPath.get(data, settask.path));
+                    }
+                  });
+                } else {
+                  objectPath.insert(data, settask.path, settask.object);
+                }
+
+                fs.writeFileSync(
+                  file,
+                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                );
               } else {
+                this.log(`Set: value ${JSON.stringify(settask.value)} found at ${settask.path}`, 2);
+              }
+              /*               } else {
                 this.log(
                   `Set: condition for '${settask.path}': '${settask.condition
                     .toString()
                     .replace(',', ' => ')}' not match (value is: '${objectPath.get(data, `${settask.path}`)}')`,
                   2
                 );
-              }
+              } */
             });
           }
 
