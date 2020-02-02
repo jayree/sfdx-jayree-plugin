@@ -1,3 +1,12 @@
+## [1.8.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.1...v1.8.2) (2020-02-02)
+
+
+### Bug Fixes
+
+* update dependencies ([06bc1cf](https://github.com/jayree/sfdx-jayree-plugin/commit/06bc1cfeae261e85658d6852ff411698eed132ec))
+* **sourcefix:** make set task more generic ([13921ee](https://github.com/jayree/sfdx-jayree-plugin/commit/13921ee2068537ab2e0dde1ec06d806f55fde368))
+* **sourceretrieve*:** inject missing user- and objectPermissions ([5a19fb9](https://github.com/jayree/sfdx-jayree-plugin/commit/5a19fb91fa6dba73a001de49de3b88c33fa0c290))
+
 ## [1.8.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.0...v1.8.1) (2020-01-14)
 
 
