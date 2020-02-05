@@ -24,7 +24,7 @@ Coverage: 82%
     await this.org.refreshAuth();
     const conn = this.org.getConnection();
 
-    conn.streaming.topic('/event/Send_Accounts_to_SAP__e').subscribe(event => {
+    conn.streaming.topic('/event/SAPAccountRequest__e').subscribe(event => {
       console.log(event);
     });
 
