@@ -21,7 +21,7 @@
     "marked-terminal": "4.0.0",
     "object-path": "0.11.4",
     "open": "^7.0.2",
-    "puppeteer": "^2.1.0",
+    "puppeteer": "^2.1.1",
     "serialize-error": "^5.0.0",
     "shelljs": "0.8.3",
     "tabletojson": "^1.2.0",
