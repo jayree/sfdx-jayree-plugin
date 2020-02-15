@@ -240,7 +240,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           const stateName =
             this.flags.uselocalvariant && value['Local variant'] !== ''
               ? value['Local variant']
-              : value['Subdivision name'];
+              : value['Subdivision name'].split('(')[0].trim();
 
           if (Object.keys(config.fix).includes(countrycode)) {
             if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
