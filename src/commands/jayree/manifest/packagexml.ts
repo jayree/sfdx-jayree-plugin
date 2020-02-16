@@ -101,13 +101,16 @@ export default class GeneratePackageXML extends SfdxCommand {
     const configFile = this.flags.configfile || false;
     const outputFile = this.flags.file || this.args.file || null;
 
-    let apiVersion = this.flags.apiversion || (await this.org.retrieveMaxApiVersion());
+    let sfdxProjectVersion;
     /* istanbul ignore next*/
     try {
       this.project = await SfdxProject.resolve();
       const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
-      apiVersion = sfdxProjectJson.getContents().sourceApiVersion;
+      sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
     } catch (error) {}
+
+    let apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
+
     let quickFilters = this.flags.quickfilter
       ? this.flags.quickfilter.toLowerCaseifTrue(!this.flags.matchcase).split(',')
       : [];
