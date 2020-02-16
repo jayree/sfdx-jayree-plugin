@@ -5,5 +5,6 @@
   "matchCaseFlagDescription": "enable 'match case' for the quickfilter",
   "matchWholeWordFlagDescription": "enable 'match whole word' for the quickfilter",
   "fileFlagDescription": "write to 'file' instead of stdout",
-  "excludeManagedFlagDescription": "exclude managed packages from output"
+  "excludeManagedFlagDescription": "exclude managed packages from output",
+  "includeflowversionsDescription": "include flow versions as with api version 43.0"
 }

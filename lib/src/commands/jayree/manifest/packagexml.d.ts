@@ -14,6 +14,7 @@ declare global {
  * This code was based on the original github:sfdx-hydrate project
  */
 export default class GeneratePackageXML extends SfdxCommand {
+    static aliases: string[];
     static description: string;
     static examples: string[];
     static args: {
@@ -24,6 +25,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         quickfilter: flags.Discriminated<flags.Option<string>>;
         matchcase: flags.Discriminated<flags.Boolean<boolean>>;
         matchwholeword: flags.Discriminated<flags.Boolean<boolean>>;
+        includeflowversions: flags.Discriminated<flags.Boolean<boolean>>;
         file: flags.Discriminated<flags.Option<string>>;
         excludemanaged: flags.Discriminated<flags.Boolean<boolean>>;
     };

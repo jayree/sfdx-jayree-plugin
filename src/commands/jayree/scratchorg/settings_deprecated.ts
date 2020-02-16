@@ -1,14 +1,10 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-// import * as AdmZip from 'adm-zip';
-// import * as chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { serializeError } from 'serialize-error';
-import * as shell from 'shelljs';
-import { parseStringSync } from '../../../lib/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -23,7 +19,7 @@ function camelize(str) {
 
 export default class ScratchOrgSettings extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
-
+  public static hidden = true;
   public static examples = [
     `$ sfdx jayree:scratchorgsettings
 $ sfdx jayree:scratchorgsettings -u me@my.org
@@ -69,101 +65,57 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       return ordered;
     };
 
-    const json = raw => {
-      try {
-        return JSON.parse(raw).result;
-      } catch (error) {
-        return JSON.parse(raw.stderr);
-      }
-    };
+    this.ux.startSpinner('Generating settings');
+    const conn = this.org.getConnection();
+    debug(conn.getApiVersion());
 
-    const projectpath = this.project.getPath();
+    const settingsarray = (await conn.tooling.describeGlobal()).sobjects
+      .filter(a => a.name.includes('Settings'))
+      .map(a => a.name);
 
     let settings = {};
 
-    const orgretrievepath = path.join(
-      projectpath,
-      '.sfdx-jayree',
-      'orgs',
-      this.org.getUsername(),
-      `sdx_retrieveSettings_${Date.now()}`
-    );
-
-    // this.ux.startSpinner('Generating settings');
-
-    try {
-      await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
-
-      let out = json(
-        shell.exec(`sfdx force:project:create --projectname=. --json`, {
-          cwd: orgretrievepath,
-          fatal: false,
-          silent: true,
-          env: { ...process.env, FORCE_COLOR: 0 }
-        })
-      );
-
-      let sfdxProjectVersion;
-      /* istanbul ignore next*/
+    for await (const member of settingsarray) {
       try {
-        const tmpProject = await SfdxProject.resolve(orgretrievepath);
-        const sfdxProjectJson = await tmpProject.retrieveSfdxProjectJson();
-        sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
-      } catch (error) {}
-
-      const apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
-
-      this.ux.log(`Using ${orgretrievepath} and apiVersion=${apiVersion}`);
-
-      out = json(
-        shell.exec(
-          `sfdx force:source:retrieve --manifest=${path.join(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            '..',
-            '..',
-            'manifest',
-            'package-settings.xml'
-          )} --targetusername=${this.org.getUsername()} --apiversion=${apiVersion} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
-        )
-      );
-
-      if (out.warnings) {
-        out.warnings.forEach(warning => {
-          this.ux.warn(warning.problem);
-        });
-      }
-
-      if (out.inboundFiles) {
-        out.inboundFiles.forEach(element => {
-          const filename = path.join(orgretrievepath, element.filePath);
-          const settingsXml = parseStringSync(fs.readFileSync(filename, 'utf8'), false);
-          Object.keys(settingsXml).forEach(key => {
-            Object.keys(settingsXml[key]).forEach(property => {
-              if (!settings[camelize(key)]) {
-                settings[camelize(key)] = {};
-              }
-              if (property !== '$') {
-                settings[camelize(key)][property] = settingsXml[key][property];
-              }
-            });
-          });
-        });
-      } else {
-        throw out;
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      if (!this.flags.keepcache) {
-        await core.fs.remove(orgretrievepath);
+        const settingsQuery = await conn.tooling.query('SELECT Metadata FROM ' + member);
+        if (typeof settingsQuery.records !== 'undefined') {
+          for await (const record of settingsQuery.records) {
+            if (member === 'OrgPreferenceSettings') {
+              settings[camelize(member)] = {};
+              record['Metadata']['preferences'].forEach(element => {
+                settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
+              });
+            } else {
+              settings[camelize(member)] = record['Metadata'];
+            }
+          }
+        } else {
+          this.logger.error('query ' + member + ' not possible');
+          // debug('query ' + member + ' not possible');
+          // tslint:disable-next-line: no-any
+          debug(chalk.red('Error: ' + member + ' - ' + (settingsQuery as any)));
+        }
+      } catch (error) {
+        if (
+          !['INVALID_TYPE', 'EXTERNAL_OBJECT_EXCEPTION', 'INVALID_FIELD', 'UNKNOWN_EXCEPTION'].includes(
+            (error as Error).name
+          )
+        ) {
+          this.ux.error(error as Error);
+        } else {
+          const e = (error as Error).message.split('\n');
+          if (e[e.length - 1].includes('Metadata')) {
+            debug(chalk.gray('Warning: ' + member + ' - ' + e[e.length - 1]));
+          } else if (e[e.length - 1].includes('Cannot access')) {
+            debug(chalk.yellow('Error: ' + member + ' - ' + e[e.length - 1]));
+          } else {
+            debug(chalk.red('Error: ' + member + ' - ' + e[e.length - 1]));
+          }
+        }
       }
     }
 
-    // this.ux.stopSpinner();
+    this.ux.stopSpinner();
     // fix hard coded things
 
     if (typeof settings['addressSettings'] !== 'undefined') {
@@ -171,10 +123,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       debug('delete ' + 'addressSettings');
     }
 
-    // if (typeof settings['leadConvertSettings'] !== 'undefined') {
-    //   delete settings['leadConvertSettings'];
-    //   debug('delete ' + 'leadConvertSettings');
-    // }
+    if (typeof settings['leadConvertSettings'] !== 'undefined') {
+      delete settings['leadConvertSettings'];
+      debug('delete ' + 'leadConvertSettings');
+    }
 
     if (typeof settings['searchSettings'] !== 'undefined') {
       delete settings['searchSettings'];
@@ -206,34 +158,32 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       }
     }
 
-    // if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
-    //   if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
-    //     delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
-    //     debug('delete ' + 'orgPreferenceSettings:expandedSourceTrackingPref');
-    //   }
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      if (typeof settings['orgPreferenceSettings']['expandedSourceTrackingPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['expandedSourceTrackingPref'];
+        debug('delete ' + 'orgPreferenceSettings:expandedSourceTrackingPref');
+      }
 
-    //   if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
-    //     delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
-    //     debug('delete ' + 'orgPreferenceSettings:scratchOrgManagementPref');
-    //   }
+      if (typeof settings['orgPreferenceSettings']['scratchOrgManagementPref'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['scratchOrgManagementPref'];
+        debug('delete ' + 'orgPreferenceSettings:scratchOrgManagementPref');
+      }
 
-    //   if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
-    //     delete settings['orgPreferenceSettings']['packaging2'];
-    //     debug('delete ' + 'orgPreferenceSettings:packaging2');
-    //   }
+      if (typeof settings['orgPreferenceSettings']['packaging2'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['packaging2'];
+        debug('delete ' + 'orgPreferenceSettings:packaging2');
+      }
 
-    //   if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
-    //     delete settings['orgPreferenceSettings']['compileOnDeploy'];
-    //     debug('delete ' + 'orgPreferenceSettings:compileOnDeploy');
-    //   }
-    // }
+      if (typeof settings['orgPreferenceSettings']['compileOnDeploy'] !== 'undefined') {
+        delete settings['orgPreferenceSettings']['compileOnDeploy'];
+        debug('delete ' + 'orgPreferenceSettings:compileOnDeploy');
+      }
+    }
 
-    // if (typeof settings['apexSettings'] !== 'undefined') {
-    //   if (typeof settings['apexSettings']['enableCompileOnDeploy'] !== 'undefined') {
-    //     delete settings['apexSettings']['enableCompileOnDeploy'];
-    //     debug('delete ' + 'apexSettings:enableCompileOnDeploy');
-    //   }
-    // }
+    if (typeof settings['apexSettings']['enableCompileOnDeploy'] !== 'undefined') {
+      delete settings['apexSettings']['enableCompileOnDeploy'];
+      debug('delete ' + 'apexSettings:enableCompileOnDeploy');
+    }
 
     if (typeof settings['forecastingSettings'] !== 'undefined') {
       if (typeof settings['forecastingSettings']['forecastingCategoryMappings'] !== 'undefined') {
@@ -262,9 +212,9 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     settings = removeEmpty(settings);
     settings = sortKeys(settings);
 
-    // if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
-    //   settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
-    // }
+    if (typeof settings['orgPreferenceSettings'] !== 'undefined') {
+      settings['orgPreferenceSettings'] = sortKeys(settings['orgPreferenceSettings']);
+    }
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath =
@@ -280,7 +230,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
             if (!deffile['features'].includes('LiveAgent')) {
               if (typeof settings['liveAgentSettings'] !== 'undefined') {
                 if (typeof settings['liveAgentSettings']['enableLiveAgent'] !== 'undefined') {
-                  if (settings['liveAgentSettings']['enableLiveAgent'] === 'false') {
+                  if (settings['liveAgentSettings']['enableLiveAgent'] === false) {
                     delete settings['liveAgentSettings'];
                     debug('delete ' + 'liveAgentSettings');
                     this.ux.warn('liveAgentSettings: Not available for deploy for this organization');
@@ -291,7 +241,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
             if (typeof settings['knowledgeSettings'] !== 'undefined') {
               if (typeof settings['knowledgeSettings']['enableKnowledge'] !== 'undefined') {
-                if (settings['knowledgeSettings']['enableKnowledge'] === 'false') {
+                if (settings['knowledgeSettings']['enableKnowledge'] === false) {
                   delete settings['knowledgeSettings'];
                   debug('delete ' + 'knowledgeSettings');
                   this.ux.warn("knowledgeSettings: Once enabled, Salesforce Knowledge can't be disabled.");
@@ -302,7 +252,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
             if (typeof settings['caseSettings'] !== 'undefined') {
               if (typeof settings['caseSettings']['emailToCase'] !== 'undefined') {
                 if (typeof settings['caseSettings']['emailToCase']['enableEmailToCase'] !== 'undefined') {
-                  if (settings['caseSettings']['emailToCase']['enableEmailToCase'] === 'false') {
+                  if (settings['caseSettings']['emailToCase']['enableEmailToCase'] === false) {
                     delete settings['caseSettings']['emailToCase'];
                     debug('delete ' + 'caseSettings:emailToCase');
                     this.ux.warn('EmailToCaseSettings: Email to case cannot be disabled once it has been enabled.');

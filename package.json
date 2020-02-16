@@ -5,11 +5,11 @@
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
-    "@oclif/config": "^1.13.3",
+    "@oclif/config": "^1.14.0",
     "@oclif/errors": "^1.2.2",
-    "@salesforce/command": "^2.2.0",
-    "@salesforce/core": "^2.1.6",
-    "adm-zip": "0.4.13",
+    "@salesforce/command": "^3.0.0",
+    "@salesforce/core": "^2.2.0",
+    "adm-zip": "0.4.14",
     "chalk": "3.0.0",
     "cli-ux": "5.4.4",
     "debug": "4.1.1",
@@ -21,7 +21,7 @@
     "marked-terminal": "4.0.0",
     "object-path": "0.11.4",
     "open": "^7.0.2",
-    "puppeteer": "^2.1.0",
+    "puppeteer": "^2.1.1",
     "serialize-error": "^5.0.0",
     "shelljs": "0.8.3",
     "tabletojson": "^1.2.0",
@@ -37,9 +37,9 @@
     "@types/fs-extra": "^8.0.1",
     "@types/inquirer": "6.5.0",
     "@types/puppeteer": "^2.0.0",
-    "codecov": "^3.6.4",
-    "husky": "^4.2.1",
-    "nock": "11.7.2",
+    "codecov": "^3.6.5",
+    "husky": "^4.2.3",
+    "nock": "11.8.2",
     "patch-package": "^6.2.0",
     "tslib": "^1.10.0",
     "tslint": "^6.0.0",
@@ -101,6 +101,10 @@
           "scratchorg": {
             "name": "scratchorg",
             "description": "scratch org tools"
+          },
+          "manifest": {
+            "name": "manifest",
+            "description": "generate and manipulate manifest files"
           },
           "source": {
             "name": "source",

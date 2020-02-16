@@ -154,7 +154,13 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     const sourceMemberResults = (await conn.tooling
       .sobject('SourceMember')
-      .find({ RevisionCounter: { $gt: this.flags.startfromrevision } }, ['RevisionCounter', 'MemberType', 'MemberName'])
+      .find({ RevisionCounter: { $gt: this.flags.startfromrevision } }, [
+        'RevisionCounter',
+        'Id',
+        'MemberType',
+        'MemberName',
+        'IsNameObsolete'
+      ])
       .then(results => {
         let islocalinmap = false;
         let isstoredinmap = false;
@@ -243,7 +249,13 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
           key: 'RevisionCounter'
         },
         {
+          key: 'Id'
+        },
+        {
           key: 'MemberType'
+        },
+        {
+          key: 'IsNameObsolete'
         },
         {
           key: 'MemberName'
