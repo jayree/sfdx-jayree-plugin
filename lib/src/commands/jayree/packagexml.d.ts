@@ -24,6 +24,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         quickfilter: flags.Discriminated<flags.Option<string>>;
         matchcase: flags.Discriminated<flags.Boolean<boolean>>;
         matchwholeword: flags.Discriminated<flags.Boolean<boolean>>;
+        includeflowversions: flags.Discriminated<flags.Boolean<boolean>>;
         file: flags.Discriminated<flags.Option<string>>;
         excludemanaged: flags.Discriminated<flags.Boolean<boolean>>;
     };
