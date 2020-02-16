@@ -3,7 +3,7 @@ import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-import { builder } from '../../lib/xml';
+import { builder } from '../../../lib/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
@@ -50,12 +50,12 @@ if (!String.prototype.toLowerCaseifTrue) {
  * This code was based on the original github:sfdx-hydrate project
  */
 export default class GeneratePackageXML extends SfdxCommand {
-  public static aliases = ['jayree:manifest:generate'];
+  public static aliases = ['jayree:packagexml'];
 
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:packagexml --targetusername myOrg@example.com
+    `$ sfdx jayree:manifest:packagexml --targetusername myOrg@example.com
     <?xml version="1.0" encoding="UTF-8"?>
     <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
   `
