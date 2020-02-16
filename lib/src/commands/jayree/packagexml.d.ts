@@ -14,6 +14,7 @@ declare global {
  * This code was based on the original github:sfdx-hydrate project
  */
 export default class GeneratePackageXML extends SfdxCommand {
+    static aliases: string[];
     static description: string;
     static examples: string[];
     static args: {

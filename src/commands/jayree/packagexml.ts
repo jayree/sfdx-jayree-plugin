@@ -50,6 +50,8 @@ if (!String.prototype.toLowerCaseifTrue) {
  * This code was based on the original github:sfdx-hydrate project
  */
 export default class GeneratePackageXML extends SfdxCommand {
+  public static aliases = ['jayree:manifest:generate'];
+
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
