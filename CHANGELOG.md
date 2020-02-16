@@ -1,3 +1,23 @@
+# [1.9.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.2...v1.9.0) (2020-02-16)
+
+
+### Bug Fixes
+
+* update dependencies ([0b4922d](https://github.com/jayree/sfdx-jayree-plugin/commit/0b4922d5eed88e00000fce0ebfbba297c7a9d513))
+* **packagexml:** fix apiVersion scope ([b0d43cc](https://github.com/jayree/sfdx-jayree-plugin/commit/b0d43cc439d43ef9d2c00fa7af6fdad2579e1e7e))
+* **packagexml:** move packagexml command to manifest:packagexml ([ea2489a](https://github.com/jayree/sfdx-jayree-plugin/commit/ea2489af9a048127ef2c63483d88435b3248ff2c))
+* **statecountry:** remove brackets from Subdivision name ([ae6f100](https://github.com/jayree/sfdx-jayree-plugin/commit/ae6f1000232c76c8e9d212ed00f840d766b7eceb))
+* update dependencies ([c2fa047](https://github.com/jayree/sfdx-jayree-plugin/commit/c2fa04766967cdd7510204ba923cd118e78d23b0))
+
+
+### Features
+
+* add manifest:cleanup command ([5e5be79](https://github.com/jayree/sfdx-jayree-plugin/commit/5e5be795611232db16dd5d48336a5c9a912493e7))
+* add org:streaming command ([4d36065](https://github.com/jayree/sfdx-jayree-plugin/commit/4d36065f4e44877d4b97a09753e213ca4df70cd4))
+* **packagexml:** add includeflowversions flag ([63bf000](https://github.com/jayree/sfdx-jayree-plugin/commit/63bf0009a2be10527c9b707bb06fddc77f1a4100))
+* **scratchorgrevision:** add Id and IsNameObsolete to output ([2b426bc](https://github.com/jayree/sfdx-jayree-plugin/commit/2b426bc5e525e3f981cfb082d9e235b8cb95543a))
+* **scratchorgsettings:** compatibility with version 48.0 ([89a9ad5](https://github.com/jayree/sfdx-jayree-plugin/commit/89a9ad577bb8be94e5d9a07444cec5c5b97a7e7a))
+
 ## [1.8.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.1...v1.8.2) (2020-02-02)
 
 
