@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.0...v1.9.1) (2020-02-17)
+
+
+### Bug Fixes
+
+* rename manifest:packagexml to manifest:generate ([7c595d3](https://github.com/jayree/sfdx-jayree-plugin/commit/7c595d3b9109c9ac4fceb359826544e8763c00b3))
+
 # [1.9.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.8.2...v1.9.0) (2020-02-16)
 
 
