@@ -3,7 +3,7 @@ import { $$, expect, test } from '@salesforce/command/lib/test';
 import * as crypto_1 from 'crypto';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-import * as packagexml from '../../../src/commands/jayree/manifest/packagexml';
+import * as packagexml from '../../../src/commands/jayree/manifest/generate';
 
 const _uniqid = () => {
   return crypto_1.randomBytes(16).toString('hex');

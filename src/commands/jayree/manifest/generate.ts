@@ -55,7 +55,7 @@ export default class GeneratePackageXML extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:manifest:packagexml --targetusername myOrg@example.com
+    `$ sfdx jayree:manifest:generate --targetusername myOrg@example.com
     <?xml version="1.0" encoding="UTF-8"?>
     <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
   `
