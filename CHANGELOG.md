@@ -1,3 +1,11 @@
+## [1.9.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.1...v1.9.2) (2020-02-29)
+
+
+### Bug Fixes
+
+* update dependencies ([4c8e225](https://github.com/jayree/sfdx-jayree-plugin/commit/4c8e2250d1cf831c9c130731fada5a3c77e9a149))
+* **statecountry:** use real ISO Codes for CN and MX instead of mapping to the legacy SF Records ([53ca320](https://github.com/jayree/sfdx-jayree-plugin/commit/53ca32017ce6817c46f62c002989f7ca916b6384))
+
 ## [1.9.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.0...v1.9.1) (2020-02-17)
 
 
