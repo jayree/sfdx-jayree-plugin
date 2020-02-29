@@ -219,6 +219,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
 
             await setHTMLInputElementChecked(selector.editVisible, false, false);
             await setHTMLInputElementChecked(selector.editActive, false, false);
+            await setHTMLInputElementValue(value, selector.editIntVal);
 
             await page.click(selector.save.replace(/:/g, '\\:'));
             await page.waitForNavigation({
