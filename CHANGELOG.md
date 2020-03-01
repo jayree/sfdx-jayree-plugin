@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.2...v1.9.3) (2020-03-01)
+
+
+### Bug Fixes
+
+* **statecountry:** deactivate province IT-AO ([35787ba](https://github.com/jayree/sfdx-jayree-plugin/commit/35787ba5fbc3655af0d97eb75ee40dd44659ca54))
+
 ## [1.9.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.1...v1.9.2) (2020-02-29)
 
 
