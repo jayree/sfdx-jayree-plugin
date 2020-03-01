@@ -48,7 +48,7 @@
             ],
             "special administrative region": ["CN-92", "CN-91"]
         },
-        "IT": { "province": ["IT-CI", "IT-GO", "IT-OG", "IT-OT", "IT-PN", "IT-TS", "IT-UD", "IT-VS"] },
+        "IT": { "province": ["IT-AO", "IT-CI", "IT-GO", "IT-OG", "IT-OT", "IT-PN", "IT-TS", "IT-UD", "IT-VS"] },
         "MX": {
             "federal district": ["MX-DF"],
             "state": [
