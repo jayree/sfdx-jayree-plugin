@@ -130,7 +130,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
         await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
           waitUntil: 'networkidle0'
         });
-        await page.waitFor('.tablesorter');
+        await page.waitFor('.tablesorter', { visible: true });
       } catch (error) {
         throw Error(`The country code element (${this.flags.countrycode.toUpperCase()}) was not found`);
       }
