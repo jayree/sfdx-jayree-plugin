@@ -1,3 +1,10 @@
+## [1.9.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.3...v1.9.4) (2020-03-05)
+
+
+### Bug Fixes
+
+* **statecountry:** waitFor table to be present in DOM and to be visible ([ac06a12](https://github.com/jayree/sfdx-jayree-plugin/commit/ac06a12c929ed62f5fdd7e31b3a93fad27768532))
+
 ## [1.9.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.2...v1.9.3) (2020-03-01)
 
 

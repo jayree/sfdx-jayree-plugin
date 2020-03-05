@@ -1,7 +1,7 @@
 {
   "name": "sfdx-jayree",
   "description": "some sfdx commands",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
