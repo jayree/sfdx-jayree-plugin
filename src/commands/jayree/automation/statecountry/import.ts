@@ -1,5 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import * as chalk from 'chalk';
 import { cli } from 'cli-ux';
 // import ProgressBar = require('progress');
 import puppeteer = require('puppeteer');
@@ -304,13 +305,24 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       }
     } catch (error) {
       this.ux.stopSpinner();
-      throw error;
-    } finally {
-      !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
       bar.stop();
-      await browser.close();
+      if (page) {
+        await page.close();
+        if (browser) {
+          await browser.close();
+        }
+      }
+      this.ux.error(chalk.bold('ERROR running jayree:automation:statecountry:import:  ') + chalk.red(error.message));
+      process.exit(1);
     }
-
-    return {};
+    !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
+    bar.stop();
+    if (page) {
+      await page.close();
+      if (browser) {
+        await browser.close();
+      }
+    }
+    process.exit(0);
   }
 }
