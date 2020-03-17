@@ -278,77 +278,78 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
 
               if (typeof setpath() !== 'undefined') {
                 settask.path = setpath();
-              }
+                debug(settask.path);
 
-              // if (checkcondition()) {
+                // if (checkcondition()) {
 
-              if (settask.value) {
-                if (settask.value.indexOf('<mydomain>') > -1) {
-                  settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
-                  settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
-                }
-                if (!compareobj(objectPath.get(data, settask.path), settask.value)) {
-                  this.log(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`, 2);
-                  objectPath.set(data, settask.path, settask.value);
+                if (settask.value) {
+                  if (settask.value.indexOf('<mydomain>') > -1) {
+                    settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
+                    settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
+                  }
+                  if (!compareobj(objectPath.get(data, settask.path), settask.value)) {
+                    this.log(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`, 2);
+                    objectPath.set(data, settask.path, settask.value);
+                    fs.writeFileSync(
+                      file,
+                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                    );
+                  }
+                } else if (typeof settask.object === 'object') {
+                  const validate = node => {
+                    const replaceArray = [];
+                    const recursive = (n, attpath) => {
+                      // tslint:disable-next-line: forin
+                      for (const attributename in n) {
+                        if (attpath.length === 0) {
+                          attpath = attributename;
+                        } else {
+                          attpath = attpath + '.' + attributename;
+                        }
+                        if (typeof n[attributename] === 'object') {
+                          recursive(n[attributename], attpath);
+                        } else {
+                          if (n[attributename] === '<username>') {
+                            replaceArray.push([n[attributename], attpath]);
+                          }
+                        }
+                      }
+                    };
+                    recursive(node, '');
+                    replaceArray.forEach(element => {
+                      if (element[0] === '<username>') {
+                        objectPath.set(node, element[1], conn.getUsername());
+                      }
+                    });
+                    return node;
+                  };
+
+                  settask.object = validate(settask.object);
+                  debug(settask.path);
+
+                  debug(settask.object);
+
+                  this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
+                  if (settask.object) {
+                    Object.keys(settask.object).forEach(k => {
+                      debug(settask.path + '.' + k);
+                      if (objectPath.has(data, settask.path + '.' + k)) {
+                        debug(settask.object[k]);
+                        objectPath.set(data, settask.path + '.' + k, settask.object[k]);
+                        debug(objectPath.get(data, settask.path));
+                      }
+                    });
+                  } else {
+                    objectPath.insert(data, settask.path, settask.object);
+                  }
+
                   fs.writeFileSync(
                     file,
                     builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                   );
-                }
-              } else if (typeof settask.object === 'object') {
-                const validate = node => {
-                  const replaceArray = [];
-                  const recursive = (n, attpath) => {
-                    // tslint:disable-next-line: forin
-                    for (const attributename in n) {
-                      if (attpath.length === 0) {
-                        attpath = attributename;
-                      } else {
-                        attpath = attpath + '.' + attributename;
-                      }
-                      if (typeof n[attributename] === 'object') {
-                        recursive(n[attributename], attpath);
-                      } else {
-                        if (n[attributename] === '<username>') {
-                          replaceArray.push([n[attributename], attpath]);
-                        }
-                      }
-                    }
-                  };
-                  recursive(node, '');
-                  replaceArray.forEach(element => {
-                    if (element[0] === '<username>') {
-                      objectPath.set(node, element[1], conn.getUsername());
-                    }
-                  });
-                  return node;
-                };
-
-                settask.object = validate(settask.object);
-                debug(settask.path);
-
-                debug(settask.object);
-
-                this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
-                if (settask.object) {
-                  Object.keys(settask.object).forEach(k => {
-                    debug(settask.path + '.' + k);
-                    if (objectPath.has(data, settask.path + '.' + k)) {
-                      debug(settask.object[k]);
-                      objectPath.set(data, settask.path + '.' + k, settask.object[k]);
-                      debug(objectPath.get(data, settask.path));
-                    }
-                  });
                 } else {
-                  objectPath.insert(data, settask.path, settask.object);
+                  this.log(`Set: value ${JSON.stringify(settask.value)} found at ${settask.path}`, 2);
                 }
-
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
-              } else {
-                this.log(`Set: value ${JSON.stringify(settask.value)} found at ${settask.path}`, 2);
               }
               /*               } else {
                 this.log(
