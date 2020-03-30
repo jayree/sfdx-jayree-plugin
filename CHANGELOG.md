@@ -1,3 +1,13 @@
+## [1.9.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.4...v1.9.5) (2020-03-30)
+
+
+### Bug Fixes
+
+* **statecountry:** stability improvements ([d9791a3](https://github.com/jayree/sfdx-jayree-plugin/commit/d9791a3a1972fdc5e0210a97bbcbd67e665fbbe5))
+* update dependencies ([931bfb9](https://github.com/jayree/sfdx-jayree-plugin/commit/931bfb9c3ce252b83053e8abc1c5f25a85c53027))
+* **sourceretrieve*:** fix set-task path undefined ([3bef979](https://github.com/jayree/sfdx-jayree-plugin/commit/3bef97939250ed500a3b62b4334096842f66d40a))
+* **statecountry:** exit workaround for long running jobs on windows ([aa57b1b](https://github.com/jayree/sfdx-jayree-plugin/commit/aa57b1bc65dbd8a80d69c872efde327ebf8986b7))
+
 ## [1.9.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.3...v1.9.4) (2020-03-05)
 
 
