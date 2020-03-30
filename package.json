@@ -24,7 +24,7 @@
     "puppeteer": "^2.1.1",
     "serialize-error": "^6.0.0",
     "shelljs": "0.8.3",
-    "tabletojson": "^1.2.0",
+    "tabletojson": "^2.0.3",
     "xml-js": "^1.6.11",
     "xml2js": "^0.4.23"
   },
