@@ -1,9 +1,10 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import * as chalk from 'chalk';
 import { cli } from 'cli-ux';
 // import ProgressBar = require('progress');
 import puppeteer = require('puppeteer');
-import tabletojson = require('tabletojson');
+import { Tabletojson as tabletojson } from 'tabletojson';
 import config = require('../../../../../config/countrystate.json');
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -54,8 +55,9 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     const page = await browser.newPage();
 
     const setHTMLInputElementValue = async (newvalue, element) => {
+      element = element.replace(/:/g, '\\:');
       const elementDisabled = await page.evaluate(s => {
-        const result = document.querySelector(s.replace(/:/g, '\\:'));
+        const result = document.querySelector(s);
         if (result != null) {
           return result['disabled'];
         } else {
@@ -64,7 +66,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
       }, element);
       if (!elementDisabled) {
         return page.evaluate(
-          (val, s) => ((document.querySelector(s.replace(/:/g, '\\:')) as HTMLInputElement).value = val),
+          (val, s) => ((document.querySelector(s) as HTMLInputElement).value = val),
           newvalue,
           element
         );
@@ -76,15 +78,16 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
     };
 
     const setHTMLInputElementChecked = async (element, newstate, waitForEnable) => {
+      element = element.replace(/:/g, '\\:');
       const elementCheckedState = await page.evaluate(s => {
-        return document.querySelector(s.replace(/:/g, '\\:'))['checked'];
+        return document.querySelector(s)['checked'];
       }, element);
       // this.ux.log('elementCheckedState: ' + element + ' ' + elementCheckedState);
       if (!elementCheckedState === newstate) {
         if (waitForEnable) {
           await page.waitFor(
             s => {
-              const val = document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
+              const val = document.querySelector(s)['disabled'];
               return (val as boolean) === false;
             },
             {
@@ -94,11 +97,11 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           );
         }
         const elementDisabledState = await page.evaluate(s => {
-          return document.querySelector(s.replace(/:/g, '\\:'))['disabled'];
+          return document.querySelector(s)['disabled'];
         }, element);
         // this.ux.log('elementDisabledState: ' + element + ' ' + elementDisabledState);
         if (!elementDisabledState) {
-          return page.click(element.replace(/:/g, '\\:'));
+          return page.click(element);
         } else {
           return new Promise(resolve => {
             resolve();
@@ -189,28 +192,14 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           for await (const value of config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category]) {
             const countrycode = value.split('-')[0];
             const stateIsoCode = value.split('-')[1].split('*')[0];
-            try {
-              await page.goto(
-                conn.instanceUrl +
-                  `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
-                {
-                  waitUntil: 'networkidle0'
-                }
-              );
-              const updatecheck = await page.evaluate(c => {
-                const result = document.querySelector(c.updatecheck) as HTMLElement;
-                if (result != null) {
-                  return result.innerText;
-                } else {
-                  return null;
-                }
-              }, config);
-              if (updatecheck === 'Unable to Access Page') {
-                throw Error('no update possible');
+
+            await page.goto(
+              conn.instanceUrl +
+                `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
+              {
+                waitUntil: 'networkidle0'
               }
-            } catch (error) {
-              continue;
-            }
+            );
 
             curr = curr + 1;
             !this.flags.silent ? bar.update(curr, { text: 'deactivate ' + value }) : process.stdout.write('.');
@@ -249,29 +238,40 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
               stateIsoCode = config.fix[countrycode][stateIsoCode];
             }
           }
-          let update;
-          try {
-            update = true;
-            await page.goto(
-              conn.instanceUrl +
-                `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
-              {
-                waitUntil: 'networkidle0'
-              }
-            );
-            const updatecheck = await page.evaluate(c => {
-              const result = document.querySelector(c.updatecheck) as HTMLElement;
-              if (result != null) {
-                return result.innerText;
-              } else {
-                return null;
-              }
-            }, config);
-            if (updatecheck === 'Unable to Access Page') {
-              throw Error('no update possible');
+
+          await page.goto(
+            conn.instanceUrl +
+              `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
+            {
+              waitUntil: 'networkidle0'
             }
-          } catch (error) {
-            update = false;
+          );
+
+          let update;
+          update = null;
+          for (let retries = 0; ; retries++) {
+            try {
+              await page.waitFor('.mainTitle', { timeout: 100 });
+              update = true;
+            } catch (e) {}
+
+            try {
+              await page.waitFor('#errorTitle', {
+                timeout: 100
+              });
+              update = false;
+            } catch (e) {}
+
+            if (update == null && retries < 600) {
+              continue;
+            }
+            if (update === true || update === false) {
+              break;
+            }
+            throw Error(`faild to open picklist for ${countrycode}`);
+          }
+
+          if (update === false) {
             await page.goto(
               conn.instanceUrl +
                 `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
@@ -279,38 +279,52 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
                 waitUntil: 'networkidle0'
               }
             );
-          } finally {
-            curr = curr + 1;
-            !this.flags.silent
-              ? bar.update(curr, { text: (update ? 'update ' : 'create ') + stateName + '/' + stateintVal })
-              : process.stdout.write('.');
-
-            const selector = update ? config.update : config.create;
-
-            await setHTMLInputElementValue(stateName, selector.editName);
-            await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
-            await setHTMLInputElementValue(stateintVal, selector.editIntVal);
-            await setHTMLInputElementChecked(selector.editActive, true, false);
-            await setHTMLInputElementChecked(selector.editVisible, true, true);
-
-            await page.click(selector.save.replace(/:/g, '\\:'));
-            await page.waitForNavigation({
-              waitUntil: 'networkidle0'
-            });
+            await page.waitFor('.mainTitle');
           }
+
+          curr = curr + 1;
+          !this.flags.silent
+            ? bar.update(curr, {
+                text: (update ? 'update ' : 'create ') + stateName + '/' + stateintVal
+              })
+            : process.stdout.write('.');
+
+          const selector = update ? config.update : config.create;
+
+          await setHTMLInputElementValue(stateName, selector.editName);
+          await setHTMLInputElementValue(stateIsoCode, selector.editIsoCode);
+          await setHTMLInputElementValue(stateintVal, selector.editIntVal);
+          await setHTMLInputElementChecked(selector.editActive, true, false);
+          await setHTMLInputElementChecked(selector.editVisible, true, true);
+
+          await page.click(selector.save.replace(/:/g, '\\:'));
+          await page.waitForNavigation({
+            waitUntil: 'networkidle0'
+          });
         }
       } else {
         throw Error('Expected --category= to be one of: ' + Object.keys(jsonParsed).toString());
       }
     } catch (error) {
       this.ux.stopSpinner();
-      throw error;
-    } finally {
-      !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
       bar.stop();
-      await browser.close();
+      if (page) {
+        await page.close();
+        if (browser) {
+          await browser.close();
+        }
+      }
+      this.ux.error(chalk.bold('ERROR running jayree:automation:statecountry:import:  ') + chalk.red(error.message));
+      process.exit(1);
     }
-
-    return {};
+    !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
+    bar.stop();
+    if (page) {
+      await page.close();
+      if (browser) {
+        await browser.close();
+      }
+    }
+    process.exit(0);
   }
 }
