@@ -16,6 +16,10 @@
     "editVisible": "#configurenew:j_id1:blockNew:j_id9:visibleSectionItem:editVisible",
     "save": "#configurenew:j_id1:blockNew:j_id43:addButton"
   },
+  "setCountry": {
+    "editIntVal": "#configurecountry:form:blockEditCountry:j_id33:j_id40:editIntVal",
+    "save": "#configurecountry:form:blockTopButtons:j_id6:saveButtonTop"
+  },
   "fix": {},
   "deactivate": {
     "CN": {

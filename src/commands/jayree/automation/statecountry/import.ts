@@ -64,6 +64,7 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
           return true;
         }
       }, element);
+      // const currentvalue = await page.evaluate(s => (document.querySelector(s) as HTMLInputElement).value, element);
       if (!elementDisabled) {
         return page.evaluate(
           (val, s) => ((document.querySelector(s) as HTMLInputElement).value = val),
@@ -172,6 +173,25 @@ export default class CreateUpdateStateCountry extends SfdxCommand {
 
         const list = jsonParsed[this.flags.category].filter(v => v['Language code'] === this.flags.language);
         let curr = 0;
+
+        spinnermessage = `set Integration Value to ${this.flags.countrycode.toUpperCase()}`;
+        !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
+
+        await page.goto(
+          conn.instanceUrl +
+            `/i18n/ConfigureCountry.apexp?countryIso=${this.flags.countrycode.toUpperCase()}&setupid=AddressCleanerOverview`,
+          {
+            waitUntil: 'networkidle0'
+          }
+        );
+
+        const setCountrySelector = config.setCountry;
+        await setHTMLInputElementValue(this.flags.countrycode.toUpperCase(), setCountrySelector.editIntVal);
+
+        await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
+        await page.waitForNavigation({
+          waitUntil: 'networkidle0'
+        });
 
         this.ux.stopSpinner();
 
