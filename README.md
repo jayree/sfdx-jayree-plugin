@@ -36,8 +36,9 @@ USAGE
 <!-- commands -->
 * [`sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationchangesetdeploy--r-string--l-string--c---nodialog--s-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationchangesetlist--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationcountryupdate--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:automation:ltngsync:status -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationltngsyncstatus--o-string--s--w-integer--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
-* [`sfdx jayree:automation:statecountry:import --countrycode <string> --category <string> --language <string> [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationstatecountryimport---countrycode-string---category-string---language-string---uselocalvariant--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx jayree:automation:state:import --countrycode <string> --category <string> --language <string> [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeautomationstateimport---countrycode-string---category-string---language-string---uselocalvariant--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeflowtestcoverage--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreemanifestcleanup--x-filepath--f-filepath--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:manifest:generate [--configfile <string>] [-q <string>] [-c] [-w] [--includeflowversions] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreemanifestgenerate---configfile-string--q-string--c--w---includeflowversions--f-string--x--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
@@ -129,6 +130,30 @@ OPTIONS
 
 _See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.9.5/src/commands/jayree/automation/changeset/list.ts)_
 
+### `sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+
+update country integration values in the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+```
+
+_See code: [src/commands/jayree/automation/country/update.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.9.5/src/commands/jayree/automation/country/update.ts)_
+
 ### `sfdx jayree:automation:ltngsync:status -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
 check the Lightning Sync User Sync Status and reset sync if needed (beta)
@@ -170,13 +195,13 @@ EXAMPLE
 
 _See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.9.5/src/commands/jayree/automation/ltngsync/status.ts)_
 
-### `sfdx jayree:automation:statecountry:import --countrycode <string> --category <string> --language <string> [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+### `sfdx jayree:automation:state:import --countrycode <string> --category <string> --language <string> [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
-import (create/update) State/Country Picklists (beta)
+import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:automation:statecountry:import --countrycode <string> --category <string> --language <string> 
+  $ sfdx jayree:automation:state:import --countrycode <string> --category <string> --language <string> 
   [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
@@ -201,11 +226,12 @@ OPTIONS
   --uselocalvariant                                                                 Use Local variant? (default:false)
 
 ALIASES
+  $ sfdx jayree:automation:statecountry:import
   $ sfdx jayree:automation:statecountry:create
   $ sfdx jayree:automation:statecountry:update
 ```
 
-_See code: [src/commands/jayree/automation/statecountry/import.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.9.5/src/commands/jayree/automation/statecountry/import.ts)_
+_See code: [src/commands/jayree/automation/state/import.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v1.9.5/src/commands/jayree/automation/state/import.ts)_
 
 ### `sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 

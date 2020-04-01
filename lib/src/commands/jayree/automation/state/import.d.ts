@@ -1,6 +1,6 @@
 import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-export default class CreateUpdateStateCountry extends SfdxCommand {
+export default class ImportState extends SfdxCommand {
     static aliases: string[];
     static description: string;
     protected static flagsConfig: {

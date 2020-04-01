@@ -118,7 +118,7 @@
           },
           "automation": {
             "name": "automation",
-            "description": "headless browser automation tools (beta)",
+            "description": "headless browser automation tools",
             "subtopics": {
               "changeset": {
                 "name": "changeset",
@@ -130,7 +130,7 @@
               },
               "statecountry": {
                 "name": "statecountry",
-                "description": "import (create/update) State/Country Picklists (beta)"
+                "description": "import (create/update) State/Country Picklists"
               }
             }
           }
