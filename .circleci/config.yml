@@ -52,7 +52,7 @@ jobs:
   node-10:
     <<: *node-test
     docker:
-      - image: node:10
+      - image: node:10.15.3
   release:
     <<: *defaults
     steps:
