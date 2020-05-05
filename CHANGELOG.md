@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.5...v1.10.0) (2020-05-05)
+
+
+### Bug Fixes
+
+* **sourceretrieve*:** fix json output (Windows) ([a805fdd](https://github.com/jayree/sfdx-jayree-plugin/commit/a805fddd3e7639e099e32eb68b8ce91ed819fcda))
+* update dependencies ([fbe5188](https://github.com/jayree/sfdx-jayree-plugin/commit/fbe5188da452c48efd036c9547bb6d3dfef24699))
+* **packagedescription:** revert "replace adm-zip with jszip" ([26e7baa](https://github.com/jayree/sfdx-jayree-plugin/commit/26e7baa73f6ffae38574eb95aa3a156573b2b1c9))
+* **statecountry:** set country integration value to ISO alpha-2 code ([34ca6f7](https://github.com/jayree/sfdx-jayree-plugin/commit/34ca6f738c1ecea9fbf92a4868637b71ba92427a))
+
+
+### Features
+
+* **statecountry:** add new command jayree:automation:country:update ([9d0b0ca](https://github.com/jayree/sfdx-jayree-plugin/commit/9d0b0ca9460ee4c550c85043099ef2a2747cd59e))
+
 ## [1.9.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.4...v1.9.5) (2020-03-30)
 
 
