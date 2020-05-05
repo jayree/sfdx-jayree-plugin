@@ -1,7 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as fs from 'fs-extra';
-import * as JSZip from 'jszip';
+import * as AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -36,21 +35,23 @@ export default class GetPackageDescription extends SfdxCommand {
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
 
+    const zip = new AdmZip(inputfile);
+    const zipEntries = zip.getEntries();
+
     let text;
-    const zip = await JSZip.loadAsync(await fs.readFile(inputfile));
-    const packagexmlfile = Object.keys(zip.files).filter(name => name.includes('package.xml'));
-
-    if (packagexmlfile.length === 1) {
-      const fileContent = await zip.file(packagexmlfile).async('string');
-      text = convert.xml2js(fileContent, { compact: true });
-      if ('description' in text['Package']) {
-        text = text['Package']['description']['_text'];
-        this.ux.log(text);
-      } else {
-        text = '';
+    zipEntries.forEach(zipEntry => {
+      const fileName = zipEntry.entryName;
+      if (fileName.includes('package.xml')) {
+        const fileContent = zip.readAsText(fileName);
+        text = convert.xml2js(fileContent, { compact: true });
+        if ('description' in text['Package']) {
+          text = text['Package']['description']['_text'];
+          this.ux.log(text);
+        } else {
+          text = '';
+        }
       }
-    }
-
+    });
     return { description: text };
   }
 }
