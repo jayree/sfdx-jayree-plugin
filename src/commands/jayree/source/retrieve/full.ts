@@ -2,6 +2,7 @@ import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
 import * as chalk from 'chalk';
+import * as fs from 'fs';
 import * as path from 'path';
 import * as shell from 'shelljs';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
@@ -110,7 +111,7 @@ Coverage: 82%
                   type: p.type,
                   filePath: path
                     .relative(orgretrievepath, p.filePath)
-                    .replace('src/main/default/', 'force-app/main/default/'),
+                    .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
                   state: 'undefined'
                 };
               })
@@ -142,7 +143,7 @@ Coverage: 82%
                   type: p.type,
                   filePath: path
                     .relative(orgretrievepath, p.filePath)
-                    .replace('src/main/default/', 'force-app/main/default/'),
+                    .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
                   state: 'undefined'
                 };
               })
@@ -174,7 +175,7 @@ Coverage: 82%
                   type: p.type,
                   filePath: path
                     .relative(orgretrievepath, p.filePath)
-                    .replace('src/main/default/', 'force-app/main/default/'),
+                    .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
                   state: 'undefined'
                 };
               })
@@ -226,7 +227,7 @@ Coverage: 82%
         const cleanedfiles = shell
           .find(path.join(orgretrievepath, 'force-app'))
           .filter(file => {
-            return file.match(/\.xml$/);
+            return fs.lstatSync(file).isFile();
           })
           .map(file => path.relative(orgretrievepath, file));
 
@@ -238,7 +239,7 @@ Coverage: 82%
 
         if (this.flags.metadata.length > 0) {
           const forceapppath = path.join(projectpath, 'force-app');
-          shell.cp('-R', `${orgretrievepath}/force-app/main`, forceapppath);
+          shell.cp('-R', path.join(orgretrievepath, 'force-app/main'), forceapppath);
         }
       } else {
         throw out;
