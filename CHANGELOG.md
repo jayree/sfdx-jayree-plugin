@@ -1,3 +1,12 @@
+## [1.10.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.10.0...v1.10.1) (2020-05-13)
+
+
+### Bug Fixes
+
+* update dependencies ([2529e8d](https://github.com/jayree/sfdx-jayree-plugin/commit/2529e8d534be47a217ab83b4c565833ce844ed55))
+* **sourceretrieve*:** support MDP ([fc0ad31](https://github.com/jayree/sfdx-jayree-plugin/commit/fc0ad3117dea0f1ca134f343f73e5051e2ac5181))
+* **sourceretrievefull:** add more metadata ([ce73e0f](https://github.com/jayree/sfdx-jayree-plugin/commit/ce73e0fa1a67c5509b935f51b8cc3d15e5a02ad3))
+
 # [1.10.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.9.5...v1.10.0) (2020-05-05)
 
 
