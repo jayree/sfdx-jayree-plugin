@@ -88,7 +88,7 @@ Coverage: 82%
 
       let out = shell.exec(
         `sfdx jayree:packagexml --excludemanaged --file=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-        { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+        { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
       );
       if (config) {
         if (config['source:retrieve:all']) {
@@ -100,8 +100,8 @@ Coverage: 82%
 
       out = json(
         shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=. --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
+          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
         )
       );
 
@@ -110,12 +110,17 @@ Coverage: 82%
         zip.extractAllTo(orgretrievepath);
 
         out = json(
-          shell.exec(`sfdx force:mdapi:convert --outputdir=./src --rootdir=./unpackaged --json`, {
-            cwd: orgretrievepath,
-            fatal: false,
-            silent: true,
-            env: { ...process.env, FORCE_COLOR: 0 }
-          })
+          shell.exec(
+            `sfdx force:mdapi:convert --outputdir=${path.join(orgretrievepath, 'src')} --rootdir=${path.join(
+              orgretrievepath,
+              'unpackaged'
+            )} --json`,
+            {
+              fatal: false,
+              silent: true,
+              env: { ...process.env, FORCE_COLOR: 0 }
+            }
+          )
         );
         if (!out.length) {
           throw out;
