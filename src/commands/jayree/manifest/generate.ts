@@ -1,5 +1,4 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
@@ -104,7 +103,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     let sfdxProjectVersion;
     /* istanbul ignore next*/
     try {
-      this.project = await SfdxProject.resolve();
+      this.project = await core.SfdxProject.resolve();
       const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
       sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
     } catch (error) {}

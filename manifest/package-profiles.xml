@@ -36,15 +36,23 @@
     <members>AuthorizationFormDataUse</members>
     <members>AuthorizationFormText</members>
     <members>Campaign</members>
+    <members>CampaignInfluence</members>
     <members>CampaignMember</members>
     <members>Case</members>
     <members>CaseContactRole</members>
     <members>ChatterActivity</members>
     <members>CollaborationGroup</members>
     <members>CollaborationGroupMember</members>
+    <members>CommSubscription</members>
+    <members>CommSubscriptionChannelType</members>
+    <members>CommSubscriptionConsent</members>
+    <members>CommSubscriptionTiming</members>
     <members>ConsumptionRate</members>
     <members>ConsumptionSchedule</members>
     <members>Contact</members>
+    <members>ContactPointConsent</members>
+    <members>ContactPointEmail</members>
+    <members>ContactPointPhone</members>
     <members>ContactPointTypeConsent</members>
     <members>ContactRequest</members>
     <members>ContentVersion</members>
@@ -55,10 +63,12 @@
     <members>DuplicateRecordItem</members>
     <members>DuplicateRecordSet</members>
     <members>EmailMessage</members>
+    <members>EngagementChannelType</members>
     <members>Event</members>
     <members>ExchangeUserMapping</members>
     <members>ExpressionFilter</members>
     <members>ExpressionFilterCriteria</members>
+    <members>ExternalEventMapping</members>
     <members>FeedItem</members>
     <members>ForecastingAdjustment</members>
     <members>ForecastingCategoryMapping</members>
@@ -71,6 +81,9 @@
     <members>Knowledge__kav</members>
     <members>Lead</members>
     <members>LinkedArticle</members>
+    <members>MLModel</members>
+    <members>MLModelFactor</members>
+    <members>MLModelFactorComponent</members>
     <members>Macro</members>
     <members>MacroAction</members>
     <members>MacroInstruction</members>
@@ -83,7 +96,10 @@
     <members>OpportunityTeamMember</members>
     <members>Order</members>
     <members>OrderItem</members>
+    <members>OrgMetricScanResult</members>
+    <members>OrgMetricScanSummary</members>
     <members>PartnerRole</members>
+    <members>PartyConsent</members>
     <members>Pricebook2</members>
     <members>PricebookEntry</members>
     <members>Product2</members>
@@ -106,12 +122,16 @@
     <members>SocialPersona</members>
     <members>SocialPost</members>
     <members>Solution</members>
+    <members>StreamActivityAccess</members>
     <members>StreamingChannel</members>
     <members>Task</members>
+    <members>Territory2</members>
+    <members>Territory2Model</members>
     <members>Topic</members>
     <members>TopicAssignment</members>
     <members>User</members>
     <members>UserProvisioningRequest</members>
+    <members>UserTerritory2Association</members>
     <members>WorkBadge</members>
     <members>WorkBadgeDefinition</members>
     <members>WorkThanks</members>

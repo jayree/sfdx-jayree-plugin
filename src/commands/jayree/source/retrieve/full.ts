@@ -73,7 +73,7 @@ Coverage: 82%
 
       let out = json(
         shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=. --unpackaged=${path.join(
+          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${path.join(
             __dirname,
             '..',
             '..',
@@ -84,7 +84,7 @@ Coverage: 82%
             'manifest',
             'package-profiles.xml'
           )} --targetusername=${this.org.getUsername()} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
         )
       );
 
@@ -94,12 +94,17 @@ Coverage: 82%
 
         if (this.flags.metadata.includes('Profile')) {
           out = json(
-            shell.exec(`sfdx force:mdapi:convert --metadata=Profile --outputdir=./src --rootdir=./unpackaged --json`, {
-              cwd: orgretrievepath,
-              fatal: false,
-              silent: true,
-              env: { ...process.env, FORCE_COLOR: 0 }
-            })
+            shell.exec(
+              `sfdx force:mdapi:convert --metadata=Profile --outputdir=${path.join(
+                orgretrievepath,
+                'src'
+              )} --rootdir=${path.join(orgretrievepath, 'unpackaged')} --json`,
+              {
+                fatal: false,
+                silent: true,
+                env: { ...process.env, FORCE_COLOR: 0 }
+              }
+            )
           );
           if (!out.length) {
             throw out;
@@ -124,9 +129,11 @@ Coverage: 82%
         if (this.flags.metadata.includes('PermissionSet')) {
           out = json(
             shell.exec(
-              `sfdx force:mdapi:convert --metadata=PermissionSet --outputdir=./src --rootdir=./unpackaged --json`,
+              `sfdx force:mdapi:convert --metadata=PermissionSet --outputdir=${path.join(
+                orgretrievepath,
+                'src'
+              )} --rootdir=${path.join(orgretrievepath, 'unpackaged')} --json`,
               {
-                cwd: orgretrievepath,
                 fatal: false,
                 silent: true,
                 env: { ...process.env, FORCE_COLOR: 0 }
@@ -156,9 +163,11 @@ Coverage: 82%
         if (this.flags.metadata.includes('CustomLabels')) {
           out = json(
             shell.exec(
-              `sfdx force:mdapi:convert --metadata=CustomLabels --outputdir=./src --rootdir=./unpackaged --json`,
+              `sfdx force:mdapi:convert --metadata=CustomLabels --outputdir=${path.join(
+                orgretrievepath,
+                'src'
+              )} --rootdir=${path.join(orgretrievepath, 'unpackaged')} --json`,
               {
-                cwd: orgretrievepath,
                 fatal: false,
                 silent: true,
                 env: { ...process.env, FORCE_COLOR: 0 }

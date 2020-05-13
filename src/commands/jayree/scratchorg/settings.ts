@@ -1,5 +1,4 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
-import { SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 // import * as AdmZip from 'adm-zip';
 // import * as chalk from 'chalk';
@@ -106,7 +105,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       let sfdxProjectVersion;
       /* istanbul ignore next*/
       try {
-        const tmpProject = await SfdxProject.resolve(orgretrievepath);
+        const tmpProject = await core.SfdxProject.resolve(orgretrievepath);
         const sfdxProjectJson = await tmpProject.retrieveSfdxProjectJson();
         sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
       } catch (error) {}
