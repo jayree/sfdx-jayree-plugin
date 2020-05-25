@@ -23,7 +23,7 @@ const builder = new xml2js.Builder({
 });
 
 // tslint:disable-next-line: no-any
-(Array.prototype as any).equals = function(arr) {
+(Array.prototype as any).equals = function (arr) {
   return this.length === arr.length && this.every((u, i) => u === arr[i]);
 };
 
@@ -74,14 +74,14 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
           data.Profile['objectPermissions'] = [];
         }
 
-        profileElementInjectionFrom.Profile.objectPermissions.forEach(element => {
+        profileElementInjectionFrom.Profile.objectPermissions.forEach((element) => {
           if (
             data.Profile.objectPermissions &&
-            !data.Profile.objectPermissions.some(e => e.object.equals(element.object))
+            !data.Profile.objectPermissions.some((e) => e.object.equals(element.object))
           ) {
             debug('inject objectPermission: ' + element.object);
 
-            Object.keys(element).forEach(k => {
+            Object.keys(element).forEach((k) => {
               if (element[k].equals(['true'])) {
                 element[k] = ['false'];
               }
@@ -95,11 +95,11 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
           data.Profile['userPermissions'] = [];
         }
 
-        profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach(element => {
-          if (data.Profile.userPermissions && !data.Profile.userPermissions.some(e => e.name.equals(element.name))) {
+        profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach((element) => {
+          if (data.Profile.userPermissions && !data.Profile.userPermissions.some((e) => e.name.equals(element.name))) {
             debug('inject userPermission: ' + element.name);
 
-            Object.keys(element).forEach(k => {
+            Object.keys(element).forEach((k) => {
               if (element[k].equals(['true'])) {
                 element[k] = ['false'];
               }
@@ -207,11 +207,11 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
           }
 
           if (fixsources[filename].insert) {
-            fixsources[filename].insert.forEach(inserttask => {
+            fixsources[filename].insert.forEach((inserttask) => {
               if (
                 !objectPath
                   .get(data, inserttask.path)
-                  .some(object => JSON.stringify(object) === JSON.stringify(inserttask.object))
+                  .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
               ) {
                 this.log(`insert: ${JSON.stringify(inserttask.object)} at ${inserttask.path}`, 2);
                 objectPath.insert(data, inserttask.path, inserttask.object, inserttask.at);
@@ -223,7 +223,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
           }
 
           if (fixsources[filename].set) {
-            fixsources[filename].set.forEach(settask => {
+            fixsources[filename].set.forEach((settask) => {
               /*               const checkcondition = () => {
                 if (typeof settask.condition !== 'undefined') {
                   if (compareobj(objectPath.get(data, `${settask.path}`), settask.condition[1])) {
@@ -296,7 +296,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                     );
                   }
                 } else if (typeof settask.object === 'object') {
-                  const validate = node => {
+                  const validate = (node) => {
                     const replaceArray = [];
                     const recursive = (n, attpath) => {
                       // tslint:disable-next-line: forin
@@ -316,7 +316,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                       }
                     };
                     recursive(node, '');
-                    replaceArray.forEach(element => {
+                    replaceArray.forEach((element) => {
                       if (element[0] === '<username>') {
                         objectPath.set(node, element[1], conn.getUsername());
                       }
@@ -331,7 +331,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
 
                   this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
                   if (settask.object) {
-                    Object.keys(settask.object).forEach(k => {
+                    Object.keys(settask.object).forEach((k) => {
                       debug(settask.path + '.' + k);
                       if (objectPath.has(data, settask.path + '.' + k)) {
                         debug(settask.object[k]);
@@ -364,7 +364,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
 
           if (fixsources[filename].fixflowtranslation) {
             const flowDefinitions = objectPath.get(data, 'Translations.flowDefinitions');
-            flowDefinitions.forEach(flowDefinition => {
+            flowDefinitions.forEach((flowDefinition) => {
               const fullname = objectPath.get(
                 data,
                 `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`
@@ -416,17 +416,17 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     const newpackage = await parseString(fs.readFileSync(manifest, 'utf8'));
 
     const newPackageTypesMapped = [];
-    newpackage.Package.types.forEach(value => {
+    newpackage.Package.types.forEach((value) => {
       newPackageTypesMapped[value.name] = value.members;
     });
 
-    packageignore.Package.types.forEach(types => {
+    packageignore.Package.types.forEach((types) => {
       if (typeof newPackageTypesMapped[types.name] !== 'undefined') {
         if (types.members.includes('*') && types.members.length > 1) {
           const includedmembers = types.members.slice();
           includedmembers.splice(includedmembers.indexOf('*'), 1);
           this.log('include only members ' + includedmembers.toString() + ' for type ' + types.name, 1);
-          newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter(value => {
+          newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter((value) => {
             return types.members.includes(value);
           });
         }
@@ -439,7 +439,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
         }
 
         if (!types.members.includes('*')) {
-          newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter(value => {
+          newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter((value) => {
             return !types.members.includes(value);
           });
         }
@@ -447,7 +447,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     });
 
     const newPackageTypesUpdated = [];
-    Object.keys(newPackageTypesMapped).forEach(key => {
+    Object.keys(newPackageTypesMapped).forEach((key) => {
       if (newPackageTypesMapped[key].length > 0) {
         newPackageTypesUpdated.push({
           name: key,

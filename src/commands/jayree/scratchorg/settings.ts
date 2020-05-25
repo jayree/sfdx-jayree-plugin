@@ -46,7 +46,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
   public async run(): Promise<AnyJson> {
     const debug = createDebug('jayree:scratchorg:settings');
-    const removeEmpty = obj => {
+    const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {
         if (val && typeof val === 'object') {
           val = removeEmpty(val);
@@ -58,17 +58,17 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       return obj;
     };
 
-    const sortKeys = obj => {
+    const sortKeys = (obj) => {
       const ordered = {};
       Object.keys(obj)
         .sort()
-        .forEach(key => {
+        .forEach((key) => {
           ordered[key] = obj[key];
         });
       return ordered;
     };
 
-    const json = raw => {
+    const json = (raw) => {
       try {
         return JSON.parse(raw).result;
       } catch (error) {
@@ -131,17 +131,17 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       );
 
       if (out.warnings) {
-        out.warnings.forEach(warning => {
+        out.warnings.forEach((warning) => {
           this.ux.warn(warning.problem);
         });
       }
 
       if (out.inboundFiles) {
-        out.inboundFiles.forEach(element => {
+        out.inboundFiles.forEach((element) => {
           const filename = path.join(orgretrievepath, element.filePath);
           const settingsXml = parseStringSync(fs.readFileSync(filename, 'utf8'), false);
-          Object.keys(settingsXml).forEach(key => {
-            Object.keys(settingsXml[key]).forEach(property => {
+          Object.keys(settingsXml).forEach((key) => {
+            Object.keys(settingsXml[key]).forEach((property) => {
               if (!settings[camelize(key)]) {
                 settings[camelize(key)] = {};
               }
@@ -272,7 +272,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
       await fs
         .readFile(deffilepath, 'utf8')
-        .then(data => {
+        .then((data) => {
           deffile = JSON.parse(data);
 
           if (deffile['edition'] === 'Enterprise') {
@@ -313,7 +313,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
           deffile['settings'] = settings;
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.code === 'ENOENT' && !this.flags.file) {
             throw Error("default file 'project-scratch-def.json' not found, please use --file flag");
           } else {
@@ -321,7 +321,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           }
         });
 
-      await fs.writeFile(deffilepath, JSON.stringify(deffile, null, 2)).catch(err => {
+      await fs.writeFile(deffilepath, JSON.stringify(deffile, null, 2)).catch((err) => {
         this.throwError(err);
       });
     } else {

@@ -19,8 +19,8 @@ declare global {
 
 /* istanbul ignore else*/
 if (!Array.prototype.pushUniqueValueKey) {
-  Array.prototype.pushUniqueValueKey = function<T>(elem: T, key: string): T[] {
-    if (!this.map(value => value[key]).includes(elem[key])) {
+  Array.prototype.pushUniqueValueKey = function <T>(elem: T, key: string): T[] {
+    if (!this.map((value) => value[key]).includes(elem[key])) {
       this.push(elem);
     }
     return this;
@@ -29,7 +29,7 @@ if (!Array.prototype.pushUniqueValueKey) {
 
 /* istanbul ignore next*/
 if (!Array.prototype.pushUniqueValue) {
-  Array.prototype.pushUniqueValue = function<T>(elem: T): T[] {
+  Array.prototype.pushUniqueValue = function <T>(elem: T): T[] {
     if (!this.includes(elem)) {
       this.push(elem);
     }
@@ -40,7 +40,7 @@ if (!Array.prototype.pushUniqueValue) {
 /* istanbul ignore else*/
 if (!String.prototype.toLowerCaseifTrue) {
   // tslint:disable-next-line:space-before-function-paren
-  String.prototype.toLowerCaseifTrue = function(ignore: boolean) {
+  String.prototype.toLowerCaseifTrue = function (ignore: boolean) {
     return ignore ? this.toLowerCase() : this;
   };
 }
@@ -118,7 +118,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     if (configFile) {
       await fs
         .readFile(configFile, 'utf8')
-        .then(data => {
+        .then((data) => {
           const obj = JSON.parse(data);
           /* cli parameters still override whats in the config file */
           apiVersion = obj.apiVersion || apiVersion;
@@ -127,7 +127,7 @@ export default class GeneratePackageXML extends SfdxCommand {
             : obj.quickfilter || [];
           excludeManaged = this.flags.excludeManaged || obj.excludeManaged === 'true' || false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.throwError(err);
         });
     }
@@ -234,13 +234,14 @@ export default class GeneratePackageXML extends SfdxCommand {
       if (this.flags.includeflowversions) {
         try {
           const flowObject = this.listMetaData(conn, { type: 'Flow' }, '43.0');
+          /* istanbul ignore next*/
           if (flowObject) {
             unfolderedObjects.push(await flowObject);
           }
         } catch (err) {}
       }
 
-      unfolderedObjects.forEach(unfolderedObject => {
+      unfolderedObjects.forEach((unfolderedObject) => {
         /* istanbul ignore else*/
         if (unfolderedObject) {
           let unfolderedObjectItems = [];
@@ -249,7 +250,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           } else {
             unfolderedObjectItems = [unfolderedObject];
           }
-          unfolderedObjectItems.forEach(metadataEntries => {
+          unfolderedObjectItems.forEach((metadataEntries) => {
             /*               if (metadataEntries.type === 'CustomApplication') {
                 console.log(metadataEntries);
               } */
@@ -266,10 +267,8 @@ export default class GeneratePackageXML extends SfdxCommand {
               if (typeof metadataEntries.type !== 'string') {
                 this.logger.error('type missing for: ' + metadataEntries.fileName);
                 const x =
-                  metadataEntries.fileName
-                    .split('.')[1]
-                    .substring(0, 1)
-                    .toUpperCase() + metadataEntries.fileName.split('.')[1].substring(1);
+                  metadataEntries.fileName.split('.')[1].substring(0, 1).toUpperCase() +
+                  metadataEntries.fileName.split('.')[1].substring(1);
                 if (!packageTypes[x]) {
                   packageTypes[x] = [];
                 }
@@ -419,7 +418,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         }
       });
 
-      folderedObjects.forEach(folderedObject => {
+      folderedObjects.forEach((folderedObject) => {
         /* istanbul ignore else*/
         if (folderedObject) {
           let folderedObjectItems = [];
@@ -428,7 +427,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           } else {
             folderedObjectItems = [folderedObject];
           }
-          folderedObjectItems.forEach(metadataEntries => {
+          folderedObjectItems.forEach((metadataEntries) => {
             // if (metadataEntries) {
             if (
               metadataEntries.type &&
@@ -594,14 +593,14 @@ export default class GeneratePackageXML extends SfdxCommand {
       /* istanbul ignore next */
       if (packageTypes['CustomObjectTranslation']) {
         const allcustomlang = packageTypes['CustomObjectTranslation']
-          .filter(element => {
+          .filter((element) => {
             const x = element.fullName.split('__');
             return x.length === 2;
           })
-          .map(element => element.fullName.split('-')[1])
+          .map((element) => element.fullName.split('-')[1])
           .filter((value, index, self) => self.indexOf(value) === index);
 
-        allcustomlang.forEach(lng => {
+        allcustomlang.forEach((lng) => {
           packageTypes['CustomObjectTranslation'].pushUniqueValueKey(
             {
               fullName: 'Product-' + lng,
@@ -625,13 +624,13 @@ export default class GeneratePackageXML extends SfdxCommand {
       const filteredwarnings = [];
       Object.keys(packageTypes)
         .sort()
-        .forEach(mdtype => {
+        .forEach((mdtype) => {
           const fileFilters =
             quickFilters.length > 0
               ? packageTypes[mdtype]
-                  .map(value => value.fileName.toLowerCaseifTrue(!this.flags.matchcase))
-                  .filter(value =>
-                    quickFilters.some(element =>
+                  .map((value) => value.fileName.toLowerCaseifTrue(!this.flags.matchcase))
+                  .filter((value) =>
+                    quickFilters.some((element) =>
                       this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
@@ -641,8 +640,8 @@ export default class GeneratePackageXML extends SfdxCommand {
           const mdFilters =
             quickFilters.length > 0
               ? [mdtype.toLowerCaseifTrue(!this.flags.matchcase)]
-                  .filter(value =>
-                    quickFilters.some(element =>
+                  .filter((value) =>
+                    quickFilters.some((element) =>
                       this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
@@ -652,9 +651,9 @@ export default class GeneratePackageXML extends SfdxCommand {
           const mFilters =
             quickFilters.length > 0
               ? packageTypes[mdtype]
-                  .map(value => value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
-                  .filter(value =>
-                    quickFilters.some(element =>
+                  .map((value) => value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
+                  .filter((value) =>
+                    quickFilters.some((element) =>
                       this.flags.matchwholeword ? value === element : value.includes(element)
                     )
                   )
@@ -666,13 +665,13 @@ export default class GeneratePackageXML extends SfdxCommand {
               name: mdtype,
               members: packageTypes[mdtype]
                 .filter(
-                  value =>
+                  (value) =>
                     quickFilters.length === 0 ||
                     mdFilters.includes(mdtype.toLowerCaseifTrue(!this.flags.matchcase)) ||
                     fileFilters.includes(value.fileName.toLowerCaseifTrue(!this.flags.matchcase)) ||
                     mFilters.includes(value.fullName.toLowerCaseifTrue(!this.flags.matchcase))
                 )
-                .map(value => {
+                .map((value) => {
                   if (value.warning) {
                     filteredwarnings.push(value.warning);
                   }
@@ -683,9 +682,9 @@ export default class GeneratePackageXML extends SfdxCommand {
           }
         });
 
-      if (this.flags.cleanup) {
-        // do cleanup
-      }
+      // if (this.flags.cleanup) {
+      // do cleanup
+      // }
 
       const packageXml = builder.buildObject(packageJson);
 
@@ -694,13 +693,13 @@ export default class GeneratePackageXML extends SfdxCommand {
             message: 'Finished creating pakckage.xml for: ' + this.org.getUsername()
           }); */
 
-      filteredwarnings.forEach(value => this.ux.warn(value));
+      filteredwarnings.forEach((value) => this.ux.warn(value));
 
       if (outputFile) {
         await fs
           .writeFile(outputFile, packageXml)
           .then(() => this.ux.stopSpinner())
-          .catch(error => {
+          .catch((error) => {
             this.throwError(error);
           });
       } else {

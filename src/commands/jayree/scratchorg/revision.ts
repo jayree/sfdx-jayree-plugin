@@ -68,7 +68,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     const conn = this.org.getConnection();
 
-    const maxRev = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember').then(result => {
+    const maxRev = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember').then((result) => {
       if (!util.isNullOrUndefined(result) && result.records.length > 0) {
         return Promise.resolve(result.records[0]['maxRev']);
       }
@@ -95,10 +95,10 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     await fs
       .readFile(maxrevpath, 'utf8')
-      .then(data => {
+      .then((data) => {
         maxrevfile = parseInt(data, 10);
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.code === 'ENOENT') {
           maxrevfile = 0;
         } else {
@@ -110,10 +110,10 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
 
     await fs
       .readFile(storedmaxrevpath, 'utf8')
-      .then(data => {
+      .then((data) => {
         storedmaxrevfile = parseInt(data, 10);
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.code === 'ENOENT') {
           storedmaxrevfile = 0;
         } else {
@@ -133,14 +133,14 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         : maxRev;
       newstoredmaxrev = this.flags.storerevision ? newlocalmaxRev : newstoredmaxrev;
       await fs.ensureFile(maxrevpath);
-      await fs.writeFile(maxrevpath, newlocalmaxRev).catch(err => {
+      await fs.writeFile(maxrevpath, newlocalmaxRev).catch((err) => {
         this.throwError(err);
       });
     }
 
     if (this.flags.storerevision) {
       await fs.ensureFile(storedmaxrevpath);
-      await fs.writeFile(storedmaxrevpath, newstoredmaxrev).catch(err => {
+      await fs.writeFile(storedmaxrevpath, newstoredmaxrev).catch((err) => {
         this.throwError(err);
       });
     }
@@ -161,11 +161,11 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         'MemberName',
         'IsNameObsolete'
       ])
-      .then(results => {
+      .then((results) => {
         let islocalinmap = false;
         let isstoredinmap = false;
 
-        const tablemap = results.map(value => {
+        const tablemap = results.map((value) => {
           const keyval = value['RevisionCounter'];
           if (keyval === newlocalmaxRev) {
             islocalinmap = true;
@@ -236,7 +236,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
               return a[0] < b[0] ? -1 : 1;
             }
           })
-          .map(value => {
+          .map((value) => {
             return {
               ...(value[1] as {})
             };

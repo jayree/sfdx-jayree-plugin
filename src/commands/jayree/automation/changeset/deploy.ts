@@ -87,7 +87,7 @@ jobid:  0Xxx100000xx1x1
             type: 'list',
             message: 'Change Sets Awaiting Deployment',
             name: 'selectedChangeSet',
-            choices: tables.csad.map(element => ({
+            choices: tables.csad.map((element) => ({
               value: element.ChangeSetName,
               name: element.Description
                 ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate} - ${element.Description}`
@@ -109,7 +109,7 @@ jobid:  0Xxx100000xx1x1
             message: 'Choose a Test Option',
             choices: ['Default', 'Run Local Tests', 'Run All Tests In Org', 'Run Specified Tests'],
             default: () => (this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default'),
-            filter: val => {
+            filter: (val) => {
               return val.replace(/( )/g, '');
             }
           },
@@ -119,10 +119,10 @@ jobid:  0Xxx100000xx1x1
             message:
               'Only the tests that you specify are run. Provide the names of test classes in a comma-separated list:',
             default: this.flags.runtests,
-            when: answers => {
+            when: (answers) => {
               return answers.testlevel === 'RunSpecifiedTests';
             },
-            validate: answer => {
+            validate: (answer) => {
               if (answer.length < 1) {
                 return 'You must specify at least one test.';
               }
@@ -131,7 +131,7 @@ jobid:  0Xxx100000xx1x1
           }
         ] as QuestionCollection;
 
-        sCS = await prompt(questions).then(answers => {
+        sCS = await prompt(questions).then((answers) => {
           return answers;
         });
       } else {
@@ -150,7 +150,7 @@ jobid:  0Xxx100000xx1x1
       }
 
       // console.log(sCS);
-      const changeset = tables.csad.filter(element => sCS.selectedChangeSet.includes(element.ChangeSetName))[0];
+      const changeset = tables.csad.filter((element) => sCS.selectedChangeSet.includes(element.ChangeSetName))[0];
       // for await (const changeset of tables.csad.filter(element => sCS.selectedChangeSet.includes(element['Change Set Name']))) {
       // console.log(changeset);
       if (!changeset) {
@@ -297,18 +297,14 @@ jobid:  0Xxx100000xx1x1
     });
     // try {
 
-    const job = await page.evaluate(csN => {
+    const job = await page.evaluate((csN) => {
       let id;
       let currentname;
       // let pendinglist;
       let pendingid;
       let running = false;
       if (typeof document.getElementById('viewErrors') !== 'undefined' && document.getElementById('viewErrors')) {
-        id = document
-          .getElementById('viewErrors')
-          .getAttribute('onclick')
-          .split('asyncId=')[1]
-          .split("'")[0];
+        id = document.getElementById('viewErrors').getAttribute('onclick').split('asyncId=')[1].split("'")[0];
         running = true;
       }
       if (
@@ -361,10 +357,7 @@ jobid:  0Xxx100000xx1x1
           const div = document.createElement('div');
           div.innerHTML = table.rows[1].cells[0].innerHTML;
           return {
-            id: (div.firstChild as Element)
-              .getAttribute('href')
-              .split('asyncId=')[1]
-              .split('&')[0],
+            id: (div.firstChild as Element).getAttribute('href').split('asyncId=')[1].split('&')[0],
             status: table.rows[1].cells[1].innerText.replace(/(:\t|\t)/g, '').split(': ')[1]
           };
         }

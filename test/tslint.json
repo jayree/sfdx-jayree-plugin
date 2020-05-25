@@ -1,3 +1,4 @@
 {
-  "extends": "@salesforce/dev-config/tslint-test"
+  "extends": "@salesforce/dev-config/tslint-test",
+  "rules": { "arrow-parens": false }
 }

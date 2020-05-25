@@ -6,7 +6,7 @@ import terminalRenderer = require('marked-terminal');
 import { join } from 'path';
 
 // tslint:disable-next-line: no-any
-export const changelog: Hook<any> = async function() {
+export const changelog: Hook<any> = async function () {
   marked.setOptions({ renderer: new terminalRenderer() });
 
   const cacheDir = join(this.config.cacheDir, 'sfdx-jayree');

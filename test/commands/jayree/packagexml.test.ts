@@ -111,7 +111,7 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '43.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow-1</members>');
       expect(ctx.stdout).to.contain('<version>43.0</version>');
       expect(ctx.stderr).to.contain(
@@ -122,7 +122,7 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '44.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow</members>');
       expect(ctx.stdout).to.contain('<version>44.0</version>');
       expect(ctx.stderr).to.contain(
@@ -203,7 +203,7 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '43.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow-1</members>');
       expect(ctx.stdout).to.contain('<version>43.0</version>');
       expect(ctx.stderr).to.contain(
@@ -214,7 +214,7 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '44.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow</members>');
       expect(ctx.stdout).to.contain('<version>44.0</version>');
       expect(ctx.stderr).to.not.contain(
@@ -295,7 +295,7 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--includeflowversions', '--apiversion', '43.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --includeflowversions --apiversion=43.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --includeflowversions --apiversion=43.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow-1</members>');
       expect(ctx.stdout).to.contain('<version>43.0</version>');
       expect(ctx.stderr).to.contain(
@@ -306,7 +306,7 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--includeflowversions', '--apiversion', '44.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --includeflowversions --apiversion=44.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --includeflowversions --apiversion=44.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow</members>');
       expect(ctx.stdout).to.contain('<version>44.0</version>');
       expect(ctx.stderr).to.not.contain(
@@ -380,7 +380,7 @@ describe('Flow with no ActiveVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '43.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=43.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow</members>');
       expect(ctx.stdout).to.contain('<version>43.0</version>');
     });
@@ -388,7 +388,7 @@ describe('Flow with no ActiveVersion', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--apiversion', '44.0'])
-    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --apiversion=44.0', (ctx) => {
       expect(ctx.stdout).to.contain('<members>testflow</members>');
       expect(ctx.stdout).to.contain('<version>44.0</version>');
       expect(ctx.stderr).to.not.contain(
@@ -429,7 +429,7 @@ describe('ConfigFile with all parameters', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--configfile', 'test/assets/config.json'])
-    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', (ctx) => {
       expect(ctx.stdout).to.contain('<version>43.0</version>');
     });
 });
@@ -466,7 +466,7 @@ describe('ConfigFile without any parameters', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '--configfile', 'test/assets/config2.json'])
-    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json', (ctx) => {
       expect(ctx.stdout).to.contain('<version>42.0</version>');
     });
 });
@@ -513,7 +513,7 @@ describe('ConfigFile without any parameters + cli parameter for QuickFilter', ()
     ])
     .it(
       'runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json --quickfilter=Report',
-      ctx => {
+      (ctx) => {
         expect(ctx.stdout).to.contain('<version>42.0</version>');
       }
     );
@@ -557,7 +557,7 @@ describe('ConfigFile does not exist', () => {
       '--configfile',
       'test/assets/does_not_exist.json'
     ])
-    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/does_not_exist.json', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/does_not_exist.json', (ctx) => {
       expect(ctx.stderr).to.contain('ENOENT: no such file or directory');
     });
 });
@@ -635,7 +635,7 @@ describe('Installed Packages', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
     });
@@ -721,7 +721,7 @@ describe('Exclude Installed Packages', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-x'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>Report</name>');
       expect(ctx.stdout).to.not.contain('<name>CustomLabel</name>');
       expect(ctx.stdout).to.not.contain('<members>sf_chttr_apps</members>');
@@ -748,6 +748,7 @@ describe('ValueSetTranslations', () => {
         } as jsforce.DescribeMetadataResult);
       });
     });
+    // @ts-ignore
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
       return Promise.resolve([
         {
@@ -785,7 +786,7 @@ describe('ValueSetTranslations', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>GlobalValueSetTranslation</name>');
       expect(ctx.stdout).to.contain('<members>testvalueset1-xx</members>');
       expect(ctx.stdout).to.contain('<members>testvalueset2-xx</members>');
@@ -858,7 +859,7 @@ describe('Foldered Objects', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>EmailTemplate</name>');
       expect(ctx.stdout).to.contain('<members>emailtestfolder/test1</members>');
     });
@@ -928,7 +929,7 @@ describe('Foldered Objects - Single Object', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>Report</name>');
       expect(ctx.stdout).to.contain('<members>testreportfolder/testreport</members>');
     });
@@ -978,7 +979,7 @@ describe('Foldered Objects - undefined', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.not.contain('<name>Report</name>');
       expect(ctx.stdout).to.not.contain('<members>testreportfolder/testreport</members>');
     });
@@ -1042,7 +1043,7 @@ describe('Unfoldered Objects', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<members>CustomLabels</members>');
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
@@ -1100,7 +1101,7 @@ describe('Unfoldered Objects - single  Object', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<members>CustomLabels</members>');
     });
@@ -1163,7 +1164,7 @@ describe('QuickFilter', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'labels/CustomLabels.labels', '-wc'])
-    .it('runs jayree:packagexml --targetusername test@org.com -q labels/CustomLabels.labels -wc', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -q labels/CustomLabels.labels -wc', (ctx) => {
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
       expect(ctx.stdout).to.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
@@ -1172,7 +1173,7 @@ describe('QuickFilter', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'CustomLabel', '-wc'])
-    .it('runs jayree:packagexml --targetusername test@org.com -q CustomLabel -wc', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -q CustomLabel -wc', (ctx) => {
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
       expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
@@ -1181,7 +1182,7 @@ describe('QuickFilter', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'customlabelname', '-wc'])
-    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -wc', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -wc', (ctx) => {
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
       expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
@@ -1190,7 +1191,7 @@ describe('QuickFilter', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'customlabelname', '-w'])
-    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -w', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -w', (ctx) => {
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
       expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
@@ -1199,7 +1200,7 @@ describe('QuickFilter', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-q', 'customlabelname', '-c'])
-    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -c', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -q customlabelname -c', (ctx) => {
       expect(ctx.stdout).to.contain('<members>customlabelname</members>');
       expect(ctx.stdout).to.not.contain('<name>CustomLabels</name>');
       expect(ctx.stdout).to.contain('<name>CustomLabel</name>');
@@ -1254,7 +1255,7 @@ describe('Write File', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-f', 'test/assets/test.xml'])
-    .it('runs jayree:packagexml --targetusername test@org.com -f test/assets/test.xml', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -f test/assets/test.xml', (ctx) => {
       expect(ctx.stderr).to.contain('Generating test/assets/test.xml');
     });
 });
@@ -1310,7 +1311,7 @@ describe('Write File - Error', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com', '-f', 'test/assets/test.xml'])
-    .it('runs jayree:packagexml --targetusername test@org.com -f test/assets/test.xml', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com -f test/assets/test.xml', (ctx) => {
       expect(ctx.stderr).to.contain('EACCES: permission denied');
     });
 });
@@ -1340,7 +1341,7 @@ describe('Unfoldered Objects - Error', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stderr).to.contain("Cannot read property 'metadataObjects' of null");
     });
 });
@@ -1414,7 +1415,7 @@ describe('test valid standardValueSet', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.contain('AccountContactMultiRoles');
     });
 });
@@ -1483,7 +1484,7 @@ describe('test invalid standardValueSet', () => {
     .stdout()
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
-    .it('runs jayree:packagexml --targetusername test@org.com', ctx => {
+    .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
       expect(ctx.stdout).to.not.contain('AccountContactMultiRoles');
     });
 });

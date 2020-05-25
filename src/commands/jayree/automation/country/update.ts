@@ -36,7 +36,7 @@ export default class UpdateCountry extends SfdxCommand {
 
     const setHTMLInputElementValue = async (newvalue, element) => {
       element = element.replace(/:/g, '\\:');
-      const elementDisabled = await page.evaluate(s => {
+      const elementDisabled = await page.evaluate((s) => {
         const result = document.querySelector(s);
         if (result != null) {
           return result['disabled'];
@@ -52,7 +52,7 @@ export default class UpdateCountry extends SfdxCommand {
           element
         );
       } else {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve();
         });
       }

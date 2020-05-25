@@ -40,7 +40,7 @@ export default class RemovePackageDescription extends SfdxCommand {
 
     let action;
     let text;
-    zipEntries.forEach(zipEntry => {
+    zipEntries.forEach((zipEntry) => {
       const fileName = zipEntry.entryName;
       const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {

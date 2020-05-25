@@ -46,7 +46,7 @@ export default class SetPackageDescription extends SfdxCommand {
 
     const text = this.flags.description.replace(/\\n/g, '\n');
     let action;
-    zipEntries.forEach(zipEntry => {
+    zipEntries.forEach((zipEntry) => {
       const fileName = zipEntry.entryName;
       const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {
