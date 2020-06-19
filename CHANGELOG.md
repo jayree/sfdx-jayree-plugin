@@ -1,3 +1,18 @@
+# [1.11.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.10.1...v1.11.0) (2020-06-19)
+
+
+### Bug Fixes
+
+* update dependencies ([460d4c1](https://github.com/jayree/sfdx-jayree-plugin/commit/460d4c116de9a51a68988c4fcb972dec2b7643e0))
+* **scratchorgrevision:** support json format ([934f9c3](https://github.com/jayree/sfdx-jayree-plugin/commit/934f9c3e8a43de40fd260309c97320b8cf9024c2))
+* **sourceretrievefull:** add new userPermissions ([18d6cca](https://github.com/jayree/sfdx-jayree-plugin/commit/18d6ccab481a669a39c5ddeaf285baeeede1ca09))
+* update dependencies ([995786a](https://github.com/jayree/sfdx-jayree-plugin/commit/995786acf152b8e3af4e743e791995b466197c1c))
+
+
+### Features
+
+* **sourceretrievefull:** add scope for manifest(ignore) config ([e3a322c](https://github.com/jayree/sfdx-jayree-plugin/commit/e3a322c4962353d2318cea8d27d788151491c1a0))
+
 ## [1.10.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.10.0...v1.10.1) (2020-05-13)
 
 
