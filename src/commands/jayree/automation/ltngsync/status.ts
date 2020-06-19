@@ -185,7 +185,7 @@ export default class LtngSyncStatus extends SfdxCommand {
     });
   }
   private async resetuser(page: puppeteer.Page) {
-    page.on('dialog', async dialog => {
+    page.on('dialog', async (dialog) => {
       await dialog.accept();
     });
     await page.evaluate(() => {
@@ -200,7 +200,7 @@ export default class LtngSyncStatus extends SfdxCommand {
     return await page.evaluate(() => {
       const converttables = (document: Document, tables: string[]) => {
         const convertedtables = {};
-        tables.forEach(tableid => {
+        tables.forEach((tableid) => {
           const object = {};
           if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
             // tslint:disable-next-line:no-any

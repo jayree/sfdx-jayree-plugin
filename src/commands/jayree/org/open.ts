@@ -1,6 +1,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import opn = require('opn');
+import * as opn from 'open';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -103,7 +103,7 @@ $ sfdx jayree:org:open -u me@my.org`
 
     /* istanbul ignore next */
     if (!this.flags.urlonly) {
-      opn(url, {
+      await opn(url, {
         app: browser,
         wait: false
       });

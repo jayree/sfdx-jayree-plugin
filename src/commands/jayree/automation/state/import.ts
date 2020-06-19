@@ -60,7 +60,7 @@ export default class ImportState extends SfdxCommand {
 
     const setHTMLInputElementValue = async (newvalue, element) => {
       element = element.replace(/:/g, '\\:');
-      const elementDisabled = await page.evaluate(s => {
+      const elementDisabled = await page.evaluate((s) => {
         const result = document.querySelector(s);
         if (result != null) {
           return result['disabled'];
@@ -76,7 +76,7 @@ export default class ImportState extends SfdxCommand {
           element
         );
       } else {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve();
         });
       }
@@ -84,14 +84,14 @@ export default class ImportState extends SfdxCommand {
 
     const setHTMLInputElementChecked = async (element, newstate, waitForEnable) => {
       element = element.replace(/:/g, '\\:');
-      const elementCheckedState = await page.evaluate(s => {
+      const elementCheckedState = await page.evaluate((s) => {
         return document.querySelector(s)['checked'];
       }, element);
       // this.ux.log('elementCheckedState: ' + element + ' ' + elementCheckedState);
       if (!elementCheckedState === newstate) {
         if (waitForEnable) {
           await page.waitFor(
-            s => {
+            (s) => {
               const val = document.querySelector(s)['disabled'];
               return (val as boolean) === false;
             },
@@ -101,19 +101,19 @@ export default class ImportState extends SfdxCommand {
             element
           );
         }
-        const elementDisabledState = await page.evaluate(s => {
+        const elementDisabledState = await page.evaluate((s) => {
           return document.querySelector(s)['disabled'];
         }, element);
         // this.ux.log('elementDisabledState: ' + element + ' ' + elementDisabledState);
         if (!elementDisabledState) {
           return page.click(element);
         } else {
-          return new Promise(resolve => {
+          return new Promise((resolve) => {
             resolve();
           });
         }
       } else {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           resolve();
         });
       }
@@ -148,7 +148,7 @@ export default class ImportState extends SfdxCommand {
       const converted = tabletojson.convert(table)[0];
       const jsonParsed = {};
       if (typeof converted !== 'undefined') {
-        converted.forEach(value => {
+        converted.forEach((value) => {
           const keyval = value[Object.keys(value)[0]];
           delete value[Object.keys(value)[0]];
           if (jsonParsed[keyval] === undefined) {
@@ -160,7 +160,7 @@ export default class ImportState extends SfdxCommand {
 
       if (Object.keys(jsonParsed).includes(this.flags.category)) {
         const languagecodes = jsonParsed[this.flags.category]
-          .map(v => v['Language code'])
+          .map((v) => v['Language code'])
           .filter((v, i, s) => s.indexOf(v) === i);
 
         if (!languagecodes.includes(this.flags.language)) {
@@ -175,7 +175,7 @@ export default class ImportState extends SfdxCommand {
           waitUntil: 'networkidle0'
         });
 
-        const list = jsonParsed[this.flags.category].filter(v => v['Language code'] === this.flags.language);
+        const list = jsonParsed[this.flags.category].filter((v) => v['Language code'] === this.flags.language);
         let curr = 0;
 
         spinnermessage = `set Integration Value to ${this.flags.countrycode.toUpperCase()}`;

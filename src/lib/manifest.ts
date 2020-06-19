@@ -5,13 +5,13 @@ import { builder, parseStringSync } from './xml';
 export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
   const packageignore = parseStringSync(fs.readFileSync(ignoreManifest, 'utf8'));
 
-  packageignore.Package.types.forEach(types => {
+  packageignore.Package.types.forEach((types) => {
     if (typeof packageTypesMapped[types.name] !== 'undefined') {
       if (types.members.includes('*') && types.members.length > 1) {
         const includedmembers = types.members.slice();
         includedmembers.splice(includedmembers.indexOf('*'), 1);
         cli.log('include only members ' + includedmembers.toString() + ' for type ' + types.name);
-        packageTypesMapped[types.name] = packageTypesMapped[types.name].filter(value => {
+        packageTypesMapped[types.name] = packageTypesMapped[types.name].filter((value) => {
           return types.members.includes(value);
         });
       }
@@ -24,7 +24,7 @@ export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
       }
 
       if (!types.members.includes('*')) {
-        packageTypesMapped[types.name] = packageTypesMapped[types.name].filter(value => {
+        packageTypesMapped[types.name] = packageTypesMapped[types.name].filter((value) => {
           return !types.members.includes(value);
         });
       }
@@ -32,7 +32,7 @@ export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
   });
 
   const newPackageTypesUpdated = [];
-  Object.keys(packageTypesMapped).forEach(key => {
+  Object.keys(packageTypesMapped).forEach((key) => {
     if (packageTypesMapped[key].length > 0) {
       newPackageTypesUpdated.push({
         name: key,
@@ -50,7 +50,7 @@ export async function cleanupManifestFile(manifest, ignoreManifest) {
   cli.log(`apply '${ignoreManifest}' to '${manifest}'`);
 
   const newPackageTypesMapped = [];
-  newpackage.Package.types.forEach(value => {
+  newpackage.Package.types.forEach((value) => {
     newPackageTypesMapped[value.name] = value.members;
   });
 

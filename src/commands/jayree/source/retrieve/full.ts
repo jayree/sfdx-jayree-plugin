@@ -47,7 +47,7 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    const json = raw => {
+    const json = (raw) => {
       try {
         return JSON.parse(raw).result;
       } catch (error) {
@@ -110,7 +110,7 @@ Coverage: 82%
             throw out;
           } else {
             out
-              .map(p => {
+              .map((p) => {
                 return {
                   fullName: p.fullName,
                   type: p.type,
@@ -120,7 +120,7 @@ Coverage: 82%
                   state: 'undefined'
                 };
               })
-              .forEach(element => {
+              .forEach((element) => {
                 inboundFiles.push(element);
               });
           }
@@ -144,7 +144,7 @@ Coverage: 82%
             throw out;
           } else {
             out
-              .map(p => {
+              .map((p) => {
                 return {
                   fullName: p.fullName,
                   type: p.type,
@@ -154,7 +154,7 @@ Coverage: 82%
                   state: 'undefined'
                 };
               })
-              .forEach(element => {
+              .forEach((element) => {
                 inboundFiles.push(element);
               });
           }
@@ -178,7 +178,7 @@ Coverage: 82%
             throw out;
           } else {
             out
-              .map(p => {
+              .map((p) => {
                 return {
                   fullName: p.fullName,
                   type: p.type,
@@ -188,7 +188,7 @@ Coverage: 82%
                   state: 'undefined'
                 };
               })
-              .forEach(element => {
+              .forEach((element) => {
                 inboundFiles.push(element);
               });
           }
@@ -235,12 +235,12 @@ Coverage: 82%
 
         const cleanedfiles = shell
           .find(path.join(orgretrievepath, 'force-app'))
-          .filter(file => {
+          .filter((file) => {
             return fs.lstatSync(file).isFile();
           })
-          .map(file => path.relative(orgretrievepath, file));
+          .map((file) => path.relative(orgretrievepath, file));
 
-        inboundFiles = inboundFiles.filter(x => {
+        inboundFiles = inboundFiles.filter((x) => {
           if (cleanedfiles.includes(x.filePath)) {
             return x;
           }

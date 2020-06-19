@@ -1,6 +1,7 @@
 {
     "Profile": {
         "userPermissions": [
+            { "enabled": ["true"], "name": ["AIViewInsightObjects"] },
             { "enabled": ["true"], "name": ["AccessCMC"] },
             { "enabled": ["true"], "name": ["ActivateContract"] },
             { "enabled": ["true"], "name": ["ActivateOrder"] },
@@ -36,6 +37,7 @@
             { "enabled": ["true"], "name": ["CloseConversations"] },
             { "enabled": ["true"], "name": ["ConfigCustomRecs"] },
             { "enabled": ["true"], "name": ["ConnectOrgToEnvironmentHub"] },
+            { "enabled": ["true"], "name": ["ConsentApiUpdate"] },
             { "enabled": ["true"], "name": ["ContentAdministrator"] },
             { "enabled": ["true"], "name": ["ContentHubUser"] },
             { "enabled": ["true"], "name": ["ContentWorkspaces"] },
@@ -98,6 +100,7 @@
             { "enabled": ["true"], "name": ["ManageAnalyticSnapshots"] },
             { "enabled": ["true"], "name": ["ManageAuthProviders"] },
             { "enabled": ["true"], "name": ["ManageBusinessHourHolidays"] },
+            { "enabled": ["true"], "name": ["ManageCMS"] },
             { "enabled": ["true"], "name": ["ManageCallCenters"] },
             { "enabled": ["true"], "name": ["ManageCases"] },
             { "enabled": ["true"], "name": ["ManageCategories"] },
@@ -128,8 +131,10 @@
             { "enabled": ["true"], "name": ["ManagePackageLicenses"] },
             { "enabled": ["true"], "name": ["ManagePasswordPolicies"] },
             { "enabled": ["true"], "name": ["ManageProfilesPermissionsets"] },
+            { "enabled": ["true"], "name": ["ManagePropositions"] },
             { "enabled": ["true"], "name": ["ManagePvtRptsAndDashbds"] },
             { "enabled": ["true"], "name": ["ManageQuotas"] },
+            { "enabled": ["true"], "name": ["ManageRecommendationStrategies"] },
             { "enabled": ["true"], "name": ["ManageRemoteAccess"] },
             { "enabled": ["true"], "name": ["ManageReportsInPubFolders"] },
             { "enabled": ["true"], "name": ["ManageRoles"] },
@@ -139,6 +144,7 @@
             { "enabled": ["true"], "name": ["ManageSolutions"] },
             { "enabled": ["true"], "name": ["ManageSubscriptions"] },
             { "enabled": ["true"], "name": ["ManageSynonyms"] },
+            { "enabled": ["true"], "name": ["ManageTerritories"] },
             { "enabled": ["true"], "name": ["ManageTwoFactor"] },
             { "enabled": ["true"], "name": ["ManageUnlistedGroups"] },
             { "enabled": ["true"], "name": ["ManageUsers"] },

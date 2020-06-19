@@ -26,16 +26,20 @@ Coverage: 82%
     keepcache: flags.boolean({
       char: 'c',
       hidden: true,
-      description: messages.getMessage('keepcache')
+      description: messages.getMessage('keepcache'),
     }),
     skipfix: flags.boolean({
       hidden: true,
-      description: messages.getMessage('keepcache')
+      description: messages.getMessage('keepcache'),
     }),
     verbose: flags.builtin({
       description: messages.getMessage('log'),
-      longDescription: messages.getMessage('log')
-    })
+      longDescription: messages.getMessage('log'),
+    }),
+    scope: flags.string({
+      char: 's',
+      description: messages.getMessage('scope'),
+    }),
   };
 
   protected static requiresUsername = true;
@@ -45,7 +49,7 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    const json = raw => {
+    const json = (raw) => {
       try {
         return JSON.parse(raw).result;
       } catch (error) {
@@ -73,15 +77,29 @@ Coverage: 82%
         // this.ux.warn(`Config file '${configfile}' not found - SKIPPING metadata fixes`);
       }
 
-      this.ux.log(`Using ${orgretrievepath}`);
-
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
+
+      if (typeof config['source:retrieve:all'].manifestignore === 'object') {
+        if (typeof config['source:retrieve:all'].manifestignore.default === 'undefined') {
+          if (typeof this.flags.scope === 'undefined') {
+            throw Error(`Missing required flag:
+ -s, --scope SCOPE  config scope to use
+See more help with --help`);
+          } else {
+            if (typeof config['source:retrieve:all'].manifestignore[this.flags.scope] === 'undefined') {
+              throw Error(`Scope ${this.flags.scope} not found`);
+            }
+          }
+        }
+      }
+
+      this.ux.log(`Using ${orgretrievepath}`);
 
       let packageXMLFile = path.join(orgretrievepath, 'package.xml');
       if (config) {
         if (config['source:retrieve:all']) {
           if (config['source:retrieve:all'].manifest) {
-            packageXMLFile = path.join(projectpath, config['source:retrieve:all'].manifest);
+            packageXMLFile = path.join(projectpath, this.getScopedValue(config['source:retrieve:all'].manifest));
           }
         }
       }
@@ -93,7 +111,11 @@ Coverage: 82%
       if (config) {
         if (config['source:retrieve:all']) {
           if (config['source:retrieve:all'].manifestignore) {
-            await this.cleanuppackagexml(packageXMLFile, config['source:retrieve:all'].manifestignore, projectpath);
+            await this.cleanuppackagexml(
+              packageXMLFile,
+              this.getScopedValue(config['source:retrieve:all'].manifestignore),
+              projectpath
+            );
           }
         }
       }
@@ -118,7 +140,7 @@ Coverage: 82%
             {
               fatal: false,
               silent: true,
-              env: { ...process.env, FORCE_COLOR: 0 }
+              env: { ...process.env, FORCE_COLOR: 0 },
             }
           )
         );
@@ -126,17 +148,17 @@ Coverage: 82%
           throw out;
         } else {
           out
-            .map(p => {
+            .map((p) => {
               return {
                 fullName: p.fullName,
                 type: p.type,
                 filePath: path
                   .relative(orgretrievepath, p.filePath)
                   .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
-                state: 'undefined'
+                state: 'undefined',
               };
             })
-            .forEach(element => {
+            .forEach((element) => {
               inboundFiles.push(element);
             });
         }
@@ -173,12 +195,12 @@ Coverage: 82%
 
         const cleanedfiles = shell
           .find(path.join(orgretrievepath, 'force-app'))
-          .filter(file => {
+          .filter((file) => {
             return fs.lstatSync(file).isFile();
           })
-          .map(file => path.relative(orgretrievepath, file));
+          .map((file) => path.relative(orgretrievepath, file));
 
-        inboundFiles = inboundFiles.filter(x => {
+        inboundFiles = inboundFiles.filter((x) => {
           if (cleanedfiles.includes(x.filePath)) {
             return x;
           }
@@ -201,22 +223,22 @@ Coverage: 82%
         columns: [
           {
             key: 'fullName',
-            label: 'FULL NAME'
+            label: 'FULL NAME',
           },
           {
             key: 'type',
-            label: 'TYPE'
+            label: 'TYPE',
           },
           {
             key: 'filePath',
-            label: 'PROJECT PATH'
-          }
-        ]
+            label: 'PROJECT PATH',
+          },
+        ],
       });
     }
 
     return {
-      inboundFiles
+      inboundFiles,
     };
   }
 }

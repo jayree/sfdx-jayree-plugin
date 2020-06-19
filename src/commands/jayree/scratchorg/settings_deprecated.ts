@@ -43,7 +43,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
   public async run(): Promise<AnyJson> {
     const debug = createDebug('jayree:scratchorg:settings');
-    const removeEmpty = obj => {
+    const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {
         if (val && typeof val === 'object') {
           val = removeEmpty(val);
@@ -55,11 +55,11 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       return obj;
     };
 
-    const sortKeys = obj => {
+    const sortKeys = (obj) => {
       const ordered = {};
       Object.keys(obj)
         .sort()
-        .forEach(key => {
+        .forEach((key) => {
           ordered[key] = obj[key];
         });
       return ordered;
@@ -70,8 +70,8 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     debug(conn.getApiVersion());
 
     const settingsarray = (await conn.tooling.describeGlobal()).sobjects
-      .filter(a => a.name.includes('Settings'))
-      .map(a => a.name);
+      .filter((a) => a.name.includes('Settings'))
+      .map((a) => a.name);
 
     let settings = {};
 
@@ -82,7 +82,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           for await (const record of settingsQuery.records) {
             if (member === 'OrgPreferenceSettings') {
               settings[camelize(member)] = {};
-              record['Metadata']['preferences'].forEach(element => {
+              record['Metadata']['preferences'].forEach((element) => {
                 settings[camelize(member)][camelize(element['settingName'])] = element['settingValue'];
               });
             } else {
@@ -223,7 +223,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
       await fs
         .readFile(deffilepath, 'utf8')
-        .then(data => {
+        .then((data) => {
           deffile = JSON.parse(data);
 
           if (deffile['edition'] === 'Enterprise') {
@@ -264,7 +264,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
           deffile['settings'] = settings;
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.code === 'ENOENT' && !this.flags.file) {
             throw Error("default file 'project-scratch-def.json' not found, please use --file flag");
           } else {
@@ -272,7 +272,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           }
         });
 
-      await fs.writeFile(deffilepath, JSON.stringify(deffile, null, 2)).catch(err => {
+      await fs.writeFile(deffilepath, JSON.stringify(deffile, null, 2)).catch((err) => {
         this.throwError(err);
       });
     } else {

@@ -36,12 +36,12 @@ Coverage: 82%
     const query3 = await conn.tooling.query(
       "SELECT Definition.DeveloperName FROM Flow WHERE Status = 'Active' AND(ProcessType = 'AutolaunchedFlow' OR ProcessType = 'Workflow' OR ProcessType = 'CustomEvent' OR ProcessType = 'InvocableProcess') AND Id NOT IN(SELECT FlowVersionId FROM FlowTestCoverage)"
     );
-    const uncovered = query3.records.map(value => value['Definition']['DeveloperName']);
+    const uncovered = query3.records.map((value) => value['Definition']['DeveloperName']);
 
     const query4 = await conn.tooling.query(
       'SELECT FlowVersion.Definition.DeveloperName FROM FlowTestCoverage GROUP BY FlowVersion.Definition.DeveloperName'
     );
-    const covered = query4.records.map(value => value['DeveloperName']);
+    const covered = query4.records.map((value) => value['DeveloperName']);
 
     this.ux.styledHeader('Flow Test Coverage');
     this.ux.styledObject({
