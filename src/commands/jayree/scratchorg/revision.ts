@@ -15,7 +15,7 @@ export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:scratchorgrevision
 $ sfdx jayree:scratchorgrevision -u me@my.org
-$ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
+$ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
@@ -23,28 +23,28 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
       char: 'i',
       hidden: true,
       description: messages.getMessage('startfromrevision'),
-      default: 0
+      default: 0,
     }),
     setlocalmaxrevision: flags.boolean({
       char: 's',
-      description: messages.getMessage('setlocalmaxrevision')
+      description: messages.getMessage('setlocalmaxrevision'),
     }),
     storerevision: flags.boolean({
       char: 'b',
       description: messages.getMessage('storerevision'),
-      exclusive: ['restorerevision']
+      exclusive: ['restorerevision'],
     }),
     restorerevision: flags.boolean({
       char: 'r',
       description: messages.getMessage('restorerevision'),
       dependsOn: ['setlocalmaxrevision'],
-      exclusive: ['localrevisionvalue', 'storerevision']
+      exclusive: ['localrevisionvalue', 'storerevision'],
     }),
     localrevisionvalue: flags.integer({
       char: 'v',
       description: messages.getMessage('localrevisionvalue'),
-      dependsOn: ['setlocalmaxrevision']
-    })
+      dependsOn: ['setlocalmaxrevision'],
+    }),
   };
 
   protected static requiresUsername = true;
@@ -92,11 +92,36 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     );
 
     let maxrevfile;
+    let isJson = false;
 
     await fs
       .readFile(maxrevpath, 'utf8')
       .then((data) => {
-        maxrevfile = parseInt(data, 10);
+        try {
+          const json = JSON.parse(data);
+          if (json.serverMaxRevisionCounter) {
+            isJson = true;
+          }
+          if (Object.keys(json.sourceMembers).length > 0) {
+            maxrevfile = Math.max(
+              0,
+              ...Object.keys(json.sourceMembers).map((key) => json.sourceMembers[key].lastRetrievedFromServer)
+            );
+            if (maxrevfile === 0) {
+              maxrevfile = Math.min(
+                ...Object.keys(json.sourceMembers).map((key) => json.sourceMembers[key].serverRevisionCounter)
+              );
+            }
+            if (maxrevfile !== 0) {
+              maxrevfile = maxrevfile - 1;
+            }
+          } else {
+            // based on the current bug this should be 0 but this might be correct if the bug is fixed
+            maxrevfile = json.serverMaxRevisionCounter;
+          }
+        } catch {
+          maxrevfile = parseInt(data, 10);
+        }
       })
       .catch((err) => {
         if (err.code === 'ENOENT') {
@@ -133,9 +158,20 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         : maxRev;
       newstoredmaxrev = this.flags.storerevision ? newlocalmaxRev : newstoredmaxrev;
       await fs.ensureFile(maxrevpath);
-      await fs.writeFile(maxrevpath, newlocalmaxRev).catch((err) => {
-        this.throwError(err);
-      });
+      if (isJson) {
+        await fs
+          .writeFile(
+            maxrevpath,
+            JSON.stringify({ serverMaxRevisionCounter: newlocalmaxRev, sourceMembers: {} }, null, 4)
+          )
+          .catch((err) => {
+            this.throwError(err);
+          });
+      } else {
+        await fs.writeFile(maxrevpath, newlocalmaxRev).catch((err) => {
+          this.throwError(err);
+        });
+      }
     }
 
     if (this.flags.storerevision) {
@@ -159,7 +195,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
         'Id',
         'MemberType',
         'MemberName',
-        'IsNameObsolete'
+        'IsNameObsolete',
       ])
       .then((results) => {
         let islocalinmap = false;
@@ -238,7 +274,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
           })
           .map((value) => {
             return {
-              ...(value[1] as {})
+              ...(value[1] as {}),
             };
           });
       })) as [];
@@ -246,27 +282,27 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
     this.ux.table(sourceMemberResults, {
       columns: [
         {
-          key: 'RevisionCounter'
+          key: 'RevisionCounter',
         },
         {
-          key: 'Id'
+          key: 'Id',
         },
         {
-          key: 'MemberType'
+          key: 'MemberType',
         },
         {
-          key: 'IsNameObsolete'
+          key: 'IsNameObsolete',
         },
         {
-          key: 'MemberName'
-        }
-      ]
+          key: 'MemberName',
+        },
+      ],
     });
 
     return {
       maxrevision: { remote: maxRev, local: newlocalmaxRev, stored: newstoredmaxrev },
       orgId: this.org.getOrgId(),
-      username: this.org.getUsername()
+      username: this.org.getUsername(),
     };
   }
 
