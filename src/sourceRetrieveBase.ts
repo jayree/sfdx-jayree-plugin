@@ -19,7 +19,7 @@ import * as objectPath from 'object-path';
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
   xmlns: true,
-  renderOpts: { pretty: true, indent: '    ', newline: '\n' }
+  renderOpts: { pretty: true, indent: '    ', newline: '\n' },
 });
 
 // tslint:disable-next-line: no-any
@@ -59,70 +59,89 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     }
   }
 
+  protected getScopedValue(config) {
+    let value;
+    if (typeof config === 'object') {
+      if (typeof config[this.flags.scope] === 'string') {
+        value = config[this.flags.scope];
+      } else {
+        value = config.default;
+      }
+    } else {
+      value = config;
+    }
+    return value;
+  }
+
   protected async profileElementInjection(root) {
     const files = await glob(join(root, 'force-app/main/default/profiles/*'));
-    const profileElementInjectionFrom = await parseString(
-      fs.readFileSync(join(root, 'force-app/main/default/profiles/Admin.profile-meta.xml'), 'utf8')
-    );
+    if (files.length > 0) {
+      const profileElementInjectionFrom = await parseString(
+        fs.readFileSync(join(root, 'force-app/main/default/profiles/Admin.profile-meta.xml'), 'utf8')
+      );
 
-    for (const file of files) {
-      if (exists(file)) {
-        debug(file);
-        const data = await parseString(fs.readFileSync(file, 'utf8'));
+      for (const file of files) {
+        if (exists(file)) {
+          debug(file);
+          const data = await parseString(fs.readFileSync(file, 'utf8'));
 
-        if (!data.Profile.objectPermissions) {
-          data.Profile['objectPermissions'] = [];
-        }
-
-        profileElementInjectionFrom.Profile.objectPermissions.forEach((element) => {
-          if (
-            data.Profile.objectPermissions &&
-            !data.Profile.objectPermissions.some((e) => e.object.equals(element.object))
-          ) {
-            debug('inject objectPermission: ' + element.object);
-
-            Object.keys(element).forEach((k) => {
-              if (element[k].equals(['true'])) {
-                element[k] = ['false'];
-              }
-            });
-
-            data.Profile.objectPermissions.push(element);
+          if (!data.Profile.objectPermissions) {
+            data.Profile['objectPermissions'] = [];
           }
-        });
 
-        if (!data.Profile.userPermissions) {
-          data.Profile['userPermissions'] = [];
-        }
+          profileElementInjectionFrom.Profile.objectPermissions.forEach((element) => {
+            if (
+              data.Profile.objectPermissions &&
+              !data.Profile.objectPermissions.some((e) => e.object.equals(element.object))
+            ) {
+              debug('inject objectPermission: ' + element.object);
 
-        profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach((element) => {
-          if (data.Profile.userPermissions && !data.Profile.userPermissions.some((e) => e.name.equals(element.name))) {
-            debug('inject userPermission: ' + element.name);
+              Object.keys(element).forEach((k) => {
+                if (element[k].equals(['true'])) {
+                  element[k] = ['false'];
+                }
+              });
 
-            Object.keys(element).forEach((k) => {
-              if (element[k].equals(['true'])) {
-                element[k] = ['false'];
-              }
-            });
+              data.Profile.objectPermissions.push(element);
+            }
+          });
 
-            data.Profile.userPermissions.push(element);
+          if (!data.Profile.userPermissions) {
+            data.Profile['userPermissions'] = [];
           }
-        });
-        if (data.Profile.objectPermissions) {
-          data.Profile.objectPermissions.sort((a, b) => (a.object > b.object ? 1 : -1));
-        }
-        if (data.Profile.userPermissions) {
-          data.Profile.userPermissions.sort((a, b) => (a.name > b.name ? 1 : -1));
-        }
 
-        data.Profile = Object.keys(data.Profile)
-          .sort()
-          .reduce((acc, key) => {
-            acc[key] = data.Profile[key];
-            return acc;
-          }, {});
+          profileElementuserPermissionsInjectionFrom.Profile.userPermissions.forEach((element) => {
+            if (
+              data.Profile.userPermissions &&
+              !data.Profile.userPermissions.some((e) => e.name.equals(element.name))
+            ) {
+              debug('inject userPermission: ' + element.name);
 
-        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+              Object.keys(element).forEach((k) => {
+                if (element[k].equals(['true'])) {
+                  element[k] = ['false'];
+                }
+              });
+
+              data.Profile.userPermissions.push(element);
+            }
+          });
+          if (data.Profile.objectPermissions) {
+            data.Profile.objectPermissions.sort((a, b) => (a.object > b.object ? 1 : -1));
+          }
+          if (data.Profile.userPermissions) {
+            data.Profile.userPermissions.sort((a, b) => (a.name > b.name ? 1 : -1));
+          }
+
+          data.Profile = Object.keys(data.Profile)
+            .sort()
+            .reduce((acc, key) => {
+              acc[key] = data.Profile[key];
+              return acc;
+            }, {});
+
+          fs.writeFileSync(file, builder.buildObject(data) + '\n');
+        }
       }
     }
   }
@@ -451,7 +470,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
       if (newPackageTypesMapped[key].length > 0) {
         newPackageTypesUpdated.push({
           name: key,
-          members: newPackageTypesMapped[key]
+          members: newPackageTypesMapped[key],
         });
       }
     });
