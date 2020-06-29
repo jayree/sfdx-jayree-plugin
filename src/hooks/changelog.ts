@@ -23,7 +23,7 @@ export const changelog: Hook<any> = async function () {
       const latestVersion = JSON.parse(readFileSync(versionFile, 'utf8'));
       changelogText = changelogFile.substring(0, changelogFile.indexOf(`[${latestVersion.version}]`));
       if (changelogText.length === 0) {
-        throw new Error(`version not found`);
+        throw new Error('version not found');
       }
     } catch (err) {
       changelogText = changelogFile.substring(0, changelogFile.indexOf('# [', 2));

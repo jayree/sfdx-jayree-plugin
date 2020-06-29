@@ -94,7 +94,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
 
       let out = json(
-        shell.exec(`sfdx force:project:create --projectname=. --json`, {
+        shell.exec('sfdx force:project:create --projectname=. --json', {
           cwd: orgretrievepath,
           fatal: false,
           silent: true,

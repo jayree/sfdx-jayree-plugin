@@ -131,7 +131,7 @@ export default class ImportState extends SfdxCommand {
         ? this.ux.startSpinner(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`)
         : process.stdout.write(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`);
 
-      spinnermessage = `get data from ISO.org`;
+      spinnermessage = 'get data from ISO.org';
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
       try {

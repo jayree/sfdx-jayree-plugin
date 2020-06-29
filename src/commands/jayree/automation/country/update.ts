@@ -61,14 +61,14 @@ export default class UpdateCountry extends SfdxCommand {
     const bar = cli.progress({
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
-      format: `State and Country/Territory Picklist | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}`,
+      format: 'State and Country/Territory Picklist | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}',
       stream: process.stdout
     });
 
     try {
       !this.flags.silent
-        ? this.ux.startSpinner(`State and Country/Territory Picklist`)
-        : process.stdout.write(`State and Country/Territory Picklist`);
+        ? this.ux.startSpinner('State and Country/Territory Picklist')
+        : process.stdout.write('State and Country/Territory Picklist');
 
       await this.org.refreshAuth();
       const conn = this.org.getConnection();
@@ -79,16 +79,16 @@ export default class UpdateCountry extends SfdxCommand {
         waitUntil: 'networkidle0'
       });
 
-      spinnermessage = `retrieve list of countries`;
+      spinnermessage = 'retrieve list of countries';
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
       try {
-        await page.goto(conn.instanceUrl + `/i18n/ConfigStateCountry.apexp?setupid=AddressCleanerOverview`, {
+        await page.goto(conn.instanceUrl + '/i18n/ConfigStateCountry.apexp?setupid=AddressCleanerOverview', {
           waitUntil: 'networkidle0'
         });
         await page.waitFor('.list', { visible: true });
       } catch (error) {
-        throw Error(`list of countries couldn't be loaded`);
+        throw Error("list of countries couldn't be loaded");
       }
       this.ux.stopSpinner();
 
