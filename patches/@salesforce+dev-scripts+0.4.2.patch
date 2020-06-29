@@ -26,6 +26,25 @@ index 0d22aa7..5acbae1 100755
  
  const options = require('@salesforce/dev-config/typedoc');
  
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
+index 4484cdb..eb13e04 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sfdx-husky-pre-commit.js
+@@ -9,13 +9,12 @@
+ const shell = require('../utils/shelljs');
+ 
+ const packageRoot = require('../utils/package-path');
+-const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
+ 
+ // double -- to pass through yarn then lerna
+ shell.exec(`yarn lint`, {
+   cwd: packageRoot
+ });
+ 
+-shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
++shell.exec(`pretty-quick --staged`, {
+   cwd: packageRoot
+ });
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js b/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
 index 68dc22e..ff96758 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sfdx-lint.js
