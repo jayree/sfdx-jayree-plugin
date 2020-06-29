@@ -1,5 +1,6 @@
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+import * as chalk from 'chalk';
 import * as path from 'path';
 import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
 
@@ -35,6 +36,7 @@ Coverage: 82%
 
   public async run(): Promise<AnyJson> {
     const projectpath = this.project.getPath();
+    let updatedfiles = [];
 
     try {
       const configfile = '.sfdx-jayree.json';
@@ -45,37 +47,39 @@ Coverage: 82%
         // this.ux.warn(`Config file '${configfile}' not found - SKIPPING metadata fixes`);
       }
 
-      if (config) {
-        for (const tag of this.flags.tag) {
-          if (config[tag]) {
-            const c = config[tag];
-            for (const workarounds of Object.keys(c)) {
-              for (const workaround of Object.keys(c[workarounds])) {
-                if (c[workarounds][workaround].isactive === true) {
-                  if (c[workarounds][workaround].files) {
-                    this.log("'" + workaround + "'");
-                    if (c[workarounds][workaround].files.delete) {
-                      await this.sourcedelete(c[workarounds][workaround].files.delete, projectpath);
-                    }
-                    if (c[workarounds][workaround].files.modify) {
-                      await this.sourcefix(
-                        c[workarounds][workaround].files.modify,
-                        projectpath,
-                        this.org.getConnection()
-                      );
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      updatedfiles = await this.applyfixes(config, this.flags.tag, projectpath);
     } catch (error) {
       throw error;
     } finally {
     }
 
-    return {};
+    Object.keys(updatedfiles).forEach((workaround) => {
+      if (updatedfiles[workaround].length > 0) {
+        this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+        this.ux.table(updatedfiles[workaround], {
+          columns: [
+            {
+              key: 'filePath',
+              label: 'FILEPATH'
+            },
+            {
+              key: 'operation',
+              label: 'OPERATION'
+            },
+            {
+              key: 'message',
+              label: 'MESSAGE'
+            }
+          ]
+        });
+      }
+    });
+
+    return {
+      fixedFiles: Object.values(updatedfiles)
+        .filter((value) => value.length > 0)
+        .reduce((acc, val) => acc.concat(val), []),
+      details: updatedfiles
+    };
   }
 }

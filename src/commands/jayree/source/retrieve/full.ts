@@ -57,6 +57,7 @@ Coverage: 82%
 
     const projectpath = this.project.getPath();
     let inboundFiles = [];
+    let updatedfiles = [];
 
     const orgretrievepath = path.join(
       projectpath,
@@ -204,34 +205,7 @@ Coverage: 82%
         } catch (error) {
           // this.ux.warn(`Config file '${configfile}' not found - SKIPPING metadata fixes`);
         }
-        if (config) {
-          if (config['source:retrieve:full']) {
-            config = config['source:retrieve:full'];
-            for (const workarounds of Object.keys(config)) {
-              for (const workaround of Object.keys(config[workarounds])) {
-                if (config[workarounds][workaround].isactive === true) {
-                  if (config[workarounds][workaround].files) {
-                    this.log("'" + workaround + "'");
-                    if (config[workarounds][workaround].files.delete) {
-                      await this.sourcedelete(config[workarounds][workaround].files.delete, orgretrievepath);
-                    }
-                    if (config[workarounds][workaround].files.modify) {
-                      await this.sourcefix(
-                        config[workarounds][workaround].files.modify,
-                        orgretrievepath,
-                        this.org.getConnection()
-                      );
-                    }
-                  }
-                }
-              }
-            }
-          } else {
-            /* this.ux.warn(
-                  `Root object 'source:retrieve:full' missing in config file '${configfile}' - SKIPPING metadata fixes`
-                ); */
-          }
-        }
+        updatedfiles = await this.applyfixes(config, ['source:retrieve:full'], orgretrievepath);
 
         const cleanedfiles = shell
           .find(path.join(orgretrievepath, 'force-app'))
@@ -277,10 +251,36 @@ Coverage: 82%
           }
         ]
       });
+
+      Object.keys(updatedfiles).forEach((workaround) => {
+        if (updatedfiles[workaround].length > 0) {
+          this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+          this.ux.table(updatedfiles[workaround], {
+            columns: [
+              {
+                key: 'filePath',
+                label: 'FILEPATH'
+              },
+              {
+                key: 'operation',
+                label: 'OPERATION'
+              },
+              {
+                key: 'message',
+                label: 'MESSAGE'
+              }
+            ]
+          });
+        }
+      });
     }
 
     return {
-      inboundFiles
+      inboundFiles,
+      fixedFiles: Object.values(updatedfiles)
+        .filter((value) => value.length > 0)
+        .reduce((acc, val) => acc.concat(val), []),
+      details: updatedfiles
     };
   }
 }

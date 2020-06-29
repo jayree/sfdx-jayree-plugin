@@ -26,20 +26,20 @@ Coverage: 82%
     keepcache: flags.boolean({
       char: 'c',
       hidden: true,
-      description: messages.getMessage('keepcache'),
+      description: messages.getMessage('keepcache')
     }),
     skipfix: flags.boolean({
       hidden: true,
-      description: messages.getMessage('keepcache'),
+      description: messages.getMessage('keepcache')
     }),
     verbose: flags.builtin({
       description: messages.getMessage('log'),
-      longDescription: messages.getMessage('log'),
+      longDescription: messages.getMessage('log')
     }),
     scope: flags.string({
       char: 's',
-      description: messages.getMessage('scope'),
-    }),
+      description: messages.getMessage('scope')
+    })
   };
 
   protected static requiresUsername = true;
@@ -59,6 +59,7 @@ Coverage: 82%
 
     const projectpath = this.project.getPath();
     let inboundFiles = [];
+    let updatedfiles = [];
 
     const orgretrievepath = path.join(
       projectpath,
@@ -140,7 +141,7 @@ See more help with --help`);
             {
               fatal: false,
               silent: true,
-              env: { ...process.env, FORCE_COLOR: 0 },
+              env: { ...process.env, FORCE_COLOR: 0 }
             }
           )
         );
@@ -155,7 +156,7 @@ See more help with --help`);
                 filePath: path
                   .relative(orgretrievepath, p.filePath)
                   .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
-                state: 'undefined',
+                state: 'undefined'
               };
             })
             .forEach((element) => {
@@ -166,31 +167,12 @@ See more help with --help`);
         shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
         await this.profileElementInjection(orgretrievepath);
 
-        if (config && !this.flags.skipfix) {
-          for (const tag of ['source:retrieve:full', 'source:retrieve:all']) {
-            if (config[tag]) {
-              const c = config[tag];
-              for (const workarounds of Object.keys(c)) {
-                for (const workaround of Object.keys(c[workarounds])) {
-                  if (c[workarounds][workaround].isactive === true) {
-                    if (c[workarounds][workaround].files) {
-                      this.log("'" + workaround + "'");
-                      if (c[workarounds][workaround].files.delete) {
-                        await this.sourcedelete(c[workarounds][workaround].files.delete, orgretrievepath);
-                      }
-                      if (c[workarounds][workaround].files.modify) {
-                        await this.sourcefix(
-                          c[workarounds][workaround].files.modify,
-                          orgretrievepath,
-                          this.org.getConnection()
-                        );
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+        if (!this.flags.skipfix) {
+          updatedfiles = await this.applyfixes(
+            config,
+            ['source:retrieve:full', 'source:retrieve:all'],
+            orgretrievepath
+          );
         }
 
         const cleanedfiles = shell
@@ -223,22 +205,48 @@ See more help with --help`);
         columns: [
           {
             key: 'fullName',
-            label: 'FULL NAME',
+            label: 'FULL NAME'
           },
           {
             key: 'type',
-            label: 'TYPE',
+            label: 'TYPE'
           },
           {
             key: 'filePath',
-            label: 'PROJECT PATH',
-          },
-        ],
+            label: 'PROJECT PATH'
+          }
+        ]
+      });
+
+      Object.keys(updatedfiles).forEach((workaround) => {
+        if (updatedfiles[workaround].length > 0) {
+          this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+          this.ux.table(updatedfiles[workaround], {
+            columns: [
+              {
+                key: 'filePath',
+                label: 'FILEPATH'
+              },
+              {
+                key: 'operation',
+                label: 'OPERATION'
+              },
+              {
+                key: 'message',
+                label: 'MESSAGE'
+              }
+            ]
+          });
+        }
       });
     }
 
     return {
       inboundFiles,
+      fixedFiles: Object.values(updatedfiles)
+        .filter((value) => value.length > 0)
+        .reduce((acc, val) => acc.concat(val), []),
+      details: updatedfiles
     };
   }
 }

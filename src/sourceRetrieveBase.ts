@@ -3,7 +3,7 @@ import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as _glob from 'glob';
-import { join } from 'path';
+import { join, relative } from 'path';
 import * as shell from 'shelljs';
 import * as util from 'util';
 import * as xml2js from 'xml2js';
@@ -19,7 +19,7 @@ import * as objectPath from 'object-path';
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
   xmlns: true,
-  renderOpts: { pretty: true, indent: '    ', newline: '\n' },
+  renderOpts: { pretty: true, indent: '    ', newline: '\n' }
 });
 
 // tslint:disable-next-line: no-any
@@ -146,16 +146,57 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     }
   }
 
-  protected async sourcefix(fixsources, root, conn) {
+  // tslint:disable-next-line: no-any
+  protected async applyfixes(config, tags, projectpath): Promise<any> {
+    const updatedfiles = {};
+    if (config) {
+      for (const tag of tags) {
+        if (config[tag]) {
+          const c = config[tag];
+          for (const workarounds of Object.keys(c)) {
+            for (const workaround of Object.keys(c[workarounds])) {
+              if (c[workarounds][workaround].isactive === true) {
+                if (c[workarounds][workaround].files) {
+                  if (c[workarounds][workaround].files.delete) {
+                    if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+                      updatedfiles[workarounds + '/' + workaround] = [];
+                    }
+                    updatedfiles[workarounds + '/' + workaround].push(
+                      ...(await this.sourcedelete(c[workarounds][workaround].files.delete, projectpath))
+                    );
+                  }
+                  if (c[workarounds][workaround].files.modify) {
+                    if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+                      updatedfiles[workarounds + '/' + workaround] = [];
+                    }
+                    updatedfiles[workarounds + '/' + workaround].push(
+                      ...(await this.sourcefix(
+                        c[workarounds][workaround].files.modify,
+                        projectpath,
+                        this.org.getConnection()
+                      ))
+                    );
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return updatedfiles;
+  }
+
+  protected async sourcefix(fixsources, root, conn): Promise<string[]> {
+    const array = [];
     for await (const filename of Object.keys(fixsources)) {
       const path = join(root, filename);
-
       const files = await glob(path);
 
       for (const file of files) {
         if (exists(file)) {
           const data = await parseString(fs.readFileSync(file, 'utf8'));
-          this.log(`modify file: ${file}`, 1);
+          debug(`modify file: ${file}`, 1);
           if (fixsources[filename].delete) {
             for (const deltask of fixsources[filename].delete) {
               const delpath = () => {
@@ -202,24 +243,29 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   return undefined;
                 }
               };
-
-              if (typeof delpath() !== 'undefined') {
-                this.log(`delete: ${delpath()}`, 2);
-                objectPath.del(data, delpath());
+              const deltaskpath = delpath();
+              if (typeof deltaskpath !== 'undefined') {
+                debug(`delete: ${deltaskpath}`, 2);
+                objectPath.del(data, deltaskpath);
                 fs.writeFileSync(
                   file,
                   builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                 );
+                array.push({
+                  filePath: relative(root, file),
+                  operation: 'delete',
+                  message: `${deltaskpath}${typeof deltask.condition !== 'undefined' ? ` (${deltask.condition})` : ''}`
+                });
               } else {
                 if (typeof deltask.condition !== 'undefined') {
-                  this.log(
+                  debug(
                     `delete: condition for '${deltask.path}': '${deltask.condition
                       .toString()
                       .replace(',', ' => ')}' not match`,
                     2
                   );
                 } else {
-                  this.log(`delete: '${deltask.path} not found`, 2);
+                  debug(`delete: '${deltask.path} not found`, 2);
                 }
               }
             }
@@ -232,29 +278,27 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   .get(data, inserttask.path)
                   .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
               ) {
-                this.log(`insert: ${JSON.stringify(inserttask.object)} at ${inserttask.path}`, 2);
+                debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttask.path}`, 2);
                 objectPath.insert(data, inserttask.path, inserttask.object, inserttask.at);
-                fs.writeFileSync(file, (builder.buildObject(data) + '\n').replace(/ {2}/g, '    '));
+                fs.writeFileSync(
+                  file,
+                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
+                );
+                array.push({
+                  filePath: relative(root, file),
+                  operation: 'insert',
+                  message: `${JSON.stringify(inserttask.object)} at ${inserttask.path}${
+                    typeof inserttask.condition !== 'undefined' ? ` (${inserttask.condition})` : ''
+                  }`
+                });
               } else {
-                this.log(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`, 2);
+                debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`, 2);
               }
             });
           }
 
           if (fixsources[filename].set) {
             fixsources[filename].set.forEach((settask) => {
-              /*               const checkcondition = () => {
-                if (typeof settask.condition !== 'undefined') {
-                  if (compareobj(objectPath.get(data, `${settask.path}`), settask.condition[1])) {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                } else {
-                  return true;
-                }
-              }; */
-
               const setpath = () => {
                 if (objectPath.get(data, settask.path)) {
                   if (settask.condition) {
@@ -295,24 +339,29 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 }
               };
 
-              if (typeof setpath() !== 'undefined') {
-                settask.path = setpath();
-                debug(settask.path);
-
-                // if (checkcondition()) {
+              const settaskpath = setpath();
+              if (typeof settaskpath !== 'undefined') {
+                debug(settaskpath);
 
                 if (settask.value) {
                   if (settask.value.indexOf('<mydomain>') > -1) {
                     settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
                     settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
                   }
-                  if (!compareobj(objectPath.get(data, settask.path), settask.value)) {
-                    this.log(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`, 2);
-                    objectPath.set(data, settask.path, settask.value);
+                  if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
+                    debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`, 2);
+                    objectPath.set(data, settaskpath, settask.value);
                     fs.writeFileSync(
                       file,
                       builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                     );
+                    array.push({
+                      filePath: relative(root, file),
+                      operation: 'set',
+                      message: `${JSON.stringify(settask.value)} at ${settaskpath}${
+                        typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
+                      }`
+                    });
                   }
                 } else if (typeof settask.object === 'object') {
                   const validate = (node) => {
@@ -344,40 +393,39 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   };
 
                   settask.object = validate(settask.object);
-                  debug(settask.path);
+                  debug(settaskpath);
 
                   debug(settask.object);
 
-                  this.log(`set: ${JSON.stringify(settask.object)} at ${settask.path}`, 2);
+                  debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`, 2);
                   if (settask.object) {
                     Object.keys(settask.object).forEach((k) => {
-                      debug(settask.path + '.' + k);
-                      if (objectPath.has(data, settask.path + '.' + k)) {
+                      debug(settaskpath + '.' + k);
+                      if (objectPath.has(data, settaskpath + '.' + k)) {
                         debug(settask.object[k]);
-                        objectPath.set(data, settask.path + '.' + k, settask.object[k]);
-                        debug(objectPath.get(data, settask.path));
+                        objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                        debug(objectPath.get(data, settaskpath));
                       }
                     });
                   } else {
-                    objectPath.insert(data, settask.path, settask.object);
+                    objectPath.insert(data, settaskpath, settask.object);
                   }
 
                   fs.writeFileSync(
                     file,
                     builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                   );
+                  array.push({
+                    filePath: relative(root, file),
+                    operation: 'set',
+                    message: `${JSON.stringify(settask.object)} at ${settaskpath}${
+                      typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
+                    }`
+                  });
                 } else {
-                  this.log(`Set: value ${JSON.stringify(settask.value)} found at ${settask.path}`, 2);
+                  debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`, 2);
                 }
               }
-              /*               } else {
-                this.log(
-                  `Set: condition for '${settask.path}': '${settask.condition
-                    .toString()
-                    .replace(',', ' => ')}' not match (value is: '${objectPath.get(data, `${settask.path}`)}')`,
-                  2
-                );
-              } */
             });
           }
 
@@ -389,7 +437,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`
               );
               if (fullname.lastIndexOf('-') > 0) {
-                this.log(`fixflowtranslation: ${fullname} => ${fullname.substring(0, fullname.lastIndexOf('-'))}`, 2);
+                debug(`fixflowtranslation: ${fullname} => ${fullname.substring(0, fullname.lastIndexOf('-'))}`, 2);
                 objectPath.set(
                   data,
                   `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`,
@@ -399,37 +447,45 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   file,
                   builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
                 );
+                array.push({
+                  filePath: relative(root, file),
+                  operation: 'fix',
+                  message: `(${fullname} => ${fullname.substring(0, fullname.lastIndexOf('-'))})`
+                });
               } else {
-                this.log(`fixflowtranslation: ${fullname} already fixed`, 2);
+                debug(`fixflowtranslation: ${fullname} already fixed`, 2);
               }
             });
           }
         } else {
-          this.log(`modify file: ${file} not found`, 1);
+          debug(`modify file: ${file} not found`, 1);
         }
       }
     }
+    return array;
   }
 
-  protected async sourcedelete(deletesources, root) {
+  protected async sourcedelete(deletesources, root): Promise<string[]> {
+    const array = [];
     for (const filename of deletesources) {
       const path = join(root, filename);
-      this.log(`delete file: ${path}`, 1);
-      // if (exists(path)) {
+      debug(`delete file: ${path}`, 1);
       if (exists(path)) {
         try {
           shell.rm('-rf', path);
+          array.push({ filePath: relative(root, path), operation: 'delete', message: '' });
         } catch (err) {
           this.ux.error(err);
         }
       } else {
-        this.log(`${path} not found`, 2);
+        debug(`${path} not found`, 2);
       }
     }
+    return array;
   }
 
   protected async cleanuppackagexml(manifest, manifestignore, root) {
-    this.log(`apply '${join(root, manifestignore)}' to '${manifest}'`);
+    debug(`apply '${join(root, manifestignore)}' to '${manifest}'`);
 
     const packageignore = await parseString(fs.readFileSync(join(root, manifestignore), 'utf8'));
     const newpackage = await parseString(fs.readFileSync(manifest, 'utf8'));
@@ -444,14 +500,14 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
         if (types.members.includes('*') && types.members.length > 1) {
           const includedmembers = types.members.slice();
           includedmembers.splice(includedmembers.indexOf('*'), 1);
-          this.log('include only members ' + includedmembers.toString() + ' for type ' + types.name, 1);
+          debug('include only members ' + includedmembers.toString() + ' for type ' + types.name, 1);
           newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter((value) => {
             return types.members.includes(value);
           });
         }
 
         if (types.members.includes('*') && types.members.length === 1) {
-          this.log('exclude all members for type ' + types.name, 1);
+          debug('exclude all members for type ' + types.name, 1);
           newPackageTypesMapped[types.name] = newPackageTypesMapped[types.name].filter(() => {
             return false;
           });
@@ -470,7 +526,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
       if (newPackageTypesMapped[key].length > 0) {
         newPackageTypesUpdated.push({
           name: key,
-          members: newPackageTypesMapped[key],
+          members: newPackageTypesMapped[key]
         });
       }
     });
