@@ -1,3 +1,21 @@
+# [2.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.11.0...v2.0.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* update dependencies ([386a63c](https://github.com/jayree/sfdx-jayree-plugin/commit/386a63c9727c30811ef79d5a687472cbcd94aa71))
+
+
+### Features
+
+* added hidden version command for CI use cases ([f2b384d](https://github.com/jayree/sfdx-jayree-plugin/commit/f2b384d87b48e5f325be5147bc1e8ad20f00ca59))
+* **source:** added json output for source:fix, source:retrieve:full, source:retrieve:all commands ([efd8ca7](https://github.com/jayree/sfdx-jayree-plugin/commit/efd8ca7b0e0b9bf6f897879a518fe69da59e5db6))
+
+
+### BREAKING CHANGES
+
+* **source:** verbose flag has no effect anymore and will be deprecated in future releases
+
 # [1.11.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.10.1...v1.11.0) (2020-06-19)
 
 
