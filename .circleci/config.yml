@@ -35,7 +35,7 @@ _refs:
 
 _defaults: &defaults
   docker:
-    - image: node:latest
+    - image: node:12
   working_directory: *cwd
 
 jobs:
@@ -52,7 +52,7 @@ jobs:
   node-10:
     <<: *node-test
     docker:
-      - image: node:10.15.3
+      - image: node:10.20.1
   release:
     <<: *defaults
     steps:
@@ -60,7 +60,7 @@ jobs:
       - restore_cache: *restore-cache
       - run: *gh-config
       - run: yarn global add semantic-release@15
-      - run: yarn global add @oclif/semantic-release@3
+      - run: yarn global add @oclif/semantic-release@3.1.1
       - run: *install
       - run: *build
       - run: semantic-release -e @oclif/semantic-release
