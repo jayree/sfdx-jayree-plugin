@@ -111,9 +111,9 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`
               maxrevfile = Math.min(
                 ...Object.keys(json.sourceMembers).map((key) => json.sourceMembers[key].serverRevisionCounter)
               );
-            }
-            if (maxrevfile !== 0) {
-              maxrevfile = maxrevfile - 1;
+              if (maxrevfile !== 0) {
+                maxrevfile = maxrevfile - 1;
+              }
             }
           } else {
             // based on the current bug this should be 0 but this might be correct if the bug is fixed
