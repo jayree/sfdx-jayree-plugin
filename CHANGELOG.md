@@ -1,3 +1,11 @@
+## [2.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.0.0...v2.0.1) (2020-07-06)
+
+
+### Bug Fixes
+
+* **scratchorgrevision:** fix local maxrevision for new json format ([5fc6c00](https://github.com/jayree/sfdx-jayree-plugin/commit/5fc6c002203ae136719fdace1afc8783455edec5))
+* update dependencies ([40cce82](https://github.com/jayree/sfdx-jayree-plugin/commit/40cce82b83fad486deac94bb8cc4338c3a4807fa))
+
 # [2.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v1.11.0...v2.0.0) (2020-06-29)
 
 
