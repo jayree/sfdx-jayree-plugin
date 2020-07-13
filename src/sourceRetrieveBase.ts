@@ -8,6 +8,7 @@ import * as shell from 'shelljs';
 import * as util from 'util';
 import * as xml2js from 'xml2js';
 import profileElementuserPermissionsInjectionFrom = require('../config/profileElementuserPermissionsInjection.json');
+import { objectPath, ObjectPathResolver } from './lib/object-path';
 
 const debug = createDebug('jayree:source');
 
@@ -15,7 +16,6 @@ const parseString = util.promisify(xml2js.parseString);
 
 const glob = util.promisify(_glob);
 
-import * as objectPath from 'object-path';
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
   xmlns: true,
@@ -243,7 +243,15 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   return undefined;
                 }
               };
-              const deltaskpath = delpath();
+              let deltaskpath;
+              if (deltask.path && deltask.path.match(/(.*\[.*\])/g)) {
+                deltaskpath = new ObjectPathResolver(data).resolveString(deltask.path).value();
+              } else if (typeof deltask.path === 'undefined') {
+                deltaskpath = new ObjectPathResolver(data).resolveString(deltask).value();
+              } else {
+                deltaskpath = delpath();
+              }
+
               if (typeof deltaskpath !== 'undefined') {
                 debug(`delete: ${deltaskpath}`, 2);
                 objectPath.del(data, deltaskpath);
@@ -339,14 +347,26 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 }
               };
 
-              const settaskpath = setpath();
+              let settaskpath;
+              if (settask.path.match(/(.*\[.*\])/g)) {
+                settaskpath = new ObjectPathResolver(data).resolveString(settask.path).value();
+              } else {
+                settaskpath = setpath();
+              }
+
               if (typeof settaskpath !== 'undefined') {
                 debug(settaskpath);
 
                 if (settask.value) {
-                  if (settask.value.indexOf('<mydomain>') > -1) {
-                    settask.value = settask.value.replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0]);
-                    settask.value = settask.value.replace(/<instance>/i, conn.instanceUrl.substring(8).split('.')[1]);
+                  if (JSON.stringify(settask.value).includes('<mydomain>')) {
+                    settask.value = JSON.parse(
+                      JSON.stringify(settask.value).replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0])
+                    );
+                  }
+                  if (JSON.stringify(settask.value).includes('<instance>')) {
+                    settask.value = JSON.parse(
+                      JSON.stringify(settask.value).replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[1])
+                    );
                   }
                   if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`, 2);
