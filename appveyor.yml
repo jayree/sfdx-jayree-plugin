@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: '10.20.1'
+  nodejs_version: '10.21.0'
 cache:
   - '%LOCALAPPDATA%\Yarn -> appveyor.yml'
   - node_modules -> yarn.lock
