@@ -21,34 +21,13 @@
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "Chatter_Answers_Moderator"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "Service_Cloud_Console"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "standard__AllTabSet"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "standard__AppLauncher"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "standard__Insights"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "standard__LightningSalesConsole"]
-                },
-                {
-                  "path": "Profile.applicationVisibilities",
-                  "condition": ["application", "standard__LightningService"]
-                }
+                "Profile.applicationVisibilities['application','Chatter_Answers_Moderator']",
+                "Profile.applicationVisibilities['application','Service_Cloud_Console']",
+                "Profile.applicationVisibilities['application','standard__AllTabSet']",
+                "Profile.applicationVisibilities['application','standard__AppLauncher']",
+                "Profile.applicationVisibilities['application','standard__Insights']",
+                "Profile.applicationVisibilities['application','standard__LightningSalesConsole']",
+                "Profile.applicationVisibilities['application','standard__LightningService']"
               ]
             }
           }
@@ -60,34 +39,13 @@
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Case.Language"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Case.IsSelfServiceClosed"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Case.IsVisibleInCss"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Case.IsVisibleInSelfService"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Contact.CanAllowPortalSelfReg"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Event.IsVisibleInSelfService"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Task.IsVisibleInSelfService"]
-                }
+                "Profile.fieldPermissions['field','Case.Language']",
+                "Profile.fieldPermissions['field','Case.IsSelfServiceClosed']",
+                "Profile.fieldPermissions['field','Case.IsVisibleInCss']",
+                "Profile.fieldPermissions['field','Case.IsVisibleInSelfService']",
+                "Profile.fieldPermissions['field','Contact.CanAllowPortalSelfReg']",
+                "Profile.fieldPermissions['field','Event.IsVisibleInSelfService']",
+                "Profile.fieldPermissions['field','Task.IsVisibleInSelfService']"
               ]
             }
           }
@@ -99,50 +57,17 @@
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "AccountBrand-Account Brand Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CommunityMemberLayout-Community Member Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "DataUseLegalBasis-Data Use Legal Basis Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "DataUsePurpose-Data Use Purpose Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "Knowledge__kav-Knowledge Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "Question-Question Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "Reply-Reply Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "UserProvAccount-User Provisioning Account Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "UserProvisioningLog-User Provisioning Log Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "UserProvisioningRequest-User Provisioning Request Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CollaborationGroup-Group Layout"]
-                }
+                "Profile.layoutAssignments['layout','AccountBrand-Account Brand Layout']",
+                "Profile.layoutAssignments['layout','CommunityMemberLayout-Community Member Layout']",
+                "Profile.layoutAssignments['layout','DataUseLegalBasis-Data Use Legal Basis Layout']",
+                "Profile.layoutAssignments['layout','DataUsePurpose-Data Use Purpose Layout']",
+                "Profile.layoutAssignments['layout','Knowledge__kav-Knowledge Layout']",
+                "Profile.layoutAssignments['layout','Question-Question Layout']",
+                "Profile.layoutAssignments['layout','Reply-Reply Layout']",
+                "Profile.layoutAssignments['layout','UserProvAccount-User Provisioning Account Layout']",
+                "Profile.layoutAssignments['layout','UserProvisioningLog-User Provisioning Log Layout']",
+                "Profile.layoutAssignments['layout','UserProvisioningRequest-User Provisioning Request Layout']",
+                "Profile.layoutAssignments['layout','CollaborationGroup-Group Layout']"
               ]
             }
           }
@@ -154,18 +79,9 @@
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.objectPermissions",
-                  "condition": ["object", "ContactRequest"]
-                },
-                {
-                  "path": "Profile.objectPermissions",
-                  "condition": ["object", "AccountBrand"]
-                },
-                {
-                  "path": "Profile.objectPermissions",
-                  "condition": ["object", "Knowledge__kav"]
-                }
+                "Profile.objectPermissions['object','ContactRequest']",
+                "Profile.objectPermissions['object','AccountBrand']",
+                "Profile.objectPermissions['object','Knowledge__kav']"
               ]
             }
           }
@@ -177,26 +93,11 @@
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.tabVisibilities",
-                  "condition": ["tab", "standard-QuickText"]
-                },
-                {
-                  "path": "Profile.tabVisibilities",
-                  "condition": ["tab", "standard-AccountBrand"]
-                },
-                {
-                  "path": "Profile.tabVisibilities",
-                  "condition": ["tab", "standard-ContactRequest"]
-                },
-                {
-                  "path": "Profile.tabVisibilities",
-                  "condition": ["tab", "standard-Recommendation"]
-                },
-                {
-                  "path": "Profile.tabVisibilities",
-                  "condition": ["tab", "standard-UserProvisioningRequest"]
-                }
+                "Profile.tabVisibilities['tab','standard-QuickText']",
+                "Profile.tabVisibilities['tab','standard-AccountBrand']",
+                "Profile.tabVisibilities['tab','standard-ContactRequest']",
+                "Profile.tabVisibilities['tab','standard-Recommendation']",
+                "Profile.tabVisibilities['tab','standard-UserProvisioningRequest']"
               ]
             }
           }
@@ -207,60 +108,23 @@
         "files": {
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
-              "delete": [
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "EnableCommunityAppLauncher"]
-                }
-              ]
+              "delete": ["Profile.userPermissions['name','EnableCommunityAppLauncher']"]
             },
             "force-app/main/default/profiles/Guest License User.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "ContentWorkspaces"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "ActivitiesAccess"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "AddDirectMessageMembers"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "AllowUniversalSearch"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "EnableNotifications"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "PasswordNeverExpires"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "SelectFilesFromSalesforce"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "ShowCompanyNameAsUserBadge"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "UseWebLink"]
-                }
+                "Profile.userPermissions['name','ContentWorkspaces']",
+                "Profile.userPermissions['name','ActivitiesAccess']",
+                "Profile.userPermissions['name','AddDirectMessageMembers']",
+                "Profile.userPermissions['name','AllowUniversalSearch']",
+                "Profile.userPermissions['name','EnableNotifications']",
+                "Profile.userPermissions['name','PasswordNeverExpires']",
+                "Profile.userPermissions['name','SelectFilesFromSalesforce']",
+                "Profile.userPermissions['name','ShowCompanyNameAsUserBadge']",
+                "Profile.userPermissions['name','UseWebLink']"
               ]
             },
             "force-app/main/default/profiles/Admin.profile-meta.xml": {
-              "delete": [
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "TraceXdsQueries"]
-                }
-              ]
+              "delete": ["Profile.userPermissions['name','TraceXdsQueries']"]
             }
           }
         }
@@ -272,18 +136,12 @@
             "force-app/main/default/profiles/Admin.profile-meta.xml": {
               "set": [
                 {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "PublishPackaging"],
-                  "object": {
-                    "enabled": ["true"]
-                  }
+                  "path": "Profile.userPermissions['name','PublishPackaging'].enabled['false']",
+                  "value": ["true"]
                 },
                 {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "CreatePackaging"],
-                  "object": {
-                    "enabled": ["true"]
-                  }
+                  "path": "Profile.userPermissions['name','CreatePackaging'].enabled['false']",
+                  "value": ["true"]
                 }
               ]
             }
@@ -295,12 +153,7 @@
         "files": {
           "modify": {
             "force-app/main/default/profiles/*.profile-meta.xml": {
-              "delete": [
-                {
-                  "path": "Profile.recordTypeVisibilities",
-                  "condition": ["recordType", "Idea.InternalIdeasIdeaRecordType"]
-                }
-              ]
+              "delete": ["Profile.recordTypeVisibilities['recordType','Idea.InternalIdeasIdeaRecordType']"]
             }
           }
         }
@@ -310,12 +163,7 @@
         "files": {
           "modify": {
             "force-app/main/default/profiles/Admin.profile-meta.xml": {
-              "delete": [
-                {
-                  "path": "Profile.loginIpRanges",
-                  "condition": ["endAddress", "255.255.255.255"]
-                }
-              ]
+              "delete": ["Profile.loginIpRanges['endAddress','255.255.255.255']"]
             }
           }
         }
@@ -337,34 +185,13 @@
           "modify": {
             "force-app/main/default/permissionsets/*.permissionset-meta.xml": {
               "delete": [
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Case.Language"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Case.IsSelfServiceClosed"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Case.IsVisibleInCss"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Case.IsVisibleInSelfService"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Contact.CanAllowPortalSelfReg"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Event.IsVisibleInSelfService"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Task.IsVisibleInSelfService"]
-                }
+                "PermissionSet.fieldPermissions['field','Case.Language']",
+                "PermissionSet.fieldPermissions['field','Case.IsSelfServiceClosed']",
+                "PermissionSet.fieldPermissions['field','Case.IsVisibleInCss']",
+                "PermissionSet.fieldPermissions['field','Case.IsVisibleInSelfService']",
+                "PermissionSet.fieldPermissions['field','Contact.CanAllowPortalSelfReg']",
+                "PermissionSet.fieldPermissions['field','Event.IsVisibleInSelfService']",
+                "PermissionSet.fieldPermissions['field','Task.IsVisibleInSelfService']"
               ]
             }
           }
@@ -376,18 +203,9 @@
           "modify": {
             "force-app/main/default/permissionsets/*.permissionset-meta.xml": {
               "delete": [
-                {
-                  "path": "PermissionSet.objectPermissions",
-                  "condition": ["object", "ContactRequest"]
-                },
-                {
-                  "path": "PermissionSet.objectPermissions",
-                  "condition": ["object", "AccountBrand"]
-                },
-                {
-                  "path": "PermissionSet.objectPermissions",
-                  "condition": ["object", "Knowledge__kav"]
-                }
+                "PermissionSet.objectPermissions['object','ContactRequest']",
+                "PermissionSet.objectPermissions['object','AccountBrand']",
+                "PermissionSet.objectPermissions['object','Knowledge__kav']"
               ]
             }
           }
@@ -398,117 +216,42 @@
       "Hotfixes/Bugs": {
         "isactive": true,
         "files": {
-          "delete": [
-            "force-app/main/default/profiles/CPQ Integration User.profile-meta.xml",
-            "force-app/main/default/profiles/Minimum Access - Salesforce.profile-meta.xml"
-          ],
+          "delete": ["force-app/main/default/profiles/Minimum Access - Salesforce.profile-meta.xml"],
           "modify": {
             "force-app/main/default/profiles/Admin.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "SkipIdentityConfirmation"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "ManageReleaseUpdates"]
-                },
-                {
-                  "path": "Profile.userPermissions",
-                  "condition": ["name", "ManageSandboxes"]
-                }
+                "Profile.userPermissions['name','SkipIdentityConfirmation']",
+                "Profile.userPermissions['name','ManageReleaseUpdates']",
+                "Profile.userPermissions['name','ManageSandboxes']"
               ]
             },
             "force-app/main/default/profiles/*.profile-meta.xml": {
               "delete": [
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Asset.ExternalIdentifier"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Asset.ManufactureDate"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Asset.StatusReason"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "Asset.Uuid"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "ContactPointConsent.EngagementChannelTypeId"]
-                },
-                {
-                  "path": "Profile.fieldPermissions",
-                  "condition": ["field", "ContactPointTypeConsent.EngagementChannelTypeId"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "ContactPointConsent-Contact Point Consent Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "ContactPointAddress-Contact Point Address Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CampaignInfluence-Campaign Influence Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CommSubscription-Communication Subscription Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CommSubscriptionChannelType-Communication Subscription Channel Type Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CommSubscriptionConsent-Communication Subscription Consent Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "CommSubscriptionTiming-Communication Subscription Timing Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "EngagementChannelType-Engagement Channel Type Layout"]
-                },
-                {
-                  "path": "Profile.layoutAssignments",
-                  "condition": ["layout", "PartyConsent-Party Consent Layout"]
-                }
+                "Profile.fieldPermissions['field','Asset.ExternalIdentifier']",
+                "Profile.fieldPermissions['field','Asset.ManufactureDate']",
+                "Profile.fieldPermissions['field','Asset.StatusReason']",
+                "Profile.fieldPermissions['field','Asset.Uuid']",
+                "Profile.fieldPermissions['field','ContactPointConsent.EngagementChannelTypeId']",
+                "Profile.fieldPermissions['field','ContactPointTypeConsent.EngagementChannelTypeId']",
+                "Profile.layoutAssignments['layout','ContactPointConsent-Contact Point Consent Layout']",
+                "Profile.layoutAssignments['layout','ContactPointAddress-Contact Point Address Layout']",
+                "Profile.layoutAssignments['layout','CampaignInfluence-Campaign Influence Layout']",
+                "Profile.layoutAssignments['layout','CommSubscription-Communication Subscription Layout']",
+                "Profile.layoutAssignments['layout','CommSubscriptionChannelType-Communication Subscription Channel Type Layout']",
+                "Profile.layoutAssignments['layout','CommSubscriptionConsent-Communication Subscription Consent Layout']",
+                "Profile.layoutAssignments['layout','CommSubscriptionTiming-Communication Subscription Timing Layout']",
+                "Profile.layoutAssignments['layout','EngagementChannelType-Engagement Channel Type Layout']",
+                "Profile.layoutAssignments['layout','PartyConsent-Party Consent Layout']"
               ]
             },
             "force-app/main/default/permissionsets/*.permissionset-meta.xml": {
               "delete": [
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Asset.ExternalIdentifier"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Asset.ManufactureDate"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Asset.StatusReason"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "Asset.Uuid"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "ContactPointConsent.EngagementChannelTypeId"]
-                },
-                {
-                  "path": "PermissionSet.fieldPermissions",
-                  "condition": ["field", "ContactPointTypeConsent.EngagementChannelTypeId"]
-                }
+                "PermissionSet.fieldPermissions['field','Asset.ExternalIdentifier']",
+                "PermissionSet.fieldPermissions['field','Asset.ManufactureDate']",
+                "PermissionSet.fieldPermissions['field','Asset.StatusReason']",
+                "PermissionSet.fieldPermissions['field','Asset.Uuid']",
+                "PermissionSet.fieldPermissions['field','ContactPointConsent.EngagementChannelTypeId']",
+                "PermissionSet.fieldPermissions['field','ContactPointTypeConsent.EngagementChannelTypeId']"
               ]
             }
           }
@@ -534,91 +277,35 @@
           ]
         }
       },
-      "(CPQ): Rows returned for [...] must be between 5 and 50": {
-        "isactive": true,
-        "files": {
-          "modify": {
-            "force-app/main/default/settings/Search.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "SearchSettings.searchSettingsByObject.0.searchSettingsByObject",
-                  "condition": ["name", "SBQQ__ColumnMetadata__c"]
-                },
-                {
-                  "path": "SearchSettings.searchSettingsByObject.0.searchSettingsByObject",
-                  "condition": ["name", "SBQQ__FieldSetMetadata__c"]
-                }
-              ]
-            }
-          }
-        }
-      },
       "enable[...]": {
         "isactive": true,
         "files": {
           "modify": {
             "force-app/main/default/settings/Discovery.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "DiscoverySettings.enableEinsteinArticleRecommendations",
-                  "condition": ["is", "false"]
-                }
-              ]
+              "delete": ["DiscoverySettings.enableEinsteinArticleRecommendations['false']"]
             },
             "force-app/main/default/settings/PlatformEncryption.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "PlatformEncryptionSettings.enableEventBusEncryption",
-                  "condition": ["is", "false"]
-                }
-              ]
+              "delete": ["PlatformEncryptionSettings.enableEventBusEncryption['false']"]
             },
             "force-app/main/default/settings/Pardot.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "PardotSettings.enablePardotAppV1Enabled",
-                  "condition": ["is", "false"]
-                }
-              ]
+              "delete": ["PardotSettings.enablePardotAppV1Enabled['false']"]
             },
             "force-app/main/default/settings/Communities.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "CommunitiesSettings.enableRelaxPartnerAccountFieldPref",
-                  "condition": ["is", "false"]
-                },
-                {
-                  "path": "CommunitiesSettings.enablePRMAccRelPref",
-                  "condition": ["is", "false"]
-                }
+                "CommunitiesSettings.enableRelaxPartnerAccountFieldPref['false']",
+                "CommunitiesSettings.enablePRMAccRelPref['false']"
               ]
             },
             "force-app/main/default/settings/LightningExperience.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "LightningExperienceSettings.enableSkypeChatEnabled",
-                  "condition": ["is", "false"]
-                }
-              ]
+              "delete": ["LightningExperienceSettings.enableSkypeChatEnabled['false']"]
             },
             "force-app/main/default/settings/Language.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "LanguageSettings.useLanguageFallback",
-                  "condition": ["is", "false"]
-                }
-              ]
+              "delete": ["LanguageSettings.useLanguageFallback['false']"]
             },
             "force-app/main/default/settings/Search.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "SearchSettings.searchSettingsByObject.0.searchSettingsByObject",
-                  "condition": ["name", "AccountBrand"]
-                },
-                {
-                  "path": "SearchSettings.searchSettingsByObject.0.searchSettingsByObject",
-                  "condition": ["name", "KnowledgeArticleVersion"]
-                }
+                "SearchSettings.searchSettingsByObject.searchSettingsByObject['name','AccountBrand']",
+                "SearchSettings.searchSettingsByObject.searchSettingsByObject['name','KnowledgeArticleVersion']"
               ]
             }
           }
@@ -649,70 +336,38 @@
         "files": {
           "modify": {
             "force-app/main/default/settings/Sharing.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "SharingSettings.enableAccountRoleOptimization"
-                }
-              ]
+              "delete": ["SharingSettings.enableAccountRoleOptimization"]
             },
             "force-app/main/default/settings/Org.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "OrgSettings.enableCustomerSuccessPortal"
-                }
-              ]
+              "delete": ["OrgSettings.enableCustomerSuccessPortal"]
             },
             "force-app/main/default/settings/Mobile.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "MobileSettings.dashboardMobile"
-                }
-              ]
+              "delete": ["MobileSettings.dashboardMobile"]
             },
             "force-app/main/default/settings/ConnectedApp.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "ConnectedAppSettings.enableSkipUserProvisioningWizardWelcomePage"
-                }
-              ]
+              "delete": ["ConnectedAppSettings.enableSkipUserProvisioningWizardWelcomePage"]
             },
             "force-app/main/default/settings/Communities.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "CommunitiesSettings.enableCspContactVisibilityPref"
-                },
-                {
-                  "path": "CommunitiesSettings.enableEnablePRM"
-                },
-
-                {
-                  "path": "CommunitiesSettings.enableUsernameUniqForOrgPref"
-                }
+                "CommunitiesSettings.enableCspContactVisibilityPref",
+                "CommunitiesSettings.enableEnablePRM",
+                "CommunitiesSettings.enableUsernameUniqForOrgPref"
               ]
             },
             "force-app/main/default/settings/AppExperience.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "AppExperienceSettings.doesHideAllAppsInAppLauncher"
-                }
-              ]
+              "delete": ["AppExperienceSettings.doesHideAllAppsInAppLauncher"]
             },
             "force-app/main/default/settings/Entitlement.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "EntitlementSettings.enableMilestoneStoppedTime"
-                },
-                {
-                  "path": "EntitlementSettings.ignoreMilestoneBusinessHours"
-                }
+                "EntitlementSettings.enableMilestoneStoppedTime",
+                "EntitlementSettings.ignoreMilestoneBusinessHours"
               ]
             },
             "force-app/main/default/settings/Currency.settings-meta.xml": {
               "set": [
                 {
-                  "path": "CurrencySettings.enableMultiCurrency",
-                  "condition": ["is", "false"],
-                  "object": ["true"]
+                  "path": "CurrencySettings.enableMultiCurrency['false']",
+                  "value": ["true"]
                 }
               ]
             }
@@ -731,9 +386,6 @@
         "isactive": true,
         "files": {
           "delete": [
-            "force-app/main/default/objects/Opportunity/webLinks/SBQQ__Amend_Assets.webLink-meta.xml",
-            "force-app/main/default/objects/Product2/webLinks/SBQQ__CloneWithRelated.webLink-meta.xml",
-            "force-app/main/default/objects/Product2/webLinks/SBQQ__Translate.webLink-meta.xml",
             "force-app/main/default/settings/Sharing.settings-meta.xml",
             "force-app/main/default/settings/Campaign.settings-meta.xml",
             "force-app/main/default/objects/Asset/fields/ExternalIdentifier.field-meta.xml",
@@ -792,62 +444,32 @@
           ],
           "modify": {
             "force-app/main/default/notificationTypeConfig/NotificationTypeConfig.config-meta.xml": {
-              "delete": [
-                {
-                  "path": "NotificationTypeConfig.notificationTypeSettings",
-                  "condition": ["notificationType", "optimizer_scan_results"]
-                }
-              ]
+              "delete": ["NotificationTypeConfig.notificationTypeSettings['notificationType','optimizer_scan_results']"]
             },
             "force-app/main/default/settings/Site.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "SiteSettings.enableSitesRecordReassignOrgPref"
-                }
-              ]
+              "delete": ["SiteSettings.enableSitesRecordReassignOrgPref"]
             },
             "force-app/main/default/settings/Search.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "SearchSettings.enableEinsteinSearchPersonalization"
-                },
-                {
-                  "path": "SearchSettings.searchSettingsByObject.0.searchSettingsByObject",
-                  "condition": ["name", "ContactPointAddress"]
-                }
+                "SearchSettings.enableEinsteinSearchPersonalization",
+                "SearchSettings.searchSettingsByObject.searchSettingsByObject['name','ContactPointAddress']"
               ]
             },
             "force-app/main/default/settings/EAC.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "EACSettings.enableEACForEveryonePref"
-                }
-              ]
+              "delete": ["EACSettings.enableEACForEveryonePref"]
             },
             "force-app/main/default/settings/LightningExperience.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "LightningExperienceSettings.enableSparkConversationEnabled"
-                },
-                {
-                  "path": "LightningExperienceSettings.enableWebexAllUsers"
-                },
-                {
-                  "path": "LightningExperienceSettings.enableWebExEnabled"
-                },
-                {
-                  "path": "LightningExperienceSettings.enableSparkAllUsers"
-                }
+                "LightningExperienceSettings.enableSparkConversationEnabled",
+                "LightningExperienceSettings.enableWebexAllUsers",
+                "LightningExperienceSettings.enableWebExEnabled",
+                "LightningExperienceSettings.enableSparkAllUsers"
               ]
             },
             "force-app/main/default/settings/Communities.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "CommunitiesSettings.enableExternalAccHierPref"
-                },
-                {
-                  "path": "CommunitiesSettings.enableGuestRecordReassignOrgPref"
-                }
+                "CommunitiesSettings.enableExternalAccHierPref",
+                "CommunitiesSettings.enableGuestRecordReassignOrgPref"
               ]
             }
           }
@@ -860,12 +482,7 @@
         "files": {
           "modify": {
             "force-app/main/default/settings/Case.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "CaseSettings.emailToCase",
-                  "condition": ["enableEmailToCase", "false"]
-                }
-              ]
+              "delete": ["CaseSettings.emailToCase['enableEmailToCase','false']"]
             }
           }
         }
@@ -893,15 +510,9 @@
           "modify": {
             "force-app/main/default/settings/Security.settings-meta.xml": {
               "delete": [
-                {
-                  "path": "SecuritySettings.enableAdminLoginAsAnyUser"
-                },
-                {
-                  "path": "SecuritySettings.sessionSettings.0.forceRelogin"
-                },
-                {
-                  "path": "SecuritySettings.singleSignOnSettings.0.enableSamlLogin"
-                }
+                "SecuritySettings.enableAdminLoginAsAnyUser",
+                "SecuritySettings.sessionSettings.forceRelogin",
+                "SecuritySettings.singleSignOnSettings.enableSamlLogin"
               ]
             }
           }
@@ -913,11 +524,7 @@
         "files": {
           "modify": {
             "force-app/main/default/settings/MyDomain.settings-meta.xml": {
-              "delete": [
-                {
-                  "path": "MyDomainSettings.useStabilizedSandboxMyDomainHostnames"
-                }
-              ]
+              "delete": ["MyDomainSettings.useStabilizedSandboxMyDomainHostnames"]
             }
           }
         }
@@ -926,6 +533,22 @@
   },
   "source:scratchorg:fix": {
     "Workarounds": {
+      "Remote Site Setting": {
+        "description": "set Remote Site Setting",
+        "isactive": true,
+        "files": {
+          "modify": {
+            "deploy/deployRemoteSiteSetting/remoteSiteSettings/dlrs_mdapi.remoteSite": {
+              "set": [
+                {
+                  "path": "RemoteSiteSetting.url",
+                  "value": ["https://<mydomain>--dlrs.visualforce.com"]
+                }
+              ]
+            }
+          }
+        }
+      },
       "Remove RoleAndSubordinates from dashboards": {
         "description": "set RoleAndSubordinatesInternal instead of RoleAndSubordinates for dashboard folder (Enterprise Edition Bug)",
         "isactive": true,
@@ -934,9 +557,8 @@
             "force-app/main/default/dashboards/*.dashboardFolder-meta.xml": {
               "set": [
                 {
-                  "path": "DashboardFolder.folderShares.0.sharedToType",
-                  "condition": ["is", "RoleAndSubordinates"],
-                  "value": "RoleAndSubordinatesInternal"
+                  "path": "DashboardFolder.folderShares.sharedToType['RoleAndSubordinates']",
+                  "value": ["RoleAndSubordinatesInternal"]
                 }
               ]
             }
