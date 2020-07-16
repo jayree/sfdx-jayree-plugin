@@ -1,3 +1,15 @@
+# [2.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.0.1...v2.1.0) (2020-07-16)
+
+
+### Bug Fixes
+
+* updated dependencies ([e3c1c65](https://github.com/jayree/sfdx-jayree-plugin/commit/e3c1c65928cdb7e397e07d4f4ca7dd204bc3dc82))
+
+
+### Features
+
+* **sourcefix:** new path format ([a72ca20](https://github.com/jayree/sfdx-jayree-plugin/commit/a72ca209e382b1a9327b7f073623a8e897fd5fa0))
+
 ## [2.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.0.0...v2.0.1) (2020-07-06)
 
 
