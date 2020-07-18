@@ -17,8 +17,8 @@ interface QueryParameters {
 }
 
 class ObjectPathResolver {
-  _path = '';
-  _object = '';
+  _path = [];
+  _object;
 
   constructor(object) {
     this._object = object;
@@ -29,46 +29,55 @@ class ObjectPathResolver {
   }
 
   resolve({ path, key, value }: QueryParameters) {
-    if (this._path !== '') {
-      if (Array.isArray(objectPath.get(this._object, this._path))) {
-        if (objectPath.get(this._object, this._path).length === 1) {
-          this._path = this._path + '.0.' + path;
-        }
-      } else {
-        this._path = this._path + '.' + path;
-      }
-    } else {
-      this._path = path;
-    }
-    if (objectPath.get(this._object, this._path)) {
-      if (value) {
-        let matchingPath = '';
-        if (key === undefined) {
-          if (compareobj(objectPath.get(this._object, this._path), value)) {
-            return this;
-          }
-        }
-        for (let i = 0; i < objectPath.get(this._object, this._path).length; i++) {
-          let iOrKeyPath = '';
-          if (key === undefined) {
-            iOrKeyPath = `${this._path}.${i}`;
-          } else {
-            iOrKeyPath = `${this._path}.${i}.${key}`;
-          }
-          if (compareobj(objectPath.get(this._object, iOrKeyPath), value)) {
-            matchingPath = `${this._path}.${i}`;
-            break;
-          }
-        }
-        if (matchingPath) {
-          this._path = matchingPath;
+    // console.log({ path, key, value });
+    if (this._path.length > 0) {
+      for (const i in this._path) {
+        if (Array.isArray(objectPath.get(this._object, this._path[i]))) {
+          this._path[i] = this._path[i] + '.' + i + '.' + path;
         } else {
-          this._path = undefined;
+          this._path[i] = this._path[i] + '.' + path;
         }
       }
+      // console.log('nach 1. iteration');
+      // console.log(this._path);
     } else {
-      this._path = undefined;
+      this._path.push(path);
+      // console.log('nach push');
+      // console.log(this._path);
     }
+
+    const matchingPath = [];
+
+    for (const currenpath of this._path) {
+      const currentvalue = objectPath.get(this._object, currenpath);
+      if (currentvalue) {
+        if (value === undefined) {
+          if (currentvalue.length > 1) {
+            for (const i in currentvalue) {
+              if (currentvalue.hasOwnProperty(i)) {
+                matchingPath.push(`${currenpath}.${i}`);
+              }
+            }
+          } else {
+            matchingPath.push(`${currenpath}`);
+          }
+        } else if (key === undefined) {
+          if (compareobj(currentvalue, value)) {
+            matchingPath.push(currenpath);
+          }
+        } else {
+          for (const i in currentvalue) {
+            if (compareobj(objectPath.get(this._object, `${currenpath}.${i}.${key}`), value)) {
+              matchingPath.push(`${currenpath}.${i}`);
+            }
+          }
+        }
+      }
+    }
+    this._path = matchingPath;
+    // console.log('nach matchinpath');
+    // console.log(this._path);
+
     return this;
   }
 
