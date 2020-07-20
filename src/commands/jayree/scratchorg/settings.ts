@@ -105,8 +105,8 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       let sfdxProjectVersion;
       /* istanbul ignore next*/
       try {
-        const tmpProject = await core.SfdxProject.resolve(orgretrievepath);
-        const sfdxProjectJson = await tmpProject.retrieveSfdxProjectJson();
+        const sfdxProject = await core.SfdxProject.resolve();
+        const sfdxProjectJson = await sfdxProject.retrieveSfdxProjectJson();
         sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
       } catch (error) {}
 
