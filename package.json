@@ -17,7 +17,7 @@
     "marked-terminal": "4.1.0",
     "object-path": "0.11.4",
     "open": "^7.0.4",
-    "puppeteer": "5.1.0",
+    "puppeteer": "5.2.0",
     "serialize-error": "^7.0.1",
     "shelljs": "0.8.4",
     "tabletojson": "^2.0.4",
@@ -39,7 +39,7 @@
     "@types/mocha": "8.0.0",
     "@types/node": "14.0.23",
     "@types/puppeteer": "3.0.1",
-    "codecov": "^3.7.0",
+    "codecov": "^3.7.1",
     "cross-spawn": "7.0.3",
     "husky": "^4.2.5",
     "mocha": "8.0.1",
@@ -54,7 +54,7 @@
     "tslint": "6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-microsoft-contrib": "6.2.0",
-    "typescript": "3.9.6",
+    "typescript": "3.9.7",
     "typescript-tslint-plugin": "^0.5.5"
   },
   "engines": {
