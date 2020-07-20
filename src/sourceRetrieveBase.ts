@@ -243,39 +243,41 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   return undefined;
                 }
               };
-              let deltaskpath;
-              if (deltask.path && deltask.path.match(/(.*\[.*\])/g)) {
-                deltaskpath = new ObjectPathResolver(data).resolveString(deltask.path).value();
-              } else if (typeof deltask.path === 'undefined') {
-                deltaskpath = new ObjectPathResolver(data).resolveString(deltask).value();
-              } else {
-                deltaskpath = delpath();
-              }
 
-              if (typeof deltaskpath !== 'undefined') {
-                debug(`delete: ${deltaskpath}`, 2);
-                objectPath.del(data, deltaskpath);
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
-                array.push({
-                  filePath: relative(root, file),
-                  operation: 'delete',
-                  message: `${deltaskpath}${typeof deltask.condition !== 'undefined' ? ` (${deltask.condition})` : ''}`
-                });
-              } else {
-                if (typeof deltask.condition !== 'undefined') {
-                  debug(
-                    `delete: condition for '${deltask.path}': '${deltask.condition
-                      .toString()
-                      .replace(',', ' => ')}' not match`,
-                    2
-                  );
-                } else {
-                  debug(`delete: '${deltask.path} not found`, 2);
-                }
+              let _deltaskpath;
+              try {
+                _deltaskpath = new ObjectPathResolver(data).resolveString(deltask).value();
+              } catch (error) {
+                _deltaskpath = [delpath()];
               }
+              _deltaskpath.reverse().forEach((deltaskpath) => {
+                if (typeof deltaskpath !== 'undefined') {
+                  debug(`delete: ${deltaskpath}`, 2);
+                  objectPath.del(data, deltaskpath);
+                  fs.writeFileSync(
+                    file,
+                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                  );
+                  array.push({
+                    filePath: relative(root, file),
+                    operation: 'delete',
+                    message: `${deltaskpath}${
+                      typeof deltask.condition !== 'undefined' ? ` (${deltask.condition})` : ''
+                    }`
+                  });
+                } else {
+                  if (typeof deltask.condition !== 'undefined') {
+                    debug(
+                      `delete: condition for '${deltask.path}': '${deltask.condition
+                        .toString()
+                        .replace(',', ' => ')}' not match`,
+                      2
+                    );
+                  } else {
+                    debug(`delete: '${deltask.path} not found`, 2);
+                  }
+                }
+              });
             }
           }
 
@@ -347,30 +349,97 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 }
               };
 
-              let settaskpath;
-              if (settask.path.match(/(.*\[.*\])/g)) {
-                settaskpath = new ObjectPathResolver(data).resolveString(settask.path).value();
-              } else {
-                settaskpath = setpath();
+              let _settaskpath;
+              try {
+                _settaskpath = new ObjectPathResolver(data).resolveString(settask.path).value();
+              } catch (error) {
+                _settaskpath = [setpath()];
               }
 
-              if (typeof settaskpath !== 'undefined') {
-                debug(settaskpath);
+              _settaskpath.forEach((settaskpath) => {
+                if (typeof settaskpath !== 'undefined') {
+                  debug(settaskpath);
 
-                if (settask.value) {
-                  if (JSON.stringify(settask.value).includes('<mydomain>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[0])
-                    );
-                  }
-                  if (JSON.stringify(settask.value).includes('<instance>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(/<mydomain>/i, conn.instanceUrl.substring(8).split('.')[1])
-                    );
-                  }
-                  if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
-                    debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`, 2);
-                    objectPath.set(data, settaskpath, settask.value);
+                  if (settask.value) {
+                    if (JSON.stringify(settask.value).includes('<mydomain>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<mydomain>/i,
+                          conn.instanceUrl.substring(8).split('.')[0]
+                        )
+                      );
+                    }
+                    if (JSON.stringify(settask.value).includes('<instance>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<mydomain>/i,
+                          conn.instanceUrl.substring(8).split('.')[1]
+                        )
+                      );
+                    }
+                    if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
+                      debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`, 2);
+                      objectPath.set(data, settaskpath, settask.value);
+                      fs.writeFileSync(
+                        file,
+                        builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                      );
+                      array.push({
+                        filePath: relative(root, file),
+                        operation: 'set',
+                        message: `${JSON.stringify(settask.value)} at ${settaskpath}${
+                          typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
+                        }`
+                      });
+                    }
+                  } else if (typeof settask.object === 'object') {
+                    const validate = (node) => {
+                      const replaceArray = [];
+                      const recursive = (n, attpath) => {
+                        // tslint:disable-next-line: forin
+                        for (const attributename in n) {
+                          if (attpath.length === 0) {
+                            attpath = attributename;
+                          } else {
+                            attpath = attpath + '.' + attributename;
+                          }
+                          if (typeof n[attributename] === 'object') {
+                            recursive(n[attributename], attpath);
+                          } else {
+                            if (n[attributename] === '<username>') {
+                              replaceArray.push([n[attributename], attpath]);
+                            }
+                          }
+                        }
+                      };
+                      recursive(node, '');
+                      replaceArray.forEach((element) => {
+                        if (element[0] === '<username>') {
+                          objectPath.set(node, element[1], conn.getUsername());
+                        }
+                      });
+                      return node;
+                    };
+
+                    settask.object = validate(settask.object);
+                    debug(settaskpath);
+
+                    debug(settask.object);
+
+                    debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`, 2);
+                    if (settask.object) {
+                      Object.keys(settask.object).forEach((k) => {
+                        debug(settaskpath + '.' + k);
+                        if (objectPath.has(data, settaskpath + '.' + k)) {
+                          debug(settask.object[k]);
+                          objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                          debug(objectPath.get(data, settaskpath));
+                        }
+                      });
+                    } else {
+                      objectPath.insert(data, settaskpath, settask.object);
+                    }
+
                     fs.writeFileSync(
                       file,
                       builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
@@ -378,74 +447,15 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                     array.push({
                       filePath: relative(root, file),
                       operation: 'set',
-                      message: `${JSON.stringify(settask.value)} at ${settaskpath}${
+                      message: `${JSON.stringify(settask.object)} at ${settaskpath}${
                         typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
                       }`
                     });
-                  }
-                } else if (typeof settask.object === 'object') {
-                  const validate = (node) => {
-                    const replaceArray = [];
-                    const recursive = (n, attpath) => {
-                      // tslint:disable-next-line: forin
-                      for (const attributename in n) {
-                        if (attpath.length === 0) {
-                          attpath = attributename;
-                        } else {
-                          attpath = attpath + '.' + attributename;
-                        }
-                        if (typeof n[attributename] === 'object') {
-                          recursive(n[attributename], attpath);
-                        } else {
-                          if (n[attributename] === '<username>') {
-                            replaceArray.push([n[attributename], attpath]);
-                          }
-                        }
-                      }
-                    };
-                    recursive(node, '');
-                    replaceArray.forEach((element) => {
-                      if (element[0] === '<username>') {
-                        objectPath.set(node, element[1], conn.getUsername());
-                      }
-                    });
-                    return node;
-                  };
-
-                  settask.object = validate(settask.object);
-                  debug(settaskpath);
-
-                  debug(settask.object);
-
-                  debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`, 2);
-                  if (settask.object) {
-                    Object.keys(settask.object).forEach((k) => {
-                      debug(settaskpath + '.' + k);
-                      if (objectPath.has(data, settaskpath + '.' + k)) {
-                        debug(settask.object[k]);
-                        objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
-                        debug(objectPath.get(data, settaskpath));
-                      }
-                    });
                   } else {
-                    objectPath.insert(data, settaskpath, settask.object);
+                    debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`, 2);
                   }
-
-                  fs.writeFileSync(
-                    file,
-                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                  );
-                  array.push({
-                    filePath: relative(root, file),
-                    operation: 'set',
-                    message: `${JSON.stringify(settask.object)} at ${settaskpath}${
-                      typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
-                    }`
-                  });
-                } else {
-                  debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`, 2);
                 }
-              }
+              });
             });
           }
 

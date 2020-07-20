@@ -5,10 +5,10 @@ interface QueryParameters {
     value?: any;
 }
 declare class ObjectPathResolver {
-    _path: string;
-    _object: string;
+    _path: any[];
+    _object: any;
     constructor(object: any);
-    value(): string;
+    value(): any[];
     resolve({ path, key, value }: QueryParameters): this;
     resolveString(string: any): this;
 }
