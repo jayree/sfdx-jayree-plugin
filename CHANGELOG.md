@@ -1,3 +1,12 @@
+## [2.1.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.0...v2.1.1) (2020-07-20)
+
+
+### Bug Fixes
+
+* updated dependencies ([3544710](https://github.com/jayree/sfdx-jayree-plugin/commit/354471091e09d816f552d03145efe20c438ccba2))
+* **scratchorgsettings:** sfdx project version detection ([5efed34](https://github.com/jayree/sfdx-jayree-plugin/commit/5efed3444b0b77e7b81cf0c932e97d5af11e6990))
+* **sourcefix:** find all occurrences matching the search path ([eadfc0c](https://github.com/jayree/sfdx-jayree-plugin/commit/eadfc0cc16448bf2bac422f8d7aa4c0db5d16db2))
+
 # [2.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.0.1...v2.1.0) (2020-07-16)
 
 
