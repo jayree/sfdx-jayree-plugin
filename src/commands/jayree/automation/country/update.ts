@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
@@ -17,8 +23,8 @@ export default class UpdateCountry extends SfdxCommand {
       description: messages.getMessage('silentFlagDescription'),
       required: false,
       default: false,
-      hidden: true
-    })
+      hidden: true,
+    }),
   };
 
   protected static requiresUsername = true;
@@ -29,7 +35,7 @@ export default class UpdateCountry extends SfdxCommand {
     let spinnermessage = '';
 
     const browser = await puppeteer.launch({
-      headless: true
+      headless: true,
     });
 
     const page = await browser.newPage();
@@ -62,10 +68,11 @@ export default class UpdateCountry extends SfdxCommand {
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
       format: 'State and Country/Territory Picklist | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}',
-      stream: process.stdout
+      stream: process.stdout,
     });
 
     try {
+      // eslint-disable-next-line no-unused-expressions
       !this.flags.silent
         ? this.ux.startSpinner('State and Country/Territory Picklist')
         : process.stdout.write('State and Country/Territory Picklist');
@@ -74,17 +81,19 @@ export default class UpdateCountry extends SfdxCommand {
       const conn = this.org.getConnection();
 
       spinnermessage = `login to ${conn.instanceUrl}`;
+      // eslint-disable-next-line no-unused-expressions
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
       await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-        waitUntil: 'networkidle0'
+        waitUntil: 'networkidle0',
       });
 
       spinnermessage = 'retrieve list of countries';
+      // eslint-disable-next-line no-unused-expressions
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
       try {
         await page.goto(conn.instanceUrl + '/i18n/ConfigStateCountry.apexp?setupid=AddressCleanerOverview', {
-          waitUntil: 'networkidle0'
+          waitUntil: 'networkidle0',
         });
         await page.waitFor('.list', { visible: true });
       } catch (error) {
@@ -100,7 +109,7 @@ export default class UpdateCountry extends SfdxCommand {
 
       if (!this.flags.silent) {
         bar.start(list.length, 0, {
-          text: ''
+          text: '',
         });
       }
 
@@ -111,15 +120,16 @@ export default class UpdateCountry extends SfdxCommand {
         const countryName = value[cNameKey];
 
         curr = curr + 1;
+        // eslint-disable-next-line no-unused-expressions
         !this.flags.silent
           ? bar.update(curr, {
-              text: 'update ' + countryName + '/' + countryCode
+              text: 'update ' + countryName + '/' + countryCode,
             })
           : process.stdout.write('.');
         await page.goto(
           conn.instanceUrl + `/i18n/ConfigureCountry.apexp?countryIso=${countryCode}&setupid=AddressCleanerOverview`,
           {
-            waitUntil: 'networkidle0'
+            waitUntil: 'networkidle0',
           }
         );
         const setCountrySelector = config.setCountry;
@@ -127,7 +137,7 @@ export default class UpdateCountry extends SfdxCommand {
 
         await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
         await page.waitForNavigation({
-          waitUntil: 'networkidle0'
+          waitUntil: 'networkidle0',
         });
       }
     } catch (error) {
@@ -142,6 +152,7 @@ export default class UpdateCountry extends SfdxCommand {
       this.ux.error(chalk.bold('ERROR running jayree:automation:country:update:  ') + chalk.red(error.message));
       process.exit(1);
     }
+    // eslint-disable-next-line no-unused-expressions
     !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
     bar.stop();
     if (page) {

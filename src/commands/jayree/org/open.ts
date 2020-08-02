@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as opn from 'open';
@@ -14,7 +20,7 @@ export default class OrgOpen extends SfdxCommand {
 $ sfdx jayree:org:open -u me@my.org
 $ sfdx jayree:org:open -u MyTestOrg1 -b firefox
 $ sfdx jayree:org:open -r -p lightning -b safari
-$ sfdx jayree:org:open -u me@my.org`
+$ sfdx jayree:org:open -u me@my.org`,
   ];
 
   protected static flagsConfig = {
@@ -22,16 +28,16 @@ $ sfdx jayree:org:open -u me@my.org`
       char: 'b',
       description: messages.getMessage('browserFlagDescription'),
       options: ['firefox', 'chrome', 'safari'],
-      default: 'chrome'
+      default: 'chrome',
     }),
     path: flags.string({
       char: 'p',
-      description: messages.getMessage('pathFlagDescription')
+      description: messages.getMessage('pathFlagDescription'),
     }),
     urlonly: flags.boolean({
       char: 'r',
-      description: messages.getMessage('urlonlyFlagDescription')
-    })
+      description: messages.getMessage('urlonlyFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;
@@ -105,14 +111,14 @@ $ sfdx jayree:org:open -u me@my.org`
     if (!this.flags.urlonly) {
       await opn(url, {
         app: browser,
-        wait: false
+        wait: false,
       });
     }
 
     return {
       url,
       orgId: this.org.getOrgId(),
-      username: this.org.getUsername()
+      username: this.org.getUsername(),
     };
   }
 }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
@@ -14,7 +20,7 @@ export default class ImportState extends SfdxCommand {
   public static aliases = [
     'jayree:automation:statecountry:import',
     'jayree:automation:statecountry:create',
-    'jayree:automation:statecountry:update'
+    'jayree:automation:statecountry:update',
   ];
 
   public static description = messages.getMessage('commandStateDescription');
@@ -22,38 +28,39 @@ export default class ImportState extends SfdxCommand {
   protected static flagsConfig = {
     countrycode: flags.string({
       description: messages.getMessage('countrycodeFlagDescription'),
-      required: true
+      required: true,
     }),
     category: flags.string({
       description: messages.getMessage('categoryFlagDescription'),
-      required: true
+      required: true,
     }),
     language: flags.string({
       description: messages.getMessage('languageFlagDescription'),
-      required: true
+      required: true,
     }),
     uselocalvariant: flags.boolean({
       description: messages.getMessage('uselocalvariantFlagDescription'),
       required: false,
-      default: false
+      default: false,
     }),
     silent: flags.boolean({
       description: messages.getMessage('silentFlagDescription'),
       required: false,
       default: false,
-      hidden: true
-    })
+      hidden: true,
+    }),
   };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
     let spinnermessage = '';
 
     const browser = await puppeteer.launch({
-      headless: true
+      headless: true,
     });
 
     const page = await browser.newPage();
@@ -96,7 +103,7 @@ export default class ImportState extends SfdxCommand {
               return (val as boolean) === false;
             },
             {
-              timeout: 0
+              timeout: 0,
             },
             element
           );
@@ -123,20 +130,22 @@ export default class ImportState extends SfdxCommand {
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
       format: `State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()} | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}`,
-      stream: process.stdout
+      stream: process.stdout,
     });
 
     try {
+      // eslint-disable-next-line no-unused-expressions
       !this.flags.silent
         ? this.ux.startSpinner(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`)
         : process.stdout.write(`State and Country/Territory Picklist: ${this.flags.countrycode.toUpperCase()}`);
 
       spinnermessage = 'get data from ISO.org';
+      // eslint-disable-next-line no-unused-expressions
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
       try {
         await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
-          waitUntil: 'networkidle0'
+          waitUntil: 'networkidle0',
         });
         await page.waitFor('.tablesorter', { visible: true });
       } catch (error) {
@@ -170,22 +179,24 @@ export default class ImportState extends SfdxCommand {
         const conn = this.org.getConnection();
 
         spinnermessage = `login to ${conn.instanceUrl}`;
+        // eslint-disable-next-line no-unused-expressions
         !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
         await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-          waitUntil: 'networkidle0'
+          waitUntil: 'networkidle0',
         });
 
         const list = jsonParsed[this.flags.category].filter((v) => v['Language code'] === this.flags.language);
         let curr = 0;
 
         spinnermessage = `set Integration Value to ${this.flags.countrycode.toUpperCase()}`;
+        // eslint-disable-next-line no-unused-expressions
         !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
 
         await page.goto(
           conn.instanceUrl +
             `/i18n/ConfigureCountry.apexp?countryIso=${this.flags.countrycode.toUpperCase()}&setupid=AddressCleanerOverview`,
           {
-            waitUntil: 'networkidle0'
+            waitUntil: 'networkidle0',
           }
         );
 
@@ -194,7 +205,7 @@ export default class ImportState extends SfdxCommand {
 
         await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
         await page.waitForNavigation({
-          waitUntil: 'networkidle0'
+          waitUntil: 'networkidle0',
         });
 
         this.ux.stopSpinner();
@@ -208,7 +219,7 @@ export default class ImportState extends SfdxCommand {
               list.length + config.deactivate[this.flags.countrycode.toUpperCase()][this.flags.category].length,
               0,
               {
-                text: ''
+                text: '',
               }
             );
           }
@@ -221,11 +232,12 @@ export default class ImportState extends SfdxCommand {
               conn.instanceUrl +
                 `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
               {
-                waitUntil: 'networkidle0'
+                waitUntil: 'networkidle0',
               }
             );
 
             curr = curr + 1;
+            // eslint-disable-next-line no-unused-expressions
             !this.flags.silent ? bar.update(curr, { text: 'deactivate ' + value }) : process.stdout.write('.');
 
             const selector = config.update;
@@ -236,13 +248,13 @@ export default class ImportState extends SfdxCommand {
 
             await page.click(selector.save.replace(/:/g, '\\:'));
             await page.waitForNavigation({
-              waitUntil: 'networkidle0'
+              waitUntil: 'networkidle0',
             });
           }
         } else {
           if (!this.flags.silent) {
             bar.start(list.length, 0, {
-              text: ''
+              text: '',
             });
           }
         }
@@ -267,7 +279,7 @@ export default class ImportState extends SfdxCommand {
             conn.instanceUrl +
               `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
             {
-              waitUntil: 'networkidle0'
+              waitUntil: 'networkidle0',
             }
           );
 
@@ -277,13 +289,15 @@ export default class ImportState extends SfdxCommand {
             try {
               await page.waitFor('.mainTitle', { timeout: 100 });
               update = true;
+              // eslint-disable-next-line no-empty
             } catch (e) {}
 
             try {
               await page.waitFor('#errorTitle', {
-                timeout: 100
+                timeout: 100,
               });
               update = false;
+              // eslint-disable-next-line no-empty
             } catch (e) {}
 
             if (update == null && retries < 600) {
@@ -300,16 +314,17 @@ export default class ImportState extends SfdxCommand {
               conn.instanceUrl +
                 `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
               {
-                waitUntil: 'networkidle0'
+                waitUntil: 'networkidle0',
               }
             );
             await page.waitFor('.mainTitle');
           }
 
           curr = curr + 1;
+          // eslint-disable-next-line no-unused-expressions
           !this.flags.silent
             ? bar.update(curr, {
-                text: (update ? 'update ' : 'create ') + stateName + '/' + stateintVal
+                text: (update ? 'update ' : 'create ') + stateName + '/' + stateintVal,
               })
             : process.stdout.write('.');
 
@@ -323,7 +338,7 @@ export default class ImportState extends SfdxCommand {
 
           await page.click(selector.save.replace(/:/g, '\\:'));
           await page.waitForNavigation({
-            waitUntil: 'networkidle0'
+            waitUntil: 'networkidle0',
           });
         }
       } else {
@@ -341,6 +356,7 @@ export default class ImportState extends SfdxCommand {
       this.ux.error(chalk.bold('ERROR running jayree:automation:state:import:  ') + chalk.red(error.message));
       process.exit(1);
     }
+    // eslint-disable-next-line no-unused-expressions
     !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
     bar.stop();
     if (page) {

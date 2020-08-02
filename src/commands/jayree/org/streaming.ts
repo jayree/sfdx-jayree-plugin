@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 
@@ -11,21 +17,22 @@ export default class Streaming extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:streaming --topic=/event/eventName__e
 ...
-`
+`,
   ];
 
   protected static flagsConfig = {
     topic: flags.string({
       char: 'p',
       required: true,
-      description: messages.getMessage('topicFlagDescription')
-    })
+      description: messages.getMessage('topicFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     // await this.org.refreshAuth();
     const conn = this.org.getConnection();
@@ -35,7 +42,7 @@ export default class Streaming extends SfdxCommand {
     });
 
     return {
-      orgId: this.org.getOrgId()
+      orgId: this.org.getOrgId(),
     };
   }
 }

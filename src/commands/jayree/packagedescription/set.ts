@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
@@ -14,7 +20,7 @@ export default class SetPackageDescription extends SfdxCommand {
 
   public static examples = [
     `$ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
-    `
+    `,
   ];
 
   public static args = [{ name: 'file' }];
@@ -23,20 +29,21 @@ export default class SetPackageDescription extends SfdxCommand {
     file: flags.string({
       char: 'f',
       description: messages.getMessage('fileFlagDescription'),
-      required: true
+      required: true,
     }),
     description: flags.string({
       char: 'd',
       description: messages.getMessage('descriptionFlagDescription'),
       dependsOn: ['file'],
-      required: true
-    })
+      required: true,
+    }),
   };
 
   protected static requiresUsername = false;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
@@ -60,18 +67,18 @@ export default class SetPackageDescription extends SfdxCommand {
         } else {
           fileContentjs = {
             _declaration: {
-              _attributes: { version: '1.0', encoding: 'utf-8' }
+              _attributes: { version: '1.0', encoding: 'utf-8' },
             },
             Package: [
               {
                 _attributes: {
-                  xmlns: 'http://soap.sforce.com/2006/04/metadata'
+                  xmlns: 'http://soap.sforce.com/2006/04/metadata',
                 },
                 description: text,
                 types: xml['Package']['types'],
-                version: xml['Package']['version']
-              }
-            ]
+                version: xml['Package']['version'],
+              },
+            ],
           };
           action = 'added';
         }

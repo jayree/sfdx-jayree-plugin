@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import * as objectPath from 'object-path';
 
 // tslint:disable-next-line: no-any
@@ -17,30 +23,38 @@ interface QueryParameters {
 }
 
 class ObjectPathResolver {
-  _path = [];
-  _object;
+  private _path = [];
+  private _object;
 
-  constructor(object) {
+  public constructor(object) {
+    // eslint-disable-next-line no-underscore-dangle
     this._object = object;
   }
 
-  value() {
+  public value() {
+    // eslint-disable-next-line no-underscore-dangle
     return this._path;
   }
 
-  resolve({ path, key, value }: QueryParameters) {
+  public resolve({ path, key, value }: QueryParameters) {
     // console.log({ path, key, value });
+    // eslint-disable-next-line no-underscore-dangle
     if (this._path.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-for-in-array, no-underscore-dangle
       for (const i in this._path) {
+        // eslint-disable-next-line no-underscore-dangle
         if (Array.isArray(objectPath.get(this._object, this._path[i]))) {
+          // eslint-disable-next-line no-underscore-dangle
           this._path[i] = this._path[i] + '.' + i + '.' + path;
         } else {
+          // eslint-disable-next-line no-underscore-dangle
           this._path[i] = this._path[i] + '.' + path;
         }
       }
       // console.log('nach 1. iteration');
       // console.log(this._path);
     } else {
+      // eslint-disable-next-line no-underscore-dangle
       this._path.push(path);
       // console.log('nach push');
       // console.log(this._path);
@@ -48,15 +62,16 @@ class ObjectPathResolver {
 
     const matchingPath = [];
 
+    // eslint-disable-next-line no-underscore-dangle
     for (const currenpath of this._path) {
+      // eslint-disable-next-line no-underscore-dangle
       const currentvalue = objectPath.get(this._object, currenpath);
       if (currentvalue) {
         if (value === undefined) {
           if (currentvalue.length > 1) {
+            // eslint-disable-next-line guard-for-in
             for (const i in currentvalue) {
-              if (currentvalue.hasOwnProperty(i)) {
-                matchingPath.push(`${currenpath}.${i}`);
-              }
+              matchingPath.push(`${currenpath}.${i}`);
             }
           } else {
             matchingPath.push(`${currenpath}`);
@@ -67,6 +82,7 @@ class ObjectPathResolver {
           }
         } else {
           for (const i in currentvalue) {
+            // eslint-disable-next-line no-underscore-dangle
             if (compareobj(objectPath.get(this._object, `${currenpath}.${i}.${key}`), value)) {
               matchingPath.push(`${currenpath}.${i}`);
             }
@@ -74,6 +90,7 @@ class ObjectPathResolver {
         }
       }
     }
+    // eslint-disable-next-line no-underscore-dangle
     this._path = matchingPath;
     // console.log('nach matchinpath');
     // console.log(this._path);
@@ -81,8 +98,9 @@ class ObjectPathResolver {
     return this;
   }
 
-  resolveString(string) {
+  public resolveString(string) {
     // console.log(string)
+    // eslint-disable-next-line no-useless-escape
     string.match(/(?:[^\.\']+|\'[^\']*\')+/g).forEach((element) => {
       const query = {} as QueryParameters;
       // const e = element.split('?');

@@ -1,9 +1,15 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import * as fs from 'fs';
+import * as path from 'path';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
 import * as chalk from 'chalk';
-import * as fs from 'fs';
-import * as path from 'path';
 import * as shell from 'shelljs';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 
@@ -26,20 +32,20 @@ Coverage: 82%
     keepcache: flags.boolean({
       char: 'c',
       hidden: true,
-      description: messages.getMessage('keepcache')
+      description: messages.getMessage('keepcache'),
     }),
     skipfix: flags.boolean({
       hidden: true,
-      description: messages.getMessage('keepcache')
+      description: messages.getMessage('keepcache'),
     }),
     verbose: flags.builtin({
       description: messages.getMessage('log'),
-      longDescription: messages.getMessage('log')
+      longDescription: messages.getMessage('log'),
     }),
     scope: flags.string({
       char: 's',
-      description: messages.getMessage('scope')
-    })
+      description: messages.getMessage('scope'),
+    }),
   };
 
   protected static requiresUsername = true;
@@ -141,7 +147,7 @@ See more help with --help`);
             {
               fatal: false,
               silent: true,
-              env: { ...process.env, FORCE_COLOR: 0 }
+              env: { ...process.env, FORCE_COLOR: 0 },
             }
           )
         );
@@ -156,7 +162,7 @@ See more help with --help`);
                 filePath: path
                   .relative(orgretrievepath, p.filePath)
                   .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
-                state: 'undefined'
+                state: 'undefined',
               };
             })
             .forEach((element) => {
@@ -193,8 +199,6 @@ See more help with --help`);
       } else {
         throw out;
       }
-    } catch (error) {
-      throw error;
     } finally {
       if (!this.flags.keepcache) {
         await core.fs.remove(orgretrievepath);
@@ -205,17 +209,17 @@ See more help with --help`);
         columns: [
           {
             key: 'fullName',
-            label: 'FULL NAME'
+            label: 'FULL NAME',
           },
           {
             key: 'type',
-            label: 'TYPE'
+            label: 'TYPE',
           },
           {
             key: 'filePath',
-            label: 'PROJECT PATH'
-          }
-        ]
+            label: 'PROJECT PATH',
+          },
+        ],
       });
 
       Object.keys(updatedfiles).forEach((workaround) => {
@@ -225,17 +229,17 @@ See more help with --help`);
             columns: [
               {
                 key: 'filePath',
-                label: 'FILEPATH'
+                label: 'FILEPATH',
               },
               {
                 key: 'operation',
-                label: 'OPERATION'
+                label: 'OPERATION',
               },
               {
                 key: 'message',
-                label: 'MESSAGE'
-              }
-            ]
+                label: 'MESSAGE',
+              },
+            ],
           });
         }
       });
@@ -246,7 +250,7 @@ See more help with --help`);
       fixedFiles: Object.values(updatedfiles)
         .filter((value) => value.length > 0)
         .reduce((acc, val) => acc.concat(val), []),
-      details: updatedfiles
+      details: updatedfiles,
     };
   }
 }

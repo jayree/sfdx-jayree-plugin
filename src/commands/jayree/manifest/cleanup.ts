@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { cleanupManifestFile } from '../../../lib/manifest';
+import { cleanupManifestFile } from '../../../utils/manifest';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -20,12 +26,12 @@ Coverage: 82%
   protected static flagsConfig = {
     manifest: flags.filepath({
       char: 'x',
-      description: messages.getMessage('manifestFlagDescription')
+      description: messages.getMessage('manifestFlagDescription'),
     }),
     file: flags.filepath({
       char: 'f',
-      description: messages.getMessage('fileFlagDescription')
-    })
+      description: messages.getMessage('fileFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;

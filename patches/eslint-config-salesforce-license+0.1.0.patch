@@ -1,0 +1,15 @@
+diff --git a/node_modules/eslint-config-salesforce-license/.eslintrc.js b/node_modules/eslint-config-salesforce-license/.eslintrc.js
+index 4ab8a1b..1226043 100644
+--- a/node_modules/eslint-config-salesforce-license/.eslintrc.js
++++ b/node_modules/eslint-config-salesforce-license/.eslintrc.js
+@@ -7,8 +7,8 @@ module.exports = {
+       [
+         '',
+         {
+-          pattern: ' \\* Copyright \\(c\\) \\d{4}, salesforce\\.com, inc\\.',
+-          template: ' * Copyright (c) 2020, salesforce.com, inc.',
++          pattern: ' \\* Copyright \\(c\\) \\d{4}, jayree',
++          template: ' * Copyright (c) 2020, jayree',
+         },
+         ' * All rights reserved.',
+         ' * Licensed under the BSD 3-Clause license.',

@@ -1,7 +1,13 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import * as path from 'path';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
-import * as path from 'path';
 import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -22,12 +28,12 @@ Coverage: 82%
   protected static flagsConfig = {
     tag: flags.array({
       char: 't',
-      description: messages.getMessage('tag')
+      description: messages.getMessage('tag'),
     }),
     verbose: flags.builtin({
       description: messages.getMessage('log'),
-      longDescription: messages.getMessage('log')
-    })
+      longDescription: messages.getMessage('log'),
+    }),
   };
 
   protected static requiresUsername = true;
@@ -48,8 +54,7 @@ Coverage: 82%
       }
 
       updatedfiles = await this.applyfixes(config, this.flags.tag, projectpath);
-    } catch (error) {
-      throw error;
+      // eslint-disable-next-line no-empty
     } finally {
     }
 
@@ -60,17 +65,17 @@ Coverage: 82%
           columns: [
             {
               key: 'filePath',
-              label: 'FILEPATH'
+              label: 'FILEPATH',
             },
             {
               key: 'operation',
-              label: 'OPERATION'
+              label: 'OPERATION',
             },
             {
               key: 'message',
-              label: 'MESSAGE'
-            }
-          ]
+              label: 'MESSAGE',
+            },
+          ],
         });
       }
     });
@@ -79,7 +84,7 @@ Coverage: 82%
       fixedFiles: Object.values(updatedfiles)
         .filter((value) => value.length > 0)
         .reduce((acc, val) => acc.concat(val), []),
-      details: updatedfiles
+      details: updatedfiles,
     };
   }
 }

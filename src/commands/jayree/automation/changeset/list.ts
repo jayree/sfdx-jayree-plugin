@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
@@ -24,7 +30,7 @@ export default class ViewChangeSets extends SfdxCommand {
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({
-      headless: true
+      headless: true,
     });
 
     const page = await browser.newPage();
@@ -32,11 +38,12 @@ export default class ViewChangeSets extends SfdxCommand {
     await this.login(conn, page);
 
     await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
 
     const tables = await this.gettables(page);
 
+    // eslint-disable-next-line @typescript-eslint/await-thenable
     await this.ux.styledJSON(tables.csad);
 
     /*     const jsonParsed = {};
@@ -54,7 +61,7 @@ export default class ViewChangeSets extends SfdxCommand {
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
     await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
 
@@ -102,7 +109,7 @@ export default class ViewChangeSets extends SfdxCommand {
         dcs: converttable(
           document,
           'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:DeployedPageBlock:ListDeployedInboundChangeSetBlockSection:DeployedInboundChangeSetList'
-        )
+        ),
       };
     });
   }

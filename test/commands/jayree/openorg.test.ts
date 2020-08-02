@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { expect, test } from '@salesforce/command/lib/test';
 
 describe('platform.win32', () => {
@@ -7,7 +13,7 @@ describe('platform.win32', () => {
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
-      value: 'win32'
+      value: 'win32',
     });
   });
 
@@ -52,7 +58,7 @@ describe('platform.undefined', () => {
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
-      value: 'undefined'
+      value: 'undefined',
     });
   });
 
@@ -76,7 +82,7 @@ describe('platform.linux', () => {
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
-      value: 'linux'
+      value: 'linux',
     });
   });
 
@@ -121,7 +127,7 @@ describe('platform.darwin', () => {
 
     // redefine process.platform
     Object.defineProperty(process, 'platform', {
-      value: 'darwin'
+      value: 'darwin',
     });
   });
 
