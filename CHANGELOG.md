@@ -1,3 +1,14 @@
+## [2.1.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.1...v2.1.2) (2020-08-27)
+
+
+### Bug Fixes
+
+* update dependencies ([c34ab8e](https://github.com/jayree/sfdx-jayree-plugin/commit/c34ab8e6209452093d4dd48a6785e13f176a34b3))
+* **scratchorgrevision:** show all revision numbers or counters ([a1aeb48](https://github.com/jayree/sfdx-jayree-plugin/commit/a1aeb4881e8762ed62d2f0b3a62697184962f6a0))
+* **sourcefix:** do not require username ([c990e3e](https://github.com/jayree/sfdx-jayree-plugin/commit/c990e3e0f6af8c64caaf629a39c5d14c0f5d39ef))
+* **sourceretrieve*:** prepare for hooks and optimize runtime ([8b916c3](https://github.com/jayree/sfdx-jayree-plugin/commit/8b916c3b5ecef510f6d2acf15e5f0a0cdc7264ce))
+* updated dependencies switch to eslint ([098ce88](https://github.com/jayree/sfdx-jayree-plugin/commit/098ce886e2cc69491708a049c3ea0ffc9bc4d76e))
+
 ## [2.1.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.0...v2.1.1) (2020-07-20)
 
 
