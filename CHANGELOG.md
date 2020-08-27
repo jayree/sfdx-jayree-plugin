@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.2...v2.1.3) (2020-08-27)
+
+
+### Bug Fixes
+
+* revert "fix(sourcefix): do not require username" ([7b5f641](https://github.com/jayree/sfdx-jayree-plugin/commit/7b5f641495ff2b1e5ab929509980fd1b83bd997b))
+
 ## [2.1.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.1...v2.1.2) (2020-08-27)
 
 
