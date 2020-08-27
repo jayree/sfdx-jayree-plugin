@@ -49,10 +49,10 @@ jobs:
       - run: *test
       - run: *coverage
       - save_cache: *save-cache
-  node-10:
+  node-12:
     <<: *node-test
     docker:
-      - image: node:10.21.0
+      - image: node:12.18.3
   release:
     <<: *defaults
     steps:
@@ -89,13 +89,13 @@ workflows:
   sfdx-jayree:
     jobs:
       - node-latest
-      - node-10
+      - node-12
       - release:
           filters:
             branches: { only: master }
           requires:
             - node-latest
-            - node-10
+            - node-12
       - merge:
           filters:
             branches: { only: master }
