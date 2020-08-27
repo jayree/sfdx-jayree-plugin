@@ -197,19 +197,16 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
     }
 
     const sourceMemberResults = (await conn.tooling
-      .sobject('SourceMember')
-      .find({ RevisionCounter: { $gt: this.flags.startfromrevision } }, [
-        'RevisionCounter',
-        'Id',
-        'MemberType',
-        'MemberName',
-        'IsNameObsolete',
-      ])
+      .query(
+        `SELECT RevisionCounter,RevisionNum,Id,MemberType,MemberName,IsNameObsolete from SourceMember where RevisionCounter >= ${this.flags.startfromrevision}`
+      )
       .then((results) => {
+        // eslint-disable-next-line no-console
         let islocalinmap = false;
         let isstoredinmap = false;
-
-        const tablemap = results.map((value) => {
+        const tablemap = results.records.map((value) => {
+          value['RevisionCounter'] =
+            value['RevisionCounter'] >= value['RevisionNum'] ? value['RevisionCounter'] : value['RevisionNum'];
           const keyval = value['RevisionCounter'];
           if (keyval === newlocalmaxRev) {
             islocalinmap = true;
