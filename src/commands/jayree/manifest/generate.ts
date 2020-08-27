@@ -1,8 +1,14 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-import { builder } from '../../../lib/xml';
+import { builder } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
@@ -39,7 +45,6 @@ if (!Array.prototype.pushUniqueValue) {
 
 /* istanbul ignore else*/
 if (!String.prototype.toLowerCaseifTrue) {
-  // tslint:disable-next-line:space-before-function-paren
   String.prototype.toLowerCaseifTrue = function (ignore: boolean) {
     return ignore ? this.toLowerCase() : this;
   };
@@ -57,44 +62,45 @@ export default class GeneratePackageXML extends SfdxCommand {
     `$ sfdx jayree:manifest:generate --targetusername myOrg@example.com
     <?xml version="1.0" encoding="UTF-8"?>
     <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
-  `
+  `,
   ];
 
   public static args = [{ name: 'file' }];
 
   protected static flagsConfig = {
     configfile: flags.string({
-      description: messages.getMessage('configFlagDescription')
+      description: messages.getMessage('configFlagDescription'),
     }),
     quickfilter: flags.string({
       char: 'q',
-      description: messages.getMessage('quickfilterFlagDescription')
+      description: messages.getMessage('quickfilterFlagDescription'),
     }),
     matchcase: flags.boolean({
       char: 'c',
-      description: messages.getMessage('matchCaseFlagDescription')
+      description: messages.getMessage('matchCaseFlagDescription'),
     }),
     matchwholeword: flags.boolean({
       char: 'w',
-      description: messages.getMessage('matchWholeWordFlagDescription')
+      description: messages.getMessage('matchWholeWordFlagDescription'),
     }),
     includeflowversions: flags.boolean({
-      description: messages.getMessage('includeflowversionsDescription')
+      description: messages.getMessage('includeflowversionsDescription'),
     }),
     file: flags.string({
       char: 'f',
-      description: messages.getMessage('fileFlagDescription')
+      description: messages.getMessage('fileFlagDescription'),
     }),
     excludemanaged: flags.boolean({
       char: 'x',
-      description: messages.getMessage('excludeManagedFlagDescription')
-    })
+      description: messages.getMessage('excludeManagedFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
     const packageTypes = {};
     const configFile = this.flags.configfile || false;
@@ -106,6 +112,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       this.project = await core.SfdxProject.resolve();
       const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
       sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
+      // eslint-disable-next-line no-empty
     } catch (error) {}
 
     let apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
@@ -132,6 +139,7 @@ export default class GeneratePackageXML extends SfdxCommand {
         });
     }
 
+    // eslint-disable-next-line no-unused-expressions
     outputFile ? this.ux.startSpinner(`Generating ${outputFile}`) : this.ux.startSpinner('Generating package.xml');
 
     // for (let retries = 0; ; retries++) {
@@ -147,7 +155,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           const promise = this.listMetaData(
             conn,
             {
-              type: `${objectType}Folder`
+              type: `${objectType}Folder`,
             },
             apiVersion
           );
@@ -195,7 +203,7 @@ export default class GeneratePackageXML extends SfdxCommand {
               conn,
               {
                 type: objectType,
-                folder: folderItem.fullName
+                folder: folderItem.fullName,
               },
               apiVersion
             );
@@ -235,9 +243,10 @@ export default class GeneratePackageXML extends SfdxCommand {
         try {
           const flowObject = this.listMetaData(conn, { type: 'Flow' }, '43.0');
           /* istanbul ignore next*/
-          if (flowObject) {
+          if (typeof flowObject !== 'undefined') {
             unfolderedObjects.push(await flowObject);
           }
+          // eslint-disable-next-line no-empty
         } catch (err) {}
       }
 
@@ -250,6 +259,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           } else {
             unfolderedObjectItems = [unfolderedObject];
           }
+          // eslint-disable-next-line complexity
           unfolderedObjectItems.forEach((metadataEntries) => {
             /*               if (metadataEntries.type === 'CustomApplication') {
                 console.log(metadataEntries);
@@ -276,7 +286,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                 packageTypes[x].pushUniqueValueKey(
                   {
                     fullName: metadataEntries.fullName,
-                    fileName: metadataEntries.fileName
+                    fileName: metadataEntries.fileName,
                   },
                   'fullName'
                 );
@@ -305,7 +315,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                             activeFlowVersions[metadataEntries.fullName].LatestVersion
                           }) for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${
                             activeFlowVersions[metadataEntries.fullName].LatestVersion
-                          })!`
+                          })!`,
                         },
                         'fullName'
                       );
@@ -313,7 +323,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                       packageTypes[metadataEntries.type].pushUniqueValueKey(
                         {
                           fullName: metadataEntries.fullName,
-                          fileName: metadataEntries.fileName
+                          fileName: metadataEntries.fileName,
                         },
                         'fullName'
                       );
@@ -329,7 +339,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                           activeFlowVersions[metadataEntries.fullName].ActiveVersion
                         }) for '${metadataEntries.fullName}' found - changing '${metadataEntries.fullName}' to '${
                           metadataEntries.fullName
-                        }-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`
+                        }-${activeFlowVersions[metadataEntries.fullName].ActiveVersion}'`,
                       },
                       'fullName'
                     );
@@ -345,7 +355,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                     packageTypes[metadataEntries.type].pushUniqueValueKey(
                       {
                         fullName: 'PersonAccount.PersonAccount',
-                        fileName: 'objects/PersonAccount.object'
+                        fileName: 'objects/PersonAccount.object',
                       },
                       'fullName'
                     );
@@ -357,7 +367,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                     packageTypes[metadataEntries.type].pushUniqueValueKey(
                       {
                         fullName: 'PersonAccount.Standard_PersonAccount_Match_Rule_v1_0',
-                        fileName: 'matchingRules/PersonAccount.matchingRule'
+                        fileName: 'matchingRules/PersonAccount.matchingRule',
                       },
                       'fullName'
                     );
@@ -380,7 +390,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                               metadataEntries.fullName
                             }' to '${metadataEntries.fullName}-${
                               activeFlowVersions[metadataEntries.fullName].LatestVersion
-                            }'`
+                            }'`,
                           },
                           'fullName'
                         );
@@ -393,7 +403,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                               activeFlowVersions[metadataEntries.fullName].ActiveVersion
                             }) not found for '${metadataEntries.fullName}' - you will retrieve LatestVersion (${
                               activeFlowVersions[metadataEntries.fullName].LatestVersion
-                            })!`
+                            })!`,
                           },
                           'fullName'
                         );
@@ -402,7 +412,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                       packageTypes[metadataEntries.type].pushUniqueValueKey(
                         {
                           fullName: metadataEntries.fullName,
-                          fileName: metadataEntries.fileName
+                          fileName: metadataEntries.fileName,
                         },
                         'fullName'
                       );
@@ -443,7 +453,7 @@ export default class GeneratePackageXML extends SfdxCommand {
               packageTypes[objectType].pushUniqueValueKey(
                 {
                   fullName: metadataEntries.fullName,
-                  fileName: metadataEntries.fileName
+                  fileName: metadataEntries.fileName,
                 },
                 'fullName'
               );
@@ -531,7 +541,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           'TaskType',
           'WorkOrderLineItemStatus',
           'WorkOrderPriority',
-          'WorkOrderStatus'
+          'WorkOrderStatus',
         ];
         for await (const member of standardvaluesetarray) {
           try {
@@ -544,7 +554,7 @@ export default class GeneratePackageXML extends SfdxCommand {
               packageTypes['StandardValueSet'].pushUniqueValueKey(
                 {
                   fullName: member,
-                  fileName: `${member}.standardValueSet`
+                  fileName: `${member}.standardValueSet`,
                 },
                 'fullName'
               );
@@ -604,7 +614,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           packageTypes['CustomObjectTranslation'].pushUniqueValueKey(
             {
               fullName: 'Product-' + lng,
-              fileName: 'objectTranslations/Product-' + lng + '.objectTranslation'
+              fileName: 'objectTranslations/Product-' + lng + '.objectTranslation',
             },
             'fullName'
           );
@@ -614,11 +624,11 @@ export default class GeneratePackageXML extends SfdxCommand {
       const packageJson = {
         Package: {
           $: {
-            xmlns: 'http://soap.sforce.com/2006/04/metadata'
+            xmlns: 'http://soap.sforce.com/2006/04/metadata',
           },
           types: [],
-          version: apiVersion
-        }
+          version: apiVersion,
+        },
       };
 
       const filteredwarnings = [];
@@ -677,7 +687,7 @@ export default class GeneratePackageXML extends SfdxCommand {
                   }
                   return value.fullName;
                 })
-                .sort()
+                .sort(),
             });
           }
         });
@@ -711,7 +721,7 @@ export default class GeneratePackageXML extends SfdxCommand {
       return {
         orgId: this.org.getOrgId(),
         packagexml: packageJson,
-        warnings: filteredwarnings
+        warnings: filteredwarnings,
       };
     } catch (error) {
       /* istanbul ignore next */
@@ -726,7 +736,7 @@ export default class GeneratePackageXML extends SfdxCommand {
   }
 
   /* istanbul ignore next */
-  public toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<{}>> {
+  public toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>> {
     return conn.tooling.query(soql);
   }
 

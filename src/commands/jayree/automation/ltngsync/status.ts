@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
@@ -14,25 +20,25 @@ export default class LtngSyncStatus extends SfdxCommand {
     userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
     userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
     userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
-    `
+    `,
   ];
 
   protected static flagsConfig = {
     officeuser: flags.string({
       char: 'o',
       description: messages.getMessage('UserFlagDescription'),
-      required: true
+      required: true,
     }),
     statusonly: flags.boolean({
       char: 's',
       description: messages.getMessage('StatusFlagDescription'),
-      required: false
+      required: false,
     }),
     wait: flags.integer({
       char: 'w',
       description: messages.getMessage('waitFlagDescription'),
-      required: false
-    })
+      required: false,
+    }),
   };
 
   protected static requiresUsername = true;
@@ -41,7 +47,7 @@ export default class LtngSyncStatus extends SfdxCommand {
 
   public async run(): Promise<AnyJson> {
     const browser = await puppeteer.launch({
-      headless: true
+      headless: true,
     });
     let tables;
 
@@ -53,7 +59,7 @@ export default class LtngSyncStatus extends SfdxCommand {
       await this.login(conn, page);
 
       await page.goto(conn.instanceUrl + '/s2x/resetExchangeSyncUser.apexp', {
-        waitUntil: 'networkidle2'
+        waitUntil: 'networkidle2',
       });
 
       tables = await this.gettables(page);
@@ -69,15 +75,15 @@ export default class LtngSyncStatus extends SfdxCommand {
         if (userSetup === 'Yes' && !this.flags.statusonly) {
           ({ tables } = await this.checkUserReset(page, tables, 'Salesforce and Exchange email addresses linked'));
           ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce and Exchange email addresses linked', [
-            'Linked'
+            'Linked',
           ]));
           ({ tables } = await this.checkContactsEvents(page, tables, 'Salesforce to Exchange sync status', [
             'Initial sync completed',
-            'In sync'
+            'In sync',
           ]));
           ({ tables } = await this.checkContactsEvents(page, tables, 'Exchange to Salesforce sync status', [
             'Initial sync completed',
-            'In sync'
+            'In sync',
           ]));
         }
       } else {
@@ -85,6 +91,7 @@ export default class LtngSyncStatus extends SfdxCommand {
       }
 
       if (this.flags.statusonly) {
+        // eslint-disable-next-line no-unused-expressions
         this.flags.officeuser ? this.ux.styledJSON(tables[this.flags.officeuser]) : this.ux.styledJSON(tables);
       }
     } catch (error) {
@@ -113,8 +120,8 @@ export default class LtngSyncStatus extends SfdxCommand {
       } catch {
         tables[this.flags.officeuser] = {
           configSetup: {
-            'User assigned to active Lightning Sync configuration': 'No'
-          }
+            'User assigned to active Lightning Sync configuration': 'No',
+          },
         };
         configSetupItem = 'No';
       }
@@ -126,7 +133,7 @@ export default class LtngSyncStatus extends SfdxCommand {
     return { tables, userSetup: configSetupItem };
   }
 
-  private async checkUserReset(page: puppeteer.Page, tables: {}, itemtext: string) {
+  private async checkUserReset(page: puppeteer.Page, tables: Record<string, any>, itemtext: string) {
     const userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
     const userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
     let status = '';
@@ -151,7 +158,12 @@ export default class LtngSyncStatus extends SfdxCommand {
     return { tables };
   }
 
-  private async checkContactsEvents(page: puppeteer.Page, tables: {}, itemtext: string, finalstate: string[]) {
+  private async checkContactsEvents(
+    page: puppeteer.Page,
+    tables: Record<string, any>,
+    itemtext: string,
+    finalstate: string[]
+  ) {
     let userContactsItem = tables[this.flags.officeuser].userContacts[itemtext];
     let userEventsItem = tables[this.flags.officeuser].userEvents[itemtext];
     let status = '';
@@ -181,10 +193,11 @@ export default class LtngSyncStatus extends SfdxCommand {
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
     await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
   private async resetuser(page: puppeteer.Page) {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     page.on('dialog', async (dialog) => {
       await dialog.accept();
     });
@@ -192,7 +205,7 @@ export default class LtngSyncStatus extends SfdxCommand {
       document.getElementById('thePage:theForm:thePageBlock:pageBlock:resetButton').click();
     });
     await page.waitForNavigation({
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
 
@@ -203,7 +216,6 @@ export default class LtngSyncStatus extends SfdxCommand {
         tables.forEach((tableid) => {
           const object = {};
           if (typeof document.getElementById(tableid) !== 'undefined' && document.getElementById(tableid)) {
-            // tslint:disable-next-line:no-any
             for (const row of (document.getElementById(tableid) as any).rows) {
               if (typeof row.cells[1] !== 'undefined') {
                 if (typeof row.cells[1].getElementsByTagName('img')[0] !== 'undefined') {
@@ -222,7 +234,7 @@ export default class LtngSyncStatus extends SfdxCommand {
       };
 
       const returntables = {
-        System: converttables(document, ['orgConfigInfo', 'orgContacts', 'orgEvents'])
+        System: converttables(document, ['orgConfigInfo', 'orgContacts', 'orgEvents']),
       };
       if (
         typeof document.getElementById('resetExchangeSyncUser') !== 'undefined' &&
@@ -242,7 +254,7 @@ export default class LtngSyncStatus extends SfdxCommand {
       document.getElementById('thePage:theForm:thePageBlock:pageBlock:checkStatusButton').click();
     });
     await page.waitForNavigation({
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
     return this.gettables(page);
   }

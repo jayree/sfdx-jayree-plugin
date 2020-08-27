@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
@@ -15,7 +21,7 @@ export default class GetPackageDescription extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:packagedescription:get --file FILENAME
     Description of Package FILENAME
-    `
+    `,
   ];
 
   public static args = [{ name: 'file' }];
@@ -24,14 +30,15 @@ export default class GetPackageDescription extends SfdxCommand {
     file: flags.string({
       char: 'f',
       description: messages.getMessage('fileFlagDescription'),
-      required: true
-    })
+      required: true,
+    }),
   };
 
   protected static requiresUsername = false;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
 

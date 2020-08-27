@@ -1,9 +1,15 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import * as path from 'path';
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
-import * as path from 'path';
 import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -23,24 +29,25 @@ export default class ScratchOrgSettings extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:scratchorgsettings
 $ sfdx jayree:scratchorgsettings -u me@my.org
-$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
+$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
     writetoprojectscratchdeffile: flags.boolean({
       char: 'w',
-      description: messages.getMessage('writetoprojectscratchdeffile')
+      description: messages.getMessage('writetoprojectscratchdeffile'),
     }),
     file: flags.string({
       char: 'f',
-      description: messages.getMessage('fileFlagDescription')
-    })
+      description: messages.getMessage('fileFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = true;
 
+  // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
@@ -92,7 +99,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         } else {
           this.logger.error('query ' + member + ' not possible');
           // debug('query ' + member + ' not possible');
-          // tslint:disable-next-line: no-any
           debug(chalk.red('Error: ' + member + ' - ' + (settingsQuery as any)));
         }
       } catch (error) {
@@ -152,7 +158,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     if (typeof settings['territory2Settings'] !== 'undefined') {
       if (typeof settings['territory2Settings']['enableTerritoryManagement2'] !== 'undefined') {
         settings['territory2Settings'] = {
-          enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2']
+          enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2'],
         };
         debug('set ' + 'enableTerritoryManagement2');
       }
@@ -218,6 +224,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath =
+        // eslint-disable-next-line @typescript-eslint/await-thenable
         this.flags.file || path.join(await this.project.getPath(), 'config', 'project-scratch-def.json');
       let deffile = {};
 
@@ -283,7 +290,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     return {
       settings,
       orgId: this.org.getOrgId(),
-      username: this.org.getUsername()
+      username: this.org.getUsername(),
     };
   }
 

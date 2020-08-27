@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { prompt, QuestionCollection } from 'inquirer';
@@ -22,37 +28,37 @@ jobid:  0Xxx100000xx1x1
  ChangeSet3
  ChangeSet2
 ❯ ChangeSet1
-`
+`,
   ];
 
   protected static flagsConfig = {
     changeset: flags.string({
       char: 's',
       description: messages.getMessage('changesetFlagDescription'),
-      required: false
+      required: false,
     }),
     runtests: flags.string({
       char: 'r',
       description: messages.getMessage('runtestsFlagDescription'),
       required: false,
-      dependsOn: ['testlevel']
+      dependsOn: ['testlevel'],
     }),
     testlevel: flags.string({
       char: 'l',
       description: messages.getMessage('testlevelFlagDescription'),
       required: false,
-      options: ['Default', 'RunSpecifiedTests', 'RunLocalTests', 'RunAllTestsInOrg']
+      options: ['Default', 'RunSpecifiedTests', 'RunLocalTests', 'RunAllTestsInOrg'],
     }),
     checkonly: flags.boolean({
       char: 'c',
       description: messages.getMessage('checkonlyFlagDescription'),
-      required: false
+      required: false,
     }),
     nodialog: flags.boolean({
       description: messages.getMessage('nodialogFlagDescription'),
       required: false,
-      dependsOn: ['changeset']
-    })
+      dependsOn: ['changeset'],
+    }),
   };
 
   protected static requiresUsername = true;
@@ -63,7 +69,7 @@ jobid:  0Xxx100000xx1x1
     const conn = this.org.getConnection();
 
     const browser = await puppeteer.launch({
-      headless: true
+      headless: true,
     });
 
     let job;
@@ -74,7 +80,7 @@ jobid:  0Xxx100000xx1x1
       await this.login(conn, page);
 
       await page.goto(conn.instanceUrl + '/changemgmt/listInboundChangeSet.apexp', {
-        waitUntil: 'networkidle2'
+        waitUntil: 'networkidle2',
       });
 
       const tables = await this.gettables(page);
@@ -92,16 +98,16 @@ jobid:  0Xxx100000xx1x1
               name: element.Description
                 ? `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate} - ${element.Description}`
                 : `${element.ChangeSetName} - ${element.SourceOrganization} - ${element.UploadedBy} - ${element.UploadedDate}`,
-              short: element.ChangeSetName
+              short: element.ChangeSetName,
             })),
-            default: this.flags.changeset
+            default: this.flags.changeset,
           },
           {
             type: 'list',
             name: 'selectedMode',
             message: 'Choose Validate or Deploy',
             choices: ['Validate', 'Deploy'],
-            default: () => (this.flags.checkonly ? 'Validate' : 'Deploy')
+            default: () => (this.flags.checkonly ? 'Validate' : 'Deploy'),
           },
           {
             type: 'list',
@@ -111,7 +117,7 @@ jobid:  0Xxx100000xx1x1
             default: () => (this.flags.testlevel ? this.flags.testlevel.replace(/([A-Z])/g, ' $1').trim() : 'Default'),
             filter: (val) => {
               return val.replace(/( )/g, '');
-            }
+            },
           },
           {
             type: 'input',
@@ -127,8 +133,8 @@ jobid:  0Xxx100000xx1x1
                 return 'You must specify at least one test.';
               }
               return true;
-            }
-          }
+            },
+          },
         ] as QuestionCollection;
 
         sCS = await prompt(questions).then((answers) => {
@@ -138,7 +144,7 @@ jobid:  0Xxx100000xx1x1
         sCS = {
           selectedChangeSet: this.flags.changeset,
           selectedMode: this.flags.checkonly ? 'Validate' : 'Deploy',
-          testlevel: this.flags.testlevel
+          testlevel: this.flags.testlevel,
         };
         if (this.flags.testlevel === 'RunSpecifiedTests') {
           if (!this.flags.runtests) {
@@ -158,7 +164,7 @@ jobid:  0Xxx100000xx1x1
       }
       // open detail page
       await page.goto(conn.instanceUrl + changeset.DetailPage, {
-        waitUntil: 'networkidle2'
+        waitUntil: 'networkidle2',
       });
 
       await this.clickvalidateordeploy(page, sCS.selectedMode);
@@ -208,13 +214,13 @@ jobid:  0Xxx100000xx1x1
       id: job.id,
       state: job.status,
       status: job.status,
-      timedOut: true
+      timedOut: true,
     };
   }
 
   private async login(conn: core.Connection, page: puppeteer.Page) {
     await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
 
@@ -259,7 +265,7 @@ jobid:  0Xxx100000xx1x1
       });
     }
     await page.waitForNavigation({
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
 
@@ -285,15 +291,14 @@ jobid:  0Xxx100000xx1x1
       document.getElementById('simpleDialog0button0').click();
     });
     await page.waitForNavigation({
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
   }
 
-  // tslint:disable-next-line:no-any
   private async getjob(conn: core.Connection, page: puppeteer.Page, cs: any) {
     // open deployment status
     await page.goto(conn.instanceUrl + '/changemgmt/monitorDeployment.apexp', {
-      waitUntil: 'networkidle0'
+      waitUntil: 'networkidle0',
     });
     // try {
 
@@ -345,7 +350,7 @@ jobid:  0Xxx100000xx1x1
     if (!job.running) {
       // open detail page
       await page.goto(conn.instanceUrl + cs.DetailPage, {
-        waitUntil: 'networkidle2'
+        waitUntil: 'networkidle2',
       });
 
       const csstatus = await page.evaluate(() => {
@@ -358,7 +363,7 @@ jobid:  0Xxx100000xx1x1
           div.innerHTML = table.rows[1].cells[0].innerHTML;
           return {
             id: (div.firstChild as Element).getAttribute('href').split('asyncId=')[1].split('&')[0],
-            status: table.rows[1].cells[1].innerText.replace(/(:\t|\t)/g, '').split(': ')[1]
+            status: table.rows[1].cells[1].innerText.replace(/(:\t|\t)/g, '').split(': ')[1],
           };
         }
       });
@@ -366,7 +371,7 @@ jobid:  0Xxx100000xx1x1
         id: csstatus.id,
         name: cs.ChangeSetName,
         status: csstatus.status,
-        running: job.running
+        running: job.running,
       };
     }
 
@@ -375,14 +380,14 @@ jobid:  0Xxx100000xx1x1
         id: job.id,
         name: job.currentname,
         status: 'InProgress',
-        running: job.running
+        running: job.running,
       };
     } else {
       return {
         id: job.pendingid,
         name: cs.ChangeSetName,
         status: 'Pending',
-        running: job.running
+        running: job.running,
       };
     }
     // } catch {
@@ -434,7 +439,7 @@ jobid:  0Xxx100000xx1x1
         dcs: converttable(
           document,
           'ListInboundChangeSetPage:listInboundChangeSetPageBody:listInboundChangeSetPageBody:ListInboundChangeSetForm:DeployedPageBlock:ListDeployedInboundChangeSetBlockSection:DeployedInboundChangeSetList'
-        )
+        ),
       };
     });
   }

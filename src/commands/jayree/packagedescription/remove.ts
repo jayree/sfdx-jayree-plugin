@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as AdmZip from 'adm-zip';
@@ -14,7 +20,7 @@ export default class RemovePackageDescription extends SfdxCommand {
 
   public static examples = [
     `$ sfdx jayree:packagedescription:remove --file FILENAME
-    `
+    `,
   ];
 
   public static args = [{ name: 'file' }];
@@ -23,14 +29,15 @@ export default class RemovePackageDescription extends SfdxCommand {
     file: flags.string({
       char: 'f',
       description: messages.getMessage('fileFlagDescription'),
-      required: true
-    })
+      required: true,
+    }),
   };
 
   protected static requiresUsername = false;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     const inputfile = this.args.file || this.flags.file;
     const newZip = new AdmZip();
@@ -53,17 +60,17 @@ export default class RemovePackageDescription extends SfdxCommand {
           this.ux.log(action + ' description: ' + text);
           fileContentjs = {
             _declaration: {
-              _attributes: { version: '1.0', encoding: 'utf-8' }
+              _attributes: { version: '1.0', encoding: 'utf-8' },
             },
             Package: [
               {
                 _attributes: {
-                  xmlns: 'http://soap.sforce.com/2006/04/metadata'
+                  xmlns: 'http://soap.sforce.com/2006/04/metadata',
                 },
                 types: xml['Package']['types'],
-                version: xml['Package']['version']
-              }
-            ]
+                version: xml['Package']['version'],
+              },
+            ],
           };
           newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
         } else {
@@ -78,6 +85,7 @@ export default class RemovePackageDescription extends SfdxCommand {
       newZip.writeZip(inputfile);
     }
 
+    // eslint-disable-next-line camelcase
     return { old_description: text, task: action };
   }
 }

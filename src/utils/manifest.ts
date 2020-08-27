@@ -1,7 +1,14 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { cli } from 'cli-ux';
 import * as fs from 'fs-extra';
 import { builder, parseStringSync } from './xml';
 
+// eslint-disable-next-line @typescript-eslint/require-await
 export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
   const packageignore = parseStringSync(fs.readFileSync(ignoreManifest, 'utf8'));
 
@@ -36,7 +43,7 @@ export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
     if (packageTypesMapped[key].length > 0) {
       newPackageTypesUpdated.push({
         name: key,
-        members: packageTypesMapped[key]
+        members: packageTypesMapped[key],
       });
     }
   });

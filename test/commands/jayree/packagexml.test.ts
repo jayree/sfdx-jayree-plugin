@@ -1,20 +1,25 @@
-// import { core } from '@salesforce/command';
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import * as crypto from 'crypto';
 import { $$, expect, test } from '@salesforce/command/lib/test';
-import * as crypto_1 from 'crypto';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import * as packagexml from '../../../src/commands/jayree/manifest/generate';
 
-const _uniqid = () => {
-  return crypto_1.randomBytes(16).toString('hex');
+const uniqid = () => {
+  return crypto.randomBytes(16).toString('hex');
 };
 const createdlastModifiedfields = {
-  createdById: _uniqid(),
+  createdById: uniqid(),
   createdByName: 'User Name1',
   createdDate: '2018-01-01T00:00:00.000Z',
-  lastModifiedById: _uniqid(),
+  lastModifiedById: uniqid(),
   lastModifiedByName: 'User Name2',
-  lastModifiedDate: '2018-12-31T23:59:00.000Z'
+  lastModifiedDate: '2018-12-31T23:59:00.000Z',
 };
 
 /* beforeEach(() => {
@@ -41,9 +46,9 @@ const createdlastModifiedfields = {
 
 describe('Flow with ActiveVersion <> LatestVersion', () => {
   beforeEach(() => {
-    const flowid = _uniqid();
+    const flowid = uniqid();
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -51,12 +56,12 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'flow',
-              xmlName: 'Flow'
-            }
+              xmlName: 'Flow',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -68,12 +73,12 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
           fullName: 'testflow',
           id: flowid,
           manageableState: 'unmanaged',
-          type: 'Flow'
-        }
+          type: 'Flow',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 1,
           totalSize: 10,
@@ -84,26 +89,26 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
             {
               attributes: {
                 type: 'FlowDefinition',
-                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid
+                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid,
               },
               DeveloperName: 'testflow',
               ActiveVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + _uniqid()
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + uniqid(),
                 },
-                VersionNumber: 1
+                VersionNumber: 1,
               },
               LatestVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 2
-              }
-            }
-          ]
-        } as jsforce.QueryResult<{}>);
+                VersionNumber: 2,
+              },
+            },
+          ],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -133,9 +138,9 @@ describe('Flow with ActiveVersion <> LatestVersion', () => {
 
 describe('Flow with ActiveVersion = LatestVersion', () => {
   beforeEach(() => {
-    const flowid = _uniqid();
+    const flowid = uniqid();
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -143,12 +148,12 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'flow',
-              xmlName: 'Flow'
-            }
+              xmlName: 'Flow',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -160,12 +165,12 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
           fullName: 'testflow',
           id: flowid,
           manageableState: 'unmanaged',
-          type: 'Flow'
-        }
+          type: 'Flow',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 1,
           totalSize: 10,
@@ -176,26 +181,26 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
             {
               attributes: {
                 type: 'FlowDefinition',
-                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid
+                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid,
               },
               DeveloperName: 'testflow',
               ActiveVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 1
+                VersionNumber: 1,
               },
               LatestVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 1
-              }
-            }
-          ]
-        } as jsforce.QueryResult<{}>);
+                VersionNumber: 1,
+              },
+            },
+          ],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -225,9 +230,9 @@ describe('Flow with ActiveVersion = LatestVersion', () => {
 
 describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => {
   beforeEach(() => {
-    const flowid = _uniqid();
+    const flowid = uniqid();
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -235,12 +240,12 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
               inFolder: false,
               metaFile: false,
               suffix: 'flow',
-              xmlName: 'Flow'
-            }
+              xmlName: 'Flow',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -252,12 +257,12 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
           fullName: 'testflow',
           id: flowid,
           manageableState: 'unmanaged',
-          type: 'Flow'
-        }
+          type: 'Flow',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 1,
           totalSize: 10,
@@ -268,26 +273,26 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
             {
               attributes: {
                 type: 'FlowDefinition',
-                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid
+                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid,
               },
               DeveloperName: 'testflow',
               ActiveVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 1
+                VersionNumber: 1,
               },
               LatestVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 1
-              }
-            }
-          ]
-        } as jsforce.QueryResult<{}>);
+                VersionNumber: 1,
+              },
+            },
+          ],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -317,9 +322,9 @@ describe('Flow with ActiveVersion = LatestVersion (includeflowversions)', () => 
 
 describe('Flow with no ActiveVersion', () => {
   beforeEach(() => {
-    const flowid = _uniqid();
+    const flowid = uniqid();
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -327,12 +332,12 @@ describe('Flow with no ActiveVersion', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'flow',
-              xmlName: 'Flow'
-            }
+              xmlName: 'Flow',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -344,12 +349,12 @@ describe('Flow with no ActiveVersion', () => {
           fullName: 'testflow',
           id: flowid,
           manageableState: 'unmanaged',
-          type: 'Flow'
-        }
+          type: 'Flow',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 1,
           totalSize: 10,
@@ -360,19 +365,19 @@ describe('Flow with no ActiveVersion', () => {
             {
               attributes: {
                 type: 'FlowDefinition',
-                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid
+                url: '/services/data/v44.0/tooling/sobjects/FlowDefinition/' + flowid,
               },
               DeveloperName: 'testflow',
               LatestVersion: {
                 attributes: {
                   type: 'Flow',
-                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid
+                  url: '/services/data/v44.0/tooling/sobjects/Flow/' + flowid,
                 },
-                VersionNumber: 1
-              }
-            }
-          ]
-        } as jsforce.QueryResult<{}>);
+                VersionNumber: 1,
+              },
+            },
+          ],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -400,12 +405,12 @@ describe('Flow with no ActiveVersion', () => {
 describe('ConfigFile with all parameters', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -413,15 +418,15 @@ describe('ConfigFile with all parameters', () => {
       return Promise.resolve([]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -437,12 +442,12 @@ describe('ConfigFile with all parameters', () => {
 describe('ConfigFile without any parameters', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -450,15 +455,15 @@ describe('ConfigFile without any parameters', () => {
       return Promise.resolve([]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -474,12 +479,12 @@ describe('ConfigFile without any parameters', () => {
 describe('ConfigFile without any parameters + cli parameter for QuickFilter', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -487,15 +492,15 @@ describe('ConfigFile without any parameters + cli parameter for QuickFilter', ()
       return Promise.resolve([]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -509,7 +514,7 @@ describe('ConfigFile without any parameters + cli parameter for QuickFilter', ()
       '--configfile',
       'test/assets/config2.json',
       '--quickfilter',
-      'Report'
+      'Report',
     ])
     .it(
       'runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/config.json --quickfilter=Report',
@@ -522,12 +527,12 @@ describe('ConfigFile without any parameters + cli parameter for QuickFilter', ()
 describe('ConfigFile does not exist', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -535,15 +540,15 @@ describe('ConfigFile does not exist', () => {
       return Promise.resolve([]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -555,7 +560,7 @@ describe('ConfigFile does not exist', () => {
       '--targetusername',
       'test@org.com',
       '--configfile',
-      'test/assets/does_not_exist.json'
+      'test/assets/does_not_exist.json',
     ])
     .it('runs jayree:packagexml --targetusername test@org.com --configfile=test/assets/does_not_exist.json', (ctx) => {
       expect(ctx.stderr).to.contain('ENOENT: no such file or directory');
@@ -565,7 +570,7 @@ describe('ConfigFile does not exist', () => {
 describe('Installed Packages', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -573,7 +578,7 @@ describe('Installed Packages', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'installedPackage',
-              xmlName: 'InstalledPackage'
+              xmlName: 'InstalledPackage',
             },
             {
               childXmlNames: ['CustomLabel'],
@@ -581,19 +586,19 @@ describe('Installed Packages', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'labels',
-              xmlName: 'CustomLabels'
+              xmlName: 'CustomLabels',
             },
             {
               directoryName: 'reports',
               inFolder: true,
               metaFile: false,
               suffix: 'report',
-              xmlName: 'Report'
-            }
+              xmlName: 'Report',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -603,31 +608,31 @@ describe('Installed Packages', () => {
           ...createdlastModifiedfields,
           fileName: 'installedPackages/sf_chttr_apps.installedPackage',
           fullName: 'sf_chttr_apps',
-          id: _uniqid(),
+          id: uniqid(),
           namespacePrefix: 'sf_chttr_apps',
-          type: 'InstalledPackage'
+          type: 'InstalledPackage',
         },
         {
           ...createdlastModifiedfields,
           fileName: 'labels/CustomLabels.labels',
           fullName: 'customlabelname',
-          id: _uniqid(),
+          id: uniqid(),
           manageableState: 'installed',
           namespacePrefix: 'mypackage',
-          type: 'CustomLabel'
-        }
+          type: 'CustomLabel',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -644,7 +649,7 @@ describe('Installed Packages', () => {
 describe('Exclude Installed Packages', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -652,7 +657,7 @@ describe('Exclude Installed Packages', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'installedPackage',
-              xmlName: 'InstalledPackage'
+              xmlName: 'InstalledPackage',
             },
             {
               childXmlNames: ['CustomLabel'],
@@ -660,19 +665,19 @@ describe('Exclude Installed Packages', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'labels',
-              xmlName: 'CustomLabels'
+              xmlName: 'CustomLabels',
             },
             {
               directoryName: 'reports',
               inFolder: true,
               metaFile: false,
               suffix: 'report',
-              xmlName: 'Report'
-            }
+              xmlName: 'Report',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -682,38 +687,38 @@ describe('Exclude Installed Packages', () => {
           ...createdlastModifiedfields,
           fileName: 'installedPackages/sf_chttr_apps.installedPackage',
           fullName: 'sf_chttr_apps',
-          id: _uniqid(),
+          id: uniqid(),
           namespacePrefix: 'sf_chttr_apps',
-          type: 'InstalledPackage'
+          type: 'InstalledPackage',
         },
         {
           ...createdlastModifiedfields,
           fileName: 'labels/CustomLabels.labels',
           fullName: 'customlabelname',
-          id: _uniqid(),
+          id: uniqid(),
           manageableState: 'installed',
-          type: 'CustomLabel'
+          type: 'CustomLabel',
         },
         {
           ...createdlastModifiedfields,
           fileName: 'reports/testreports/testreport.report',
           fullName: 'testreports/testreport',
-          id: _uniqid(),
+          id: uniqid(),
           manageableState: 'unmanaged',
-          type: 'Report'
-        }
+          type: 'Report',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -731,7 +736,7 @@ describe('Exclude Installed Packages', () => {
 describe('ValueSetTranslations', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -739,17 +744,18 @@ describe('ValueSetTranslations', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'globalValueSetTranslation',
-              xmlName: 'GlobalValueSetTranslation'
-            }
+              xmlName: 'GlobalValueSetTranslation',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
-    // @ts-ignore
-    $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    ($$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData') as any).callsFake(async () => {
       return Promise.resolve([
         {
           ...createdlastModifiedfields,
@@ -757,7 +763,7 @@ describe('ValueSetTranslations', () => {
           fullName: 'testvalueset1-xx',
           id: '',
           namespacePrefix: '',
-          type: { $: { 'xsi:nil': 'true' } }
+          type: { $: { 'xsi:nil': 'true' } },
         },
         {
           ...createdlastModifiedfields,
@@ -765,20 +771,20 @@ describe('ValueSetTranslations', () => {
           fullName: 'testvalueset2-xx',
           id: '',
           namespacePrefix: '',
-          type: { $: { 'xsi:nil': 'true' } }
-        }
+          type: { $: { 'xsi:nil': 'true' } },
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -796,7 +802,7 @@ describe('ValueSetTranslations', () => {
 describe('Foldered Objects', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -804,12 +810,12 @@ describe('Foldered Objects', () => {
               inFolder: true,
               metaFile: true,
               suffix: 'email',
-              xmlName: 'EmailTemplate'
-            }
+              xmlName: 'EmailTemplate',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -821,11 +827,11 @@ describe('Foldered Objects', () => {
             ...createdlastModifiedfields,
             fileName: 'email/emailtestfolder',
             fullName: 'emailtestfolder',
-            id: _uniqid(),
+            id: uniqid(),
             manageableState: 'installed',
             namespacePrefix: 'mypackage',
-            type: 'EmailFolder'
-          }
+            type: 'EmailFolder',
+          },
         ]);
       })
       .onCall(1)
@@ -835,23 +841,23 @@ describe('Foldered Objects', () => {
             ...createdlastModifiedfields,
             fileName: 'email/emailtestfolder/test1.email',
             fullName: 'emailtestfolder/test1',
-            id: _uniqid(),
+            id: uniqid(),
             manageableState: 'installed',
             namespacePrefix: 'emailtest',
-            type: 'EmailTemplate'
-          }
+            type: 'EmailTemplate',
+          },
         ]);
       });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -868,7 +874,7 @@ describe('Foldered Objects', () => {
 describe('Foldered Objects - Single Object', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -876,52 +882,52 @@ describe('Foldered Objects - Single Object', () => {
               inFolder: true,
               metaFile: false,
               suffix: 'report',
-              xmlName: 'Report'
-            }
+              xmlName: 'Report',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+        return new Promise<jsforce.FileProperties>((resolve) => {
           resolve({
             ...createdlastModifiedfields,
             fileName: 'reports/testreportfolder',
             fullName: 'testreportfolder',
-            id: _uniqid(),
+            id: uniqid(),
             manageableState: 'unmanaged',
-            type: 'ReportFolder'
+            type: 'ReportFolder',
           } as jsforce.FileProperties);
         });
       })
       .onCall(1)
       .callsFake(async () => {
-        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+        return new Promise<jsforce.FileProperties>((resolve) => {
           resolve({
             ...createdlastModifiedfields,
             fileName: 'reports/testreportfolder/testreport.report',
             fullName: 'testreportfolder/testreport',
-            id: _uniqid(),
+            id: uniqid(),
             manageableState: 'unmanaged',
-            type: 'Report'
+            type: 'Report',
           } as jsforce.FileProperties);
         });
       });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -938,7 +944,7 @@ describe('Foldered Objects - Single Object', () => {
 describe('Foldered Objects - undefined', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -946,32 +952,32 @@ describe('Foldered Objects - undefined', () => {
               inFolder: true,
               metaFile: false,
               suffix: 'report',
-              xmlName: 'Report'
-            }
+              xmlName: 'Report',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+        return new Promise<jsforce.FileProperties>((resolve) => {
           resolve(undefined);
         });
       });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -988,7 +994,7 @@ describe('Foldered Objects - undefined', () => {
 describe('Unfoldered Objects', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -997,12 +1003,12 @@ describe('Unfoldered Objects', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'labels',
-              xmlName: 'CustomLabels'
-            }
+              xmlName: 'CustomLabels',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
@@ -1014,28 +1020,28 @@ describe('Unfoldered Objects', () => {
           fullName: 'CustomLabels',
           id: '',
           namespacePrefix: '',
-          type: 'CustomLabels'
+          type: 'CustomLabels',
         },
         {
           ...createdlastModifiedfields,
           fileName: 'labels/CustomLabels.labels',
           fullName: 'customlabelname',
-          id: _uniqid(),
+          id: uniqid(),
           manageableState: 'installed',
-          type: 'CustomLabel'
-        }
+          type: 'CustomLabel',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1054,7 +1060,7 @@ describe('Unfoldered Objects', () => {
 describe('Unfoldered Objects - single  Object', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [
             {
@@ -1063,37 +1069,37 @@ describe('Unfoldered Objects - single  Object', () => {
               inFolder: false,
               metaFile: false,
               suffix: 'labels',
-              xmlName: 'CustomLabels'
-            }
+              xmlName: 'CustomLabels',
+            },
           ],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         } as jsforce.DescribeMetadataResult);
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
-      return new Promise<jsforce.FileProperties>((resolve, reject) => {
+      return new Promise<jsforce.FileProperties>((resolve) => {
         resolve({
           ...createdlastModifiedfields,
           fileName: 'labels/CustomLabels.labels',
           fullName: 'CustomLabels',
           id: '',
           namespacePrefix: '',
-          type: 'CustomLabels'
+          type: 'CustomLabels',
         } as jsforce.FileProperties);
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1118,12 +1124,12 @@ describe('QuickFilter', () => {
             inFolder: false,
             metaFile: false,
             suffix: 'labels',
-            xmlName: 'CustomLabels'
-          }
+            xmlName: 'CustomLabels',
+          },
         ],
         organizationNamespace: '',
         partialSaveAllowed: true,
-        testRequired: false
+        testRequired: false,
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
@@ -1134,29 +1140,29 @@ describe('QuickFilter', () => {
           fullName: 'CustomLabels',
           id: '',
           namespacePrefix: '',
-          type: 'CustomLabels'
+          type: 'CustomLabels',
         },
         {
           ...createdlastModifiedfields,
           fileName: 'labels/CustomLabels.labels',
           fullName: 'customlabelname',
-          id: _uniqid(),
+          id: uniqid(),
           manageableState: 'installed',
           namespacePrefix: 'mypackage',
-          type: 'CustomLabel'
-        }
+          type: 'CustomLabel',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1218,12 +1224,12 @@ describe('Write File', () => {
             inFolder: false,
             metaFile: false,
             suffix: 'labels',
-            xmlName: 'CustomLabels'
-          }
+            xmlName: 'CustomLabels',
+          },
         ],
         organizationNamespace: '',
         partialSaveAllowed: true,
-        testRequired: false
+        testRequired: false,
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
@@ -1234,20 +1240,20 @@ describe('Write File', () => {
           fullName: 'CustomLabels',
           id: '',
           namespacePrefix: '',
-          type: 'CustomLabels'
-        }
+          type: 'CustomLabels',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1262,6 +1268,7 @@ describe('Write File', () => {
 
 describe('Write File - Error', () => {
   beforeEach(() => {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     $$.SANDBOX.stub(fs, 'writeFile').callsFake(async () => {
       throw Error('EACCES: permission denied');
     });
@@ -1274,12 +1281,12 @@ describe('Write File - Error', () => {
             inFolder: false,
             metaFile: false,
             suffix: 'labels',
-            xmlName: 'CustomLabels'
-          }
+            xmlName: 'CustomLabels',
+          },
         ],
         organizationNamespace: '',
         partialSaveAllowed: true,
-        testRequired: false
+        testRequired: false,
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
@@ -1290,20 +1297,20 @@ describe('Write File - Error', () => {
           fullName: 'CustomLabels',
           id: '',
           namespacePrefix: '',
-          type: 'CustomLabels'
-        }
+          type: 'CustomLabels',
+        },
       ]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1319,21 +1326,22 @@ describe('Write File - Error', () => {
 describe('Unfoldered Objects - Error', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return Promise.resolve(null);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData').callsFake(async () => {
       return Promise.resolve([]);
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery').callsFake(async () => {
-      return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+      return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
         resolve({
           size: 0,
           totalSize: 10,
           done: true,
           queryLocator: null,
           entityTypeName: 'FlowDefinition',
-          records: []
-        } as jsforce.QueryResult<{}>);
+          records: [],
+        } as jsforce.QueryResult<Record<string, unknown>>);
       });
     });
   });
@@ -1349,39 +1357,39 @@ describe('Unfoldered Objects - Error', () => {
 describe('test valid standardValueSet', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         });
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+        return new Promise<jsforce.FileProperties>((resolve) => {
           resolve(undefined);
         });
       });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
           resolve({
             size: 0,
             totalSize: 10,
             done: true,
             queryLocator: null,
             entityTypeName: 'FlowDefinition',
-            records: []
-          } as jsforce.QueryResult<{}>);
+            records: [],
+          } as jsforce.QueryResult<Record<string, unknown>>);
         });
       })
       .onCall(1)
       .callsFake(async () => {
-        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
           resolve({
             size: 1,
             totalSize: 1,
@@ -1392,7 +1400,7 @@ describe('test valid standardValueSet', () => {
               {
                 attributes: {
                   type: 'StandardValueSet',
-                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles'
+                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles',
                 },
                 Metadata: {
                   groupingStringEnum: null,
@@ -1400,14 +1408,14 @@ describe('test valid standardValueSet', () => {
                   standardValue: [
                     {
                       label: 'User',
-                      valueName: 'User'
-                    }
+                      valueName: 'User',
+                    },
                   ],
-                  urls: null
-                }
-              }
-            ]
-          } as jsforce.QueryResult<{}>);
+                  urls: null,
+                },
+              },
+            ],
+          } as jsforce.QueryResult<Record<string, unknown>>);
         });
       });
   });
@@ -1423,39 +1431,39 @@ describe('test valid standardValueSet', () => {
 describe('test invalid standardValueSet', () => {
   beforeEach(() => {
     $$.SANDBOX.stub(packagexml.default.prototype, 'getMetaData').callsFake(async () => {
-      return new Promise<jsforce.DescribeMetadataResult>((resolve, reject) => {
+      return new Promise<jsforce.DescribeMetadataResult>((resolve) => {
         resolve({
           metadataObjects: [],
           organizationNamespace: '',
           partialSaveAllowed: true,
-          testRequired: false
+          testRequired: false,
         });
       });
     });
     $$.SANDBOX.stub(packagexml.default.prototype, 'listMetaData')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.FileProperties>((resolve, reject) => {
+        return new Promise<jsforce.FileProperties>((resolve) => {
           resolve(undefined);
         });
       });
     $$.SANDBOX.stub(packagexml.default.prototype, 'toolingQuery')
       .onCall(0)
       .callsFake(async () => {
-        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
           resolve({
             size: 0,
             totalSize: 10,
             done: true,
             queryLocator: null,
             entityTypeName: 'FlowDefinition',
-            records: []
-          } as jsforce.QueryResult<{}>);
+            records: [],
+          } as jsforce.QueryResult<Record<string, unknown>>);
         });
       })
       .onCall(1)
       .callsFake(async () => {
-        return new Promise<jsforce.QueryResult<{}>>((resolve, reject) => {
+        return new Promise<jsforce.QueryResult<Record<string, unknown>>>((resolve) => {
           resolve({
             size: 1,
             totalSize: 1,
@@ -1466,17 +1474,17 @@ describe('test invalid standardValueSet', () => {
               {
                 attributes: {
                   type: 'StandardValueSet',
-                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles'
+                  url: '/services/data/v44.0/tooling/sobjects/StandardValueSet/AccountContactMultiRoles',
                 },
                 Metadata: {
                   groupingStringEnum: null,
                   sorted: false,
                   standardValue: [],
-                  urls: null
-                }
-              }
-            ]
-          } as jsforce.QueryResult<{}>);
+                  urls: null,
+                },
+              },
+            ],
+          } as jsforce.QueryResult<Record<string, unknown>>);
         });
       });
   });

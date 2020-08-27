@@ -1,8 +1,8 @@
 diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-index 38f65a2..c9ff058 100644
+index 38f65a2..9ec707c 100644
 --- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
 +++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-@@ -49,22 +49,22 @@ class Readme extends command_1.Command {
+@@ -49,25 +49,28 @@ class Readme extends command_1.Command {
          return readme.replace(`<!-- ${tag} -->`, `<!-- ${tag} -->\n${body}\n<!-- ${tag}stop -->`);
      }
      toc(__, readme) {
@@ -14,26 +14,38 @@ index 38f65a2..c9ff058 100644
              .join('\n');
      }
      usage(config) {
-         return [
-             `\`\`\`sh-session
+-        return [
+-            `\`\`\`sh-session
 -$ npm install -g ${config.name}
 -$ ${config.bin} COMMAND
-+$ ${config.bin} plugins:install ${config.name}
-+$ ${config.bin} ${config.topics[0].name}:COMMAND
- running command...
+-running command...
 -$ ${config.bin} (-v|--version|version)
 -${config.name}/${process.env.OCLIF_NEXT_VERSION || config.version} ${process.platform}-${process.arch} node-v${process.versions.node}
 -$ ${config.bin} --help [COMMAND]
-+$ ${config.bin} plugins
-+${config.name} ${process.env.OCLIF_NEXT_VERSION || config.version}
-+$ ${config.bin} help ${config.topics[0].name}:COMMAND
++      let message = `\`\`\`sh-session
++$ ${config.bin} plugins:install ${config.name}`;
++      if (config.topics[0]) {
++        message += `\n$ ${config.bin} ${config.topics[0].name}:COMMAND
++running command...`;
++      }
++      message += `\n$ ${config.bin} plugins
++${config.name} ${process.env.OCLIF_NEXT_VERSION || config.version}`;
++      if (config.topics[0]) {
++        message += `\n$ ${config.bin} help ${config.topics[0].name}:COMMAND
  USAGE
 -  $ ${config.bin} COMMAND
+-...
+-\`\`\`\n`,
+-        ].join('\n').trim();
 +  $ ${config.bin} ${config.topics[0].name}:COMMAND
- ...
- \`\`\`\n`,
-         ].join('\n').trim();
-@@ -79,7 +79,7 @@ USAGE
++...`;
++      }
++      message += `\n\`\`\`\n`;
++      return [message].join('\n').trim();
+     }
+     multiCommands(config, commands, dir) {
+         let topics = config.topics;
+@@ -79,7 +82,7 @@ USAGE
              this.createTopicFile(path.join('.', dir, topic.name.replace(/:/g, '/') + '.md'), config, topic, commands.filter(c => c.id === topic.name || c.id.startsWith(topic.name + ':')));
          }
          return [
@@ -42,7 +54,7 @@ index 38f65a2..c9ff058 100644
              ...topics.map(t => {
                  return util_1.compact([
                      `* [\`${config.bin} ${t.name}\`](${dir}/${t.name.replace(/:/g, '/')}.md)`,
-@@ -114,7 +114,7 @@ USAGE
+@@ -114,7 +117,7 @@ USAGE
          this.debug('rendering command', c.id);
          let title = util_1.template({ config, command: c })(c.description || '').trim().split('\n')[0];
          const help = new plugin_help_1.default(config, { stripAnsi: true, maxWidth: columns });
@@ -51,7 +63,7 @@ index 38f65a2..c9ff058 100644
          return util_1.compact([
              header(),
              title,
-@@ -187,7 +187,7 @@ USAGE
+@@ -187,7 +190,7 @@ USAGE
              return;
          p = p.replace(plugin.root + path.sep, '');
          if (plugin.pjson.devDependencies.typescript) {
@@ -60,7 +72,7 @@ index 38f65a2..c9ff058 100644
              p = p.replace(/\.js$/, '.ts');
          }
          return p;
-@@ -213,9 +213,9 @@ USAGE
+@@ -213,9 +216,9 @@ USAGE
  }
  Readme.description = `adds commands to README.md in current directory
  The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:

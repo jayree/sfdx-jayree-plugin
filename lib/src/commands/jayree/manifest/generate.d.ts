@@ -33,7 +33,7 @@ export default class GeneratePackageXML extends SfdxCommand {
     protected static supportsDevhubUsername: boolean;
     protected static requiresProject: boolean;
     run(): Promise<AnyJson>;
-    toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<{}>>;
+    toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>>;
     getMetaData(conn: core.Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult>;
     listMetaData(conn: core.Connection, query: jsforce.ListMetadataQuery | jsforce.ListMetadataQuery[], apiVersion: string): Promise<jsforce.FileProperties | jsforce.FileProperties[]>;
     private throwError;

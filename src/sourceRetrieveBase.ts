@@ -1,14 +1,20 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import { join, relative } from 'path';
+import * as util from 'util';
 import { SfdxCommand } from '@salesforce/command';
 import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
 import * as _glob from 'glob';
-import { join, relative } from 'path';
 import * as shell from 'shelljs';
-import * as util from 'util';
 import * as xml2js from 'xml2js';
 import profileElementuserPermissionsInjectionFrom = require('../config/profileElementuserPermissionsInjection.json');
-import { objectPath, ObjectPathResolver } from './lib/object-path';
+import { objectPath, ObjectPathResolver } from './utils/object-path';
 
 const debug = createDebug('jayree:source');
 
@@ -19,16 +25,14 @@ const glob = util.promisify(_glob);
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
   xmlns: true,
-  renderOpts: { pretty: true, indent: '    ', newline: '\n' }
+  renderOpts: { pretty: true, indent: '    ', newline: '\n' },
 });
 
-// tslint:disable-next-line: no-any
 (Array.prototype as any).equals = function (arr) {
   return this.length === arr.length && this.every((u, i) => u === arr[i]);
 };
 
 function compareobj(obj1, obj2) {
-  // tslint:disable-next-line: no-any
   return ((!Array.isArray(obj2) ? [obj2] : obj2) as any).equals(!Array.isArray(obj1) ? [obj1] : obj1);
 }
 
@@ -146,7 +150,6 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     }
   }
 
-  // tslint:disable-next-line: no-any
   protected async applyfixes(config, tags, projectpath): Promise<any> {
     const updatedfiles = {};
     if (config) {
@@ -244,6 +247,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 }
               };
 
+              // eslint-disable-next-line no-underscore-dangle
               let _deltaskpath;
               try {
                 _deltaskpath = new ObjectPathResolver(data).resolveString(deltask).value();
@@ -263,7 +267,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                     operation: 'delete',
                     message: `${deltaskpath}${
                       typeof deltask.condition !== 'undefined' ? ` (${deltask.condition})` : ''
-                    }`
+                    }`,
                   });
                 } else {
                   if (typeof deltask.condition !== 'undefined') {
@@ -299,7 +303,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                   operation: 'insert',
                   message: `${JSON.stringify(inserttask.object)} at ${inserttask.path}${
                     typeof inserttask.condition !== 'undefined' ? ` (${inserttask.condition})` : ''
-                  }`
+                  }`,
                 });
               } else {
                 debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`, 2);
@@ -349,6 +353,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 }
               };
 
+              // eslint-disable-next-line no-underscore-dangle
               let _settaskpath;
               try {
                 _settaskpath = new ObjectPathResolver(data).resolveString(settask.path).value();
@@ -389,14 +394,14 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                         operation: 'set',
                         message: `${JSON.stringify(settask.value)} at ${settaskpath}${
                           typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
-                        }`
+                        }`,
                       });
                     }
                   } else if (typeof settask.object === 'object') {
                     const validate = (node) => {
                       const replaceArray = [];
                       const recursive = (n, attpath) => {
-                        // tslint:disable-next-line: forin
+                        // eslint-disable-next-line guard-for-in
                         for (const attributename in n) {
                           if (attpath.length === 0) {
                             attpath = attributename;
@@ -449,7 +454,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                       operation: 'set',
                       message: `${JSON.stringify(settask.object)} at ${settaskpath}${
                         typeof settask.condition !== 'undefined' ? ` (${settask.condition})` : ''
-                      }`
+                      }`,
                     });
                   } else {
                     debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`, 2);
@@ -480,7 +485,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
                 array.push({
                   filePath: relative(root, file),
                   operation: 'fix',
-                  message: `(${fullname} => ${fullname.substring(0, fullname.lastIndexOf('-'))})`
+                  message: `(${fullname} => ${fullname.substring(0, fullname.lastIndexOf('-'))})`,
                 });
               } else {
                 debug(`fixflowtranslation: ${fullname} already fixed`, 2);
@@ -495,6 +500,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     return array;
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   protected async sourcedelete(deletesources, root): Promise<string[]> {
     const array = [];
     for (const filename of deletesources) {
@@ -556,7 +562,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
       if (newPackageTypesMapped[key].length > 0) {
         newPackageTypesUpdated.push({
           name: key,
-          members: newPackageTypesMapped[key]
+          members: newPackageTypesMapped[key],
         });
       }
     });

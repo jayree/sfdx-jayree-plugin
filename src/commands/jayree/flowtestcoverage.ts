@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
 import { core, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 
@@ -13,7 +19,7 @@ export default class FlowTestCoverage extends SfdxCommand {
 === Flow Test Coverage
 Coverage: 82%
 ...
-`
+`,
   ];
 
   protected static requiresUsername = true;
@@ -50,7 +56,7 @@ Coverage: 82%
       Coverage:
         Math.floor(
           (numberOfCoveredActiveAutolaunchedFlowsAndProcesses / numberOfActiveAutolaunchedFlowsAndProcesses) * 100
-        ) + '%'
+        ) + '%',
     });
 
     const x = [];
@@ -58,19 +64,19 @@ Coverage: 82%
     for (let i = 0; i < length; i++) {
       x.push({
         'all active autolaunched flows and processes that don’t have test coverage': uncovered[i],
-        'all flows and processes that have test coverage': covered[i]
+        'all flows and processes that have test coverage': covered[i],
       });
     }
 
     this.ux.table(x, {
       columns: [
         {
-          key: 'all flows and processes that have test coverage'
+          key: 'all flows and processes that have test coverage',
         },
         {
-          key: 'all active autolaunched flows and processes that don’t have test coverage'
-        }
-      ]
+          key: 'all active autolaunched flows and processes that don’t have test coverage',
+        },
+      ],
     });
 
     if (covered.length !== numberOfCoveredActiveAutolaunchedFlowsAndProcesses) {
@@ -88,7 +94,7 @@ Coverage: 82%
       numberOfActiveAutolaunchedFlowsAndProcesses,
       numberOfCoveredActiveAutolaunchedFlowsAndProcesses,
       'all active autolaunched flows and processes that don’t have test coverage': uncovered,
-      'all flows and processes that have test coverage': covered
+      'all flows and processes that have test coverage': covered,
     };
   }
 }

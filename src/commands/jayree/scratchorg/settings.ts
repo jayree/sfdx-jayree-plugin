@@ -1,13 +1,19 @@
+/*
+ * Copyright (c) 2020, jayree
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+import * as path from 'path';
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 // import * as AdmZip from 'adm-zip';
 // import * as chalk from 'chalk';
 import * as createDebug from 'debug';
 import * as fs from 'fs-extra';
-import * as path from 'path';
 import { serializeError } from 'serialize-error';
 import * as shell from 'shelljs';
-import { parseStringSync } from '../../../lib/xml';
+import { parseStringSync } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -26,24 +32,25 @@ export default class ScratchOrgSettings extends SfdxCommand {
   public static examples = [
     `$ sfdx jayree:scratchorgsettings
 $ sfdx jayree:scratchorgsettings -u me@my.org
-$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
+$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
     writetoprojectscratchdeffile: flags.boolean({
       char: 'w',
-      description: messages.getMessage('writetoprojectscratchdeffile')
+      description: messages.getMessage('writetoprojectscratchdeffile'),
     }),
     file: flags.string({
       char: 'f',
-      description: messages.getMessage('fileFlagDescription')
-    })
+      description: messages.getMessage('fileFlagDescription'),
+    }),
   };
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = true;
 
+  // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
@@ -98,7 +105,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
           cwd: orgretrievepath,
           fatal: false,
           silent: true,
-          env: { ...process.env, FORCE_COLOR: 0 }
+          env: { ...process.env, FORCE_COLOR: 0 },
         })
       );
 
@@ -108,6 +115,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
         const sfdxProject = await core.SfdxProject.resolve();
         const sfdxProjectJson = await sfdxProject.retrieveSfdxProjectJson();
         sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
+        // eslint-disable-next-line no-empty
       } catch (error) {}
 
       const apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
@@ -154,8 +162,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
       } else {
         throw out;
       }
-    } catch (error) {
-      throw error;
     } finally {
       if (!this.flags.keepcache) {
         await core.fs.remove(orgretrievepath);
@@ -199,7 +205,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     if (typeof settings['territory2Settings'] !== 'undefined') {
       if (typeof settings['territory2Settings']['enableTerritoryManagement2'] !== 'undefined') {
         settings['territory2Settings'] = {
-          enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2']
+          enableTerritoryManagement2: settings['territory2Settings']['enableTerritoryManagement2'],
         };
         debug('set ' + 'enableTerritoryManagement2');
       }
@@ -267,6 +273,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
 
     if (this.flags.writetoprojectscratchdeffile) {
       const deffilepath =
+        // eslint-disable-next-line @typescript-eslint/await-thenable
         this.flags.file || path.join(await this.project.getPath(), 'config', 'project-scratch-def.json');
       let deffile = {};
 
@@ -332,7 +339,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`
     return {
       settings,
       orgId: this.org.getOrgId(),
-      username: this.org.getUsername()
+      username: this.org.getUsername(),
     };
   }
 
