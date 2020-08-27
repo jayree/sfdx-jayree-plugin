@@ -50,6 +50,7 @@
     <members>ConsumptionRate</members>
     <members>ConsumptionSchedule</members>
     <members>Contact</members>
+    <members>ContactPointAddress</members>
     <members>ContactPointConsent</members>
     <members>ContactPointEmail</members>
     <members>ContactPointPhone</members>

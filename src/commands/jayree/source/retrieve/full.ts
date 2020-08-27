@@ -78,20 +78,16 @@ Coverage: 82%
 
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
 
+      let packagexml = path.join(__dirname, '..', '..', '..', '..', '..', '..', 'manifest', 'package-profiles.xml');
+
+      if (!this.flags.metadata.includes('Profile') && !this.flags.metadata.includes('PermissionSet')) {
+        packagexml = path.join(__dirname, '..', '..', '..', '..', '..', '..', 'manifest', 'package-labels.xml');
+      }
+
       let out = json(
         shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${path.join(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            '..',
-            '..',
-            '..',
-            'manifest',
-            'package-profiles.xml'
-          )} --targetusername=${this.org.getUsername()} --json`,
-          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${packagexml} --targetusername=${this.org.getUsername()} --json`,
+          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
         )
       );
 
@@ -109,7 +105,7 @@ Coverage: 82%
               {
                 fatal: false,
                 silent: true,
-                env: { ...process.env, FORCE_COLOR: 0 },
+                env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
               }
             )
           );
@@ -143,7 +139,7 @@ Coverage: 82%
               {
                 fatal: false,
                 silent: true,
-                env: { ...process.env, FORCE_COLOR: 0 },
+                env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
               }
             )
           );
@@ -177,7 +173,7 @@ Coverage: 82%
               {
                 fatal: false,
                 silent: true,
-                env: { ...process.env, FORCE_COLOR: 0 },
+                env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
               }
             )
           );

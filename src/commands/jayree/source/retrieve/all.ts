@@ -113,7 +113,7 @@ See more help with --help`);
 
       let out = shell.exec(
         `sfdx jayree:packagexml --excludemanaged --file=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-        { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+        { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
       );
       if (config) {
         if (config['source:retrieve:all']) {
@@ -130,7 +130,7 @@ See more help with --help`);
       out = json(
         shell.exec(
           `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
         )
       );
 
@@ -147,7 +147,7 @@ See more help with --help`);
             {
               fatal: false,
               silent: true,
-              env: { ...process.env, FORCE_COLOR: 0 },
+              env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
             }
           )
         );
