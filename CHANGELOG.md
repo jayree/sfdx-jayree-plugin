@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.3...v2.2.0) (2020-09-04)
+
+
+### Bug Fixes
+
+* update dependencies ([b8239aa](https://github.com/jayree/sfdx-jayree-plugin/commit/b8239aae5c9ae19fe2914318af7063e89b8c9b1c))
+
+
+### Features
+
+* new cmd 'jayree:manifest:git:diff' creates manifest and destructiveChanges manifest using git ([56402ad](https://github.com/jayree/sfdx-jayree-plugin/commit/56402adcf3978d8ef2f0b34cb78b0d867870ab2c))
+
 ## [2.1.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.2...v2.1.3) (2020-08-27)
 
 
