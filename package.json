@@ -5,18 +5,21 @@
   "author": "jayree @jayree",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
-    "@salesforce/command": "^3.0.1",
+    "@salesforce/command": "^3.0.3",
+    "@salesforce/kit": "^1.3.2",
     "adm-zip": "^0.4.16",
     "chalk": "^4.1.0",
-    "cli-ux": "^5.4.10",
+    "cli-ux": "^5.5.0",
     "debug": "^4.1.1",
+    "fast-deep-equal": "^3.1.3",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "inquirer": "^7.3.3",
+    "listr2": "^2.6.2",
     "marked": "^1.1.1",
     "marked-terminal": "^4.1.0",
     "object-path": "^0.11.4",
-    "open": "^7.2.0",
+    "open": "^7.2.1",
     "puppeteer": "^5.2.1",
     "serialize-error": "^7.0.1",
     "shelljs": "^0.8.4",
@@ -39,25 +42,25 @@
     "@types/fs-extra": "^9.0.1",
     "@types/inquirer": "^7.3.1",
     "@types/mocha": "^8.0.3",
-    "@types/node": "^14.6.0",
+    "@types/node": "^14.6.4",
     "@types/puppeteer": "^3.0.1",
     "@types/sinon": "^9.0.5",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "chai": "^4.2.0",
     "codecov": "^3.7.2",
     "cross-spawn": "^7.0.3",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-salesforce": "^0.1.0",
     "eslint-config-salesforce-license": "^0.1.0",
     "eslint-config-salesforce-typescript": "^0.1.0",
-    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-header": "^3.1.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsdoc": "^30.3.0",
+    "eslint-plugin-jsdoc": "^30.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
-    "mocha": "^8.1.2",
+    "mocha": "^8.1.3",
     "nock": "^13.0.4",
     "nyc": "^15.1.0",
     "patch-package": "^6.2.2",
@@ -67,7 +70,8 @@
     "source-map-support": "^0.5.19",
     "ts-node": "^9.0.0",
     "tslib": "^2.0.1",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "xunit-file": "^1.0.0"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -112,48 +116,37 @@
         "description": "packages and automation toolset",
         "subtopics": {
           "packagedescription": {
-            "name": "packagedescription",
             "description": "add/modify/remove the description of a package"
           },
           "org": {
-            "name": "org",
             "description": "manage your orgs"
           },
           "scratchorg": {
-            "name": "scratchorg",
             "description": "scratch org tools"
           },
           "manifest": {
-            "name": "manifest",
             "description": "generate and manipulate manifest files"
           },
+          "manifest:git": {
+            "description": "generate manifest files based on git data"
+          },
           "source": {
-            "name": "source",
-            "description": "sync your project with your orgs",
-            "subtopics": {
-              "retrieve": {
-                "name": "retrieve",
-                "description": "retrieve source from an org"
-              }
-            }
+            "description": "sync your project with your orgs"
+          },
+          "source:retrieve": {
+            "description": "retrieve source from an org"
           },
           "automation": {
-            "name": "automation",
-            "description": "headless browser automation tools",
-            "subtopics": {
-              "changeset": {
-                "name": "changeset",
-                "description": "deploy/list incomming change sets (beta)"
-              },
-              "ltngsync": {
-                "name": "ltngsync",
-                "description": "check the Lightning Sync User Sync Status and reset sync if needed (beta)"
-              },
-              "statecountry": {
-                "name": "statecountry",
-                "description": "import (create/update) State/Country Picklists"
-              }
-            }
+            "description": "headless browser automation tools"
+          },
+          "automation:changeset": {
+            "description": "deploy/list incomming change sets (beta)"
+          },
+          "automation:ltngsync": {
+            "description": "check the Lightning Sync User Sync Status and reset sync if needed (beta)"
+          },
+          "automation:statecountry": {
+            "description": "import (create/update) State/Country Picklists"
           }
         }
       }

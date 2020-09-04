@@ -6,7 +6,7 @@
  */
 import * as crypto from 'crypto';
 import { $$, expect, test } from '@salesforce/command/lib/test';
-import * as fs from 'fs-extra';
+import fs = require('fs-extra');
 import * as jsforce from 'jsforce';
 import * as packagexml from '../../../src/commands/jayree/manifest/generate';
 

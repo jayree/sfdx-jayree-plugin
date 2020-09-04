@@ -6,7 +6,7 @@
  */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as opn from 'open';
+import opn from 'open';
 
 core.Messages.importMessagesDirectory(__dirname);
 

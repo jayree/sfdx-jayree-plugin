@@ -42,6 +42,7 @@ USAGE
 * [`sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeflowtestcoverage--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreemanifestcleanup--x-filepath--f-filepath--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:manifest:generate [--configfile <string>] [-q <string>] [-c] [-w] [--includeflowversions] [-f <string>] [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreemanifestgenerate---configfile-string--q-string--c--w---includeflowversions--f-string--x--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx jayree:manifest:git:diff [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreemanifestgitdiff---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeorgopen--b-string--p-string--r--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:org:streaming -p <string> [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreeorgstreaming--p-string--u-string---apiversion-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 * [`sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-jayreepackagedescriptioncreate--d-string--f-string---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
@@ -341,6 +342,49 @@ EXAMPLE
 ```
 
 _See code: [src/commands/jayree/manifest/generate.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v2.1.3/src/commands/jayree/manifest/generate.ts)_
+
+### `sfdx jayree:manifest:git:diff [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+
+create a manifest and destructiveChanges manifest using 'git diff' data
+
+```
+USAGE
+  $ sfdx jayree:manifest:git:diff [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+ARGUMENTS
+  REF1  base commit or branch
+  REF2  commit or branch to compare to the base commit
+
+OPTIONS
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  Creates a manifest and destructiveChanges manifest using 'git diff' data.
+
+  You can use all ways to spell <commit> which are valid for 'git diff'.
+  (See https://git-scm.com/docs/git-diff)
+
+EXAMPLES
+  $ sfdx jayree:manifest:git:diff <commit> <commit>
+  $ sfdx jayree:manifest:git:diff <commit>..<commit>
+  uses the changes between two arbitrary <commit>
+
+  $ sfdx jayree:manifest:git:diff <commit>...<commit>
+  uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both 
+  <commit>.
+    
+  $ sfdx jayree:manifest:git:diff branchA..branchB
+  uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1)
+
+  $ sfdx jayree:manifest:git:diff branchA...branchB
+  uses the diff of what is unique in branchB (REF2)
+```
+
+_See code: [src/commands/jayree/manifest/git/diff.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v2.1.3/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 

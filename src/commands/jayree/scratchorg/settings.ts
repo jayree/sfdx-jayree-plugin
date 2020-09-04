@@ -9,7 +9,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 // import * as AdmZip from 'adm-zip';
 // import * as chalk from 'chalk';
-import * as createDebug from 'debug';
+import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import { serializeError } from 'serialize-error';
 import * as shell from 'shelljs';

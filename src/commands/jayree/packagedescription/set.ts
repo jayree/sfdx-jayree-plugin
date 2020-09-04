@@ -6,7 +6,7 @@
  */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as AdmZip from 'adm-zip';
+import AdmZip from 'adm-zip';
 import * as convert from 'xml-js';
 
 core.Messages.importMessagesDirectory(__dirname);
