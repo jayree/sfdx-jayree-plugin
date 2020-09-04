@@ -4,7 +4,8 @@
     "importHelpers": true,
     "lib": ["ES2017", "DOM"],
     "outDir": "lib",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": ["./src/**/*.ts", "./test/**/*.ts"]
 }

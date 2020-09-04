@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as AdmZip from 'adm-zip';
+import AdmZip from 'adm-zip';
 import * as chalk from 'chalk';
 import * as shell from 'shelljs';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
