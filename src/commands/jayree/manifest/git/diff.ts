@@ -224,7 +224,7 @@ uses the diff of what is unique in branchB (REF2)`,
                 },
               },
               {
-                title: 'Copy added files to temp project',
+                title: 'Create added files in temp project',
                 // eslint-disable-next-line no-shadow
                 task: async (ctx, task): Promise<void> => {
                   ctx.manifestSourceFiles = await addFilesToTempProject(
