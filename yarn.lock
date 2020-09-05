@@ -5326,10 +5326,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-listr2@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-2.6.2.tgz#4912eb01e1e2dd72ec37f3895a56bf2622d6f36a"
-  integrity sha512-6x6pKEMs8DSIpA/tixiYY2m/GcbgMplMVmhQAaLFxEtNSKLeWTGjtmU57xvv6QCm2XcqzyNXL/cTSVf4IChCRA==
+listr2@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-3.0.0.tgz#d2c4f9aba6b35acea35898d8389aaa4a13511142"
+  integrity sha512-Wz0bhug+d5kq5IWe+A6scvvaPtiW140aGu0PbG8sgnWuw4wRirps2AnNQmY/k+Tf9YTnjm9qSfyKz3FLiFpS1A==
   dependencies:
     chalk "^4.1.0"
     cli-truncate "^2.1.0"
@@ -6608,9 +6608,9 @@ object-path@^0.11.4:
   integrity sha1-NwrnUvvzfePqcKhhwju6iRVpGUk=
 
 object-treeify@^1.1.4:
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.26.tgz#80b882036cb5d0fddc16e8a2affa98ba96f89a74"
-  integrity sha512-0WTfU7SGM8umY4YPpOg+oHXL66E6dPVCr+sMR6KitPmvg8CkVrHUUZYEFtx0+5Wb0HjFEsBwBYXyGRNeX7c/oQ==
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/object-treeify/-/object-treeify-1.1.27.tgz#4244a90df5ba3d2d92747ebd64b271369379e4f3"
+  integrity sha512-xRDJvP4ptfleTmJm/qPrxv/8Iifgk/xnaNeBqyczbYeQ4Yh5GCGOZaO78MlbwR5nlo9viTxM1kgThgl8/sMEHg==
 
 object-visit@^1.0.0:
   version "1.0.1"
