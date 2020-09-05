@@ -7,7 +7,7 @@
 import * as path from 'path';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
 
 core.Messages.importMessagesDirectory(__dirname);

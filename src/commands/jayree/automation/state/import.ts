@@ -6,7 +6,7 @@
  */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { cli } from 'cli-ux';
 // import ProgressBar = require('progress');
 import puppeteer = require('puppeteer');

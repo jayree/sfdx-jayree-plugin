@@ -6,7 +6,7 @@
  */
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { cli } from 'cli-ux';
 import puppeteer = require('puppeteer');
 import { Tabletojson as tabletojson } from 'tabletojson';

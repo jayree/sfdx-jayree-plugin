@@ -7,7 +7,7 @@
 import { join, relative } from 'path';
 import * as util from 'util';
 import { SfdxCommand } from '@salesforce/command';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import _glob from 'glob';
