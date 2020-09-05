@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.2.0...v2.2.1) (2020-09-05)
+
+
+### Bug Fixes
+
+* chalk[color] is not a function ([be5a38f](https://github.com/jayree/sfdx-jayree-plugin/commit/be5a38f13972b8fac30473d490a281cf729b747a))
+* update dependencies ([ae5beb7](https://github.com/jayree/sfdx-jayree-plugin/commit/ae5beb796ac7a39a194840c8a4714e9a6a0be8eb))
+
 # [2.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.1.3...v2.2.0) (2020-09-04)
 
 
