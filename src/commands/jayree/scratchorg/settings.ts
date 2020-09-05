@@ -7,8 +7,6 @@
 import * as path from 'path';
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-// import * as AdmZip from 'adm-zip';
-// import * as chalk from 'chalk';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import { serializeError } from 'serialize-error';
