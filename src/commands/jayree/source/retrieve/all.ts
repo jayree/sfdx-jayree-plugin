@@ -12,6 +12,7 @@ import AdmZip from 'adm-zip';
 import chalk from 'chalk';
 import * as shell from 'shelljs';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
+import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -65,7 +66,7 @@ Coverage: 82%
 
     const projectpath = this.project.getPath();
     let inboundFiles = [];
-    let updatedfiles = [];
+    let updatedfiles: aggregatedFixResults = {};
 
     const orgretrievepath = path.join(
       projectpath,
@@ -174,11 +175,7 @@ See more help with --help`);
         await this.profileElementInjection(orgretrievepath);
 
         if (!this.flags.skipfix) {
-          updatedfiles = await this.applyfixes(
-            config,
-            ['source:retrieve:full', 'source:retrieve:all'],
-            orgretrievepath
-          );
+          updatedfiles = await applyFixes(['source:retrieve:full', 'source:retrieve:all'], orgretrievepath);
         }
 
         const cleanedfiles = shell

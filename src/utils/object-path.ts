@@ -6,14 +6,12 @@
  */
 import * as objectPath from 'object-path';
 
-// tslint:disable-next-line: no-any
-(Array.prototype as any).equals = function (arr) {
-  return this.length === arr.length && this.every((u, i) => u === arr[i]);
-};
+function arrayEquals(arr1, arr2) {
+  return arr1.length === arr2.length && arr1.every((u, i) => u === arr2[i]);
+}
 
 function compareobj(obj1, obj2) {
-  // tslint:disable-next-line: no-any
-  return ((!Array.isArray(obj2) ? [obj2] : obj2) as any).equals(!Array.isArray(obj1) ? [obj1] : obj1);
+  return arrayEquals(!Array.isArray(obj2) ? [obj2] : obj2, !Array.isArray(obj1) ? [obj1] : obj1);
 }
 
 interface QueryParameters {
