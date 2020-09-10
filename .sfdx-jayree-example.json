@@ -570,6 +570,7 @@
   "ensureUserPermissions": [
     // use this option to define the UserPermissions based on your Org configuration
     // this is the old list of predefinded UserPermissions before this option was introduced to ensure UserPermissions in profiles
+    // only custom profiles are updated
     "AIViewInsightObjects",
     "AccessCMC",
     "ActivateContract",
@@ -786,6 +787,7 @@
   "ensureObjectPermissions": [
     // use this option to define the ObjectPermissions based on your Org configuration
     // if the admin profile is not present in the manifest this list of Objects is used to ensure ObjectPermissions in profiles
+    // only custom profiles are updated
     "Account",
     "ActiveScratchOrg",
     "Asset",
