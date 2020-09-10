@@ -13,6 +13,7 @@ import { builder } from '../../../utils/xml';
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare global {
   interface Array<T> {
     pushUniqueValueKey(elem: T, key: string): T[];
