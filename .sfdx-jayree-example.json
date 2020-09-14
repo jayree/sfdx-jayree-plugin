@@ -799,5 +799,118 @@
     "CardPaymentMethod",
     "Case",
     "..."
+  ],
+  "setupTasks": [
+    {
+      "title": "Activity Settings",
+      "isactive": true,
+      "url": "/setup/activitiesSetupPage.apexp",
+      "evaluate": [
+        {
+          "querySelector": "#thePage\\3a theForm\\3a theBlock\\3a manyWhoPref",
+          "action": "click",
+          "type": { "checkbox": { "checked": true } },
+          "waitFor": ""
+        },
+        {
+          "querySelector": "#thePage\\3a theForm\\3a theBlock\\3a buttons\\3a submit",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        }
+      ]
+    },
+    {
+      "title": "Asset Settings",
+      "isactive": true,
+      "url": "/setup/assetSettings.apexp",
+      "evaluate": [
+        {
+          "querySelector": "#j_id0\\3a j_id6\\3a thePageBlock\\3a sharingModel",
+          "action": "click",
+          "type": { "checkbox": { "checked": true } },
+          "waitFor": ""
+        },
+        {
+          "querySelector": "#j_id0\\3a j_id6\\3a thePageBlock\\3a j_id49\\3a save",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        }
+      ]
+    },
+    {
+      "title": "Opportunity Splits",
+      "isactive": true,
+      "url": "/opp/opportunitySplitSetupOverview.apexp",
+      "evaluate": [
+        {
+          "querySelector": "#j_id0\\3a form\\3a EditButton",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        },
+        {
+          "querySelector": "#j_id0\\3a form\\3a SaveButton",
+          "action": "click",
+          "type": "button",
+          "waitFor": ""
+        },
+        {
+          "querySelector": "#splitsMassOperationConfirmDialog_overlayConfirmButton",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        },
+        {
+          "querySelector": "#j_id0\\3a j_id4\\3a pageBlock2\\3a j_id10\\3a save",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        }
+      ]
+    },
+    {
+      "title": "Marketing User",
+      "isactive": true,
+      "url": "/005?isUserEntityOverride=1",
+      "evaluate": [
+        {
+          "querySelector": "#ResetForm > div.pbBody > table > tbody > tr.dataRow.even.last > td.actionColumn > a",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        },
+        {
+          "querySelector": "#UserPermissions_0",
+          "action": "click",
+          "type": { "checkbox": { "checked": true } },
+          "waitFor": ""
+        },
+        {
+          "querySelector": "#topButtonRow > input:nth-child(1)",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        }
+      ]
+    },
+    {
+      "title": "Field Service Settings - Disable Work Orders",
+      "isactive": true,
+      "url": "/ui/setup/fieldservice/FieldServiceSettingsLightningInAlohaPage?setupid=FieldServiceSettings",
+      "evaluate": [
+        {
+          "querySelector": "#setupComponent > div.setupcontent > div > article > div > div > div > lightning-input",
+          "action": "click",
+          "type": "lightningbutton",
+          "waitFor": {
+            "querySelector": "#setupComponent > div.setupcontent > div > article > div > div > div > lightning-input",
+            "property": "innerText",
+            "value": "Disabled"
+          }
+        }
+      ]
+    }
   ]
 }
