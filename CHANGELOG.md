@@ -1,3 +1,16 @@
+# [3.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.2.1...v3.0.0) (2020-09-14)
+
+
+### Features
+
+* new cmd 'org:configure' to make configuration changes that are not covered by the metadata API ([87f5c19](https://github.com/jayree/sfdx-jayree-plugin/commit/87f5c199da5398fba6f1908352d8d31f7a88baaa))
+* **sourceretrieve*:** new way to ensure Object- and UserPermissions in retrieved profiles ([ac69916](https://github.com/jayree/sfdx-jayree-plugin/commit/ac6991632c96b9558cf7d1f4dcc84be00fd95394))
+
+
+### BREAKING CHANGES
+
+* **sourceretrieve*:** changed result of 'retrieve:all/full' see the example config for more information
+
 ## [2.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.2.0...v2.2.1) (2020-09-05)
 
 
