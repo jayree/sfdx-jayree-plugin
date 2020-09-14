@@ -27,8 +27,12 @@ export default (path) => {
   }
 
   const defaults = CONFIG_DEFAULTS;
-
-  const configFromFile = fs.readJsonSync(join(path, '.sfdx-jayree.json'), { throws: false }) || {};
+  let configFromFile;
+  try {
+    configFromFile = fs.readJsonSync(join(path, '.sfdx-jayree.json'));
+  } catch (error) {
+    throw new Error(error);
+  }
 
   // // Allow users to override certain scripts
   // const config = Object.assign({}, defaults, configFromFile, {
