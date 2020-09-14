@@ -201,18 +201,20 @@ export async function logFixes(updatedfiles) {
 }
 
 export async function logMoves(movedSourceFiles) {
-  const root = await getProjectPath();
-  cli.styledHeader(chalk.blue('Moved Source Files'));
-  cli.table(movedSourceFiles, {
-    from: {
-      header: 'FROM',
-      get: (row: { from: string; to: string }) => path.relative(root, row.from),
-    },
-    to: {
-      header: 'TO',
-      get: (row: { from: string; to: string }) => path.relative(root, row.to),
-    },
-  });
+  if (movedSourceFiles.length > 0) {
+    cli.styledHeader(chalk.blue('Moved Source Files'));
+    const root = await getProjectPath();
+    cli.table(movedSourceFiles, {
+      from: {
+        header: 'FROM',
+        get: (row: { from: string; to: string }) => path.relative(root, row.from),
+      },
+      to: {
+        header: 'TO',
+        get: (row: { from: string; to: string }) => path.relative(root, row.to),
+      },
+    });
+  }
 }
 
 export async function applySourceFixes(filter: string[]) {
