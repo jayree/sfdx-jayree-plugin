@@ -1,3 +1,11 @@
+## [3.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.0.0...v3.0.1) (2020-09-21)
+
+
+### Bug Fixes
+
+* ensureObjectPermissions bugfix ([516ff87](https://github.com/jayree/sfdx-jayree-plugin/commit/516ff877a58d2615788d56a3b83b076d2220816e))
+* update dependencies, add execa ([2330a06](https://github.com/jayree/sfdx-jayree-plugin/commit/2330a06c6a6d6906ffcf43313bea0f0ac0cc4815))
+
 # [3.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v2.2.1...v3.0.0) (2020-09-14)
 
 
