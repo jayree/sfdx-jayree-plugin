@@ -54,11 +54,18 @@ async function getProjectPath(): Promise<string> {
 }
 
 export async function shrinkPermissionSets(permissionsets) {
-  debug({ permissionsets });
   for (const file of permissionsets) {
     if (await fs.pathExists(file)) {
       const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
       if (data.PermissionSet.fieldPermissions) {
+        debug({
+          permissionset: file,
+          removedFieldPermsissions: JSON.stringify(
+            data.PermissionSet.fieldPermissions.filter(
+              (el) => el.editable.toString() === 'false' && el.readable.toString() === 'false'
+            )
+          ),
+        });
         data.PermissionSet.fieldPermissions = data.PermissionSet.fieldPermissions.filter(
           (el) => el.editable.toString() === 'true' || el.readable.toString() === 'true'
         );
@@ -98,7 +105,7 @@ export async function profileElementInjection(
               allowEdit: ['false'],
               allowRead: ['false'],
               modifyAllRecords: ['false'],
-              object,
+              object: [object],
               viewAllRecords: ['false'],
             });
           }
