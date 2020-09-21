@@ -1,5 +1,5 @@
 diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-index 38f65a2..9ec707c 100644
+index 38f65a2..5be93d5 100644
 --- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
 +++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
 @@ -49,25 +49,28 @@ class Readme extends command_1.Command {
@@ -54,12 +54,21 @@ index 38f65a2..9ec707c 100644
              ...topics.map(t => {
                  return util_1.compact([
                      `* [\`${config.bin} ${t.name}\`](${dir}/${t.name.replace(/:/g, '/')}.md)`,
+@@ -104,7 +107,7 @@ USAGE
+         return [
+             ...commands.map(c => {
+                 let usage = this.commandUsage(config, c);
+-                return `* [\`${config.bin} ${usage}\`](#${slugify.slug(`${config.bin}-${usage}`)})`;
++                return `* [\`${config.bin} ${c.id}\`](#${slugify.slug(`${config.bin}-${c.id}`)})`;
+             }),
+             '',
+             ...commands.map(c => this.renderCommand(config, c)).map(s => s.trim() + '\n'),
 @@ -114,7 +117,7 @@ USAGE
          this.debug('rendering command', c.id);
          let title = util_1.template({ config, command: c })(c.description || '').trim().split('\n')[0];
          const help = new plugin_help_1.default(config, { stripAnsi: true, maxWidth: columns });
 -        const header = () => `## \`${config.bin} ${this.commandUsage(config, c)}\``;
-+        const header = () => `### \`${config.bin} ${this.commandUsage(config, c)}\``;
++        const header = () => `### \`${config.bin} ${c.id}\``;
          return util_1.compact([
              header(),
              title,
