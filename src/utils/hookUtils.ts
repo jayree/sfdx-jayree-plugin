@@ -8,6 +8,6 @@ import * as core from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import config from '../utils/config';
 
-export const runHook =
+export const runHooks =
   Boolean(config(core.SfdxProject.resolveProjectPathSync()).runHooks) &&
   !kit.env.getBoolean('SFDX_DISABLE_JAYREE_HOOKS', false);

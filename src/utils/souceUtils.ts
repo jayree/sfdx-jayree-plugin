@@ -273,8 +273,14 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
   }
 
   if (aliasOrUsername.length === 0) {
-    const aggregator = await ConfigAggregator.create();
-    aliasOrUsername = aggregator.getPropertyValue('defaultusername').toString();
+    try {
+      const aggregator = await ConfigAggregator.create();
+      aliasOrUsername = aggregator.getPropertyValue('defaultusername').toString();
+    } catch {
+      throw new Error(
+        'This command requires a username to apply <mydomain> or <username>. Specify it with the -u parameter or with the "sfdx config:set defaultusername=<username>" command.'
+      );
+    }
   }
 
   const org = await Org.create({ aliasOrUsername });
@@ -533,8 +539,19 @@ type fixResult = { filePath: string; operation: string; message: string };
 export async function updateProfiles(profiles, retrievePackageDir, forceSourcePull) {
   if (forceSourcePull) {
     debug('force:source:pull detected');
-    const packageProfilesOnly = path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml');
+    let packageProfilesOnly = path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml');
     const retrieveDir = path.join(retrievePackageDir, '..');
+
+    const pjson = await xml2js.parseStringPromise(fs.readFileSync(packageProfilesOnly, 'utf8'));
+    pjson.Package.types[
+      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
+    ].members = pjson.Package.types[
+      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
+    ].members.concat(config(await getProjectPath()).ensureObjectPermissions);
+
+    packageProfilesOnly = path.join(retrieveDir, 'pinject.xml');
+    await fs.writeFile(packageProfilesOnly, builder.buildObject(pjson));
+
     debug({ packageProfilesOnly, retrieveDir });
     let stdout;
     try {
@@ -557,7 +574,7 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
       debug({ zipFilePath: stdout.result.zipFilePath });
       const zip = new AdmZip(stdout.result.zipFilePath);
       zip.getEntries().forEach(function (entry) {
-        if (entry.entryName.includes('unpackaged/profiles/')) {
+        if (entry.entryName.split(path.sep).join(path.posix.sep).includes('unpackaged/profiles/')) {
           zip.extractEntryTo(entry, retrieveDir, true, true);
         }
       });

@@ -130,7 +130,10 @@
     "commands": "./lib/src/commands",
     "bin": "sfdx",
     "hooks": {
-      "update": "./lib/src/hooks/changelog"
+      "update": "./lib/src/hooks/changelog",
+      "preretrieve": "./lib/src/hooks/preretrieve",
+      "postretrieve": "./lib/src/hooks/postretrieve",
+      "postsourceupdate": "./lib/src/hooks/postsourceupdate"
     },
     "topics": {
       "jayree": {
