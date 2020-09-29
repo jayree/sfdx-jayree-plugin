@@ -43,7 +43,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
 
   protected static requiresUsername = true;
   protected static supportsDevhubUsername = false;
-  protected static requiresProject = true;
+  protected static requiresProject = false;
 
   private isOutputEnabled;
 
@@ -52,12 +52,18 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
 
     await this.org.refreshAuth();
+    const configPath = await core.fs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
 
-    let selectedSetupTasks;
+    let allTasks = [];
+    let selectedSetupTasks = [];
     if (this.flags.tasks) {
-      selectedSetupTasks = config(this.project.getPath()).setupTasks.filter((t) => this.flags.tasks.includes(t.title));
+      this.flags.tasks.forEach((task) => {
+        selectedSetupTasks = selectedSetupTasks.concat(config(configPath).setupTasks.filter((t) => task === t.title));
+      });
+      allTasks = selectedSetupTasks;
     } else {
-      selectedSetupTasks = config(this.project.getPath()).setupTasks.filter((t) => t.isactive === true);
+      selectedSetupTasks = config(configPath).setupTasks.filter((t) => t.isactive === true);
+      allTasks = config(configPath).setupTasks;
     }
 
     const setupTaskRunner = new PuppeteerTasks(
@@ -70,7 +76,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
 
     const setupTasks = new Listr<any>([], { concurrent: this.flags.concurrent, exitOnError: false });
 
-    config(this.project.getPath()).setupTasks.forEach((el) => {
+    allTasks.forEach((el) => {
       setupTasks.add({
         title: el.title,
         skip: (): boolean => !selectedSetupTasks.includes(el),
