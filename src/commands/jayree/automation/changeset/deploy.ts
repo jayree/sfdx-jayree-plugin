@@ -286,7 +286,7 @@ jobid:  0Xxx100000xx1x1
       });
     }
     // click on ok
-    await page.waitFor('#simpleDialog0button0');
+    await page.waitForSelector('#simpleDialog0button0');
     await page.evaluate(() => {
       document.getElementById('simpleDialog0button0').click();
     });
