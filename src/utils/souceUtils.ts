@@ -326,7 +326,7 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
 async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   const array = [];
   for (const filename of Object.keys(fixsources)) {
-    const fileOrGlobPath = path.join(root, filename);
+    const fileOrGlobPath = path.join(root, filename).replace(/\\/g, '/');
     let files = await globby(fileOrGlobPath);
     if (filter.length > 0) {
       files = files.filter((el) => filter.includes(el));
