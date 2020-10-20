@@ -7,7 +7,7 @@
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
-import { applyFixes, logFixes, aggregatedFixResults } from '../../../utils/souceUtils';
+import { applyFixes, aggregatedFixResults } from '../../../utils/souceUtils';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -47,9 +47,6 @@ Coverage: 82%
       // eslint-disable-next-line no-empty
     } finally {
     }
-
-    await logFixes(updatedfiles);
-
     return {
       fixedFiles: Object.values(updatedfiles)
         .filter((value) => value.length > 0)
