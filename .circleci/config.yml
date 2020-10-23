@@ -92,12 +92,17 @@ workflows:
       - node-12
       - release:
           filters:
-            branches: { only: master }
+            branches:
+              only:
+                - master
+                - next
           requires:
             - node-latest
             - node-12
       - merge:
           filters:
-            branches: { only: master }
+            branches:
+              only:
+                - master
           requires:
             - release
