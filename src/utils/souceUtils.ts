@@ -9,6 +9,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
 import { SfdxProject } from '@salesforce/core';
+import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
@@ -19,6 +20,10 @@ import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
 
 // const parseStringPromise = util.promisify(xml2js.parseString);
+
+const isOutputEnabled = !(
+  process.argv.find((arg) => arg === '--json') || kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON'
+);
 
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
@@ -187,40 +192,44 @@ export async function moveSourceFilesByFolder(): Promise<Array<{ from: string; t
 }
 
 export async function logFixes(updatedfiles) {
-  const root = await getProjectPath();
-  Object.keys(updatedfiles).forEach((workaround) => {
-    if (updatedfiles[workaround].length > 0) {
-      cli.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
-      cli.table(updatedfiles[workaround], {
-        filePath: {
-          header: 'FILEPATH',
-          get: (row: fixResult) => path.relative(root, row.filePath),
-        },
-        operation: {
-          header: 'OPERATION',
-        },
-        message: {
-          header: 'MESSAGE',
-        },
-      });
-    }
-  });
+  if (isOutputEnabled) {
+    const root = await getProjectPath();
+    Object.keys(updatedfiles).forEach((workaround) => {
+      if (updatedfiles[workaround].length > 0) {
+        cli.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+        cli.table(updatedfiles[workaround], {
+          filePath: {
+            header: 'FILEPATH',
+            get: (row: fixResult) => path.relative(root, row.filePath),
+          },
+          operation: {
+            header: 'OPERATION',
+          },
+          message: {
+            header: 'MESSAGE',
+          },
+        });
+      }
+    });
+  }
 }
 
 export async function logMoves(movedSourceFiles) {
-  if (movedSourceFiles.length > 0) {
-    cli.styledHeader(chalk.blue('Moved Source Files'));
-    const root = await getProjectPath();
-    cli.table(movedSourceFiles, {
-      from: {
-        header: 'FROM',
-        get: (row: { from: string; to: string }) => path.relative(root, row.from),
-      },
-      to: {
-        header: 'TO',
-        get: (row: { from: string; to: string }) => path.relative(root, row.to),
-      },
-    });
+  if (isOutputEnabled) {
+    if (movedSourceFiles.length > 0) {
+      cli.styledHeader(chalk.blue('Moved Source Files'));
+      const root = await getProjectPath();
+      cli.table(movedSourceFiles, {
+        from: {
+          header: 'FROM',
+          get: (row: { from: string; to: string }) => path.relative(root, row.from),
+        },
+        to: {
+          header: 'TO',
+          get: (row: { from: string; to: string }) => path.relative(root, row.to),
+        },
+      });
+    }
   }
 }
 
