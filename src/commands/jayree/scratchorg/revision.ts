@@ -87,7 +87,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
       '.sfdx',
       'orgs',
       this.org.getUsername(),
-      'maxrevision.json'
+      'maxRevision.json'
     );
 
     const storedmaxrevpath = path.join(
@@ -100,16 +100,12 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
     );
 
     let maxrevfile;
-    let isJson = false;
 
     await fs
       .readFile(maxrevpath, 'utf8')
       .then((data) => {
         try {
           const json = JSON.parse(data);
-          if (json.serverMaxRevisionCounter) {
-            isJson = true;
-          }
           if (Object.keys(json.sourceMembers).length > 0) {
             maxrevfile = Math.max(
               0,
@@ -166,20 +162,11 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
         : maxRev;
       newstoredmaxrev = this.flags.storerevision ? newlocalmaxRev : newstoredmaxrev;
       await fs.ensureFile(maxrevpath);
-      if (isJson) {
-        await fs
-          .writeFile(
-            maxrevpath,
-            JSON.stringify({ serverMaxRevisionCounter: newlocalmaxRev, sourceMembers: {} }, null, 4)
-          )
-          .catch((err) => {
-            this.throwError(err);
-          });
-      } else {
-        await fs.writeFile(maxrevpath, newlocalmaxRev).catch((err) => {
+      await fs
+        .writeFile(maxrevpath, JSON.stringify({ serverMaxRevisionCounter: newlocalmaxRev, sourceMembers: {} }, null, 4))
+        .catch((err) => {
           this.throwError(err);
         });
-      }
     }
 
     if (this.flags.storerevision) {
