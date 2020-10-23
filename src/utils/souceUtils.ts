@@ -16,6 +16,7 @@ import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import AdmZip from 'adm-zip';
 import execa = require('execa');
+import slash from 'slash';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
 
@@ -54,7 +55,7 @@ async function getProjectPath(): Promise<string> {
   if (projectPath.length > 0) {
     return projectPath;
   }
-  projectPath = await SfdxProject.resolveProjectPath();
+  projectPath = slash(await SfdxProject.resolveProjectPath());
   return projectPath;
 }
 
@@ -335,7 +336,7 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
 async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   const array = [];
   for (const filename of Object.keys(fixsources)) {
-    const fileOrGlobPath = path.join(root, filename);
+    const fileOrGlobPath = path.posix.join(root, filename);
     let files = await globby(fileOrGlobPath);
     if (filter.length > 0) {
       files = files.filter((el) => filter.includes(el));
