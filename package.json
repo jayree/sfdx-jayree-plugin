@@ -178,6 +178,6 @@
     "pretest": "sf-compile-test",
     "semantic-release": "semantic-release",
     "test": "sf-test",
-    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
+    "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json CHANGELOG.md"
   }
 }
