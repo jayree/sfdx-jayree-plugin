@@ -1,3 +1,22 @@
+# [3.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.0.1...v3.1.0) (2020-10-26)
+
+
+### Bug Fixes
+
+* update dependencies ([91472df](https://github.com/jayree/sfdx-jayree-plugin/commit/91472dfab70332510b9dd5a2261f7b2f387a2c81))
+* **orgconfigure:** do not require sfdx project ([56b8620](https://github.com/jayree/sfdx-jayree-plugin/commit/56b8620973fb9498002725f5bfe80557296f5652))
+* **scratchorgrevision:** always use json format for maxRevision.json ([9e111fd](https://github.com/jayree/sfdx-jayree-plugin/commit/9e111fd762ee86b63a475772492de8538d258f4e))
+* **sourcefix:** fix json output ([661b921](https://github.com/jayree/sfdx-jayree-plugin/commit/661b921217fe6668a9495c9138b6b6a1dc9ae2be))
+* **sourcefix:** fix source:fix on windows ([a35b614](https://github.com/jayree/sfdx-jayree-plugin/commit/a35b6143da995fc59c4a57568833c5ff64f1f523))
+* fix if the configuration file is not present (ENOENT) ([5bb933e](https://github.com/jayree/sfdx-jayree-plugin/commit/5bb933eb0743b701e4f689313c8f14ad652e82c3))
+* puppeteer waitFor is deprecated ([4bef674](https://github.com/jayree/sfdx-jayree-plugin/commit/4bef67401289afddabc56d42e6172fa802131222))
+* update dependencies ([fbc9a36](https://github.com/jayree/sfdx-jayree-plugin/commit/fbc9a366d14b58069a12f48cb288669bbbc4f0ec))
+
+
+### Features
+
+* winter ’21 updates ([3771f6e](https://github.com/jayree/sfdx-jayree-plugin/commit/3771f6ee563ad2f2ea10ab6e2992eae0523bc631))
+
 ## [3.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.0.0...v3.0.1) (2020-09-21)
 
 
