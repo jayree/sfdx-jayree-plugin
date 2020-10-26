@@ -97,7 +97,7 @@ export default class ImportState extends SfdxCommand {
       // this.ux.log('elementCheckedState: ' + element + ' ' + elementCheckedState);
       if (!elementCheckedState === newstate) {
         if (waitForEnable) {
-          await page.waitFor(
+          await page.waitForFunction(
             (s) => {
               const val = document.querySelector(s)['disabled'];
               return (val as boolean) === false;
@@ -147,7 +147,7 @@ export default class ImportState extends SfdxCommand {
         await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.flags.countrycode.toUpperCase()}`, {
           waitUntil: 'networkidle0',
         });
-        await page.waitFor('.tablesorter', { visible: true });
+        await page.waitForSelector('.tablesorter', { visible: true });
       } catch (error) {
         throw Error(`The country code element (${this.flags.countrycode.toUpperCase()}) was not found`);
       }
@@ -287,13 +287,13 @@ export default class ImportState extends SfdxCommand {
           update = null;
           for (let retries = 0; ; retries++) {
             try {
-              await page.waitFor('.mainTitle', { timeout: 100 });
+              await page.waitForSelector('.mainTitle', { timeout: 100 });
               update = true;
               // eslint-disable-next-line no-empty
             } catch (e) {}
 
             try {
-              await page.waitFor('#errorTitle', {
+              await page.waitForSelector('#errorTitle', {
                 timeout: 100,
               });
               update = false;
@@ -317,7 +317,7 @@ export default class ImportState extends SfdxCommand {
                 waitUntil: 'networkidle0',
               }
             );
-            await page.waitFor('.mainTitle');
+            await page.waitForSelector('.mainTitle');
           }
 
           curr = curr + 1;

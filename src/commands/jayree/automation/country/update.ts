@@ -95,7 +95,7 @@ export default class UpdateCountry extends SfdxCommand {
         await page.goto(conn.instanceUrl + '/i18n/ConfigStateCountry.apexp?setupid=AddressCleanerOverview', {
           waitUntil: 'networkidle0',
         });
-        await page.waitFor('.list', { visible: true });
+        await page.waitForSelector('.list', { visible: true });
       } catch (error) {
         throw Error("list of countries couldn't be loaded");
       }

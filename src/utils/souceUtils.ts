@@ -9,16 +9,22 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
 import { SfdxProject } from '@salesforce/core';
+import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import AdmZip from 'adm-zip';
 import execa = require('execa');
+import slash from 'slash';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
 
 // const parseStringPromise = util.promisify(xml2js.parseString);
+
+const isOutputEnabled = !(
+  process.argv.find((arg) => arg === '--json') || kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON'
+);
 
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
@@ -49,7 +55,7 @@ async function getProjectPath(): Promise<string> {
   if (projectPath.length > 0) {
     return projectPath;
   }
-  projectPath = await SfdxProject.resolveProjectPath();
+  projectPath = slash(await SfdxProject.resolveProjectPath());
   return projectPath;
 }
 
@@ -187,40 +193,44 @@ export async function moveSourceFilesByFolder(): Promise<Array<{ from: string; t
 }
 
 export async function logFixes(updatedfiles) {
-  const root = await getProjectPath();
-  Object.keys(updatedfiles).forEach((workaround) => {
-    if (updatedfiles[workaround].length > 0) {
-      cli.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
-      cli.table(updatedfiles[workaround], {
-        filePath: {
-          header: 'FILEPATH',
-          get: (row: fixResult) => path.relative(root, row.filePath),
-        },
-        operation: {
-          header: 'OPERATION',
-        },
-        message: {
-          header: 'MESSAGE',
-        },
-      });
-    }
-  });
+  if (isOutputEnabled) {
+    const root = await getProjectPath();
+    Object.keys(updatedfiles).forEach((workaround) => {
+      if (updatedfiles[workaround].length > 0) {
+        cli.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+        cli.table(updatedfiles[workaround], {
+          filePath: {
+            header: 'FILEPATH',
+            get: (row: fixResult) => path.relative(root, row.filePath),
+          },
+          operation: {
+            header: 'OPERATION',
+          },
+          message: {
+            header: 'MESSAGE',
+          },
+        });
+      }
+    });
+  }
 }
 
 export async function logMoves(movedSourceFiles) {
-  if (movedSourceFiles.length > 0) {
-    cli.styledHeader(chalk.blue('Moved Source Files'));
-    const root = await getProjectPath();
-    cli.table(movedSourceFiles, {
-      from: {
-        header: 'FROM',
-        get: (row: { from: string; to: string }) => path.relative(root, row.from),
-      },
-      to: {
-        header: 'TO',
-        get: (row: { from: string; to: string }) => path.relative(root, row.to),
-      },
-    });
+  if (isOutputEnabled) {
+    if (movedSourceFiles.length > 0) {
+      cli.styledHeader(chalk.blue('Moved Source Files'));
+      const root = await getProjectPath();
+      cli.table(movedSourceFiles, {
+        from: {
+          header: 'FROM',
+          get: (row: { from: string; to: string }) => path.relative(root, row.from),
+        },
+        to: {
+          header: 'TO',
+          get: (row: { from: string; to: string }) => path.relative(root, row.to),
+        },
+      });
+    }
   }
 }
 
@@ -326,7 +336,7 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
 async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   const array = [];
   for (const filename of Object.keys(fixsources)) {
-    const fileOrGlobPath = path.join(root, filename);
+    const fileOrGlobPath = path.posix.join(root, filename);
     let files = await globby(fileOrGlobPath);
     if (filter.length > 0) {
       files = files.filter((el) => filter.includes(el));

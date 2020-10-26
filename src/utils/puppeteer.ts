@@ -171,7 +171,7 @@ export class PuppeteerTasks {
           /* eslint no-constant-condition: ["error", { "checkLoops": false }] */
           while (true) {
             try {
-              await page.waitFor((selector) => !document.querySelector(selector), {}, call.waitFor[1]);
+              await page.waitForFunction((selector) => !document.querySelector(selector), {}, call.waitFor[1]);
               break;
             } catch {
               await page.reload({
@@ -191,7 +191,7 @@ export class PuppeteerTasks {
       if (typeof call.waitFor === 'object') {
         if (typeof call.waitFor.querySelector === 'string') {
           if (typeof call.waitFor.property !== 'undefined') {
-            await page.waitFor(
+            await page.waitForFunction(
               (c) => {
                 let value = document.querySelector(c.waitFor.querySelector);
                 if (value !== null) {

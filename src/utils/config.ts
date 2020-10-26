@@ -31,7 +31,11 @@ export default (path) => {
   try {
     configFromFile = fs.readJsonSync(join(path, '.sfdx-jayree.json'));
   } catch (error) {
-    throw new Error(error);
+    if (error.code === 'ENOENT') {
+      configFromFile = {};
+    } else {
+      throw error;
+    }
   }
 
   // // Allow users to override certain scripts

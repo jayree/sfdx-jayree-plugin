@@ -7,6 +7,7 @@
         <members>AccountContactRole</members>
         <members>ActiveScratchOrg</members>
         <members>Activity</members>
+        <members>ActivityRecurrence2Exception</members>
         <members>Asset</members>
         <members>AssetRelationship</members>
         <members>AssistantProgress</members>
@@ -97,6 +98,7 @@
         <members>ScorecardAssociation</members>
         <members>ScorecardMetric</members>
         <members>ScratchOrgInfo</members>
+        <members>ShapeRepresentation</members>
         <members>Site</members>
         <members>SocialPersona</members>
         <members>Solution</members>
@@ -109,8 +111,8 @@
         <members>UserProvisioningRequest</members>
     </types>
     <types>
-      <name>Profile</name>
-      <members>Admin</members>
-  </types>
-    <version>49.0</version>
+        <name>Profile</name>
+        <members>Admin</members>
+    </types>
+    <version>50.0</version>
 </Package>

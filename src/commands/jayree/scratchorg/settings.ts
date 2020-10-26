@@ -103,7 +103,7 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
           cwd: orgretrievepath,
           fatal: false,
           silent: true,
-          env: { ...process.env, FORCE_COLOR: 0 },
+          env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
         })
       );
 
@@ -132,7 +132,12 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
             'manifest',
             'package-settings.xml'
           )} --targetusername=${this.org.getUsername()} --apiversion=${apiVersion} --json`,
-          { cwd: orgretrievepath, fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0 } }
+          {
+            cwd: orgretrievepath,
+            fatal: false,
+            silent: true,
+            env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
+          }
         )
       );
 
