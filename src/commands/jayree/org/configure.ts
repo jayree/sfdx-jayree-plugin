@@ -83,7 +83,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
         task: async (ctx, task): Promise<void> => {
           const sTask = setupTaskRunner.getNext();
           if (!(await sTask.execute())) {
-            task.output = 'already done';
+            task.skip();
           }
         },
         options: { persistentOutput: true },
