@@ -21,103 +21,108 @@ interface QueryParameters {
 }
 
 class ObjectPathResolver {
-  private _path = [];
-  private _object;
+  private path = [];
+  private object;
+  private returnPathBefore;
 
   public constructor(object) {
-    // eslint-disable-next-line no-underscore-dangle
-    this._object = object;
+    this.object = object;
   }
 
   public value() {
-    // eslint-disable-next-line no-underscore-dangle
-    return this._path;
+    if (this.returnPathBefore) {
+      return this.path.map((x) => x.split(this.returnPathBefore)[0].slice(0, -1));
+    } else {
+      return this.path;
+    }
   }
 
   public resolve({ path, key, value }: QueryParameters) {
-    // console.log({ path, key, value });
-    // eslint-disable-next-line no-underscore-dangle
-    if (this._path.length > 0) {
-      // eslint-disable-next-line @typescript-eslint/no-for-in-array, no-underscore-dangle
-      for (const i in this._path) {
-        // eslint-disable-next-line no-underscore-dangle
-        if (Array.isArray(objectPath.get(this._object, this._path[i]))) {
-          // eslint-disable-next-line no-underscore-dangle
-          this._path[i] = this._path[i] + '.' + i + '.' + path;
+    if (this.path.length > 0) {
+      for (const [i, v] of this.path.entries()) {
+        if (Array.isArray(objectPath.get(this.object, v))) {
+          this.path[i] = v + '.' + i + '.' + path;
         } else {
-          // eslint-disable-next-line no-underscore-dangle
-          this._path[i] = this._path[i] + '.' + path;
+          this.path[i] = v + '.' + path;
         }
       }
-      // console.log('nach 1. iteration');
-      // console.log(this._path);
     } else {
-      // eslint-disable-next-line no-underscore-dangle
-      this._path.push(path);
-      // console.log('nach push');
-      // console.log(this._path);
+      this.path.push(path);
+      return this;
     }
 
     const matchingPath = [];
 
-    // eslint-disable-next-line no-underscore-dangle
-    for (const currenpath of this._path) {
-      // eslint-disable-next-line no-underscore-dangle
-      const currentvalue = objectPath.get(this._object, currenpath);
+    for (const currenpath of this.path) {
+      const currentvalue = objectPath.get(this.object, currenpath);
       if (currentvalue) {
         if (value === undefined) {
-          if (currentvalue.length > 1) {
-            // eslint-disable-next-line guard-for-in
-            for (const i in currentvalue) {
-              matchingPath.push(`${currenpath}.${i}`);
-            }
-          } else {
-            matchingPath.push(`${currenpath}`);
+          for (let i = 0; i < currentvalue.length; i++) {
+            matchingPath.push(`${currenpath}.${i}`);
           }
         } else if (key === undefined) {
           if (compareobj(currentvalue, value)) {
-            matchingPath.push(currenpath);
+            matchingPath.push(`${currenpath}`);
+          } else {
+            if (currentvalue.includes(value)) {
+              matchingPath.push(`${currenpath}.${currentvalue.indexOf(value)}`);
+            }
           }
         } else {
-          for (const i in currentvalue) {
-            // eslint-disable-next-line no-underscore-dangle
-            if (compareobj(objectPath.get(this._object, `${currenpath}.${i}.${key}`), value)) {
+          for (let i = 0; i < currentvalue.length; i++) {
+            let match = true;
+            for (const [k, v] of key.entries()) {
+              const obj2compare = objectPath.get(this.object, `${currenpath}.${i}.${v}`);
+              if (obj2compare) {
+                if (!compareobj(obj2compare, value[k])) {
+                  match = false;
+                }
+              } else {
+                if (value[k] !== 'undefined') {
+                  match = false;
+                }
+              }
+            }
+            if (match) {
               matchingPath.push(`${currenpath}.${i}`);
             }
           }
         }
       }
     }
-    // eslint-disable-next-line no-underscore-dangle
-    this._path = matchingPath;
-    // console.log('nach matchinpath');
-    // console.log(this._path);
 
+    this.path = matchingPath;
     return this;
   }
 
   public resolveString(string) {
-    // console.log(string)
     // eslint-disable-next-line no-useless-escape
     string.match(/(?:[^\.\']+|\'[^\']*\')+/g).forEach((element) => {
       const query = {} as QueryParameters;
-      // const e = element.split('?');
-      const e = element.split(/(\[.*?\])/);
-      // console.log(e);
+      const e = element.split(/(\[.*\])/);
       if (e.length === 1) {
         query.path = e[0];
       } else {
         query.path = e[0];
         const params = JSON.parse(e[1].replace(/'/g, '"'));
-        if (params.length === 2) {
-          query.key = params[0];
-          query.value = params[1];
+        if (params.length >= 2) {
+          if (Array.isArray(params[0])) {
+            query.key = params.map((x) => x[0]);
+            query.value = params.map((x) => x[1]);
+          } else {
+            query.key = [params[0]];
+            query.value = [params[1]];
+          }
         }
         if (params.length === 1) {
           query.value = params[0];
         }
       }
-      // console.log(query);
+      if (query.path.charAt(0) === '?') {
+        query.path = query.path.slice(1);
+
+        this.returnPathBefore = query.path;
+      }
       this.resolve(query);
     });
     return this;
