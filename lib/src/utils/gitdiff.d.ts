@@ -38,21 +38,13 @@ export interface Ctx {
     };
     warnings: Record<string, Record<string, string[]>>;
 }
+export declare function ensureDirsInTempProject(basePath: string, ctx: Ctx): Promise<void>;
 export declare function prepareTempProject(type: string, ctx: Ctx): Promise<string>;
 export declare function addFilesToTempProject(tmpRoot: any, paths: any, task: any, ctx: Ctx): Promise<string[]>;
 export declare function convertTempProject(convertpath: string, options: {
     destruct: boolean;
 }, task: any, ctx: Ctx): Promise<string>;
 export declare function appendToManifest(file: any, insert: any): Promise<Record<string, unknown>>;
-export declare function ensureDirsInTempProject(basePath: string, ctx: Ctx): Promise<void>;
-export declare function getGitResults(task: any, ctx: Ctx): Promise<{
-    added: string[];
-    modified: {
-        toManifest: Record<string, []>;
-        toDestructiveChanges: Record<string, []>;
-    };
-    deleted: string[];
-}>;
 export declare function analyzeFile(path: any, ctx: Ctx): Promise<{
     status: number;
     toManifest?: undefined;
@@ -61,4 +53,12 @@ export declare function analyzeFile(path: any, ctx: Ctx): Promise<{
     status: number;
     toManifest: {};
     toDestructiveChanges: {};
+}>;
+export declare function getGitResults(task: any, ctx: Ctx): Promise<{
+    added: string[];
+    modified: {
+        toManifest: Record<string, []>;
+        toDestructiveChanges: Record<string, []>;
+    };
+    deleted: string[];
 }>;

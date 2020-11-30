@@ -310,10 +310,12 @@ uses the diff of what is unique in branchB (REF2)`,
         warnings: (context.warnings as unknown) as AnyJson,
       };
     } catch (e) {
-      if (this.isOutputEnabled) {
-        logger.fail(e);
+      if (debug.enabled) {
+        if (this.isOutputEnabled) {
+          logger.fail(e);
+        }
       }
-      return { ...e };
+      throw e;
     }
   }
 
