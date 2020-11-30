@@ -1,3 +1,18 @@
+# [3.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.1.0...v3.2.0) (2020-11-30)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix error handling ([1c59ce3](https://github.com/jayree/sfdx-jayree-plugin/commit/1c59ce3bb03b6601bd8a7a6482af29e4f9908cef))
+* **orgconfigure:** replaced output with skipped if task was already executed ([eb58b1c](https://github.com/jayree/sfdx-jayree-plugin/commit/eb58b1ce039f29874e3ab76d3f62000cc6072597))
+
+
+### Features
+
+* **sourceretrieve:** added logic to shrink PermissionSets, updated CustomObjects, use tmp project ([34bf807](https://github.com/jayree/sfdx-jayree-plugin/commit/34bf80762f823cd345d7a073d038d04c681ed3f3))
+* **sourceretrieve:** new options for ObjectPathResolver ([048ff3d](https://github.com/jayree/sfdx-jayree-plugin/commit/048ff3d68d90bfda1d8882cde43f4778b022aeec))
+* **statecountry:** redesigned import command with better output and task parallelization ([88512e3](https://github.com/jayree/sfdx-jayree-plugin/commit/88512e3327d841c2ee90780a0777169cdf0b8ac5))
+
 # [3.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.0.1...v3.1.0) (2020-10-26)
 
 
