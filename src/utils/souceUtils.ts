@@ -234,56 +234,6 @@ export async function logMoves(movedSourceFiles) {
   }
 }
 
-export async function applySourceFixes(filter: string[]) {
-  return await applyFixes(config(await getProjectPath()).sourceFix, null, filter);
-}
-
-export type aggregatedFixResults = {
-  [workaround: string]: fixResults;
-};
-
-type fixResults = fixResult[];
-
-type fixResult = { filePath: string; operation: string; message: string };
-
-export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFixResults> {
-  if (!root) {
-    root = await getProjectPath();
-  }
-  const updatedfiles: aggregatedFixResults = {};
-  for (const tag of tags) {
-    if (config(await getProjectPath())[tag]) {
-      const c = config(await getProjectPath())[tag];
-      for (const workarounds of Object.keys(c)) {
-        for (const workaround of Object.keys(c[workarounds])) {
-          if (c[workarounds][workaround].isactive === true) {
-            if (c[workarounds][workaround].files) {
-              if (c[workarounds][workaround].files.delete) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcedelete(c[workarounds][workaround].files.delete, root, filter)
-                );
-              }
-              if (c[workarounds][workaround].files.modify) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcefix(c[workarounds][workaround].files.modify, root, filter)
-                );
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return updatedfiles;
-}
-
 async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
   const array = [];
   deletesources = deletesources.map((el) => path.join(root, el));
@@ -417,7 +367,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   }
                   if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
-                    objectPath.set(data, settaskpath, settask.value);
+                    objectPath.set(data, settaskpath, `${settask.value}`);
                     fs.writeFileSync(
                       file,
                       builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
@@ -460,27 +410,32 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   settask.object = await validate(settask.object);
                   debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
                   if (settask.object) {
+                    let modify = false;
+
                     for (const k of Object.keys(settask.object)) {
                       debug(settaskpath + '.' + k);
                       if (objectPath.has(data, settaskpath + '.' + k)) {
                         debug(settask.object[k]);
-                        objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                        if (!compareobj(objectPath.get(data, settaskpath + '.' + k), settask.object[k])) {
+                          modify = true;
+                          objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                          debug({ modify });
+                        }
                         debug(objectPath.get(data, settaskpath));
                       }
                     }
-                  } else {
-                    objectPath.insert(data, settaskpath, settask.object);
+                    if (modify) {
+                      fs.writeFileSync(
+                        file,
+                        builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                      );
+                      array.push({
+                        filePath: file,
+                        operation: 'set',
+                        message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                      });
+                    }
                   }
-
-                  fs.writeFileSync(
-                    file,
-                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                  );
-                  array.push({
-                    filePath: file,
-                    operation: 'set',
-                    message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
-                  });
                 } else {
                   debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
                 }
@@ -524,6 +479,56 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   }
   return array;
 }
+
+export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFixResults> {
+  if (!root) {
+    root = await getProjectPath();
+  }
+  const updatedfiles: aggregatedFixResults = {};
+  for (const tag of tags) {
+    if (config(await getProjectPath())[tag]) {
+      const c = config(await getProjectPath())[tag];
+      for (const workarounds of Object.keys(c)) {
+        for (const workaround of Object.keys(c[workarounds])) {
+          if (c[workarounds][workaround].isactive === true) {
+            if (c[workarounds][workaround].files) {
+              if (c[workarounds][workaround].files.delete) {
+                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+                  updatedfiles[workarounds + '/' + workaround] = [];
+                }
+                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+                  await sourcedelete(c[workarounds][workaround].files.delete, root, filter)
+                );
+              }
+              if (c[workarounds][workaround].files.modify) {
+                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+                  updatedfiles[workarounds + '/' + workaround] = [];
+                }
+                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+                  await sourcefix(c[workarounds][workaround].files.modify, root, filter)
+                );
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return updatedfiles;
+}
+
+export async function applySourceFixes(filter: string[]) {
+  return await applyFixes(config(await getProjectPath()).sourceFix, null, filter);
+}
+
+export type aggregatedFixResults = {
+  [workaround: string]: fixResults;
+};
+
+type fixResults = fixResult[];
+
+type fixResult = { filePath: string; operation: string; message: string };
 
 export async function updateProfiles(profiles, retrievePackageDir, forceSourcePull) {
   if (forceSourcePull) {

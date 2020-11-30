@@ -70,6 +70,13 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
     }
   }
 
+  protected async shrinkPermissionSets(root) {
+    const permissionsets = await globby(join(root, 'force-app/main/default/permissionsets/*'));
+    if (permissionsets.length > 0) {
+      await souceUtils.shrinkPermissionSets(permissionsets);
+    }
+  }
+
   protected async cleanuppackagexml(manifest, manifestignore, root) {
     debug(`apply '${join(root, manifestignore)}' to '${manifest}'`);
 

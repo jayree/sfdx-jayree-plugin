@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import AdmZip from 'adm-zip';
+// import AdmZip from 'adm-zip';
 import chalk from 'chalk';
 import * as shell from 'shelljs';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
@@ -58,9 +58,14 @@ Coverage: 82%
 
     const json = (raw) => {
       try {
-        return JSON.parse(raw).result;
+        const j = JSON.parse(raw);
+        if (j.status === 0) {
+          return j.result;
+        } else {
+          return j;
+        }
       } catch (error) {
-        return JSON.parse(raw.stderr);
+        return raw;
       }
     };
 
@@ -129,50 +134,31 @@ See more help with --help`);
       }
 
       out = json(
+        shell.exec('sfdx force:project:create --projectname=. --json', {
+          cwd: orgretrievepath,
+          fatal: false,
+          silent: true,
+          env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
+        })
+      );
+
+      out = json(
         shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
+          `sfdx force:source:retrieve --manifest=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
+          {
+            cwd: orgretrievepath,
+            fatal: false,
+            silent: true,
+            env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
+          }
         )
       );
 
-      if (out.success) {
-        const zip = new AdmZip(out.zipFilePath);
-        zip.extractAllTo(orgretrievepath);
+      if (out?.inboundFiles?.length > 0) {
+        inboundFiles = out.inboundFiles;
 
-        out = json(
-          shell.exec(
-            `sfdx force:mdapi:convert --outputdir=${path.join(orgretrievepath, 'src')} --rootdir=${path.join(
-              orgretrievepath,
-              'unpackaged'
-            )} --json`,
-            {
-              fatal: false,
-              silent: true,
-              env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
-            }
-          )
-        );
-        if (!out.length) {
-          throw out;
-        } else {
-          out
-            .map((p) => {
-              return {
-                fullName: p.fullName,
-                type: p.type,
-                filePath: path
-                  .relative(orgretrievepath, p.filePath)
-                  .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
-                state: 'undefined',
-              };
-            })
-            .forEach((element) => {
-              inboundFiles.push(element);
-            });
-        }
-
-        shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
         await this.profileElementInjection(orgretrievepath);
+        await this.shrinkPermissionSets(orgretrievepath);
 
         if (!this.flags.skipfix) {
           updatedfiles = await applyFixes(['source:retrieve:full', 'source:retrieve:all'], orgretrievepath);
@@ -194,53 +180,52 @@ See more help with --help`);
         const forceapppath = path.join(projectpath, 'force-app');
         shell.cp('-R', path.join(orgretrievepath, 'force-app/main'), forceapppath);
       } else {
-        throw out;
+        throw new Error(out.message);
       }
     } finally {
       if (!this.flags.keepcache) {
         await core.fs.remove(orgretrievepath);
       }
-
-      this.ux.styledHeader(chalk.blue('Retrieved Source'));
-      this.ux.table(inboundFiles, {
-        columns: [
-          {
-            key: 'fullName',
-            label: 'FULL NAME',
-          },
-          {
-            key: 'type',
-            label: 'TYPE',
-          },
-          {
-            key: 'filePath',
-            label: 'PROJECT PATH',
-          },
-        ],
-      });
-
-      Object.keys(updatedfiles).forEach((workaround) => {
-        if (updatedfiles[workaround].length > 0) {
-          this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
-          this.ux.table(updatedfiles[workaround], {
-            columns: [
-              {
-                key: 'filePath',
-                label: 'FILEPATH',
-              },
-              {
-                key: 'operation',
-                label: 'OPERATION',
-              },
-              {
-                key: 'message',
-                label: 'MESSAGE',
-              },
-            ],
-          });
-        }
-      });
     }
+    this.ux.styledHeader(chalk.blue('Retrieved Source'));
+    this.ux.table(inboundFiles, {
+      columns: [
+        {
+          key: 'fullName',
+          label: 'FULL NAME',
+        },
+        {
+          key: 'type',
+          label: 'TYPE',
+        },
+        {
+          key: 'filePath',
+          label: 'PROJECT PATH',
+        },
+      ],
+    });
+
+    Object.keys(updatedfiles).forEach((workaround) => {
+      if (updatedfiles[workaround].length > 0) {
+        this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+        this.ux.table(updatedfiles[workaround], {
+          columns: [
+            {
+              key: 'filePath',
+              label: 'FILEPATH',
+            },
+            {
+              key: 'operation',
+              label: 'OPERATION',
+            },
+            {
+              key: 'message',
+              label: 'MESSAGE',
+            },
+          ],
+        });
+      }
+    });
 
     return {
       inboundFiles,

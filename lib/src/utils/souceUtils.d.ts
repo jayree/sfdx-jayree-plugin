@@ -9,6 +9,7 @@ export declare function moveSourceFilesByFolder(): Promise<Array<{
 }>>;
 export declare function logFixes(updatedfiles: any): Promise<void>;
 export declare function logMoves(movedSourceFiles: any): Promise<void>;
+export declare function applyFixes(tags: any, root?: any, filter?: any[]): Promise<aggregatedFixResults>;
 export declare function applySourceFixes(filter: string[]): Promise<aggregatedFixResults>;
 export declare type aggregatedFixResults = {
     [workaround: string]: fixResults;
@@ -19,6 +20,5 @@ declare type fixResult = {
     operation: string;
     message: string;
 };
-export declare function applyFixes(tags: any, root?: any, filter?: any[]): Promise<aggregatedFixResults>;
 export declare function updateProfiles(profiles: any, retrievePackageDir: any, forceSourcePull: any): Promise<void>;
 export {};
