@@ -203,8 +203,8 @@ import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:automation:state:import --countrycode <string> --category <string> --language <string> 
-  [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  $ sfdx jayree:automation:state:import [--countrycode <string>] [--category <string>] [--language <string>] 
+  [--concurrent <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
@@ -214,18 +214,18 @@ OPTIONS
   --apiversion=apiversion                                                           override the api version used for
                                                                                     api requests made by this command
 
-  --category=category                                                               (required) Subdivision category
+  --category=category                                                               Subdivision category
 
-  --countrycode=countrycode                                                         (required) Alpha-2 code
+  --concurrent=concurrent                                                           [default: 1] ccc
+
+  --countrycode=countrycode                                                         Alpha-2 code
 
   --json                                                                            format output as json
 
-  --language=language                                                               (required) Language code
+  --language=language                                                               Language code
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
-
-  --uselocalvariant                                                                 Use Local variant? (default:false)
 
 ALIASES
   $ sfdx jayree:automation:statecountry:import
@@ -731,8 +731,7 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -m, --metadata=metadata                                                           [default:
-                                                                                    Profile,PermissionSet,CustomLabels]
+  -m, --metadata=metadata                                                           [default: Profile,PermissionSet]
                                                                                     comma-separated list of metadata
                                                                                     component names
 
