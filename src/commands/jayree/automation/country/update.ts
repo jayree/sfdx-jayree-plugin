@@ -57,10 +57,6 @@ export default class UpdateCountry extends SfdxCommand {
           newvalue,
           element
         );
-      } else {
-        return new Promise((resolve) => {
-          resolve();
-        });
       }
     };
 

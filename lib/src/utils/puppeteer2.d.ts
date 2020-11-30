@@ -1,0 +1,31 @@
+export declare class PuppeteerTasks2 {
+    currentAddTask: any;
+    currentDeactivateTask: any;
+    private addTasks;
+    private deactivateTasks;
+    private nextAddTaskIndex;
+    private nextDeactivateTaskIndex;
+    private browser;
+    private auth;
+    private countrycode;
+    private countries;
+    private language;
+    private category;
+    private ISOData;
+    constructor(auth: any);
+    private static setHTMLInputElementValue;
+    private static setHTMLInputElementChecked;
+    validateParameterCountryCode(countrycode: any): Promise<any>;
+    validateParameterCategory(category: any): any;
+    validateParameterLanguage(language: any): any;
+    validateParameter(countrycode: any, category: any, language: any): Promise<any>;
+    getData2(): any;
+    getData(countrycode: any, category: any, language: any): Promise<any>;
+    setCountryIntegrationValue(): Promise<boolean>;
+    executeAdd(): Promise<string>;
+    executeDeactivate(): Promise<boolean>;
+    getNextAdd(): this;
+    getNextDeactivate(): this;
+    close(): Promise<void>;
+    open(): Promise<void>;
+}
