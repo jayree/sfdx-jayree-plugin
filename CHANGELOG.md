@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.0...v3.2.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* replace shelljs with execa and update dependencies ([0d161ff](https://github.com/jayree/sfdx-jayree-plugin/commit/0d161ff8879fea6ba100883dab44714c88115c8e))
+
 # [3.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.1.0...v3.2.0) (2020-11-30)
 
 
