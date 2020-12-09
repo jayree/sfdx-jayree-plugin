@@ -8,7 +8,7 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
-import { SfdxProject } from '@salesforce/core';
+import * as core from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
 import globby from 'globby';
@@ -55,7 +55,7 @@ async function getProjectPath(): Promise<string> {
   if (projectPath.length > 0) {
     return projectPath;
   }
-  projectPath = slash(await SfdxProject.resolveProjectPath());
+  projectPath = slash(await core.SfdxProject.resolveProjectPath());
   return projectPath;
 }
 
@@ -484,28 +484,29 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   if (!root) {
     root = await getProjectPath();
   }
+  const configPath = await core.fs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
   const updatedfiles: aggregatedFixResults = {};
   for (const tag of tags) {
-    if (config(await getProjectPath())[tag]) {
-      const c = config(await getProjectPath())[tag];
-      for (const workarounds of Object.keys(c)) {
-        for (const workaround of Object.keys(c[workarounds])) {
-          if (c[workarounds][workaround].isactive === true) {
-            if (c[workarounds][workaround].files) {
-              if (c[workarounds][workaround].files.delete) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (fix[workarounds][workaround].isactive === true) {
+            if (fix[workarounds][workaround].files) {
+              if (fix[workarounds][workaround].files.delete) {
                 if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
                   updatedfiles[workarounds + '/' + workaround] = [];
                 }
                 updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcedelete(c[workarounds][workaround].files.delete, root, filter)
+                  await sourcedelete(fix[workarounds][workaround].files.delete, root, filter)
                 );
               }
-              if (c[workarounds][workaround].files.modify) {
+              if (fix[workarounds][workaround].files.modify) {
                 if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
                   updatedfiles[workarounds + '/' + workaround] = [];
                 }
                 updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcefix(c[workarounds][workaround].files.modify, root, filter)
+                  await sourcefix(fix[workarounds][workaround].files.modify, root, filter)
                 );
               }
             }

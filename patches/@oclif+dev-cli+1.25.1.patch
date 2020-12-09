@@ -1,5 +1,5 @@
 diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-index fc263d2..47b440c 100644
+index e757385..0e851d2 100644
 --- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
 +++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
 @@ -51,25 +51,28 @@ class Readme extends command_1.Command {
@@ -63,11 +63,7 @@ index fc263d2..47b440c 100644
              }),
              '',
              ...commands.map(c => this.renderCommand(config, c)).map(s => s.trim() + '\n'),
-@@ -114,13 +117,15 @@ USAGE
-     }
-     renderCommand(config, c) {
-         this.debug('rendering command', c.id);
-+        const title = util_1.template({config, command: c})(c.description || '').trim().split('\n')[0]
+@@ -118,7 +121,7 @@ USAGE
          const HelpClass = plugin_help_1.getHelpClass(config);
          const help = new HelpClass(config, { stripAnsi: true, maxWidth: columns });
          const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
@@ -76,11 +72,7 @@ index fc263d2..47b440c 100644
          try {
              return util_1.compact([
                  header(),
-+                title,
-                 '```\n' + wrapper.formatCommand(c).trim() + '\n```',
-                 this.commandCode(config, c),
-             ]).join('\n\n');
-@@ -195,7 +200,7 @@ USAGE
+@@ -197,7 +200,7 @@ USAGE
              return;
          p = p.replace(plugin.root + path.sep, '');
          if (plugin.pjson.devDependencies && plugin.pjson.devDependencies.typescript) {
@@ -89,7 +81,7 @@ index fc263d2..47b440c 100644
              p = p.replace(/\.js$/, '.ts');
          }
          p = p.replace(/\\/g, '/'); // Replace windows '\' by '/'
-@@ -223,9 +228,9 @@ USAGE
+@@ -225,9 +228,9 @@ USAGE
  exports.default = Readme;
  Readme.description = `adds commands to README.md in current directory
  The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:

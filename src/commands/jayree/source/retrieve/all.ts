@@ -4,13 +4,12 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import * as fs from 'fs';
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-// import AdmZip from 'adm-zip';
 import chalk from 'chalk';
-import * as shell from 'shelljs';
+import execa = require('execa');
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 
@@ -55,19 +54,6 @@ Coverage: 82%
 
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
-
-    const json = (raw) => {
-      try {
-        const j = JSON.parse(raw);
-        if (j.status === 0) {
-          return j.result;
-        } else {
-          return j;
-        }
-      } catch (error) {
-        return raw;
-      }
-    };
 
     const projectpath = this.project.getPath();
     let inboundFiles = [];
@@ -117,10 +103,20 @@ See more help with --help`);
         }
       }
 
-      let out = shell.exec(
-        `sfdx jayree:packagexml --excludemanaged --file=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-        { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
+      await execa(
+        'sfdx',
+        [
+          'jayree:packagexml',
+          '--excludemanaged',
+          '--file',
+          packageXMLFile,
+          '--targetusername',
+          this.org.getUsername(),
+          '--json',
+        ],
+        { env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
       );
+
       if (config) {
         if (config['source:retrieve:all']) {
           if (config['source:retrieve:all'].manifestignore) {
@@ -133,29 +129,30 @@ See more help with --help`);
         }
       }
 
-      out = json(
-        shell.exec('sfdx force:project:create --projectname=. --json', {
-          cwd: orgretrievepath,
-          fatal: false,
-          silent: true,
-          env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
-        })
+      await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
+        cwd: orgretrievepath,
+        env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' },
+      });
+
+      const out = JSON.parse(
+        (
+          await execa(
+            'sfdx',
+            [
+              'force:source:retrieve',
+              '--manifest',
+              packageXMLFile,
+              '--targetusername',
+              this.org.getUsername(),
+              '--json',
+            ],
+            { cwd: orgretrievepath, env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
+          )
+        ).stdout
       );
 
-      out = json(
-        shell.exec(
-          `sfdx force:source:retrieve --manifest=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-          {
-            cwd: orgretrievepath,
-            fatal: false,
-            silent: true,
-            env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
-          }
-        )
-      );
-
-      if (out?.inboundFiles?.length > 0) {
-        inboundFiles = out.inboundFiles;
+      if (out?.result?.inboundFiles?.length > 0) {
+        inboundFiles = out.result.inboundFiles;
 
         await this.profileElementInjection(orgretrievepath);
         await this.shrinkPermissionSets(orgretrievepath);
@@ -164,21 +161,10 @@ See more help with --help`);
           updatedfiles = await applyFixes(['source:retrieve:full', 'source:retrieve:all'], orgretrievepath);
         }
 
-        const cleanedfiles = shell
-          .find(path.join(orgretrievepath, 'force-app'))
-          .filter((file) => {
-            return fs.lstatSync(file).isFile();
-          })
-          .map((file) => path.relative(orgretrievepath, file));
-
-        inboundFiles = inboundFiles.filter((x) => {
-          if (cleanedfiles.includes(x.filePath)) {
-            return x;
-          }
-        });
+        inboundFiles = inboundFiles.filter((x) => fs.pathExistsSync(path.join(orgretrievepath, x.filePath)));
 
         const forceapppath = path.join(projectpath, 'force-app');
-        shell.cp('-R', path.join(orgretrievepath, 'force-app/main'), forceapppath);
+        await fs.copy(path.join(orgretrievepath, 'force-app'), forceapppath);
       } else {
         throw new Error(out.message);
       }

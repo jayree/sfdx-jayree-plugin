@@ -8,9 +8,8 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-// import AdmZip from 'adm-zip';
 import chalk from 'chalk';
-import * as shell from 'shelljs';
+import execa = require('execa');
 import * as xml2js from 'xml2js';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
@@ -57,19 +56,6 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    const json = (raw) => {
-      try {
-        const j = JSON.parse(raw);
-        if (j.status === 0) {
-          return j.result;
-        } else {
-          return j;
-        }
-      } catch (error) {
-        return raw;
-      }
-    };
-
     const projectpath = this.project.getPath();
     let inboundFiles = [];
     let updatedfiles: aggregatedFixResults = {};
@@ -103,72 +89,73 @@ Coverage: 82%
         packagexml = path.join(__dirname, '..', '..', '..', '..', '..', '..', 'manifest', 'package-labels.xml');
       }
 
-      let out = json(
-        shell.exec('sfdx force:project:create --projectname=. --json', {
-          cwd: orgretrievepath,
-          fatal: false,
-          silent: true,
-          env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
-        })
+      await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
+        cwd: orgretrievepath,
+        env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' },
+      });
+
+      const out = JSON.parse(
+        (
+          await execa(
+            'sfdx',
+            ['force:source:retrieve', '--manifest', packagexml, '--targetusername', this.org.getUsername(), '--json'],
+            { cwd: orgretrievepath, env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
+          )
+        ).stdout
       );
 
-      out = json(
-        shell.exec(
-          `sfdx force:source:retrieve --manifest=${packagexml} --targetusername=${this.org.getUsername()} --json`,
-          {
-            cwd: orgretrievepath,
-            fatal: false,
-            silent: true,
-            env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
-          }
-        )
-      );
-
-      if (out?.inboundFiles?.length > 0) {
+      if (out?.result?.inboundFiles?.length > 0) {
         if (this.flags.metadata.includes('Profile')) {
-          inboundFiles.push(...out.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/profiles')));
+          inboundFiles.push(
+            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/profiles'))
+          );
         }
 
         if (this.flags.metadata.includes('PermissionSet')) {
           inboundFiles.push(
-            ...out.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/permissionsets'))
+            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/permissionsets'))
           );
         }
 
         if (this.flags.metadata.includes('CustomLabels')) {
-          inboundFiles.push(...out.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/labels')));
+          inboundFiles.push(
+            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/labels'))
+          );
         }
 
         await this.profileElementInjection(orgretrievepath);
         await this.shrinkPermissionSets(orgretrievepath);
 
         updatedfiles = await applyFixes(['source:retrieve:full'], orgretrievepath);
+        // eslint-disable-next-line no-console
+        console.log({ updatedfiles: Object.values(updatedfiles), inboundFiles });
 
-        const cleanedfiles = shell
-          .find(path.join(orgretrievepath, 'force-app'))
-          .filter((file) => {
-            return fs.lstatSync(file).isFile();
-          })
-          .map((file) => path.relative(orgretrievepath, file));
+        inboundFiles = inboundFiles.filter((x) => fs.pathExistsSync(path.join(orgretrievepath, x.filePath)));
 
-        inboundFiles = inboundFiles.filter((x) => {
-          if (cleanedfiles.includes(x.filePath)) {
-            return x;
-          }
-        });
+        // eslint-disable-next-line no-console
+        console.log('hier');
 
         const forceTargetPath = path.join(projectpath, 'force-app/main/default/');
         await fs.ensureDir(forceTargetPath);
         if (this.flags.metadata.includes('Profile')) {
-          shell.cp('-R', path.join(orgretrievepath, 'force-app/main/default/profiles'), forceTargetPath);
+          await fs.copy(
+            path.join(orgretrievepath, 'force-app/main/default/profiles'),
+            path.join(forceTargetPath, 'profiles')
+          );
         }
 
         if (this.flags.metadata.includes('PermissionSet')) {
-          shell.cp('-R', path.join(orgretrievepath, 'force-app/main/default/permissionsets'), forceTargetPath);
+          await fs.copy(
+            path.join(orgretrievepath, 'force-app/main/default/permissionsets'),
+            path.join(forceTargetPath, 'permissionsets')
+          );
         }
 
         if (this.flags.metadata.includes('CustomLabels')) {
-          shell.cp('-R', path.join(orgretrievepath, 'force-app/main/default/labels'), forceTargetPath);
+          await fs.copy(
+            path.join(orgretrievepath, 'force-app/main/default/labels'),
+            path.join(forceTargetPath, 'labels')
+          );
         }
       } else {
         throw new Error(out.message);

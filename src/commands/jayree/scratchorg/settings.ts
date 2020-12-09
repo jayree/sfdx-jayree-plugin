@@ -9,8 +9,8 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
+import execa = require('execa');
 import { serializeError } from 'serialize-error';
-import * as shell from 'shelljs';
 import { parseStringSync } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -73,14 +73,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
       return ordered;
     };
 
-    const json = (raw) => {
-      try {
-        return JSON.parse(raw).result;
-      } catch (error) {
-        return JSON.parse(raw.stderr);
-      }
-    };
-
     const projectpath = this.project.getPath();
 
     let settings = {};
@@ -98,14 +90,10 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
     try {
       await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
 
-      let out = json(
-        shell.exec('sfdx force:project:create --projectname=. --json', {
-          cwd: orgretrievepath,
-          fatal: false,
-          silent: true,
-          env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
-        })
-      );
+      await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
+        cwd: orgretrievepath,
+        env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' },
+      });
 
       let sfdxProjectVersion;
       /* istanbul ignore next*/
@@ -120,35 +108,36 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
 
       this.ux.log(`Using ${orgretrievepath} and apiVersion=${apiVersion}`);
 
-      out = json(
-        shell.exec(
-          `sfdx force:source:retrieve --manifest=${path.join(
-            __dirname,
-            '..',
-            '..',
-            '..',
-            '..',
-            '..',
-            'manifest',
-            'package-settings.xml'
-          )} --targetusername=${this.org.getUsername()} --apiversion=${apiVersion} --json`,
-          {
-            cwd: orgretrievepath,
-            fatal: false,
-            silent: true,
-            env: { ...process.env, FORCE_COLOR: 0, SFDX_DISABLE_JAYREE_HOOKS: true },
-          }
-        )
+      const out = JSON.parse(
+        (
+          await execa(
+            'sfdx',
+            [
+              'force:source:retrieve',
+              '--manifest',
+              path.join(__dirname, '..', '..', '..', '..', '..', 'manifest', 'package-settings.xml'),
+              '--targetusername',
+              this.org.getUsername(),
+              '--apiversion',
+              apiVersion,
+              '--json',
+            ],
+            { cwd: orgretrievepath, env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
+          )
+        ).stdout
       );
 
-      if (out.warnings) {
-        out.warnings.forEach((warning) => {
+      // eslint-disable-next-line no-console
+      console.log(out);
+
+      if (out?.result?.warnings) {
+        out.result.warnings.forEach((warning) => {
           this.ux.warn(warning.problem);
         });
       }
 
-      if (out.inboundFiles) {
-        out.inboundFiles.forEach((element) => {
+      if (out?.result?.inboundFiles) {
+        out.result.inboundFiles.forEach((element) => {
           const filename = path.join(orgretrievepath, element.filePath);
           const settingsXml = parseStringSync(fs.readFileSync(filename, 'utf8'), false);
           Object.keys(settingsXml).forEach((key) => {
