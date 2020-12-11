@@ -1,3 +1,11 @@
+## [3.2.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.1...v3.2.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* error handling on windows ([12566f4](https://github.com/jayree/sfdx-jayree-plugin/commit/12566f4e93091331c1a3f1fde8e0a3497019ca58))
+* update dependencies ([5f10c13](https://github.com/jayree/sfdx-jayree-plugin/commit/5f10c136e2fc3a5b9f28b73f6c636990beaee326))
+
 ## [3.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.0...v3.2.1) (2020-12-09)
 
 
