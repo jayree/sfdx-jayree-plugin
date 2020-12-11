@@ -71,7 +71,7 @@ Coverage: 82%
     try {
       this.ux.log(`Using ${orgretrievepath}`);
 
-      await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
+      await fs.mkdirp(orgretrievepath);
 
       let packagexml = path.join(__dirname, '..', '..', '..', '..', '..', '..', 'manifest', 'package-profiles.xml');
 
@@ -160,57 +160,65 @@ Coverage: 82%
       } else {
         throw new Error(out.message);
       }
+      this.ux.styledHeader(chalk.blue('Retrieved Source'));
+      this.ux.table(inboundFiles, {
+        columns: [
+          {
+            key: 'fullName',
+            label: 'FULL NAME',
+          },
+          {
+            key: 'type',
+            label: 'TYPE',
+          },
+          {
+            key: 'filePath',
+            label: 'PROJECT PATH',
+          },
+        ],
+      });
+
+      Object.keys(updatedfiles).forEach((workaround) => {
+        if (updatedfiles[workaround].length > 0) {
+          this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+          this.ux.table(updatedfiles[workaround], {
+            columns: [
+              {
+                key: 'filePath',
+                label: 'FILEPATH',
+              },
+              {
+                key: 'operation',
+                label: 'OPERATION',
+              },
+              {
+                key: 'message',
+                label: 'MESSAGE',
+              },
+            ],
+          });
+        }
+      });
+
+      return {
+        inboundFiles,
+        fixedFiles: Object.values(updatedfiles)
+          .filter((value) => value.length > 0)
+          .reduce((acc, val) => acc.concat(val), []),
+        details: updatedfiles,
+      };
+    } catch (error) {
+      if (error.stdout) {
+        throw new Error(JSON.parse(error.stdout).message);
+      } else {
+        throw new Error(error.message.toLowerCase());
+      }
     } finally {
       if (!this.flags.keepcache) {
-        await core.fs.remove(orgretrievepath);
-      }
-    }
-    this.ux.styledHeader(chalk.blue('Retrieved Source'));
-    this.ux.table(inboundFiles, {
-      columns: [
-        {
-          key: 'fullName',
-          label: 'FULL NAME',
-        },
-        {
-          key: 'type',
-          label: 'TYPE',
-        },
-        {
-          key: 'filePath',
-          label: 'PROJECT PATH',
-        },
-      ],
-    });
-
-    Object.keys(updatedfiles).forEach((workaround) => {
-      if (updatedfiles[workaround].length > 0) {
-        this.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
-        this.ux.table(updatedfiles[workaround], {
-          columns: [
-            {
-              key: 'filePath',
-              label: 'FILEPATH',
-            },
-            {
-              key: 'operation',
-              label: 'OPERATION',
-            },
-            {
-              key: 'message',
-              label: 'MESSAGE',
-            },
-          ],
+        process.once('exit', () => {
+          fs.removeSync(orgretrievepath);
         });
       }
-    });
-
-    return {
-      inboundFiles,
-      fixedFiles: Object.values(updatedfiles)
-        .filter((value) => value.length > 0)
-        .reduce((acc, val) => acc.concat(val), []),
-      details: updatedfiles,
-    };
+    }
   }
 }
