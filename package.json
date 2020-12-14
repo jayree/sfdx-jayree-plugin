@@ -37,7 +37,6 @@
     "@commitlint/config-conventional": "^11.0.0",
     "@oclif/dev-cli": "^1.26.0",
     "@oclif/plugin-help": "^3.2.0",
-    "@oclif/semantic-release": "^3.1.5",
     "@salesforce/dev-config": "^2.0.0",
     "@salesforce/dev-scripts": "^0.6.2",
     "@salesforce/prettier-config": "^0.0.1",
@@ -176,7 +175,6 @@
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "sf-build",
     "pretest": "sf-compile-test",
-    "semantic-release": "semantic-release",
     "test": "sf-test",
     "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
   }
