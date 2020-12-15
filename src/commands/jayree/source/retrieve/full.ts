@@ -127,13 +127,8 @@ Coverage: 82%
         await this.shrinkPermissionSets(orgretrievepath);
 
         updatedfiles = await applyFixes(['source:retrieve:full'], orgretrievepath);
-        // eslint-disable-next-line no-console
-        console.log({ updatedfiles: Object.values(updatedfiles), inboundFiles });
 
         inboundFiles = inboundFiles.filter((x) => fs.pathExistsSync(path.join(orgretrievepath, x.filePath)));
-
-        // eslint-disable-next-line no-console
-        console.log('hier');
 
         const forceTargetPath = path.join(projectpath, 'force-app/main/default/');
         await fs.ensureDir(forceTargetPath);
