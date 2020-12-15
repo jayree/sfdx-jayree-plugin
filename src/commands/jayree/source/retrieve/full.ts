@@ -107,19 +107,25 @@ Coverage: 82%
       if (out?.result?.inboundFiles?.length > 0) {
         if (this.flags.metadata.includes('Profile')) {
           inboundFiles.push(
-            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/profiles'))
+            ...out.result.inboundFiles.filter((x) =>
+              x.filePath.includes(path.join('force-app', 'main', 'default', 'profiles'))
+            )
           );
         }
 
         if (this.flags.metadata.includes('PermissionSet')) {
           inboundFiles.push(
-            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/permissionsets'))
+            ...out.result.inboundFiles.filter((x) =>
+              x.filePath.includes(path.join('force-app', 'main', 'default', 'permissionsets'))
+            )
           );
         }
 
         if (this.flags.metadata.includes('CustomLabels')) {
           inboundFiles.push(
-            ...out.result.inboundFiles.filter((x) => x.filePath.includes('force-app/main/default/labels'))
+            ...out.result.inboundFiles.filter((x) =>
+              x.filePath.includes(path.join('force-app', 'main', 'default', 'labels'))
+            )
           );
         }
 
@@ -130,25 +136,25 @@ Coverage: 82%
 
         inboundFiles = inboundFiles.filter((x) => fs.pathExistsSync(path.join(orgretrievepath, x.filePath)));
 
-        const forceTargetPath = path.join(projectpath, 'force-app/main/default/');
+        const forceTargetPath = path.join(projectpath, 'force-app', 'main', 'default');
         await fs.ensureDir(forceTargetPath);
         if (this.flags.metadata.includes('Profile')) {
           await fs.copy(
-            path.join(orgretrievepath, 'force-app/main/default/profiles'),
+            path.join(orgretrievepath, 'force-app', 'main', 'default', 'profiles'),
             path.join(forceTargetPath, 'profiles')
           );
         }
 
         if (this.flags.metadata.includes('PermissionSet')) {
           await fs.copy(
-            path.join(orgretrievepath, 'force-app/main/default/permissionsets'),
+            path.join(orgretrievepath, 'force-app', 'main', 'default', 'permissionsets'),
             path.join(forceTargetPath, 'permissionsets')
           );
         }
 
         if (this.flags.metadata.includes('CustomLabels')) {
           await fs.copy(
-            path.join(orgretrievepath, 'force-app/main/default/labels'),
+            path.join(orgretrievepath, 'force-app', 'main', 'default', 'labels'),
             path.join(forceTargetPath, 'labels')
           );
         }

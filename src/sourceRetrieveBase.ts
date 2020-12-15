@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { join } from 'path';
+import * as path from 'path';
 import * as util from 'util';
 import { SfdxCommand } from '@salesforce/command';
 import chalk from 'chalk';
@@ -56,8 +56,10 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
   }
 
   protected async profileElementInjection(root) {
-    const profiles = await globby(join(root, 'force-app/main/default/profiles/*'));
-    const adminProfilePath = join(root, 'force-app/main/default/profiles/Admin.profile-meta.xml');
+    const profiles = await globby(
+      path.posix.join(root.split(path.sep).join(path.posix.sep), 'force-app', 'main', 'default', 'profiles', '*')
+    );
+    const adminProfilePath = path.join(root, 'force-app', 'main', 'default', 'profiles', 'Admin.profile-meta.xml');
     if (profiles.length > 0) {
       if (await fs.pathExists(adminProfilePath)) {
         const profileElementInjectionFromAdmin = {
@@ -71,16 +73,18 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
   }
 
   protected async shrinkPermissionSets(root) {
-    const permissionsets = await globby(join(root, 'force-app/main/default/permissionsets/*'));
+    const permissionsets = await globby(
+      path.posix.join(root.split(path.sep).join(path.posix.sep), 'force-app', 'main', 'default', 'permissionsets', '*')
+    );
     if (permissionsets.length > 0) {
       await souceUtils.shrinkPermissionSets(permissionsets);
     }
   }
 
   protected async cleanuppackagexml(manifest, manifestignore, root) {
-    debug(`apply '${join(root, manifestignore)}' to '${manifest}'`);
+    debug(`apply '${path.join(root, manifestignore)}' to '${manifest}'`);
 
-    const packageignore = await parseString(fs.readFileSync(join(root, manifestignore), 'utf8'));
+    const packageignore = await parseString(fs.readFileSync(path.join(root, manifestignore), 'utf8'));
     const newpackage = await parseString(fs.readFileSync(manifest, 'utf8'));
 
     const newPackageTypesMapped = [];
