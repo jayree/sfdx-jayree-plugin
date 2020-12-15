@@ -1,3 +1,10 @@
+## [3.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.3...v3.2.4) (2020-12-15)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** fix win32 path handling ([a45fd47](https://github.com/jayree/sfdx-jayree-plugin/commit/a45fd47364df279f2f170408ec95016e22f73449))
+
 ## [3.2.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.2...v3.2.3) (2020-12-15)
 
 
