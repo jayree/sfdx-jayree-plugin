@@ -1,3 +1,10 @@
+## [3.2.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.2...v3.2.3) (2020-12-15)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** remove console.log ([822d2ab](https://github.com/jayree/sfdx-jayree-plugin/commit/822d2ab7015b130288d01c19e6222501983cc7e7))
+
 ## [3.2.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.1...v3.2.2) (2020-12-11)
 
 
