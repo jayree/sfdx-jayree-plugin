@@ -171,7 +171,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
 
     if (this.flags.storerevision) {
       await fs.ensureFile(storedmaxrevpath);
-      await fs.writeFile(storedmaxrevpath, newstoredmaxrev).catch((err) => {
+      await fs.writeFile(storedmaxrevpath, newstoredmaxrev.toString()).catch((err) => {
         this.throwError(err);
       });
     }
