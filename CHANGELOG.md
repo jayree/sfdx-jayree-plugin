@@ -1,3 +1,10 @@
+## [3.2.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.5...v3.2.6) (2020-12-17)
+
+
+### Bug Fixes
+
+* **scratchorgrevision:** fix storerevision ([1a05e1c](https://github.com/jayree/sfdx-jayree-plugin/commit/1a05e1c03a3cb688b52bb01fb0d6566bdebed4e8))
+
 ## [3.2.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.4...v3.2.5) (2020-12-17)
 
 
