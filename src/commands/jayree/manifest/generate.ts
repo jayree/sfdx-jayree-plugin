@@ -522,6 +522,7 @@ export default class GeneratePackageXML extends SfdxCommand {
           'OrderType',
           'PartnerRole',
           'Product2Family',
+          'QuantityUnitOfMeasure',
           'QuestionOrigin',
           'QuickTextCategory',
           'QuickTextChannel',
