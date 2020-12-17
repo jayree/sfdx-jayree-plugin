@@ -1,3 +1,11 @@
+## [3.2.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.4...v3.2.5) (2020-12-17)
+
+
+### Bug Fixes
+
+* **gitdiff:** add MissingComponentOrResource handler, fix win32 path handling ([27f5613](https://github.com/jayree/sfdx-jayree-plugin/commit/27f561320637348bd53e44cee2a9aea49007633f))
+* **manifestgenerate:** add missing StandardValueSet QuantityUnitOfMeasure ([6380de6](https://github.com/jayree/sfdx-jayree-plugin/commit/6380de678f490c142e849e8a9805815d55146e5b))
+
 ## [3.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.3...v3.2.4) (2020-12-15)
 
 
