@@ -84,6 +84,7 @@
     "/bin/per-env.js",
     "/lib/src",
     "/lib/config",
+    "/lib/metadata",
     "/support",
     "/messages",
     "/oclif.manifest.json",

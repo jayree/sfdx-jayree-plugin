@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { join, dirname, basename, relative } from 'path';
+import { join, dirname, basename, relative, sep, posix } from 'path';
 import * as util from 'util';
 import * as fs from 'fs-extra';
 import execa = require('execa');
@@ -113,7 +113,11 @@ export async function convertTempProject(
     debug({ forceSourceConvertResult: result });
     result = JSON.parse(result.stdout);
     if (result.status === 1) {
-      if (result.name === 'Missing Metadata File' || result.name === 'MissingContentOrMetadataFile') {
+      if (
+        result.name === 'Missing Metadata File' ||
+        result.name === 'MissingContentOrMetadataFile' ||
+        result.name === 'MissingComponentOrResource'
+      ) {
         let path;
         if (result.name === 'Missing Metadata File') {
           path = result.message.split("Expected metadata file with '-meta.xml' extension at path: ")[1];
@@ -121,7 +125,27 @@ export async function convertTempProject(
         if (result.name === 'MissingContentOrMetadataFile') {
           path = result.message.split('Expected file at path: ')[1];
         }
-        const relpath = relative(convertpath, path);
+        if (result.name === 'MissingComponentOrResource') {
+          path = result.message.split(' exists and is correct, and try again.')[0].split(sep).slice(1).join(posix.sep);
+          let componentOrResource;
+          if (path.endsWith('.resource')) {
+            componentOrResource = '.resource';
+          } else if (path.endsWith('.component')) {
+            componentOrResource = '.component';
+          }
+          path = path.split(componentOrResource)[0];
+          const gitLines = (
+            await execa('git', ['--no-pager', 'log', '--name-only', '--pretty=format:', '--', `*${path}*`])
+          ).stdout.split(/\r?\n/);
+          debug({ MissingComponentOrResourceLogResult: gitLines });
+          path = Array.from(new Set(gitLines.filter(Boolean))).filter(
+            (f) => !f.endsWith(`${componentOrResource}-meta.xml`)
+          )[0];
+          debug({ MissingComponentOrResourceLogResultPath: path });
+          path = join(convertpath, path);
+        }
+        const relpath = relative(convertpath, path).split(sep).join(posix.sep);
+        debug({ path, convertpath, relpath });
         if (!options.destruct) {
           task.output = `add missing file ${relpath}`;
           await fs.ensureDir(join(convertpath, dirname(relpath)));
@@ -152,7 +176,7 @@ export async function convertTempProject(
         result.status = 0;
         result.result = { location: convertpath };
       } else {
-        throw new Error(`No error handler for: '${result.name}'`);
+        throw new Error(`No error handler for: '${result.name}' - ${result.message}`);
       }
     }
   } while (result.status === 1);
@@ -377,10 +401,10 @@ export async function getGitResults(
         let extf;
         if (line.path.startsWith(sfdxFolder)) {
           extf = sfdxFolder;
-          if (line.path.startsWith(join(sfdxFolder, '/main/default/'))) {
-            extf = join(sfdxFolder, '/main/default/');
+          if (line.path.startsWith(join(sfdxFolder, '/main/default/').split(sep).join(posix.sep))) {
+            extf = join(sfdxFolder, '/main/default/').split(sep).join(posix.sep);
           } else {
-            extf = join(sfdxFolder, '/');
+            extf = join(sfdxFolder, '/').split(sep).join(posix.sep);
           }
           if (gitlinesf.filter((t) => t.path.endsWith(line.path.replace(extf, '')) && t.status === 'A').length !== 0) {
             return false;

@@ -125,7 +125,7 @@ uses the diff of what is unique in branchB (REF2)`,
                 task: async (ctx): Promise<void> => {
                   ctx.tmpbasepath = join(ctx.projectRoot, '.sfdx', 'temp', `sdx_sourceGitDiff_${Date.now()}`);
 
-                  process.once('beforeExit', () => {
+                  process.once('exit', () => {
                     void fs.remove(ctx.tmpbasepath);
                   });
 
