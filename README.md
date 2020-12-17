@@ -1,6 +1,6 @@
 # sfdx-jayree
 
-some sfdx commands
+sfdx ALM commands & more
 
 [![sfdx](https://img.shields.io/badge/cli-sfdx-brightgreen.svg)](https://developer.salesforce.com/tools/sfdxcli)
 [![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
