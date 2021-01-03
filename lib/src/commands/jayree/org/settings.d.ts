@@ -1,6 +1,7 @@
 import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 export default class ScratchOrgSettings extends SfdxCommand {
+    static aliases: string[];
     static description: string;
     static examples: string[];
     protected static flagsConfig: {

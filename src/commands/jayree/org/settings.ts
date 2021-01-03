@@ -25,12 +25,14 @@ function camelize(str) {
 }
 
 export default class ScratchOrgSettings extends SfdxCommand {
+  public static aliases = ['jayree:scratchorg:settings'];
+
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:scratchorgsettings
-$ sfdx jayree:scratchorgsettings -u me@my.org
-$ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
+    `$ sfdx jayree:org:settings
+$ sfdx jayree:org:settings -u me@my.org
+$ sfdx jayree:org:settings -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
