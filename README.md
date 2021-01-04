@@ -46,16 +46,19 @@ USAGE
 * [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
 * [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
+* [`sfdx jayree:org:settings`](#sfdx-jayreeorgsettings)
 * [`sfdx jayree:org:streaming`](#sfdx-jayreeorgstreaming)
 * [`sfdx jayree:packagedescription:create`](#sfdx-jayreepackagedescriptioncreate)
 * [`sfdx jayree:packagedescription:get`](#sfdx-jayreepackagedescriptionget)
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
 * [`sfdx jayree:scratchorg:revision`](#sfdx-jayreescratchorgrevision)
-* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
 * [`sfdx jayree:source:retrieve:all`](#sfdx-jayreesourceretrieveall)
 * [`sfdx jayree:source:retrieve:full`](#sfdx-jayreesourceretrievefull)
+* [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
+* [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
+* [`sfdx jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)
 
 ### `sfdx jayree:automation:changeset:deploy`
 
@@ -466,6 +469,44 @@ EXAMPLE
 
 _See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/org/open.ts)_
 
+### `sfdx jayree:org:settings`
+
+write the current settings from an Org to a scratch org def file
+
+```
+USAGE
+  $ sfdx jayree:org:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -f, --file=file                                                                   write to 'file' instead of
+                                                                                    project-scratch-def.json
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  -w, --writetoprojectscratchdeffile                                                write output to
+                                                                                    project-scratch-def.json file
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+ALIASES
+  $ sfdx jayree:scratchorg:settings
+
+EXAMPLE
+  $ sfdx jayree:org:settings
+  $ sfdx jayree:org:settings -u me@my.org
+  $ sfdx jayree:org:settings -u MyTestOrg1 -w
+```
+
+_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/org/settings.ts)_
+
 ### `sfdx jayree:org:streaming`
 
 listen to streaming api and platform events
@@ -624,41 +665,6 @@ EXAMPLE
 
 _See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/scratchorg/revision.ts)_
 
-### `sfdx jayree:scratchorg:settings`
-
-write the current settings from an Org to a scratch org def file
-
-```
-USAGE
-  $ sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -f, --file=file                                                                   write to 'file' instead of
-                                                                                    project-scratch-def.json
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  -w, --writetoprojectscratchdeffile                                                write output to
-                                                                                    project-scratch-def.json file
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLE
-  $ sfdx jayree:scratchorgsettings
-  $ sfdx jayree:scratchorgsettings -u me@my.org
-  $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w
-```
-
-_See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/scratchorg/settings.ts)_
-
 ### `sfdx jayree:source:fix`
 
 fix local source files
@@ -755,4 +761,96 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/jayree/source/retrieve/full.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/source/retrieve/full.ts)_
+
+### `sfdx jayree:source:tracking:list`
+
+list changes in a scratch org by remote revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:list [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -r, --revision=revision                                                           start at a specific revision counter
+                                                                                    number (default: 0)
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:list
+  $ sfdx jayree:source:tracking:list -u me@my.org
+  $ sfdx jayree:source:tracking:list -u me@my.org -r 101
+```
+
+_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/source/tracking/list.ts)_
+
+### `sfdx jayree:source:tracking:store:get`
+
+get stored revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:store:get [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:store:get
+  $ sfdx jayree:source:tracking:store:get -u me@my.org
+```
+
+_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/source/tracking/store/get.ts)_
+
+### `sfdx jayree:source:tracking:store:set`
+
+store revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:store:set [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -r, --revision=revision                                                           revision counter number (default:
+                                                                                    remote revision counter number)
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:store:set
+  $ sfdx jayree:source:tracking:store:set -u me@my.org
+  $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
+```
+
+_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.2.6/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
