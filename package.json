@@ -46,11 +46,11 @@
     "@types/fs-extra": "^9.0.6",
     "@types/inquirer": "^7.3.1",
     "@types/mocha": "^8.2.0",
-    "@types/node": "^14.14.19",
+    "@types/node": "^14.14.20",
     "@types/puppeteer": "^5.4.2",
     "@types/sinon": "^9.0.10",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
     "chai": "^4.2.0",
     "codecov": "^3.8.1",
     "cross-spawn": "^7.0.3",
@@ -62,7 +62,7 @@
     "eslint-plugin-header": "^3.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^30.7.13",
-    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "husky": "^4.3.6",
     "mocha": "^8.2.1",
     "nock": "^13.0.5",
@@ -130,7 +130,10 @@
     "commands": "./lib/src/commands",
     "bin": "sfdx",
     "hooks": {
-      "update": "./lib/src/hooks/changelog"
+      "update": "./lib/src/hooks/changelog",
+      "preretrieve": "./lib/src/hooks/preretrieve",
+      "postretrieve": "./lib/src/hooks/postretrieve",
+      "postsourceupdate": "./lib/src/hooks/postsourceupdate"
     },
     "topics": {
       "jayree": {
