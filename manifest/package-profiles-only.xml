@@ -17,10 +17,6 @@
     <members>*</members>
   </types>
   <types>
-    <name>CustomLabels</name>
-    <members>*</members>
-  </types>
-  <types>
     <name>CustomObject</name>
     <members>*</members>
     <members>AccountContactRelation</members>
@@ -134,10 +130,6 @@
   </types>
   <types>
     <name>NamedCredential</name>
-    <members>*</members>
-  </types>
-  <types>
-    <name>PermissionSet</name>
     <members>*</members>
   </types>
   <types>
