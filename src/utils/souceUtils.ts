@@ -525,7 +525,7 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
 }
 
 export async function applySourceFixes(filter: string[]) {
-  return await applyFixes(config(await getProjectPath()).sourceFix, null, filter);
+  return await applyFixes(config(await getProjectPath()).applySourceFixes, null, filter);
 }
 
 export type aggregatedFixResults = {

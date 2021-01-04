@@ -11,14 +11,13 @@ import ensureUserPermissionsDeveloperEdition = require('../../config/ensureUserP
 import ensureObjectPermissionsDeveloperEdition = require('../../config/ensureObjectPermissionsDeveloperEdition.json');
 
 const CONFIG_DEFAULTS = {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   ensureUserPermissions: ensureUserPermissionsDeveloperEdition.ensureUserPermissions,
   ensureObjectPermissions: ensureObjectPermissionsDeveloperEdition.ensureObjectPermissions,
   moveSourceFolders: [],
-  sourceFix: [],
+  applySourceFixes: ['source:retrieve:full', 'source:retrieve:all'],
+  runHooks: false,
 };
 
-// Path to resolved config object.
 const resolvedConfigs = {};
 
 export default (path) => {
@@ -38,18 +37,13 @@ export default (path) => {
     }
   }
 
-  // // Allow users to override certain scripts
-  // const config = Object.assign({}, defaults, configFromFile, {
-  //   scripts: Object.assign({}, defaults.scripts || {}, configFromFile.script || {}),
-  //   husky: Object.assign({}, defaults.husky || {}, configFromFile.husky || {}),
-  // });
-
   const config = {
     ...configFromFile,
     ensureUserPermissions: configFromFile.ensureUserPermissions || defaults.ensureUserPermissions,
     ensureObjectPermissions: configFromFile.ensureObjectPermissions || defaults.ensureObjectPermissions,
     moveSourceFolders: configFromFile.moveSourceFolders || defaults.moveSourceFolders,
-    sourceFix: configFromFile.sourceFix || defaults.sourceFix,
+    applySourceFixes: configFromFile.applySourceFixes || defaults.applySourceFixes,
+    runHooks: configFromFile.runHooks || defaults.runHooks,
   };
 
   resolvedConfigs[path] = config;
