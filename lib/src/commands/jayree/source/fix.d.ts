@@ -7,7 +7,7 @@ export default class FixMetadata extends SourceRetrieveBase {
         tag: flags.Discriminated<flags.Array<string>>;
         verbose: flags.Builtin;
     };
-    protected static requiresUsername: boolean;
+    protected static supportsUsername: boolean;
     protected static supportsDevhubUsername: boolean;
     protected static requiresProject: boolean;
     run(): Promise<AnyJson>;
