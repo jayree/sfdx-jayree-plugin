@@ -1,3 +1,17 @@
+# [3.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.6...v3.3.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* fix changelog hook ([64d2d1d](https://github.com/jayree/sfdx-jayree-plugin/commit/64d2d1dc89ec284448f681b3372364c9b1bbd290))
+* update dependencies ([7a2c047](https://github.com/jayree/sfdx-jayree-plugin/commit/7a2c04782f2324b617257a8d04cd630d786ef9b0))
+
+
+### Features
+
+* rename jayree:scratchorg:settings to jayree:org:settings ([b5d4feb](https://github.com/jayree/sfdx-jayree-plugin/commit/b5d4febe6477bd4a3e603ca2124317ef48823f41))
+* split scratchorg:revision into source:tracking:list and :store:get, :store:set ([9e10c6b](https://github.com/jayree/sfdx-jayree-plugin/commit/9e10c6bfaf95adeeabfa553579452f1156b2b58f))
+
 ## [3.2.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.5...v3.2.6) (2020-12-17)
 
 
