@@ -1,3 +1,16 @@
+# [3.4.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.3.0...v3.4.0) (2021-01-05)
+
+
+### Bug Fixes
+
+* **sourcefix:** change requiresUsername to supportsUsername ([7890c09](https://github.com/jayree/sfdx-jayree-plugin/commit/7890c09c8301b5a4ff8a9280f0b7d9d02ef7e6ab))
+* set version to 50.0 in all internal manifests ([53b9ef6](https://github.com/jayree/sfdx-jayree-plugin/commit/53b9ef6686352a40df01db716b0e511bf1117307))
+
+
+### Features
+
+* implement retrieve hooks ([dd71f69](https://github.com/jayree/sfdx-jayree-plugin/commit/dd71f6940390b9466b1f222a9558eac0762f5893))
+
 # [3.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.6...v3.3.0) (2021-01-04)
 
 
