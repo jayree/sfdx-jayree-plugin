@@ -294,7 +294,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   for (const filename of Object.keys(fixsources)) {
     let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filename));
     if (filter.length > 0) {
-      files = files.filter((el) => filter.includes(el));
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
     }
     for (const file of files) {
       if (await fs.pathExists(file)) {
