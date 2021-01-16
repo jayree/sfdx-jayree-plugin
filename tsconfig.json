@@ -2,7 +2,7 @@
   "extends": "@salesforce/dev-config/tsconfig",
   "compilerOptions": {
     "importHelpers": true,
-    "lib": ["ES2017", "DOM"],
+    "lib": ["es2019", "dom"],
     "outDir": "lib",
     "resolveJsonModule": true,
     "esModuleInterop": true
