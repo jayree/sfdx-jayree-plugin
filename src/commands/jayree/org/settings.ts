@@ -10,7 +10,6 @@ import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import execa = require('execa');
-import { serializeError } from 'serialize-error';
 import { parseStringSync } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
@@ -306,7 +305,6 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
 
   private throwError(err: Error) {
     this.ux.stopSpinner();
-    this.logger.error({ err: serializeError(err) });
     throw err;
   }
 }

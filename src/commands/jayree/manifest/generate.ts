@@ -761,7 +761,6 @@ export default class GeneratePackageXML extends SfdxCommand {
 
   private throwError(err: Error) {
     this.ux.stopSpinner();
-    // this.logger.error({ err: serializeError(err) });
     this.logger.error(err.stack);
     throw err;
   }

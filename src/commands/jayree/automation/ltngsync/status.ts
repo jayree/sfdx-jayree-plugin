@@ -7,7 +7,6 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer = require('puppeteer');
-import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'ltngsyncstatus');
@@ -96,7 +95,6 @@ export default class LtngSyncStatus extends SfdxCommand {
       }
     } catch (error) {
       this.ux.stopSpinner();
-      this.logger.error({ error: serializeError(error) });
       throw error;
     } finally {
       await browser.close();

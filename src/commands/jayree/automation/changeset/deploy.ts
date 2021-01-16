@@ -8,7 +8,6 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { prompt, QuestionCollection } from 'inquirer';
 import puppeteer = require('puppeteer');
-import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
@@ -202,9 +201,6 @@ jobid:  0Xxx100000xx1x1
       this.ux.log('Status: ' + job.status);
       this.ux.log('jobid:  ' + job.id);
       // }
-    } catch (error) {
-      this.logger.error({ error: serializeError(error) });
-      throw error;
     } finally {
       await browser.close();
     }
