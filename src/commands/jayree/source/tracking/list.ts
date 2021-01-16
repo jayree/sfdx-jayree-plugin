@@ -112,6 +112,21 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
       });
     }
 
+    if (storedServerMaxRevisionCounter) {
+      if (
+        !sourceMemberResults.find((SourceMember) => SourceMember.RevisionCounter === storedServerMaxRevisionCounter)
+      ) {
+        sourceMemberResults.push({
+          RevisionCounter: storedServerMaxRevisionCounter,
+          RevisionCounterString: `${storedServerMaxRevisionCounter} [stored]`,
+          Id: 'unknown',
+          MemberType: 'unknown',
+          IsNameObsolete: 'unknown',
+          MemberName: 'unknown',
+        });
+      }
+    }
+
     sourceMemberResults = sourceMemberResults.sort((a, b) => {
       const x = a.RevisionCounter;
       const y = b.RevisionCounter;
