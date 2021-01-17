@@ -10,7 +10,6 @@
   "terminal.integrated.env.windows": {
     "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
   },
-  "eslint.enable": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": true,
@@ -23,6 +22,9 @@
   },
   "search.exclude": {
     "**/lib": true,
-    "**/bin": true
-  }
+    "**/bin": true,
+    "**/node_modules": true,
+    "**/.yarn": true
+  },
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

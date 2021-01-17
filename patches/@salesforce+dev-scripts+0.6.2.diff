@@ -1,7 +1,7 @@
-diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-index 07e8816..6b1d712 100755
---- a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-+++ b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
+diff --git a/bin/sf-clean.js b/bin/sf-clean.js
+index 07e8816e9e2fb9090ce65352b60c9829a9052682..6b1d712e904c3491e8b875c48eae9610ad442661 100755
+--- a/bin/sf-clean.js
++++ b/bin/sf-clean.js
 @@ -39,7 +39,7 @@ if (gitignorePath) {
 
    // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
@@ -23,14 +23,14 @@ index 07e8816..6b1d712 100755
 @@ -58,5 +58,6 @@ if (cleanAll) {
    toClean = [...toClean, ...toCleanAll];
  }
- 
+
 +toClean = [...new Set(toClean)]
  log(`rm -rf ${toClean}`);
  shell.rm('-rf', toClean);
-diff --git a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
-index 9b64188..fbc4a64 100644
---- a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
-+++ b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
+diff --git a/files/LICENSE.txt b/files/LICENSE.txt
+index 9b64188eed60d210ed86c879c373ff1736ad3704..fbc4a64ff262900ec92c7c32e851ded35a283789 100644
+--- a/files/LICENSE.txt
++++ b/files/LICENSE.txt
 @@ -1,4 +1,4 @@
 -Copyright (c) 2018, Salesforce.com, Inc.
 +Copyright (c) 2020, jayree
@@ -46,10 +46,10 @@ index 9b64188..fbc4a64 100644
 
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \ No newline at end of file
-diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index ee68920..0719c79 100644
---- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-+++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
+diff --git a/utils/sf-config.js b/utils/sf-config.js
+index ee689202d701db4aade77167d22b89dd25a793be..0719c795f66459be6dc77a794092938b5ff8c92b 100644
+--- a/utils/sf-config.js
++++ b/utils/sf-config.js
 @@ -13,7 +13,7 @@ const PACKAGE_DEFAULTS = {
    scripts: {
      build: 'sf-build',
@@ -67,10 +67,10 @@ index ee68920..0719c79 100644
      prepack: 'sf-build',
    },
    husky: {
-diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 58eba83..6d3ae94 100644
---- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-+++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
+diff --git a/utils/write-dependencies.js b/utils/write-dependencies.js
+index 58eba8371d38d62db86d6419549776e4bf34d1e3..7771f8e110438c38f61fe7020c26ba5a0eaa73b2 100644
+--- a/utils/write-dependencies.js
++++ b/utils/write-dependencies.js
 @@ -28,7 +28,7 @@ module.exports = (projectPath, inLernaProject) => {
          `Version empty for ${name}. Make sure it is in the devDependencies in dev-scripts since it is being added to the actual projects devDependencies.`
        );
@@ -107,3 +107,16 @@ index 58eba83..6d3ae94 100644
 
    // We use eslint now
    remove('tslint');
+diff --git a/utils/standardize-pjson.js b/utils/standardize-pjson.js
+index 50ed4a01545848ad22572d08bada19e44bc706d0..1218b8299d6ad14eddcc0a441aa3fc0d3320b969 100644
+--- a/utils/standardize-pjson.js
++++ b/utils/standardize-pjson.js
+@@ -34,7 +34,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
+         scriptCommand = `lerna run ${scriptName}`;
+       }
+ 
+-      if (scripts[scriptName] !== scriptCommand) {
++      if (!scripts[scriptName]) {
+         scripts[scriptName] = scriptCommand;
+         scriptsChanged.push(scriptName);
+       }

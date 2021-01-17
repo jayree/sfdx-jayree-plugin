@@ -1,7 +1,7 @@
-diff --git a/node_modules/@oclif/dev-cli/lib/commands/readme.js b/node_modules/@oclif/dev-cli/lib/commands/readme.js
-index e757385..0e851d2 100644
---- a/node_modules/@oclif/dev-cli/lib/commands/readme.js
-+++ b/node_modules/@oclif/dev-cli/lib/commands/readme.js
+diff --git a/lib/commands/readme.js b/lib/commands/readme.js
+index e75738563a3fa55f2474c4008a398df2aef9e2c3..0e851d2bb110773afe2d094afa918d7c3f21a980 100644
+--- a/lib/commands/readme.js
++++ b/lib/commands/readme.js
 @@ -51,25 +51,28 @@ class Readme extends command_1.Command {
          return readme.replace(`<!-- ${tag} -->`, `<!-- ${tag} -->\n${body}\n<!-- ${tag}stop -->`);
      }

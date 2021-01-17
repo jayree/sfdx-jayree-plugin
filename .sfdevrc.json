@@ -2,5 +2,5 @@
   "test": {
     "testsPath": "lib/test/**/*test.js"
   },
-  "exclude-scripts": ["docs"]
+  "exclude-scripts": ["docs", "pretest"]
 }

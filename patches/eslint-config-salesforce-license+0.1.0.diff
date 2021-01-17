@@ -1,7 +1,7 @@
-diff --git a/node_modules/eslint-config-salesforce-license/.eslintrc.js b/node_modules/eslint-config-salesforce-license/.eslintrc.js
-index 4ab8a1b..1226043 100644
---- a/node_modules/eslint-config-salesforce-license/.eslintrc.js
-+++ b/node_modules/eslint-config-salesforce-license/.eslintrc.js
+diff --git a/.eslintrc.js b/.eslintrc.js
+index 4ab8a1b1d5d260bfba85b3c45fc6488b50fe260d..122604391aad5db6335e6c56c4d44ecac788630e 100644
+--- a/.eslintrc.js
++++ b/.eslintrc.js
 @@ -7,8 +7,8 @@ module.exports = {
        [
          '',
