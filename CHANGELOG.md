@@ -1,3 +1,11 @@
+## [3.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.1...v3.4.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* update dependencies ([5609a4b](https://github.com/jayree/sfdx-jayree-plugin/commit/5609a4b788b26c331cb8de12b77a32a3b7746a88))
+* **sourcetrackinglist:** show stored RevisionCounter only if available ([13baee8](https://github.com/jayree/sfdx-jayree-plugin/commit/13baee8dba68d9f4a8d3a6124ee6600874ec90e1))
+
 ## [3.4.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.0...v3.4.1) (2021-01-06)
 
 
