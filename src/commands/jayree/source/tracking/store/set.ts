@@ -37,9 +37,13 @@ $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101`,
   public async run(): Promise<AnyJson> {
     const conn = this.org.getConnection();
 
-    const {
+    let {
       records: [{ maxRev }],
     } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember');
+
+    if (!maxRev) {
+      maxRev = 0;
+    }
 
     const storedmaxrevpath = path.join(
       this.project.getPath(),
