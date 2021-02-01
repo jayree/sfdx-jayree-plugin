@@ -1,3 +1,12 @@
+## [3.4.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.2...v3.4.3) (2021-02-01)
+
+
+### Bug Fixes
+
+* update dependencies ([dcbcb48](https://github.com/jayree/sfdx-jayree-plugin/commit/dcbcb486bb6dd91b84c8ca30b10d79ae85827fb6))
+* **manifestcleanup:** set requiresUsername to false ([ecb06f0](https://github.com/jayree/sfdx-jayree-plugin/commit/ecb06f05cb570e8ef1744570113acb4ad55b8ae7))
+* **trackingset:** set  maxRev to 0 if undefined in org ([74bfecd](https://github.com/jayree/sfdx-jayree-plugin/commit/74bfecd0547100b136daf97233e3abf315f44417))
+
 ## [3.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.1...v3.4.2) (2021-01-17)
 
 
