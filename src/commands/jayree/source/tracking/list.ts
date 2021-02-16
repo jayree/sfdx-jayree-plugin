@@ -40,8 +40,10 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
     const conn = this.org.getConnection();
 
     const {
-      records: [{ maxRev }],
-    } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember');
+      records: [{ maxCounter, maxNum }],
+    } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxCounter,MAX(RevisionNum) maxNum from SourceMember');
+
+    const maxRev = maxCounter >= maxNum ? maxCounter : maxNum;
 
     const maxrevpath = path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getUsername(), 'maxRevision.json');
 

@@ -37,9 +37,11 @@ $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101`,
   public async run(): Promise<AnyJson> {
     const conn = this.org.getConnection();
 
-    let {
-      records: [{ maxRev }],
-    } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxRev from SourceMember');
+    const {
+      records: [{ maxCounter, maxNum }],
+    } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxCounter,MAX(RevisionNum) maxNum from SourceMember');
+
+    let maxRev = maxCounter >= maxNum ? maxCounter : maxNum;
 
     if (!maxRev) {
       maxRev = 0;
