@@ -47,18 +47,9 @@ index 9b64188..fbc4a64 100644
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 \ No newline at end of file
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index ee68920..0719c79 100644
+index 9882e17..76172dc 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-@@ -13,7 +13,7 @@ const PACKAGE_DEFAULTS = {
-   scripts: {
-     build: 'sf-build',
-     clean: 'sf-clean',
--    'clean-all': '-clean all',
-+    'clean-all': 'sf-clean all',
-     compile: 'sf-compile',
-     docs: 'sf-docs',
-     format: 'sf-format',
 @@ -21,6 +21,7 @@ const PACKAGE_DEFAULTS = {
      pretest: 'sf-compile-test',
      test: 'sf-test',
@@ -67,6 +58,50 @@ index ee68920..0719c79 100644
      prepack: 'sf-build',
    },
    husky: {
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+index 50ed4a0..d8e6432 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+@@ -42,36 +42,9 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
+     pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+   }
+ 
+-  // Husky should only be at the root git project (the lerna project)
+-  if (inLernaProject) {
+-    if (pjson.contents.husky) {
+-      pjson.actions.push('removing husky scripts; they should only be on the lerna package.json');
+-      delete pjson.contents.husky;
+-    }
+-  } else {
+-    // GENERATE HUSKY
+-    const huskyList = Object.keys(config.husky);
+-
+-    if (huskyList.length > 0) {
+-      pjson.actions.push(`standardizing husky: ${huskyList.join(', ')}`);
+-
+-      const husky = pjson.get('husky');
+-
+-      if (!husky.hooks) {
+-        husky.hooks = {};
+-      }
+-
+-      const standardizedHuskyScripts = [];
+-      for (const [hookName, huskyScript] of Object.entries(config.husky)) {
+-        if (husky.hooks[hookName] !== huskyScript) {
+-          husky.hooks[hookName] = huskyScript;
+-          standardizedHuskyScripts.push(hookName);
+-        }
+-      }
+-      if (standardizedHuskyScripts.length > 0) {
+-        pjson.actions.push(`standardize husky scripts ${standardizedHuskyScripts.join(', ')}`);
+-      }
+-    }
++  if (pjson.contents.husky) {
++    pjson.actions.push('migrate to husky 5, removing husky scripts.');
++    delete pjson.contents.husky;
+   }
+ 
+   try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 index 58eba83..7771f8e 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
