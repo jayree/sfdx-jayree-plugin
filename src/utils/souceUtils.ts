@@ -585,9 +585,12 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
   let customObjectsFilter = [];
 
   if (await fs.pathExists(adminprofile)) {
-    profileElementInjectionFromAdmin.ensureObjectPermissions = (
-      await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'))
-    ).Profile.objectPermissions.map((el) => el.object.toString());
+    const profileContent = await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'));
+    if (profileContent.Profile.objectPermissions) {
+      profileElementInjectionFromAdmin.ensureObjectPermissions = profileContent.Profile.objectPermissions.map((el) =>
+        el.object.toString()
+      );
+    }
   } else {
     const manifest = await xml2js.parseStringPromise(
       await fs.readFile(path.join(retrievePackageDir, 'package.xml'), 'utf8')
