@@ -1,4 +1,5 @@
 {
+  "runHooks": true,
   "source:retrieve:full": {
     "Profile": {
       "Delete Profiles": {
@@ -531,6 +532,11 @@
       }
     }
   },
+  "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
+  "moveSourceFilesByFolder": [
+    ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
+    ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
+  ],
   "source:scratchorg:fix": {
     "Workarounds": {
       "Remote Site Setting": {

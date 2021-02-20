@@ -14,6 +14,7 @@ sfdx ALM commands & more
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Hooks](#hooks)
 <!-- tocstop -->
 
 ## Usage
@@ -846,3 +847,50 @@ EXAMPLE
 
 _See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.4.3/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
+
+## Hooks
+
+The following hooks are triggered after running `force:source:retrieve` or `force:source:pull`. They extend both standard commands with the same logic as `jayree:source:retrieve:all` and `jayree:source:retrieve:full`.
+
+### Enable/Disable
+
+Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (false) the hooks:
+
+```json
+{
+  "runHooks": true,
+}
+```
+
+### Hook flow
+
+![Hooks Flow](images/jayree_hooks_flow.svg)
+
+#### preretrieve
+
+- Disables the `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
+
+#### postretrieve
+
+- Re-retrieves Profiles if `source:pull` triggered the hook.
+- Ensures Object- and User-Permissions settings. Review [.sfdx-jayree-example.json](.sfdx-jayree-example.json) how the configuration should look like.
+- Shrinks Permission Sets to avoid merge conflicts in git.
+
+#### postsourceupdate
+
+- *(NEW)* Moves source files by folder (metadata type) to separate package directories. Use the following parameter in `.sfdx-jayree.json` to specify the "source" and "target" folders: 
+```json
+{
+  "moveSourceFilesByFolder": [
+    ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
+    ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
+  ],
+}
+```
+- Applies source fixes of the `jayree:source:fix` command. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
+```json
+{
+  "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
+}
+```
+- Calls `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
