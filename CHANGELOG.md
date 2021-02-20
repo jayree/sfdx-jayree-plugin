@@ -1,3 +1,18 @@
+# [3.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.3...v3.5.0) (2021-02-20)
+
+
+### Bug Fixes
+
+* update describe.json to ApiVersion 51.0 ([1c03cc8](https://github.com/jayree/sfdx-jayree-plugin/commit/1c03cc84184386cd14eeebb1f5a76a99b10dd788))
+* **hooks:** fix ensureObjectPermissions if no objects are retrieved ([3a7f83c](https://github.com/jayree/sfdx-jayree-plugin/commit/3a7f83cf8da2b2c534d2299f0e297841947a2618))
+* update dependencies ([e83f4f1](https://github.com/jayree/sfdx-jayree-plugin/commit/e83f4f1a71dedb076856ae95bd93a058adfca351))
+* **sourcetracking:** show and use RevisionCounter and RevisionNum ([f075067](https://github.com/jayree/sfdx-jayree-plugin/commit/f0750674b93256129dc3ec3528baad167f27ad85))
+
+
+### Features
+
+* added hook documentation to README ([129d0df](https://github.com/jayree/sfdx-jayree-plugin/commit/129d0df7dad8ae397b1afad92f6ab9203529aa07))
+
 ## [3.4.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.2...v3.4.3) (2021-02-01)
 
 
