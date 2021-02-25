@@ -4,7 +4,7 @@ export default class LtngSyncStatus extends SfdxCommand {
     static description: string;
     static examples: string[];
     protected static flagsConfig: {
-        officeuser: flags.Discriminated<flags.Option<string>>;
+        officeuser: flags.Discriminated<flags.String>;
         statusonly: flags.Discriminated<flags.Boolean<boolean>>;
         wait: flags.Discriminated<flags.Number>;
     };

@@ -4,9 +4,9 @@ export default class DeployChangeSet extends SfdxCommand {
     static description: string;
     static examples: string[];
     protected static flagsConfig: {
-        changeset: flags.Discriminated<flags.Option<string>>;
-        runtests: flags.Discriminated<flags.Option<string>>;
-        testlevel: flags.Discriminated<flags.Option<string>>;
+        changeset: flags.Discriminated<flags.String>;
+        runtests: flags.Discriminated<flags.String>;
+        testlevel: flags.Discriminated<flags.String>;
         checkonly: flags.Discriminated<flags.Boolean<boolean>>;
         nodialog: flags.Discriminated<flags.Boolean<boolean>>;
     };

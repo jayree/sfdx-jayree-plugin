@@ -4,9 +4,9 @@ export default class ImportState extends SfdxCommand {
     static hidden: boolean;
     static description: string;
     protected static flagsConfig: {
-        countrycode: flags.Discriminated<flags.Option<string>>;
-        category: flags.Discriminated<flags.Option<string>>;
-        language: flags.Discriminated<flags.Option<string>>;
+        countrycode: flags.Discriminated<flags.String>;
+        category: flags.Discriminated<flags.String>;
+        language: flags.Discriminated<flags.String>;
         uselocalvariant: flags.Discriminated<flags.Boolean<boolean>>;
         silent: flags.Discriminated<flags.Boolean<boolean>>;
     };

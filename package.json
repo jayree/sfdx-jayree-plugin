@@ -7,7 +7,7 @@
   "dependencies": {
     "@oclif/config": "^1.17.0",
     "@salesforce/command": "^3.1.0",
-    "@salesforce/core": "^2.19.1",
+    "@salesforce/core": "^2.20.2",
     "@salesforce/kit": "^1.4.3",
     "adm-zip": "^0.5.3",
     "chalk": "^4.1.0",
@@ -19,7 +19,7 @@
     "fs-extra": "^9.1.0",
     "globby": "^11.0.2",
     "inquirer": "^7.3.3",
-    "listr2": "^3.3.1",
+    "listr2": "^3.3.3",
     "marked": "^2.0.0",
     "marked-terminal": "^4.1.0",
     "object-path": "^0.11.5",
@@ -32,8 +32,8 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/cli": "^12.0.0",
+    "@commitlint/config-conventional": "^12.0.0",
     "@oclif/dev-cli": "^1.26.0",
     "@oclif/plugin-help": "^3.2.2",
     "@salesforce/dev-config": "^2.1.0",
@@ -47,34 +47,34 @@
     "@types/mocha": "^8.2.1",
     "@types/node": "^14.14.31",
     "@types/sinon": "^9.0.10",
-    "@typescript-eslint/eslint-plugin": "^4.15.1",
-    "@typescript-eslint/parser": "^4.15.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
     "chai": "^4.3.0",
     "codecov": "^3.8.1",
     "cross-spawn": "^7.0.3",
     "eslint": "^7.20.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-config-salesforce": "^0.1.0",
     "eslint-config-salesforce-license": "^0.1.0",
     "eslint-config-salesforce-typescript": "^0.2.0",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^32.0.2",
+    "eslint-plugin-jsdoc": "^32.2.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^5.0.9",
+    "husky": "^5.1.1",
     "is-ci": "^3.0.0",
     "mocha": "^8.3.0",
-    "nock": "^13.0.7",
+    "nock": "^13.0.8",
     "nyc": "^15.1.0",
     "patch-package": "^6.2.2",
-    "pinst": "^2.1.4",
+    "pinst": "^2.1.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "sinon": "^9.2.4",
     "source-map-support": "~0.5.19",
     "ts-node": "^9.1.1",
     "tslib": "^2.1.0",
-    "typescript": "^4.1.5",
+    "typescript": "^4.2.2",
     "xunit-file": "^1.0.0"
   },
   "engines": {
@@ -180,7 +180,7 @@
     "lint": "sf-lint",
     "lint-fix": "sf-lint --fix",
     "postcompile": "oclif-dev manifest && oclif-dev readme",
-    "_postinstall": "patch-package && (is-ci || husky install)",
+    "postinstall": "patch-package && (is-ci || husky install)",
     "postpack": "rimraf oclif.manifest.json",
     "postpublish": "pinst --enable",
     "posttest": "git checkout -q -- test/assets/*",
@@ -189,5 +189,11 @@
     "pretest": "sf-compile-test",
     "test": "sf-test",
     "version": "oclif-dev manifest && oclif-dev readme && git add README.md oclif.manifest.json"
+  },
+  "release": {
+    "branches": [
+      "main",
+      "next"
+    ]
   }
 }

@@ -21,12 +21,12 @@ export default class GeneratePackageXML extends SfdxCommand {
         name: string;
     }[];
     protected static flagsConfig: {
-        configfile: flags.Discriminated<flags.Option<string>>;
-        quickfilter: flags.Discriminated<flags.Option<string>>;
+        configfile: flags.Discriminated<flags.String>;
+        quickfilter: flags.Discriminated<flags.String>;
         matchcase: flags.Discriminated<flags.Boolean<boolean>>;
         matchwholeword: flags.Discriminated<flags.Boolean<boolean>>;
         includeflowversions: flags.Discriminated<flags.Boolean<boolean>>;
-        file: flags.Discriminated<flags.Option<string>>;
+        file: flags.Discriminated<flags.String>;
         excludemanaged: flags.Discriminated<flags.Boolean<boolean>>;
     };
     protected static requiresUsername: boolean;
