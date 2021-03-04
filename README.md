@@ -881,7 +881,7 @@ Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (
 - *(NEW)* Moves source files by folder (metadata type) to separate package directories. Use the following parameter in `.sfdx-jayree.json` to specify the "source" and "target" folders: 
 ```json
 {
-  "moveSourceFilesByFolder": [
+  "moveSourceFolders": [
     ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
     ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
   ],
