@@ -1,3 +1,16 @@
+# [3.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.2...v3.6.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* update dependencies ([4f2fcd2](https://github.com/jayree/sfdx-jayree-plugin/commit/4f2fcd2f2fd9a8c46ab07fae02e3cb65cf1ecd6d))
+
+
+### Features
+
+* **hooks:** add json output, see README for details ([3ce1e06](https://github.com/jayree/sfdx-jayree-plugin/commit/3ce1e0640d7e4dacf12463bc5ad6fdac89dc9a0c))
+* **sourcefix:** add file move function, see example configuration for details ([05b42f5](https://github.com/jayree/sfdx-jayree-plugin/commit/05b42f5201c73f82542ecf4408e439cbe1908663))
+
 ## [3.5.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.1...v3.5.2) (2021-03-04)
 
 
