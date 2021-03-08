@@ -530,13 +530,20 @@
           }
         }
       }
+    },
+    "Move Rules": {
+      "Move sharing and duplicate rules": {
+        "isactive": true,
+        "files": {
+          "move": [
+            ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
+            ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
+          ]
+        }
+      }
     }
   },
   "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
-  "moveSourceFilesByFolder": [
-    ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
-    ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
-  ],
   "source:scratchorg:fix": {
     "Workarounds": {
       "Remote Site Setting": {

@@ -234,6 +234,39 @@ export async function logMoves(movedSourceFiles) {
   }
 }
 
+async function getGlobbyBaseDirectory(globbypath) {
+  try {
+    (await fs.lstat(globbypath)).isDirectory();
+    return globbypath;
+  } catch (error) {
+    return await getGlobbyBaseDirectory(path.dirname(globbypath));
+  }
+}
+
+async function sourcemove(movesources, root, filter): Promise<fixResults> {
+  const array = [];
+  for (const filepath of movesources) {
+    debug(`move file(s): ${filepath[0]} to ${filepath[1]}`);
+    let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath[0]));
+    if (filter.length > 0) {
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
+    }
+    const from = await getGlobbyBaseDirectory(filepath[0]);
+    for (const file of files) {
+      if (await fs.pathExists(file)) {
+        const destinationFile = path.join(filepath[1], path.relative(from, file));
+        await fs.ensureDir(path.dirname(destinationFile));
+        fs.writeFileSync(destinationFile, await fs.readFile(file));
+        await fs.remove(file);
+        array.push({ filePath: file, operation: 'moveFile', message: destinationFile });
+      } else {
+        debug(`${filepath} not found`);
+      }
+    }
+  }
+  return array;
+}
+
 async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
   const array = [];
   deletesources = deletesources.map((el) => path.join(root, el));
@@ -504,6 +537,14 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
                 }
                 updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
                   await sourcedelete(fix[workarounds][workaround].files.delete, root, filter)
+                );
+              }
+              if (fix[workarounds][workaround].files.move) {
+                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+                  updatedfiles[workarounds + '/' + workaround] = [];
+                }
+                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+                  await sourcemove(fix[workarounds][workaround].files.move, root, filter)
                 );
               }
               if (fix[workarounds][workaround].files.modify) {
