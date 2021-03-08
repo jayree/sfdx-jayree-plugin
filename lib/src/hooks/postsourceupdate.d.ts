@@ -14,6 +14,7 @@ declare type PostSourceUpdateResult = {
             metadataName: string;
             filePath: string;
             state: string;
+            type: string;
             deleteSupported: boolean;
         }>;
     };

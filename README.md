@@ -877,20 +877,65 @@ Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (
 - Shrinks Permission Sets to avoid merge conflicts in git.
 
 #### postsourceupdate
-
-- *(NEW)* Moves source files by folder (metadata type) to separate package directories. Use the following parameter in `.sfdx-jayree.json` to specify the "source" and "target" folders: 
-```json
-{
-  "moveSourceFolders": [
-    ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
-    ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
-  ],
-}
-```
-- Applies source fixes of the `jayree:source:fix` command. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
+- Applies source fixes of the `jayree:source:fix` command and moves source files to separate package directories. See the configuration file [.sfdx-jayree-example.json](.sfdx-jayree-example.json) for examples. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
 ```json
 {
   "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
 }
 ```
+
+> **_IMPORTANT:_** Since the hook is not able to update the (JSON) output of the command, an additional output is generated. Set the environment variable `SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT=true` and additional comma-separated JSON output will be appended, where the output must be parsed as an array, e.g. ``JSON.parse(`[${stdout}]`)``. See an example below:
+
+```javascript
+import * as execa from 'execa';
+import { cli } from 'cli-ux';
+
+async function run() {
+    const { stdout } = await execa('sfdx', [
+        'force:source:retrieve',
+        '--metadata="Group:*"',
+        '--json'
+    ]);
+    const parsedStdout = JSON.parse(`[${stdout}]`);
+        let consolidatedStdout: {
+          result: {
+            pulledSource?: any[];
+            inboundFiles?: any[];
+            fixedFiles?: any[];
+          };
+        };
+    if (parsedStdout.length > 1) {
+        const pulledSourceOrinboundFiles =
+            parsedStdout[0].result?.pulledSource !== undefined
+                ? 'pulledSource'
+                : 'inboundFiles';
+        consolidatedStdout = {
+            ...parsedStdout[0],
+            result: {
+                ...parsedStdout[0].result,
+                [pulledSourceOrinboundFiles]: [],
+                fixedFiles: []
+            }
+        };
+        parsedStdout.shift();
+        parsedStdout.forEach((element) => {
+            consolidatedStdout.result[
+                pulledSourceOrinboundFiles
+            ] = consolidatedStdout.result[pulledSourceOrinboundFiles].concat(
+                element.result[pulledSourceOrinboundFiles]
+            );
+            consolidatedStdout.result.fixedFiles = consolidatedStdout.result.fixedFiles.concat(
+                element.result.fixedFiles
+            );
+        });
+    } else {
+        consolidatedStdout = parsedStdout[0];
+    }
+    cli.styledJSON(consolidatedStdout);
+}
+}
+
+run();
+```
+
 - Calls `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
