@@ -47,7 +47,9 @@ class ObjectPathResolver {
         }
       }
     } else {
-      this.path.push(path);
+      if (objectPath.get(this.object, path)) {
+        this.path.push(path);
+      }
       return this;
     }
 
