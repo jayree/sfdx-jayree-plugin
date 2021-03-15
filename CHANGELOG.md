@@ -1,3 +1,16 @@
+# [3.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.6.0...v3.7.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* update dependencies ([dab9ab4](https://github.com/jayree/sfdx-jayree-plugin/commit/dab9ab47f1e8616aff97907ccbab6ed05a0bb05a))
+
+
+### Features
+
+* **manifestcleanup:** use exclamation mark to add members to the package manifest ([090f9cd](https://github.com/jayree/sfdx-jayree-plugin/commit/090f9cd382d998f1c4b4f0c38aa0a6c2fe9ee3e3))
+* **sourcefix:** set global order of execution to move, modify, delete ([0f3cb7f](https://github.com/jayree/sfdx-jayree-plugin/commit/0f3cb7f6a5c84b857541e6ababfb675d1082ae6d))
+
 # [3.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.2...v3.6.0) (2021-03-08)
 
 
