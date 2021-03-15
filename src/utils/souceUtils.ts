@@ -256,7 +256,7 @@ async function sourcemove(movesources, root, filter): Promise<fixResults> {
       if (await fs.pathExists(file)) {
         const destinationFile = path.join(filepath[1], path.relative(from, file));
         await fs.ensureDir(path.dirname(destinationFile));
-        fs.writeFileSync(destinationFile, await fs.readFile(file));
+        await fs.writeFile(destinationFile, await fs.readFile(file));
         await fs.remove(file);
         array.push({ filePath: file, operation: 'moveFile', message: destinationFile });
       } else {
@@ -383,86 +383,34 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
         if (fixsources[filename].set) {
           for (const settask of fixsources[filename].set) {
             const settaskpaths = new ObjectPathResolver(data).resolveString(settask.path).value();
-
-            for (const settaskpath of settaskpaths) {
-              if (typeof settaskpath !== 'undefined') {
-                if (settask.value) {
-                  if (JSON.stringify(settask.value).includes('<mydomain>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(
-                        /<mydomain>/i,
-                        (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[0]
-                      )
-                    );
-                  }
-                  if (JSON.stringify(settask.value).includes('<instance>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(
-                        /<mydomain>/i,
-                        (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[1]
-                      )
-                    );
-                  }
-                  if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
-                    debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
-                    objectPath.set(data, settaskpath, `${settask.value}`);
-                    fs.writeFileSync(
-                      file,
-                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                    );
-                    array.push({
-                      filePath: file,
-                      operation: 'set',
-                      message: `${settask.path} => ${JSON.stringify(settask.value)}`,
-                    });
-                  }
-                } else if (typeof settask.object === 'object') {
-                  const validate = async (node) => {
-                    const replaceArray = [];
-                    const recursive = (n, attpath) => {
-                      // eslint-disable-next-line guard-for-in
-                      for (const attributename in n) {
-                        if (attpath.length === 0) {
-                          attpath = attributename;
-                        } else {
-                          attpath = attpath + '.' + attributename;
-                        }
-                        if (typeof n[attributename] === 'object') {
-                          recursive(n[attributename], attpath);
-                        } else {
-                          if (n[attributename] === '<username>') {
-                            replaceArray.push([n[attributename], attpath]);
-                          }
-                        }
-                      }
-                    };
-                    recursive(node, '');
-                    for (const element of replaceArray) {
-                      if (element[0] === '<username>') {
-                        objectPath.set(node, element[1], (await getConnectionFromArgv()).username);
-                      }
+            if (settaskpaths.length > 0) {
+              for (const settaskpath of settaskpaths) {
+                if (typeof settaskpath !== 'undefined') {
+                  if (settask.value) {
+                    if (JSON.stringify(settask.value).includes('<mydomain>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<mydomain>/i,
+                          (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[0]
+                        )
+                      );
                     }
-                    return node;
-                  };
-
-                  settask.object = await validate(settask.object);
-                  debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
-                  if (settask.object) {
-                    let modify = false;
-
-                    for (const k of Object.keys(settask.object)) {
-                      debug(settaskpath + '.' + k);
-                      if (objectPath.has(data, settaskpath + '.' + k)) {
-                        debug(settask.object[k]);
-                        if (!compareobj(objectPath.get(data, settaskpath + '.' + k), settask.object[k])) {
-                          modify = true;
-                          objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
-                          debug({ modify });
-                        }
-                        debug(objectPath.get(data, settaskpath));
-                      }
+                    if (JSON.stringify(settask.value).includes('<instance>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<instance>/i,
+                          (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[1]
+                        )
+                      );
                     }
-                    if (modify) {
+                    if (JSON.stringify(settask.value).includes('<username>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(/<username>/i, (await getConnectionFromArgv()).username)
+                      );
+                    }
+                    if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
+                      debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
+                      objectPath.set(data, settaskpath, `${settask.value}`);
                       fs.writeFileSync(
                         file,
                         builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
@@ -470,13 +418,97 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                       array.push({
                         filePath: file,
                         operation: 'set',
-                        message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                        message: `${settask.path} => ${JSON.stringify(settask.value)}`,
                       });
                     }
+                  } else if (typeof settask.object === 'object') {
+                    const validate = async (node) => {
+                      const replaceArray = [];
+                      const recursive = (n, attpath) => {
+                        // eslint-disable-next-line guard-for-in
+                        for (const attributename in n) {
+                          if (attpath.length === 0) {
+                            attpath = attributename;
+                          } else {
+                            attpath = attpath + '.' + attributename;
+                          }
+                          if (typeof n[attributename] === 'object') {
+                            recursive(n[attributename], attpath);
+                          } else {
+                            if (n[attributename] === '<username>') {
+                              replaceArray.push([n[attributename], attpath]);
+                            }
+                          }
+                        }
+                      };
+                      recursive(node, '');
+                      for (const element of replaceArray) {
+                        if (element[0] === '<username>') {
+                          objectPath.set(node, element[1], (await getConnectionFromArgv()).username);
+                        }
+                      }
+                      return node;
+                    };
+
+                    settask.object = await validate(settask.object);
+                    debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
+                    if (settask.object) {
+                      let modifiedPath = '';
+
+                      for (const k of Object.keys(settask.object)) {
+                        debug(settaskpath + '.' + k);
+                        if (objectPath.has(data, settaskpath + '.' + k)) {
+                          debug(settask.object[k]);
+                          if (!compareobj(objectPath.get(data, settaskpath + '.' + k), settask.object[k])) {
+                            modifiedPath = settaskpath;
+                            objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                            debug({ modifiedPath });
+                          }
+                          debug(objectPath.get(data, settaskpath));
+                        }
+                      }
+                      if (modifiedPath) {
+                        fs.writeFileSync(
+                          file,
+                          builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                        );
+                        array.push({
+                          filePath: file,
+                          operation: 'set',
+                          message: `${modifiedPath} ==> ${JSON.stringify(settask.object)}`,
+                        });
+                      }
+                    }
+                  } else {
+                    debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
                   }
-                } else {
-                  debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
                 }
+              }
+            } else {
+              if (settask.value) {
+                debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
+                objectPath.set(data, settask.path, `${settask.value}`);
+                fs.writeFileSync(
+                  file,
+                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                );
+                array.push({
+                  filePath: file,
+                  operation: 'set',
+                  message: `${settask.path} => ${JSON.stringify(settask.value)}`,
+                });
+              } else if (typeof settask.object === 'object') {
+                objectPath.set(data, settask.path + '.0', settask.object);
+                debug(objectPath.get(data, settask.path));
+                fs.writeFileSync(
+                  file,
+                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                );
+                array.push({
+                  filePath: file,
+                  operation: 'set',
+                  message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                });
               }
             }
           }
@@ -518,6 +550,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   return array;
 }
 
+// eslint-disable-next-line complexity
 export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFixResults> {
   if (!root) {
     root = await getProjectPath();
@@ -527,35 +560,66 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   for (const tag of tags) {
     const fix = config(configPath)[tag];
     if (fix) {
+      let result = [];
       for (const workarounds of Object.keys(fix)) {
         for (const workaround of Object.keys(fix[workarounds])) {
-          if (fix[workarounds][workaround].isactive === true) {
-            if (fix[workarounds][workaround].files) {
-              if (fix[workarounds][workaround].files.delete) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcedelete(fix[workarounds][workaround].files.delete, root, filter)
-                );
-              }
-              if (fix[workarounds][workaround].files.move) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcemove(fix[workarounds][workaround].files.move, root, filter)
-                );
-              }
-              if (fix[workarounds][workaround].files.modify) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcefix(fix[workarounds][workaround].files.modify, root, filter)
-                );
-              }
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.move
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
             }
+            result = result.concat(await sourcemove(fix[workarounds][workaround].files.move, root, filter));
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(result);
+          }
+        }
+      }
+
+      result.forEach((element) => {
+        const index = filter.findIndex((p) => p === element.filePath);
+        filter[index] = path.join(root, element.message);
+      });
+    }
+  }
+  for (const tag of tags) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.modify
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
+            }
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+              await sourcefix(fix[workarounds][workaround].files.modify, root, filter)
+            );
+          }
+        }
+      }
+    }
+  }
+  for (const tag of tags) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.delete
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
+            }
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+              await sourcedelete(fix[workarounds][workaround].files.delete, root, filter)
+            );
           }
         }
       }
