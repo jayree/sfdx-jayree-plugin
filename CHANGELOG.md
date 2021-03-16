@@ -1,3 +1,11 @@
+## [3.7.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.7.0...v3.7.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* **gitdiff:** add handler for error - no matching source was found ([6a0557a](https://github.com/jayree/sfdx-jayree-plugin/commit/6a0557aea050e1cf45612ff08007c6b3dce0b272))
+* **sourcefix:** allow globby path for file delete ([b3ff0ad](https://github.com/jayree/sfdx-jayree-plugin/commit/b3ff0ada6da83d89fdd268efdfe8635bc9f28bed))
+
 # [3.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.6.0...v3.7.0) (2021-03-15)
 
 
