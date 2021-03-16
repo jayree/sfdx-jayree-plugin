@@ -91,6 +91,7 @@ export async function addFilesToTempProject(tmpRoot, paths, task, ctx: Ctx): Pro
   return addedFiles;
 }
 
+// eslint-disable-next-line complexity
 export async function convertTempProject(
   convertpath: string,
   options: { destruct: boolean } = { destruct: false },
@@ -173,6 +174,9 @@ export async function convertTempProject(
         task.output = `removed file ${relpath}`;
         await fs.remove(join(convertpath, relpath));
       } else if (result.message === 'The package root directory is empty.') {
+        result.status = 0;
+        result.result = { location: convertpath };
+      } else if (result.message.startsWith('No matching source was found within the package root directory')) {
         result.status = 0;
         result.result = { location: convertpath };
       } else {
