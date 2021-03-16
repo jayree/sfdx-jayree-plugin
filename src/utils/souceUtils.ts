@@ -246,7 +246,6 @@ async function getGlobbyBaseDirectory(globbypath) {
 async function sourcemove(movesources, root, filter): Promise<fixResults> {
   const array = [];
   for (const filepath of movesources) {
-    debug(`move file(s): ${filepath[0]} to ${filepath[1]}`);
     let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath[0]));
     if (filter.length > 0) {
       files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
@@ -255,6 +254,7 @@ async function sourcemove(movesources, root, filter): Promise<fixResults> {
     for (const file of files) {
       if (await fs.pathExists(file)) {
         const destinationFile = path.join(filepath[1], path.relative(from, file));
+        debug(`move file(s): ${from} to ${destinationFile}`);
         await fs.ensureDir(path.dirname(destinationFile));
         await fs.writeFile(destinationFile, await fs.readFile(file));
         await fs.remove(file);
@@ -269,17 +269,19 @@ async function sourcemove(movesources, root, filter): Promise<fixResults> {
 
 async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
   const array = [];
-  deletesources = deletesources.map((el) => path.join(root, el));
-  if (filter.length > 0) {
-    deletesources = deletesources.filter((el) => filter.includes(el));
-  }
   for (const filepath of deletesources) {
-    debug(`delete file: ${filepath}`);
-    if (await fs.pathExists(filepath)) {
-      await fs.remove(filepath);
-      array.push({ filePath: filepath, operation: 'deleteFile', message: '' });
-    } else {
-      debug(`${filepath} not found`);
+    let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath));
+    if (filter.length > 0) {
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
+    }
+    for (const file of files) {
+      if (await fs.pathExists(file)) {
+        debug(`delete file: ${file}`);
+        await fs.remove(file);
+        array.push({ filePath: file, operation: 'deleteFile', message: '' });
+      } else {
+        debug(`${file} not found`);
+      }
     }
   }
   return array;
