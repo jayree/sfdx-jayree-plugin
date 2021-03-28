@@ -361,6 +361,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
         if (fixsources[filename].insert) {
           for (const inserttask of fixsources[filename].insert) {
             if (
+              inserttask.object &&
               !objectPath
                 .get(data, inserttask.path)
                 .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
@@ -378,6 +379,20 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               });
             } else {
               debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`);
+            }
+            if (inserttask.value && !compareobj(objectPath.get(data, inserttask.path), inserttask.value)) {
+              objectPath.set(data, inserttask.path, `${inserttask.value}`);
+              fs.writeFileSync(
+                file,
+                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
+              );
+              array.push({
+                filePath: file,
+                operation: 'insert',
+                message: `${JSON.stringify(inserttask.value)} at ${inserttask.path}`,
+              });
+            } else {
+              debug(`insert: Object ${JSON.stringify(inserttask.value)} found at ${inserttask.path}`);
             }
           }
         }
@@ -410,20 +425,24 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                         JSON.stringify(settask.value).replace(/<username>/i, (await getConnectionFromArgv()).username)
                       );
                     }
-                    if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
-                      debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
-                      objectPath.set(data, settaskpath, `${settask.value}`);
-                      fs.writeFileSync(
-                        file,
-                        builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                      );
-                      array.push({
-                        filePath: file,
-                        operation: 'set',
-                        message: `${settask.path} => ${JSON.stringify(settask.value)}`,
-                      });
-                    }
-                  } else if (typeof settask.object === 'object') {
+                  }
+                  if (settask.value && !compareobj(objectPath.get(data, settaskpath), settask.value)) {
+                    debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
+                    objectPath.set(data, settaskpath, `${settask.value}`);
+                    fs.writeFileSync(
+                      file,
+                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                    );
+                    array.push({
+                      filePath: file,
+                      operation: 'set',
+                      message: `${settask.path} => ${JSON.stringify(settask.value)}`,
+                    });
+                  } else {
+                    debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
+                  }
+
+                  if (settask.object) {
                     const validate = async (node) => {
                       const replaceArray = [];
                       const recursive = (n, attpath) => {
@@ -453,6 +472,19 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                     };
 
                     settask.object = await validate(settask.object);
+                  }
+
+                  const checkequal = (x, y) => {
+                    let equal = true;
+                    Object.keys(x).forEach((key) => {
+                      if (!compareobj(x[key], y[key])) {
+                        equal = false;
+                      }
+                    });
+                    return equal;
+                  };
+
+                  if (settask.object && !checkequal(settask.object, objectPath.get(data, settaskpath))) {
                     debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
                     if (settask.object) {
                       let modifiedPath = '';
@@ -482,23 +514,25 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                       }
                     }
                   } else {
-                    debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
+                    debug(`Set: value ${JSON.stringify(settask.object)} found at ${settaskpath}`);
                   }
                 }
               }
             } else {
               if (settask.value) {
                 debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
-                objectPath.set(data, settask.path, `${settask.value}`);
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
-                array.push({
-                  filePath: file,
-                  operation: 'set',
-                  message: `${settask.path} => ${JSON.stringify(settask.value)}`,
-                });
+                if (objectPath.has(data, settask.path)) {
+                  objectPath.set(data, settask.path, `${settask.value}`);
+                  fs.writeFileSync(
+                    file,
+                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                  );
+                  array.push({
+                    filePath: file,
+                    operation: 'set',
+                    message: `${settask.path} => ${JSON.stringify(settask.value)}`,
+                  });
+                }
               } else if (typeof settask.object === 'object') {
                 objectPath.set(data, settask.path + '.0', settask.object);
                 debug(objectPath.get(data, settask.path));
