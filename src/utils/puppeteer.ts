@@ -111,14 +111,14 @@ export class PuppeteerTasks {
             });
             const found = await page.evaluate((c) => {
               const elements = document.querySelectorAll(c.querySelectorAll);
+              let ret = '';
               elements.forEach((element) => {
                 if (element.textContent.trim() === c.type.list.selection) {
                   element.click();
-                  return element.textContent.trim();
+                  ret = element.textContent.trim();
                 }
               });
-              debug('not found');
-              return false;
+              return ret;
             }, call);
             if (found !== call.type.list.selection) {
               debug(`value ${call.type.list.selection} not found`);
