@@ -117,7 +117,7 @@ export const postsourceupdate: HookFunction = async function (options) {
     }
     void this.config.runHook('prettierFormat', {
       ...options,
-      result: sourceElements.map((el) => el.filePath).filter((el) => !toRemove.includes(el)),
+      result: inboundFiles.map((el) => el.filePath),
     });
   });
 };
