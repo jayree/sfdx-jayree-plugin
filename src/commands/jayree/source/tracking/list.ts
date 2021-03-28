@@ -84,7 +84,13 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
     } catch {}
 
     const { records } = await conn.tooling.query(
-      `SELECT RevisionCounter,RevisionNum,Id,MemberType,MemberName,IsNameObsolete from SourceMember where RevisionCounter >= ${this.flags.revision}`
+      `SELECT RevisionCounter,RevisionNum,Id,MemberType,MemberName,IsNameObsolete from SourceMember where RevisionCounter >= ${
+        this.flags.revision > 0
+          ? this.flags.revision
+          : storedServerMaxRevisionCounter
+          ? storedServerMaxRevisionCounter
+          : 0
+      }`
     );
 
     let sourceMemberResults = records.map((SourceMember: any) => {
