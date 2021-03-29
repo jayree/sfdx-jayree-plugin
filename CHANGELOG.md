@@ -1,3 +1,22 @@
+# [3.8.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.7.1...v3.8.0) (2021-03-29)
+
+
+### Bug Fixes
+
+* update dependencies ([226d0d0](https://github.com/jayree/sfdx-jayree-plugin/commit/226d0d09ad5343dce8c3749211cd2380a72ae616))
+* **hooks:** fix prettierFormat call ([ab29da5](https://github.com/jayree/sfdx-jayree-plugin/commit/ab29da5188faadf798713379b2d4faadc5247062))
+* **hooks:** support mutingpermissionsets ([c329deb](https://github.com/jayree/sfdx-jayree-plugin/commit/c329deba97a8c912d1d377b3a0ccf6fa3480ee9c))
+* **orgconfigure:** fix click type 'list' ([f276525](https://github.com/jayree/sfdx-jayree-plugin/commit/f27652537b59f50f3d724aa7e264951b1fe347b9))
+* **sourcefix:** bugfix and add debug ([c7301fc](https://github.com/jayree/sfdx-jayree-plugin/commit/c7301fc1f9afcc8e76cc5bc6714d83cdff12f1ca))
+* **trackinglist:** start list at storedServerMaxRevisionCounter if available ([eda8607](https://github.com/jayree/sfdx-jayree-plugin/commit/eda86077be378d62d768755bcf66742d424e99c6))
+
+
+### Features
+
+* add hook to reset source tracking before pull ([2562d37](https://github.com/jayree/sfdx-jayree-plugin/commit/2562d37dc6f8539a7349a217c2a4a0b9646a9af9))
+* **orgconfigure:** add action 'type' ([e145dbb](https://github.com/jayree/sfdx-jayree-plugin/commit/e145dbb2a3c5fa4d0eea8138c51b9f43c994d282))
+* **orgconfigure:** prepare to support subtasks ([6efb36b](https://github.com/jayree/sfdx-jayree-plugin/commit/6efb36be943f43128816b38ce42205798e2cb723))
+
 ## [3.7.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.7.0...v3.7.1) (2021-03-16)
 
 
