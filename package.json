@@ -122,6 +122,7 @@
     "commands": "./lib/src/commands",
     "bin": "sfdx",
     "hooks": {
+      "prerun": "./lib/src/hooks/prerun",
       "update": "./lib/src/hooks/changelog",
       "preretrieve": "./lib/src/hooks/preretrieve",
       "postretrieve": "./lib/src/hooks/postretrieve",

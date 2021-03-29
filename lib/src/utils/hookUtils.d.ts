@@ -1,1 +1,1 @@
-export declare const runHooks: boolean;
+export declare const runHooks: () => boolean;

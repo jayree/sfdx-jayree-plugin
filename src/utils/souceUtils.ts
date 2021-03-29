@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-// import * as util from 'util';
+/* istanbul ignore file */
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
@@ -51,12 +51,16 @@ type argvConnection = {
 let argvConnection: argvConnection = { username: null, instanceUrl: null };
 let projectPath = '';
 
-async function getProjectPath(): Promise<string> {
+export async function getProjectPath(): Promise<string> {
   if (projectPath.length > 0) {
     return projectPath;
   }
-  projectPath = slash(await core.SfdxProject.resolveProjectPath());
-  return projectPath;
+  try {
+    projectPath = slash(await core.SfdxProject.resolveProjectPath());
+    return projectPath;
+  } catch (error) {
+    return undefined;
+  }
 }
 
 export async function shrinkPermissionSets(permissionsets) {
@@ -288,7 +292,7 @@ async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
   return array;
 }
 
-async function getConnectionFromArgv(): Promise<argvConnection> {
+export async function getConnectionFromArgv(): Promise<argvConnection> {
   if (Object.values(argvConnection).some((x) => x !== null && x !== '')) {
     return new Promise((resolve) => {
       resolve(argvConnection);
