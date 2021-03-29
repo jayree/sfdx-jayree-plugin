@@ -47,9 +47,10 @@ export const postretrieve: HookFunction = async function (options) {
     await updateProfiles(profiles, retrievePackageDir, 'force:source:pull' === options.Command.id);
   }
 
-  const permissionsets = mdapiFilePaths.filter((el) =>
-    el.split(path.sep).join(path.posix.sep).includes('unpackaged/permissionsets/')
-  );
+  const permissionsets = mdapiFilePaths.filter((el) => {
+    const posixPath = el.split(path.sep).join(path.posix.sep);
+    return posixPath.includes('unpackaged/permissionsets/') || posixPath.includes('unpackaged/mutingpermissionsets/');
+  });
   if (permissionsets.length > 0) {
     await shrinkPermissionSets(permissionsets);
   }

@@ -63,16 +63,17 @@ export async function shrinkPermissionSets(permissionsets) {
   for (const file of permissionsets) {
     if (await fs.pathExists(file)) {
       const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
-      if (data.PermissionSet.fieldPermissions) {
+      const mutingOrPermissionSet = Object.keys(data)[0];
+      if (data[mutingOrPermissionSet].fieldPermissions) {
         debug({
-          permissionset: file,
+          [mutingOrPermissionSet]: file,
           removedFieldPermsissions: JSON.stringify(
-            data.PermissionSet.fieldPermissions.filter(
+            data[mutingOrPermissionSet].fieldPermissions.filter(
               (el) => el.editable.toString() === 'false' && el.readable.toString() === 'false'
             )
           ),
         });
-        data.PermissionSet.fieldPermissions = data.PermissionSet.fieldPermissions.filter(
+        data[mutingOrPermissionSet].fieldPermissions = data[mutingOrPermissionSet].fieldPermissions.filter(
           (el) => el.editable.toString() === 'true' || el.readable.toString() === 'true'
         );
         fs.writeFileSync(file, builder.buildObject(data) + '\n');

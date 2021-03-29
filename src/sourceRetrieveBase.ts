@@ -74,7 +74,7 @@ export abstract class SourceRetrieveBase extends SfdxCommand {
 
   protected async shrinkPermissionSets(root) {
     const permissionsets = await globby(
-      path.posix.join(root.split(path.sep).join(path.posix.sep), 'force-app', 'main', 'default', 'permissionsets', '*')
+      path.posix.join(root.split(path.sep).join(path.posix.sep), 'force-app', 'main', 'default', '*permissionsets', '*')
     );
     if (permissionsets.length > 0) {
       await souceUtils.shrinkPermissionSets(permissionsets);
