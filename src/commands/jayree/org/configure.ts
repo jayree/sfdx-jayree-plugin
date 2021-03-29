@@ -82,11 +82,11 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
         skip: (): boolean => !selectedSetupTasks.includes(el),
         task: async (ctx, task): Promise<void> => {
           const sTask = setupTaskRunner.getNext();
-          if (!(await sTask.execute())) {
+          if (!(await sTask.execute(task))) {
             task.skip();
           }
         },
-        options: { persistentOutput: true },
+        options: { persistentOutput: false, bottomBar: 5 },
       });
     });
 
