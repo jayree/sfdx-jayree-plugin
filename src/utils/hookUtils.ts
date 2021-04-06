@@ -9,7 +9,7 @@ import * as core from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import config from '../utils/config';
 
-export const runHooks = () => {
+export const runHooks = (() => {
   try {
     return (
       Boolean(config(core.SfdxProject.resolveProjectPathSync()).runHooks) &&
@@ -18,4 +18,4 @@ export const runHooks = () => {
   } catch (error) {
     return false;
   }
-};
+})();
