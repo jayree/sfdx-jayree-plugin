@@ -866,6 +866,12 @@ Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (
 
 ![Hooks Flow](images/jayree_hooks_flow.svg)
 
+#### prerun
+
+- Resets source tracking using `force:source:tracking:reset` before executing `force:source:pull`.
+
+> **_IMPORTANT:_** This hook will only run if  `SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL=true` is set. It uses the stored `serverMaxRevisionCounter` as revision counter number (see: [`jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)). If the hook doesn't find a stored value it asks if the current *local* revision counter number should be stored and used.
+
 #### preretrieve
 
 - Disables the `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.

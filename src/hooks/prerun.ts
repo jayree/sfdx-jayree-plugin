@@ -10,7 +10,7 @@ import { Hook } from '@oclif/config';
 import { cli } from 'cli-ux';
 import { env } from '@salesforce/kit';
 import * as fs from 'fs-extra';
-import execa = require('execa');
+import execa from 'execa';
 import chalk from 'chalk';
 import { runHooks } from '../utils/hookUtils';
 import { getConnectionFromArgv, getProjectPath } from '../utils/souceUtils';
@@ -23,8 +23,8 @@ export const prerun: Hook<'prerun'> = async function (options) {
     debug('hooks disabled');
     return;
   }
-  if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL', false)) {
-    if (options.Command.id === 'force:source:pull') {
+  if (options.Command.id === 'force:source:pull') {
+    if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL', false)) {
       debug('force:source:pull detected');
       let storedServerMaxRevisionCounter;
       let storedServerMaxRevisionCounterPath;
@@ -72,7 +72,7 @@ Store current local revision: ${localServerMaxRevisionCounter}? (y/n)`
         if (answer) {
           await fs.ensureFile(storedServerMaxRevisionCounterPath);
           await fs.writeJSON(storedServerMaxRevisionCounterPath, {
-            localServerMaxRevisionCounter,
+            serverMaxRevisionCounter: localServerMaxRevisionCounter,
           });
         }
       }
