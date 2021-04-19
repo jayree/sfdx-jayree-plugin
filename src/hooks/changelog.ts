@@ -8,8 +8,8 @@ import { join } from 'path';
 import * as fs from 'fs-extra';
 import { Hook } from '@oclif/config';
 import { ensureDirSync } from 'fs-extra';
-import marked = require('marked');
-import terminalRenderer = require('marked-terminal');
+import marked from 'marked';
+import terminalRenderer from 'marked-terminal';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const changelog: Hook<any> = async function () {

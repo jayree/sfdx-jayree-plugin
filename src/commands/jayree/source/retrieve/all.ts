@@ -9,7 +9,7 @@ import * as fs from 'fs-extra';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
-import execa = require('execa');
+import execa from 'execa';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 

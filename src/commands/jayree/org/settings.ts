@@ -9,7 +9,7 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
-import execa = require('execa');
+import execa from 'execa';
 import { parseStringSync } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);

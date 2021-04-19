@@ -7,7 +7,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { prompt, QuestionCollection } from 'inquirer';
-import puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');

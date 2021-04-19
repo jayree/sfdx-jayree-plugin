@@ -6,7 +6,7 @@
  */
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import config = require('../../config/countrystate.json');
+import * as config from '../../config/countrystate.json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:x:y');

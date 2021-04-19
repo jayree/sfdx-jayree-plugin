@@ -234,7 +234,7 @@ export default class ImportState extends SfdxCommand {
         rendererSilent: !this.isOutputEnabled,
         rendererFallback: debug.enabled,
         exitOnError: false,
-        injectWrapper: { enquirer: new Enquirer() },
+        injectWrapper: { enquirer: new Enquirer() as any },
       }
     );
 

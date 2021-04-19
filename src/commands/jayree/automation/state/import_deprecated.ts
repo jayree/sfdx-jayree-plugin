@@ -9,9 +9,9 @@ import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import { cli } from 'cli-ux';
 // import ProgressBar = require('progress');
-import puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import config = require('../../../../../config/countrystate.json');
+import * as config from '../../../../../config/countrystate.json';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');

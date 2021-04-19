@@ -7,8 +7,8 @@
 /* istanbul ignore file */
 import { join } from 'path';
 import * as fs from 'fs-extra';
-import ensureUserPermissionsDeveloperEdition = require('../../config/ensureUserPermissionsDeveloperEdition.json');
-import ensureObjectPermissionsDeveloperEdition = require('../../config/ensureObjectPermissionsDeveloperEdition.json');
+import * as ensureUserPermissionsDeveloperEdition from '../../config/ensureUserPermissionsDeveloperEdition.json';
+import * as ensureObjectPermissionsDeveloperEdition from '../../config/ensureObjectPermissionsDeveloperEdition.json';
 
 const CONFIG_DEFAULTS = {
   ensureUserPermissions: ensureUserPermissionsDeveloperEdition.ensureUserPermissions,

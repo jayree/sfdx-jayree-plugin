@@ -8,10 +8,10 @@
 import { join, dirname, basename, relative, sep, posix } from 'path';
 import * as util from 'util';
 import * as fs from 'fs-extra';
-import execa = require('execa');
-import equal = require('fast-deep-equal');
+import execa from 'execa';
+import equal from 'fast-deep-equal';
 import * as xml2js from 'xml2js';
-import describe = require('../../metadata/describe.json');
+import * as describe from '../../metadata/describe.json';
 
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },

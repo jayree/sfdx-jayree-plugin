@@ -15,7 +15,7 @@ import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import AdmZip from 'adm-zip';
-import execa = require('execa');
+import execa from 'execa';
 import slash from 'slash';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
