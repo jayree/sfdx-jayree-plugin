@@ -1,3 +1,10 @@
+## [3.8.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.2...v3.8.3) (2021-04-19)
+
+
+### Reverts
+
+* Revert "chore: remove semantic-release" ([679a4e6](https://github.com/jayree/sfdx-jayree-plugin/commit/679a4e6c499e6b3c67e3c65172bf608f6ebceb02))
+
 ## [3.8.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.1...v3.8.2) (2021-04-19)
 
 
