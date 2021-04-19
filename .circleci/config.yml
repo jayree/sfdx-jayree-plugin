@@ -59,8 +59,11 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
+      - run: yarn global add npm yarn
+      - run: yarn global add semantic-release@17
+      - run: yarn global add @oclif/semantic-release@3
       - run: *install
-      - run: yarn semantic-release -e @oclif/semantic-release
+      - run: semantic-release -e @oclif/semantic-release
       - save_cache: *save-cache
   merge:
     <<: *defaults
