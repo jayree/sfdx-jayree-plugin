@@ -1,3 +1,11 @@
+## [3.8.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.1...v3.8.2) (2021-04-19)
+
+
+### Bug Fixes
+
+* fix prerun hook and update README ([fe21355](https://github.com/jayree/sfdx-jayree-plugin/commit/fe21355e5cfb3cb51c4b5b3362bc4e7a61ac390b))
+* update dependencies ([41f5c60](https://github.com/jayree/sfdx-jayree-plugin/commit/41f5c60d9526244e1d8e44d0982e44d40f477f96))
+
 ## [3.8.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.0...v3.8.1) (2021-04-06)
 
 
