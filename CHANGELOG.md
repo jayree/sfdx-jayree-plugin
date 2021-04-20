@@ -1,3 +1,10 @@
+## [3.8.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.3...v3.8.4) (2021-04-20)
+
+
+### Bug Fixes
+
+* fix plugin installation ([99c953e](https://github.com/jayree/sfdx-jayree-plugin/commit/99c953ec638421c564eab900219e30bb5fafc3ea))
+
 ## [3.8.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.2...v3.8.3) (2021-04-19)
 
 
