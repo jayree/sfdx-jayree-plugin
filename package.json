@@ -19,7 +19,7 @@
     "fs-extra": "^9.1.0",
     "globby": "^11.0.3",
     "inquirer": "^8.0.0",
-    "listr2": "^3.7.0",
+    "listr2": "^3.7.1",
     "marked": "^2.0.3",
     "marked-terminal": "^4.1.1",
     "object-path": "^0.11.5",
@@ -68,6 +68,7 @@
     "nock": "^13.0.11",
     "nyc": "^15.1.0",
     "patch-package": "^6.4.7",
+    "pinst": "^2.1.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "semantic-release": "^17.4.2",
@@ -189,7 +190,9 @@
     "pretest": "sf-compile-test",
     "test": "sf-test",
     "version": "oclif-dev manifest && oclif-dev readme",
-    "prepare": "is-ci || husky install"
+    "prepare": "is-ci || husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "release": {
     "branches": [
