@@ -4,7 +4,7 @@ export default class Streaming extends SfdxCommand {
     static description: string;
     static examples: string[];
     protected static flagsConfig: {
-        topic: flags.Discriminated<flags.Option<string>>;
+        topic: flags.Discriminated<flags.String>;
     };
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;

@@ -8,9 +8,9 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import { cli } from 'cli-ux';
-import puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import config = require('../../../../../config/countrystate.json');
+import * as config from '../../../../../config/countrystate.json';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
@@ -57,10 +57,6 @@ export default class UpdateCountry extends SfdxCommand {
           newvalue,
           element
         );
-      } else {
-        return new Promise((resolve) => {
-          resolve();
-        });
       }
     };
 

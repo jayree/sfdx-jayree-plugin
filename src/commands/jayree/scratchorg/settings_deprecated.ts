@@ -10,7 +10,6 @@ import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
-import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -296,7 +295,6 @@ $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w`,
 
   private throwError(err: Error) {
     this.ux.stopSpinner();
-    this.logger.error({ err: serializeError(err) });
     throw err;
   }
 }

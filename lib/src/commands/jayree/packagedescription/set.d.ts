@@ -7,8 +7,8 @@ export default class SetPackageDescription extends SfdxCommand {
         name: string;
     }[];
     protected static flagsConfig: {
-        file: flags.Discriminated<flags.Option<string>>;
-        description: flags.Discriminated<flags.Option<string>>;
+        file: flags.Discriminated<flags.String>;
+        description: flags.Discriminated<flags.String>;
     };
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;

@@ -1,0 +1,26 @@
+diff --git a/node_modules/@oclif/semantic-release/release.config.js b/node_modules/@oclif/semantic-release/release.config.js
+index 26969ae..ec1a43c 100644
+--- a/node_modules/@oclif/semantic-release/release.config.js
++++ b/node_modules/@oclif/semantic-release/release.config.js
+@@ -12,7 +12,6 @@ module.exports = {
+   ],
+   prepare: [
+     script('preversion'),
+-    script('prepublishOnly'),
+     script('prepack'),
+     '@semantic-release/changelog',
+     // {path: './scripts/update-version.js'},
+@@ -20,11 +19,12 @@ module.exports = {
+     '@semantic-release/npm',
+     {
+       path: '@semantic-release/git',
+-      assets: ['package.json', 'CHANGELOG.md', 'README.md', 'docs'],
++      assets: ['package.json', 'CHANGELOG.md', 'README.md', 'docs', 'oclif.manifest.json'],
+     },
+     script('postversion'),
+   ],
+   publish: [
++    script('prepublishOnly'),
+     '@semantic-release/npm',
+     '@semantic-release/github',
+     script('postpack'),

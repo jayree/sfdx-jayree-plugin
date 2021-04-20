@@ -4,13 +4,12 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import * as fs from 'fs';
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import AdmZip from 'adm-zip';
 import chalk from 'chalk';
-import * as shell from 'shelljs';
+import execa from 'execa';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 
@@ -56,14 +55,6 @@ Coverage: 82%
   public async run(): Promise<AnyJson> {
     await this.org.refreshAuth();
 
-    const json = (raw) => {
-      try {
-        return JSON.parse(raw).result;
-      } catch (error) {
-        return JSON.parse(raw.stderr);
-      }
-    };
-
     const projectpath = this.project.getPath();
     let inboundFiles = [];
     let updatedfiles: aggregatedFixResults = {};
@@ -85,7 +76,7 @@ Coverage: 82%
         // this.ux.warn(`Config file '${configfile}' not found - SKIPPING metadata fixes`);
       }
 
-      await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
+      await fs.mkdirp(orgretrievepath);
 
       if (typeof config['source:retrieve:all'].manifestignore === 'object') {
         if (typeof config['source:retrieve:all'].manifestignore.default === 'undefined') {
@@ -112,10 +103,20 @@ See more help with --help`);
         }
       }
 
-      let out = shell.exec(
-        `sfdx jayree:packagexml --excludemanaged --file=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-        { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
+      await execa(
+        'sfdx',
+        [
+          'jayree:packagexml',
+          '--excludemanaged',
+          '--file',
+          packageXMLFile,
+          '--targetusername',
+          this.org.getUsername(),
+          '--json',
+        ],
+        { env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
       );
+
       if (config) {
         if (config['source:retrieve:all']) {
           if (config['source:retrieve:all'].manifestignore) {
@@ -128,79 +129,45 @@ See more help with --help`);
         }
       }
 
-      out = json(
-        shell.exec(
-          `sfdx force:mdapi:retrieve --retrievetargetdir=${orgretrievepath} --unpackaged=${packageXMLFile} --targetusername=${this.org.getUsername()} --json`,
-          { fatal: false, silent: true, env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 } }
-        )
+      await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
+        cwd: orgretrievepath,
+        env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' },
+      });
+
+      const out = JSON.parse(
+        (
+          await execa(
+            'sfdx',
+            [
+              'force:source:retrieve',
+              '--manifest',
+              packageXMLFile,
+              '--targetusername',
+              this.org.getUsername(),
+              '--json',
+            ],
+            { cwd: orgretrievepath, env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
+          )
+        ).stdout
       );
 
-      if (out.success) {
-        const zip = new AdmZip(out.zipFilePath);
-        zip.extractAllTo(orgretrievepath);
+      if (out?.result?.inboundFiles?.length > 0) {
+        inboundFiles = out.result.inboundFiles;
 
-        out = json(
-          shell.exec(
-            `sfdx force:mdapi:convert --outputdir=${path.join(orgretrievepath, 'src')} --rootdir=${path.join(
-              orgretrievepath,
-              'unpackaged'
-            )} --json`,
-            {
-              fatal: false,
-              silent: true,
-              env: { ...process.env, FORCE_COLOR: 0, RUN_SFDX_JAYREE_HOOK: 0 },
-            }
-          )
-        );
-        if (!out.length) {
-          throw out;
-        } else {
-          out
-            .map((p) => {
-              return {
-                fullName: p.fullName,
-                type: p.type,
-                filePath: path
-                  .relative(orgretrievepath, p.filePath)
-                  .replace(path.join('src', 'main', 'default'), path.join('force-app', 'main', 'default')),
-                state: 'undefined',
-              };
-            })
-            .forEach((element) => {
-              inboundFiles.push(element);
-            });
-        }
-
-        shell.mv(path.join(orgretrievepath, 'src'), path.join(orgretrievepath, 'force-app'));
         await this.profileElementInjection(orgretrievepath);
+        await this.shrinkPermissionSets(orgretrievepath);
 
         if (!this.flags.skipfix) {
           updatedfiles = await applyFixes(['source:retrieve:full', 'source:retrieve:all'], orgretrievepath);
         }
 
-        const cleanedfiles = shell
-          .find(path.join(orgretrievepath, 'force-app'))
-          .filter((file) => {
-            return fs.lstatSync(file).isFile();
-          })
-          .map((file) => path.relative(orgretrievepath, file));
-
-        inboundFiles = inboundFiles.filter((x) => {
-          if (cleanedfiles.includes(x.filePath)) {
-            return x;
-          }
-        });
+        inboundFiles = inboundFiles.filter((x) => fs.pathExistsSync(path.join(orgretrievepath, x.filePath)));
 
         const forceapppath = path.join(projectpath, 'force-app');
-        shell.cp('-R', path.join(orgretrievepath, 'force-app/main'), forceapppath);
+        await fs.copy(path.join(orgretrievepath, 'force-app'), forceapppath);
       } else {
-        throw out;
+        throw new Error(out.message);
       }
-    } finally {
-      if (!this.flags.keepcache) {
-        await core.fs.remove(orgretrievepath);
-      }
-
       this.ux.styledHeader(chalk.blue('Retrieved Source'));
       this.ux.table(inboundFiles, {
         columns: [
@@ -240,14 +207,27 @@ See more help with --help`);
           });
         }
       });
-    }
 
-    return {
-      inboundFiles,
-      fixedFiles: Object.values(updatedfiles)
-        .filter((value) => value.length > 0)
-        .reduce((acc, val) => acc.concat(val), []),
-      details: updatedfiles,
-    };
+      return {
+        inboundFiles,
+        fixedFiles: Object.values(updatedfiles)
+          .filter((value) => value.length > 0)
+          .reduce((acc, val) => acc.concat(val), []),
+        details: updatedfiles,
+      };
+      // eslint-disable-next-line no-useless-catch
+    } catch (error) {
+      if (error.stdout) {
+        throw new Error(JSON.parse(error.stdout).message);
+      } else {
+        throw new Error(error.message.toLowerCase());
+      }
+    } finally {
+      if (!this.flags.keepcache) {
+        process.once('exit', () => {
+          fs.removeSync(orgretrievepath);
+        });
+      }
+    }
   }
 }

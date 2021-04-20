@@ -9,7 +9,6 @@ import * as util from 'util';
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
-import { serializeError } from 'serialize-error';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -171,7 +170,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
 
     if (this.flags.storerevision) {
       await fs.ensureFile(storedmaxrevpath);
-      await fs.writeFile(storedmaxrevpath, newstoredmaxrev).catch((err) => {
+      await fs.writeFile(storedmaxrevpath, newstoredmaxrev.toString()).catch((err) => {
         this.throwError(err);
       });
     }
@@ -300,7 +299,6 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
 
   private throwError(err: Error) {
     this.ux.stopSpinner();
-    this.logger.error({ err: serializeError(err) });
     throw err;
   }
 }

@@ -5,6 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import puppeteer from 'puppeteer';
+import chalk from 'chalk';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:org:configure');
@@ -21,25 +22,79 @@ export class PuppeteerTasks {
     this.auth = auth;
   }
 
-  // eslint-disable-next-line complexity
-  public async execute(): Promise<boolean> {
-    const task = this.currenTask;
-    if (!this.browser) {
-      await this.open();
+  public getNext() {
+    this.nextTaskIndex = this.nextTaskIndex + 1;
+    this.currenTask = this.tasks[this.nextTaskIndex];
+    return this;
+  }
+
+  public async close() {
+    if (this.browser) {
+      await this.browser.close();
     }
-    const page = await this.browser.newPage();
-    await page.goto(this.auth.instanceUrl + task.url, {
-      waitUntil: 'networkidle0',
-      timeout: 300000,
-    });
-    if (task.iframe) {
-      await page.waitForSelector('iframe', { timeout: 300000, visible: true });
-      await page.goto((await page.frames())[task.iframe].url(), {
+  }
+
+  public async open() {
+    if (!this.browser) {
+      if (process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD) {
+        this.browser = await puppeteer.launch({
+          executablePath: '/usr/bin/chromium-browser',
+          args: ['--disable-dev-shm-usage'],
+        });
+      } else {
+        this.browser = await puppeteer.launch({ headless: true });
+      }
+
+      const login = await this.browser.newPage();
+      await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
         waitUntil: 'networkidle0',
         timeout: 300000,
       });
     }
+  }
 
+  public async execute(listrTask): Promise<boolean> {
+    const task = this.currenTask;
+    if (!this.browser) {
+      await this.open();
+    }
+
+    if (!task.tasks) {
+      task.tasks = [{ evaluate: task.evaluate }];
+    }
+
+    let retValue = false;
+    for (const subTask of task.tasks) {
+      const page = await this.browser.newPage();
+      await page.goto(this.auth.instanceUrl + task.url, {
+        waitUntil: 'networkidle0',
+        timeout: 300000,
+      });
+      if (task.iframe) {
+        await page.waitForSelector('iframe', { timeout: 300000, visible: true });
+        await page.goto((await page.frames())[task.iframe].url(), {
+          waitUntil: 'networkidle0',
+          timeout: 300000,
+        });
+      }
+      if ((await this.subExec(page, subTask)) === true) {
+        retValue = true;
+        if (subTask.title) {
+          listrTask.output = `${subTask.title}`;
+        }
+      } else {
+        if (subTask.title) {
+          listrTask.output = `${subTask.title} ${chalk.dim('[SKIPPED]')}`;
+        }
+      }
+      debug({ retValue });
+    }
+    debug({ retValue });
+    return retValue;
+  }
+
+  // eslint-disable-next-line complexity
+  private async subExec(page, task): Promise<boolean> {
     for (const call of task.evaluate) {
       if (call.action === 'click') {
         try {
@@ -109,16 +164,26 @@ export class PuppeteerTasks {
               timeout: 300000,
               visible: true,
             });
+            debug({
+              [call.querySelectorAll]: await page.evaluate((c) => {
+                const elements = document.querySelectorAll(c.querySelectorAll);
+                const ret = [];
+                elements.forEach((element) => {
+                  ret.push(element.textContent.trim());
+                });
+                return ret;
+              }, call),
+            });
             const found = await page.evaluate((c) => {
               const elements = document.querySelectorAll(c.querySelectorAll);
+              let ret = '';
               elements.forEach((element) => {
                 if (element.textContent.trim() === c.type.list.selection) {
                   element.click();
-                  return element.textContent.trim();
+                  ret = element.textContent.trim();
                 }
               });
-              debug('not found');
-              return false;
+              return ret;
             }, call);
             if (found !== call.type.list.selection) {
               debug(`value ${call.type.list.selection} not found`);
@@ -149,6 +214,24 @@ export class PuppeteerTasks {
           }
         } catch (error) {
           throw new Error(error.message);
+        }
+      }
+
+      if (call.action === 'type') {
+        if (typeof call.value === 'string') {
+          const value = await page.evaluate((c) => {
+            const element = document.querySelector(c.querySelector);
+            return element.value;
+          }, call);
+          if (value === call.value) {
+            debug(`value already ${call.value}`);
+            return false;
+          } else {
+            await page.evaluate((c) => {
+              const element = document.querySelector(c.querySelector);
+              element.value = c.value;
+            }, call);
+          }
         }
       }
 
@@ -210,36 +293,5 @@ export class PuppeteerTasks {
       }
     }
     return true;
-  }
-
-  public getNext() {
-    this.nextTaskIndex = this.nextTaskIndex + 1;
-    this.currenTask = this.tasks[this.nextTaskIndex];
-    return this;
-  }
-
-  public async close() {
-    if (this.browser) {
-      await this.browser.close();
-    }
-  }
-
-  public async open() {
-    if (!this.browser) {
-      if (process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD) {
-        this.browser = await puppeteer.launch({
-          executablePath: '/usr/bin/chromium-browser',
-          args: ['--disable-dev-shm-usage'],
-        });
-      } else {
-        this.browser = await puppeteer.launch({ headless: true });
-      }
-
-      const login = await this.browser.newPage();
-      await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
-        waitUntil: 'networkidle0',
-        timeout: 300000,
-      });
-    }
   }
 }

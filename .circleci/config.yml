@@ -14,7 +14,7 @@ _refs:
       - /usr/local/share/.config/yarn
   install: &install
     name: Install dependencies
-    command: yarn
+    command: yarn install
   build: &build
     name: Building
     command: yarn build
@@ -49,22 +49,18 @@ jobs:
       - run: *test
       - run: *coverage
       - save_cache: *save-cache
-  node-12:
+  node-14:
     <<: *node-test
     docker:
-      - image: node:12.18.3
+      - image: node:14.15.4
   release:
     <<: *defaults
     steps:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
-      - run: yarn global add npm yarn
-      - run: yarn global add semantic-release@17
-      - run: yarn global add @oclif/semantic-release@3
       - run: *install
-      - run: semantic-release -e @oclif/semantic-release
-      - run: git status
+      - run: yarn semantic-release -e @oclif/semantic-release
       - save_cache: *save-cache
   merge:
     <<: *defaults
@@ -80,7 +76,7 @@ jobs:
             git fetch
             git checkout develop
             git pull origin develop
-            git merge origin/master
+            git merge origin/main
             git push origin develop
       - save_cache: *save-cache
 
@@ -89,15 +85,20 @@ workflows:
   sfdx-jayree:
     jobs:
       - node-latest
-      - node-12
+      - node-14
       - release:
           filters:
-            branches: { only: master }
+            branches:
+              only:
+                - main
+                - next
           requires:
             - node-latest
-            - node-12
+            - node-14
       - merge:
           filters:
-            branches: { only: master }
+            branches:
+              only:
+                - main
           requires:
             - release

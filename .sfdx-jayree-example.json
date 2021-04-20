@@ -1,4 +1,5 @@
 {
+  "runHooks": true,
   "source:retrieve:full": {
     "Profile": {
       "Delete Profiles": {
@@ -529,8 +530,20 @@
           }
         }
       }
+    },
+    "Move Rules": {
+      "Move sharing and duplicate rules": {
+        "isactive": true,
+        "files": {
+          "move": [
+            ["force-app/main/default/sharingRules", "feature-sr/sharingRules"],
+            ["force-app/main/default/duplicateRules", "feature-dr/duplicateRules"]
+          ]
+        }
+      }
     }
   },
+  "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
   "source:scratchorg:fix": {
     "Workarounds": {
       "Remote Site Setting": {
@@ -909,6 +922,111 @@
             "property": "innerText",
             "value": "Disabled"
           }
+        }
+      ]
+    },
+    {
+      "title": "Defer Sharing Calculations - suspend",
+      "isactive": false,
+      "url": "/p/own/DeferSharingSetupPage/e",
+      "evaluate": [
+        {
+          "querySelector": "#ep > div.pbBody > div.pbSubsection > table > tbody > tr:nth-child(3) > td > input.btn",
+          "action": "click",
+          "type": "button",
+          "waitFor": {
+            "querySelector": "#srMajor",
+            "property": "innerHTML",
+            "value": "User User suspended sharing rule calculations"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Defer Sharing Calculations - resume",
+      "isactive": false,
+      "url": "/p/own/DeferSharingSetupPage/e",
+      "evaluate": [
+        {
+          "querySelector": "#ep > div.pbBody > div.pbSubsection > table > tbody > tr:nth-child(3) > td > input.btn",
+          "action": "click",
+          "type": "button",
+          "waitFor": {
+            "querySelector": "#srMajor",
+            "property": "innerHTML",
+            "value": "User User enabled sharing"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Defer Sharing Calculations - recalculate",
+      "isactive": false,
+      "url": "/p/own/DeferSharingSetupPage/e",
+      "evaluate": [
+        {
+          "querySelector": "#ep > div.pbBody > div.pbSubsection > table > tbody > tr:nth-child(3) > td > input:nth-child(3)",
+          "action": "click",
+          "type": "button",
+          "waitFor": {
+            "querySelector": "#srMajor",
+            "property": "innerHTML",
+            "value": "User User enabled sharing rule calculations"
+          }
+        }
+      ]
+    },
+    {
+      "title": "sharingOperationInProgress",
+      "isactive": false,
+      "url": "/p/own/OrgSharingDetail",
+      "evaluate": [
+        {
+          "waitFor": ["not", "#sharingOperationInProgress"]
+        }
+      ]
+    },
+    {
+      "title": "Activate Territory Model",
+      "isactive": false,
+      "url": "/ui/setup/territory2/Territory2ModelListPage",
+      "evaluate": [
+        {
+          "querySelector": "#bodyCell > div.listRelatedObject.setupBlock > div > div.pbBody > table > tbody > tr.dataRow.even.last.first > th > a",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        },
+        {
+          "querySelector": "#topButtonRow > input:nth-child(4)",
+          "action": "click",
+          "type": "button",
+          "waitFor": "#auraElement-1 > div.dialog.default.modal.medium.uiDialog.sfaDialog.aloha_sales_tm2Territory2AsyncHelper.slideUp > div.buttons > button:nth-child(2)"
+        },
+        {
+          "querySelector": "#auraElement-1 > div.dialog.default.modal.medium.uiDialog.sfaDialog.aloha_sales_tm2Territory2AsyncHelper.slideUp > div.buttons > button:nth-child(2)",
+          "action": "click",
+          "type": "button",
+          "waitFor": "#auraElement-1 > div.banners.aloha_sales_tm2Territory2AsyncHelper > div"
+        }
+      ]
+    },
+    {
+      "title": "Wait for Territory Model to be activated",
+      "isactive": false,
+      "url": "/ui/setup/territory2/Territory2ModelListPage",
+      "evaluate": [
+        {
+          "querySelector": "#bodyCell > div.listRelatedObject.setupBlock > div > div.pbBody > table > tbody > tr.dataRow.even.last.first > th > a",
+          "action": "click",
+          "type": "button",
+          "waitFor": "Navigation"
+        },
+        {
+          "waitFor": [
+            "not",
+            "#auraElement-1 > div.banners.aloha_sales_tm2Territory2AsyncHelper > div > div > div.bBody > h4"
+          ]
         }
       ]
     }

@@ -4,18 +4,18 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-// import * as util from 'util';
+/* istanbul ignore file */
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
-import { SfdxProject } from '@salesforce/core';
+import * as core from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import AdmZip from 'adm-zip';
-import execa = require('execa');
+import execa from 'execa';
 import slash from 'slash';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
@@ -51,28 +51,33 @@ type argvConnection = {
 let argvConnection: argvConnection = { username: null, instanceUrl: null };
 let projectPath = '';
 
-async function getProjectPath(): Promise<string> {
+export async function getProjectPath(): Promise<string> {
   if (projectPath.length > 0) {
     return projectPath;
   }
-  projectPath = slash(await SfdxProject.resolveProjectPath());
-  return projectPath;
+  try {
+    projectPath = slash(await core.SfdxProject.resolveProjectPath());
+    return projectPath;
+  } catch (error) {
+    return undefined;
+  }
 }
 
 export async function shrinkPermissionSets(permissionsets) {
   for (const file of permissionsets) {
     if (await fs.pathExists(file)) {
       const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
-      if (data.PermissionSet.fieldPermissions) {
+      const mutingOrPermissionSet = Object.keys(data)[0];
+      if (data[mutingOrPermissionSet].fieldPermissions) {
         debug({
-          permissionset: file,
+          [mutingOrPermissionSet]: file,
           removedFieldPermsissions: JSON.stringify(
-            data.PermissionSet.fieldPermissions.filter(
+            data[mutingOrPermissionSet].fieldPermissions.filter(
               (el) => el.editable.toString() === 'false' && el.readable.toString() === 'false'
             )
           ),
         });
-        data.PermissionSet.fieldPermissions = data.PermissionSet.fieldPermissions.filter(
+        data[mutingOrPermissionSet].fieldPermissions = data[mutingOrPermissionSet].fieldPermissions.filter(
           (el) => el.editable.toString() === 'true' || el.readable.toString() === 'true'
         );
         fs.writeFileSync(file, builder.buildObject(data) + '\n');
@@ -234,75 +239,60 @@ export async function logMoves(movedSourceFiles) {
   }
 }
 
-export async function applySourceFixes(filter: string[]) {
-  return await applyFixes(config(await getProjectPath()).sourceFix, null, filter);
+async function getGlobbyBaseDirectory(globbypath) {
+  try {
+    (await fs.lstat(globbypath)).isDirectory();
+    return globbypath;
+  } catch (error) {
+    return await getGlobbyBaseDirectory(path.dirname(globbypath));
+  }
 }
 
-export type aggregatedFixResults = {
-  [workaround: string]: fixResults;
-};
-
-type fixResults = fixResult[];
-
-type fixResult = { filePath: string; operation: string; message: string };
-
-export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFixResults> {
-  if (!root) {
-    root = await getProjectPath();
-  }
-  const updatedfiles: aggregatedFixResults = {};
-  for (const tag of tags) {
-    if (config(await getProjectPath())[tag]) {
-      const c = config(await getProjectPath())[tag];
-      for (const workarounds of Object.keys(c)) {
-        for (const workaround of Object.keys(c[workarounds])) {
-          if (c[workarounds][workaround].isactive === true) {
-            if (c[workarounds][workaround].files) {
-              if (c[workarounds][workaround].files.delete) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcedelete(c[workarounds][workaround].files.delete, root, filter)
-                );
-              }
-              if (c[workarounds][workaround].files.modify) {
-                if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
-                  updatedfiles[workarounds + '/' + workaround] = [];
-                }
-                updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
-                  await sourcefix(c[workarounds][workaround].files.modify, root, filter)
-                );
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return updatedfiles;
-}
-
-async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
+async function sourcemove(movesources, root, filter): Promise<fixResults> {
   const array = [];
-  deletesources = deletesources.map((el) => path.join(root, el));
-  if (filter.length > 0) {
-    deletesources = deletesources.filter((el) => filter.includes(el));
-  }
-  for (const filepath of deletesources) {
-    debug(`delete file: ${filepath}`);
-    if (await fs.pathExists(filepath)) {
-      await fs.remove(filepath);
-      array.push({ filePath: filepath, operation: 'deleteFile', message: '' });
-    } else {
-      debug(`${filepath} not found`);
+  for (const filepath of movesources) {
+    let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath[0]));
+    if (filter.length > 0) {
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
+    }
+    const from = await getGlobbyBaseDirectory(filepath[0]);
+    for (const file of files) {
+      if (await fs.pathExists(file)) {
+        const destinationFile = path.join(filepath[1], path.relative(from, file));
+        debug(`move file(s): ${from} to ${destinationFile}`);
+        await fs.ensureDir(path.dirname(destinationFile));
+        await fs.writeFile(destinationFile, await fs.readFile(file));
+        await fs.remove(file);
+        array.push({ filePath: file, operation: 'moveFile', message: destinationFile });
+      } else {
+        debug(`${filepath} not found`);
+      }
     }
   }
   return array;
 }
 
-async function getConnectionFromArgv(): Promise<argvConnection> {
+async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
+  const array = [];
+  for (const filepath of deletesources) {
+    let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath));
+    if (filter.length > 0) {
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
+    }
+    for (const file of files) {
+      if (await fs.pathExists(file)) {
+        debug(`delete file: ${file}`);
+        await fs.remove(file);
+        array.push({ filePath: file, operation: 'deleteFile', message: '' });
+      } else {
+        debug(`${file} not found`);
+      }
+    }
+  }
+  return array;
+}
+
+export async function getConnectionFromArgv(): Promise<argvConnection> {
   if (Object.values(argvConnection).some((x) => x !== null && x !== '')) {
     return new Promise((resolve) => {
       resolve(argvConnection);
@@ -323,8 +313,14 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
   }
 
   if (aliasOrUsername.length === 0) {
-    const aggregator = await ConfigAggregator.create();
-    aliasOrUsername = aggregator.getPropertyValue('defaultusername').toString();
+    try {
+      const aggregator = await ConfigAggregator.create();
+      aliasOrUsername = aggregator.getPropertyValue('defaultusername').toString();
+    } catch {
+      throw new Error(
+        'This command requires a username to apply <mydomain> or <username>. Specify it with the -u parameter or with the "sfdx config:set defaultusername=<username>" command.'
+      );
+    }
   }
 
   const org = await Org.create({ aliasOrUsername });
@@ -336,10 +332,9 @@ async function getConnectionFromArgv(): Promise<argvConnection> {
 async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   const array = [];
   for (const filename of Object.keys(fixsources)) {
-    const fileOrGlobPath = path.posix.join(root, filename);
-    let files = await globby(fileOrGlobPath);
+    let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filename));
     if (filter.length > 0) {
-      files = files.filter((el) => filter.includes(el));
+      files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
     }
     for (const file of files) {
       if (await fs.pathExists(file)) {
@@ -371,6 +366,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
         if (fixsources[filename].insert) {
           for (const inserttask of fixsources[filename].insert) {
             if (
+              inserttask.object &&
               !objectPath
                 .get(data, inserttask.path)
                 .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
@@ -389,35 +385,55 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
             } else {
               debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`);
             }
+            if (inserttask.value && !compareobj(objectPath.get(data, inserttask.path), inserttask.value)) {
+              objectPath.set(data, inserttask.path, `${inserttask.value}`);
+              fs.writeFileSync(
+                file,
+                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
+              );
+              array.push({
+                filePath: file,
+                operation: 'insert',
+                message: `${JSON.stringify(inserttask.value)} at ${inserttask.path}`,
+              });
+            } else {
+              debug(`insert: Object ${JSON.stringify(inserttask.value)} found at ${inserttask.path}`);
+            }
           }
         }
 
         if (fixsources[filename].set) {
           for (const settask of fixsources[filename].set) {
             const settaskpaths = new ObjectPathResolver(data).resolveString(settask.path).value();
-
-            for (const settaskpath of settaskpaths) {
-              if (typeof settaskpath !== 'undefined') {
-                if (settask.value) {
-                  if (JSON.stringify(settask.value).includes('<mydomain>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(
-                        /<mydomain>/i,
-                        (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[0]
-                      )
-                    );
+            if (settaskpaths.length > 0) {
+              for (const settaskpath of settaskpaths) {
+                if (typeof settaskpath !== 'undefined') {
+                  if (settask.value) {
+                    if (JSON.stringify(settask.value).includes('<mydomain>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<mydomain>/i,
+                          (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[0]
+                        )
+                      );
+                    }
+                    if (JSON.stringify(settask.value).includes('<instance>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(
+                          /<instance>/i,
+                          (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[1]
+                        )
+                      );
+                    }
+                    if (JSON.stringify(settask.value).includes('<username>')) {
+                      settask.value = JSON.parse(
+                        JSON.stringify(settask.value).replace(/<username>/i, (await getConnectionFromArgv()).username)
+                      );
+                    }
                   }
-                  if (JSON.stringify(settask.value).includes('<instance>')) {
-                    settask.value = JSON.parse(
-                      JSON.stringify(settask.value).replace(
-                        /<mydomain>/i,
-                        (await getConnectionFromArgv()).instanceUrl.substring(8).split('.')[1]
-                      )
-                    );
-                  }
-                  if (!compareobj(objectPath.get(data, settaskpath), settask.value)) {
+                  if (settask.value && !compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
-                    objectPath.set(data, settaskpath, settask.value);
+                    objectPath.set(data, settaskpath, `${settask.value}`);
                     fs.writeFileSync(
                       file,
                       builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
@@ -427,51 +443,91 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                       operation: 'set',
                       message: `${settask.path} => ${JSON.stringify(settask.value)}`,
                     });
+                  } else {
+                    debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
                   }
-                } else if (typeof settask.object === 'object') {
-                  const validate = async (node) => {
-                    const replaceArray = [];
-                    const recursive = (n, attpath) => {
-                      // eslint-disable-next-line guard-for-in
-                      for (const attributename in n) {
-                        if (attpath.length === 0) {
-                          attpath = attributename;
-                        } else {
-                          attpath = attpath + '.' + attributename;
-                        }
-                        if (typeof n[attributename] === 'object') {
-                          recursive(n[attributename], attpath);
-                        } else {
-                          if (n[attributename] === '<username>') {
-                            replaceArray.push([n[attributename], attpath]);
+
+                  if (settask.object) {
+                    const validate = async (node) => {
+                      const replaceArray = [];
+                      const recursive = (n, attpath) => {
+                        // eslint-disable-next-line guard-for-in
+                        for (const attributename in n) {
+                          if (attpath.length === 0) {
+                            attpath = attributename;
+                          } else {
+                            attpath = attpath + '.' + attributename;
+                          }
+                          if (typeof n[attributename] === 'object') {
+                            recursive(n[attributename], attpath);
+                          } else {
+                            if (n[attributename] === '<username>') {
+                              replaceArray.push([n[attributename], attpath]);
+                            }
                           }
                         }
+                      };
+                      recursive(node, '');
+                      for (const element of replaceArray) {
+                        if (element[0] === '<username>') {
+                          objectPath.set(node, element[1], (await getConnectionFromArgv()).username);
+                        }
                       }
+                      return node;
                     };
-                    recursive(node, '');
-                    for (const element of replaceArray) {
-                      if (element[0] === '<username>') {
-                        objectPath.set(node, element[1], (await getConnectionFromArgv()).username);
+
+                    settask.object = await validate(settask.object);
+                  }
+
+                  const checkequal = (x, y) => {
+                    let equal = true;
+                    Object.keys(x).forEach((key) => {
+                      if (!compareobj(x[key], y[key])) {
+                        equal = false;
                       }
-                    }
-                    return node;
+                    });
+                    return equal;
                   };
 
-                  settask.object = await validate(settask.object);
-                  debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
-                  if (settask.object) {
-                    for (const k of Object.keys(settask.object)) {
-                      debug(settaskpath + '.' + k);
-                      if (objectPath.has(data, settaskpath + '.' + k)) {
-                        debug(settask.object[k]);
-                        objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
-                        debug(objectPath.get(data, settaskpath));
+                  if (settask.object && !checkequal(settask.object, objectPath.get(data, settaskpath))) {
+                    debug(`set: ${JSON.stringify(settask.object)} at ${settaskpath}`);
+                    if (settask.object) {
+                      let modifiedPath = '';
+
+                      for (const k of Object.keys(settask.object)) {
+                        debug(settaskpath + '.' + k);
+                        if (objectPath.has(data, settaskpath + '.' + k)) {
+                          debug(settask.object[k]);
+                          if (!compareobj(objectPath.get(data, settaskpath + '.' + k), settask.object[k])) {
+                            modifiedPath = settaskpath;
+                            objectPath.set(data, settaskpath + '.' + k, settask.object[k]);
+                            debug({ modifiedPath });
+                          }
+                          debug(objectPath.get(data, settaskpath));
+                        }
+                      }
+                      if (modifiedPath) {
+                        fs.writeFileSync(
+                          file,
+                          builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                        );
+                        array.push({
+                          filePath: file,
+                          operation: 'set',
+                          message: `${modifiedPath} ==> ${JSON.stringify(settask.object)}`,
+                        });
                       }
                     }
                   } else {
-                    objectPath.insert(data, settaskpath, settask.object);
+                    debug(`Set: value ${JSON.stringify(settask.object)} found at ${settaskpath}`);
                   }
-
+                }
+              }
+            } else {
+              if (settask.value) {
+                debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
+                if (objectPath.has(data, settask.path)) {
+                  objectPath.set(data, settask.path, `${settask.value}`);
                   fs.writeFileSync(
                     file,
                     builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
@@ -479,11 +535,21 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   array.push({
                     filePath: file,
                     operation: 'set',
-                    message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                    message: `${settask.path} => ${JSON.stringify(settask.value)}`,
                   });
-                } else {
-                  debug(`Set: value ${JSON.stringify(settask.value)} found at ${settaskpath}`);
                 }
+              } else if (typeof settask.object === 'object') {
+                objectPath.set(data, settask.path + '.0', settask.object);
+                debug(objectPath.get(data, settask.path));
+                fs.writeFileSync(
+                  file,
+                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
+                );
+                array.push({
+                  filePath: file,
+                  operation: 'set',
+                  message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                });
               }
             }
           }
@@ -525,11 +591,113 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   return array;
 }
 
+// eslint-disable-next-line complexity
+export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFixResults> {
+  if (!root) {
+    root = await getProjectPath();
+  }
+  const configPath = await core.fs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
+  const updatedfiles: aggregatedFixResults = {};
+  for (const tag of tags) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      let result = [];
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.move
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
+            }
+            result = result.concat(await sourcemove(fix[workarounds][workaround].files.move, root, filter));
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(result);
+          }
+        }
+      }
+
+      result.forEach((element) => {
+        const index = filter.findIndex((p) => p === element.filePath);
+        filter[index] = path.join(root, element.message);
+      });
+    }
+  }
+  for (const tag of tags) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.modify
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
+            }
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+              await sourcefix(fix[workarounds][workaround].files.modify, root, filter)
+            );
+          }
+        }
+      }
+    }
+  }
+  for (const tag of tags) {
+    const fix = config(configPath)[tag];
+    if (fix) {
+      for (const workarounds of Object.keys(fix)) {
+        for (const workaround of Object.keys(fix[workarounds])) {
+          if (
+            fix[workarounds][workaround].isactive === true &&
+            fix[workarounds][workaround].files &&
+            fix[workarounds][workaround].files.delete
+          ) {
+            if (!Array.isArray(updatedfiles[workarounds + '/' + workaround])) {
+              updatedfiles[workarounds + '/' + workaround] = [];
+            }
+            updatedfiles[workarounds + '/' + workaround] = updatedfiles[workarounds + '/' + workaround].concat(
+              await sourcedelete(fix[workarounds][workaround].files.delete, root, filter)
+            );
+          }
+        }
+      }
+    }
+  }
+
+  return updatedfiles;
+}
+
+export async function applySourceFixes(filter: string[]) {
+  return await applyFixes(config(await getProjectPath()).applySourceFixes, null, filter);
+}
+
+export type aggregatedFixResults = {
+  [workaround: string]: fixResults;
+};
+
+type fixResults = fixResult[];
+
+type fixResult = { filePath: string; operation: string; message: string };
+
 export async function updateProfiles(profiles, retrievePackageDir, forceSourcePull) {
   if (forceSourcePull) {
     debug('force:source:pull detected');
-    const packageProfilesOnly = path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml');
+    let packageProfilesOnly = path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml');
     const retrieveDir = path.join(retrievePackageDir, '..');
+
+    const pjson = await xml2js.parseStringPromise(fs.readFileSync(packageProfilesOnly, 'utf8'));
+    pjson.Package.types[
+      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
+    ].members = pjson.Package.types[
+      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
+    ].members.concat(config(await getProjectPath()).ensureObjectPermissions);
+
+    packageProfilesOnly = path.join(retrieveDir, 'pinject.xml');
+    await fs.writeFile(packageProfilesOnly, builder.buildObject(pjson));
+
     debug({ packageProfilesOnly, retrieveDir });
     let stdout;
     try {
@@ -552,7 +720,7 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
       debug({ zipFilePath: stdout.result.zipFilePath });
       const zip = new AdmZip(stdout.result.zipFilePath);
       zip.getEntries().forEach(function (entry) {
-        if (entry.entryName.includes('unpackaged/profiles/')) {
+        if (entry.entryName.split(path.sep).join(path.posix.sep).includes('unpackaged/profiles/')) {
           zip.extractEntryTo(entry, retrieveDir, true, true);
         }
       });
@@ -563,9 +731,12 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
   let customObjectsFilter = [];
 
   if (await fs.pathExists(adminprofile)) {
-    profileElementInjectionFromAdmin.ensureObjectPermissions = (
-      await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'))
-    ).Profile.objectPermissions.map((el) => el.object.toString());
+    const profileContent = await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'));
+    if (profileContent.Profile.objectPermissions) {
+      profileElementInjectionFromAdmin.ensureObjectPermissions = profileContent.Profile.objectPermissions.map((el) =>
+        el.object.toString()
+      );
+    }
   } else {
     const manifest = await xml2js.parseStringPromise(
       await fs.readFile(path.join(retrievePackageDir, 'package.xml'), 'utf8')
