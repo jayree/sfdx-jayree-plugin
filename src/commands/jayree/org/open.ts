@@ -110,7 +110,7 @@ $ sfdx jayree:org:open -u me@my.org`,
     /* istanbul ignore next */
     if (!this.flags.urlonly) {
       await opn(url, {
-        app: browser,
+        app: { name: browser },
         wait: false,
       });
     }

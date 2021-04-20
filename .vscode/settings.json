@@ -1,7 +1,6 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "terminal.integrated.env.osx": {
-    "NODE_ENV": "development",
     "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
   },
   "terminal.integrated.env.linux": {
@@ -10,7 +9,6 @@
   "terminal.integrated.env.windows": {
     "SFDX_SET_CLIENT_IDS": "sfdx-vscode"
   },
-  "eslint.enable": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "editor.formatOnType": true,

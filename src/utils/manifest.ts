@@ -35,6 +35,12 @@ export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
           return !types.members.includes(value);
         });
       }
+
+      types.members.forEach((member) => {
+        if (member.startsWith('!')) {
+          packageTypesMapped[types.name].push(member.substring(1));
+        }
+      });
     }
   });
 

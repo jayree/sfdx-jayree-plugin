@@ -1,18 +1,20 @@
 # sfdx-jayree
 
-some sfdx commands
+sfdx ALM commands & more
 
 [![sfdx](https://img.shields.io/badge/cli-sfdx-brightgreen.svg)](https://developer.salesforce.com/tools/sfdxcli)
 [![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
-[![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/master)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree-plugin?branch=master&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree-plugin/branch/master)
-[![Codecov](https://codecov.io/gh/jayree/sfdx-jayree-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree-plugin)
+[![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/main.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/main)
+[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree-plugin?branch=main&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree-plugin/branch/main)
+[![Codecov](https://codecov.io/gh/jayree/sfdx-jayree-plugin/branch/main/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree-plugin)
 [![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
-[![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/main/package.json)
+[![Gitter](https://badges.gitter.im/sfdx-jayree-plugin/community.svg)](https://gitter.im/sfdx-jayree-plugin/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
+* [Hooks](#hooks)
 <!-- tocstop -->
 
 ## Usage
@@ -23,7 +25,7 @@ $ sfdx plugins:install sfdx-jayree
 $ sfdx jayree:COMMAND
 running command...
 $ sfdx plugins
-sfdx-jayree 3.1.0
+sfdx-jayree 3.8.4
 $ sfdx help jayree:COMMAND
 USAGE
   $ sfdx jayree:COMMAND
@@ -45,16 +47,19 @@ USAGE
 * [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
 * [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
+* [`sfdx jayree:org:settings`](#sfdx-jayreeorgsettings)
 * [`sfdx jayree:org:streaming`](#sfdx-jayreeorgstreaming)
 * [`sfdx jayree:packagedescription:create`](#sfdx-jayreepackagedescriptioncreate)
 * [`sfdx jayree:packagedescription:get`](#sfdx-jayreepackagedescriptionget)
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
 * [`sfdx jayree:scratchorg:revision`](#sfdx-jayreescratchorgrevision)
-* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
 * [`sfdx jayree:source:retrieve:all`](#sfdx-jayreesourceretrieveall)
 * [`sfdx jayree:source:retrieve:full`](#sfdx-jayreesourceretrievefull)
+* [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
+* [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
+* [`sfdx jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)
 
 ### `sfdx jayree:automation:changeset:deploy`
 
@@ -106,7 +111,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ### `sfdx jayree:automation:changeset:list`
 
@@ -130,7 +135,7 @@ OPTIONS
                                                                                     this command invocation
 ```
 
-_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/automation/changeset/list.ts)_
 
 ### `sfdx jayree:automation:country:update`
 
@@ -154,7 +159,7 @@ OPTIONS
                                                                                     this command invocation
 ```
 
-_See code: [src/commands/jayree/automation/country/update.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/automation/country/update.ts)_
+_See code: [src/commands/jayree/automation/country/update.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/automation/country/update.ts)_
 
 ### `sfdx jayree:automation:ltngsync:status`
 
@@ -195,7 +200,7 @@ EXAMPLE
        userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/automation/ltngsync/status.ts)_
+_See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/automation/ltngsync/status.ts)_
 
 ### `sfdx jayree:automation:state:import`
 
@@ -203,8 +208,8 @@ import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:automation:state:import --countrycode <string> --category <string> --language <string> 
-  [--uselocalvariant] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  $ sfdx jayree:automation:state:import [--countrycode <string>] [--category <string>] [--language <string>] 
+  [--concurrent <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
@@ -214,18 +219,18 @@ OPTIONS
   --apiversion=apiversion                                                           override the api version used for
                                                                                     api requests made by this command
 
-  --category=category                                                               (required) Subdivision category
+  --category=category                                                               Subdivision category
 
-  --countrycode=countrycode                                                         (required) Alpha-2 code
+  --concurrent=concurrent                                                           [default: 1] ccc
+
+  --countrycode=countrycode                                                         Alpha-2 code
 
   --json                                                                            format output as json
 
-  --language=language                                                               (required) Language code
+  --language=language                                                               Language code
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
-
-  --uselocalvariant                                                                 Use Local variant? (default:false)
 
 ALIASES
   $ sfdx jayree:automation:statecountry:import
@@ -233,7 +238,7 @@ ALIASES
   $ sfdx jayree:automation:statecountry:update
 ```
 
-_See code: [src/commands/jayree/automation/state/import.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/automation/state/import.ts)_
+_See code: [src/commands/jayree/automation/state/import.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/automation/state/import.ts)_
 
 ### `sfdx jayree:flowtestcoverage`
 
@@ -263,7 +268,7 @@ EXAMPLE
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/flowtestcoverage.ts)_
 
 ### `sfdx jayree:manifest:cleanup`
 
@@ -271,27 +276,19 @@ removes those tags from a manifest file that are present in a second manifest fi
 
 ```
 USAGE
-  $ sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [-u <string>] [--apiversion <string>] [--json] 
-  [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
   -f, --file=file                                                                   path to the second manifest file
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
   -x, --manifest=manifest                                                           path to the manifest file
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
   --json                                                                            format output as json
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 ```
 
-_See code: [src/commands/jayree/manifest/cleanup.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [src/commands/jayree/manifest/cleanup.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -342,7 +339,7 @@ EXAMPLE
        <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
 ```
 
-_See code: [src/commands/jayree/manifest/generate.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/manifest/generate.ts)_
+_See code: [src/commands/jayree/manifest/generate.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -385,7 +382,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [src/commands/jayree/manifest/git/diff.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [src/commands/jayree/manifest/git/diff.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -424,7 +421,7 @@ EXAMPLE
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [src/commands/jayree/org/configure.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/org/configure.ts)_
+_See code: [src/commands/jayree/org/configure.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/org/configure.ts)_
 
 ### `sfdx jayree:org:open`
 
@@ -463,7 +460,45 @@ EXAMPLE
   $ sfdx jayree:org:open -u me@my.org
 ```
 
-_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/org/open.ts)_
+_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/org/open.ts)_
+
+### `sfdx jayree:org:settings`
+
+write the current settings from an Org to a scratch org def file
+
+```
+USAGE
+  $ sfdx jayree:org:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -f, --file=file                                                                   write to 'file' instead of
+                                                                                    project-scratch-def.json
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  -w, --writetoprojectscratchdeffile                                                write output to
+                                                                                    project-scratch-def.json file
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+ALIASES
+  $ sfdx jayree:scratchorg:settings
+
+EXAMPLE
+  $ sfdx jayree:org:settings
+  $ sfdx jayree:org:settings -u me@my.org
+  $ sfdx jayree:org:settings -u MyTestOrg1 -w
+```
+
+_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/org/settings.ts)_
 
 ### `sfdx jayree:org:streaming`
 
@@ -493,7 +528,7 @@ EXAMPLE
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/org/streaming.ts)_
+_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/org/streaming.ts)_
 
 ### `sfdx jayree:packagedescription:create`
 
@@ -516,7 +551,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/packagedescription/create.ts)_
+_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/packagedescription/create.ts)_
 
 ### `sfdx jayree:packagedescription:get`
 
@@ -539,7 +574,7 @@ EXAMPLE
        Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/packagedescription/get.ts)_
 
 ### `sfdx jayree:packagedescription:remove`
 
@@ -561,7 +596,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/packagedescription/remove.ts)_
 
 ### `sfdx jayree:packagedescription:set`
 
@@ -584,7 +619,7 @@ EXAMPLE
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/packagedescription/set.ts)_
 
 ### `sfdx jayree:scratchorg:revision`
 
@@ -621,42 +656,7 @@ EXAMPLE
   $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/scratchorg/revision.ts)_
-
-### `sfdx jayree:scratchorg:settings`
-
-write the current settings from an Org to a scratch org def file
-
-```
-USAGE
-  $ sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -f, --file=file                                                                   write to 'file' instead of
-                                                                                    project-scratch-def.json
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  -w, --writetoprojectscratchdeffile                                                write output to
-                                                                                    project-scratch-def.json file
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLE
-  $ sfdx jayree:scratchorgsettings
-  $ sfdx jayree:scratchorgsettings -u me@my.org
-  $ sfdx jayree:scratchorgsettings -u MyTestOrg1 -w
-```
-
-_See code: [src/commands/jayree/scratchorg/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/scratchorg/settings.ts)_
+_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/scratchorg/revision.ts)_
 
 ### `sfdx jayree:source:fix`
 
@@ -688,7 +688,7 @@ DESCRIPTION
   (examples will follow)
 ```
 
-_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/source/fix.ts)_
+_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/fix.ts)_
 
 ### `sfdx jayree:source:retrieve:all`
 
@@ -719,7 +719,7 @@ DESCRIPTION
   Retrieves all metadata in source format from an org to your local Salesforce DX project.
 ```
 
-_See code: [src/commands/jayree/source/retrieve/all.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/source/retrieve/all.ts)_
+_See code: [src/commands/jayree/source/retrieve/all.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/retrieve/all.ts)_
 
 ### `sfdx jayree:source:retrieve:full`
 
@@ -731,8 +731,7 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -m, --metadata=metadata                                                           [default:
-                                                                                    Profile,PermissionSet,CustomLabels]
+  -m, --metadata=metadata                                                           [default: Profile,PermissionSet]
                                                                                     comma-separated list of metadata
                                                                                     component names
 
@@ -754,5 +753,195 @@ DESCRIPTION
   DX project.
 ```
 
-_See code: [src/commands/jayree/source/retrieve/full.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.1.0/src/commands/jayree/source/retrieve/full.ts)_
+_See code: [src/commands/jayree/source/retrieve/full.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/retrieve/full.ts)_
+
+### `sfdx jayree:source:tracking:list`
+
+list changes in a scratch org by remote revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:list [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -r, --revision=revision                                                           start at a specific revision counter
+                                                                                    number (default: 0)
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:list
+  $ sfdx jayree:source:tracking:list -u me@my.org
+  $ sfdx jayree:source:tracking:list -u me@my.org -r 101
+```
+
+_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/tracking/list.ts)_
+
+### `sfdx jayree:source:tracking:store:get`
+
+get stored revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:store:get [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:store:get
+  $ sfdx jayree:source:tracking:store:get -u me@my.org
+```
+
+_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/tracking/store/get.ts)_
+
+### `sfdx jayree:source:tracking:store:set`
+
+store revision counter number
+
+```
+USAGE
+  $ sfdx jayree:source:tracking:store:set [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -r, --revision=revision                                                           revision counter number (default:
+                                                                                    remote revision counter number)
+
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+EXAMPLE
+  $ sfdx jayree:source:tracking:store:set
+  $ sfdx jayree:source:tracking:store:set -u me@my.org
+  $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
+```
+
+_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
+
+## Hooks
+
+The following hooks are triggered after running `force:source:retrieve` or `force:source:pull`. They extend both standard commands with the same logic as `jayree:source:retrieve:all` and `jayree:source:retrieve:full`.
+
+### Enable/Disable
+
+Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (false) the hooks:
+
+```json
+{
+  "runHooks": true,
+}
+```
+
+### Hook flow
+
+![Hooks Flow](images/jayree_hooks_flow.svg)
+
+#### prerun
+
+- Resets source tracking using `force:source:tracking:reset` before executing `force:source:pull`.
+
+> **_IMPORTANT:_** This hook will only run if  `SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL=true` is set. It uses the stored `serverMaxRevisionCounter` as revision counter number (see: [`jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)). If the hook doesn't find a stored value it asks if the current *local* revision counter number should be stored and used.
+
+#### preretrieve
+
+- Disables the `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
+
+#### postretrieve
+
+- Re-retrieves Profiles if `source:pull` triggered the hook.
+- Ensures Object- and User-Permissions settings. Review [.sfdx-jayree-example.json](.sfdx-jayree-example.json) how the configuration should look like.
+- Shrinks Permission Sets to avoid merge conflicts in git.
+
+#### postsourceupdate
+- Applies source fixes of the `jayree:source:fix` command and moves source files to separate package directories. See the configuration file [.sfdx-jayree-example.json](.sfdx-jayree-example.json) for examples. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
+```json
+{
+  "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
+}
+```
+
+> **_IMPORTANT:_** Since the hook is not able to update the (JSON) output of the command, an additional output is generated. Set the environment variable `SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT=true` and additional comma-separated JSON output will be appended, where the output must be parsed as an array, e.g. ``JSON.parse(`[${stdout}]`)``. See an example below:
+
+```javascript
+import * as execa from 'execa';
+import { cli } from 'cli-ux';
+
+async function run() {
+    const { stdout } = await execa('sfdx', [
+        'force:source:retrieve',
+        '--metadata="Group:*"',
+        '--json'
+    ]);
+    const parsedStdout = JSON.parse(`[${stdout}]`);
+        let consolidatedStdout: {
+          result: {
+            pulledSource?: any[];
+            inboundFiles?: any[];
+            fixedFiles?: any[];
+          };
+        };
+    if (parsedStdout.length > 1) {
+        const pulledSourceOrinboundFiles =
+            parsedStdout[0].result?.pulledSource !== undefined
+                ? 'pulledSource'
+                : 'inboundFiles';
+        consolidatedStdout = {
+            ...parsedStdout[0],
+            result: {
+                ...parsedStdout[0].result,
+                [pulledSourceOrinboundFiles]: [],
+                fixedFiles: []
+            }
+        };
+        parsedStdout.shift();
+        parsedStdout.forEach((element) => {
+            consolidatedStdout.result[
+                pulledSourceOrinboundFiles
+            ] = consolidatedStdout.result[pulledSourceOrinboundFiles].concat(
+                element.result[pulledSourceOrinboundFiles]
+            );
+            consolidatedStdout.result.fixedFiles = consolidatedStdout.result.fixedFiles.concat(
+                element.result.fixedFiles
+            );
+        });
+    } else {
+        consolidatedStdout = parsedStdout[0];
+    }
+    cli.styledJSON(consolidatedStdout);
+}
+}
+
+run();
+```
+
+- Calls `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.

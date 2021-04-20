@@ -35,7 +35,7 @@ Coverage: 82%
     }),
   };
 
-  protected static requiresUsername = true;
+  protected static supportsUsername = true;
   protected static supportsDevhubUsername = false;
   protected static requiresProject = true;
 

@@ -1,3 +1,225 @@
+## [3.8.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.3...v3.8.4) (2021-04-20)
+
+
+### Bug Fixes
+
+* fix plugin installation ([99c953e](https://github.com/jayree/sfdx-jayree-plugin/commit/99c953ec638421c564eab900219e30bb5fafc3ea))
+
+## [3.8.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.2...v3.8.3) (2021-04-19)
+
+
+### Reverts
+
+* Revert "chore: remove semantic-release" ([679a4e6](https://github.com/jayree/sfdx-jayree-plugin/commit/679a4e6c499e6b3c67e3c65172bf608f6ebceb02))
+
+## [3.8.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.1...v3.8.2) (2021-04-19)
+
+
+### Bug Fixes
+
+* fix prerun hook and update README ([fe21355](https://github.com/jayree/sfdx-jayree-plugin/commit/fe21355e5cfb3cb51c4b5b3362bc4e7a61ac390b))
+* update dependencies ([41f5c60](https://github.com/jayree/sfdx-jayree-plugin/commit/41f5c60d9526244e1d8e44d0982e44d40f477f96))
+
+## [3.8.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.0...v3.8.1) (2021-04-06)
+
+
+### Bug Fixes
+
+* fix build and update dependencies ([9466d32](https://github.com/jayree/sfdx-jayree-plugin/commit/9466d32a3e1526d7c780ca6c7b8dee586a463bce))
+* fix SFDX_DISABLE_JAYREE_HOOKS=true ([8e0a40f](https://github.com/jayree/sfdx-jayree-plugin/commit/8e0a40f60b78d728cf98c47d78eabd39e6dbfe8e))
+
+# [3.8.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.7.1...v3.8.0) (2021-03-29)
+
+
+### Bug Fixes
+
+* update dependencies ([226d0d0](https://github.com/jayree/sfdx-jayree-plugin/commit/226d0d09ad5343dce8c3749211cd2380a72ae616))
+* **hooks:** fix prettierFormat call ([ab29da5](https://github.com/jayree/sfdx-jayree-plugin/commit/ab29da5188faadf798713379b2d4faadc5247062))
+* **hooks:** support mutingpermissionsets ([c329deb](https://github.com/jayree/sfdx-jayree-plugin/commit/c329deba97a8c912d1d377b3a0ccf6fa3480ee9c))
+* **orgconfigure:** fix click type 'list' ([f276525](https://github.com/jayree/sfdx-jayree-plugin/commit/f27652537b59f50f3d724aa7e264951b1fe347b9))
+* **sourcefix:** bugfix and add debug ([c7301fc](https://github.com/jayree/sfdx-jayree-plugin/commit/c7301fc1f9afcc8e76cc5bc6714d83cdff12f1ca))
+* **trackinglist:** start list at storedServerMaxRevisionCounter if available ([eda8607](https://github.com/jayree/sfdx-jayree-plugin/commit/eda86077be378d62d768755bcf66742d424e99c6))
+
+
+### Features
+
+* add hook to reset source tracking before pull ([2562d37](https://github.com/jayree/sfdx-jayree-plugin/commit/2562d37dc6f8539a7349a217c2a4a0b9646a9af9))
+* **orgconfigure:** add action 'type' ([e145dbb](https://github.com/jayree/sfdx-jayree-plugin/commit/e145dbb2a3c5fa4d0eea8138c51b9f43c994d282))
+* **orgconfigure:** prepare to support subtasks ([6efb36b](https://github.com/jayree/sfdx-jayree-plugin/commit/6efb36be943f43128816b38ce42205798e2cb723))
+
+## [3.7.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.7.0...v3.7.1) (2021-03-16)
+
+
+### Bug Fixes
+
+* **gitdiff:** add handler for error - no matching source was found ([6a0557a](https://github.com/jayree/sfdx-jayree-plugin/commit/6a0557aea050e1cf45612ff08007c6b3dce0b272))
+* **sourcefix:** allow globby path for file delete ([b3ff0ad](https://github.com/jayree/sfdx-jayree-plugin/commit/b3ff0ada6da83d89fdd268efdfe8635bc9f28bed))
+
+# [3.7.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.6.0...v3.7.0) (2021-03-15)
+
+
+### Bug Fixes
+
+* update dependencies ([dab9ab4](https://github.com/jayree/sfdx-jayree-plugin/commit/dab9ab47f1e8616aff97907ccbab6ed05a0bb05a))
+
+
+### Features
+
+* **manifestcleanup:** use exclamation mark to add members to the package manifest ([090f9cd](https://github.com/jayree/sfdx-jayree-plugin/commit/090f9cd382d998f1c4b4f0c38aa0a6c2fe9ee3e3))
+* **sourcefix:** set global order of execution to move, modify, delete ([0f3cb7f](https://github.com/jayree/sfdx-jayree-plugin/commit/0f3cb7f6a5c84b857541e6ababfb675d1082ae6d))
+
+# [3.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.2...v3.6.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* update dependencies ([4f2fcd2](https://github.com/jayree/sfdx-jayree-plugin/commit/4f2fcd2f2fd9a8c46ab07fae02e3cb65cf1ecd6d))
+
+
+### Features
+
+* **hooks:** add json output, see README for details ([3ce1e06](https://github.com/jayree/sfdx-jayree-plugin/commit/3ce1e0640d7e4dacf12463bc5ad6fdac89dc9a0c))
+* **sourcefix:** add file move function, see example configuration for details ([05b42f5](https://github.com/jayree/sfdx-jayree-plugin/commit/05b42f5201c73f82542ecf4408e439cbe1908663))
+
+## [3.5.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.1...v3.5.2) (2021-03-04)
+
+
+### Bug Fixes
+
+* fix build and update dependencies ([527004f](https://github.com/jayree/sfdx-jayree-plugin/commit/527004f250f5ad74582846c8e164db156674a958))
+
+## [3.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.5.0...v3.5.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* updated dependencies ([ef63825](https://github.com/jayree/sfdx-jayree-plugin/commit/ef63825125d51d9b85f1ad0146fa8982b9652df9))
+
+# [3.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.3...v3.5.0) (2021-02-20)
+
+
+### Bug Fixes
+
+* update describe.json to ApiVersion 51.0 ([1c03cc8](https://github.com/jayree/sfdx-jayree-plugin/commit/1c03cc84184386cd14eeebb1f5a76a99b10dd788))
+* **hooks:** fix ensureObjectPermissions if no objects are retrieved ([3a7f83c](https://github.com/jayree/sfdx-jayree-plugin/commit/3a7f83cf8da2b2c534d2299f0e297841947a2618))
+* update dependencies ([e83f4f1](https://github.com/jayree/sfdx-jayree-plugin/commit/e83f4f1a71dedb076856ae95bd93a058adfca351))
+* **sourcetracking:** show and use RevisionCounter and RevisionNum ([f075067](https://github.com/jayree/sfdx-jayree-plugin/commit/f0750674b93256129dc3ec3528baad167f27ad85))
+
+
+### Features
+
+* added hook documentation to README ([129d0df](https://github.com/jayree/sfdx-jayree-plugin/commit/129d0df7dad8ae397b1afad92f6ab9203529aa07))
+
+## [3.4.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.2...v3.4.3) (2021-02-01)
+
+
+### Bug Fixes
+
+* update dependencies ([dcbcb48](https://github.com/jayree/sfdx-jayree-plugin/commit/dcbcb486bb6dd91b84c8ca30b10d79ae85827fb6))
+* **manifestcleanup:** set requiresUsername to false ([ecb06f0](https://github.com/jayree/sfdx-jayree-plugin/commit/ecb06f05cb570e8ef1744570113acb4ad55b8ae7))
+* **trackingset:** set  maxRev to 0 if undefined in org ([74bfecd](https://github.com/jayree/sfdx-jayree-plugin/commit/74bfecd0547100b136daf97233e3abf315f44417))
+
+## [3.4.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.1...v3.4.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* update dependencies ([5609a4b](https://github.com/jayree/sfdx-jayree-plugin/commit/5609a4b788b26c331cb8de12b77a32a3b7746a88))
+* **sourcetrackinglist:** show stored RevisionCounter only if available ([13baee8](https://github.com/jayree/sfdx-jayree-plugin/commit/13baee8dba68d9f4a8d3a6124ee6600874ec90e1))
+
+## [3.4.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.4.0...v3.4.1) (2021-01-06)
+
+
+### Bug Fixes
+
+* **sourcefix:** fix win32 path handling ([21e296a](https://github.com/jayree/sfdx-jayree-plugin/commit/21e296ae09241f8486a919d81332276b06445cb6))
+
+# [3.4.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.3.0...v3.4.0) (2021-01-05)
+
+
+### Bug Fixes
+
+* **sourcefix:** change requiresUsername to supportsUsername ([7890c09](https://github.com/jayree/sfdx-jayree-plugin/commit/7890c09c8301b5a4ff8a9280f0b7d9d02ef7e6ab))
+* set version to 50.0 in all internal manifests ([53b9ef6](https://github.com/jayree/sfdx-jayree-plugin/commit/53b9ef6686352a40df01db716b0e511bf1117307))
+
+
+### Features
+
+* implement retrieve hooks ([dd71f69](https://github.com/jayree/sfdx-jayree-plugin/commit/dd71f6940390b9466b1f222a9558eac0762f5893))
+
+# [3.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.6...v3.3.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* fix changelog hook ([64d2d1d](https://github.com/jayree/sfdx-jayree-plugin/commit/64d2d1dc89ec284448f681b3372364c9b1bbd290))
+* update dependencies ([7a2c047](https://github.com/jayree/sfdx-jayree-plugin/commit/7a2c04782f2324b617257a8d04cd630d786ef9b0))
+
+
+### Features
+
+* rename jayree:scratchorg:settings to jayree:org:settings ([b5d4feb](https://github.com/jayree/sfdx-jayree-plugin/commit/b5d4febe6477bd4a3e603ca2124317ef48823f41))
+* split scratchorg:revision into source:tracking:list and :store:get, :store:set ([9e10c6b](https://github.com/jayree/sfdx-jayree-plugin/commit/9e10c6bfaf95adeeabfa553579452f1156b2b58f))
+
+## [3.2.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.5...v3.2.6) (2020-12-17)
+
+
+### Bug Fixes
+
+* **scratchorgrevision:** fix storerevision ([1a05e1c](https://github.com/jayree/sfdx-jayree-plugin/commit/1a05e1c03a3cb688b52bb01fb0d6566bdebed4e8))
+
+## [3.2.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.4...v3.2.5) (2020-12-17)
+
+
+### Bug Fixes
+
+* **gitdiff:** add MissingComponentOrResource handler, fix win32 path handling ([27f5613](https://github.com/jayree/sfdx-jayree-plugin/commit/27f561320637348bd53e44cee2a9aea49007633f))
+* **manifestgenerate:** add missing StandardValueSet QuantityUnitOfMeasure ([6380de6](https://github.com/jayree/sfdx-jayree-plugin/commit/6380de678f490c142e849e8a9805815d55146e5b))
+
+## [3.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.3...v3.2.4) (2020-12-15)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** fix win32 path handling ([a45fd47](https://github.com/jayree/sfdx-jayree-plugin/commit/a45fd47364df279f2f170408ec95016e22f73449))
+
+## [3.2.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.2...v3.2.3) (2020-12-15)
+
+
+### Bug Fixes
+
+* **sourceretrievefull:** remove console.log ([822d2ab](https://github.com/jayree/sfdx-jayree-plugin/commit/822d2ab7015b130288d01c19e6222501983cc7e7))
+
+## [3.2.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.1...v3.2.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* error handling on windows ([12566f4](https://github.com/jayree/sfdx-jayree-plugin/commit/12566f4e93091331c1a3f1fde8e0a3497019ca58))
+* update dependencies ([5f10c13](https://github.com/jayree/sfdx-jayree-plugin/commit/5f10c136e2fc3a5b9f28b73f6c636990beaee326))
+
+## [3.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.2.0...v3.2.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* replace shelljs with execa and update dependencies ([0d161ff](https://github.com/jayree/sfdx-jayree-plugin/commit/0d161ff8879fea6ba100883dab44714c88115c8e))
+
+# [3.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.1.0...v3.2.0) (2020-11-30)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix error handling ([1c59ce3](https://github.com/jayree/sfdx-jayree-plugin/commit/1c59ce3bb03b6601bd8a7a6482af29e4f9908cef))
+* **orgconfigure:** replaced output with skipped if task was already executed ([eb58b1c](https://github.com/jayree/sfdx-jayree-plugin/commit/eb58b1ce039f29874e3ab76d3f62000cc6072597))
+
+
+### Features
+
+* **sourceretrieve:** added logic to shrink PermissionSets, updated CustomObjects, use tmp project ([34bf807](https://github.com/jayree/sfdx-jayree-plugin/commit/34bf80762f823cd345d7a073d038d04c681ed3f3))
+* **sourceretrieve:** new options for ObjectPathResolver ([048ff3d](https://github.com/jayree/sfdx-jayree-plugin/commit/048ff3d68d90bfda1d8882cde43f4778b022aeec))
+* **statecountry:** redesigned import command with better output and task parallelization ([88512e3](https://github.com/jayree/sfdx-jayree-plugin/commit/88512e3327d841c2ee90780a0777169cdf0b8ac5))
+
 # [3.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.0.1...v3.1.0) (2020-10-26)
 
 

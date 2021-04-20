@@ -5,8 +5,9 @@ interface QueryParameters {
     value?: any;
 }
 declare class ObjectPathResolver {
-    private _path;
-    private _object;
+    private path;
+    private object;
+    private returnPathBefore;
     constructor(object: any);
     value(): any[];
     resolve({ path, key, value }: QueryParameters): this;

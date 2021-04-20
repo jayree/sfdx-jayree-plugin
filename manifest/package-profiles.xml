@@ -23,50 +23,30 @@
   <types>
     <name>CustomObject</name>
     <members>*</members>
-    <members>Account</members>
-    <members>AccountBrand</members>
     <members>AccountContactRelation</members>
     <members>AccountContactRole</members>
+    <members>AccountTeamMember</members>
     <members>Activity</members>
-    <members>Asset</members>
+    <members>ActivityRecurrence2Exception</members>
+    <members>AssetDowntimePeriod</members>
     <members>AssetRelationship</members>
+    <members>AssetWarranty</members>
+    <members>AssignedResource</members>
     <members>AssistantProgress</members>
-    <members>AuthorizationForm</members>
-    <members>AuthorizationFormConsent</members>
-    <members>AuthorizationFormDataUse</members>
-    <members>AuthorizationFormText</members>
-    <members>Campaign</members>
-    <members>CampaignInfluence</members>
+    <members>AssociatedLocation</members>
     <members>CampaignMember</members>
-    <members>Case</members>
     <members>CaseContactRole</members>
     <members>ChatterActivity</members>
     <members>CollaborationGroup</members>
     <members>CollaborationGroupMember</members>
-    <members>CommSubscription</members>
-    <members>CommSubscriptionChannelType</members>
-    <members>CommSubscriptionConsent</members>
-    <members>CommSubscriptionTiming</members>
-    <members>ConsumptionRate</members>
-    <members>ConsumptionSchedule</members>
-    <members>Contact</members>
-    <members>ContactPointAddress</members>
-    <members>ContactPointConsent</members>
-    <members>ContactPointEmail</members>
-    <members>ContactPointPhone</members>
-    <members>ContactPointTypeConsent</members>
-    <members>ContactRequest</members>
     <members>ContentVersion</members>
-    <members>Contract</members>
     <members>ContractContactRole</members>
-    <members>DataUseLegalBasis</members>
-    <members>DataUsePurpose</members>
+    <members>DigitalSignature</members>
     <members>DuplicateRecordItem</members>
-    <members>DuplicateRecordSet</members>
     <members>EmailMessage</members>
-    <members>EngagementChannelType</members>
     <members>Event</members>
     <members>ExchangeUserMapping</members>
+    <members>ExpenseReportEntry</members>
     <members>ExpressionFilter</members>
     <members>ExpressionFilterCriteria</members>
     <members>ExternalEventMapping</members>
@@ -76,66 +56,57 @@
     <members>ForecastingOwnerAdjustment</members>
     <members>ForecastingQuota</members>
     <members>ForecastingTypeToCategory</members>
-    <members>Idea</members>
-    <members>Image</members>
-    <members>Individual</members>
-    <members>Knowledge__kav</members>
-    <members>Lead</members>
     <members>LinkedArticle</members>
     <members>MLModel</members>
     <members>MLModelFactor</members>
     <members>MLModelFactorComponent</members>
-    <members>Macro</members>
     <members>MacroAction</members>
     <members>MacroInstruction</members>
     <members>MacroUsage</members>
-    <members>Opportunity</members>
+    <members>MaintenanceAsset</members>
+    <members>NetworkMember</members>
     <members>OpportunityCompetitor</members>
     <members>OpportunityContactRole</members>
     <members>OpportunityLineItem</members>
-    <members>OpportunityLineItemSchedule</members>
-    <members>OpportunityTeamMember</members>
-    <members>Order</members>
     <members>OrderItem</members>
     <members>OrgMetricScanResult</members>
     <members>OrgMetricScanSummary</members>
     <members>PartnerRole</members>
-    <members>PartyConsent</members>
-    <members>Pricebook2</members>
     <members>PricebookEntry</members>
-    <members>Product2</members>
-    <members>ProductConsumptionSchedule</members>
-    <members>ProfileSkill</members>
-    <members>ProfileSkillEndorsement</members>
-    <members>ProfileSkillUser</members>
+    <members>ProductConsumed</members>
+    <members>ProductItemTransaction</members>
+    <members>ProductRequestLineItem</members>
+    <members>ProductRequired</members>
+    <members>ProductWarrantyTerm</members>
     <members>PromptAction</members>
-    <members>QuickText</members>
     <members>QuickTextUsage</members>
-    <members>Quote</members>
     <members>QuoteLineItem</members>
     <members>Recommendation</members>
     <members>RecordAction</members>
     <members>RecordMergeHistory</members>
-    <members>Scorecard</members>
-    <members>ScorecardAssociation</members>
-    <members>ScorecardMetric</members>
+    <members>ResourceAbsence</members>
+    <members>ResourcePreference</members>
+    <members>ReturnOrderLineItem</members>
+    <members>ServiceCrewMember</members>
+    <members>ServiceReport</members>
+    <members>ServiceResourceCapacity</members>
+    <members>ServiceResourceSkill</members>
+    <members>ServiceTerritoryLocation</members>
+    <members>ServiceTerritoryMember</members>
     <members>Site</members>
-    <members>SocialPersona</members>
-    <members>SocialPost</members>
-    <members>Solution</members>
-    <members>StreamActivityAccess</members>
-    <members>StreamingChannel</members>
+    <members>SkillRequirement</members>
     <members>Task</members>
-    <members>Territory2</members>
-    <members>Territory2Model</members>
+    <members>TimeSheetEntry</members>
+    <members>TimeSlot</members>
     <members>Topic</members>
     <members>TopicAssignment</members>
     <members>User</members>
     <members>UserProvisioningRequest</members>
-    <members>UserTerritory2Association</members>
     <members>WorkBadge</members>
     <members>WorkBadgeDefinition</members>
+    <members>WorkOrderLineItem</members>
     <members>WorkThanks</members>
+    <members>WorkTypeGroupMember</members>
   </types>
   <types>
     <name>CustomPermission</name>
@@ -185,5 +156,5 @@
     <name>ServicePresenceStatus</name>
     <members>*</members>
   </types>
-  <version>49.0</version>
+  <version>50.0</version>
 </Package>

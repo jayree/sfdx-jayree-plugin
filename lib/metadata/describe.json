@@ -15,6 +15,27 @@
             "xmlName": "AccessControlPolicy"
         },
         {
+            "directoryName": "AccountForecastSettings",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "accountForecastSetting",
+            "xmlName": "AccountForecastSettings"
+        },
+        {
+            "directoryName": "accountRelationshipShareRules",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "accountRelationshipShareRule",
+            "xmlName": "AccountRelationshipShareRule"
+        },
+        {
+            "directoryName": "acctMgrTargetSettings",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "acctMgrTargetSetting",
+            "xmlName": "AcctMgrTargetSettings"
+        },
+        {
             "directoryName": "actionLinkGroupTemplates",
             "inFolder": false,
             "metaFile": false,
@@ -160,6 +181,13 @@
             "xmlName": "BatchProcessJobDefinition"
         },
         {
+            "directoryName": "benefitActions",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "benefitAction",
+            "xmlName": "BenefitAction"
+        },
+        {
             "childXmlNames": {
                 "botVersions": "BotVersion"
             },
@@ -175,6 +203,13 @@
             "metaFile": false,
             "suffix": "brandingSet",
             "xmlName": "BrandingSet"
+        },
+        {
+            "directoryName": "briefcaseDefinitions",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "briefcaseDefinition",
+            "xmlName": "BriefcaseDefinition"
         },
         {
             "directoryName": "businessProcessFeedbackConfigurations",
@@ -247,6 +282,13 @@
             "xmlName": "ChannelLayout"
         },
         {
+            "directoryName": "ChannelObjectLinkingRules",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "ChannelObjectLinkingRule",
+            "xmlName": "ChannelObjectLinkingRule"
+        },
+        {
             "directoryName": "ChatterExtensions",
             "inFolder": false,
             "metaFile": false,
@@ -301,6 +343,20 @@
             "metaFile": true,
             "suffix": "asset",
             "xmlName": "ContentAsset"
+        },
+        {
+            "directoryName": "ConversationVendorFieldDefinitions",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "ConversationVendorFieldDefinition",
+            "xmlName": "ConversationVendorFieldDef"
+        },
+        {
+            "directoryName": "ConversationVendorInformation",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "ConversationVendorInformation",
+            "xmlName": "ConversationVendorInfo"
         },
         {
             "directoryName": "corsWhitelistOrigins",
@@ -451,11 +507,39 @@
             "xmlName": "DataCategoryGroup"
         },
         {
+            "directoryName": "s3DataConnectors",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "s3DataConnector",
+            "xmlName": "DataConnectorS3"
+        },
+        {
             "directoryName": "dataPipelines",
             "inFolder": false,
             "metaFile": true,
             "suffix": "dataPipeline",
             "xmlName": "DataPipeline"
+        },
+        {
+            "directoryName": "mktDataSources",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "dataSource",
+            "xmlName": "DataSource"
+        },
+        {
+            "directoryName": "dataSourceObjects",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "dataSourceObject",
+            "xmlName": "DataSourceObject"
+        },
+        {
+            "directoryName": "dataStreamDefinitions",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "dataStreamDefinition",
+            "xmlName": "DataStreamDefinition"
         },
         {
             "directoryName": "decisionTables",
@@ -479,6 +563,20 @@
             "xmlName": "DelegateGroup"
         },
         {
+            "directoryName": "discovery",
+            "inFolder": false,
+            "metaFile": true,
+            "suffix": "model",
+            "xmlName": "DiscoveryAIModel"
+        },
+        {
+            "directoryName": "discovery",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "goal",
+            "xmlName": "DiscoveryGoal"
+        },
+        {
             "directoryName": "documents",
             "inFolder": true,
             "metaFile": true,
@@ -497,6 +595,13 @@
             "metaFile": false,
             "suffix": "duplicateRule",
             "xmlName": "DuplicateRule"
+        },
+        {
+            "directoryName": "dynamicTriggers",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "dynamicTrigger",
+            "xmlName": "DynamicTrigger"
         },
         {
             "directoryName": "eclair",
@@ -569,6 +674,13 @@
             "xmlName": "EntitlementTemplate"
         },
         {
+            "directoryName": "entityImplements",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "entityImplements",
+            "xmlName": "EntityImplements"
+        },
+        {
             "childXmlNames": {
                 "escalationRule": "EscalationRule"
             },
@@ -606,6 +718,13 @@
             "xmlName": "ExperienceBundle"
         },
         {
+            "directoryName": "externalDataConnectors",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "externalDataConnector",
+            "xmlName": "ExternalDataConnector"
+        },
+        {
             "directoryName": "dataSources",
             "inFolder": false,
             "metaFile": false,
@@ -639,6 +758,20 @@
             "metaFile": false,
             "suffix": "featureParameterInteger",
             "xmlName": "FeatureParameterInteger"
+        },
+        {
+            "directoryName": "fieldServiceMobileExtensions",
+            "inFolder": false,
+            "metaFile": true,
+            "suffix": "fieldServiceMobileExtension",
+            "xmlName": "FieldServiceMobileExtension"
+        },
+        {
+            "directoryName": "fieldSrcTrgtRelationships",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "fieldSrcTrgtRelationship",
+            "xmlName": "FieldSrcTrgtRelationship"
         },
         {
             "directoryName": "flexipages",
@@ -754,6 +887,13 @@
             "metaFile": false,
             "suffix": "inboundNetworkConnection",
             "xmlName": "InboundNetworkConnection"
+        },
+        {
+            "directoryName": "IndustriesManufacturingSettings",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "settings",
+            "xmlName": "IndustriesManufacturingSettings"
         },
         {
             "directoryName": "insightTypes",
@@ -919,6 +1059,14 @@
             "xmlName": "MilestoneType"
         },
         {
+            "childXmlNames": ["MktDataTranField"],
+            "directoryName": "mktDataTranObjects",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "mktDataTranObject",
+            "xmlName": "MktDataTranObject"
+        },
+        {
             "directoryName": "mlDomains",
             "inFolder": false,
             "metaFile": false,
@@ -938,6 +1086,13 @@
             "metaFile": false,
             "suffix": "rule",
             "xmlName": "ModerationRule"
+        },
+        {
+            "directoryName": "mutingpermissionsets",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "mutingpermissionset",
+            "xmlName": "MutingPermissionSet"
         },
         {
             "directoryName": "myDomainDiscoverableLogins",
@@ -994,6 +1149,20 @@
             "metaFile": false,
             "suffix": "oauthcustomscope",
             "xmlName": "OauthCustomScope"
+        },
+        {
+            "directoryName": "ObjectHierarchyRelationship",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "settings",
+            "xmlName": "ObjectHierarchyRelationship"
+        },
+        {
+            "directoryName": "objectSourceTargetMaps",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "objectSourceTargetMap",
+            "xmlName": "ObjectSourceTargetMap"
         },
         {
             "directoryName": "iot",
@@ -1071,6 +1240,13 @@
             "metaFile": false,
             "suffix": "platformEventChannelMember",
             "xmlName": "PlatformEventChannelMember"
+        },
+        {
+            "directoryName": "PlatformEventSubscriberConfigs",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "platformEventSubscriberConfig",
+            "xmlName": "PlatformEventSubscriberConfig"
         },
         {
             "directoryName": "portals",
@@ -1206,6 +1382,13 @@
             "xmlName": "Role"
         },
         {
+            "directoryName": "salesAgreementSettings",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "salesAgreementSetting",
+            "xmlName": "SalesAgreementSettings"
+        },
+        {
             "directoryName": "samlssoconfigs",
             "inFolder": false,
             "metaFile": false,
@@ -1243,7 +1426,9 @@
         {
             "childXmlNames": {
                 "sharingOwnerRules": "SharingOwnerRule",
-                "sharingCriteriaRules": "SharingCriteriaRule"
+                "sharingCriteriaRules": "SharingCriteriaRule",
+                "SharingGuestRules": "SharingGuestRule",
+                "SharingTerritoryRules": "SharingTerritoryRule"
             },
             "directoryName": "sharingRules",
             "inFolder": false,
@@ -1292,13 +1477,6 @@
             "metaFile": true,
             "suffix": "resource",
             "xmlName": "StaticResource"
-        },
-        {
-            "directoryName": "surveySettings",
-            "inFolder": false,
-            "metaFile": false,
-            "suffix": "survey",
-            "xmlName": "SurveySettings"
         },
         {
             "directoryName": "synonymDictionaries",
@@ -1445,6 +1623,13 @@
             "metaFile": false,
             "suffix": "xmd",
             "xmlName": "WaveXmd"
+        },
+        {
+            "directoryName": "webStoreTemplates",
+            "inFolder": false,
+            "metaFile": false,
+            "suffix": "webStoreTemplate",
+            "xmlName": "WebStoreTemplate"
         },
         {
             "directoryName": "workSkillRoutings",

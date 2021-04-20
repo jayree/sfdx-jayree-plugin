@@ -6,7 +6,7 @@
  */
 import { core, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import puppeteer = require('puppeteer');
+import puppeteer from 'puppeteer';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'listchangeset');

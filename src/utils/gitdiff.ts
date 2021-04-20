@@ -5,13 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { join, dirname, basename, relative } from 'path';
+import { join, dirname, basename, relative, sep, posix } from 'path';
 import * as util from 'util';
 import * as fs from 'fs-extra';
-import execa = require('execa');
-import equal = require('fast-deep-equal');
+import execa from 'execa';
+import equal from 'fast-deep-equal';
 import * as xml2js from 'xml2js';
-import describe = require('../../metadata/describe.json');
+import * as describe from '../../metadata/describe.json';
 
 const builder = new xml2js.Builder({
   xmldec: { version: '1.0', encoding: 'UTF-8' },
@@ -57,6 +57,12 @@ export interface Ctx {
   warnings: Record<string, Record<string, string[]>>;
 }
 
+export async function ensureDirsInTempProject(basePath: string, ctx: Ctx) {
+  for (const folder of ctx.sfdxProjectFolders) {
+    await fs.ensureDir(join(basePath, folder));
+  }
+}
+
 export async function prepareTempProject(type: string, ctx: Ctx) {
   const tmpProjectPath = join(ctx.tmpbasepath, type);
   await fs.ensureDir(ctx.tmpbasepath);
@@ -85,6 +91,7 @@ export async function addFilesToTempProject(tmpRoot, paths, task, ctx: Ctx): Pro
   return addedFiles;
 }
 
+// eslint-disable-next-line complexity
 export async function convertTempProject(
   convertpath: string,
   options: { destruct: boolean } = { destruct: false },
@@ -107,7 +114,11 @@ export async function convertTempProject(
     debug({ forceSourceConvertResult: result });
     result = JSON.parse(result.stdout);
     if (result.status === 1) {
-      if (result.name === 'Missing Metadata File' || result.name === 'MissingContentOrMetadataFile') {
+      if (
+        result.name === 'Missing Metadata File' ||
+        result.name === 'MissingContentOrMetadataFile' ||
+        result.name === 'MissingComponentOrResource'
+      ) {
         let path;
         if (result.name === 'Missing Metadata File') {
           path = result.message.split("Expected metadata file with '-meta.xml' extension at path: ")[1];
@@ -115,7 +126,27 @@ export async function convertTempProject(
         if (result.name === 'MissingContentOrMetadataFile') {
           path = result.message.split('Expected file at path: ')[1];
         }
-        const relpath = relative(convertpath, path);
+        if (result.name === 'MissingComponentOrResource') {
+          path = result.message.split(' exists and is correct, and try again.')[0].split(sep).slice(1).join(posix.sep);
+          let componentOrResource;
+          if (path.endsWith('.resource')) {
+            componentOrResource = '.resource';
+          } else if (path.endsWith('.component')) {
+            componentOrResource = '.component';
+          }
+          path = path.split(componentOrResource)[0];
+          const gitLines = (
+            await execa('git', ['--no-pager', 'log', '--name-only', '--pretty=format:', '--', `*${path}*`])
+          ).stdout.split(/\r?\n/);
+          debug({ MissingComponentOrResourceLogResult: gitLines });
+          path = Array.from(new Set(gitLines.filter(Boolean))).filter(
+            (f) => !f.endsWith(`${componentOrResource}-meta.xml`)
+          )[0];
+          debug({ MissingComponentOrResourceLogResultPath: path });
+          path = join(convertpath, path);
+        }
+        const relpath = relative(convertpath, path).split(sep).join(posix.sep);
+        debug({ path, convertpath, relpath });
         if (!options.destruct) {
           task.output = `add missing file ${relpath}`;
           await fs.ensureDir(join(convertpath, dirname(relpath)));
@@ -145,8 +176,11 @@ export async function convertTempProject(
       } else if (result.message === 'The package root directory is empty.') {
         result.status = 0;
         result.result = { location: convertpath };
+      } else if (result.message.startsWith('No matching source was found within the package root directory')) {
+        result.status = 0;
+        result.result = { location: convertpath };
       } else {
-        throw new Error(`No error handler for: '${result.name}'`);
+        throw new Error(`No error handler for: '${result.name}' - ${result.message}`);
       }
     }
   } while (result.status === 1);
@@ -188,94 +222,6 @@ export async function appendToManifest(file, insert): Promise<Record<string, unk
 
   return packagexmlJson;
 }
-export async function ensureDirsInTempProject(basePath: string, ctx: Ctx) {
-  for (const folder of ctx.sfdxProjectFolders) {
-    await fs.ensureDir(join(basePath, folder));
-  }
-}
-
-export async function getGitResults(
-  task,
-  ctx: Ctx
-): Promise<{
-  added: string[];
-  modified: { toManifest: Record<string, []>; toDestructiveChanges: Record<string, []> };
-  deleted: string[];
-}> {
-  const results = {
-    added: [],
-    modified: { files: [], toManifest: {}, toDestructiveChanges: {} },
-    deleted: [],
-    skipped: [],
-  };
-
-  let gitLines = (
-    await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ctx.git.ref1ref2])
-  ).stdout.split(/\r?\n/);
-
-  gitLines = gitLines.filter((l) =>
-    ctx.sfdxProjectFolders.some((f) => {
-      if (typeof l.split('\t')[1] !== 'undefined') {
-        return l.split('\t')[1].startsWith(f);
-      }
-    })
-  );
-
-  let gitlinesf = gitLines.map((line) => {
-    const l = line.split('\t');
-    return { path: l[1], status: l[0] };
-  });
-
-  gitlinesf = gitlinesf.filter((line) => {
-    if (line.status === 'D') {
-      for (const sfdxFolder of ctx.sfdxProjectFolders) {
-        let extf;
-        if (line.path.startsWith(sfdxFolder)) {
-          extf = sfdxFolder;
-          if (line.path.startsWith(join(sfdxFolder, '/main/default/'))) {
-            extf = join(sfdxFolder, '/main/default/');
-          } else {
-            extf = join(sfdxFolder, '/');
-          }
-          if (gitlinesf.filter((t) => t.path.endsWith(line.path.replace(extf, '')) && t.status === 'A').length !== 0) {
-            return false;
-          }
-        }
-      }
-    }
-    return true;
-  });
-
-  for (const [i, { status, path }] of gitlinesf.entries()) {
-    const check = await analyzeFile(path, ctx);
-    if (check.status === 0) {
-      switch (status) {
-        case 'D': {
-          results.deleted.push(path);
-          break;
-        }
-        default: {
-          results.added.push(path);
-          break;
-        }
-      }
-    } else if (check.status > 0) {
-      results.modified.files.push(path);
-      Object.keys(check).forEach((to) => {
-        Object.keys(check[to]).forEach((md) => {
-          results.modified[to] = results.modified[to] ?? {};
-          results.modified[to][md] = results.modified[to][md] ?? [];
-          results.modified[to][md] = results.modified[to][md].concat(check[to][md]);
-        });
-      });
-    } else if (check.status === -1) {
-      results.skipped.push(path);
-    }
-    task.output = `${i + 1}/${gitlinesf.length} files processed (${results.skipped.length} skipped):
-Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${results.modified.files.length}`;
-  }
-  return results;
-}
 
 export async function analyzeFile(path, ctx: Ctx) {
   let source;
@@ -300,7 +246,7 @@ export async function analyzeFile(path, ctx: Ctx) {
 
   const XmlName = ((objects) => {
     for (const obj of objects) {
-      if (typeof obj !== 'undefined') {
+      if (typeof obj !== 'undefined' && obj !== null) {
         return Object.keys(obj)[0];
       }
     }
@@ -419,4 +365,87 @@ export async function analyzeFile(path, ctx: Ctx) {
     toManifest,
     toDestructiveChanges,
   };
+}
+
+export async function getGitResults(
+  task,
+  ctx: Ctx
+): Promise<{
+  added: string[];
+  modified: { toManifest: Record<string, []>; toDestructiveChanges: Record<string, []> };
+  deleted: string[];
+}> {
+  const results = {
+    added: [],
+    modified: { files: [], toManifest: {}, toDestructiveChanges: {} },
+    deleted: [],
+    skipped: [],
+  };
+
+  let gitLines = (
+    await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ctx.git.ref1ref2])
+  ).stdout.split(/\r?\n/);
+
+  gitLines = gitLines.filter((l) =>
+    ctx.sfdxProjectFolders.some((f) => {
+      if (typeof l.split('\t')[1] !== 'undefined') {
+        return l.split('\t')[1].startsWith(f);
+      }
+    })
+  );
+
+  let gitlinesf = gitLines.map((line) => {
+    const l = line.split('\t');
+    return { path: l[1], status: l[0] };
+  });
+
+  gitlinesf = gitlinesf.filter((line) => {
+    if (line.status === 'D') {
+      for (const sfdxFolder of ctx.sfdxProjectFolders) {
+        let extf;
+        if (line.path.startsWith(sfdxFolder)) {
+          extf = sfdxFolder;
+          if (line.path.startsWith(join(sfdxFolder, '/main/default/').split(sep).join(posix.sep))) {
+            extf = join(sfdxFolder, '/main/default/').split(sep).join(posix.sep);
+          } else {
+            extf = join(sfdxFolder, '/').split(sep).join(posix.sep);
+          }
+          if (gitlinesf.filter((t) => t.path.endsWith(line.path.replace(extf, '')) && t.status === 'A').length !== 0) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  });
+
+  for (const [i, { status, path }] of gitlinesf.entries()) {
+    const check = await analyzeFile(path, ctx);
+    if (check.status === 0) {
+      switch (status) {
+        case 'D': {
+          results.deleted.push(path);
+          break;
+        }
+        default: {
+          results.added.push(path);
+          break;
+        }
+      }
+    } else if (check.status > 0) {
+      results.modified.files.push(path);
+      Object.keys(check).forEach((to) => {
+        Object.keys(check[to]).forEach((md) => {
+          results.modified[to] = results.modified[to] ?? {};
+          results.modified[to][md] = results.modified[to][md] ?? [];
+          results.modified[to][md] = results.modified[to][md].concat(check[to][md]);
+        });
+      });
+    } else if (check.status === -1) {
+      results.skipped.push(path);
+    }
+    task.output = `${i + 1}/${gitlinesf.length} files processed (${results.skipped.length} skipped):
+Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${results.modified.files.length}`;
+  }
+  return results;
 }

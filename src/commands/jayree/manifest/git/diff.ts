@@ -125,7 +125,7 @@ uses the diff of what is unique in branchB (REF2)`,
                 task: async (ctx): Promise<void> => {
                   ctx.tmpbasepath = join(ctx.projectRoot, '.sfdx', 'temp', `sdx_sourceGitDiff_${Date.now()}`);
 
-                  process.once('beforeExit', () => {
+                  process.once('exit', () => {
                     void fs.remove(ctx.tmpbasepath);
                   });
 
@@ -310,10 +310,12 @@ uses the diff of what is unique in branchB (REF2)`,
         warnings: (context.warnings as unknown) as AnyJson,
       };
     } catch (e) {
-      if (this.isOutputEnabled) {
-        logger.fail(e);
+      if (debug.enabled) {
+        if (this.isOutputEnabled) {
+          logger.fail(e);
+        }
       }
-      return { ...e };
+      throw e;
     }
   }
 
