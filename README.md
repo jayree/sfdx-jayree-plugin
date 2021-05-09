@@ -53,10 +53,7 @@ USAGE
 * [`sfdx jayree:packagedescription:get`](#sfdx-jayreepackagedescriptionget)
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
-* [`sfdx jayree:scratchorg:revision`](#sfdx-jayreescratchorgrevision)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
-* [`sfdx jayree:source:retrieve:all`](#sfdx-jayreesourceretrieveall)
-* [`sfdx jayree:source:retrieve:full`](#sfdx-jayreesourceretrievefull)
 * [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
 * [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
 * [`sfdx jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)
@@ -621,43 +618,6 @@ EXAMPLE
 
 _See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/packagedescription/set.ts)_
 
-### `sfdx jayree:scratchorg:revision`
-
-list changes in a scratch org by remote RevisionNum and set local maxrevision
-
-```
-USAGE
-  $ sfdx jayree:scratchorg:revision [-b | -r] [-v <integer> -s] [-u <string>] [--apiversion <string>] [--json] 
-  [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -b, --storerevision                                                               store maxrevision value
-  -r, --restorerevision                                                             restore maxrevision value
-
-  -s, --setlocalmaxrevision                                                         set local maxrevision (default:
-                                                                                    remote maxrevision)
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  -v, --localrevisionvalue=localrevisionvalue                                       set local maxrevision value
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLE
-  $ sfdx jayree:scratchorgrevision
-  $ sfdx jayree:scratchorgrevision -u me@my.org
-  $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w
-```
-
-_See code: [src/commands/jayree/scratchorg/revision.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/scratchorg/revision.ts)_
-
 ### `sfdx jayree:source:fix`
 
 fix local source files
@@ -689,71 +649,6 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/fix.ts)_
-
-### `sfdx jayree:source:retrieve:all`
-
-retrieve all sources from an org
-
-```
-USAGE
-  $ sfdx jayree:source:retrieve:all [-s <string>] [-u <string>] [--apiversion <string>] [--verbose] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -s, --scope=scope                                                                 config scope to use
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-  --verbose                                                                         log output to console
-
-DESCRIPTION
-  Retrieves all metadata in source format from an org to your local Salesforce DX project.
-```
-
-_See code: [src/commands/jayree/source/retrieve/all.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/retrieve/all.ts)_
-
-### `sfdx jayree:source:retrieve:full`
-
-retrieve full sources from an org
-
-```
-USAGE
-  $ sfdx jayree:source:retrieve:full [-m <array>] [-u <string>] [--apiversion <string>] [--verbose] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -m, --metadata=metadata                                                           [default: Profile,PermissionSet]
-                                                                                    comma-separated list of metadata
-                                                                                    component names
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-  --verbose                                                                         log output to console
-
-DESCRIPTION
-  Retrieves full profile, permission set and custom label metadata in source format from an org to your local Salesforce 
-  DX project.
-```
-
-_See code: [src/commands/jayree/source/retrieve/full.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.8.4/src/commands/jayree/source/retrieve/full.ts)_
 
 ### `sfdx jayree:source:tracking:list`
 
