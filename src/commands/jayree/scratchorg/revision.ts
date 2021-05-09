@@ -16,6 +16,7 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgrevision')
 
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
+  public static hidden = true;
 
   public static examples = [
     `$ sfdx jayree:scratchorgrevision

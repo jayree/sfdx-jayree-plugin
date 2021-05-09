@@ -2,6 +2,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
     static description: string;
+    static hidden: boolean;
     static examples: string[];
     protected static flagsConfig: {
         startfromrevision: flags.Discriminated<flags.Number>;
