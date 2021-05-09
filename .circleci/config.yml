@@ -14,7 +14,7 @@ _refs:
       - /usr/local/share/.config/yarn
   install: &install
     name: Install dependencies
-    command: yarn install
+    command: yarn
   build: &build
     name: Building
     command: yarn build
@@ -59,16 +59,15 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
+      - run: yarn global add semantic-release@17
+      - run: yarn global add https://github.com/jayree/semantic-release
       - run: *install
-      - run: yarn semantic-release -e @oclif/semantic-release
+      - run: semantic-release -e @oclif/semantic-release
       - save_cache: *save-cache
   merge:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache: *restore-cache
-      - run: *install
-      - run: *build
       - run: *gh-config
       - run:
           name: Merging
