@@ -1,3 +1,17 @@
+# [3.9.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.4...v3.9.0) (2021-05-09)
+
+
+### Bug Fixes
+
+* update dependencies ([65f7412](https://github.com/jayree/sfdx-jayree-plugin/commit/65f7412ceb2ed1d4fcbbe572c91b362303fe2ea6))
+
+
+### Features
+
+* hide/deprecate jayree:scratchorg:revision ([0b439c4](https://github.com/jayree/sfdx-jayree-plugin/commit/0b439c452f1786957e5debcc69dc8c4e2e937101))
+* hide/deprecate jayree:source:retrieve:all ([3a81e40](https://github.com/jayree/sfdx-jayree-plugin/commit/3a81e40ee744a9386220f37807bd1634690df5a5))
+* hide/deprecate jayree:source:retrieve:full ([a4cb727](https://github.com/jayree/sfdx-jayree-plugin/commit/a4cb727fc1678babf4bcda49b61e862d262d6832))
+
 ## [3.8.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.3...v3.8.4) (2021-04-20)
 
 
