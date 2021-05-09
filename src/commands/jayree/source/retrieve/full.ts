@@ -22,6 +22,7 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrievefull')
 
 export default class RetrieveProfiles extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');
+  public static hidden = true;
 
   /*   public static examples = [
     `$ sfdx jayree:flowtestcoverage
