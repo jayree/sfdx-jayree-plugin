@@ -59,8 +59,8 @@ jobs:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
-      - run: yarn global add semantic-release@17
-      - run: yarn global add https://github.com/jayree/semantic-release
+      - run: npm install -global semantic-release@17
+      - run: npm install -global https://github.com/jayree/semantic-release
       - run: *install
       - run: semantic-release -e @oclif/semantic-release
       - save_cache: *save-cache
