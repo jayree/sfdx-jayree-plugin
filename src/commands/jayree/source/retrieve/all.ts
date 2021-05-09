@@ -19,6 +19,7 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrieveall');
 
 export default class RetrieveMetadata extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');
+  public static hidden = true;
 
   /*   public static examples = [
     `$ sfdx jayree:flowtestcoverage
