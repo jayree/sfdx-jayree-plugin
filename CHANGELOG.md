@@ -1,3 +1,11 @@
+## [3.9.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.9.0...v3.9.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* puppeteer exec in docker ([49581c0](https://github.com/jayree/sfdx-jayree-plugin/commit/49581c0f2bf1c02b1b54fec2bcd891bda1e906b4))
+* update dependencies ([7f1d150](https://github.com/jayree/sfdx-jayree-plugin/commit/7f1d15076f805fffb0989db2a6ec79d045a668e6))
+
 # [3.9.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.4...v3.9.0) (2021-05-09)
 
 
