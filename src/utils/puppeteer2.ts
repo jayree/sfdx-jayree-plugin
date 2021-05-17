@@ -140,7 +140,7 @@ export class PuppeteerTasks2 {
         this.countrycode = countrycode.toUpperCase();
         const table = await page.evaluate(() => document.querySelector('table#subdivision').outerHTML);
 
-        // eslint-disable-next-line no-shadow
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const converted = tabletojson.convert(table)[0];
         const jsonParsed = {};
         if (typeof converted !== 'undefined') {

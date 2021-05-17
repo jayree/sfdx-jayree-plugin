@@ -121,7 +121,7 @@ uses the diff of what is unique in branchB (REF2)`,
             task.newListr([
               {
                 title: 'Prepare temp project',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
                   ctx.tmpbasepath = join(ctx.projectRoot, '.sfdx', 'temp', `sdx_sourceGitDiff_${Date.now()}`);
 
@@ -138,7 +138,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Create deleted files in temp project',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   ctx.destructiveChangesSourceFiles = await addFilesToTempProject(
                     ctx.destructiveChangesProjectPath,
@@ -153,7 +153,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Generate manifest',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   ctx.destructiveChangesManifestFile = null;
                   if (ctx.destructiveChangesSourceFiles.length > 0) {
@@ -184,7 +184,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Apply changes from modified files to manifest',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
                   ctx.destructiveChanges.content = await appendToManifest(
                     ctx.destructiveChangesManifestFile,
@@ -194,7 +194,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Save',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
                   ctx.destructiveChanges.files = [
                     join(ctx.projectRoot, 'destructiveChanges', 'destructiveChanges.xml'),
@@ -218,14 +218,14 @@ uses the diff of what is unique in branchB (REF2)`,
             task.newListr([
               {
                 title: 'Prepare temp project',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
                   ctx.manifestProjectPath = await prepareTempProject('manifest', ctx);
                 },
               },
               {
                 title: 'Create added files in temp project',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   ctx.manifestSourceFiles = await addFilesToTempProject(
                     ctx.manifestProjectPath,
@@ -240,7 +240,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Generate manifest',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   ctx.manifestFile = null;
                   if (ctx.manifestSourceFiles.length > 0) {
@@ -268,7 +268,7 @@ uses the diff of what is unique in branchB (REF2)`,
               },
               {
                 title: 'Apply changes from modified files to manifest',
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
                   ctx.manifest.content = await appendToManifest(ctx.manifestFile, ctx.gitResults.modified.toManifest);
                 },
@@ -296,7 +296,7 @@ uses the diff of what is unique in branchB (REF2)`,
         if (this.isOutputEnabled) {
           logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
         }
-        return (context as unknown) as AnyJson;
+        return context as unknown as AnyJson;
       }
       if (Object.keys(context.warnings).length > 0) {
         Object.keys(context.warnings).forEach((w) => {
@@ -305,9 +305,9 @@ uses the diff of what is unique in branchB (REF2)`,
         });
       }
       return {
-        destructiveChanges: (context.destructiveChanges as unknown) as AnyJson,
-        manifest: (context.manifest as unknown) as AnyJson,
-        warnings: (context.warnings as unknown) as AnyJson,
+        destructiveChanges: context.destructiveChanges as unknown as AnyJson,
+        manifest: context.manifest as unknown as AnyJson,
+        warnings: context.warnings as unknown as AnyJson,
       };
     } catch (e) {
       if (debug.enabled) {

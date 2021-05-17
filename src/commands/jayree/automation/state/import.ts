@@ -81,7 +81,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Country Code: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.CountryCode.selected === undefined) {
                     ctx.CountryCode.selected = await task.prompt<boolean>({
@@ -100,7 +100,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Category: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.category.selected === undefined) {
                     ctx.category.selected = await task.prompt<boolean>({
@@ -118,7 +118,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Language: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.language.selected === undefined) {
                     ctx.language.selected = await task.prompt<boolean>({
@@ -166,9 +166,9 @@ export default class ImportState extends SfdxCommand {
                 ctx.data.deactivate.forEach((el) => {
                   deactivateTasks.push({
                     title: el.toString(),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     skip: (ctx): boolean => !ctx.data.deactivate.includes(el),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     task: async (ctx, task): Promise<void> => {
                       const sTask = taskRunner.getNextDeactivate();
                       if (!(await sTask.executeDeactivate())) {
@@ -196,9 +196,9 @@ export default class ImportState extends SfdxCommand {
                 ctx.data.add.forEach((el) => {
                   addTasks.push({
                     title: `${el['Subdivision name']} (${el['3166-2 code']})`,
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     skip: (ctx): boolean => !ctx.data.add.includes(el),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     task: async (ctx, task): Promise<void> => {
                       const sTask = taskRunner.getNextAdd();
                       const result = await sTask.executeAdd();

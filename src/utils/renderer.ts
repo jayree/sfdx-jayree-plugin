@@ -342,7 +342,7 @@ export class MyDefaultRenderer implements ListrRenderer {
             if (
               !(
                 tasks.some(
-                  // eslint-disable-next-line no-shadow
+                  // eslint-disable-next-line @typescript-eslint/no-shadow
                   (task) => task.hasFailed()
                 ) &&
                 !task.hasFailed() &&

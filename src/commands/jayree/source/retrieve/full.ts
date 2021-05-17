@@ -77,11 +77,10 @@ Coverage: 82%
       let packagexml = path.join(__dirname, '..', '..', '..', '..', '..', '..', 'manifest', 'package-profiles.xml');
 
       const pjson = await xml2js.parseStringPromise(fs.readFileSync(packagexml, 'utf8'));
-      pjson.Package.types[
-        pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
-      ].members = pjson.Package.types[
-        pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
-      ].members.concat(config(this.project.getPath()).ensureObjectPermissions);
+      pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members =
+        pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members.concat(
+          config(this.project.getPath()).ensureObjectPermissions
+        );
 
       packagexml = path.join(orgretrievepath, 'pinject.xml');
       await fs.writeFile(packagexml, builder.buildObject(pjson));

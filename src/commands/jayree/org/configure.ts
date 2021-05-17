@@ -126,7 +126,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
         if (this.isOutputEnabled) {
           logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
         }
-        return (context as unknown) as AnyJson;
+        return context as unknown as AnyJson;
       }
       return {
         context,

@@ -689,11 +689,10 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
     const retrieveDir = path.join(retrievePackageDir, '..');
 
     const pjson = await xml2js.parseStringPromise(fs.readFileSync(packageProfilesOnly, 'utf8'));
-    pjson.Package.types[
-      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
-    ].members = pjson.Package.types[
-      pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')
-    ].members.concat(config(await getProjectPath()).ensureObjectPermissions);
+    pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members =
+      pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members.concat(
+        config(await getProjectPath()).ensureObjectPermissions
+      );
 
     packageProfilesOnly = path.join(retrieveDir, 'pinject.xml');
     await fs.writeFile(packageProfilesOnly, builder.buildObject(pjson));
