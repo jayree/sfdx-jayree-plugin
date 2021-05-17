@@ -6,7 +6,8 @@
  */
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import * as config from '../../config/countrystate.json';
+import config from '../utils/config';
+import * as CSconfig from '../../config/countrystate.json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:x:y');
@@ -260,8 +261,8 @@ export class PuppeteerTasks2 {
     }
 
     this.addTasks = this.ISOData[this.category].filter((v) => v['Language code'] === this.language);
-    this.deactivateTasks = config.deactivate[this.countrycode]
-      ? config.deactivate[this.countrycode][this.category]
+    this.deactivateTasks = CSconfig.deactivate[this.countrycode]
+      ? CSconfig.deactivate[this.countrycode][this.category]
       : [];
 
     return { add: this.addTasks, deactivate: this.deactivateTasks };
@@ -300,7 +301,7 @@ export class PuppeteerTasks2 {
         throw Error('Expected --language to be one of: ' + languagecodes.toString());
       }
       list.add = jsonParsed[category].filter((v) => v['Language code'] === language);
-      list.deactivate = config.deactivate[this.countrycode] ? config.deactivate[this.countrycode][category] : [];
+      list.deactivate = CSconfig.deactivate[this.countrycode] ? CSconfig.deactivate[this.countrycode][category] : [];
     } else {
       throw Error('Expected --category= to be one of: ' + Object.keys(jsonParsed).toString());
     }
@@ -320,7 +321,7 @@ export class PuppeteerTasks2 {
       }
     );
 
-    const setCountrySelector = config.setCountry;
+    const setCountrySelector = CSconfig.setCountry;
     const editIntValResult = await PuppeteerTasks2.setHTMLInputElementValue(
       page,
       setCountrySelector.editIntVal,
@@ -345,10 +346,10 @@ export class PuppeteerTasks2 {
     const stateName =
       task['Local variant'] !== '' ? task['Local variant'] : task['Subdivision name'].split('(')[0].trim();
 
-    if (Object.keys(config.fix).includes(countrycode)) {
-      if (Object.keys(config.fix[countrycode]).includes(stateIsoCode)) {
-        // this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${config.fix[countrycode][stateIsoCode]}`);
-        stateIsoCode = config.fix[countrycode][stateIsoCode];
+    if (Object.keys(CSconfig.fix).includes(countrycode)) {
+      if (Object.keys(CSconfig.fix[countrycode]).includes(stateIsoCode)) {
+        // this.ux.log(`Fix ${stateintVal}: ${stateIsoCode} -> ${CSconfig.fix[countrycode][stateIsoCode]}`);
+        stateIsoCode = CSconfig.fix[countrycode][stateIsoCode];
       }
     }
 
@@ -397,7 +398,7 @@ export class PuppeteerTasks2 {
       await page.waitForSelector('.mainTitle');
     }
 
-    const selector = update ? config.update : config.create;
+    const selector = update ? CSconfig.update : CSconfig.create;
 
     const editNameResult = await PuppeteerTasks2.setHTMLInputElementValue(page, selector.editName, stateName);
     const editIsoCodeResult = await PuppeteerTasks2.setHTMLInputElementValue(page, selector.editIsoCode, stateIsoCode);
@@ -442,7 +443,7 @@ export class PuppeteerTasks2 {
       }
     );
 
-    const selector = config.update;
+    const selector = CSconfig.update;
 
     const editVisibleResult = await PuppeteerTasks2.setHTMLInputElementChecked(
       page,
@@ -483,14 +484,7 @@ export class PuppeteerTasks2 {
 
   public async open() {
     if (!this.browser) {
-      if (process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD) {
-        this.browser = await puppeteer.launch({
-          executablePath: '/usr/bin/chromium-browser',
-          args: ['--disable-dev-shm-usage'],
-        });
-      } else {
-        this.browser = await puppeteer.launch({ headless: true });
-      }
+      this.browser = await puppeteer.launch(config().puppeteer);
       const login = await this.browser.newPage();
       await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
         waitUntil: 'networkidle0',

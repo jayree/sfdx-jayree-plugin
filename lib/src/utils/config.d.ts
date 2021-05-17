@@ -1,2 +1,2 @@
-declare const _default: (path: any) => any;
+declare const _default: (path?: string) => any;
 export default _default;

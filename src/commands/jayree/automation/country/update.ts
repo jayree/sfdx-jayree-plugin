@@ -10,7 +10,8 @@ import chalk from 'chalk';
 import { cli } from 'cli-ux';
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import * as config from '../../../../../config/countrystate.json';
+import config from '../../../../utils/config';
+import * as CSconfig from '../../../../../config/countrystate.json';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
@@ -34,9 +35,7 @@ export default class UpdateCountry extends SfdxCommand {
   public async run(): Promise<AnyJson> {
     let spinnermessage = '';
 
-    const browser = await puppeteer.launch({
-      headless: true,
-    });
+    const browser = await puppeteer.launch(config().puppeteer);
 
     const page = await browser.newPage();
 
@@ -128,7 +127,7 @@ export default class UpdateCountry extends SfdxCommand {
             waitUntil: 'networkidle0',
           }
         );
-        const setCountrySelector = config.setCountry;
+        const setCountrySelector = CSconfig.setCountry;
         await setHTMLInputElementValue(countryCode, setCountrySelector.editIntVal);
 
         await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
