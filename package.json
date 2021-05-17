@@ -183,7 +183,7 @@
     "lint": "sf-lint",
     "lint-fix": "sf-lint --fix",
     "postcompile": "oclif-dev manifest && oclif-dev readme",
-    "postinstall": "patch-package",
+    "_postinstall": "patch-package",
     "postpack": "rimraf oclif.manifest.json",
     "postpublish": "pinst --enable",
     "posttest": "git checkout -q -- test/assets/*",
