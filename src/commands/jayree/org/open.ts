@@ -27,7 +27,7 @@ $ sfdx jayree:org:open -u me@my.org`,
     browser: flags.string({
       char: 'b',
       description: messages.getMessage('browserFlagDescription'),
-      options: ['firefox', 'chrome', 'safari'],
+      options: ['firefox', 'chrome', 'edge', 'safari'],
       default: 'chrome',
     }),
     path: flags.string({
@@ -53,6 +53,9 @@ $ sfdx jayree:org:open -u me@my.org`,
         break;
       case 'firefox':
         browser = opn.apps.firefox;
+        break;
+      case 'edge':
+        browser = opn.apps.edge;
         break;
       case 'safari':
         if (process.platform === 'darwin') {

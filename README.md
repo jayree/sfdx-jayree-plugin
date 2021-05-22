@@ -430,7 +430,7 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -b, --browser=firefox|chrome|safari                                               [default: chrome] browser to be
+  -b, --browser=firefox|chrome|edge|safari                                          [default: chrome] browser to be
                                                                                     launched
 
   -p, --path=path                                                                   navigation URL path
