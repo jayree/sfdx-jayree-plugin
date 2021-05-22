@@ -1,3 +1,15 @@
+# [3.10.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.9.1...v3.10.0) (2021-05-22)
+
+
+### Bug Fixes
+
+* update dependencies ([e2591b7](https://github.com/jayree/sfdx-jayree-plugin/commit/e2591b77850e8ddb6226bf54b259ea8bf955ead1))
+
+
+### Features
+
+* **org:open:** support edge browser ([cb109e9](https://github.com/jayree/sfdx-jayree-plugin/commit/cb109e99ce66816b494249a6c714def97bc2a529))
+
 ## [3.9.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.9.0...v3.9.1) (2021-05-17)
 
 
