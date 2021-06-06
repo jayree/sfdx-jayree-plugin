@@ -19,9 +19,9 @@ export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static hidden = true;
 
   public static examples = [
-    `$ sfdx jayree:scratchorgrevision
-$ sfdx jayree:scratchorgrevision -u me@my.org
-$ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
+    `$ sfdx jayree:scratchorg:revision
+$ sfdx jayree:scratchorg:revision -u me@my.org
+$ sfdx jayree:scratchorg:revision -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
