@@ -6,13 +6,13 @@
  */
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import config from '../utils/config';
-import * as CSconfig from '../../config/countrystate.json';
+import * as CSconfig from '../../../config/countrystate.json';
+import config from '../config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:x:y');
 
-export class PuppeteerTasks2 {
+export class PuppeteerStateTasks {
   public currentAddTask;
   public currentDeactivateTask;
   private addTasks: any;
@@ -322,7 +322,7 @@ export class PuppeteerTasks2 {
     );
 
     const setCountrySelector = CSconfig.setCountry;
-    const editIntValResult = await PuppeteerTasks2.setHTMLInputElementValue(
+    const editIntValResult = await PuppeteerStateTasks.setHTMLInputElementValue(
       page,
       setCountrySelector.editIntVal,
       this.countrycode
@@ -400,11 +400,25 @@ export class PuppeteerTasks2 {
 
     const selector = update ? CSconfig.update : CSconfig.create;
 
-    const editNameResult = await PuppeteerTasks2.setHTMLInputElementValue(page, selector.editName, stateName);
-    const editIsoCodeResult = await PuppeteerTasks2.setHTMLInputElementValue(page, selector.editIsoCode, stateIsoCode);
-    const editIntValResult = await PuppeteerTasks2.setHTMLInputElementValue(page, selector.editIntVal, stateintVal);
-    const editActiveResult = await PuppeteerTasks2.setHTMLInputElementChecked(page, selector.editActive, true, false);
-    const editVisibleResult = await PuppeteerTasks2.setHTMLInputElementChecked(page, selector.editVisible, true, true);
+    const editNameResult = await PuppeteerStateTasks.setHTMLInputElementValue(page, selector.editName, stateName);
+    const editIsoCodeResult = await PuppeteerStateTasks.setHTMLInputElementValue(
+      page,
+      selector.editIsoCode,
+      stateIsoCode
+    );
+    const editIntValResult = await PuppeteerStateTasks.setHTMLInputElementValue(page, selector.editIntVal, stateintVal);
+    const editActiveResult = await PuppeteerStateTasks.setHTMLInputElementChecked(
+      page,
+      selector.editActive,
+      true,
+      false
+    );
+    const editVisibleResult = await PuppeteerStateTasks.setHTMLInputElementChecked(
+      page,
+      selector.editVisible,
+      true,
+      true
+    );
 
     debug({ editNameResult, editIsoCodeResult, editIntValResult, editActiveResult, editVisibleResult });
 
@@ -445,13 +459,18 @@ export class PuppeteerTasks2 {
 
     const selector = CSconfig.update;
 
-    const editVisibleResult = await PuppeteerTasks2.setHTMLInputElementChecked(
+    const editVisibleResult = await PuppeteerStateTasks.setHTMLInputElementChecked(
       page,
       selector.editVisible,
       false,
       false
     );
-    const editActiveResult = await PuppeteerTasks2.setHTMLInputElementChecked(page, selector.editActive, false, false);
+    const editActiveResult = await PuppeteerStateTasks.setHTMLInputElementChecked(
+      page,
+      selector.editActive,
+      false,
+      false
+    );
     debug({ editVisibleResult, editActiveResult });
 
     await page.click(selector.save.replace(/:/g, '\\:'));

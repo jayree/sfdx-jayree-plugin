@@ -6,12 +6,12 @@
  */
 import puppeteer from 'puppeteer';
 import chalk from 'chalk';
-import config from '../utils/config';
+import config from '../config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:org:configure');
 
-export class PuppeteerTasks {
+export class PuppeteerConfigureTasks {
   public currenTask;
   private tasks: any;
   private nextTaskIndex = -1;

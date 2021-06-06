@@ -1,4 +1,4 @@
-export declare class PuppeteerTasks {
+export declare class PuppeteerConfigureTasks {
     currenTask: any;
     private tasks;
     private nextTaskIndex;

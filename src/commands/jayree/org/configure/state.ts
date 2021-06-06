@@ -10,7 +10,7 @@ import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
 import Enquirer from 'enquirer';
 import { MyDefaultRenderer } from '../../../../utils/renderer';
-import { PuppeteerTasks2 } from '../../../../utils/puppeteer2';
+import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
@@ -25,6 +25,7 @@ export default class ImportState extends SfdxCommand {
     'jayree:automation:statecountry:import',
     'jayree:automation:statecountry:create',
     'jayree:automation:statecountry:update',
+    'jayree:automation:state:import',
   ];
 
   public static description = messages.getMessage('commandStateDescription');
@@ -57,7 +58,7 @@ export default class ImportState extends SfdxCommand {
     const isContentTypeJSON = kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON';
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
 
-    const taskRunner = new PuppeteerTasks2({
+    const taskRunner = new PuppeteerStateTasks({
       accessToken: this.org.getConnection().accessToken,
       instanceUrl: this.org.getConnection().instanceUrl,
     });

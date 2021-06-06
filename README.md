@@ -38,14 +38,14 @@ USAGE
 <!-- commands -->
 * [`sfdx jayree:automation:changeset:deploy`](#sfdx-jayreeautomationchangesetdeploy)
 * [`sfdx jayree:automation:changeset:list`](#sfdx-jayreeautomationchangesetlist)
-* [`sfdx jayree:automation:country:update`](#sfdx-jayreeautomationcountryupdate)
 * [`sfdx jayree:automation:ltngsync:status`](#sfdx-jayreeautomationltngsyncstatus)
-* [`sfdx jayree:automation:state:import`](#sfdx-jayreeautomationstateimport)
 * [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
 * [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
 * [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
 * [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
+* [`sfdx jayree:org:configure:country`](#sfdx-jayreeorgconfigurecountry)
+* [`sfdx jayree:org:configure:state`](#sfdx-jayreeorgconfigurestate)
 * [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
 * [`sfdx jayree:org:settings`](#sfdx-jayreeorgsettings)
 * [`sfdx jayree:org:streaming`](#sfdx-jayreeorgstreaming)
@@ -134,30 +134,6 @@ OPTIONS
 
 _See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/automation/changeset/list.ts)_
 
-### `sfdx jayree:automation:country:update`
-
-update country integration values in the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-```
-
-_See code: [src/commands/jayree/automation/country/update.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/automation/country/update.ts)_
-
 ### `sfdx jayree:automation:ltngsync:status`
 
 check the Lightning Sync User Sync Status and reset sync if needed (beta)
@@ -198,44 +174,6 @@ EXAMPLE
 ```
 
 _See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/automation/ltngsync/status.ts)_
-
-### `sfdx jayree:automation:state:import`
-
-import (create/update) states into the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:state:import [--countrycode <string>] [--category <string>] [--language <string>] 
-  [--concurrent <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --category=category                                                               Subdivision category
-
-  --concurrent=concurrent                                                           [default: 1] ccc
-
-  --countrycode=countrycode                                                         Alpha-2 code
-
-  --json                                                                            format output as json
-
-  --language=language                                                               Language code
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-```
-
-_See code: [src/commands/jayree/automation/state/import.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/automation/state/import.ts)_
 
 ### `sfdx jayree:flowtestcoverage`
 
@@ -418,7 +356,73 @@ EXAMPLE
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [src/commands/jayree/org/configure.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/org/configure.ts)_
+_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/org/configure/index.ts)_
+
+### `sfdx jayree:org:configure:country`
+
+update country integration values in the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:org:configure:country [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --json                                                                            format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+ALIASES
+  $ sfdx jayree:automation:country:update
+```
+
+_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/org/configure/country.ts)_
+
+### `sfdx jayree:org:configure:state`
+
+import (create/update) states into the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:org:configure:state [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent 
+  <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
+  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+OPTIONS
+  -u, --targetusername=targetusername                                               username or alias for the target
+                                                                                    org; overrides default target org
+
+  --apiversion=apiversion                                                           override the api version used for
+                                                                                    api requests made by this command
+
+  --category=category                                                               Subdivision category
+
+  --concurrent=concurrent                                                           [default: 1] ccc
+
+  --countrycode=countrycode                                                         Alpha-2 code
+
+  --json                                                                            format output as json
+
+  --language=language                                                               Language code
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+ALIASES
+  $ sfdx jayree:automation:statecountry:import
+  $ sfdx jayree:automation:statecountry:create
+  $ sfdx jayree:automation:statecountry:update
+  $ sfdx jayree:automation:state:import
+```
+
+_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v3.10.1/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree:org:open`
 
@@ -521,7 +525,7 @@ OPTIONS
                                                                                     this command invocation
 
 EXAMPLE
-  $ sfdx jayree:streaming --topic=/event/eventName__e
+  $ sfdx jayree:org:streaming --topic=/event/eventName__e
   ...
 ```
 
