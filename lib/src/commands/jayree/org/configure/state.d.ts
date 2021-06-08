@@ -1,6 +1,7 @@
-import { flags, SfdxCommand } from '@salesforce/command';
+import { flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-export default class ImportState extends SfdxCommand {
+import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
+export default class ImportState extends JayreeSfdxCommand {
     static aliases: string[];
     static description: string;
     protected static flagsConfig: {

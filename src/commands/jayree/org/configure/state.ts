@@ -4,13 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
 import Enquirer from 'enquirer';
 import { MyDefaultRenderer } from '../../../../utils/renderer';
 import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks';
+import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
@@ -20,7 +21,7 @@ const logger = new Logger({ useIcons: false });
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:x:y');
 
-export default class ImportState extends SfdxCommand {
+export default class ImportState extends JayreeSfdxCommand {
   public static aliases = [
     'jayree:automation:statecountry:import',
     'jayree:automation:statecountry:create',
@@ -53,6 +54,7 @@ export default class ImportState extends SfdxCommand {
   private isOutputEnabled;
 
   public async run(): Promise<AnyJson> {
+    this.warnIfRunByAlias(ImportState);
     await this.org.refreshAuth();
 
     const isContentTypeJSON = kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON';

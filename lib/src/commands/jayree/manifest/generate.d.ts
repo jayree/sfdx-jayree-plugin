@@ -1,6 +1,7 @@
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as jsforce from 'jsforce';
+import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 declare global {
     interface Array<T> {
         pushUniqueValueKey(elem: T, key: string): T[];
@@ -13,7 +14,7 @@ declare global {
 /**
  * This code was based on the original github:sfdx-hydrate project
  */
-export default class GeneratePackageXML extends SfdxCommand {
+export default class GeneratePackageXML extends JayreeSfdxCommand {
     static aliases: string[];
     static description: string;
     static examples: string[];
