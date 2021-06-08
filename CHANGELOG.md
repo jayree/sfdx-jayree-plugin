@@ -1,3 +1,11 @@
+## [3.10.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.1...v3.10.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* add warning message for deprecated aliases ([755bf8d](https://github.com/jayree/sfdx-jayree-plugin/commit/755bf8dfba9890e7eac87fda4bcebc39078162b7))
+* update dependencies ([c4970aa](https://github.com/jayree/sfdx-jayree-plugin/commit/c4970aa0cc22cc01b4a5c8026de6c336bb344bde))
+
 ## [3.10.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.0...v3.10.1) (2021-05-25)
 
 
