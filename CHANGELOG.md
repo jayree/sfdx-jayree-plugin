@@ -1,3 +1,10 @@
+## [3.11.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.0...v3.11.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* **gitdiff:** add missing describe.json file ([6f968f1](https://github.com/jayree/sfdx-jayree-plugin/commit/6f968f1df783841d6cc7c7b362d2e8a86c21f737))
+
 # [3.11.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.2...v3.11.0) (2021-06-09)
 
 
