@@ -1,3 +1,15 @@
+# [3.11.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.2...v3.11.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **gitdiff:** update describe.json to match apiVersion ([7d94782](https://github.com/jayree/sfdx-jayree-plugin/commit/7d94782bb1e5598772a9f36762cf2b9c4405bd0f))
+
+
+### Features
+
+* include @jayree/sfdx-plugin-prettier ([2f782b9](https://github.com/jayree/sfdx-jayree-plugin/commit/2f782b9630aa77744f69b16e4592d4f1f0db5a8e))
+
 ## [3.10.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.1...v3.10.2) (2021-06-08)
 
 
