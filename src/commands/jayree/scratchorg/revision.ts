@@ -58,6 +58,7 @@ $ sfdx jayree:scratchorg:revision -u MyTestOrg1 -w`,
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    this.ux.warn('You are using a deprecated command. Use instead: jayree:source:tracking:list|store:set|get');
     if (!this.flags.setlocalmaxrevision) {
       // workaround as 0 is not a valid flag value at all
       if (this.flags.localrevisionvalue === 0) {

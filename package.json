@@ -9,7 +9,7 @@
     "@oclif/config": "^1.17.0",
     "@salesforce/command": "^3.1.3",
     "@salesforce/core": "^2.24.0",
-    "@salesforce/kit": "^1.5.13",
+    "@salesforce/kit": "^1.5.14",
     "adm-zip": "^0.5.5",
     "chalk": "^4.1.1",
     "cli-ux": "^5.5.1",
@@ -61,7 +61,7 @@
     "eslint-config-salesforce-typescript": "^0.2.7",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jsdoc": "^35.1.3",
+    "eslint-plugin-jsdoc": "^35.2.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
     "is-ci": "^3.0.0",
@@ -75,7 +75,7 @@
     "sinon": "^11.1.1",
     "source-map-support": "^0.5.19",
     "ts-node": "^10.0.0",
-    "tslib": "^2.2.0",
+    "tslib": "^2.3.0",
     "typescript": "^4.3.2"
   },
   "engines": {
