@@ -1,3 +1,10 @@
+## [3.11.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.1...v3.11.2) (2021-06-13)
+
+
+### Bug Fixes
+
+* add warning message for deprecated commands ([d3bd905](https://github.com/jayree/sfdx-jayree-plugin/commit/d3bd9059fb2186928b736d6c8d28bde8582981c8))
+
 ## [3.11.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.0...v3.11.1) (2021-06-09)
 
 
