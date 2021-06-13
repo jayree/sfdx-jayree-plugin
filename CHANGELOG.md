@@ -1,3 +1,78 @@
+## [3.11.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.1...v3.11.2) (2021-06-13)
+
+
+### Bug Fixes
+
+* add warning message for deprecated commands ([d3bd905](https://github.com/jayree/sfdx-jayree-plugin/commit/d3bd9059fb2186928b736d6c8d28bde8582981c8))
+
+## [3.11.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.0...v3.11.1) (2021-06-09)
+
+
+### Bug Fixes
+
+* **gitdiff:** add missing describe.json file ([6f968f1](https://github.com/jayree/sfdx-jayree-plugin/commit/6f968f1df783841d6cc7c7b362d2e8a86c21f737))
+
+# [3.11.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.2...v3.11.0) (2021-06-09)
+
+
+### Bug Fixes
+
+* **gitdiff:** update describe.json to match apiVersion ([7d94782](https://github.com/jayree/sfdx-jayree-plugin/commit/7d94782bb1e5598772a9f36762cf2b9c4405bd0f))
+
+
+### Features
+
+* include @jayree/sfdx-plugin-prettier ([2f782b9](https://github.com/jayree/sfdx-jayree-plugin/commit/2f782b9630aa77744f69b16e4592d4f1f0db5a8e))
+
+## [3.10.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.1...v3.10.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* add warning message for deprecated aliases ([755bf8d](https://github.com/jayree/sfdx-jayree-plugin/commit/755bf8dfba9890e7eac87fda4bcebc39078162b7))
+* update dependencies ([c4970aa](https://github.com/jayree/sfdx-jayree-plugin/commit/c4970aa0cc22cc01b4a5c8026de6c336bb344bde))
+
+## [3.10.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.10.0...v3.10.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* update dependencies ([b8510ea](https://github.com/jayree/sfdx-jayree-plugin/commit/b8510eae1d474ffda1cee7227eedb47e62226151))
+
+# [3.10.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.9.1...v3.10.0) (2021-05-22)
+
+
+### Bug Fixes
+
+* update dependencies ([e2591b7](https://github.com/jayree/sfdx-jayree-plugin/commit/e2591b77850e8ddb6226bf54b259ea8bf955ead1))
+
+
+### Features
+
+* **org:open:** support edge browser ([cb109e9](https://github.com/jayree/sfdx-jayree-plugin/commit/cb109e99ce66816b494249a6c714def97bc2a529))
+
+## [3.9.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.9.0...v3.9.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* puppeteer exec in docker ([49581c0](https://github.com/jayree/sfdx-jayree-plugin/commit/49581c0f2bf1c02b1b54fec2bcd891bda1e906b4))
+* update dependencies ([7f1d150](https://github.com/jayree/sfdx-jayree-plugin/commit/7f1d15076f805fffb0989db2a6ec79d045a668e6))
+
+# [3.9.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.4...v3.9.0) (2021-05-09)
+
+
+### Bug Fixes
+
+* update dependencies ([65f7412](https://github.com/jayree/sfdx-jayree-plugin/commit/65f7412ceb2ed1d4fcbbe572c91b362303fe2ea6))
+
+
+### Features
+
+* hide/deprecate jayree:scratchorg:revision ([0b439c4](https://github.com/jayree/sfdx-jayree-plugin/commit/0b439c452f1786957e5debcc69dc8c4e2e937101))
+* hide/deprecate jayree:source:retrieve:all ([3a81e40](https://github.com/jayree/sfdx-jayree-plugin/commit/3a81e40ee744a9386220f37807bd1634690df5a5))
+* hide/deprecate jayree:source:retrieve:full ([a4cb727](https://github.com/jayree/sfdx-jayree-plugin/commit/a4cb727fc1678babf4bcda49b61e862d262d6832))
+
 ## [3.8.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.8.3...v3.8.4) (2021-04-20)
 
 

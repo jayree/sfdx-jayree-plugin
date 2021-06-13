@@ -1,4 +1,4 @@
-export declare class PuppeteerTasks2 {
+export declare class PuppeteerStateTasks {
     currentAddTask: any;
     currentDeactivateTask: any;
     private addTasks;

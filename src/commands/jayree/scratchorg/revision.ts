@@ -16,11 +16,12 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgrevision')
 
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
+  public static hidden = true;
 
   public static examples = [
-    `$ sfdx jayree:scratchorgrevision
-$ sfdx jayree:scratchorgrevision -u me@my.org
-$ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
+    `$ sfdx jayree:scratchorg:revision
+$ sfdx jayree:scratchorg:revision -u me@my.org
+$ sfdx jayree:scratchorg:revision -u MyTestOrg1 -w`,
   ];
 
   protected static flagsConfig = {
@@ -57,6 +58,7 @@ $ sfdx jayree:scratchorgrevision -u MyTestOrg1 -w`,
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    this.ux.warn('You are using a deprecated command. Use instead: jayree:source:tracking:list|store:set|get');
     if (!this.flags.setlocalmaxrevision) {
       // workaround as 0 is not a valid flag value at all
       if (this.flags.localrevisionvalue === 0) {

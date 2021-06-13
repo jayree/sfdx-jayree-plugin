@@ -5,12 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import execa from 'execa';
 import { parseStringSync } from '../../../utils/xml';
+import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -23,7 +24,7 @@ function camelize(str) {
   });
 }
 
-export default class ScratchOrgSettings extends SfdxCommand {
+export default class ScratchOrgSettings extends JayreeSfdxCommand {
   public static aliases = ['jayree:scratchorg:settings'];
 
   public static description = messages.getMessage('commandDescription');
@@ -51,6 +52,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
 
   // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
+    this.warnIfRunByAlias(ScratchOrgSettings);
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {

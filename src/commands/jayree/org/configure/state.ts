@@ -4,13 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
 import Enquirer from 'enquirer';
 import { MyDefaultRenderer } from '../../../../utils/renderer';
-import { PuppeteerTasks2 } from '../../../../utils/puppeteer2';
+import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks';
+import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
@@ -20,11 +21,12 @@ const logger = new Logger({ useIcons: false });
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:x:y');
 
-export default class ImportState extends SfdxCommand {
+export default class ImportState extends JayreeSfdxCommand {
   public static aliases = [
     'jayree:automation:statecountry:import',
     'jayree:automation:statecountry:create',
     'jayree:automation:statecountry:update',
+    'jayree:automation:state:import',
   ];
 
   public static description = messages.getMessage('commandStateDescription');
@@ -52,12 +54,13 @@ export default class ImportState extends SfdxCommand {
   private isOutputEnabled;
 
   public async run(): Promise<AnyJson> {
+    this.warnIfRunByAlias(ImportState);
     await this.org.refreshAuth();
 
     const isContentTypeJSON = kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON';
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
 
-    const taskRunner = new PuppeteerTasks2({
+    const taskRunner = new PuppeteerStateTasks({
       accessToken: this.org.getConnection().accessToken,
       instanceUrl: this.org.getConnection().instanceUrl,
     });
@@ -81,7 +84,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Country Code: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.CountryCode.selected === undefined) {
                     ctx.CountryCode.selected = await task.prompt<boolean>({
@@ -100,7 +103,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Category: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.category.selected === undefined) {
                     ctx.category.selected = await task.prompt<boolean>({
@@ -118,7 +121,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Language: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                // eslint-disable-next-line no-shadow
+                // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.language.selected === undefined) {
                     ctx.language.selected = await task.prompt<boolean>({
@@ -166,9 +169,9 @@ export default class ImportState extends SfdxCommand {
                 ctx.data.deactivate.forEach((el) => {
                   deactivateTasks.push({
                     title: el.toString(),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     skip: (ctx): boolean => !ctx.data.deactivate.includes(el),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     task: async (ctx, task): Promise<void> => {
                       const sTask = taskRunner.getNextDeactivate();
                       if (!(await sTask.executeDeactivate())) {
@@ -196,9 +199,9 @@ export default class ImportState extends SfdxCommand {
                 ctx.data.add.forEach((el) => {
                   addTasks.push({
                     title: `${el['Subdivision name']} (${el['3166-2 code']})`,
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     skip: (ctx): boolean => !ctx.data.add.includes(el),
-                    // eslint-disable-next-line no-shadow
+                    // eslint-disable-next-line @typescript-eslint/no-shadow
                     task: async (ctx, task): Promise<void> => {
                       const sTask = taskRunner.getNextAdd();
                       const result = await sTask.executeAdd();

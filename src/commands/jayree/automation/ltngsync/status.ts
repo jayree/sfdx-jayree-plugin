@@ -217,9 +217,8 @@ export default class LtngSyncStatus extends SfdxCommand {
             for (const row of (document.getElementById(tableid) as any).rows) {
               if (typeof row.cells[1] !== 'undefined') {
                 if (typeof row.cells[1].getElementsByTagName('img')[0] !== 'undefined') {
-                  object[row.cells[0].innerText.replace(/(:|:\t|\t)/g, '')] = row.cells[1].getElementsByTagName(
-                    'img'
-                  )[0].alt;
+                  object[row.cells[0].innerText.replace(/(:|:\t|\t)/g, '')] =
+                    row.cells[1].getElementsByTagName('img')[0].alt;
                 } else {
                   object[row.cells[0].innerText.replace(/(:|:\t|\t)/g, '')] = row.cells[1].innerText;
                 }

@@ -256,7 +256,7 @@ export async function analyzeFile(path, ctx: Ctx) {
   const XmlTypesOfXmlName = ((xmlName) => {
     const metadata = describe.metadataObjects.filter((md) => md.xmlName === xmlName);
     if (metadata[0] && metadata[0].childXmlNames) {
-      return (metadata[0].childXmlNames as unknown) as [];
+      return metadata[0].childXmlNames as unknown as [];
     }
     return [];
   })(XmlName);
@@ -287,7 +287,7 @@ export async function analyzeFile(path, ctx: Ctx) {
       if (typeof n.obj === 'object') {
         Object.keys(n.obj).forEach((k) => {
           if (typeof n.obj[k] === 'object') {
-            // eslint-disable-next-line no-shadow
+            // eslint-disable-next-line @typescript-eslint/no-shadow
             const path = n.path.concat(k);
             if (path.includes('fullName')) {
               const fullName = n.obj[k];

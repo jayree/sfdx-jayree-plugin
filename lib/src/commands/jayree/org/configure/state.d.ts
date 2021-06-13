@@ -1,17 +1,18 @@
-import { flags, SfdxCommand } from '@salesforce/command';
+import { flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-export default class ImportState extends SfdxCommand {
-    static hidden: boolean;
+import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
+export default class ImportState extends JayreeSfdxCommand {
+    static aliases: string[];
     static description: string;
     protected static flagsConfig: {
         countrycode: flags.Discriminated<flags.String>;
         category: flags.Discriminated<flags.String>;
         language: flags.Discriminated<flags.String>;
-        uselocalvariant: flags.Discriminated<flags.Boolean<boolean>>;
-        silent: flags.Discriminated<flags.Boolean<boolean>>;
+        concurrent: flags.Discriminated<flags.Number>;
     };
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;
     protected static requiresProject: boolean;
+    private isOutputEnabled;
     run(): Promise<AnyJson>;
 }

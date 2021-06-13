@@ -1,30 +1,32 @@
 {
   "name": "sfdx-jayree",
   "description": "sfdx ALM commands & more",
-  "version": "3.8.4",
-  "author": "jayree @jayree",
+  "version": "3.11.2",
+  "author": "jayree <jayree.git@icloud.com>",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
+    "@jayree/sfdx-plugin-prettier": "^1.0.3",
     "@oclif/config": "^1.17.0",
-    "@salesforce/command": "^3.1.0",
-    "@salesforce/core": "^2.20.10",
-    "@salesforce/kit": "^1.5.0",
+    "@salesforce/command": "^3.1.3",
+    "@salesforce/core": "^2.24.0",
+    "@salesforce/kit": "^1.5.14",
     "adm-zip": "^0.5.5",
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.1",
     "cli-ux": "^5.5.1",
     "debug": "^4.3.1",
     "enquirer": "^2.3.6",
-    "execa": "^5.0.0",
+    "execa": "^5.1.1",
     "fast-deep-equal": "^3.1.3",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "globby": "^11.0.3",
-    "inquirer": "^8.0.0",
-    "listr2": "^3.7.1",
-    "marked": "^2.0.3",
+    "inquirer": "^8.1.0",
+    "is-docker": "^2.2.1",
+    "listr2": "^3.10.0",
+    "marked": "^2.0.7",
     "marked-terminal": "^4.1.1",
     "object-path": "^0.11.5",
-    "open": "^8.0.6",
-    "puppeteer": "8.0.0",
+    "open": "^8.2.0",
+    "puppeteer": "^10.0.0",
     "slash": "^3.0.0",
     "tabletojson": "^2.0.6",
     "time-span": "^4.0.0",
@@ -32,52 +34,49 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@oclif/dev-cli": "^1.26.0",
     "@oclif/plugin-help": "^3.2.2",
-    "@oclif/semantic-release": "^3.1.5",
-    "@salesforce/dev-config": "^2.1.0",
-    "@salesforce/dev-scripts": "^0.9.1",
+    "@salesforce/dev-config": "^2.1.2",
+    "@salesforce/dev-scripts": "0.9.15",
     "@salesforce/prettier-config": "^0.0.2",
-    "@salesforce/ts-sinon": "^1.3.5",
+    "@salesforce/ts-sinon": "^1.3.18",
     "@types/adm-zip": "^0.4.34",
-    "@types/chai": "^4.2.16",
+    "@types/chai": "^4.2.18",
     "@types/fs-extra": "^9.0.11",
     "@types/inquirer": "^7.3.1",
+    "@types/jsforce": "^1.9.29",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^14.14.41",
-    "@types/sinon": "^10.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
+    "@types/node": "^15.12.2",
+    "@types/sinon": "^10.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.26.1",
+    "@typescript-eslint/parser": "^4.26.1",
     "chai": "^4.3.4",
-    "codecov": "^3.8.1",
-    "cross-spawn": "^7.0.3",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-config-salesforce": "^0.1.0",
-    "eslint-config-salesforce-license": "^0.1.0",
-    "eslint-config-salesforce-typescript": "^0.2.0",
+    "codecov": "^3.8.2",
+    "eslint": "^7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-salesforce": "^0.1.6",
+    "eslint-config-salesforce-license": "^0.1.6",
+    "eslint-config-salesforce-typescript": "^0.2.7",
     "eslint-plugin-header": "^3.1.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsdoc": "^32.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsdoc": "^35.2.0",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
     "is-ci": "^3.0.0",
-    "mocha": "^8.3.2",
-    "nock": "^13.0.11",
+    "mocha": "^9.0.0",
+    "nock": "^13.1.0",
     "nyc": "^15.1.0",
     "patch-package": "^6.4.7",
     "pinst": "^2.1.6",
-    "prettier": "^2.2.1",
+    "prettier": "^2.3.1",
     "pretty-quick": "^3.1.0",
-    "semantic-release": "^17.4.2",
-    "sinon": "^10.0.0",
-    "source-map-support": "~0.5.19",
-    "ts-node": "^9.1.1",
-    "tslib": "^2.2.0",
-    "typescript": "^4.2.4",
-    "xunit-file": "^1.0.0"
+    "sinon": "^11.1.1",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^10.0.0",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.2"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -88,7 +87,9 @@
     "/lib/metadata",
     "/messages",
     "/oclif.manifest.json",
-    "/manifest"
+    "/manifest",
+    "/CHANGELOG.md",
+    "/yarn.lock"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
   "keywords": [
@@ -139,9 +140,6 @@
           "org": {
             "description": "manage your orgs"
           },
-          "scratchorg": {
-            "description": "scratch org tools"
-          },
           "manifest": {
             "description": "generate and manipulate manifest files"
           },
@@ -151,8 +149,11 @@
           "source": {
             "description": "sync your project with your orgs"
           },
-          "source:retrieve": {
-            "description": "retrieve source from an org"
+          "source:tracking": {
+            "description": "manipulate local source tracking files"
+          },
+          "source:tracking:store": {
+            "description": "get and set/store revision counter number"
           },
           "automation": {
             "description": "headless browser automation tools"
@@ -163,7 +164,10 @@
           "automation:ltngsync": {
             "description": "check the Lightning Sync User Sync Status and reset sync if needed (beta)"
           },
-          "automation:statecountry": {
+          "automation:country": {
+            "description": "import (create/update) Country Picklist"
+          },
+          "automation:state": {
             "description": "import (create/update) State/Country Picklists"
           }
         }
@@ -171,6 +175,9 @@
     },
     "devPlugins": [
       "@oclif/plugin-help"
+    ],
+    "plugins": [
+      "@jayree/sfdx-plugin-prettier"
     ]
   },
   "repository": "jayree/sfdx-jayree-plugin",
@@ -185,14 +192,14 @@
     "postcompile": "oclif-dev manifest && oclif-dev readme",
     "postinstall": "patch-package",
     "postpack": "rimraf oclif.manifest.json",
+    "postpublish": "pinst --enable",
     "posttest": "git checkout -q -- test/assets/*",
     "prepack": "sf-prepack",
-    "pretest": "sf-compile-test",
-    "test": "sf-test",
-    "version": "oclif-dev manifest && oclif-dev readme",
     "prepare": "is-ci || husky install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "pretest": "sf-compile-test",
+    "test": "sf-test",
+    "version": "oclif-dev manifest && oclif-dev readme"
   },
   "release": {
     "branches": [

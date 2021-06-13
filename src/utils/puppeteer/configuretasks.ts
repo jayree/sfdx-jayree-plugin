@@ -6,11 +6,12 @@
  */
 import puppeteer from 'puppeteer';
 import chalk from 'chalk';
+import config from '../config';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:org:configure');
 
-export class PuppeteerTasks {
+export class PuppeteerConfigureTasks {
   public currenTask;
   private tasks: any;
   private nextTaskIndex = -1;
@@ -36,14 +37,7 @@ export class PuppeteerTasks {
 
   public async open() {
     if (!this.browser) {
-      if (process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD) {
-        this.browser = await puppeteer.launch({
-          executablePath: '/usr/bin/chromium-browser',
-          args: ['--disable-dev-shm-usage'],
-        });
-      } else {
-        this.browser = await puppeteer.launch({ headless: true });
-      }
+      this.browser = await puppeteer.launch(config().puppeteer);
 
       const login = await this.browser.newPage();
       await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {

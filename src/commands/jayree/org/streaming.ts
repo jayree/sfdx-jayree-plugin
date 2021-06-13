@@ -15,7 +15,7 @@ export default class Streaming extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
-    `$ sfdx jayree:streaming --topic=/event/eventName__e
+    `$ sfdx jayree:org:streaming --topic=/event/eventName__e
 ...
 `,
   ];

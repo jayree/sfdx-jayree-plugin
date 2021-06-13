@@ -19,6 +19,7 @@ const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrieveall');
 
 export default class RetrieveMetadata extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');
+  public static hidden = true;
 
   /*   public static examples = [
     `$ sfdx jayree:flowtestcoverage
@@ -53,6 +54,7 @@ Coverage: 82%
   protected static requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    this.ux.warn('You are using a deprecated command. See the Readme file for more information.');
     await this.org.refreshAuth();
 
     const projectpath = this.project.getPath();

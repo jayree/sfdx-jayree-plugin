@@ -27,7 +27,7 @@ $ sfdx jayree:org:open -u me@my.org`,
     browser: flags.string({
       char: 'b',
       description: messages.getMessage('browserFlagDescription'),
-      options: ['firefox', 'chrome', 'safari'],
+      options: ['firefox', 'chrome', 'edge', 'safari'],
       default: 'chrome',
     }),
     path: flags.string({
@@ -45,47 +45,24 @@ $ sfdx jayree:org:open -u me@my.org`,
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    let browser = '';
-    switch (process.platform) {
-      case 'win32':
-        switch (this.flags.browser) {
-          case 'chrome':
-            browser = 'chrome';
-            break;
-          case 'firefox':
-            browser = 'firefox';
-            break;
-          case 'safari':
-            throw Error(this.flags.browser + ' is not supported on ' + process.platform);
-        }
+    let browser;
+
+    switch (this.flags.browser) {
+      case 'chrome':
+        browser = opn.apps.chrome;
         break;
-      case 'darwin':
-        switch (this.flags.browser) {
-          case 'chrome':
-            browser = 'google chrome';
-            break;
-          case 'firefox':
-            browser = 'firefox';
-            break;
-          case 'safari':
-            browser = 'safari';
-            break;
-        }
+      case 'firefox':
+        browser = opn.apps.firefox;
         break;
-      case 'linux':
-        switch (this.flags.browser) {
-          case 'chrome':
-            browser = 'google-chrome';
-            break;
-          case 'firefox':
-            browser = 'firefox';
-            break;
-          case 'safari':
-            throw Error(this.flags.browser + ' is not supported on ' + process.platform);
-        }
+      case 'edge':
+        browser = opn.apps.edge;
         break;
-      default:
-        throw Error('OS ' + process.platform + ' is not supported yet.');
+      case 'safari':
+        if (process.platform === 'darwin') {
+          browser = 'safari';
+          break;
+        }
+        throw Error(this.flags.browser + ' is not supported on ' + process.platform);
     }
 
     const conn = this.org.getConnection();

@@ -8,8 +8,8 @@ import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
-import config from '../../../utils/config';
-import { PuppeteerTasks } from '../../../utils/puppeteer';
+import config from '../../../../utils/config';
+import { PuppeteerConfigureTasks } from '../../../../utils/puppeteer/configuretasks';
 
 core.Messages.importMessagesDirectory(__dirname);
 
@@ -66,7 +66,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
       allTasks = config(configPath).setupTasks;
     }
 
-    const setupTaskRunner = new PuppeteerTasks(
+    const setupTaskRunner = new PuppeteerConfigureTasks(
       {
         accessToken: this.org.getConnection().accessToken,
         instanceUrl: this.org.getConnection().instanceUrl,
@@ -126,7 +126,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
         if (this.isOutputEnabled) {
           logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
         }
-        return (context as unknown) as AnyJson;
+        return context as unknown as AnyJson;
       }
       return {
         context,

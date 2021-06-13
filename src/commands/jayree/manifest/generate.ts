@@ -4,11 +4,12 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { core, flags } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import { builder } from '../../../utils/xml';
+import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
@@ -54,7 +55,7 @@ if (!String.prototype.toLowerCaseifTrue) {
 /**
  * This code was based on the original github:sfdx-hydrate project
  */
-export default class GeneratePackageXML extends SfdxCommand {
+export default class GeneratePackageXML extends JayreeSfdxCommand {
   public static aliases = ['jayree:packagexml'];
 
   public static description = messages.getMessage('commandDescription');
@@ -103,6 +104,8 @@ export default class GeneratePackageXML extends SfdxCommand {
 
   // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
+    this.warnIfRunByAlias(GeneratePackageXML);
+
     const packageTypes = {};
     const configFile = this.flags.configfile || false;
     const outputFile = this.flags.file || this.args.file || null;

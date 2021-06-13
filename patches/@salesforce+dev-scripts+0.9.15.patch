@@ -103,19 +103,10 @@ index 50ed4a0..d8e6432 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 58eba83..7771f8e 100644
+index 26e2a0d..caae5b8 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-@@ -28,7 +28,7 @@ module.exports = (projectPath, inLernaProject) => {
-         `Version empty for ${name}. Make sure it is in the devDependencies in dev-scripts since it is being added to the actual projects devDependencies.`
-       );
-     }
--    if (!dependencies[name] || dependencies[name] !== version) {
-+    if (!dependencies[name]) {
-       dependencies[name] = version;
-       added.push(name);
-     }
-@@ -79,16 +79,16 @@ module.exports = (projectPath, inLernaProject) => {
+@@ -92,16 +92,16 @@ module.exports = (projectPath, inLernaProject) => {
    add('sinon');
    add('chai');
  
@@ -132,7 +123,7 @@ index 58eba83..7771f8e 100644
 +  add('@commitlint/cli');
 +  add('@commitlint/config-conventional');
 +  add('source-map-support');
-+  add('xunit-file');
++  // remove('xunit-file');
 +  add('@types/chai');
 +  add('@types/mocha');
 +  add('@types/node');
