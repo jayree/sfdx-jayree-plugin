@@ -1,3 +1,11 @@
+## [3.11.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.2...v3.11.3) (2021-06-18)
+
+
+### Bug Fixes
+
+* updated dependencies ([0469cf6](https://github.com/jayree/sfdx-jayree-plugin/commit/0469cf6030b577a55421aa8e4252444705bd6ffc))
+* **manifestgenerate:** update list of StandardValueSet to match apiVersion ([b808a80](https://github.com/jayree/sfdx-jayree-plugin/commit/b808a807380a2922d600c9312fed596227e7d10c))
+
 ## [3.11.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.1...v3.11.2) (2021-06-13)
 
 
