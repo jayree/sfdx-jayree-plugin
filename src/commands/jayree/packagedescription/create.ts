@@ -7,7 +7,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import * as convert from 'xml-js';
+import { builder } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'createpackagedescription');
@@ -50,22 +50,14 @@ export default class CreatePackageDescription extends SfdxCommand {
     const text = this.flags.description.replace(/\\n/g, '\n');
 
     const fileContentjs = {
-      _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
-      Package: [
-        {
-          _attributes: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
-          description: text,
-          version: '43.0',
-        },
-      ],
+      Package: {
+        $: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
+        description: [text],
+        version: ['50.0'],
+      },
     };
 
-    newZip.addFile(
-      'unpackaged/package.xml',
-      Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })),
-      '',
-      0o644
-    );
+    newZip.addFile('unpackaged/package.xml', Buffer.from(builder.buildObject(fileContentjs)), '', 0o644);
 
     newZip.writeZip(inputfile);
     // this.ux.log(newZip.getEntries()[0].header.toString());

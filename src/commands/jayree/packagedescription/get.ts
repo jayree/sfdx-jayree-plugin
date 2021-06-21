@@ -7,7 +7,7 @@
 import { core, flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import * as convert from 'xml-js';
+import { parseStringSync } from '../../../utils/xml';
 
 core.Messages.importMessagesDirectory(__dirname);
 const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
@@ -50,13 +50,9 @@ export default class GetPackageDescription extends SfdxCommand {
       const fileName = zipEntry.entryName;
       if (fileName.includes('package.xml')) {
         const fileContent = zip.readAsText(fileName);
-        text = convert.xml2js(fileContent, { compact: true });
-        if ('description' in text['Package']) {
-          text = text['Package']['description']['_text'];
-          this.ux.log(text);
-        } else {
-          text = '';
-        }
+        const xml = parseStringSync(fileContent);
+        text = xml.Package.description ? xml.Package.description.toString() : '';
+        this.ux.log(text);
       }
     });
     return { description: text };
