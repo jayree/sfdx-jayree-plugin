@@ -1,3 +1,12 @@
+## [3.11.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.3...v3.11.4) (2021-06-24)
+
+
+### Bug Fixes
+
+* update dependencies ([b1b7993](https://github.com/jayree/sfdx-jayree-plugin/commit/b1b79934c9d74c373040606976787fe501e4688c))
+* **gitdiff:** replace ChildTypes with ParentTypes in manifest where necessary ([4f55a9f](https://github.com/jayree/sfdx-jayree-plugin/commit/4f55a9f9259032d61e9ed51d08c6937496e41a3e))
+* **packagedescription:** remove xml-js dependency ([0e93b99](https://github.com/jayree/sfdx-jayree-plugin/commit/0e93b996fe0587080b33115c4b90e2d1c5bd3d81))
+
 ## [3.11.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.2...v3.11.3) (2021-06-18)
 
 
