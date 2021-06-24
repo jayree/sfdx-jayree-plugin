@@ -126,7 +126,7 @@ uses the diff of what is unique in branchB (REF2)`,
                   ctx.tmpbasepath = join(ctx.projectRoot, '.sfdx', 'temp', `sdx_sourceGitDiff_${Date.now()}`);
 
                   process.once('exit', () => {
-                    void fs.remove(ctx.tmpbasepath);
+                    fs.removeSync(ctx.tmpbasepath);
                   });
 
                   process.once('SIGINT', () => {
@@ -188,7 +188,8 @@ uses the diff of what is unique in branchB (REF2)`,
                 task: async (ctx): Promise<void> => {
                   ctx.destructiveChanges.content = await appendToManifest(
                     ctx.destructiveChangesManifestFile,
-                    ctx.gitResults.modified.toDestructiveChanges
+                    ctx.gitResults.modified.toDestructiveChanges,
+                    { destruct: true }
                   );
                 },
               },
@@ -270,7 +271,9 @@ uses the diff of what is unique in branchB (REF2)`,
                 title: 'Apply changes from modified files to manifest',
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
-                  ctx.manifest.content = await appendToManifest(ctx.manifestFile, ctx.gitResults.modified.toManifest);
+                  ctx.manifest.content = await appendToManifest(ctx.manifestFile, ctx.gitResults.modified.toManifest, {
+                    destruct: false,
+                  });
                 },
               },
               {
