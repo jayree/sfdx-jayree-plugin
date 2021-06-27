@@ -53,7 +53,7 @@ export default class CreatePackageDescription extends SfdxCommand {
       Package: {
         $: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
         description: [text],
-        version: ['50.0'],
+        version: ['52.0'],
       },
     };
 
