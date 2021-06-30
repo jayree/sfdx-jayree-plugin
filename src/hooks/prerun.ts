@@ -42,7 +42,7 @@ export const prerun: Hook<'prerun'> = async function (options) {
         storedServerMaxRevisionCounter = serverMaxRevisionCounter;
         // eslint-disable-next-line no-empty
       } catch {}
-      if (storedServerMaxRevisionCounter) {
+      if (storedServerMaxRevisionCounter >= 0) {
         try {
           cli.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
           await execa('sfdx', [
