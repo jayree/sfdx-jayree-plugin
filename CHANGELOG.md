@@ -1,3 +1,11 @@
+## [3.11.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.4...v3.11.5) (2021-06-30)
+
+
+### Bug Fixes
+
+* **hooks:** call reset in prerun hook if storedServerMaxRevisionCounter eq 0 ([2ffda2c](https://github.com/jayree/sfdx-jayree-plugin/commit/2ffda2c6b9615c3a5937de22e096a587ce831541))
+* update listr2 subTasksRenderer ([8733744](https://github.com/jayree/sfdx-jayree-plugin/commit/8733744ffebdecefb43e2ed33d5586b314ca0817))
+
 ## [3.11.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.3...v3.11.4) (2021-06-24)
 
 
