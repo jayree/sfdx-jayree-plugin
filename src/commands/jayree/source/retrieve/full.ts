@@ -6,7 +6,8 @@
  */
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import execa from 'execa';
@@ -16,9 +17,9 @@ import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 import config from '../../../../utils/config';
 import { builder } from '../../../../utils/xml';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrievefull');
+const messages = Messages.loadMessages('sfdx-jayree', 'sourceretrievefull');
 
 export default class RetrieveProfiles extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');

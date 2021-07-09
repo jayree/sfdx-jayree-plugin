@@ -5,14 +5,15 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import chalk from 'chalk';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgtrackingset');
+const messages = Messages.loadMessages('sfdx-jayree', 'scratchorgtrackingset');
 
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');

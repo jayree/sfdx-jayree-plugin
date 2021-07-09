@@ -6,7 +6,8 @@
  */
 import { join } from 'path';
 import * as util from 'util';
-import { core, SfdxCommand } from '@salesforce/command';
+import { SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import { Logger, Listr } from 'listr2';
@@ -21,9 +22,9 @@ import {
   debug,
 } from '../../../../utils/gitdiff';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'gitdiff');
+const messages = Messages.loadMessages('sfdx-jayree', 'gitdiff');
 
 const logger = new Logger({ useIcons: false });
 

@@ -6,13 +6,14 @@
  */
 import * as path from 'path';
 import * as util from 'util';
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgrevision');
+const messages = Messages.loadMessages('sfdx-jayree', 'scratchorgrevision');
 
 export default class ScratchOrgRevisionInfo extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');

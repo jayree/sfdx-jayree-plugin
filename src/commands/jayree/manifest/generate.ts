@@ -4,15 +4,16 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Messages, SfdxProject, Connection } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
 import { builder } from '../../../utils/xml';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'packagexml');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'packagexml');
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare global {
@@ -113,7 +114,7 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
     let sfdxProjectVersion;
     /* istanbul ignore next*/
     try {
-      this.project = await core.SfdxProject.resolve();
+      this.project = await SfdxProject.resolve();
       const sfdxProjectJson = await this.project.retrieveSfdxProjectJson();
       sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
       // eslint-disable-next-line no-empty
@@ -759,18 +760,18 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
   }
 
   /* istanbul ignore next */
-  public toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>> {
+  public toolingQuery(conn: Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>> {
     return conn.tooling.query(soql);
   }
 
   /* istanbul ignore next */
-  public getMetaData(conn: core.Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult> {
+  public getMetaData(conn: Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult> {
     return conn.metadata.describe(apiVersion);
   }
 
   /* istanbul ignore next */
   public listMetaData(
-    conn: core.Connection,
+    conn: Connection,
     query: jsforce.ListMetadataQuery | jsforce.ListMetadataQuery[],
     apiVersion: string
   ): Promise<jsforce.FileProperties | jsforce.FileProperties[]> {

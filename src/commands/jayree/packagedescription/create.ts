@@ -4,13 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
 import { builder } from '../../../utils/xml';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'createpackagedescription');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'createpackagedescription');
 
 export default class CreatePackageDescription extends SfdxCommand {
   // hotfix to receive only one help page

@@ -4,12 +4,13 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, SfdxCommand } from '@salesforce/command';
+import { SfdxCommand } from '@salesforce/command';
+import { Messages, Connection } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import puppeteer from 'puppeteer';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'listchangeset');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'listchangeset');
 export default class ViewChangeSets extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
@@ -59,7 +60,7 @@ export default class ViewChangeSets extends SfdxCommand {
     return tables.csad;
   }
 
-  private async login(conn: core.Connection, page: puppeteer.Page) {
+  private async login(conn: Connection, page: puppeteer.Page) {
     await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
       waitUntil: 'networkidle2',
     });

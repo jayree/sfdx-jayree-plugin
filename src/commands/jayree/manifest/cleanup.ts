@@ -4,13 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { cleanupManifestFile } from '../../../utils/manifest';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'manifestcleanup');
+const messages = Messages.loadMessages('sfdx-jayree', 'manifestcleanup');
 
 export default class CleanupManifest extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
