@@ -1088,7 +1088,7 @@
         },
         {
             "childXmlNames": {
-                "mktDataTranField": "MktDataTranField"
+                "mktDataTranFields": "MktDataTranField"
             },
             "directoryName": "mktDataTranObjects",
             "inFolder": false,

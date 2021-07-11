@@ -775,13 +775,11 @@ Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (
 
 - Disables the `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
 
-#### postretrieve
+#### postretrieve (plugin-source plugin) / postsourceupdate (legacy salesforce-alm plugin)
 
 - Re-retrieves Profiles if `source:pull` triggered the hook.
 - Ensures Object- and User-Permissions settings. Review [.sfdx-jayree-example.json](.sfdx-jayree-example.json) how the configuration should look like.
 - Shrinks Permission Sets to avoid merge conflicts in git.
-
-#### postsourceupdate
 - Applies source fixes of the `jayree:source:fix` command and moves source files to separate package directories. See the configuration file [.sfdx-jayree-example.json](.sfdx-jayree-example.json) for examples. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
 ```json
 {
