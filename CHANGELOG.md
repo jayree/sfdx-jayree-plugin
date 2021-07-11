@@ -1,3 +1,15 @@
+# [3.12.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.5...v3.12.0) (2021-07-11)
+
+
+### Bug Fixes
+
+* update dependencies and metadataObjects ([1afd9ff](https://github.com/jayree/sfdx-jayree-plugin/commit/1afd9ff37a6acb546c1c4d9d178dd6f146574253))
+
+
+### Features
+
+* **hooks:** support plugin-source plugin ([3f1fa64](https://github.com/jayree/sfdx-jayree-plugin/commit/3f1fa640444d48827b09eac0bdd4ca86cba61ef0))
+
 ## [3.11.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.4...v3.11.5) (2021-06-30)
 
 
