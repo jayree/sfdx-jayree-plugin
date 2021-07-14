@@ -288,10 +288,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               if (typeof deltaskpath !== 'undefined') {
                 debug(`delete: ${deltaskpath}`);
                 objectPath.del(data, deltaskpath);
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
+                fs.writeFileSync(file, builder.buildObject(data) + '\n');
                 array.push({
                   filePath: file,
                   operation: 'delete',
@@ -306,39 +303,47 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
 
         if (fixsources[filename].insert) {
           for (const inserttask of fixsources[filename].insert) {
-            if (
-              inserttask.object &&
-              !objectPath
-                .get(data, inserttask.path)
-                .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
-            ) {
-              debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttask.path}`);
-              objectPath.insert(data, inserttask.path, inserttask.object, inserttask.at);
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
-              );
-              array.push({
-                filePath: file,
-                operation: 'insert',
-                message: `${JSON.stringify(inserttask.object)} at ${inserttask.path}`,
-              });
-            } else {
-              debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`);
-            }
-            if (inserttask.value && !compareobj(objectPath.get(data, inserttask.path), inserttask.value)) {
-              objectPath.set(data, inserttask.path, `${inserttask.value}`);
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
-              );
-              array.push({
-                filePath: file,
-                operation: 'insert',
-                message: `${JSON.stringify(inserttask.value)} at ${inserttask.path}`,
-              });
-            } else {
-              debug(`insert: Object ${JSON.stringify(inserttask.value)} found at ${inserttask.path}`);
+            if (inserttask.object) {
+              const inserttaskpaths = new ObjectPathResolver(data).resolveString(inserttask.path).value();
+              if (inserttaskpaths.length > 0) {
+                let match = '';
+                for (const inserttaskpath of inserttaskpaths) {
+                  if (typeof inserttaskpath !== 'undefined') {
+                    if (
+                      JSON.stringify(objectPath.get(data, inserttaskpath)).includes(
+                        JSON.stringify(inserttask.object).replace('{', '').replace('}', '')
+                      )
+                    ) {
+                      match = inserttaskpath;
+                    }
+                  }
+                }
+                if (!match) {
+                  const lastItem = inserttaskpaths.pop();
+                  const index = lastItem.split('.').pop();
+                  let inserttaskpath;
+                  if (Number(index)) {
+                    inserttaskpath = lastItem.split('.').slice(0, -1).join('.');
+                    debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttaskpath}`);
+                    objectPath.insert(data, inserttaskpath, inserttask.object, inserttask.at);
+                  } else {
+                    inserttaskpath = lastItem;
+                    debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttaskpath}`);
+                    Object.keys(inserttask.object).forEach((key) => {
+                      objectPath.set(data, `${inserttaskpath}.${key}`, inserttask.object[key]);
+                    });
+                  }
+
+                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                  array.push({
+                    filePath: file,
+                    operation: 'insert',
+                    message: `${JSON.stringify(inserttask.object)} at ${inserttaskpath}`,
+                  });
+                } else {
+                  debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${match}`);
+                }
+              }
             }
           }
         }
@@ -375,10 +380,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   if (settask.value && !compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
                     objectPath.set(data, settaskpath, `${settask.value}`);
-                    fs.writeFileSync(
-                      file,
-                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                    );
+                    fs.writeFileSync(file, builder.buildObject(data) + '\n');
                     array.push({
                       filePath: file,
                       operation: 'set',
@@ -448,10 +450,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                         }
                       }
                       if (modifiedPath) {
-                        fs.writeFileSync(
-                          file,
-                          builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                        );
+                        fs.writeFileSync(file, builder.buildObject(data) + '\n');
                         array.push({
                           filePath: file,
                           operation: 'set',
@@ -469,10 +468,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
                 if (objectPath.has(data, settask.path)) {
                   objectPath.set(data, settask.path, `${settask.value}`);
-                  fs.writeFileSync(
-                    file,
-                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                  );
+                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
                   array.push({
                     filePath: file,
                     operation: 'set',
@@ -482,10 +478,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               } else if (typeof settask.object === 'object') {
                 objectPath.set(data, settask.path + '.0', settask.object);
                 debug(objectPath.get(data, settask.path));
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
+                fs.writeFileSync(file, builder.buildObject(data) + '\n');
                 array.push({
                   filePath: file,
                   operation: 'set',
@@ -510,10 +503,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`,
                 fullname.substring(0, fullname.lastIndexOf('-'))
               );
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-              );
+              fs.writeFileSync(file, builder.buildObject(data) + '\n');
               array.push({
                 filePath: file,
                 operation: 'fix',

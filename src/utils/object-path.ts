@@ -38,6 +38,7 @@ class ObjectPathResolver {
     }
   }
 
+  // eslint-disable-next-line complexity
   public resolve({ path, key, value }: QueryParameters) {
     if (this.path.length > 0) {
       for (const [i, v] of this.path.entries()) {
@@ -51,7 +52,9 @@ class ObjectPathResolver {
       if (objectPath.get(this.object, path)) {
         this.path.push(path);
       }
-      return this;
+      if (value === undefined) {
+        return this;
+      }
     }
 
     const matchingPath = [];
@@ -72,10 +75,29 @@ class ObjectPathResolver {
             }
           }
         } else {
-          for (let i = 0; i < currentvalue.length; i++) {
+          if (currentvalue.length > 0) {
+            for (let i = 0; i < currentvalue.length; i++) {
+              let match = true;
+              for (const [k, v] of key.entries()) {
+                const obj2compare = objectPath.get(this.object, `${currenpath}.${i}.${v}`);
+                if (obj2compare) {
+                  if (!compareobj(obj2compare, value[k])) {
+                    match = false;
+                  }
+                } else {
+                  if (value[k] !== 'undefined') {
+                    match = false;
+                  }
+                }
+              }
+              if (match) {
+                matchingPath.push(`${currenpath}.${i}`);
+              }
+            }
+          } else {
             let match = true;
             for (const [k, v] of key.entries()) {
-              const obj2compare = objectPath.get(this.object, `${currenpath}.${i}.${v}`);
+              const obj2compare = objectPath.get(this.object, `${currenpath}.${v}`);
               if (obj2compare) {
                 if (!compareobj(obj2compare, value[k])) {
                   match = false;
@@ -87,7 +109,7 @@ class ObjectPathResolver {
               }
             }
             if (match) {
-              matchingPath.push(`${currenpath}.${i}`);
+              matchingPath.push(currenpath);
             }
           }
         }
