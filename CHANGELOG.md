@@ -1,3 +1,11 @@
+## [3.12.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.12.0...v3.12.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* update dependencies ([3852efe](https://github.com/jayree/sfdx-jayree-plugin/commit/3852efeb317e03c84a8ce1150635875000f2bc50))
+* **sourcefix:** optimize inserttask code and fix object-path bug ([a12b14f](https://github.com/jayree/sfdx-jayree-plugin/commit/a12b14f65d838775704fa2d3322208b74abd54f8))
+
 # [3.12.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.5...v3.12.0) (2021-07-11)
 
 
