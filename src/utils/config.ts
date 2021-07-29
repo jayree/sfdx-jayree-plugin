@@ -9,12 +9,10 @@ import { join } from 'path';
 import * as fs from 'fs-extra';
 import isDocker from 'is-docker';
 import { SfdxProject } from '@salesforce/core';
-import * as ensureUserPermissionsDeveloperEdition from '../../config/ensureUserPermissionsDeveloperEdition.json';
-import * as ensureObjectPermissionsDeveloperEdition from '../../config/ensureObjectPermissionsDeveloperEdition.json';
 
 const CONFIG_DEFAULTS = {
-  ensureUserPermissions: ensureUserPermissionsDeveloperEdition.ensureUserPermissions,
-  ensureObjectPermissions: ensureObjectPermissionsDeveloperEdition.ensureObjectPermissions,
+  ensureUserPermissions: [],
+  ensureObjectPermissions: [],
   moveSourceFolders: [],
   applySourceFixes: ['source:retrieve:full', 'source:retrieve:all'],
   runHooks: false,

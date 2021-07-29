@@ -55,44 +55,46 @@ export const postretrieve: HookFunction = async function (options) {
     await shrinkPermissionSets(permissionsets.map((permset) => permset.filePath).filter(Boolean));
   }
 
-  const updatedfiles = await applySourceFixes(result.map((el) => el.filePath).filter(Boolean));
-  debug({ updatedfiles });
-
-  const toRemove = Object.values(updatedfiles)
-    .flat()
-    .filter((value) => value.operation === 'deleteFile')
-    .map((value) => value.filePath);
-  debug({ toRemove });
-
-  const toUpdate = {};
-  Object.values(updatedfiles)
-    .flat()
-    .filter((value) => value.operation === 'moveFile')
-    .forEach((value) => {
-      toUpdate[value.filePath] = value.message;
-    });
-  debug({ toUpdate });
-
-  const projectPath = await SfdxProject.resolveProjectPath();
-  const inboundFiles = [];
-
-  result.forEach((element) => {
-    if (!toRemove.includes(element.filePath)) {
-      inboundFiles.push({
-        state: element.state,
-        fullName: element.fullName,
-        type: element.type,
-        filePath: path.relative(
-          projectPath,
-          toUpdate[element.filePath] ? toUpdate[element.filePath] : element.filePath
-        ),
-      });
-    }
-  });
-  debug({ inboundFiles });
-
-  process.once('beforeExit', () => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  process.once('beforeExit', async () => {
     debug('beforeExit');
+
+    const updatedfiles = await applySourceFixes(result.map((el) => el.filePath).filter(Boolean));
+    debug({ updatedfiles });
+
+    const toRemove = Object.values(updatedfiles)
+      .flat()
+      .filter((value) => value.operation === 'deleteFile')
+      .map((value) => value.filePath);
+    debug({ toRemove });
+
+    const toUpdate = {};
+    Object.values(updatedfiles)
+      .flat()
+      .filter((value) => value.operation === 'moveFile')
+      .forEach((value) => {
+        toUpdate[value.filePath] = value.message;
+      });
+    debug({ toUpdate });
+
+    const projectPath = await SfdxProject.resolveProjectPath();
+    const inboundFiles = [];
+
+    result.forEach((element) => {
+      if (!toRemove.includes(element.filePath)) {
+        inboundFiles.push({
+          state: element.state,
+          fullName: element.fullName,
+          type: element.type,
+          filePath: path.relative(
+            projectPath,
+            toUpdate[element.filePath] ? toUpdate[element.filePath] : element.filePath
+          ),
+        });
+      }
+    });
+    debug({ inboundFiles });
+
     if (isOutputEnabled) {
       void logFixes(updatedfiles);
     } else {
