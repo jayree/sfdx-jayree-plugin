@@ -8,7 +8,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import { builder, parseStringSync } from '../../../utils/xml';
+import { js2Manifest, parseManifest } from '../../../utils/xml';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'setpackagedescription');
@@ -59,7 +59,7 @@ export default class SetPackageDescription extends SfdxCommand {
       const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {
         const fileTXTContent = zip.readAsText(fileName);
-        const xml = parseStringSync(fileTXTContent);
+        const xml = parseManifest(fileTXTContent);
         if (xml.Package.description && xml.Package.description.length > 0) {
           action = 'updated';
         } else {
@@ -67,7 +67,7 @@ export default class SetPackageDescription extends SfdxCommand {
         }
         xml.Package['description'] = text;
         this.ux.log(action + ' description: ' + text);
-        newZip.addFile(fileName, Buffer.from(builder.buildObject(xml)), '', 0o644);
+        newZip.addFile(fileName, Buffer.from(js2Manifest(xml)), '', 0o644);
       } else {
         newZip.addFile(fileName, fileContent, '', 0o644);
       }

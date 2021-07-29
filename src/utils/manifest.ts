@@ -6,37 +6,40 @@
  */
 import { cli } from 'cli-ux';
 import * as fs from 'fs-extra';
-import { builder, parseStringSync } from './xml';
+import { parseManifest, js2Manifest, normalizeToArray } from '../utils/xml';
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
-  const packageignore = parseStringSync(fs.readFileSync(ignoreManifest, 'utf8'));
+  const packageignore = parseManifest(fs.readFileSync(ignoreManifest, 'utf8')).Package;
 
-  packageignore.Package.types.forEach((types) => {
+  const packageTypes = normalizeToArray(packageignore.types);
+
+  packageTypes.forEach((types) => {
     if (typeof packageTypesMapped[types.name] !== 'undefined') {
-      if (types.members.includes('*') && types.members.length > 1) {
-        const includedmembers = types.members.slice();
+      packageTypesMapped[types.name] = normalizeToArray(packageTypesMapped[types.name]);
+      const packageTypeMembers = normalizeToArray(types.members);
+      if (packageTypeMembers.includes('*') && packageTypeMembers.length > 1) {
+        const includedmembers = packageTypeMembers.slice();
         includedmembers.splice(includedmembers.indexOf('*'), 1);
         cli.log('include only members ' + includedmembers.toString() + ' for type ' + types.name);
         packageTypesMapped[types.name] = packageTypesMapped[types.name].filter((value) => {
-          return types.members.includes(value);
+          return packageTypeMembers.includes(value);
         });
       }
 
-      if (types.members.includes('*') && types.members.length === 1) {
+      if (packageTypeMembers.includes('*') && packageTypeMembers.length === 1) {
         cli.log('exclude all members for type ' + types.name);
         packageTypesMapped[types.name] = packageTypesMapped[types.name].filter(() => {
           return false;
         });
       }
 
-      if (!types.members.includes('*')) {
+      if (!packageTypeMembers.includes('*')) {
         packageTypesMapped[types.name] = packageTypesMapped[types.name].filter((value) => {
-          return !types.members.includes(value);
+          return !packageTypeMembers.includes(value);
         });
       }
-
-      types.members.forEach((member) => {
+      packageTypeMembers.forEach((member) => {
         if (member.startsWith('!')) {
           packageTypesMapped[types.name].push(member.substring(1));
         }
@@ -58,7 +61,7 @@ export async function cleanupManifestTypes(packageTypesMapped, ignoreManifest) {
 }
 
 export async function cleanupManifestFile(manifest, ignoreManifest) {
-  const newpackage = parseStringSync(fs.readFileSync(manifest, 'utf8'));
+  const newpackage = parseManifest(fs.readFileSync(manifest, 'utf8'));
 
   cli.log(`apply '${ignoreManifest}' to '${manifest}'`);
 
@@ -71,5 +74,5 @@ export async function cleanupManifestFile(manifest, ignoreManifest) {
 
   newpackage.Package.types = newPackageTypesUpdated;
 
-  fs.writeFileSync(manifest, builder.buildObject(newpackage));
+  fs.writeFileSync(manifest, js2Manifest(newpackage));
 }
