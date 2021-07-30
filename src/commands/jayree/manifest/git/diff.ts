@@ -1,12 +1,13 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { join } from 'path';
 import * as util from 'util';
-import { core, SfdxCommand } from '@salesforce/command';
+import { SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import { Logger, Listr } from 'listr2';
@@ -21,9 +22,9 @@ import {
   debug,
 } from '../../../../utils/gitdiff';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'gitdiff');
+const messages = Messages.loadMessages('sfdx-jayree', 'gitdiff');
 
 const logger = new Logger({ useIcons: false });
 
@@ -126,7 +127,7 @@ uses the diff of what is unique in branchB (REF2)`,
                   ctx.tmpbasepath = join(ctx.projectRoot, '.sfdx', 'temp', `sdx_sourceGitDiff_${Date.now()}`);
 
                   process.once('exit', () => {
-                    void fs.remove(ctx.tmpbasepath);
+                    fs.removeSync(ctx.tmpbasepath);
                   });
 
                   process.once('SIGINT', () => {
@@ -188,7 +189,8 @@ uses the diff of what is unique in branchB (REF2)`,
                 task: async (ctx): Promise<void> => {
                   ctx.destructiveChanges.content = await appendToManifest(
                     ctx.destructiveChangesManifestFile,
-                    ctx.gitResults.modified.toDestructiveChanges
+                    ctx.gitResults.modified.toDestructiveChanges,
+                    { destruct: true }
                   );
                 },
               },
@@ -270,7 +272,9 @@ uses the diff of what is unique in branchB (REF2)`,
                 title: 'Apply changes from modified files to manifest',
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx): Promise<void> => {
-                  ctx.manifest.content = await appendToManifest(ctx.manifestFile, ctx.gitResults.modified.toManifest);
+                  ctx.manifest.content = await appendToManifest(ctx.manifestFile, ctx.gitResults.modified.toManifest, {
+                    destruct: false,
+                  });
                 },
               },
               {

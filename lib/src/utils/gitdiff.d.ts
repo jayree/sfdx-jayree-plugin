@@ -44,7 +44,9 @@ export declare function addFilesToTempProject(tmpRoot: any, paths: any, task: an
 export declare function convertTempProject(convertpath: string, options: {
     destruct: boolean;
 }, task: any, ctx: Ctx): Promise<string>;
-export declare function appendToManifest(file: any, insert: any): Promise<Record<string, unknown>>;
+export declare function appendToManifest(file: any, insert: any, options?: {
+    destruct: boolean;
+}): Promise<Record<string, unknown>>;
 export declare function analyzeFile(path: any, ctx: Ctx): Promise<{
     status: number;
     toManifest?: undefined;

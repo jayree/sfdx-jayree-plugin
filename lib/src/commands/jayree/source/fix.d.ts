@@ -1,7 +1,6 @@
-import { flags } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { SourceRetrieveBase } from '../../../sourceRetrieveBase';
-export default class FixMetadata extends SourceRetrieveBase {
+export default class FixMetadata extends SfdxCommand {
     static description: string;
     protected static flagsConfig: {
         tag: flags.Discriminated<flags.Array<string>>;

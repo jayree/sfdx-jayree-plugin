@@ -338,6 +338,13 @@
       "xmlName": "ConnectedApp"
     },
     {
+      "directoryName": "ConnectedSystem",
+      "inFolder": false,
+      "metaFile": false,
+      "suffix": "connectedSystem",
+      "xmlName": "ConnectedSystem"
+    },
+    {
       "directoryName": "contentassets",
       "inFolder": "false",
       "metaFile": "true",
@@ -512,6 +519,20 @@
       "metaFile": false,
       "suffix": "s3DataConnector",
       "xmlName": "DataConnectorS3"
+    },
+    {
+      "directoryName": "dataMapping",
+      "inFolder": false,
+      "metaFile": true,
+      "suffix": "dataMapping",
+      "xmlName": "DataMapping"
+    },
+    {
+      "directoryName": "dataMappingSchema",
+      "inFolder": false,
+      "metaFile": false,
+      "suffix": "dataMappingSchema",
+      "xmlName": "DataMappingSchema"
     },
     {
       "directoryName": "dataPipelines",
@@ -758,6 +779,13 @@
       "metaFile": "false",
       "suffix": "featureParameterInteger",
       "xmlName": "FeatureParameterInteger"
+    },
+    {
+      "directoryName": "federationDataMappingUsage",
+      "inFolder": false,
+      "metaFile": false,
+      "suffix": "federationDataMappingUsage",
+      "xmlName": "FederationDataMappingUsage"
     },
     {
       "directoryName": "fieldServiceMobileExtensions",
@@ -1060,7 +1088,7 @@
     },
     {
       "childXmlNames": {
-        "mktDataTranField": "MktDataTranField"
+        "mktDataTranFields": "MktDataTranField"
       },
       "directoryName": "mktDataTranObjects",
       "inFolder": false,
@@ -1598,6 +1626,13 @@
       "metaFile": "false",
       "suffix": "wapp",
       "xmlName": "WaveApplication"
+    },
+    {
+      "directoryName": "wave",
+      "inFolder": "false",
+      "metaFile": "true",
+      "suffix": "wcomp",
+      "xmlName": "WaveComponent"
     },
     {
       "directoryName": "wave",

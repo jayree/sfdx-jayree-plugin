@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Messages, SfdxProject, fs as corefs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
@@ -13,9 +14,9 @@ import execa from 'execa';
 import { parseStringSync } from '../../../utils/xml';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'scratchorgsettings');
+const messages = Messages.loadMessages('sfdx-jayree', 'scratchorgsettings');
 
 function camelize(str) {
   return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
@@ -91,7 +92,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
     // this.ux.startSpinner('Generating settings');
 
     try {
-      await core.fs.mkdirp(orgretrievepath, core.fs.DEFAULT_USER_DIR_MODE);
+      await corefs.mkdirp(orgretrievepath, corefs.DEFAULT_USER_DIR_MODE);
 
       await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
         cwd: orgretrievepath,
@@ -101,7 +102,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
       let sfdxProjectVersion;
       /* istanbul ignore next*/
       try {
-        const sfdxProject = await core.SfdxProject.resolve();
+        const sfdxProject = await SfdxProject.resolve();
         const sfdxProjectJson = await sfdxProject.retrieveSfdxProjectJson();
         sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
         // eslint-disable-next-line no-empty

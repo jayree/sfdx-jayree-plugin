@@ -1,19 +1,20 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages, fs as corefs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
 import config from '../../../../utils/config';
 import { PuppeteerConfigureTasks } from '../../../../utils/puppeteer/configuretasks';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'configure');
+const messages = Messages.loadMessages('sfdx-jayree', 'configure');
 
 const logger = new Logger({ useIcons: false });
 
@@ -52,7 +53,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
 
     await this.org.refreshAuth();
-    const configPath = await core.fs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
+    const configPath = await corefs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
 
     let allTasks = [];
     let selectedSetupTasks = [];

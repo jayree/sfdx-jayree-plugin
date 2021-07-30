@@ -1,16 +1,17 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import * as convert from 'xml-js';
+import { parseStringSync } from '../../../utils/xml';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'getpackagedescription');
 
 export default class GetPackageDescription extends SfdxCommand {
   // hotfix to receive only one help page
@@ -50,13 +51,9 @@ export default class GetPackageDescription extends SfdxCommand {
       const fileName = zipEntry.entryName;
       if (fileName.includes('package.xml')) {
         const fileContent = zip.readAsText(fileName);
-        text = convert.xml2js(fileContent, { compact: true });
-        if ('description' in text['Package']) {
-          text = text['Package']['description']['_text'];
-          this.ux.log(text);
-        } else {
-          text = '';
-        }
+        const xml = parseStringSync(fileContent);
+        text = xml.Package.description ? xml.Package.description.toString() : '';
+        this.ux.log(text);
       }
     });
     return { description: text };

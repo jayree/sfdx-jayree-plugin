@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import { cli } from 'cli-ux';
@@ -14,8 +15,8 @@ import config from '../../../../utils/config';
 import * as CSconfig from '../../../../../config/countrystate.json';
 import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'createstatecountry');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
 export default class UpdateCountry extends JayreeSfdxCommand {
   public static aliases = ['jayree:automation:country:update'];
