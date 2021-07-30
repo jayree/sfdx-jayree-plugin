@@ -1,21 +1,22 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import execa from 'execa';
 import { SourceRetrieveBase } from '../../../../sourceRetrieveBase';
 import { applyFixes, aggregatedFixResults } from '../../../../utils/souceUtils';
 
-core.Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(__dirname);
 
-const messages = core.Messages.loadMessages('sfdx-jayree', 'sourceretrieveall');
+const messages = Messages.loadMessages('sfdx-jayree', 'sourceretrieveall');
 
 export default class RetrieveMetadata extends SourceRetrieveBase {
   public static description = messages.getMessage('commandDescription');

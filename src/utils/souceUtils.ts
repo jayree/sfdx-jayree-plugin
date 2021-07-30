@@ -1,26 +1,23 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* istanbul ignore file */
 import * as path from 'path';
+import os from 'os';
 import * as fs from 'fs-extra';
 import * as xml2js from 'xml2js';
-import * as core from '@salesforce/core';
+import { SfdxProject, fs as corefs } from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
-import AdmZip from 'adm-zip';
-import execa from 'execa';
-import slash from 'slash';
+import { ComponentSet } from '@salesforce/source-deploy-retrieve';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
-
-// const parseStringPromise = util.promisify(xml2js.parseString);
 
 const isOutputEnabled = !(
   process.argv.find((arg) => arg === '--json') || kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON'
@@ -56,7 +53,7 @@ export async function getProjectPath(): Promise<string> {
     return projectPath;
   }
   try {
-    projectPath = slash(await core.SfdxProject.resolveProjectPath());
+    projectPath = (await SfdxProject.resolveProjectPath()).split(path.sep).join(path.posix.sep);
     return projectPath;
   } catch (error) {
     return undefined;
@@ -161,42 +158,6 @@ export async function profileElementInjection(
   }
 }
 
-async function mergeDirectories(source: string, destination: string): Promise<Array<{ from: string; to: string }>> {
-  const files = await fs.readdir(source);
-  let result = [];
-
-  for (const file of files) {
-    const sourceFile = path.join(source, file);
-    const destinationFile = path.join(destination, file);
-    if ((await fs.lstat(sourceFile)).isDirectory()) {
-      result = result.concat(await mergeDirectories(sourceFile, destinationFile));
-    } else {
-      await fs.ensureDir(path.dirname(destinationFile));
-      fs.writeFileSync(destinationFile, await fs.readFile(sourceFile));
-      result.push({ from: sourceFile, to: destinationFile });
-    }
-  }
-  return result;
-}
-
-export async function moveSourceFilesByFolder(): Promise<Array<{ from: string; to: string }>> {
-  let f = [];
-  const project = await getProjectPath();
-  const moveSourceFolders = config(project).moveSourceFolders;
-
-  for (const element of moveSourceFolders) {
-    const from = path.join(project, element[0]);
-    const to = path.join(project, element[1]);
-
-    if (await fs.pathExists(from)) {
-      f = f.concat(await mergeDirectories(from, to));
-      await fs.remove(from);
-    }
-  }
-
-  return f;
-}
-
 export async function logFixes(updatedfiles) {
   if (isOutputEnabled) {
     const root = await getProjectPath();
@@ -220,25 +181,6 @@ export async function logFixes(updatedfiles) {
   }
 }
 
-export async function logMoves(movedSourceFiles) {
-  if (isOutputEnabled) {
-    if (movedSourceFiles.length > 0) {
-      cli.styledHeader(chalk.blue('Moved Source Files'));
-      const root = await getProjectPath();
-      cli.table(movedSourceFiles, {
-        from: {
-          header: 'FROM',
-          get: (row: { from: string; to: string }) => path.relative(root, row.from),
-        },
-        to: {
-          header: 'TO',
-          get: (row: { from: string; to: string }) => path.relative(root, row.to),
-        },
-      });
-    }
-  }
-}
-
 async function getGlobbyBaseDirectory(globbypath) {
   try {
     (await fs.lstat(globbypath)).isDirectory();
@@ -259,10 +201,9 @@ async function sourcemove(movesources, root, filter): Promise<fixResults> {
     for (const file of files) {
       if (await fs.pathExists(file)) {
         const destinationFile = path.join(filepath[1], path.relative(from, file));
-        debug(`move file(s): ${from} to ${destinationFile}`);
+        debug(`move file: ${file} to ${destinationFile}`);
         await fs.ensureDir(path.dirname(destinationFile));
-        await fs.writeFile(destinationFile, await fs.readFile(file));
-        await fs.remove(file);
+        await fs.rename(file, destinationFile);
         array.push({ filePath: file, operation: 'moveFile', message: destinationFile });
       } else {
         debug(`${filepath} not found`);
@@ -347,10 +288,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               if (typeof deltaskpath !== 'undefined') {
                 debug(`delete: ${deltaskpath}`);
                 objectPath.del(data, deltaskpath);
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
+                fs.writeFileSync(file, builder.buildObject(data) + '\n');
                 array.push({
                   filePath: file,
                   operation: 'delete',
@@ -365,39 +303,47 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
 
         if (fixsources[filename].insert) {
           for (const inserttask of fixsources[filename].insert) {
-            if (
-              inserttask.object &&
-              !objectPath
-                .get(data, inserttask.path)
-                .some((object) => JSON.stringify(object) === JSON.stringify(inserttask.object))
-            ) {
-              debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttask.path}`);
-              objectPath.insert(data, inserttask.path, inserttask.object, inserttask.at);
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
-              );
-              array.push({
-                filePath: file,
-                operation: 'insert',
-                message: `${JSON.stringify(inserttask.object)} at ${inserttask.path}`,
-              });
-            } else {
-              debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${inserttask.path}`);
-            }
-            if (inserttask.value && !compareobj(objectPath.get(data, inserttask.path), inserttask.value)) {
-              objectPath.set(data, inserttask.path, `${inserttask.value}`);
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, '    ')
-              );
-              array.push({
-                filePath: file,
-                operation: 'insert',
-                message: `${JSON.stringify(inserttask.value)} at ${inserttask.path}`,
-              });
-            } else {
-              debug(`insert: Object ${JSON.stringify(inserttask.value)} found at ${inserttask.path}`);
+            if (inserttask.object) {
+              const inserttaskpaths = new ObjectPathResolver(data).resolveString(inserttask.path).value();
+              if (inserttaskpaths.length > 0) {
+                let match = '';
+                for (const inserttaskpath of inserttaskpaths) {
+                  if (typeof inserttaskpath !== 'undefined') {
+                    if (
+                      JSON.stringify(objectPath.get(data, inserttaskpath)).includes(
+                        JSON.stringify(inserttask.object).replace('{', '').replace('}', '')
+                      )
+                    ) {
+                      match = inserttaskpath;
+                    }
+                  }
+                }
+                if (!match) {
+                  const lastItem = inserttaskpaths.pop();
+                  const index = lastItem.split('.').pop();
+                  let inserttaskpath;
+                  if (Number(index)) {
+                    inserttaskpath = lastItem.split('.').slice(0, -1).join('.');
+                    debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttaskpath}`);
+                    objectPath.insert(data, inserttaskpath, inserttask.object, inserttask.at);
+                  } else {
+                    inserttaskpath = lastItem;
+                    debug(`insert: ${JSON.stringify(inserttask.object)} at ${inserttaskpath}`);
+                    Object.keys(inserttask.object).forEach((key) => {
+                      objectPath.set(data, `${inserttaskpath}.${key}`, inserttask.object[key]);
+                    });
+                  }
+
+                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                  array.push({
+                    filePath: file,
+                    operation: 'insert',
+                    message: `${JSON.stringify(inserttask.object)} at ${inserttaskpath}`,
+                  });
+                } else {
+                  debug(`insert: Object ${JSON.stringify(inserttask.object)} found at ${match}`);
+                }
+              }
             }
           }
         }
@@ -434,10 +380,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   if (settask.value && !compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
                     objectPath.set(data, settaskpath, `${settask.value}`);
-                    fs.writeFileSync(
-                      file,
-                      builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                    );
+                    fs.writeFileSync(file, builder.buildObject(data) + '\n');
                     array.push({
                       filePath: file,
                       operation: 'set',
@@ -507,10 +450,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                         }
                       }
                       if (modifiedPath) {
-                        fs.writeFileSync(
-                          file,
-                          builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                        );
+                        fs.writeFileSync(file, builder.buildObject(data) + '\n');
                         array.push({
                           filePath: file,
                           operation: 'set',
@@ -528,10 +468,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
                 if (objectPath.has(data, settask.path)) {
                   objectPath.set(data, settask.path, `${settask.value}`);
-                  fs.writeFileSync(
-                    file,
-                    builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                  );
+                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
                   array.push({
                     filePath: file,
                     operation: 'set',
@@ -541,10 +478,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               } else if (typeof settask.object === 'object') {
                 objectPath.set(data, settask.path + '.0', settask.object);
                 debug(objectPath.get(data, settask.path));
-                fs.writeFileSync(
-                  file,
-                  builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-                );
+                fs.writeFileSync(file, builder.buildObject(data) + '\n');
                 array.push({
                   filePath: file,
                   operation: 'set',
@@ -569,10 +503,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`,
                 fullname.substring(0, fullname.lastIndexOf('-'))
               );
-              fs.writeFileSync(
-                file,
-                builder.buildObject(data) + '\n' // .replace(/ {2}/g, "    ")
-              );
+              fs.writeFileSync(file, builder.buildObject(data) + '\n');
               array.push({
                 filePath: file,
                 operation: 'fix',
@@ -596,7 +527,7 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   if (!root) {
     root = await getProjectPath();
   }
-  const configPath = await core.fs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
+  const configPath = await corefs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
   const updatedfiles: aggregatedFixResults = {};
   for (const tag of tags) {
     const fix = config(configPath)[tag];
@@ -682,53 +613,57 @@ type fixResults = fixResult[];
 
 type fixResult = { filePath: string; operation: string; message: string };
 
-export async function updateProfiles(profiles, retrievePackageDir, forceSourcePull) {
+export async function updateProfiles(profiles, customObjects, forceSourcePull) {
   if (forceSourcePull) {
     debug('force:source:pull detected');
-    let packageProfilesOnly = path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml');
-    const retrieveDir = path.join(retrievePackageDir, '..');
+    const targetDir = process.env.SFDX_MDAPI_TEMP_DIR || os.tmpdir();
+    const destRoot = path.join(targetDir, 'reRetrieveProfiles');
+    const packageFilePath = path.join(destRoot, 'package.xml');
+    debug({ packageFilePath, destRoot });
 
-    const pjson = await xml2js.parseStringPromise(fs.readFileSync(packageProfilesOnly, 'utf8'));
-    pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members =
-      pjson.Package.types[pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject')].members.concat(
+    try {
+      const pjson = await xml2js.parseStringPromise(
+        await fs.readFile(path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml'), 'utf8')
+      );
+      const index = pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject');
+      pjson.Package.types[index].members = pjson.Package.types[index].members.concat(
         config(await getProjectPath()).ensureObjectPermissions
       );
 
-    packageProfilesOnly = path.join(retrieveDir, 'pinject.xml');
-    await fs.writeFile(packageProfilesOnly, builder.buildObject(pjson));
+      await fs.emptyDir(destRoot);
+      await fs.writeFile(packageFilePath, builder.buildObject(pjson));
 
-    debug({ packageProfilesOnly, retrieveDir });
-    let stdout;
-    try {
-      stdout = (
-        await execa('sfdx', [
-          'force:mdapi:retrieve',
-          '--retrievetargetdir',
-          path.join(retrieveDir, 'reRetrieveProfiles'),
-          '--unpackaged',
-          packageProfilesOnly,
-          '--json',
-        ])
-      ).stdout;
+      const componentSet = await ComponentSet.fromManifest(packageFilePath);
+      const mdapiRetrieve = await componentSet.retrieve({
+        usernameOrConnection: (await getConnectionFromArgv()).username,
+        output: destRoot,
+        merge: true,
+      });
+
+      const retrieveResult = await mdapiRetrieve.pollStatus(1000);
+
+      for (const retrieveProfile of retrieveResult
+        .getFileResponses()
+        .filter((component) => component.type === 'Profile')) {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        const index = profiles.findIndex((profile) => profile.fullName === retrieveProfile.fullName);
+        if (index >= 0) {
+          await fs.rename(retrieveProfile.filePath, profiles[index].filePath);
+        }
+      }
     } catch (e) {
       debug(e);
-      stdout = { status: 1 };
-    }
-    stdout = JSON.parse(stdout);
-    if (stdout.status === 0) {
-      debug({ zipFilePath: stdout.result.zipFilePath });
-      const zip = new AdmZip(stdout.result.zipFilePath);
-      zip.getEntries().forEach(function (entry) {
-        if (entry.entryName.split(path.sep).join(path.posix.sep).includes('unpackaged/profiles/')) {
-          zip.extractEntryTo(entry, retrieveDir, true, true);
-        }
-      });
+    } finally {
+      await fs.remove(destRoot);
     }
   }
-  const adminprofile = path.join(retrievePackageDir, 'profiles/Admin.profile');
+  const adminprofile = profiles
+    .filter((profile) => profile.fullName === 'Admin')
+    .map((profile) => profile.filePath)
+    .filter(Boolean)
+    .toString();
   const profileElementInjectionFromAdmin = { ensureObjectPermissions: null };
   let customObjectsFilter = [];
-
   if (await fs.pathExists(adminprofile)) {
     const profileContent = await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'));
     if (profileContent.Profile.objectPermissions) {
@@ -737,14 +672,12 @@ export async function updateProfiles(profiles, retrievePackageDir, forceSourcePu
       );
     }
   } else {
-    const manifest = await xml2js.parseStringPromise(
-      await fs.readFile(path.join(retrievePackageDir, 'package.xml'), 'utf8')
-    );
-    customObjectsFilter = manifest.Package.types
-      .filter((el) => el.name.toString() === 'CustomObject')
-      .map((el) => el.members)
-      .flat();
+    customObjectsFilter = customObjects.map((el) => el.fullName).filter(Boolean);
   }
   debug({ profiles, profileElementInjectionFromAdmin, customObjectsFilter });
-  await profileElementInjection(profiles, profileElementInjectionFromAdmin, customObjectsFilter);
+  await profileElementInjection(
+    profiles.map((profile) => profile.filePath).filter(Boolean),
+    profileElementInjectionFromAdmin,
+    customObjectsFilter
+  );
 }

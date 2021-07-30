@@ -1,16 +1,17 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import * as convert from 'xml-js';
+import { builder, parseStringSync } from '../../../utils/xml';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'setpackagedescription');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'setpackagedescription');
 
 export default class SetPackageDescription extends SfdxCommand {
   // hotfix to receive only one help page
@@ -57,33 +58,16 @@ export default class SetPackageDescription extends SfdxCommand {
       const fileName = zipEntry.entryName;
       const fileContent = zip.readFile(fileName);
       if (fileName.includes('package.xml')) {
-        let fileContentjs;
         const fileTXTContent = zip.readAsText(fileName);
-        const xml = convert.xml2js(fileTXTContent, { compact: true });
-        if ('description' in xml['Package']) {
-          xml['Package']['description'] = text;
+        const xml = parseStringSync(fileTXTContent);
+        if (xml.Package.description && xml.Package.description.length > 0) {
           action = 'updated';
-          fileContentjs = xml;
         } else {
-          fileContentjs = {
-            _declaration: {
-              _attributes: { version: '1.0', encoding: 'utf-8' },
-            },
-            Package: [
-              {
-                _attributes: {
-                  xmlns: 'http://soap.sforce.com/2006/04/metadata',
-                },
-                description: text,
-                types: xml['Package']['types'],
-                version: xml['Package']['version'],
-              },
-            ],
-          };
           action = 'added';
         }
+        xml.Package['description'] = text;
         this.ux.log(action + ' description: ' + text);
-        newZip.addFile(fileName, Buffer.from(convert.js2xml(fileContentjs, { compact: true, spaces: 4 })), '', 0o644);
+        newZip.addFile(fileName, Buffer.from(builder.buildObject(xml)), '', 0o644);
       } else {
         newZip.addFile(fileName, fileContent, '', 0o644);
       }

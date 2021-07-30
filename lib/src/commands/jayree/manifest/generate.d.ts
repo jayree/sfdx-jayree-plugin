@@ -1,4 +1,5 @@
-import { core, flags } from '@salesforce/command';
+import { flags } from '@salesforce/command';
+import { Connection } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as jsforce from 'jsforce';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
@@ -34,8 +35,8 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
     protected static supportsDevhubUsername: boolean;
     protected static requiresProject: boolean;
     run(): Promise<AnyJson>;
-    toolingQuery(conn: core.Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>>;
-    getMetaData(conn: core.Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult>;
-    listMetaData(conn: core.Connection, query: jsforce.ListMetadataQuery | jsforce.ListMetadataQuery[], apiVersion: string): Promise<jsforce.FileProperties | jsforce.FileProperties[]>;
+    toolingQuery(conn: Connection, soql: string): Promise<jsforce.QueryResult<Record<string, any>>>;
+    getMetaData(conn: Connection, apiVersion: string): Promise<jsforce.DescribeMetadataResult>;
+    listMetaData(conn: Connection, query: jsforce.ListMetadataQuery | jsforce.ListMetadataQuery[], apiVersion: string): Promise<jsforce.FileProperties | jsforce.FileProperties[]>;
     private throwError;
 }

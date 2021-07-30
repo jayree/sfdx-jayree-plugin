@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
@@ -8,7 +8,7 @@
 import { join } from 'path';
 import * as fs from 'fs-extra';
 import isDocker from 'is-docker';
-import * as core from '@salesforce/core';
+import { SfdxProject } from '@salesforce/core';
 import * as ensureUserPermissionsDeveloperEdition from '../../config/ensureUserPermissionsDeveloperEdition.json';
 import * as ensureObjectPermissionsDeveloperEdition from '../../config/ensureObjectPermissionsDeveloperEdition.json';
 
@@ -30,7 +30,7 @@ const CONFIG_DEFAULTS = {
 
 const resolvedConfigs = {};
 
-export default (path = core.SfdxProject.resolveProjectPathSync()) => {
+export default (path = SfdxProject.resolveProjectPathSync()) => {
   if (path && resolvedConfigs[path]) {
     return resolvedConfigs[path];
   }

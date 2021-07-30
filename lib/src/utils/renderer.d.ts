@@ -1,9 +1,10 @@
-import { ListrRenderer, ListrTaskObject } from 'listr2';
+import { ListrRenderer } from 'listr2';
+import { Task } from 'listr2/dist/lib/task';
 /** Default updating renderer for Listr2 */
 export declare class MyDefaultRenderer implements ListrRenderer {
-    tasks: Array<ListrTaskObject<any, typeof MyDefaultRenderer>>;
+    tasks: Array<Task<any, typeof MyDefaultRenderer>>;
     options: typeof MyDefaultRenderer['rendererOptions'];
-    renderHook$?: ListrTaskObject<any, any>['renderHook$'];
+    renderHook$?: Task<any, any>['renderHook$'];
     /** designates whether this renderer can output to a non-tty console */
     static nonTTY: boolean;
     /** renderer options for the defauult renderer */
@@ -18,12 +19,14 @@ export declare class MyDefaultRenderer implements ListrRenderer {
          * clear output when task finishes
          *
          * @default false
+         * @global global option that can not be temperated with from subtasks
          */
         clearOutput?: boolean;
         /**
          * show the subtasks of the current task if it returns a new listr
          *
          * @default true
+         * @global global option that can not be temperated with from subtasks
          */
         showSubtasks?: boolean;
         /**
@@ -68,12 +71,19 @@ export declare class MyDefaultRenderer implements ListrRenderer {
          */
         showErrorMessage?: boolean;
         /**
+         * suffix retry messages with [RETRY-${COUNT}] when retry is enabled for a task
+         *
+         * @default true
+         */
+        suffixRetries?: boolean;
+        /**
          * only update via renderhook
          *
          * useful for tests and stuff. this will disable showing spinner and only update the screen if the something else has
          * happened in the task worthy to show
          *
          * @default false
+         * @global global option that can not be temperated with from subtasks
          */
         lazy?: boolean;
         /**
@@ -82,8 +92,23 @@ export declare class MyDefaultRenderer implements ListrRenderer {
          * overwrites per task renderer options
          *
          * @default false
+         * @global global option that can not be temperated with from subtasks
          */
         showTimer?: boolean;
+        /**
+         * removes empty lines from the data output
+         *
+         * @default true
+         */
+        removeEmptyLines?: boolean;
+        /**
+         * formats data output depending on your requirements.
+         * log-update mostly breaks if there is no wrap, so there is many options to choose your preference
+         *
+         * @default 'truncate'
+         * @global global option that can not be temperated with from subtasks
+         */
+        formatOutput?: 'truncate' | 'wrap';
         /**
          * max subtasks to print
          *
@@ -119,24 +144,25 @@ export declare class MyDefaultRenderer implements ListrRenderer {
          */
         persistentOutput?: boolean;
         /**
-         * show the task time if it was succesful
+         * show the task time if it was successful
          */
         showTimer?: boolean;
     };
     private id?;
     private bottomBar;
     private promptBar;
-    private spinner;
+    private readonly spinner;
     private spinnerPosition;
     private taskTime;
     private currentTasks;
     private hiddenTasks;
-    constructor(tasks: Array<ListrTaskObject<any, typeof MyDefaultRenderer>>, options: typeof MyDefaultRenderer['rendererOptions'], renderHook$?: ListrTaskObject<any, any>['renderHook$']);
-    getTaskOptions(task: ListrTaskObject<any, typeof MyDefaultRenderer>): typeof MyDefaultRenderer['rendererTaskOptions'];
-    isBottomBar(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
-    hasPersistentOutput(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
-    hasTimer(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
-    getTaskTime(task: ListrTaskObject<any, typeof MyDefaultRenderer>): string;
+    constructor(tasks: Array<Task<any, typeof MyDefaultRenderer>>, options: typeof MyDefaultRenderer['rendererOptions'], renderHook$?: Task<any, any>['renderHook$']);
+    getTaskOptions(task: Task<any, typeof MyDefaultRenderer>): typeof MyDefaultRenderer['rendererTaskOptions'];
+    isBottomBar(task: Task<any, typeof MyDefaultRenderer>): boolean;
+    hasPersistentOutput(task: Task<any, typeof MyDefaultRenderer>): boolean;
+    hasTimer(task: Task<any, typeof MyDefaultRenderer>): boolean;
+    getSelfOrParentOption<T extends keyof typeof MyDefaultRenderer['rendererOptions']>(task: Task<any, typeof MyDefaultRenderer>, key: T): typeof MyDefaultRenderer['rendererOptions'][T];
+    getTaskTime(task: Task<any, typeof MyDefaultRenderer>): string;
     createRender(options?: {
         tasks?: boolean;
         bottomBar?: boolean;
@@ -149,5 +175,7 @@ export declare class MyDefaultRenderer implements ListrRenderer {
     private renderPrompt;
     private dumpData;
     private formatString;
+    private indentMultilineOutput;
     private getSymbol;
+    private addSuffixToMessage;
 }

@@ -1,16 +1,17 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { core, flags, SfdxCommand } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
+import { Messages, Connection } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { prompt, QuestionCollection } from 'inquirer';
 import puppeteer from 'puppeteer';
 
-core.Messages.importMessagesDirectory(__dirname);
-const messages = core.Messages.loadMessages('sfdx-jayree', 'deploychangeset');
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('sfdx-jayree', 'deploychangeset');
 export default class DeployChangeSet extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
@@ -214,7 +215,7 @@ jobid:  0Xxx100000xx1x1
     };
   }
 
-  private async login(conn: core.Connection, page: puppeteer.Page) {
+  private async login(conn: Connection, page: puppeteer.Page) {
     await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
       waitUntil: 'networkidle2',
     });
@@ -291,7 +292,7 @@ jobid:  0Xxx100000xx1x1
     });
   }
 
-  private async getjob(conn: core.Connection, page: puppeteer.Page, cs: any) {
+  private async getjob(conn: Connection, page: puppeteer.Page, cs: any) {
     // open deployment status
     await page.goto(conn.instanceUrl + '/changemgmt/monitorDeployment.apexp', {
       waitUntil: 'networkidle0',

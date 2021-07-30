@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, jayree
+ * Copyright (c) 2021, jayree
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
@@ -11,6 +11,7 @@ import * as fs from 'fs-extra';
 import execa from 'execa';
 import equal from 'fast-deep-equal';
 import * as xml2js from 'xml2js';
+import { cli } from 'cli-ux';
 import * as describe from '../../metadata/describe.json';
 
 const builder = new xml2js.Builder({
@@ -192,7 +193,11 @@ export async function convertTempProject(
   return null;
 }
 
-export async function appendToManifest(file, insert): Promise<Record<string, unknown>> {
+export async function appendToManifest(
+  file,
+  insert,
+  options: { destruct: boolean } = { destruct: false }
+): Promise<Record<string, unknown>> {
   const packagexmlJson = await parseString(await fs.readFile(file, 'utf8'));
   const types = {};
 
@@ -208,6 +213,48 @@ export async function appendToManifest(file, insert): Promise<Record<string, unk
     types[md] = types[md] ?? [];
     types[md] = types[md].concat(insert[md]);
   });
+
+  const replaceChildwithParentType = (childTypes, masterType) => {
+    const PrefixOfFile = new Set();
+    childTypes.forEach((childType) => {
+      if (types[childType]) {
+        types[childType].forEach((ruleName) => {
+          const masterLabel = ruleName.split('.').slice(0, 1).toString();
+          PrefixOfFile.add(masterLabel);
+          process.once('exit', () => {
+            cli.warn(`'${childType}:${ruleName}' replaced with '${masterType}:${masterLabel}' in ${basename(file)}`);
+          });
+        });
+        delete types[childType];
+      }
+    });
+    if (PrefixOfFile.size > 0) {
+      types[masterType] = Array.from(PrefixOfFile);
+    }
+  };
+
+  if (!options.destruct) {
+    replaceChildwithParentType(['AssignmentRule'], 'AssignmentRules');
+    replaceChildwithParentType(['AutoResponseRule'], 'AutoResponseRules');
+    replaceChildwithParentType(['EscalationRule'], 'EscalationRules');
+    replaceChildwithParentType(['MatchingRule'], 'MatchingRules');
+    replaceChildwithParentType(
+      ['SharingOwnerRule', 'SharingCriteriaRule', 'SharingGuestRule', 'SharingTerritoryRule'],
+      'SharingRules'
+    );
+    replaceChildwithParentType(
+      [
+        'WorkflowFieldUpdate',
+        'WorkflowKnowledgePublish',
+        'WorkflowTask',
+        'WorkflowAlert',
+        'WorkflowSend',
+        'WorkflowOutboundMessage',
+        'WorkflowRule',
+      ],
+      'Workflow'
+    );
+  }
 
   const newtypes = [];
   Object.keys(types)

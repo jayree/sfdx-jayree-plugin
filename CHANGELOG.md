@@ -1,3 +1,48 @@
+## [3.12.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.12.0...v3.12.1) (2021-07-20)
+
+
+### Bug Fixes
+
+* update dependencies ([3852efe](https://github.com/jayree/sfdx-jayree-plugin/commit/3852efeb317e03c84a8ce1150635875000f2bc50))
+* **sourcefix:** optimize inserttask code and fix object-path bug ([a12b14f](https://github.com/jayree/sfdx-jayree-plugin/commit/a12b14f65d838775704fa2d3322208b74abd54f8))
+
+# [3.12.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.5...v3.12.0) (2021-07-11)
+
+
+### Bug Fixes
+
+* update dependencies and metadataObjects ([1afd9ff](https://github.com/jayree/sfdx-jayree-plugin/commit/1afd9ff37a6acb546c1c4d9d178dd6f146574253))
+
+
+### Features
+
+* **hooks:** support plugin-source plugin ([3f1fa64](https://github.com/jayree/sfdx-jayree-plugin/commit/3f1fa640444d48827b09eac0bdd4ca86cba61ef0))
+
+## [3.11.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.4...v3.11.5) (2021-06-30)
+
+
+### Bug Fixes
+
+* **hooks:** call reset in prerun hook if storedServerMaxRevisionCounter eq 0 ([2ffda2c](https://github.com/jayree/sfdx-jayree-plugin/commit/2ffda2c6b9615c3a5937de22e096a587ce831541))
+* update listr2 subTasksRenderer ([8733744](https://github.com/jayree/sfdx-jayree-plugin/commit/8733744ffebdecefb43e2ed33d5586b314ca0817))
+
+## [3.11.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.3...v3.11.4) (2021-06-24)
+
+
+### Bug Fixes
+
+* update dependencies ([b1b7993](https://github.com/jayree/sfdx-jayree-plugin/commit/b1b79934c9d74c373040606976787fe501e4688c))
+* **gitdiff:** replace ChildTypes with ParentTypes in manifest where necessary ([4f55a9f](https://github.com/jayree/sfdx-jayree-plugin/commit/4f55a9f9259032d61e9ed51d08c6937496e41a3e))
+* **packagedescription:** remove xml-js dependency ([0e93b99](https://github.com/jayree/sfdx-jayree-plugin/commit/0e93b996fe0587080b33115c4b90e2d1c5bd3d81))
+
+## [3.11.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.2...v3.11.3) (2021-06-18)
+
+
+### Bug Fixes
+
+* updated dependencies ([0469cf6](https://github.com/jayree/sfdx-jayree-plugin/commit/0469cf6030b577a55421aa8e4252444705bd6ffc))
+* **manifestgenerate:** update list of StandardValueSet to match apiVersion ([b808a80](https://github.com/jayree/sfdx-jayree-plugin/commit/b808a807380a2922d600c9312fed596227e7d10c))
+
 ## [3.11.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.11.1...v3.11.2) (2021-06-13)
 
 
