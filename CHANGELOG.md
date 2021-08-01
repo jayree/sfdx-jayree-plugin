@@ -1,3 +1,23 @@
+# [4.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.12.1...v4.0.0) (2021-08-01)
+
+
+### Bug Fixes
+
+* **hooks:** fix if result is empty after success filter ([5193185](https://github.com/jayree/sfdx-jayree-plugin/commit/51931851495cf34be61fce8092f8fd6cf68be39f))
+
+
+### Features
+
+* faster xml processing ([58bda42](https://github.com/jayree/sfdx-jayree-plugin/commit/58bda422aef53cb539ad6680e3b8d94e88037cf7))
+* hook support for plugin-source plugin ([fcb840b](https://github.com/jayree/sfdx-jayree-plugin/commit/fcb840b79d49d5739a87781425b98de44e5ce1db))
+* new lightning fast version of git:diff based on the  SDR library ([859e676](https://github.com/jayree/sfdx-jayree-plugin/commit/859e6763153ee2676117375b93bb17d474d29bd5))
+* remove deprecated commands ([009fd30](https://github.com/jayree/sfdx-jayree-plugin/commit/009fd30f132c6c90b1bd33a36fb237fee2108034))
+
+
+### BREAKING CHANGES
+
+* remove source:all and :full, as the functionality is replaced by the retrieve hooks
+
 ## [3.12.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.12.0...v3.12.1) (2021-07-20)
 
 
