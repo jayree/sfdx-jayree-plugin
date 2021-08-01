@@ -112,12 +112,12 @@ function parseMetadataXml(fsPath: string) {
   }
 }
 
-export function analyzeFile(path, ctx: Ctx) {
+export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer) {
   let source = '';
   let target = '';
   if (parseMetadataXml(path)) {
     try {
-      const ref2resolver = new MetadataResolver(registryAccess, ctx.ref2VirtualTreeContainer);
+      const ref2resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
       const ref2Component = ref2resolver.getComponentsFromPath(path);
       if (ref2Component.length === 1) {
         source = ref2Component[0].parseXmlSync();
@@ -128,7 +128,7 @@ export function analyzeFile(path, ctx: Ctx) {
     }
 
     try {
-      const ref1resolver = new MetadataResolver(registryAccess, ctx.ref1VirtualTreeContainer);
+      const ref1resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
       const ref1Component = ref1resolver.getComponentsFromPath(path);
       if (ref1Component.length === 1) {
         target = ref1Component[0].parseXmlSync();
@@ -273,13 +273,13 @@ export function analyzeFile(path, ctx: Ctx) {
   };
 }
 
-export async function getGitDiff(ctx: Ctx) {
-  let gitLines = (
-    await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ctx.git.ref1ref2])
-  ).stdout.split(/\r?\n/);
+export async function getGitDiff(sfdxProjectFolders, ref1ref2) {
+  let gitLines = (await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ref1ref2])).stdout.split(
+    /\r?\n/
+  );
 
   gitLines = gitLines.filter((l) =>
-    ctx.sfdxProjectFolders.some((f) => {
+    sfdxProjectFolders.some((f) => {
       if (typeof l.split('\t')[1] !== 'undefined') {
         return l.split('\t')[1].startsWith(f);
       }
@@ -293,7 +293,7 @@ export async function getGitDiff(ctx: Ctx) {
 
   gitlinesf = gitlinesf.filter((line) => {
     if (line.status === 'D') {
-      for (const sfdxFolder of ctx.sfdxProjectFolders) {
+      for (const sfdxFolder of sfdxProjectFolders) {
         let extf;
         if (line.path.startsWith(sfdxFolder)) {
           extf = sfdxFolder;
@@ -315,7 +315,9 @@ export async function getGitDiff(ctx: Ctx) {
 
 export function getGitResults(
   task,
-  ctx: Ctx
+  gitLines,
+  ref1VirtualTreeContainer,
+  ref2VirtualTreeContainer
 ): {
   added: string[];
   modified: {
@@ -333,8 +335,8 @@ export function getGitResults(
     skipped: [],
   };
 
-  for (const [i, { status, path }] of ctx.gitLines.entries()) {
-    const check = analyzeFile(path, ctx);
+  for (const [i, { status, path }] of gitLines.entries()) {
+    const check = analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer);
     if (check.status === 0) {
       switch (status) {
         case 'D': {
@@ -362,7 +364,7 @@ export function getGitResults(
     } else if (check.status === -1) {
       results.skipped.push(path);
     }
-    task.output = `${i + 1}/${ctx.gitLines.length} files processed (${results.skipped.length} skipped):
+    task.output = `${i + 1}/${gitLines.length} files processed (${results.skipped.length} skipped):
 Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
       [...results.modified.destructiveFiles, ...results.modified.manifestFiles].length
     }`;

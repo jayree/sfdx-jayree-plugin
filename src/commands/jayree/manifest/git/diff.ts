@@ -110,7 +110,7 @@ uses the diff of what is unique in branchB (REF2)`,
           title: "Get result of 'git --no-pager diff --name-status --no-renames <pending>'",
           task: async (ctx, task): Promise<void> => {
             task.title = `Get result of 'git --no-pager diff --name-status --no-renames ${ctx.git.ref1ref2}'`;
-            ctx.gitLines = await getGitDiff(ctx);
+            ctx.gitLines = await getGitDiff(ctx.sfdxProjectFolders, ctx.git.ref1ref2);
           },
           options: { persistentOutput: true },
         },
@@ -154,7 +154,12 @@ uses the diff of what is unique in branchB (REF2)`,
         {
           title: 'Analyze git diff results',
           task: (ctx, task): void => {
-            ctx.gitResults = getGitResults(task, ctx);
+            ctx.gitResults = getGitResults(
+              task,
+              ctx.gitLines,
+              ctx.ref1VirtualTreeContainer,
+              ctx.ref2VirtualTreeContainer
+            );
           },
           options: { persistentOutput: true },
         },
@@ -167,7 +172,7 @@ uses the diff of what is unique in branchB (REF2)`,
                   title:
                     !ctx.gitResults.deleted.length && !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length
                       ? undefined
-                      : `Generate ${join('destructiveChanges', 'destructiveChanges.xml')}`,
+                      : join('destructiveChanges', 'destructiveChanges.xml'),
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   skip: (ctx): boolean =>
                     !ctx.gitResults.deleted.length && !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length,
@@ -221,7 +226,7 @@ uses the diff of what is unique in branchB (REF2)`,
                   title:
                     !ctx.gitResults.added.length && !Object.keys(ctx.gitResults.modified.toManifest).length
                       ? undefined
-                      : `Generate ${join('package', 'package.xml')}`,
+                      : join('package', 'package.xml'),
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   skip: (ctx): boolean =>
                     !ctx.gitResults.added.length && !Object.keys(ctx.gitResults.modified.toManifest).length,

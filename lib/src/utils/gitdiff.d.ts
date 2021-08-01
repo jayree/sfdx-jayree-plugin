@@ -42,7 +42,7 @@ export interface Ctx {
     };
 }
 export declare function createVirtualTreeContainer(ref: any, modifiedFiles: any): Promise<VirtualTreeContainer>;
-export declare function analyzeFile(path: any, ctx: Ctx): {
+export declare function analyzeFile(path: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
     status: number;
     toManifest?: undefined;
     toDestructiveChanges?: undefined;
@@ -51,11 +51,11 @@ export declare function analyzeFile(path: any, ctx: Ctx): {
     toManifest: {};
     toDestructiveChanges: {};
 };
-export declare function getGitDiff(ctx: Ctx): Promise<{
+export declare function getGitDiff(sfdxProjectFolders: any, ref1ref2: any): Promise<{
     path: string;
     status: string;
 }[]>;
-export declare function getGitResults(task: any, ctx: Ctx): {
+export declare function getGitResults(task: any, gitLines: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
     added: string[];
     modified: {
         destructiveFiles: string[];
