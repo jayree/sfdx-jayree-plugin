@@ -28,6 +28,16 @@ const messages = Messages.loadMessages('sfdx-jayree', 'gitdiff');
 
 const logger = new Logger({ useIcons: false });
 
+// workaround until listr2 can catch emitWarnings with v4.0
+// eslint-disable-next-line @typescript-eslint/unbound-method
+const original = process.emitWarning;
+
+process.emitWarning = (warning: string) => {
+  process.once('beforeExit', () => {
+    return original(warning);
+  });
+};
+
 const unexpectedArgument = (input) => {
   if (input.includes('-')) {
     throw new Error(`Unexpected argument: ${input}
