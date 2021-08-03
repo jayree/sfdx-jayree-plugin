@@ -215,8 +215,11 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -f, --file=file                                                                   path to the second manifest file
+  -f, --file=file                                                                   path to the second 'cleanup'
+                                                                                    manifest file
+
   -x, --manifest=manifest                                                           path to the manifest file
+
   --json                                                                            format output as json
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
