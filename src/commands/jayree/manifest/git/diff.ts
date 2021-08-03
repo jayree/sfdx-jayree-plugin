@@ -97,19 +97,16 @@ uses the diff of what is unique in branchB (REF2)`,
         {
           title: 'Analyze sfdx-project',
           task: async (ctx, task): Promise<void> => {
-            ctx.sfdxProject = JSON.parse((await fs.readFile(join(ctx.projectRoot, 'sfdx-project.json'))).toString());
-            ctx.sfdxProjectFolders = ctx.sfdxProject.packageDirectories.map((p) => p.path);
-            task.output = `found ${ctx.sfdxProjectFolders.length} package ${util.format(
-              'director%s',
-              ctx.sfdxProjectFolders.length === 1 ? 'y' : 'ies'
-            )}`;
+            ctx.sfdxProjectFolders = this.project.getPackageDirectories().map((p) => p.path);
+            ctx.sourceApiVersion = (await this.project.retrieveSfdxProjectJson()).getContents().sourceApiVersion;
+            task.output = `packageDirectories: ${ctx.sfdxProjectFolders.length} sourceApiVersion: ${ctx.sourceApiVersion}`;
           },
           options: { persistentOutput: true },
         },
         {
-          title: "Get result of 'git --no-pager diff --name-status --no-renames <pending>'",
+          title: "Execute 'git --no-pager diff --name-status --no-renames <pending>'",
           task: async (ctx, task): Promise<void> => {
-            task.title = `Get result of 'git --no-pager diff --name-status --no-renames ${ctx.git.ref1ref2}'`;
+            task.title = `Execute 'git --no-pager diff --name-status --no-renames ${ctx.git.ref1ref2}'`;
             ctx.gitLines = await getGitDiff(ctx.sfdxProjectFolders, ctx.git.ref1ref2);
           },
           options: { persistentOutput: true },
@@ -215,7 +212,7 @@ uses the diff of what is unique in branchB (REF2)`,
                             ctx.destructiveChanges.files[1],
                             `<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
-  <version>${ctx.sfdxProject.sourceApiVersion}</version>
+  <version>${ctx.sourceApiVersion}</version>
 </Package>`
                           );
                         },

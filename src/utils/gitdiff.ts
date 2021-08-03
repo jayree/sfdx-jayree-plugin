@@ -38,7 +38,7 @@ const registryAccess = new RegistryAccess(registry);
 export interface Ctx {
   projectRoot: string;
   sfdxProjectFolders: string[];
-  sfdxProject: { packageDirectories: [{ path: string }]; sourceApiVersion: string };
+  sourceApiVersion: string;
   gitLines: Array<{ path: string; status: string }>;
   gitResults: {
     added: string[];
@@ -364,10 +364,10 @@ export function getGitResults(
     } else if (check.status === -1) {
       results.skipped.push(path);
     }
-    task.output = `${i + 1}/${gitLines.length} files processed (${results.skipped.length} skipped):
+    task.output = `${i + 1}/${gitLines.length} files processed
 Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
       [...results.modified.destructiveFiles, ...results.modified.manifestFiles].length
-    }`;
+    } Skipped: ${results.skipped.length}`;
   }
 
   return results;

@@ -5,12 +5,7 @@ export declare const debug: any;
 export interface Ctx {
     projectRoot: string;
     sfdxProjectFolders: string[];
-    sfdxProject: {
-        packageDirectories: [{
-            path: string;
-        }];
-        sourceApiVersion: string;
-    };
+    sourceApiVersion: string;
     gitLines: Array<{
         path: string;
         status: string;
