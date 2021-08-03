@@ -1,3 +1,12 @@
+## [4.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.0...v4.0.1) (2021-08-03)
+
+
+### Bug Fixes
+
+* **git:diff:** fix if process.emitWarning is called ([d0332ba](https://github.com/jayree/sfdx-jayree-plugin/commit/d0332bae087fc49f583be9b0a82ac4f343dba731))
+* **manifest:cleanup:** creates cleanup manifest template if file doesn't exist ([b6ae5e0](https://github.com/jayree/sfdx-jayree-plugin/commit/b6ae5e0e152a8fd4112b23274451bf003694b15d))
+* **manifest:generate:** fix if targetpath doesn't exist ([49a9937](https://github.com/jayree/sfdx-jayree-plugin/commit/49a9937d7f8ba1376ef9129bdb5a6ee4c2254e8b))
+
 # [4.0.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v3.12.1...v4.0.0) (2021-08-01)
 
 
