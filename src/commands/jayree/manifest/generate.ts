@@ -727,6 +727,7 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
       filteredwarnings.forEach((value) => this.ux.warn(value));
 
       if (outputFile) {
+        await fs.ensureFile(outputFile);
         await fs
           .writeFile(outputFile, packageXml)
           .then(() => this.ux.stopSpinner())
