@@ -1978,6 +1978,24 @@
             "name": "ConnectedSystem",
             "suffix": "connectedSystem",
             "directoryName": "ConnectedSystem"
+        },
+        "svccatalogcategory": {
+            "id": "svccatalogcategory",
+            "name": "SvcCatalogCategory",
+            "suffix": "category",
+            "directoryName": "svcCatalogCategories"
+        },
+        "svccatalogfulfillmentflow": {
+            "id": "svccatalogfulfillmentflow",
+            "name": "SvcCatalogFulfillmentFlow",
+            "suffix": "fulfillmentFlow",
+            "directoryName": "svcCatalogFulfillmentFlows"
+        },
+        "svccatalogitemdef": {
+            "id": "svccatalogitemdef",
+            "name": "SvcCatalogItemDef",
+            "suffix": "catalogItem",
+            "directoryName": "svcCatalogItems"
         }
     },
     "suffixes": {
@@ -2217,7 +2235,10 @@
         "dataMappingSchema": "datamappingschema",
         "dataMapping": "datamapping",
         "federationDataMappingUsage": "federationdatamappingusage",
-        "connectedSystem": "connectedsystem"
+        "connectedSystem": "connectedsystem",
+        "category": "svccatalogcategory",
+        "fulfillmentFlow": "svccatalogfulfillmentflow",
+        "catalogItem": "svccatalogitemdef"
     },
     "strictDirectoryNames": {
         "experiences": "experiencebundle",
@@ -2231,11 +2252,11 @@
         "staticresources": "staticresource",
         "sites": "customsite",
         "accessControlPolicies": "accesscontrolpolicy",
-        "integrationHub": "integrationhubsettings",
-        "mktDataSources": "datasource",
         "restrictionRules": "restrictionrule",
+        "integrationHub": "integrationhubsettings",
         "ObjectHierarchyRelationship": "objecthierarchyrelationship",
-        "IndustriesManufacturingSettings": "industriesmanufacturingsettings"
+        "IndustriesManufacturingSettings": "industriesmanufacturingsettings",
+        "mktDataSources": "datasource"
     },
     "childTypes": {
         "customlabel": "customlabels",
@@ -2249,9 +2270,7 @@
         "sharingreason": "customobject",
         "listview": "customobject",
         "fieldset": "customobject",
-        "formsection": "form",
         "workflowfieldupdate": "workflow",
-        "workflowknowledgepublish": "workflow",
         "workflowtask": "workflow",
         "workflowalert": "workflow",
         "workflowsend": "workflow",
@@ -2264,12 +2283,14 @@
         "sharingownerrule": "sharingrules",
         "sharingcriteriarule": "sharingrules",
         "botversion": "bot",
+        "customfieldtranslation": "customobjecttranslation",
+        "formsection": "form",
+        "workflowknowledgepublish": "workflow",
         "sharingguestrule": "sharingrules",
         "sharingterritoryrule": "sharingrules",
         "managedtopic": "managedtopics",
         "workskillroutingattribute": "workskillrouting",
-        "mktdatatranfield": "mktdatatranobject",
-        "customfieldtranslation": "customobjecttranslation"
+        "mktdatatranfield": "mktdatatranobject"
     },
     "apiVersion": "52.0"
 }

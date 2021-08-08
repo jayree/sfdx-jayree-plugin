@@ -120,6 +120,7 @@ export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeConta
       const ref2resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
       const ref2Component = ref2resolver.getComponentsFromPath(path);
       if (ref2Component.length === 1) {
+        // debug({ ref2Component: ref2Component[0].getChildren() });
         source = ref2Component[0].parseXmlSync();
       }
     } catch (error) {
@@ -131,6 +132,7 @@ export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeConta
       const ref1resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
       const ref1Component = ref1resolver.getComponentsFromPath(path);
       if (ref1Component.length === 1) {
+        // debug({ ref1Component: ref1Component[0].getChildren() });
         target = ref1Component[0].parseXmlSync();
       }
     } catch (error) {
@@ -191,7 +193,6 @@ export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeConta
       const n = nodes.pop();
       if (typeof n.obj === 'object') {
         Object.keys(n.obj).forEach((k) => {
-          // if (typeof n.obj[k] === 'object') {
           // eslint-disable-next-line @typescript-eslint/no-shadow
           const path = n.path.concat(k);
           if (path.includes('fullName')) {
@@ -203,7 +204,6 @@ export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeConta
             obj: n.obj[k],
             path,
           });
-          //   }
         });
       }
     }

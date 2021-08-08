@@ -123,14 +123,12 @@ uses the diff of what is unique in branchB (REF2)`,
         },
         {
           title: 'Create virtual tree container',
+          skip: (ctx): boolean => ctx.gitLines.length === 0,
           task: (ctx, task): Listr =>
             task.newListr(
               [
                 {
                   title: `ref1: ${ctx.git.ref1}`,
-                  // eslint-disable-next-line @typescript-eslint/no-shadow
-                  // skip: (ctx): boolean =>
-                  //  !ctx.gitResults.deleted.length && !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length,
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   task: async (ctx): Promise<void> => {
                     ctx.ref1VirtualTreeContainer = await createVirtualTreeContainer(
@@ -141,8 +139,6 @@ uses the diff of what is unique in branchB (REF2)`,
                 },
                 {
                   title: ctx.git.ref2 !== '' ? `ref2: ${ctx.git.ref2}` : undefined,
-                  // eslint-disable-next-line @typescript-eslint/no-shadow
-                  // skip: (ctx): boolean => ctx.git.ref2 === '',
                   // eslint-disable-next-line @typescript-eslint/no-shadow
                   task: async (ctx): Promise<void> => {
                     ctx.ref2VirtualTreeContainer =
@@ -160,6 +156,7 @@ uses the diff of what is unique in branchB (REF2)`,
         },
         {
           title: 'Analyze git diff results',
+          skip: (ctx): boolean => ctx.gitLines.length === 0,
           task: (ctx, task): void => {
             ctx.gitResults = getGitResults(
               task,
@@ -172,6 +169,12 @@ uses the diff of what is unique in branchB (REF2)`,
         },
         {
           title: 'Generate manifests',
+          skip: (ctx): boolean =>
+            !ctx.gitResults ||
+            (!ctx.gitResults.deleted.length &&
+              !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length &&
+              !ctx.gitResults.added.length &&
+              !Object.keys(ctx.gitResults.modified.toManifest).length),
           task: (ctx, task): Listr =>
             task.newListr(
               [
@@ -190,7 +193,6 @@ uses the diff of what is unique in branchB (REF2)`,
                         // title: 'Generate manifest',
                         // eslint-disable-next-line @typescript-eslint/no-shadow
                         task: (ctx, task): void => {
-                          ctx.destructiveChangesComponentSet = null;
                           ctx.destructiveChangesComponentSet = createManifest(
                             ctx.ref1VirtualTreeContainer,
                             { destruct: true },
@@ -205,7 +207,8 @@ uses the diff of what is unique in branchB (REF2)`,
                       },
                       {
                         // title: 'Save',
-                        skip: (): boolean => !ctx.destructiveChangesComponentSet.size,
+                        skip: (): boolean =>
+                          !ctx.destructiveChangesComponentSet || !ctx.destructiveChangesComponentSet.size,
                         // eslint-disable-next-line @typescript-eslint/no-shadow
                         task: async (ctx): Promise<void> => {
                           ctx.destructiveChanges.files = [
@@ -244,7 +247,6 @@ uses the diff of what is unique in branchB (REF2)`,
                         // title: 'Generate manifest',
                         // eslint-disable-next-line @typescript-eslint/no-shadow
                         task: (ctx, task): void => {
-                          ctx.manifestComponentSet = null;
                           ctx.manifestComponentSet = createManifest(
                             ctx.ref2VirtualTreeContainer,
                             { destruct: false },
@@ -259,7 +261,7 @@ uses the diff of what is unique in branchB (REF2)`,
                       },
                       {
                         // title: 'Save',
-                        skip: (): boolean => !ctx.manifestComponentSet.size,
+                        skip: (): boolean => !ctx.manifestComponentSet || !ctx.manifestComponentSet.size,
                         // eslint-disable-next-line @typescript-eslint/no-shadow
                         task: async (ctx): Promise<void> => {
                           ctx.manifest.file = join(ctx.projectRoot, 'package', 'package.xml');
