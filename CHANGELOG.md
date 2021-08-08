@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.1...v4.0.2) (2021-08-08)
+
+
+### Bug Fixes
+
+* **git:diff:** update registry, fix skip tasks ([bb74d76](https://github.com/jayree/sfdx-jayree-plugin/commit/bb74d7633c54897f6c164f6888dfe5f17befdde4))
+
 ## [4.0.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.0...v4.0.1) (2021-08-03)
 
 
