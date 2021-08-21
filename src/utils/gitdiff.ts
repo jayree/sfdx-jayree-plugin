@@ -327,12 +327,13 @@ export function getGitResults(
     toDestructiveChanges: Record<string, []>;
   };
   deleted: string[];
+  unchanged: string[];
 } {
   const results = {
     added: [],
     modified: { destructiveFiles: [], manifestFiles: [], toManifest: {}, toDestructiveChanges: {} },
     deleted: [],
-    skipped: [],
+    unchanged: [],
   };
 
   for (const [i, { status, path }] of gitLines.entries()) {
@@ -362,12 +363,12 @@ export function getGitResults(
         });
       });
     } else if (check.status === -1) {
-      results.skipped.push(path);
+      results.unchanged.push(path);
     }
     task.output = `${i + 1}/${gitLines.length} files processed
 Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
       [...results.modified.destructiveFiles, ...results.modified.manifestFiles].length
-    } Skipped: ${results.skipped.length}`;
+    } Unchanged: ${results.unchanged.length}`;
   }
 
   return results;
@@ -398,8 +399,8 @@ export function createManifest(
   // });
 
   const fromSourcePath = new ComponentSet();
-  sourcepath.forEach((path) => {
-    const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
+  const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
+  for (const path of sourcepath) {
     for (const component of resolver.getComponentsFromPath(path)) {
       if (['CustomFieldTranslation'].includes(component.type.name)) {
         if (!options.destruct) {
@@ -412,7 +413,7 @@ export function createManifest(
         fromSourcePath.add(component);
       }
     }
-  });
+  }
   debug({ fromSourcePath });
 
   Aggregator.push(...fromSourcePath);
@@ -452,12 +453,13 @@ export function createManifest(
   };
 
   const filter = new ComponentSet();
-  Object.keys(metadata).forEach((type) => {
-    metadata[type].forEach((fullName) => {
+
+  for (const type of Object.keys(metadata)) {
+    for (const fullName of metadata[type]) {
       debug({ type, fullName });
       filter.add(replaceChildwithParentType(type, fullName));
-    });
-  });
+    }
+  }
 
   const fromMetadata = ComponentSet.fromSource({
     fsPaths: ['.'],

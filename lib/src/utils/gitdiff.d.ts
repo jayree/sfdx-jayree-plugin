@@ -59,6 +59,7 @@ export declare function getGitResults(task: any, gitLines: any, ref1VirtualTreeC
         toDestructiveChanges: Record<string, []>;
     };
     deleted: string[];
+    unchanged: string[];
 };
 export declare function createManifest(virtualTreeContainer: any, options: {
     destruct: boolean;
