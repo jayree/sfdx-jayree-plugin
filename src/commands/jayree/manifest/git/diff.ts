@@ -277,7 +277,7 @@ uses the diff of what is unique in branchB (REF2)`,
         },
       ],
       {
-        rendererOptions: { showTimer: true, collapse: false },
+        rendererOptions: { showTimer: true, collapse: false, lazy: true },
         rendererSilent: !this.isOutputEnabled,
         rendererFallback: debug.enabled,
       }
