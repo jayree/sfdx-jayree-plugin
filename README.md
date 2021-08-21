@@ -667,8 +667,8 @@ USAGE
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
-  -r, --revision=revision                                                           start at a specific revision counter
-                                                                                    number (default: 0)
+  -r, --revision=revision                                                           [default: 0] start at a specific
+                                                                                    revision counter number
 
   -u, --targetusername=targetusername                                               username or alias for the target
                                                                                     org; overrides default target org
