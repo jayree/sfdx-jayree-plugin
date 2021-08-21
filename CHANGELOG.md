@@ -1,3 +1,12 @@
+## [4.0.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.2...v4.0.3) (2021-08-21)
+
+
+### Bug Fixes
+
+* update dependencies ([6f4b18b](https://github.com/jayree/sfdx-jayree-plugin/commit/6f4b18be647dbaabe7c38ce46d28a67718e2937d))
+* **gitdiff:** rename skipped to unchanged ([5a32c97](https://github.com/jayree/sfdx-jayree-plugin/commit/5a32c97f4ddbea1f16a8f1f215cffe369b53633e))
+* **gitdiff:** use lazy renderer option to fix sync issues ([495e9fe](https://github.com/jayree/sfdx-jayree-plugin/commit/495e9fedc65d340038e805820c6e082701d5861e))
+
 ## [4.0.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.1...v4.0.2) (2021-08-08)
 
 
