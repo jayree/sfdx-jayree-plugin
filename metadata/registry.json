@@ -11,6 +11,7 @@
       "name": "CustomLabels",
       "suffix": "labels",
       "directoryName": "labels",
+      "ignoreParsedFullName": true,
       "children": {
         "types": {
           "customlabel": {
@@ -274,6 +275,7 @@
         "suffixes": {
           "field": "customfield",
           "index": "index",
+          "indexe": "index",
           "businessProcess": "businessprocess",
           "recordType": "recordtype",
           "compactLayout": "compactlayout",
@@ -364,7 +366,8 @@
       "id": "custompageweblink",
       "name": "CustomPageWebLink",
       "suffix": "weblink",
-      "directoryName": "weblinks"
+      "directoryName": "weblinks",
+      "legacySuffix": "custompageweblink"
     },
     "letterhead": {
       "id": "letterhead",
