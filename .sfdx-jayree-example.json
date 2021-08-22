@@ -261,14 +261,6 @@
     }
   },
   "source:retrieve:all": {
-    "manifestignore": {
-      "default": "manifest/packageignore.xml",
-      "dev": "manifest/packageignore-dev.xml"
-    },
-    "manifest": {
-      "default": "manifest/package.xml",
-      "dev": "manifest/package-dev.xml"
-    },
     "Spring 20": {
       "Value too long for field: Name maximum length is:40": {
         "isactive": true,

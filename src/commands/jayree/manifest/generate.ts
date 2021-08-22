@@ -9,7 +9,7 @@ import { Messages, SfdxProject, Connection } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import * as jsforce from 'jsforce';
-import { builder } from '../../../utils/xml';
+import { js2Manifest } from '../../../utils/xml';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
 Messages.importMessagesDirectory(__dirname);
@@ -647,9 +647,6 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
 
       const packageJson = {
         Package: {
-          $: {
-            xmlns: 'http://soap.sforce.com/2006/04/metadata',
-          },
           types: [],
           version: apiVersion,
         },
@@ -720,7 +717,7 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
       // do cleanup
       // }
 
-      const packageXml = builder.buildObject(packageJson);
+      const packageXml = js2Manifest(packageJson);
 
       /*     notifier.notify({
             title: 'sfdx-jayree packagexml',
@@ -730,6 +727,7 @@ export default class GeneratePackageXML extends JayreeSfdxCommand {
       filteredwarnings.forEach((value) => this.ux.warn(value));
 
       if (outputFile) {
+        await fs.ensureFile(outputFile);
         await fs
           .writeFile(outputFile, packageXml)
           .then(() => this.ux.stopSpinner())

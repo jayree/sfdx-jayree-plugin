@@ -5,13 +5,14 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
+import os from 'os';
 import { flags } from '@salesforce/command';
 import { Messages, SfdxProject, fs as corefs } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
-import execa from 'execa';
-import { parseStringSync } from '../../../utils/xml';
+import { ComponentSet } from '@salesforce/source-deploy-retrieve';
+import { parseSourceComponent } from '../../../utils/xml';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
 Messages.importMessagesDirectory(__dirname);
@@ -77,27 +78,15 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
       return ordered;
     };
 
-    const projectpath = this.project.getPath();
-
     let settings = {};
 
-    const orgretrievepath = path.join(
-      projectpath,
-      '.sfdx-jayree',
-      'orgs',
-      this.org.getUsername(),
-      `sdx_retrieveSettings_${Date.now()}`
-    );
+    const targetDir = process.env.SFDX_MDAPI_TEMP_DIR || os.tmpdir();
+    const destRoot = path.join(targetDir, 'RetrieveSettings');
 
     // this.ux.startSpinner('Generating settings');
 
     try {
-      await corefs.mkdirp(orgretrievepath, corefs.DEFAULT_USER_DIR_MODE);
-
-      await execa('sfdx', ['force:project:create', '--projectname', '.', '--json'], {
-        cwd: orgretrievepath,
-        env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' },
-      });
+      await corefs.mkdirp(destRoot, corefs.DEFAULT_USER_DIR_MODE);
 
       let sfdxProjectVersion;
       /* istanbul ignore next*/
@@ -110,51 +99,32 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
 
       const apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
 
-      this.ux.log(`Using ${orgretrievepath} and apiVersion=${apiVersion}`);
+      this.ux.log(`Using ${destRoot} and apiVersion=${apiVersion}`);
 
-      const out = JSON.parse(
-        (
-          await execa(
-            'sfdx',
-            [
-              'force:source:retrieve',
-              '--manifest',
-              path.join(__dirname, '..', '..', '..', '..', '..', 'manifest', 'package-settings.xml'),
-              '--targetusername',
-              this.org.getUsername(),
-              '--apiversion',
-              apiVersion,
-              '--json',
-            ],
-            { cwd: orgretrievepath, env: { FORCE_COLOR: '0', SFDX_DISABLE_JAYREE_HOOKS: 'true' } }
-          )
-        ).stdout
-      );
+      const componentSet = new ComponentSet([{ fullName: '*', type: 'Settings' }]);
 
-      if (out?.result?.warnings) {
-        out.result.warnings.forEach((warning) => {
-          this.ux.warn(warning.problem);
-        });
-      }
+      const mdapiRetrieve = await componentSet.retrieve({
+        usernameOrConnection: this.org.getUsername(),
+        output: destRoot,
+        apiVersion,
+      });
 
-      if (out?.result?.inboundFiles) {
-        out.result.inboundFiles.forEach((element) => {
-          const filename = path.join(orgretrievepath, element.filePath);
-          const settingsXml = parseStringSync(fs.readFileSync(filename, 'utf8'), false);
-          Object.keys(settingsXml).forEach((key) => {
-            Object.keys(settingsXml[key]).forEach((property) => {
-              if (!settings[camelize(key)]) {
-                settings[camelize(key)] = {};
-              }
-              if (property !== '$') {
-                settings[camelize(key)][property] = settingsXml[key][property];
-              }
-            });
+      const retrieveResult = await mdapiRetrieve.pollStatus(1000);
+
+      for (const setting of retrieveResult.getFileResponses().filter((component) => component.type === 'Settings')) {
+        const settingsXml = parseSourceComponent(fs.readFileSync(setting.filePath, 'utf8'));
+        Object.keys(settingsXml).forEach((key) => {
+          Object.keys(settingsXml[key]).forEach((property) => {
+            if (!settings[camelize(key)]) {
+              settings[camelize(key)] = {};
+            }
+            if (property !== '$') {
+              settings[camelize(key)][property] = settingsXml[key][property];
+            }
           });
         });
-      } else {
-        throw out;
       }
+
       if (typeof settings['addressSettings'] !== 'undefined') {
         delete settings['addressSettings'];
         debug('delete ' + 'addressSettings');
@@ -300,7 +270,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
     } finally {
       if (!this.flags.keepcache) {
         process.once('exit', () => {
-          fs.removeSync(orgretrievepath);
+          fs.removeSync(destRoot);
         });
       }
     }

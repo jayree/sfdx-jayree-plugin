@@ -144,6 +144,13 @@
       "xmlName": "AssistantRecommendationType"
     },
     {
+      "directoryName": "audience",
+      "inFolder": "false",
+      "metaFile": "false",
+      "suffix": "audience",
+      "xmlName": "Audience"
+    },
+    {
       "directoryName": "aura",
       "inFolder": "false",
       "metaFile": "false",
@@ -920,7 +927,7 @@
       "directoryName": "IndustriesManufacturingSettings",
       "inFolder": "false",
       "metaFile": "false",
-      "suffix": "settings",
+      "suffix": "industriesManufacturingSettings",
       "xmlName": "IndustriesManufacturingSettings"
     },
     {
@@ -1528,6 +1535,27 @@
       "metaFile": "true",
       "suffix": "resource",
       "xmlName": "StaticResource"
+    },
+    {
+      "directoryName": "svcCatalogCategories",
+      "inFolder": "false",
+      "metaFile": "false",
+      "suffix": "category",
+      "xmlName": "SvcCatalogCategory"
+    },
+    {
+      "directoryName": "svcCatalogFulfillmentFlows",
+      "inFolder": "false",
+      "metaFile": "false",
+      "suffix": "fulfillmentFlow",
+      "xmlName": "SvcCatalogFulfillmentFlow"
+    },
+    {
+      "directoryName": "svcCatalogItems",
+      "inFolder": "false",
+      "metaFile": "false",
+      "suffix": "catalogItem",
+      "xmlName": "SvcCatalogItemDef"
     },
     {
       "directoryName": "synonymDictionaries",

@@ -5,290 +5,146 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { join, dirname, basename, relative, sep, posix } from 'path';
-import * as util from 'util';
-import * as fs from 'fs-extra';
+import { join, basename, sep, posix, dirname } from 'path';
+import { EOL } from 'os';
 import execa from 'execa';
 import equal from 'fast-deep-equal';
-import * as xml2js from 'xml2js';
-import { cli } from 'cli-ux';
-import * as describe from '../../metadata/describe.json';
+import {
+  ComponentSet,
+  RegistryAccess,
+  VirtualDirectory,
+  VirtualTreeContainer,
+} from '@salesforce/source-deploy-retrieve';
+import {
+  NodeFSTreeContainer as FSTreeContainer,
+  MetadataResolver,
+} from '@salesforce/source-deploy-retrieve/lib/src/resolve';
+import { ComponentLike } from '@salesforce/source-deploy-retrieve/lib/src/resolve/types';
 
-const builder = new xml2js.Builder({
-  xmldec: { version: '1.0', encoding: 'UTF-8' },
-  xmlns: true,
-  renderOpts: { pretty: true, indent: '  ', newline: '\n' },
-});
-
-const parseString = util.promisify(xml2js.parseString);
+export const NodeFSTreeContainer = FSTreeContainer;
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 export const debug = require('debug')('jayree:manifest:git:diff');
 
+// eslint-disable-next-line import/order
+import { deepFreeze } from '@salesforce/source-deploy-retrieve/lib/src/utils';
+import * as registryData from '../../metadata/registry.json';
+
+const registry = deepFreeze(registryData);
+const registryAccess = new RegistryAccess(registry);
+
+// const registryAccess = new RegistryAccess();
+
 export interface Ctx {
-  tmpbasepath: string;
   projectRoot: string;
   sfdxProjectFolders: string[];
-  sfdxProject: { packageDirectories: [{ path: string }]; sourceApiVersion: string };
-  // eslint-disable-next-line @typescript-eslint/ban-types
+  sourceApiVersion: string;
+  gitLines: Array<{ path: string; status: string }>;
   gitResults: {
     added: string[];
     deleted: string[];
-    modified: { toDestructiveChanges: Record<string, []>; toManifest: Record<string, []> };
+    modified: {
+      destructiveFiles: string[];
+      manifestFiles: string[];
+      toDestructiveChanges: Record<string, []>;
+      toManifest: Record<string, []>;
+    };
   };
-  destructiveChangesProjectPath: string;
-  manifestProjectPath: string;
-  destructiveChangesManifestFile: string;
-  manifestFile: string;
-  destructiveChangesSourceFiles: string[];
-  manifestSourceFiles: string[];
+  ref1VirtualTreeContainer: VirtualTreeContainer;
+  ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer;
+  destructiveChangesComponentSet: ComponentSet;
+  manifestComponentSet: ComponentSet;
   git: {
     ref1: string;
     ref2: string;
     ref1ref2: string;
   };
   destructiveChanges: {
-    content: Record<string, unknown>;
     files: string[];
   };
   manifest: {
-    content: Record<string, unknown>;
     file: string;
   };
-  warnings: Record<string, Record<string, string[]>>;
 }
 
-export async function ensureDirsInTempProject(basePath: string, ctx: Ctx) {
-  for (const folder of ctx.sfdxProjectFolders) {
-    await fs.ensureDir(join(basePath, folder));
-  }
-}
-
-export async function prepareTempProject(type: string, ctx: Ctx) {
-  const tmpProjectPath = join(ctx.tmpbasepath, type);
-  await fs.ensureDir(ctx.tmpbasepath);
-  await fs.copy(join(ctx.projectRoot, 'sfdx-project.json'), join(tmpProjectPath, 'sfdx-project.json'));
-  await fs.copy(join(ctx.projectRoot, '.forceignore'), join(tmpProjectPath, '.forceignore'));
-  await ensureDirsInTempProject(tmpProjectPath, ctx);
-  return tmpProjectPath;
-}
-
-export async function addFilesToTempProject(tmpRoot, paths, task, ctx: Ctx): Promise<string[]> {
-  const addedFiles = [];
-  for (const path of paths) {
-    const file = join(tmpRoot, path);
-    task.output = path;
-    await fs.ensureDir(join(tmpRoot, dirname(path)));
-    const content = (async () => {
-      try {
-        return (await execa('git', ['--no-pager', 'show', `${ctx.git.ref2}:${path}`])).stdout;
-      } catch (error) {
-        return (await execa('git', ['--no-pager', 'show', `${ctx.git.ref1}:${path}`])).stdout;
-      }
-    })();
-    await fs.writeFile(file, await content);
-    addedFiles.push(file);
-  }
-  return addedFiles;
-}
-
-// eslint-disable-next-line complexity
-export async function convertTempProject(
-  convertpath: string,
-  options: { destruct: boolean } = { destruct: false },
-  task,
-  ctx: Ctx
-): Promise<string> {
-  let result;
-  do {
-    try {
-      result = await execa(
-        'sfdx',
-        ['force:source:convert', '--sourcepath', ctx.sfdxProjectFolders.toString(), '--json'],
-        {
-          cwd: convertpath,
-        }
-      );
-    } catch (e) {
-      result = e;
-    }
-    debug({ forceSourceConvertResult: result });
-    result = JSON.parse(result.stdout);
-    if (result.status === 1) {
-      if (
-        result.name === 'Missing Metadata File' ||
-        result.name === 'MissingContentOrMetadataFile' ||
-        result.name === 'MissingComponentOrResource'
-      ) {
-        let path;
-        if (result.name === 'Missing Metadata File') {
-          path = result.message.split("Expected metadata file with '-meta.xml' extension at path: ")[1];
-        }
-        if (result.name === 'MissingContentOrMetadataFile') {
-          path = result.message.split('Expected file at path: ')[1];
-        }
-        if (result.name === 'MissingComponentOrResource') {
-          path = result.message.split(' exists and is correct, and try again.')[0].split(sep).slice(1).join(posix.sep);
-          let componentOrResource;
-          if (path.endsWith('.resource')) {
-            componentOrResource = '.resource';
-          } else if (path.endsWith('.component')) {
-            componentOrResource = '.component';
-          }
-          path = path.split(componentOrResource)[0];
-          const gitLines = (
-            await execa('git', ['--no-pager', 'log', '--name-only', '--pretty=format:', '--', `*${path}*`])
-          ).stdout.split(/\r?\n/);
-          debug({ MissingComponentOrResourceLogResult: gitLines });
-          path = Array.from(new Set(gitLines.filter(Boolean))).filter(
-            (f) => !f.endsWith(`${componentOrResource}-meta.xml`)
-          )[0];
-          debug({ MissingComponentOrResourceLogResultPath: path });
-          path = join(convertpath, path);
-        }
-        const relpath = relative(convertpath, path).split(sep).join(posix.sep);
-        debug({ path, convertpath, relpath });
-        if (!options.destruct) {
-          task.output = `add missing file ${relpath}`;
-          await fs.ensureDir(join(convertpath, dirname(relpath)));
-          const { stdout } = await execa('git', ['--no-pager', 'show', `${ctx.git.ref2}:${relpath}`]);
-          await fs.writeFile(path, stdout);
-        } else {
-          const arrayOfPath = [...relpath];
-          let files = [];
-          do {
-            arrayOfPath.pop();
-            files = ctx.gitResults.deleted.filter((p) => p.startsWith(arrayOfPath.join('')));
-          } while (arrayOfPath.length > 0 && files.length === 0);
-          await fs.remove(join(convertpath, files[0]));
-          ctx.gitResults.added.push(files[0]);
-          ctx.gitResults.deleted.splice(ctx.gitResults.deleted.indexOf(files[0]), 1);
-          ctx.destructiveChangesSourceFiles.splice(ctx.destructiveChangesSourceFiles.indexOf(files[0]), 1);
-          ctx.warnings[result.name] = ctx.warnings[result.name] ?? {};
-          ctx.warnings[result.name][relpath] = ctx.warnings[result.name][relpath] ?? [];
-          ctx.warnings[result.name][relpath].push(files[0]);
-          task.output = `moved file ${files[0]} from destructiveChanges to manifest`;
-        }
-      } else if (result.name === 'UnexpectedFileFound') {
-        const path = result.message.split('Unexpected file found in package directory: ')[1];
-        const relpath = relative(convertpath, path);
-        task.output = `removed file ${relpath}`;
-        await fs.remove(join(convertpath, relpath));
-      } else if (result.message === 'The package root directory is empty.') {
-        result.status = 0;
-        result.result = { location: convertpath };
-      } else if (result.message.startsWith('No matching source was found within the package root directory')) {
-        result.status = 0;
-        result.result = { location: convertpath };
-      } else {
-        throw new Error(`No error handler for: '${result.name}' - ${result.message}`);
-      }
-    }
-  } while (result.status === 1);
-
-  const packagexml = join(result.result.location, 'package.xml');
-  if (await fs.pathExists(packagexml)) {
-    return packagexml;
-  }
-  return null;
-}
-
-export async function appendToManifest(
-  file,
-  insert,
-  options: { destruct: boolean } = { destruct: false }
-): Promise<Record<string, unknown>> {
-  const packagexmlJson = await parseString(await fs.readFile(file, 'utf8'));
-  const types = {};
-
-  if (packagexmlJson.Package.types) {
-    packagexmlJson.Package.types.forEach((t) => {
-      if (JSON.stringify(t['members']) !== JSON.stringify(['*'])) {
-        types[t['name']] = t['members'];
-      }
-    });
-  }
-
-  Object.keys(insert).forEach((md) => {
-    types[md] = types[md] ?? [];
-    types[md] = types[md].concat(insert[md]);
-  });
-
-  const replaceChildwithParentType = (childTypes, masterType) => {
-    const PrefixOfFile = new Set();
-    childTypes.forEach((childType) => {
-      if (types[childType]) {
-        types[childType].forEach((ruleName) => {
-          const masterLabel = ruleName.split('.').slice(0, 1).toString();
-          PrefixOfFile.add(masterLabel);
-          process.once('exit', () => {
-            cli.warn(`'${childType}:${ruleName}' replaced with '${masterType}:${masterLabel}' in ${basename(file)}`);
-          });
+export async function createVirtualTreeContainer(ref, modifiedFiles) {
+  debug({ modifiedFiles });
+  const { stdout } = await execa('git', ['ls-tree', '-r', '--name-only', ref]);
+  const virtualFs: VirtualDirectory[] = [];
+  for (const path of stdout.split(EOL)) {
+    let dirPath;
+    let subPath = path;
+    while (dirPath !== dirname(subPath)) {
+      dirPath = dirname(subPath);
+      const index = virtualFs.findIndex((dir) => dir.dirPath === dirPath);
+      if (index >= 0) {
+        virtualFs[index].children.push({
+          name: basename(subPath),
+          data:
+            parseMetadataXml(subPath) && modifiedFiles.includes(subPath)
+              ? Buffer.from((await execa('git', ['--no-pager', 'show', `${ref}:${subPath}`])).stdout)
+              : Buffer.from(''),
         });
-        delete types[childType];
+      } else {
+        virtualFs.push({
+          dirPath,
+          children: [
+            {
+              name: basename(subPath),
+              data:
+                parseMetadataXml(subPath) && modifiedFiles.includes(subPath)
+                  ? Buffer.from((await execa('git', ['--no-pager', 'show', `${ref}:${subPath}`])).stdout)
+                  : Buffer.from(''),
+            },
+          ],
+        });
       }
-    });
-    if (PrefixOfFile.size > 0) {
-      types[masterType] = Array.from(PrefixOfFile);
+      subPath = dirPath;
     }
-  };
-
-  if (!options.destruct) {
-    replaceChildwithParentType(['AssignmentRule'], 'AssignmentRules');
-    replaceChildwithParentType(['AutoResponseRule'], 'AutoResponseRules');
-    replaceChildwithParentType(['EscalationRule'], 'EscalationRules');
-    replaceChildwithParentType(['MatchingRule'], 'MatchingRules');
-    replaceChildwithParentType(
-      ['SharingOwnerRule', 'SharingCriteriaRule', 'SharingGuestRule', 'SharingTerritoryRule'],
-      'SharingRules'
-    );
-    replaceChildwithParentType(
-      [
-        'WorkflowFieldUpdate',
-        'WorkflowKnowledgePublish',
-        'WorkflowTask',
-        'WorkflowAlert',
-        'WorkflowSend',
-        'WorkflowOutboundMessage',
-        'WorkflowRule',
-      ],
-      'Workflow'
-    );
   }
-
-  const newtypes = [];
-  Object.keys(types)
-    .sort()
-    .forEach((md) => {
-      newtypes.push({ name: md, members: types[md].sort() });
-    });
-
-  packagexmlJson.Package.types = newtypes;
-
-  await fs.writeFile(file, builder.buildObject(packagexmlJson));
-
-  return packagexmlJson;
+  return new VirtualTreeContainer(virtualFs);
 }
 
-export async function analyzeFile(path, ctx: Ctx) {
-  let source;
-  try {
-    const filecontent = (await execa('git', ['--no-pager', 'show', `${ctx.git.ref2}:${path}`])).stdout;
-    source = await parseString(filecontent);
-  } catch (error) {
-    source = undefined;
+function parseMetadataXml(fsPath: string) {
+  const match = /(.+)\.(.+)-meta\.xml/.exec(basename(fsPath));
+  if (match) {
+    return { fullName: match[1], suffix: match[2], path: fsPath };
+  }
+}
+
+export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer) {
+  let source = '';
+  let target = '';
+  if (parseMetadataXml(path)) {
+    try {
+      const ref2resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
+      const ref2Component = ref2resolver.getComponentsFromPath(path);
+      if (ref2Component.length === 1) {
+        // debug({ ref2Component: ref2Component[0].getChildren() });
+        source = ref2Component[0].parseXmlSync();
+      }
+    } catch (error) {
+      debug({ error });
+      source = '';
+    }
+
+    try {
+      const ref1resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
+      const ref1Component = ref1resolver.getComponentsFromPath(path);
+      if (ref1Component.length === 1) {
+        // debug({ ref1Component: ref1Component[0].getChildren() });
+        target = ref1Component[0].parseXmlSync();
+      }
+    } catch (error) {
+      debug({ error });
+      target = '';
+    }
   }
 
-  let target;
-  try {
-    const filecontent = (await execa('git', ['--no-pager', 'show', `${ctx.git.ref1}:${path}`])).stdout;
-    target = await parseString(filecontent);
-  } catch (error) {
-    target = undefined;
-  }
-
-  if (equal(target, source) && typeof source !== 'undefined' && typeof target !== 'undefined') {
+  if (equal(target, source) && source !== '' && target !== '') {
     return { status: -1 };
+  } else if (source === '' && target === '') {
+    return { status: 0 };
   }
 
   const XmlName = ((objects) => {
@@ -297,18 +153,22 @@ export async function analyzeFile(path, ctx: Ctx) {
         return Object.keys(obj)[0];
       }
     }
-    return [];
+    return '';
   })([target, source]);
 
   const XmlTypesOfXmlName = ((xmlName) => {
-    const metadata = describe.metadataObjects.filter((md) => md.xmlName === xmlName);
-    if (metadata[0] && metadata[0].childXmlNames) {
-      return metadata[0].childXmlNames as unknown as [];
+    try {
+      const childTypeMapping = {};
+      Object.values(registryAccess.getTypeByName(xmlName).children.types).forEach((element) => {
+        childTypeMapping[element.directoryName] = element.name;
+      });
+      return childTypeMapping;
+    } catch (error) {
+      return {};
     }
-    return [];
   })(XmlName);
 
-  if (XmlTypesOfXmlName.length === 0) {
+  if (Object.keys(XmlTypesOfXmlName).length === 0) {
     return { status: 0 };
   }
 
@@ -333,19 +193,17 @@ export async function analyzeFile(path, ctx: Ctx) {
       const n = nodes.pop();
       if (typeof n.obj === 'object') {
         Object.keys(n.obj).forEach((k) => {
-          if (typeof n.obj[k] === 'object') {
-            // eslint-disable-next-line @typescript-eslint/no-shadow
-            const path = n.path.concat(k);
-            if (path.includes('fullName')) {
-              const fullName = n.obj[k];
-              path.pop();
-              paths.push({ path, fullName: fullName[0] });
-            }
-            nodes.unshift({
-              obj: n.obj[k],
-              path,
-            });
+          // eslint-disable-next-line @typescript-eslint/no-shadow
+          const path = n.path.concat(k);
+          if (path.includes('fullName')) {
+            const fullName = n.obj[k];
+            path.pop();
+            paths.push({ path, fullName });
           }
+          nodes.unshift({
+            obj: n.obj[k],
+            path,
+          });
         });
       }
     }
@@ -401,6 +259,7 @@ export async function analyzeFile(path, ctx: Ctx) {
         }
       }
     });
+
     return converted;
   };
 
@@ -414,27 +273,13 @@ export async function analyzeFile(path, ctx: Ctx) {
   };
 }
 
-export async function getGitResults(
-  task,
-  ctx: Ctx
-): Promise<{
-  added: string[];
-  modified: { toManifest: Record<string, []>; toDestructiveChanges: Record<string, []> };
-  deleted: string[];
-}> {
-  const results = {
-    added: [],
-    modified: { files: [], toManifest: {}, toDestructiveChanges: {} },
-    deleted: [],
-    skipped: [],
-  };
-
-  let gitLines = (
-    await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ctx.git.ref1ref2])
-  ).stdout.split(/\r?\n/);
+export async function getGitDiff(sfdxProjectFolders, ref1ref2) {
+  let gitLines = (await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ref1ref2])).stdout.split(
+    /\r?\n/
+  );
 
   gitLines = gitLines.filter((l) =>
-    ctx.sfdxProjectFolders.some((f) => {
+    sfdxProjectFolders.some((f) => {
       if (typeof l.split('\t')[1] !== 'undefined') {
         return l.split('\t')[1].startsWith(f);
       }
@@ -448,7 +293,7 @@ export async function getGitResults(
 
   gitlinesf = gitlinesf.filter((line) => {
     if (line.status === 'D') {
-      for (const sfdxFolder of ctx.sfdxProjectFolders) {
+      for (const sfdxFolder of sfdxProjectFolders) {
         let extf;
         if (line.path.startsWith(sfdxFolder)) {
           extf = sfdxFolder;
@@ -465,9 +310,34 @@ export async function getGitResults(
     }
     return true;
   });
+  return gitlinesf;
+}
 
-  for (const [i, { status, path }] of gitlinesf.entries()) {
-    const check = await analyzeFile(path, ctx);
+export function getGitResults(
+  task,
+  gitLines,
+  ref1VirtualTreeContainer,
+  ref2VirtualTreeContainer
+): {
+  added: string[];
+  modified: {
+    destructiveFiles: string[];
+    manifestFiles: string[];
+    toManifest: Record<string, []>;
+    toDestructiveChanges: Record<string, []>;
+  };
+  deleted: string[];
+  unchanged: string[];
+} {
+  const results = {
+    added: [],
+    modified: { destructiveFiles: [], manifestFiles: [], toManifest: {}, toDestructiveChanges: {} },
+    deleted: [],
+    unchanged: [],
+  };
+
+  for (const [i, { status, path }] of gitLines.entries()) {
+    const check = analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer);
     if (check.status === 0) {
       switch (status) {
         case 'D': {
@@ -480,7 +350,11 @@ export async function getGitResults(
         }
       }
     } else if (check.status > 0) {
-      results.modified.files.push(path);
+      if (Object.keys(check.toDestructiveChanges).length) {
+        results.modified.destructiveFiles.push(path);
+      } else if (!Object.keys(check.toDestructiveChanges).length && Object.keys(check.toManifest).length) {
+        results.modified.manifestFiles.push(path);
+      }
       Object.keys(check).forEach((to) => {
         Object.keys(check[to]).forEach((md) => {
           results.modified[to] = results.modified[to] ?? {};
@@ -489,10 +363,115 @@ export async function getGitResults(
         });
       });
     } else if (check.status === -1) {
-      results.skipped.push(path);
+      results.unchanged.push(path);
     }
-    task.output = `${i + 1}/${gitlinesf.length} files processed (${results.skipped.length} skipped):
-Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${results.modified.files.length}`;
+    task.output = `${i + 1}/${gitLines.length} files processed
+Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
+      [...results.modified.destructiveFiles, ...results.modified.manifestFiles].length
+    } Unchanged: ${results.unchanged.length}`;
   }
+
   return results;
+}
+
+export function createManifest(
+  virtualTreeContainer,
+  options: { destruct: boolean } = { destruct: false },
+  results,
+  task
+): ComponentSet {
+  let metadata;
+  let sourcepath;
+  if (options.destruct) {
+    metadata = results.modified.toDestructiveChanges;
+    sourcepath = results.deleted;
+  } else {
+    metadata = results.modified.toManifest;
+    sourcepath = results.added;
+  }
+
+  const Aggregator: ComponentLike[] = [];
+
+  // const fromSourcePath = ComponentSet.fromSource({
+  //   fsPaths: sourcepath,
+  //   registry: registryAccess,
+  //   tree: virtualTreeContainer,
+  // });
+
+  const fromSourcePath = new ComponentSet();
+  const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
+  for (const path of sourcepath) {
+    for (const component of resolver.getComponentsFromPath(path)) {
+      if (['CustomFieldTranslation'].includes(component.type.name)) {
+        if (!options.destruct) {
+          task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
+          fromSourcePath.add(component.parent);
+        } else {
+          task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
+        }
+      } else {
+        fromSourcePath.add(component);
+      }
+    }
+  }
+  debug({ fromSourcePath });
+
+  Aggregator.push(...fromSourcePath);
+
+  const replaceChildwithParentType = (type, fullName) => {
+    const lower = type.toLowerCase().trim();
+    if (
+      !options.destruct &&
+      registry.childTypes[lower] &&
+      [
+        'AssignmentRule',
+        'AutoResponseRule',
+        'EscalationRule',
+        'MatchingRule',
+        'SharingOwnerRule',
+        'SharingCriteriaRule',
+        'SharingGuestRule',
+        'SharingTerritoryRule',
+        'WorkflowFieldUpdate',
+        'WorkflowKnowledgePublish',
+        'WorkflowTask',
+        'WorkflowAlert',
+        'WorkflowSend',
+        'WorkflowOutboundMessage',
+        'WorkflowRule',
+      ].includes(type)
+    ) {
+      const parentType = registryAccess.getTypeByName(registry.childTypes[lower]);
+      const parentFullName = fullName.split('.').slice(0, 1).toString();
+      task.output = `'${type}:${fullName}' replaced with '${parentType.name}:${parentFullName}' in package manifest`;
+      return {
+        type: parentType,
+        fullName: parentFullName,
+      };
+    }
+    return { type: registryAccess.getTypeByName(type), fullName };
+  };
+
+  const filter = new ComponentSet();
+
+  for (const type of Object.keys(metadata)) {
+    for (const fullName of metadata[type]) {
+      debug({ type, fullName });
+      filter.add(replaceChildwithParentType(type, fullName));
+    }
+  }
+
+  const fromMetadata = ComponentSet.fromSource({
+    fsPaths: ['.'],
+    registry: registryAccess,
+    tree: virtualTreeContainer,
+    include: filter,
+  });
+
+  debug({ fromMetadata, filter, options });
+  const finalized = fromMetadata.size > 0 ? fromMetadata : filter;
+  Aggregator.push(...finalized);
+
+  const pkg = new ComponentSet(Aggregator, registryAccess);
+  return pkg;
 }

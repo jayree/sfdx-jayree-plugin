@@ -63,8 +63,12 @@ class ObjectPathResolver {
       const currentvalue = objectPath.get(this.object, currenpath);
       if (currentvalue) {
         if (value === undefined) {
-          for (let i = 0; i < currentvalue.length; i++) {
-            matchingPath.push(`${currenpath}.${i}`);
+          if (Array.isArray(currentvalue)) {
+            for (let i = 0; i < currentvalue.length; i++) {
+              matchingPath.push(`${currenpath}.${i}`);
+            }
+          } else {
+            matchingPath.push(currenpath);
           }
         } else if (key === undefined) {
           if (compareobj(currentvalue, value)) {
@@ -75,7 +79,7 @@ class ObjectPathResolver {
             }
           }
         } else {
-          if (currentvalue.length > 0) {
+          if (Array.isArray(currentvalue) && currentvalue.length > 0) {
             for (let i = 0; i < currentvalue.length; i++) {
               let match = true;
               for (const [k, v] of key.entries()) {
