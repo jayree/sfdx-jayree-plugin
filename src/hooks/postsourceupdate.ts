@@ -54,6 +54,10 @@ export const postsourceupdate: HookFunction = async function (options) {
 
   debug({ result });
 
+  if (result.length === 0) {
+    return;
+  }
+
   const profiles = result.filter((el) => el.type === 'Profile');
   if (profiles.length > 0) {
     const customObjects = result.filter((el) => el.type === 'CustomObject');

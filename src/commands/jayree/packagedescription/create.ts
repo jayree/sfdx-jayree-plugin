@@ -8,7 +8,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import { builder } from '../../../utils/xml';
+import { js2Manifest } from '../../../utils/xml';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'createpackagedescription');
@@ -52,13 +52,12 @@ export default class CreatePackageDescription extends SfdxCommand {
 
     const fileContentjs = {
       Package: {
-        $: { xmlns: 'http://soap.sforce.com/2006/04/metadata' },
         description: [text],
         version: ['52.0'],
       },
     };
 
-    newZip.addFile('unpackaged/package.xml', Buffer.from(builder.buildObject(fileContentjs)), '', 0o644);
+    newZip.addFile('unpackaged/package.xml', Buffer.from(js2Manifest(fileContentjs)), '', 0o644);
 
     newZip.writeZip(inputfile);
     // this.ux.log(newZip.getEntries()[0].header.toString());

@@ -8,7 +8,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import AdmZip from 'adm-zip';
-import { builder, parseStringSync } from '../../../utils/xml';
+import { js2Manifest, parseManifest } from '../../../utils/xml';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'removepackagedescription');
@@ -54,7 +54,7 @@ export default class RemovePackageDescription extends SfdxCommand {
       if (fileName.includes('package.xml')) {
         let fileContentjs;
         const fileTXTContent = zip.readAsText(fileName);
-        const xml = parseStringSync(fileTXTContent);
+        const xml = parseManifest(fileTXTContent);
         if (xml.Package.description && xml.Package.description.length > 0) {
           text = xml.Package.description.toString();
           action = 'removed';
@@ -66,7 +66,7 @@ export default class RemovePackageDescription extends SfdxCommand {
               version: xml.Package.version,
             },
           };
-          newZip.addFile(fileName, Buffer.from(builder.buildObject(fileContentjs)), '', 0o644);
+          newZip.addFile(fileName, Buffer.from(js2Manifest(fileContentjs)), '', 0o644);
         } else {
           action = '';
           this.ux.log('no description found');

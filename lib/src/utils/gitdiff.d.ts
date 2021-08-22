@@ -1,53 +1,43 @@
+import { ComponentSet, VirtualTreeContainer } from '@salesforce/source-deploy-retrieve';
+import { NodeFSTreeContainer as FSTreeContainer } from '@salesforce/source-deploy-retrieve/lib/src/resolve';
+export declare const NodeFSTreeContainer: typeof FSTreeContainer;
 export declare const debug: any;
 export interface Ctx {
-    tmpbasepath: string;
     projectRoot: string;
     sfdxProjectFolders: string[];
-    sfdxProject: {
-        packageDirectories: [{
-            path: string;
-        }];
-        sourceApiVersion: string;
-    };
+    sourceApiVersion: string;
+    gitLines: Array<{
+        path: string;
+        status: string;
+    }>;
     gitResults: {
         added: string[];
         deleted: string[];
         modified: {
+            destructiveFiles: string[];
+            manifestFiles: string[];
             toDestructiveChanges: Record<string, []>;
             toManifest: Record<string, []>;
         };
     };
-    destructiveChangesProjectPath: string;
-    manifestProjectPath: string;
-    destructiveChangesManifestFile: string;
-    manifestFile: string;
-    destructiveChangesSourceFiles: string[];
-    manifestSourceFiles: string[];
+    ref1VirtualTreeContainer: VirtualTreeContainer;
+    ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer;
+    destructiveChangesComponentSet: ComponentSet;
+    manifestComponentSet: ComponentSet;
     git: {
         ref1: string;
         ref2: string;
         ref1ref2: string;
     };
     destructiveChanges: {
-        content: Record<string, unknown>;
         files: string[];
     };
     manifest: {
-        content: Record<string, unknown>;
         file: string;
     };
-    warnings: Record<string, Record<string, string[]>>;
 }
-export declare function ensureDirsInTempProject(basePath: string, ctx: Ctx): Promise<void>;
-export declare function prepareTempProject(type: string, ctx: Ctx): Promise<string>;
-export declare function addFilesToTempProject(tmpRoot: any, paths: any, task: any, ctx: Ctx): Promise<string[]>;
-export declare function convertTempProject(convertpath: string, options: {
-    destruct: boolean;
-}, task: any, ctx: Ctx): Promise<string>;
-export declare function appendToManifest(file: any, insert: any, options?: {
-    destruct: boolean;
-}): Promise<Record<string, unknown>>;
-export declare function analyzeFile(path: any, ctx: Ctx): Promise<{
+export declare function createVirtualTreeContainer(ref: any, modifiedFiles: any): Promise<VirtualTreeContainer>;
+export declare function analyzeFile(path: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
     status: number;
     toManifest?: undefined;
     toDestructiveChanges?: undefined;
@@ -55,12 +45,22 @@ export declare function analyzeFile(path: any, ctx: Ctx): Promise<{
     status: number;
     toManifest: {};
     toDestructiveChanges: {};
-}>;
-export declare function getGitResults(task: any, ctx: Ctx): Promise<{
+};
+export declare function getGitDiff(sfdxProjectFolders: any, ref1ref2: any): Promise<{
+    path: string;
+    status: string;
+}[]>;
+export declare function getGitResults(task: any, gitLines: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
     added: string[];
     modified: {
+        destructiveFiles: string[];
+        manifestFiles: string[];
         toManifest: Record<string, []>;
         toDestructiveChanges: Record<string, []>;
     };
     deleted: string[];
-}>;
+    unchanged: string[];
+};
+export declare function createManifest(virtualTreeContainer: any, options: {
+    destruct: boolean;
+}, results: any, task: any): ComponentSet;

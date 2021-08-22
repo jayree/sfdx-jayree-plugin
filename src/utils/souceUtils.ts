@@ -8,7 +8,6 @@
 import * as path from 'path';
 import os from 'os';
 import * as fs from 'fs-extra';
-import * as xml2js from 'xml2js';
 import { SfdxProject, fs as corefs } from '@salesforce/core';
 import * as kit from '@salesforce/kit';
 import cli from 'cli-ux';
@@ -16,18 +15,13 @@ import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
+import { parseSourceComponent, normalizeToArray, js2SourceComponent } from '../utils/xml';
 import config from './config';
 import { objectPath, ObjectPathResolver } from './object-path';
 
 const isOutputEnabled = !(
   process.argv.find((arg) => arg === '--json') || kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON'
 );
-
-const builder = new xml2js.Builder({
-  xmldec: { version: '1.0', encoding: 'UTF-8' },
-  xmlns: true,
-  renderOpts: { pretty: true, indent: '    ', newline: '\n' },
-});
 
 function arrayEquals(arr1, arr2) {
   return arr1.length === arr2.length && arr1.every((u, i) => u === arr2[i]);
@@ -63,50 +57,45 @@ export async function getProjectPath(): Promise<string> {
 export async function shrinkPermissionSets(permissionsets) {
   for (const file of permissionsets) {
     if (await fs.pathExists(file)) {
-      const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
+      const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
       const mutingOrPermissionSet = Object.keys(data)[0];
-      if (data[mutingOrPermissionSet].fieldPermissions) {
+      const fieldPermissions = normalizeToArray(data[mutingOrPermissionSet].fieldPermissions);
+      if (fieldPermissions) {
         debug({
           [mutingOrPermissionSet]: file,
           removedFieldPermsissions: JSON.stringify(
-            data[mutingOrPermissionSet].fieldPermissions.filter(
-              (el) => el.editable.toString() === 'false' && el.readable.toString() === 'false'
-            )
+            fieldPermissions.filter((el) => el.editable.toString() === 'false' && el.readable.toString() === 'false')
           ),
         });
-        data[mutingOrPermissionSet].fieldPermissions = data[mutingOrPermissionSet].fieldPermissions.filter(
+        data[mutingOrPermissionSet].fieldPermissions = fieldPermissions.filter(
           (el) => el.editable.toString() === 'true' || el.readable.toString() === 'true'
         );
-        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+        fs.writeFileSync(file, js2SourceComponent(data));
       }
     }
   }
 }
 
-export async function profileElementInjection(
-  profiles,
-  ensureObjectPermissionsFromAdmin = { ensureObjectPermissions: null },
-  customObjectsFilter = []
-) {
+export async function profileElementInjection(profiles, customObjectsFilter = []) {
   const ensureUserPermissions = config(await getProjectPath()).ensureUserPermissions;
-  const ensureObjectPermissions =
-    ensureObjectPermissionsFromAdmin.ensureObjectPermissions ||
-    config(await getProjectPath()).ensureObjectPermissions.filter((el) => customObjectsFilter.includes(el));
-
+  let ensureObjectPermissions = config(await getProjectPath()).ensureObjectPermissions;
+  if (customObjectsFilter.length) {
+    ensureObjectPermissions = ensureObjectPermissions.filter((el) => customObjectsFilter.includes(el));
+  }
+  if (ensureObjectPermissions.length === 0) {
+    process.once('exit', () => {
+      cli.warn('no ensureObjectPermissions list configured');
+    });
+  }
   for (const file of profiles) {
     if (await fs.pathExists(file)) {
-      const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
+      const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
 
-      if (arrayEquals(data.Profile.custom, ['true'])) {
-        if (!data.Profile.objectPermissions) {
-          data.Profile['objectPermissions'] = [];
-        }
+      if (data.Profile.custom === 'true') {
+        const objectPermissions = normalizeToArray(data.Profile['objectPermissions']);
         const injectedObjectPermission = [];
         ensureObjectPermissions.forEach((object) => {
-          if (
-            data.Profile.objectPermissions &&
-            !data.Profile.objectPermissions.some((e) => compareobj(e.object, object))
-          ) {
+          if (objectPermissions && !objectPermissions.some((e) => compareobj(e.object, object))) {
             injectedObjectPermission.push({
               allowCreate: ['false'],
               allowDelete: ['false'],
@@ -118,20 +107,17 @@ export async function profileElementInjection(
             });
           }
         });
+        data.Profile['objectPermissions'] = objectPermissions.concat(injectedObjectPermission);
 
-        data.Profile.objectPermissions = data.Profile.objectPermissions.concat(injectedObjectPermission);
-
-        if (!data.Profile.userPermissions) {
-          data.Profile['userPermissions'] = [];
-        }
+        const userPermissions = normalizeToArray(data.Profile['userPermissions']);
         const injectedUserPermission = [];
         ensureUserPermissions.forEach((name) => {
-          if (data.Profile.userPermissions && !data.Profile.userPermissions.some((e) => compareobj(e.name, name))) {
+          if (userPermissions && !userPermissions.some((e) => compareobj(e.name, name))) {
             injectedUserPermission.push({ enabled: ['false'], name: [name] });
           }
         });
 
-        data.Profile.userPermissions = data.Profile.userPermissions.concat(injectedUserPermission);
+        data.Profile['userPermissions'] = userPermissions.concat(injectedUserPermission);
 
         if (data.Profile.objectPermissions) {
           data.Profile.objectPermissions.sort((a, b) => (a.object > b.object ? 1 : -1));
@@ -147,7 +133,7 @@ export async function profileElementInjection(
             return acc;
           }, {});
 
-        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+        fs.writeFileSync(file, js2SourceComponent(data));
         debug({
           profile: file,
           injectedObjectPermission: JSON.stringify(injectedObjectPermission),
@@ -279,7 +265,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
     }
     for (const file of files) {
       if (await fs.pathExists(file)) {
-        const data = await xml2js.parseStringPromise(await fs.readFile(file, 'utf8'));
+        const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
         debug(`modify file: ${file}`);
         if (fixsources[filename].delete) {
           for (const deltask of fixsources[filename].delete) {
@@ -288,7 +274,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               if (typeof deltaskpath !== 'undefined') {
                 debug(`delete: ${deltaskpath}`);
                 objectPath.del(data, deltaskpath);
-                fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                fs.writeFileSync(file, js2SourceComponent(data));
                 array.push({
                   filePath: file,
                   operation: 'delete',
@@ -334,7 +320,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                     });
                   }
 
-                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                  fs.writeFileSync(file, js2SourceComponent(data));
                   array.push({
                     filePath: file,
                     operation: 'insert',
@@ -380,7 +366,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   if (settask.value && !compareobj(objectPath.get(data, settaskpath), settask.value)) {
                     debug(`Set: ${JSON.stringify(settask.value)} at ${settaskpath}`);
                     objectPath.set(data, settaskpath, `${settask.value}`);
-                    fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                    fs.writeFileSync(file, js2SourceComponent(data));
                     array.push({
                       filePath: file,
                       operation: 'set',
@@ -450,7 +436,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                         }
                       }
                       if (modifiedPath) {
-                        fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                        fs.writeFileSync(file, js2SourceComponent(data));
                         array.push({
                           filePath: file,
                           operation: 'set',
@@ -468,7 +454,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
                 if (objectPath.has(data, settask.path)) {
                   objectPath.set(data, settask.path, `${settask.value}`);
-                  fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                  fs.writeFileSync(file, js2SourceComponent(data));
                   array.push({
                     filePath: file,
                     operation: 'set',
@@ -478,7 +464,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
               } else if (typeof settask.object === 'object') {
                 objectPath.set(data, settask.path + '.0', settask.object);
                 debug(objectPath.get(data, settask.path));
-                fs.writeFileSync(file, builder.buildObject(data) + '\n');
+                fs.writeFileSync(file, js2SourceComponent(data));
                 array.push({
                   filePath: file,
                   operation: 'set',
@@ -503,7 +489,7 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                 `Translations.flowDefinitions.${flowDefinitions.indexOf(flowDefinition)}.flows.0.fullName.0`,
                 fullname.substring(0, fullname.lastIndexOf('-'))
               );
-              fs.writeFileSync(file, builder.buildObject(data) + '\n');
+              fs.writeFileSync(file, js2SourceComponent(data));
               array.push({
                 filePath: file,
                 operation: 'fix',
@@ -618,66 +604,59 @@ export async function updateProfiles(profiles, customObjects, forceSourcePull) {
     debug('force:source:pull detected');
     const targetDir = process.env.SFDX_MDAPI_TEMP_DIR || os.tmpdir();
     const destRoot = path.join(targetDir, 'reRetrieveProfiles');
-    const packageFilePath = path.join(destRoot, 'package.xml');
-    debug({ packageFilePath, destRoot });
+    debug({ destRoot });
 
-    try {
-      const pjson = await xml2js.parseStringPromise(
-        await fs.readFile(path.join(__dirname, '..', '..', '..', 'manifest', 'package-profiles-only.xml'), 'utf8')
-      );
-      const index = pjson.Package.types.findIndex((x) => x.name.toString() === 'CustomObject');
-      pjson.Package.types[index].members = pjson.Package.types[index].members.concat(
-        config(await getProjectPath()).ensureObjectPermissions
-      );
+    const ComponentSetArray = [
+      { fullName: '*', type: 'ApexClass' },
+      { fullName: '*', type: 'ApexPage' },
+      { fullName: '*', type: 'Community' },
+      { fullName: '*', type: 'CustomApplication' },
+      { fullName: '*', type: 'CustomObject' },
+      { fullName: '*', type: 'CustomPermission' },
+      { fullName: '*', type: 'CustomTab' },
+      { fullName: '*', type: 'DataCategoryGroup' },
+      { fullName: '*', type: 'ExternalDataSource' },
+      { fullName: '*', type: 'Flow' },
+      { fullName: '*', type: 'Layout' },
+      { fullName: '*', type: 'NamedCredential' },
+      { fullName: '*', type: 'Profile' },
+      { fullName: '*', type: 'ProfilePasswordPolicy' },
+      { fullName: '*', type: 'ProfileSessionSetting' },
+      { fullName: '*', type: 'ServicePresenceStatus' },
+    ];
 
-      await fs.emptyDir(destRoot);
-      await fs.writeFile(packageFilePath, builder.buildObject(pjson));
+    config(await getProjectPath()).ensureObjectPermissions.forEach((fullName) => {
+      ComponentSetArray.push({ fullName, type: 'CustomObject' });
+    });
 
-      const componentSet = await ComponentSet.fromManifest(packageFilePath);
-      const mdapiRetrieve = await componentSet.retrieve({
-        usernameOrConnection: (await getConnectionFromArgv()).username,
-        output: destRoot,
-        merge: true,
-      });
+    const componentSet = new ComponentSet(ComponentSetArray);
 
-      const retrieveResult = await mdapiRetrieve.pollStatus(1000);
+    const mdapiRetrieve = await componentSet.retrieve({
+      usernameOrConnection: (await getConnectionFromArgv()).username,
+      output: destRoot,
+    });
 
-      for (const retrieveProfile of retrieveResult
-        .getFileResponses()
-        .filter((component) => component.type === 'Profile')) {
-        // eslint-disable-next-line @typescript-eslint/no-shadow
-        const index = profiles.findIndex((profile) => profile.fullName === retrieveProfile.fullName);
-        if (index >= 0) {
-          await fs.rename(retrieveProfile.filePath, profiles[index].filePath);
-        }
+    const retrieveResult = await mdapiRetrieve.pollStatus(1000);
+    customObjects = retrieveResult.getFileResponses().filter((el) => el.type === 'CustomObject');
+
+    for (const retrieveProfile of retrieveResult
+      .getFileResponses()
+      .filter((component) => component.type === 'Profile')) {
+      const index = profiles.findIndex((profile) => profile.fullName === retrieveProfile.fullName);
+      if (index >= 0) {
+        await fs.rename(retrieveProfile.filePath, profiles[index].filePath);
       }
-    } catch (e) {
-      debug(e);
-    } finally {
-      await fs.remove(destRoot);
     }
+
+    await fs.remove(destRoot);
   }
-  const adminprofile = profiles
-    .filter((profile) => profile.fullName === 'Admin')
-    .map((profile) => profile.filePath)
-    .filter(Boolean)
-    .toString();
-  const profileElementInjectionFromAdmin = { ensureObjectPermissions: null };
+
   let customObjectsFilter = [];
-  if (await fs.pathExists(adminprofile)) {
-    const profileContent = await xml2js.parseStringPromise(await fs.readFile(adminprofile, 'utf8'));
-    if (profileContent.Profile.objectPermissions) {
-      profileElementInjectionFromAdmin.ensureObjectPermissions = profileContent.Profile.objectPermissions.map((el) =>
-        el.object.toString()
-      );
-    }
-  } else {
+
+  if (customObjects.length) {
     customObjectsFilter = customObjects.map((el) => el.fullName).filter(Boolean);
   }
-  debug({ profiles, profileElementInjectionFromAdmin, customObjectsFilter });
-  await profileElementInjection(
-    profiles.map((profile) => profile.filePath).filter(Boolean),
-    profileElementInjectionFromAdmin,
-    customObjectsFilter
-  );
+
+  debug({ profiles, customObjectsFilter });
+  await profileElementInjection(profiles.map((profile) => profile.filePath).filter(Boolean), customObjectsFilter);
 }

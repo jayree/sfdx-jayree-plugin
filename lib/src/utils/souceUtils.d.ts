@@ -6,9 +6,7 @@ declare type argvConnection = {
 declare let argvConnection: argvConnection;
 export declare function getProjectPath(): Promise<string>;
 export declare function shrinkPermissionSets(permissionsets: any): Promise<void>;
-export declare function profileElementInjection(profiles: any, ensureObjectPermissionsFromAdmin?: {
-    ensureObjectPermissions: any;
-}, customObjectsFilter?: any[]): Promise<void>;
+export declare function profileElementInjection(profiles: any, customObjectsFilter?: any[]): Promise<void>;
 export declare function logFixes(updatedfiles: any): Promise<void>;
 export declare function getConnectionFromArgv(): Promise<argvConnection>;
 export declare function applyFixes(tags: any, root?: any, filter?: any[]): Promise<aggregatedFixResults>;
