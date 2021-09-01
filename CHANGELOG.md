@@ -1,3 +1,11 @@
+## [4.0.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.3...v4.0.4) (2021-09-01)
+
+
+### Bug Fixes
+
+* **gitdiff:** use SDR forDestructiveChanges parameter ([e2b69dd](https://github.com/jayree/sfdx-jayree-plugin/commit/e2b69dd479533e9094ceaf0c2fb5ea4000eafa34))
+* update dependencies, pin SDR version ([76fd39f](https://github.com/jayree/sfdx-jayree-plugin/commit/76fd39f0ef4fa09dcdf4e1fdfee0d5946e4dcc40))
+
 ## [4.0.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.2...v4.0.3) (2021-08-21)
 
 
