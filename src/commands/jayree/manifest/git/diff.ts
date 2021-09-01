@@ -195,7 +195,7 @@ uses the diff of what is unique in branchB (REF2)`,
                         task: (ctx, task): void => {
                           ctx.destructiveChangesComponentSet = createManifest(
                             ctx.ref1VirtualTreeContainer,
-                            { destruct: true },
+                            true,
                             ctx.gitResults,
                             task
                           );
@@ -218,7 +218,7 @@ uses the diff of what is unique in branchB (REF2)`,
                           await fs.ensureDir(dirname(ctx.destructiveChanges.files[0]));
                           await fs.writeFile(
                             ctx.destructiveChanges.files[0],
-                            ctx.destructiveChangesComponentSet.getPackageXml()
+                            ctx.destructiveChangesComponentSet.getPackageXml(undefined, true)
                           );
 
                           await fs.writeFile(
@@ -249,7 +249,7 @@ uses the diff of what is unique in branchB (REF2)`,
                         task: (ctx, task): void => {
                           ctx.manifestComponentSet = createManifest(
                             ctx.ref2VirtualTreeContainer,
-                            { destruct: false },
+                            false,
                             ctx.gitResults,
                             task
                           );

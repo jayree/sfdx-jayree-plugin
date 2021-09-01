@@ -374,15 +374,10 @@ Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
   return results;
 }
 
-export function createManifest(
-  virtualTreeContainer,
-  options: { destruct: boolean } = { destruct: false },
-  results,
-  task
-): ComponentSet {
+export function createManifest(virtualTreeContainer, forDestructiveChanges = false, results, task): ComponentSet {
   let metadata;
   let sourcepath;
-  if (options.destruct) {
+  if (forDestructiveChanges) {
     metadata = results.modified.toDestructiveChanges;
     sourcepath = results.deleted;
   } else {
@@ -403,14 +398,14 @@ export function createManifest(
   for (const path of sourcepath) {
     for (const component of resolver.getComponentsFromPath(path)) {
       if (['CustomFieldTranslation'].includes(component.type.name)) {
-        if (!options.destruct) {
+        if (!forDestructiveChanges) {
           task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
-          fromSourcePath.add(component.parent);
+          fromSourcePath.add(component.parent, forDestructiveChanges);
         } else {
           task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
         }
       } else {
-        fromSourcePath.add(component);
+        fromSourcePath.add(component, forDestructiveChanges);
       }
     }
   }
@@ -421,7 +416,7 @@ export function createManifest(
   const replaceChildwithParentType = (type, fullName) => {
     const lower = type.toLowerCase().trim();
     if (
-      !options.destruct &&
+      !forDestructiveChanges &&
       registry.childTypes[lower] &&
       [
         'AssignmentRule',
@@ -457,7 +452,7 @@ export function createManifest(
   for (const type of Object.keys(metadata)) {
     for (const fullName of metadata[type]) {
       debug({ type, fullName });
-      filter.add(replaceChildwithParentType(type, fullName));
+      filter.add(replaceChildwithParentType(type, fullName), forDestructiveChanges);
     }
   }
 
@@ -468,7 +463,7 @@ export function createManifest(
     include: filter,
   });
 
-  debug({ fromMetadata, filter, options });
+  debug({ fromMetadata, filter, forDestructiveChanges });
   const finalized = fromMetadata.size > 0 ? fromMetadata : filter;
   Aggregator.push(...finalized);
 

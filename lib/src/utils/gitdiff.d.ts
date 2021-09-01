@@ -61,6 +61,4 @@ export declare function getGitResults(task: any, gitLines: any, ref1VirtualTreeC
     deleted: string[];
     unchanged: string[];
 };
-export declare function createManifest(virtualTreeContainer: any, options: {
-    destruct: boolean;
-}, results: any, task: any): ComponentSet;
+export declare function createManifest(virtualTreeContainer: any, forDestructiveChanges: boolean, results: any, task: any): ComponentSet;
