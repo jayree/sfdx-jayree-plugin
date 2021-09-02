@@ -6,7 +6,6 @@
  */
 
 import { join, basename, sep, posix, dirname } from 'path';
-import { EOL } from 'os';
 import execa from 'execa';
 import equal from 'fast-deep-equal';
 import {
@@ -71,7 +70,7 @@ export async function createVirtualTreeContainer(ref, modifiedFiles) {
   debug({ modifiedFiles });
   const { stdout } = await execa('git', ['ls-tree', '-r', '--name-only', ref]);
   const virtualFs: VirtualDirectory[] = [];
-  for (const path of stdout.split(EOL)) {
+  for (const path of stdout.split('\n')) {
     let dirPath;
     let subPath = path;
     while (dirPath !== dirname(subPath)) {
