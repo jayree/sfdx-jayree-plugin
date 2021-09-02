@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.5...v4.0.6) (2021-09-02)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix windows path handling ([de76079](https://github.com/jayree/sfdx-jayree-plugin/commit/de76079df4155d5e0199fff2956dee4228558ce5))
+
 ## [4.0.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.4...v4.0.5) (2021-09-02)
 
 
