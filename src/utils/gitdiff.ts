@@ -72,7 +72,7 @@ export async function createVirtualTreeContainer(ref, modifiedFiles) {
   const virtualFs: VirtualDirectory[] = [];
   for (const path of stdout.split('\n')) {
     let dirPath;
-    let subPath = path;
+    let subPath = path.split(posix.sep).join(sep);
     while (dirPath !== dirname(subPath)) {
       dirPath = dirname(subPath);
       const index = virtualFs.findIndex((dir) => dir.dirPath === dirPath);
@@ -395,7 +395,7 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
   const fromSourcePath = new ComponentSet();
   const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
   for (const path of sourcepath) {
-    for (const component of resolver.getComponentsFromPath(path)) {
+    for (const component of resolver.getComponentsFromPath(path.split(posix.sep).join(sep))) {
       if (['CustomFieldTranslation'].includes(component.type.name)) {
         if (!forDestructiveChanges) {
           task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
