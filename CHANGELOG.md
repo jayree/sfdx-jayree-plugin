@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.4...v4.0.5) (2021-09-02)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix createVirtualTreeContainer on windows ([7fb6c59](https://github.com/jayree/sfdx-jayree-plugin/commit/7fb6c5988c66a635f0e52632fb1339117dd990a6))
+
 ## [4.0.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.3...v4.0.4) (2021-09-01)
 
 
