@@ -218,7 +218,7 @@ uses the diff of what is unique in branchB (REF2)`,
                           await fs.ensureDir(dirname(ctx.destructiveChanges.files[0]));
                           await fs.writeFile(
                             ctx.destructiveChanges.files[0],
-                            ctx.destructiveChangesComponentSet.getPackageXml(undefined, true)
+                            ctx.destructiveChangesComponentSet.getPackageXml()
                           );
 
                           await fs.writeFile(

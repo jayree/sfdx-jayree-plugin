@@ -387,7 +387,7 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
   const Aggregator: ComponentLike[] = [];
 
   // const fromSourcePath = ComponentSet.fromSource({
-  //   fsPaths: sourcepath,
+  //   fsPaths: sourcepath.map((path) => path.split(posix.sep).join(sep)),
   //   registry: registryAccess,
   //   tree: virtualTreeContainer,
   // });
@@ -399,16 +399,15 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
       if (['CustomFieldTranslation'].includes(component.type.name)) {
         if (!forDestructiveChanges) {
           task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
-          fromSourcePath.add(component.parent, forDestructiveChanges);
+          fromSourcePath.add(component.parent);
         } else {
           task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
         }
       } else {
-        fromSourcePath.add(component, forDestructiveChanges);
+        fromSourcePath.add(component);
       }
     }
   }
-  debug({ fromSourcePath });
 
   Aggregator.push(...fromSourcePath);
 
@@ -451,7 +450,7 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
   for (const type of Object.keys(metadata)) {
     for (const fullName of metadata[type]) {
       debug({ type, fullName });
-      filter.add(replaceChildwithParentType(type, fullName), forDestructiveChanges);
+      filter.add(replaceChildwithParentType(type, fullName));
     }
   }
 
@@ -462,10 +461,10 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
     include: filter,
   });
 
-  debug({ fromMetadata, filter, forDestructiveChanges });
-  const finalized = fromMetadata.size > 0 ? fromMetadata : filter;
+  const finalized = fromMetadata.size === filter.size ? fromMetadata : filter;
   Aggregator.push(...finalized);
-
   const pkg = new ComponentSet(Aggregator, registryAccess);
+  debug({ forDestructiveChanges, fromSourcePath, filter, fromMetadata, Aggregator, pkg });
+
   return pkg;
 }
