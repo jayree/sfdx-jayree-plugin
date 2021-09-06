@@ -1,3 +1,11 @@
+## [4.0.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.6...v4.0.7) (2021-09-06)
+
+
+### Bug Fixes
+
+* revert usage of forDestructiveChanges until all childTypes are supported ([798ab6e](https://github.com/jayree/sfdx-jayree-plugin/commit/798ab6ec65b9ae1cfc43b4bd7adea32f0fe7d21a))
+* update SDR ([8d34815](https://github.com/jayree/sfdx-jayree-plugin/commit/8d348155aeb90a3850a6558071275374bf667074))
+
 ## [4.0.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.5...v4.0.6) (2021-09-02)
 
 
