@@ -917,6 +917,13 @@
       "xmlName": "IframeWhiteListUrlSettings"
     },
     {
+      "directoryName": "inboundCertificates",
+      "inFolder": "false",
+      "metaFile": "true",
+      "suffix": "inboundCertificate",
+      "xmlName": "InboundCertificate"
+    },
+    {
       "directoryName": "inboundNetworkConnections",
       "inFolder": "false",
       "metaFile": "false",

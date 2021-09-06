@@ -679,7 +679,8 @@
             "id": "customfieldtranslation",
             "name": "CustomFieldTranslation",
             "directoryName": "fields",
-            "suffix": "fieldTranslation"
+            "suffix": "fieldTranslation",
+            "isAddressable": false
           }
         },
         "suffixes": {
@@ -2268,8 +2269,8 @@
     "objectTranslations": "customobjecttranslation",
     "staticresources": "staticresource",
     "sites": "customsite",
-    "accessControlPolicies": "accesscontrolpolicy",
     "restrictionRules": "restrictionrule",
+    "accessControlPolicies": "accesscontrolpolicy",
     "integrationHub": "integrationhubsettings",
     "ObjectHierarchyRelationship": "objecthierarchyrelationship",
     "IndustriesManufacturingSettings": "industriesmanufacturingsettings",
