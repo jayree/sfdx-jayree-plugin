@@ -386,28 +386,28 @@ export function createManifest(virtualTreeContainer, forDestructiveChanges = fal
 
   const Aggregator: ComponentLike[] = [];
 
-  // const fromSourcePath = ComponentSet.fromSource({
-  //   fsPaths: sourcepath.map((path) => path.split(posix.sep).join(sep)),
-  //   registry: registryAccess,
-  //   tree: virtualTreeContainer,
-  // });
+  const fromSourcePath = ComponentSet.fromSource({
+    fsPaths: sourcepath.map((path) => path.split(posix.sep).join(sep)),
+    registry: registryAccess,
+    tree: virtualTreeContainer,
+  });
 
-  const fromSourcePath = new ComponentSet();
-  const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
-  for (const path of sourcepath) {
-    for (const component of resolver.getComponentsFromPath(path.split(posix.sep).join(sep))) {
-      if (['CustomFieldTranslation'].includes(component.type.name)) {
-        if (!forDestructiveChanges) {
-          task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
-          fromSourcePath.add(component.parent);
-        } else {
-          task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
-        }
-      } else {
-        fromSourcePath.add(component);
-      }
-    }
-  }
+  // const fromSourcePath = new ComponentSet();
+  // const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
+  // for (const path of sourcepath) {
+  //   for (const component of resolver.getComponentsFromPath(path.split(posix.sep).join(sep))) {
+  //     if (['CustomFieldTranslation'].includes(component.type.name)) {
+  //       if (!forDestructiveChanges) {
+  //         task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
+  //         fromSourcePath.add(component.parent);
+  //       } else {
+  //         task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
+  //       }
+  //     } else {
+  //       fromSourcePath.add(component);
+  //     }
+  //   }
+  // }
 
   Aggregator.push(...fromSourcePath);
 
