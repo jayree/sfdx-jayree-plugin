@@ -51,14 +51,14 @@ jobs:
   node-14:
     <<: *node-test
     docker:
-      - image: node:14.15.4
+      - image: node:14.17.6
   release:
     <<: *defaults
     steps:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
-      - run: npm install -global semantic-release@17
+      - run: npm install -global semantic-release@18
       - run: npm install -global https://github.com/jayree/semantic-release
       - run: *install
       - run: semantic-release -e @oclif/semantic-release
