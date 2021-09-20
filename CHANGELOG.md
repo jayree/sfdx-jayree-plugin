@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.7...v4.1.0) (2021-09-20)
+
+
+### Features
+
+* **gitdiff:** utilize the full power of the SRD library ([1463b6e](https://github.com/jayree/sfdx-jayree-plugin/commit/1463b6eafd1b671ae1c3d83c91436bd61ad11e0a))
+
 ## [4.0.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.6...v4.0.7) (2021-09-06)
 
 
