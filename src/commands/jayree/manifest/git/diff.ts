@@ -12,14 +12,16 @@ import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
+import { ComponentSet, VirtualTreeContainer } from '@salesforce/source-deploy-retrieve';
 import {
   getGitResults,
   createVirtualTreeContainer,
   NodeFSTreeContainer,
-  createManifest,
+  buildManifestComponentSet,
   getGitDiff,
   Ctx,
   debug,
+  ensureOSPath,
 } from '../../../../utils/gitdiff';
 
 Messages.importMessagesDirectory(__dirname);
@@ -92,22 +94,13 @@ uses the diff of what is unique in branchB (REF2)`,
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
     const gitArgs = this.getGitArgsFromArgv();
 
-    const tasks: Listr<Ctx> = new Listr<Ctx>(
+    const tasks = new Listr<Ctx>(
       [
-        {
-          // title: 'Prepare',
-          task: (ctx): void => {
-            ctx.projectRoot = this.project.getPath();
-            ctx.git = gitArgs;
-            ctx.destructiveChanges = { files: null };
-            ctx.manifest = { file: null };
-          },
-          options: { persistentOutput: true },
-        },
         {
           title: 'Analyze sfdx-project',
           task: async (ctx, task): Promise<void> => {
-            ctx.sfdxProjectFolders = this.project.getPackageDirectories().map((p) => p.path);
+            ctx.projectRoot = this.project.getPath();
+            ctx.sfdxProjectFolders = this.project.getPackageDirectories().map((p) => ensureOSPath(p.path));
             ctx.sourceApiVersion = (await this.project.retrieveSfdxProjectJson()).getContents().sourceApiVersion;
             task.output = `packageDirectories: ${ctx.sfdxProjectFolders.length} sourceApiVersion: ${ctx.sourceApiVersion}`;
           },
@@ -116,8 +109,10 @@ uses the diff of what is unique in branchB (REF2)`,
         {
           title: "Execute 'git --no-pager diff --name-status --no-renames <pending>'",
           task: async (ctx, task): Promise<void> => {
+            ctx.git = gitArgs;
             task.title = `Execute 'git --no-pager diff --name-status --no-renames ${ctx.git.ref1ref2}'`;
             ctx.gitLines = await getGitDiff(ctx.sfdxProjectFolders, ctx.git.ref1ref2);
+            task.output = `Changed files: ${ctx.gitLines.length}`;
           },
           options: { persistentOutput: true },
         },
@@ -157,149 +152,132 @@ uses the diff of what is unique in branchB (REF2)`,
         {
           title: 'Analyze git diff results',
           skip: (ctx): boolean => ctx.gitLines.length === 0,
-          task: (ctx, task): void => {
-            ctx.gitResults = getGitResults(
-              task,
+          task: async (ctx, task): Promise<void> => {
+            ctx.gitResults = await getGitResults(
               ctx.gitLines,
               ctx.ref1VirtualTreeContainer,
               ctx.ref2VirtualTreeContainer
             );
+            task.output = `Added: ${ctx.gitResults.counts.added}, Deleted: ${
+              ctx.gitResults.counts.deleted
+            }, Modified: ${ctx.gitResults.counts.modified}, Unchanged: ${ctx.gitResults.counts.unchanged}, Ignored: ${
+              ctx.gitResults.counts.ignored
+            }${ctx.gitResults.counts.error ? `, Errors: ${ctx.gitResults.counts.error}` : ''}`;
           },
           options: { persistentOutput: true },
         },
         {
+          // title: 'Error output',
+          skip: (ctx): boolean => !ctx.gitResults.errors.length,
+          task: (ctx, task): void => {
+            const errors = [...ctx.gitResults.errors];
+            const moreErrors = errors.splice(5);
+            for (const message of errors) {
+              task.output = `Error: ${message}`;
+            }
+            task.output = moreErrors.length ? `... ${moreErrors.length} more errors` : '';
+          },
+          options: { persistentOutput: true, bottomBar: 6 },
+        },
+        {
           title: 'Generate manifests',
           skip: (ctx): boolean =>
-            !ctx.gitResults ||
-            (!ctx.gitResults.deleted.length &&
-              !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length &&
-              !ctx.gitResults.added.length &&
-              !Object.keys(ctx.gitResults.modified.toManifest).length),
+            !ctx.gitResults || (!ctx.gitResults.manifest.size && !ctx.gitResults.destructiveChanges.size),
           task: (ctx, task): Listr =>
             task.newListr(
               [
                 {
-                  title:
-                    !ctx.gitResults.deleted.length && !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length
-                      ? undefined
-                      : join('destructiveChanges', 'destructiveChanges.xml'),
+                  title: join('destructiveChanges', 'destructiveChanges.xml'),
                   // eslint-disable-next-line @typescript-eslint/no-shadow
-                  skip: (ctx): boolean =>
-                    !ctx.gitResults.deleted.length && !Object.keys(ctx.gitResults.modified.toDestructiveChanges).length,
+                  skip: (ctx): boolean => !ctx.gitResults.destructiveChanges.size,
                   // eslint-disable-next-line @typescript-eslint/no-shadow
-                  task: (ctx, task): Listr =>
-                    task.newListr([
-                      {
-                        // title: 'Generate manifest',
-                        // eslint-disable-next-line @typescript-eslint/no-shadow
-                        task: (ctx, task): void => {
-                          ctx.destructiveChangesComponentSet = createManifest(
-                            ctx.ref1VirtualTreeContainer,
-                            true,
-                            ctx.gitResults,
-                            task
-                          );
-                        },
-                        options: {
-                          bottomBar: 5,
-                          persistentOutput: true,
-                        },
-                      },
-                      {
-                        // title: 'Save',
-                        skip: (): boolean =>
-                          !ctx.destructiveChangesComponentSet || !ctx.destructiveChangesComponentSet.size,
-                        // eslint-disable-next-line @typescript-eslint/no-shadow
-                        task: async (ctx): Promise<void> => {
-                          ctx.destructiveChanges.files = [
-                            join(ctx.projectRoot, 'destructiveChanges', 'destructiveChanges.xml'),
-                            join(ctx.projectRoot, 'destructiveChanges', 'package.xml'),
-                          ];
-                          await fs.ensureDir(dirname(ctx.destructiveChanges.files[0]));
-                          await fs.writeFile(
-                            ctx.destructiveChanges.files[0],
-                            ctx.destructiveChangesComponentSet.getPackageXml()
-                          );
+                  task: async (ctx, task): Promise<void> => {
+                    ctx.destructiveChangesComponentSet = buildManifestComponentSet(
+                      ctx.gitResults.destructiveChanges,
+                      true
+                    );
+                    if (!ctx.destructiveChangesComponentSet.getObject(true).Package.types.length) {
+                      task.skip();
+                      return;
+                    }
+                    ctx.destructiveChanges = {
+                      files: [
+                        join(ctx.projectRoot, 'destructiveChanges', 'destructiveChanges.xml'),
+                        join(ctx.projectRoot, 'destructiveChanges', 'package.xml'),
+                      ],
+                    };
+                    await fs.ensureDir(dirname(ctx.destructiveChanges.files[0]));
+                    await fs.writeFile(
+                      ctx.destructiveChanges.files[0],
+                      ctx.destructiveChangesComponentSet.getPackageXml(undefined, true)
+                    );
 
-                          await fs.writeFile(
-                            ctx.destructiveChanges.files[1],
-                            `<?xml version="1.0" encoding="UTF-8"?>
-<Package xmlns="http://soap.sforce.com/2006/04/metadata">
-  <version>${ctx.sourceApiVersion}</version>
-</Package>`
-                          );
-                        },
-                      },
-                    ]),
+                    await fs.writeFile(
+                      ctx.destructiveChanges.files[1],
+                      ctx.destructiveChangesComponentSet.getPackageXml()
+                    );
+                  },
+                  options: { persistentOutput: true },
                 },
                 {
-                  title:
-                    !ctx.gitResults.added.length && !Object.keys(ctx.gitResults.modified.toManifest).length
-                      ? undefined
-                      : join('package', 'package.xml'),
+                  title: join('package', 'package.xml'),
                   // eslint-disable-next-line @typescript-eslint/no-shadow
-                  skip: (ctx): boolean =>
-                    !ctx.gitResults.added.length && !Object.keys(ctx.gitResults.modified.toManifest).length,
+                  skip: (ctx): boolean => !ctx.gitResults.manifest.size,
                   // eslint-disable-next-line @typescript-eslint/no-shadow
-                  task: (ctx, task): Listr =>
-                    task.newListr([
-                      {
-                        // title: 'Generate manifest',
-                        // eslint-disable-next-line @typescript-eslint/no-shadow
-                        task: (ctx, task): void => {
-                          ctx.manifestComponentSet = createManifest(
-                            ctx.ref2VirtualTreeContainer,
-                            false,
-                            ctx.gitResults,
-                            task
-                          );
-                        },
-                        options: {
-                          bottomBar: 5,
-                          persistentOutput: true,
-                        },
-                      },
-                      {
-                        // title: 'Save',
-                        skip: (): boolean => !ctx.manifestComponentSet || !ctx.manifestComponentSet.size,
-                        // eslint-disable-next-line @typescript-eslint/no-shadow
-                        task: async (ctx): Promise<void> => {
-                          ctx.manifest.file = join(ctx.projectRoot, 'package', 'package.xml');
-                          await fs.ensureDir(dirname(ctx.manifest.file));
-                          await fs.writeFile(ctx.manifest.file, ctx.manifestComponentSet.getPackageXml());
-                        },
-                      },
-                    ]),
+                  task: async (ctx, task): Promise<void> => {
+                    ctx.manifestComponentSet = buildManifestComponentSet(ctx.gitResults.manifest);
+                    if (!ctx.manifestComponentSet.getObject().Package.types.length) {
+                      task.skip();
+                      return;
+                    }
+                    ctx.manifest = { file: join(ctx.projectRoot, 'package', 'package.xml') };
+                    await fs.ensureDir(dirname(ctx.manifest.file));
+                    await fs.writeFile(ctx.manifest.file, ctx.manifestComponentSet.getPackageXml());
+                  },
+                  options: { persistentOutput: true },
                 },
               ],
-              { concurrent: true }
+              { concurrent: true, exitOnError: false }
             ),
         },
       ],
       {
-        rendererOptions: { showTimer: true, collapse: false, lazy: true },
+        rendererOptions: { showTimer: true, collapse: false, lazy: true, collapseErrors: false },
         rendererSilent: !this.isOutputEnabled,
         rendererFallback: debug.enabled,
       }
     );
 
     try {
-      const context: Ctx = await tasks.run();
-      if (debug.enabled) {
-        if (this.isOutputEnabled) {
-          logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
-        }
-        return context as unknown as AnyJson;
+      const context = await tasks.run();
+      if (debug.enabled && this.isOutputEnabled) {
+        logger.success(
+          `Context: ${JSON.stringify(
+            context,
+            (key, value) => {
+              if (value instanceof ComponentSet && value !== null) {
+                let types = value.getObject().Package.types;
+                if (types.length === 0) {
+                  types = value.getObject(true).Package.types;
+                }
+                return types;
+              }
+              if (value instanceof VirtualTreeContainer) {
+                return typeof value;
+              }
+              return value;
+            },
+            2
+          )}`
+        );
       }
       return {
-        destructiveChanges: context.destructiveChanges as unknown as AnyJson,
-        manifest: context.manifest as unknown as AnyJson,
-      };
+        destructiveChanges: context.destructiveChangesComponentSet?.getObject(true),
+        manifest: context.manifestComponentSet?.getObject(),
+      } as unknown as AnyJson;
     } catch (e) {
-      if (debug.enabled) {
-        if (this.isOutputEnabled) {
-          logger.fail(e);
-        }
+      if (debug.enabled && this.isOutputEnabled) {
+        logger.fail(e);
       }
       throw e;
     }

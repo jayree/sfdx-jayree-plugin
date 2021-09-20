@@ -1,5 +1,4 @@
-import { ComponentSet, VirtualTreeContainer } from '@salesforce/source-deploy-retrieve';
-import { NodeFSTreeContainer as FSTreeContainer } from '@salesforce/source-deploy-retrieve/lib/src/resolve';
+import { ComponentSet, VirtualTreeContainer, SourceComponent, NodeFSTreeContainer as FSTreeContainer } from '@salesforce/source-deploy-retrieve';
 export declare const NodeFSTreeContainer: typeof FSTreeContainer;
 export declare const debug: any;
 export interface Ctx {
@@ -11,14 +10,22 @@ export interface Ctx {
         status: string;
     }>;
     gitResults: {
-        added: string[];
-        deleted: string[];
-        modified: {
-            destructiveFiles: string[];
-            manifestFiles: string[];
-            toDestructiveChanges: Record<string, []>;
-            toManifest: Record<string, []>;
+        manifest: ComponentSet;
+        destructiveChanges: ComponentSet;
+        unchanged: string[];
+        ignored: {
+            ref1: string[];
+            ref2: string[];
         };
+        counts: {
+            added: number;
+            deleted: number;
+            modified: number;
+            unchanged: number;
+            ignored: number;
+            error: number;
+        };
+        errors: string[];
     };
     ref1VirtualTreeContainer: VirtualTreeContainer;
     ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer;
@@ -36,29 +43,14 @@ export interface Ctx {
         file: string;
     };
 }
-export declare function createVirtualTreeContainer(ref: any, modifiedFiles: any): Promise<VirtualTreeContainer>;
-export declare function analyzeFile(path: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
+export declare function ensureOSPath(path: string): string;
+export declare function ensureGitPath(path: string): string;
+export declare function createVirtualTreeContainer(ref: string, modifiedFiles: string[]): Promise<VirtualTreeContainer>;
+export declare function analyzeFile(path: string, ref1VirtualTreeContainer: VirtualTreeContainer, ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer): Promise<{
     status: number;
-    toManifest?: undefined;
-    toDestructiveChanges?: undefined;
-} | {
-    status: number;
-    toManifest: {};
-    toDestructiveChanges: {};
-};
-export declare function getGitDiff(sfdxProjectFolders: any, ref1ref2: any): Promise<{
-    path: string;
-    status: string;
-}[]>;
-export declare function getGitResults(task: any, gitLines: any, ref1VirtualTreeContainer: any, ref2VirtualTreeContainer: any): {
-    added: string[];
-    modified: {
-        destructiveFiles: string[];
-        manifestFiles: string[];
-        toManifest: Record<string, []>;
-        toDestructiveChanges: Record<string, []>;
-    };
-    deleted: string[];
-    unchanged: string[];
-};
-export declare function createManifest(virtualTreeContainer: any, forDestructiveChanges: boolean, results: any, task: any): ComponentSet;
+    toManifest?: SourceComponent[];
+    toDestructiveChanges?: SourceComponent[];
+}>;
+export declare function getGitDiff(sfdxProjectFolders: string[], ref1ref2: string): Promise<Ctx['gitLines']>;
+export declare function getGitResults(gitLines: Ctx['gitLines'], ref1VirtualTreeContainer: VirtualTreeContainer, ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer): Promise<Ctx['gitResults']>;
+export declare function buildManifestComponentSet(cs: ComponentSet, forDestructiveChanges?: boolean): ComponentSet;
