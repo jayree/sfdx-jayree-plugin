@@ -9,14 +9,15 @@
     "customlabels": {
       "id": "customlabels",
       "name": "CustomLabels",
+      "ignoreParsedFullName": true,
       "suffix": "labels",
       "directoryName": "labels",
-      "ignoreParsedFullName": true,
       "children": {
         "types": {
           "customlabel": {
             "id": "customlabel",
             "name": "CustomLabel",
+            "xmlElementName": "labels",
             "ignoreParentName": true,
             "uniqueIdElement": "fullName",
             "directoryName": "labels",
@@ -514,42 +515,56 @@
           "workflowfieldupdate": {
             "id": "workflowfieldupdate",
             "name": "WorkflowFieldUpdate",
+            "xmlElementName": "fieldUpdates",
+            "uniqueIdElement": "fullName",
             "directoryName": "fieldUpdates",
             "suffix": "fieldUpdate"
           },
           "workflowknowledgepublish": {
             "id": "workflowknowledgepublish",
             "name": "WorkflowKnowledgePublish",
+            "xmlElementName": "knowledgePublishes",
+            "uniqueIdElement": "fullName",
             "directoryName": "knowledgePublishes",
             "suffix": "knowledgePublish"
           },
           "workflowtask": {
             "id": "workflowtask",
             "name": "WorkflowTask",
+            "xmlElementName": "tasks",
+            "uniqueIdElement": "fullName",
             "directoryName": "tasks",
             "suffix": "task"
           },
           "workflowalert": {
             "id": "workflowalert",
             "name": "WorkflowAlert",
+            "xmlElementName": "alerts",
+            "uniqueIdElement": "fullName",
             "directoryName": "alerts",
             "suffix": "alert"
           },
           "workflowsend": {
             "id": "workflowsend",
             "name": "WorkflowSend",
+            "xmlElementName": "send",
+            "uniqueIdElement": "fullName",
             "directoryName": "send",
             "suffix": "send"
           },
           "workflowoutboundmessage": {
             "id": "workflowoutboundmessage",
             "name": "WorkflowOutboundMessage",
+            "xmlElementName": "outboundMessages",
+            "uniqueIdElement": "fullName",
             "directoryName": "outboundMessages",
             "suffix": "outboundMessage"
           },
           "workflowrule": {
             "id": "workflowrule",
             "name": "WorkflowRule",
+            "xmlElementName": "rules",
+            "uniqueIdElement": "fullName",
             "directoryName": "rules",
             "suffix": "rule"
           }
@@ -584,6 +599,7 @@
           "assignmentrule": {
             "id": "assignmentrule",
             "name": "AssignmentRule",
+            "xmlElementName": "assignmentRule",
             "uniqueIdElement": "fullName",
             "directoryName": "assignmentRule",
             "suffix": "assignmentRule"
@@ -607,6 +623,7 @@
           "autoresponserule": {
             "id": "autoresponserule",
             "name": "AutoResponseRule",
+            "xmlElementName": "autoResponseRule",
             "uniqueIdElement": "fullName",
             "directoryName": "autoResponseRule",
             "suffix": "autoResponseRule"
@@ -630,6 +647,7 @@
           "escalationrule": {
             "id": "escalationrule",
             "name": "EscalationRule",
+            "xmlElementName": "escalationRule",
             "uniqueIdElement": "fullName",
             "directoryName": "escalationRule",
             "suffix": "escalationRule"
@@ -679,7 +697,8 @@
             "id": "customfieldtranslation",
             "name": "CustomFieldTranslation",
             "directoryName": "fields",
-            "suffix": "fieldTranslation"
+            "suffix": "fieldTranslation",
+            "isAddressable": false
           }
         },
         "suffixes": {
@@ -801,6 +820,7 @@
           "matchingrule": {
             "id": "matchingrule",
             "name": "MatchingRule",
+            "xmlElementName": "matchingRules",
             "uniqueIdElement": "fullName",
             "directoryName": "matchingRules",
             "suffix": "matchingRule"
@@ -978,24 +998,32 @@
           "sharingownerrule": {
             "id": "sharingownerrule",
             "name": "SharingOwnerRule",
+            "xmlElementName": "sharingOwnerRules",
+            "uniqueIdElement": "fullName",
             "directoryName": "sharingOwnerRules",
             "suffix": "sharingOwnerRule"
           },
           "sharingcriteriarule": {
             "id": "sharingcriteriarule",
             "name": "SharingCriteriaRule",
+            "xmlElementName": "sharingCriteriaRules",
+            "uniqueIdElement": "fullName",
             "directoryName": "sharingCriteriaRules",
             "suffix": "sharingCriteriaRule"
           },
           "sharingguestrule": {
             "id": "sharingguestrule",
             "name": "SharingGuestRule",
+            "xmlElementName": "sharingGuestRules",
+            "uniqueIdElement": "fullName",
             "directoryName": "sharingGuestRules",
             "suffix": "sharingGuestRule"
           },
           "sharingterritoryrule": {
             "id": "sharingterritoryrule",
             "name": "SharingTerritoryRule",
+            "xmlElementName": "sharingTerritoryRules",
+            "uniqueIdElement": "fullName",
             "directoryName": "sharingTerritoryRules",
             "suffix": "sharingTerritoryRule"
           }
@@ -1156,7 +1184,7 @@
           "managedtopic": {
             "id": "managedtopic",
             "name": "ManagedTopic",
-            "directoryName": "ManagedTopic",
+            "directoryName": "managedTopic",
             "suffix": "managedTopic"
           }
         },
@@ -1164,7 +1192,7 @@
           "managedTopic": "managedtopic"
         },
         "directories": {
-          "ManagedTopic": "managedtopic"
+          "managedTopic": "managedtopic"
         }
       }
     },
@@ -1196,19 +1224,22 @@
       "id": "territory2model",
       "name": "Territory2Model",
       "suffix": "territory2Model",
-      "directoryName": "territory2Models"
+      "directoryName": "territory2Models",
+      "folderType": "territory2model"
     },
     "territory2rule": {
       "id": "territory2rule",
       "name": "Territory2Rule",
       "suffix": "territory2Rule",
-      "directoryName": "territory2Models"
+      "directoryName": "rules",
+      "folderType": "territory2model"
     },
     "territory2": {
       "id": "territory2",
       "name": "Territory2",
       "suffix": "territory2",
-      "directoryName": "territory2Models"
+      "directoryName": "territories",
+      "folderType": "territory2model"
     },
     "campaigninfluencemodel": {
       "id": "campaigninfluencemodel",
@@ -1549,6 +1580,15 @@
       "name": "OutboundNetworkConnection",
       "suffix": "outboundNetworkConnection",
       "directoryName": "outboundNetworkConnections"
+    },
+    "inboundcertificate": {
+      "id": "inboundcertificate",
+      "name": "InboundCertificate",
+      "suffix": "inboundCertificate",
+      "directoryName": "inboundCertificates",
+      "strategies": {
+        "adapter": "matchingContentFile"
+      }
     },
     "mutingpermissionset": {
       "id": "mutingpermissionset",
@@ -1898,23 +1938,7 @@
       "id": "mktdatatranobject",
       "name": "MktDataTranObject",
       "suffix": "mktDataTranObject",
-      "directoryName": "mktDataTranObjects",
-      "children": {
-        "types": {
-          "mktdatatranfield": {
-            "id": "mktdatatranfield",
-            "name": "MktDataTranField",
-            "directoryName": "mktDataTranFields",
-            "suffix": "mktDataTranField"
-          }
-        },
-        "suffixes": {
-          "mktDataTranField": "mktdatatranfield"
-        },
-        "directories": {
-          "mktDataTranFields": "mktdatatranfield"
-        }
-      }
+      "directoryName": "mktDataTranObjects"
     },
     "fieldsrctrgtrelationship": {
       "id": "fieldsrctrgtrelationship",
@@ -1981,24 +2005,6 @@
       "name": "ConnectedSystem",
       "suffix": "connectedSystem",
       "directoryName": "ConnectedSystem"
-    },
-    "svccatalogcategory": {
-      "id": "svccatalogcategory",
-      "name": "SvcCatalogCategory",
-      "suffix": "category",
-      "directoryName": "svcCatalogCategories"
-    },
-    "svccatalogfulfillmentflow": {
-      "id": "svccatalogfulfillmentflow",
-      "name": "SvcCatalogFulfillmentFlow",
-      "suffix": "fulfillmentFlow",
-      "directoryName": "svcCatalogFulfillmentFlows"
-    },
-    "svccatalogitemdef": {
-      "id": "svccatalogitemdef",
-      "name": "SvcCatalogItemDef",
-      "suffix": "catalogItem",
-      "directoryName": "svcCatalogItems"
     }
   },
   "suffixes": {
@@ -2006,6 +2012,7 @@
     "businessProcessGroup": "businessprocessgroup",
     "model": "discoveryaimodel",
     "goal": "discoverygoal",
+    "function": "functionreference",
     "participantRole": "participantrole",
     "gatewayProviderPaymentMethodType": "gatewayproviderpaymentmethodtype",
     "careProviderSearchConfig": "careprovidersearchconfig",
@@ -2058,6 +2065,7 @@
     "feedFilter": "customfeedfilter",
     "layout": "layout",
     "weblink": "custompageweblink",
+    "custompageweblink": "custompageweblink",
     "letter": "letterhead",
     "email": "emailtemplate",
     "quickAction": "quickaction",
@@ -2202,6 +2210,7 @@
     "emailFolder": "emailfolder",
     "inboundNetworkConnection": "inboundnetworkconnection",
     "outboundNetworkConnection": "outboundnetworkconnection",
+    "inboundCertificate": "inboundcertificate",
     "mutingpermissionset": "mutingpermissionset",
     "myDomainDiscoverableLogin": "mydomaindiscoverablelogin",
     "blacklistedConsumer": "blacklistedconsumer",
@@ -2225,7 +2234,6 @@
     "IPAddressRange": "ipaddressrange",
     "xml": "emailservicesfunction",
     "businessProcessFeedbackConfiguration": "businessprocessfeedbackconfiguration",
-    "function": "functionreference",
     "dynamicTrigger": "dynamictrigger",
     "salesAgreementSetting": "salesagreementsettings",
     "accountForecastSetting": "accountforecastsettings",
@@ -2238,10 +2246,7 @@
     "dataMappingSchema": "datamappingschema",
     "dataMapping": "datamapping",
     "federationDataMappingUsage": "federationdatamappingusage",
-    "connectedSystem": "connectedsystem",
-    "category": "svccatalogcategory",
-    "fulfillmentFlow": "svccatalogfulfillmentflow",
-    "catalogItem": "svccatalogitemdef"
+    "connectedSystem": "connectedsystem"
   },
   "strictDirectoryNames": {
     "experiences": "experiencebundle",
@@ -2254,8 +2259,8 @@
     "objectTranslations": "customobjecttranslation",
     "staticresources": "staticresource",
     "sites": "customsite",
-    "accessControlPolicies": "accesscontrolpolicy",
     "restrictionRules": "restrictionrule",
+    "accessControlPolicies": "accesscontrolpolicy",
     "integrationHub": "integrationhubsettings",
     "ObjectHierarchyRelationship": "objecthierarchyrelationship",
     "IndustriesManufacturingSettings": "industriesmanufacturingsettings",
@@ -2279,6 +2284,7 @@
     "workflowsend": "workflow",
     "workflowoutboundmessage": "workflow",
     "workflowrule": "workflow",
+    "workflowknowledgepublish": "workflow",
     "assignmentrule": "assignmentrules",
     "autoresponserule": "autoresponserules",
     "escalationrule": "escalationrules",
@@ -2288,12 +2294,10 @@
     "botversion": "bot",
     "customfieldtranslation": "customobjecttranslation",
     "formsection": "form",
-    "workflowknowledgepublish": "workflow",
     "sharingguestrule": "sharingrules",
     "sharingterritoryrule": "sharingrules",
     "managedtopic": "managedtopics",
-    "workskillroutingattribute": "workskillrouting",
-    "mktdatatranfield": "mktdatatranobject"
+    "workskillroutingattribute": "workskillrouting"
   },
   "apiVersion": "52.0"
 }

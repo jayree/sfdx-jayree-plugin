@@ -6,7 +6,6 @@
  */
 
 import { join, basename, sep, posix, dirname } from 'path';
-import { EOL } from 'os';
 import execa from 'execa';
 import equal from 'fast-deep-equal';
 import {
@@ -14,12 +13,12 @@ import {
   RegistryAccess,
   VirtualDirectory,
   VirtualTreeContainer,
-} from '@salesforce/source-deploy-retrieve';
-import {
+  SourceComponent,
   NodeFSTreeContainer as FSTreeContainer,
   MetadataResolver,
-} from '@salesforce/source-deploy-retrieve/lib/src/resolve';
-import { ComponentLike } from '@salesforce/source-deploy-retrieve/lib/src/resolve/types';
+  VirtualFile,
+} from '@salesforce/source-deploy-retrieve';
+import { parseMetadataXml } from '@salesforce/source-deploy-retrieve/lib/src/utils';
 
 export const NodeFSTreeContainer = FSTreeContainer;
 
@@ -41,14 +40,12 @@ export interface Ctx {
   sourceApiVersion: string;
   gitLines: Array<{ path: string; status: string }>;
   gitResults: {
-    added: string[];
-    deleted: string[];
-    modified: {
-      destructiveFiles: string[];
-      manifestFiles: string[];
-      toDestructiveChanges: Record<string, []>;
-      toManifest: Record<string, []>;
-    };
+    manifest: ComponentSet;
+    destructiveChanges: ComponentSet;
+    unchanged: string[];
+    ignored: { ref1: string[]; ref2: string[] };
+    counts: { added: number; deleted: number; modified: number; unchanged: number; ignored: number; error: number };
+    errors: string[];
   };
   ref1VirtualTreeContainer: VirtualTreeContainer;
   ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer;
@@ -67,411 +64,232 @@ export interface Ctx {
   };
 }
 
-export async function createVirtualTreeContainer(ref, modifiedFiles) {
+export function ensureOSPath(path: string) {
+  return path.split(posix.sep).join(sep);
+}
+
+export function ensureGitPath(path: string) {
+  return path.split(sep).join(posix.sep);
+}
+
+export async function createVirtualTreeContainer(ref: string, modifiedFiles: string[]): Promise<VirtualTreeContainer> {
+  const paths = (await execa('git', ['ls-tree', '-r', '--name-only', ref])).stdout
+    .split(/\r?\n/)
+    .map((p) => ensureOSPath(p));
+  const virtualFsSet = new Map<string, Set<VirtualFile | string>>();
   debug({ modifiedFiles });
-  const { stdout } = await execa('git', ['ls-tree', '-r', '--name-only', ref]);
-  const virtualFs: VirtualDirectory[] = [];
-  for (const path of stdout.split(EOL)) {
-    let dirPath;
-    let subPath = path;
-    while (dirPath !== dirname(subPath)) {
-      dirPath = dirname(subPath);
-      const index = virtualFs.findIndex((dir) => dir.dirPath === dirPath);
-      if (index >= 0) {
-        virtualFs[index].children.push({
-          name: basename(subPath),
-          data:
-            parseMetadataXml(subPath) && modifiedFiles.includes(subPath)
-              ? Buffer.from((await execa('git', ['--no-pager', 'show', `${ref}:${subPath}`])).stdout)
-              : Buffer.from(''),
-        });
-      } else {
-        virtualFs.push({
-          dirPath,
-          children: [
-            {
-              name: basename(subPath),
-              data:
-                parseMetadataXml(subPath) && modifiedFiles.includes(subPath)
-                  ? Buffer.from((await execa('git', ['--no-pager', 'show', `${ref}:${subPath}`])).stdout)
-                  : Buffer.from(''),
-            },
-          ],
-        });
+  for (const path of paths) {
+    let dirOrFilePath = path;
+    while (dirOrFilePath !== dirname(dirOrFilePath)) {
+      const fileOrFolderName = basename(dirOrFilePath);
+      dirOrFilePath = dirname(dirOrFilePath);
+      if (!virtualFsSet.has(dirOrFilePath)) {
+        virtualFsSet.set(dirOrFilePath, new Set());
       }
-      subPath = dirPath;
+      if (path.endsWith(fileOrFolderName)) {
+        const data =
+          parseMetadataXml(path) && modifiedFiles.includes(path)
+            ? Buffer.from((await execa('git', ['--no-pager', 'show', `${ref}:${ensureGitPath(path)}`])).stdout)
+            : Buffer.from('');
+        virtualFsSet.get(dirOrFilePath).add({ name: fileOrFolderName, data });
+      } else {
+        virtualFsSet.get(dirOrFilePath).add(fileOrFolderName);
+      }
     }
+  }
+  const virtualFs: VirtualDirectory[] = [];
+  for (const [dirPath, childSet] of virtualFsSet) {
+    virtualFs.push({ dirPath, children: [...childSet] });
   }
   return new VirtualTreeContainer(virtualFs);
 }
 
-function parseMetadataXml(fsPath: string) {
-  const match = /(.+)\.(.+)-meta\.xml/.exec(basename(fsPath));
-  if (match) {
-    return { fullName: match[1], suffix: match[2], path: fsPath };
-  }
-}
-
-export function analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer) {
-  let source = '';
-  let target = '';
-  if (parseMetadataXml(path)) {
-    try {
-      const ref2resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
-      const ref2Component = ref2resolver.getComponentsFromPath(path);
-      if (ref2Component.length === 1) {
-        // debug({ ref2Component: ref2Component[0].getChildren() });
-        source = ref2Component[0].parseXmlSync();
-      }
-    } catch (error) {
-      debug({ error });
-      source = '';
-    }
-
-    try {
-      const ref1resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
-      const ref1Component = ref1resolver.getComponentsFromPath(path);
-      if (ref1Component.length === 1) {
-        // debug({ ref1Component: ref1Component[0].getChildren() });
-        target = ref1Component[0].parseXmlSync();
-      }
-    } catch (error) {
-      debug({ error });
-      target = '';
-    }
+export async function analyzeFile(
+  path: string,
+  ref1VirtualTreeContainer: VirtualTreeContainer,
+  ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer
+): Promise<{
+  status: number;
+  toManifest?: SourceComponent[];
+  toDestructiveChanges?: SourceComponent[];
+}> {
+  if (!parseMetadataXml(path)) {
+    return { status: 0 };
   }
 
-  if (equal(target, source) && source !== '' && target !== '') {
+  const ref2resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
+  const [ref2Component] = ref2resolver.getComponentsFromPath(path); // git path only conaints files
+
+  const ref1resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
+  const [ref1Component] = ref1resolver.getComponentsFromPath(path); // git path only conaints files
+
+  if (equal(await ref1Component.parseXml(), await ref2Component.parseXml())) {
     return { status: -1 };
-  } else if (source === '' && target === '') {
+  }
+
+  if (ref1Component.type.strictDirectoryName === true || !ref1Component.type.children) {
     return { status: 0 };
   }
 
-  const XmlName = ((objects) => {
-    for (const obj of objects) {
-      if (typeof obj !== 'undefined' && obj !== null) {
-        return Object.keys(obj)[0];
-      }
-    }
-    return '';
-  })([target, source]);
-
-  const XmlTypesOfXmlName = ((xmlName) => {
-    try {
-      const childTypeMapping = {};
-      Object.values(registryAccess.getTypeByName(xmlName).children.types).forEach((element) => {
-        childTypeMapping[element.directoryName] = element.name;
-      });
-      return childTypeMapping;
-    } catch (error) {
-      return {};
-    }
-  })(XmlName);
-
-  if (Object.keys(XmlTypesOfXmlName).length === 0) {
-    return { status: 0 };
-  }
-
-  const PrefixOfFile = ((filePath, xmlName) => {
-    let prefix = null;
-    const parentObjectName = basename(filePath).split('.')[0];
-    if (parentObjectName !== xmlName) {
-      prefix = parentObjectName;
-    }
-    return prefix;
-  })(path, XmlName);
-
-  const getFullNamePaths = (root) => {
-    const paths = [];
-    const nodes = [
-      {
-        obj: root,
-        path: [],
-      },
-    ];
-    while (nodes.length > 0) {
-      const n = nodes.pop();
-      if (typeof n.obj === 'object') {
-        Object.keys(n.obj).forEach((k) => {
-          // eslint-disable-next-line @typescript-eslint/no-shadow
-          const path = n.path.concat(k);
-          if (path.includes('fullName')) {
-            const fullName = n.obj[k];
-            path.pop();
-            paths.push({ path, fullName });
-          }
-          nodes.unshift({
-            obj: n.obj[k],
-            path,
-          });
-        });
-      }
-    }
-    return paths;
-  };
-
-  const targetFullNamePaths = getFullNamePaths(target);
-  const sourceFullNamePaths = getFullNamePaths(source);
-
-  const fullNamePathsNotInSource = targetFullNamePaths.filter(
-    (x) => !sourceFullNamePaths.map((f) => f.fullName).includes(x.fullName)
+  const SourceComponentNotInSource = ref1Component.getChildren().filter(
+    (x) =>
+      !ref2Component
+        .getChildren()
+        .map((f) => {
+          return getUniqueIdentifier(f);
+        })
+        .includes(getUniqueIdentifier(x))
   ); // deleted
-  const fullNamePathsNotInTarget = sourceFullNamePaths.filter(
-    (x) => !targetFullNamePaths.map((f) => f.fullName).includes(x.fullName)
+  const SourceComponentNotInTarget = ref2Component.getChildren().filter(
+    (x) =>
+      !ref1Component
+        .getChildren()
+        .map((f) => {
+          return getUniqueIdentifier(f);
+        })
+        .includes(getUniqueIdentifier(x))
   ); // added
-
-  const fullNamePathsInSourceAndTarget = targetFullNamePaths.filter((x) =>
-    sourceFullNamePaths.map((f) => f.fullName).includes(x.fullName)
+  const SourceComponentInSourceAndTarget = ref1Component.getChildren().filter((x) =>
+    ref2Component
+      .getChildren()
+      .map((f) => {
+        return getUniqueIdentifier(f);
+      })
+      .includes(getUniqueIdentifier(x))
   ); // modified?
 
-  const getObjectAtPath = (diffPath, object) => {
-    let current = object;
-    for (const value of diffPath) {
-      current = current[value];
-    }
-    return current;
-  };
+  debug({ SourceComponentNotInSource, SourceComponentNotInTarget, SourceComponentInSourceAndTarget });
 
-  for (const x of fullNamePathsInSourceAndTarget) {
-    const y = sourceFullNamePaths.filter((f) => x.fullName === f.fullName)[0];
-    if (!equal(getObjectAtPath(x.path, target), getObjectAtPath(y.path, source))) {
-      fullNamePathsNotInTarget.push({ fullName: x.fullName, path: x.path }); // modified! -> add to added
+  for (const x of SourceComponentInSourceAndTarget) {
+    const [y] = ref2Component.getChildren().filter((f) => getUniqueIdentifier(x) === getUniqueIdentifier(f));
+    if (!equal(await x.parseXml(), await y.parseXml())) {
+      SourceComponentNotInTarget.push(y); // modified! -> add to added
     }
   }
 
-  const getXmlType = (object, XmlTypes) => {
-    return object.path
-      .filter((p) => typeof p === 'string')
-      .map((pv) => XmlTypes[pv])
-      .filter(Boolean);
-  };
-
-  const convert = (array, XmlTypes) => {
-    const converted = {};
-    array.forEach((e) => {
-      const childXmlType = getXmlType(e, XmlTypes);
-      if (childXmlType) {
-        converted[childXmlType] = converted[childXmlType] ?? [];
-        if (PrefixOfFile) {
-          converted[childXmlType].push(`${PrefixOfFile}.${e.fullName}`);
-        } else {
-          converted[childXmlType].push(e.fullName);
-        }
-      }
-    });
-
-    return converted;
-  };
-
-  const toDestructiveChanges = convert(fullNamePathsNotInSource, XmlTypesOfXmlName);
-  const toManifest = convert(fullNamePathsNotInTarget, XmlTypesOfXmlName);
+  debug({ SourceComponentNotInTarget });
 
   return {
-    status: Object.keys(toManifest).length + Object.keys(toDestructiveChanges).length,
-    toManifest,
-    toDestructiveChanges,
+    status: SourceComponentNotInSource.length + SourceComponentNotInTarget.length,
+    toManifest: SourceComponentNotInTarget,
+    toDestructiveChanges: SourceComponentNotInSource,
   };
 }
 
-export async function getGitDiff(sfdxProjectFolders, ref1ref2) {
-  let gitLines = (await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ref1ref2])).stdout.split(
-    /\r?\n/
-  );
+function getUniqueIdentifier(component: SourceComponent) {
+  return `${component.type.name}#${component[component.type.uniqueIdElement]}`;
+}
 
-  gitLines = gitLines.filter((l) =>
-    sfdxProjectFolders.some((f) => {
-      if (typeof l.split('\t')[1] !== 'undefined') {
-        return l.split('\t')[1].startsWith(f);
-      }
+export async function getGitDiff(sfdxProjectFolders: string[], ref1ref2: string): Promise<Ctx['gitLines']> {
+  let gitLines = (await execa('git', ['--no-pager', 'diff', '--name-status', '--no-renames', ref1ref2])).stdout
+    .split(/\r?\n/)
+    .map((line) => {
+      const l = line.split('\t');
+      return { path: ensureOSPath(l[1]), status: l[0] };
     })
-  );
+    .filter((l) =>
+      sfdxProjectFolders.some((f) => {
+        return l.path.startsWith(f);
+      })
+    );
 
-  let gitlinesf = gitLines.map((line) => {
-    const l = line.split('\t');
-    return { path: l[1], status: l[0] };
-  });
-
-  gitlinesf = gitlinesf.filter((line) => {
+  const renames = [];
+  gitLines = gitLines.filter((line) => {
     if (line.status === 'D') {
       for (const sfdxFolder of sfdxProjectFolders) {
-        let extf;
-        if (line.path.startsWith(sfdxFolder)) {
-          extf = sfdxFolder;
-          if (line.path.startsWith(join(sfdxFolder, '/main/default/').split(sep).join(posix.sep))) {
-            extf = join(sfdxFolder, '/main/default/').split(sep).join(posix.sep);
-          } else {
-            extf = join(sfdxFolder, '/').split(sep).join(posix.sep);
-          }
-          if (gitlinesf.filter((t) => t.path.endsWith(line.path.replace(extf, '')) && t.status === 'A').length !== 0) {
-            return false;
-          }
+        const defaultFolder = join(sfdxFolder, 'main', 'default');
+        const filePath = line.path.replace(line.path.startsWith(defaultFolder) ? defaultFolder : sfdxFolder, '');
+        const target = gitLines.find((t) => t.path.endsWith(filePath) && t.status === 'A');
+        if (target) {
+          renames.push({ from: line.path, to: target.path });
+          return false;
         }
       }
     }
     return true;
   });
-  return gitlinesf;
+  debug({ gitLines, renames, sfdxProjectFolders });
+  return gitLines;
 }
 
-export function getGitResults(
-  task,
-  gitLines,
-  ref1VirtualTreeContainer,
-  ref2VirtualTreeContainer
-): {
-  added: string[];
-  modified: {
-    destructiveFiles: string[];
-    manifestFiles: string[];
-    toManifest: Record<string, []>;
-    toDestructiveChanges: Record<string, []>;
-  };
-  deleted: string[];
-  unchanged: string[];
-} {
+export async function getGitResults(
+  gitLines: Ctx['gitLines'],
+  ref1VirtualTreeContainer: VirtualTreeContainer,
+  ref2VirtualTreeContainer: VirtualTreeContainer | FSTreeContainer
+): Promise<Ctx['gitResults']> {
   const results = {
-    added: [],
-    modified: { destructiveFiles: [], manifestFiles: [], toManifest: {}, toDestructiveChanges: {} },
-    deleted: [],
+    manifest: new ComponentSet(undefined, registryAccess),
+    destructiveChanges: new ComponentSet(undefined, registryAccess),
     unchanged: [],
+    ignored: { ref1: [], ref2: [] },
+    counts: { added: 0, deleted: 0, modified: 0, unchanged: 0, ignored: 0, error: 0 },
+    errors: [],
   };
+  const ref1Resolver = new MetadataResolver(registryAccess, ref1VirtualTreeContainer);
+  const ref2Resolver = new MetadataResolver(registryAccess, ref2VirtualTreeContainer);
 
-  for (const [i, { status, path }] of gitLines.entries()) {
-    const check = analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer);
-    if (check.status === 0) {
-      switch (status) {
-        case 'D': {
-          results.deleted.push(path);
-          break;
-        }
-        default: {
-          results.added.push(path);
-          break;
+  for (const [, { status, path }] of gitLines.entries()) {
+    if (status === 'D') {
+      for (const c of ref1Resolver.getComponentsFromPath(path)) {
+        if (c.xml === path || gitLines.find((x) => x.path === c.xml)) {
+          results.destructiveChanges.add(c, true);
+          results.counts.deleted++;
+        } else {
+          try {
+            ref2Resolver.getComponentsFromPath(c.xml);
+            results.manifest.add(c);
+            results.counts.added++;
+          } catch (error) {
+            results.counts.error++;
+            results.errors.push(error.message);
+          }
         }
       }
-    } else if (check.status > 0) {
-      if (Object.keys(check.toDestructiveChanges).length) {
-        results.modified.destructiveFiles.push(path);
-      } else if (!Object.keys(check.toDestructiveChanges).length && Object.keys(check.toManifest).length) {
-        results.modified.manifestFiles.push(path);
+    } else if (status === 'A') {
+      for (const c of ref2Resolver.getComponentsFromPath(path)) {
+        results.manifest.add(c);
+        results.counts.added++;
       }
-      Object.keys(check).forEach((to) => {
-        Object.keys(check[to]).forEach((md) => {
-          results.modified[to] = results.modified[to] ?? {};
-          results.modified[to][md] = results.modified[to][md] ?? [];
-          results.modified[to][md] = results.modified[to][md].concat(check[to][md]);
-        });
-      });
-    } else if (check.status === -1) {
-      results.unchanged.push(path);
+    } else {
+      const check = await analyzeFile(path, ref1VirtualTreeContainer, ref2VirtualTreeContainer);
+      if (check.status === 0) {
+        for (const c of ref2Resolver.getComponentsFromPath(path)) {
+          results.manifest.add(c);
+          results.counts.added++;
+        }
+      } else if (check.status === -1) {
+        results.unchanged.push(path);
+        results.counts.unchanged++;
+      } else {
+        results.counts.modified++;
+        for (const c of check.toDestructiveChanges) {
+          results.destructiveChanges.add(c, true);
+        }
+        for (const c of check.toManifest) {
+          results.manifest.add(c);
+        }
+      }
     }
-    task.output = `${i + 1}/${gitLines.length} files processed
-Added: ${results.added.length} Deleted: ${results.deleted.length} Modified: ${
-      [...results.modified.destructiveFiles, ...results.modified.manifestFiles].length
-    } Unchanged: ${results.unchanged.length}`;
   }
+
+  results.ignored = {
+    ref1: Array.from(ref1Resolver.forceIgnoredPaths),
+    ref2: Array.from(ref2Resolver.forceIgnoredPaths),
+  };
+  results.counts.ignored = ref1Resolver.forceIgnoredPaths.size + ref2Resolver.forceIgnoredPaths.size;
 
   return results;
 }
 
-export function createManifest(
-  virtualTreeContainer,
-  options: { destruct: boolean } = { destruct: false },
-  results,
-  task
-): ComponentSet {
-  let metadata;
-  let sourcepath;
-  if (options.destruct) {
-    metadata = results.modified.toDestructiveChanges;
-    sourcepath = results.deleted;
-  } else {
-    metadata = results.modified.toManifest;
-    sourcepath = results.added;
-  }
-
-  const Aggregator: ComponentLike[] = [];
-
-  // const fromSourcePath = ComponentSet.fromSource({
-  //   fsPaths: sourcepath,
-  //   registry: registryAccess,
-  //   tree: virtualTreeContainer,
-  // });
-
-  const fromSourcePath = new ComponentSet();
-  const resolver = new MetadataResolver(registryAccess, virtualTreeContainer);
-  for (const path of sourcepath) {
-    for (const component of resolver.getComponentsFromPath(path)) {
-      if (['CustomFieldTranslation'].includes(component.type.name)) {
-        if (!options.destruct) {
-          task.output = `'${component.type.name}:${component.fullName}' replaced with '${component.parent.type.name}:${component.parent.fullName}' in package manifest`;
-          fromSourcePath.add(component.parent);
-        } else {
-          task.output = `'${component.type.name}:${component.fullName}' removed from destructiveChanges manifest`;
-        }
-      } else {
-        fromSourcePath.add(component);
-      }
-    }
-  }
-  debug({ fromSourcePath });
-
-  Aggregator.push(...fromSourcePath);
-
-  const replaceChildwithParentType = (type, fullName) => {
-    const lower = type.toLowerCase().trim();
-    if (
-      !options.destruct &&
-      registry.childTypes[lower] &&
-      [
-        'AssignmentRule',
-        'AutoResponseRule',
-        'EscalationRule',
-        'MatchingRule',
-        'SharingOwnerRule',
-        'SharingCriteriaRule',
-        'SharingGuestRule',
-        'SharingTerritoryRule',
-        'WorkflowFieldUpdate',
-        'WorkflowKnowledgePublish',
-        'WorkflowTask',
-        'WorkflowAlert',
-        'WorkflowSend',
-        'WorkflowOutboundMessage',
-        'WorkflowRule',
-      ].includes(type)
-    ) {
-      const parentType = registryAccess.getTypeByName(registry.childTypes[lower]);
-      const parentFullName = fullName.split('.').slice(0, 1).toString();
-      task.output = `'${type}:${fullName}' replaced with '${parentType.name}:${parentFullName}' in package manifest`;
-      return {
-        type: parentType,
-        fullName: parentFullName,
-      };
-    }
-    return { type: registryAccess.getTypeByName(type), fullName };
-  };
-
-  const filter = new ComponentSet();
-
-  for (const type of Object.keys(metadata)) {
-    for (const fullName of metadata[type]) {
-      debug({ type, fullName });
-      filter.add(replaceChildwithParentType(type, fullName));
+export function buildManifestComponentSet(cs: ComponentSet, forDestructiveChanges = false): ComponentSet {
+  // SDR library is more strict and avoids fixes like this
+  if (!forDestructiveChanges) {
+    const missingParents = cs.find((c) => ['CustomFieldTranslation'].includes(c.type.name))?.parent;
+    if (missingParents) {
+      debug({ missingParents });
+      cs.add(missingParents);
     }
   }
 
-  const fromMetadata = ComponentSet.fromSource({
-    fsPaths: ['.'],
-    registry: registryAccess,
-    tree: virtualTreeContainer,
-    include: filter,
-  });
-
-  debug({ fromMetadata, filter, options });
-  const finalized = fromMetadata.size > 0 ? fromMetadata : filter;
-  Aggregator.push(...finalized);
-
-  const pkg = new ComponentSet(Aggregator, registryAccess);
-  return pkg;
+  return cs;
 }

@@ -1,3 +1,40 @@
+# [4.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.7...v4.1.0) (2021-09-20)
+
+
+### Features
+
+* **gitdiff:** utilize the full power of the SRD library ([1463b6e](https://github.com/jayree/sfdx-jayree-plugin/commit/1463b6eafd1b671ae1c3d83c91436bd61ad11e0a))
+
+## [4.0.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.6...v4.0.7) (2021-09-06)
+
+
+### Bug Fixes
+
+* revert usage of forDestructiveChanges until all childTypes are supported ([798ab6e](https://github.com/jayree/sfdx-jayree-plugin/commit/798ab6ec65b9ae1cfc43b4bd7adea32f0fe7d21a))
+* update SDR ([8d34815](https://github.com/jayree/sfdx-jayree-plugin/commit/8d348155aeb90a3850a6558071275374bf667074))
+
+## [4.0.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.5...v4.0.6) (2021-09-02)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix windows path handling ([de76079](https://github.com/jayree/sfdx-jayree-plugin/commit/de76079df4155d5e0199fff2956dee4228558ce5))
+
+## [4.0.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.4...v4.0.5) (2021-09-02)
+
+
+### Bug Fixes
+
+* **gitdiff:** fix createVirtualTreeContainer on windows ([7fb6c59](https://github.com/jayree/sfdx-jayree-plugin/commit/7fb6c5988c66a635f0e52632fb1339117dd990a6))
+
+## [4.0.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.3...v4.0.4) (2021-09-01)
+
+
+### Bug Fixes
+
+* **gitdiff:** use SDR forDestructiveChanges parameter ([e2b69dd](https://github.com/jayree/sfdx-jayree-plugin/commit/e2b69dd479533e9094ceaf0c2fb5ea4000eafa34))
+* update dependencies, pin SDR version ([76fd39f](https://github.com/jayree/sfdx-jayree-plugin/commit/76fd39f0ef4fa09dcdf4e1fdfee0d5946e4dcc40))
+
 ## [4.0.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.2...v4.0.3) (2021-08-21)
 
 

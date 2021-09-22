@@ -917,6 +917,13 @@
       "xmlName": "IframeWhiteListUrlSettings"
     },
     {
+      "directoryName": "inboundCertificates",
+      "inFolder": "false",
+      "metaFile": "true",
+      "suffix": "inboundCertificate",
+      "xmlName": "InboundCertificate"
+    },
+    {
       "directoryName": "inboundNetworkConnections",
       "inFolder": "false",
       "metaFile": "false",
@@ -927,7 +934,7 @@
       "directoryName": "IndustriesManufacturingSettings",
       "inFolder": "false",
       "metaFile": "false",
-      "suffix": "industriesManufacturingSettings",
+      "suffix": "settings",
       "xmlName": "IndustriesManufacturingSettings"
     },
     {

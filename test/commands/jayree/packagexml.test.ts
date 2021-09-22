@@ -1350,7 +1350,9 @@ describe('Unfoldered Objects - Error', () => {
     .stderr()
     .command(['jayree:packagexml', '--targetusername', 'test@org.com'])
     .it('runs jayree:packagexml --targetusername test@org.com', (ctx) => {
-      expect(ctx.stderr).to.contain("Cannot read property 'metadataObjects' of null");
+      expect(ctx.stderr).to.contain('metadataObjects');
+      expect(ctx.stderr).to.contain('Cannot read');
+      expect(ctx.stderr).to.contain('null');
     });
 });
 
