@@ -36,7 +36,7 @@ export default class UpdateCountry extends JayreeSfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    this.warnIfRunByAlias(UpdateCountry);
+    this.warnIfRunByAlias(UpdateCountry.aliases, UpdateCountry.id);
     let spinnermessage = '';
 
     const browser = await puppeteer.launch(config().puppeteer);

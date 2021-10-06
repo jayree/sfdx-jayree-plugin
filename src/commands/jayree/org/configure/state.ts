@@ -55,7 +55,7 @@ export default class ImportState extends JayreeSfdxCommand {
   private isOutputEnabled;
 
   public async run(): Promise<AnyJson> {
-    this.warnIfRunByAlias(ImportState);
+    this.warnIfRunByAlias(ImportState.aliases, ImportState.id);
     await this.org.refreshAuth();
 
     const isContentTypeJSON = kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON';

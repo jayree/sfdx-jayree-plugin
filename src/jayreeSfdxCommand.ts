@@ -7,9 +7,9 @@
 import { SfdxCommand } from '@salesforce/command';
 
 export abstract class JayreeSfdxCommand extends SfdxCommand {
-  public warnIfRunByAlias(commandClass) {
-    if (commandClass.aliases.some((r) => process.argv.includes(r))) {
-      this.ux.warn(`You are using a deprecated alias of the command: ${commandClass.id}`);
+  public warnIfRunByAlias(aliases: string[], id: string): void {
+    if (aliases.some((r) => process.argv.includes(r))) {
+      this.ux.warn(`You are using a deprecated alias of the command: ${id}`);
     }
   }
 }

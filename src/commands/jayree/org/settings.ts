@@ -54,7 +54,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
 
   // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
-    this.warnIfRunByAlias(ScratchOrgSettings);
+    this.warnIfRunByAlias(ScratchOrgSettings.aliases, ScratchOrgSettings.id);
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {
