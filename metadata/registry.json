@@ -1,5 +1,29 @@
 {
   "types": {
+    "aiapplication": {
+      "id": "aiapplication",
+      "name": "AIApplication",
+      "suffix": "ai",
+      "directoryName": "aiApplications"
+    },
+    "aiapplicationconfig": {
+      "id": "aiapplicationconfig",
+      "name": "AIApplicationConfig",
+      "suffix": "aiapplicationconfig",
+      "directoryName": "aiApplicationConfigs"
+    },
+    "mlprediction": {
+      "id": "mlprediction",
+      "name": "MLPredictionDefinition",
+      "suffix": "mlPrediction",
+      "directoryName": "mlPredictions"
+    },
+    "mldatadefinition": {
+      "id": "mldatadefinition",
+      "name": "MLDataDefinition",
+      "suffix": "mlDataDefinition",
+      "directoryName": "mlDataDefinitions"
+    },
     "installedpackage": {
       "id": "installedpackage",
       "name": "InstalledPackage",
@@ -9,9 +33,9 @@
     "customlabels": {
       "id": "customlabels",
       "name": "CustomLabels",
-      "ignoreParsedFullName": true,
       "suffix": "labels",
       "directoryName": "labels",
+      "ignoreParsedFullName": true,
       "children": {
         "types": {
           "customlabel": {
@@ -210,6 +234,7 @@
       "suffix": "object",
       "directoryName": "objects",
       "strictDirectoryName": true,
+      "supportsWildcardAndName": true,
       "children": {
         "types": {
           "customfield": {
@@ -2005,9 +2030,144 @@
       "name": "ConnectedSystem",
       "suffix": "connectedSystem",
       "directoryName": "ConnectedSystem"
+    },
+    "userauthcertificate": {
+      "id": "userauthcertificate",
+      "name": "UserAuthCertificate",
+      "suffix": "userAuthCertificate",
+      "directoryName": "userAuthCertificates"
+    },
+    "forecastingtypesource": {
+      "id": "forecastingtypesource",
+      "name": "ForecastingTypeSource",
+      "suffix": "forecastingTypeSource",
+      "directoryName": "forecastingTypeSources"
+    },
+    "forecastingtype": {
+      "id": "forecastingtype",
+      "name": "ForecastingType",
+      "suffix": "forecastingType",
+      "directoryName": "forecastingTypes"
+    },
+    "forecastingsourcedefinition": {
+      "id": "forecastingsourcedefinition",
+      "name": "ForecastingSourceDefinition",
+      "suffix": "forecastingSourceDefinition",
+      "directoryName": "forecastingSourceDefinitions"
+    },
+    "assistantversion": {
+      "id": "assistantversion",
+      "name": "AssistantVersion",
+      "suffix": "assistantVersion",
+      "directoryName": "assistantVersions"
+    },
+    "assistantskillsobjectaction": {
+      "id": "assistantskillsobjectaction",
+      "name": "AssistantSkillSobjectAction",
+      "suffix": "assistantSkillSobjectAction",
+      "directoryName": "assistantSkillSobjectActions"
+    },
+    "assistantskillquickaction": {
+      "id": "assistantskillquickaction",
+      "name": "AssistantSkillQuickAction",
+      "suffix": "assistantSkillQuickAction",
+      "directoryName": "assistantSkillQuickActions"
+    },
+    "assistantdefinition": {
+      "id": "assistantdefinition",
+      "name": "AssistantDefinition",
+      "suffix": "assistantDefinition",
+      "directoryName": "assistantDefinitions"
+    },
+    "assistantcontextitem": {
+      "id": "assistantcontextitem",
+      "name": "AssistantContextItem",
+      "suffix": "assistantContextItem",
+      "directoryName": "assistantContextItems"
+    },
+    "advacctforecastperiodgroup": {
+      "id": "advacctforecastperiodgroup",
+      "name": "AdvAcctForecastPeriodGroup",
+      "suffix": "advAcctForecastPeriodGroup",
+      "directoryName": "AdvAcctForecastPeriodGroup"
+    },
+    "advaccountforecastset": {
+      "id": "advaccountforecastset",
+      "name": "AdvAccountForecastSet",
+      "suffix": "advAccountForecastSet",
+      "directoryName": "AdvAccountForecastSet"
+    },
+    "documentgenerationsetting": {
+      "id": "documentgenerationsetting",
+      "name": "DocumentGenerationSetting",
+      "suffix": "documentGenerationSetting",
+      "directoryName": "documentGenerationSettings"
+    },
+    "uiobjectrelationconfig": {
+      "id": "uiobjectrelationconfig",
+      "name": "UIObjectRelationConfig",
+      "suffix": "uiObjectRelationConfig",
+      "directoryName": "uiObjectRelationConfigs"
+    },
+    "carerequestconfiguration": {
+      "id": "carerequestconfiguration",
+      "name": "CareRequestConfiguration",
+      "suffix": "careRequestConfiguration",
+      "directoryName": "careRequestConfigurations"
+    },
+    "mlrecommendationdefinition": {
+      "id": "mlrecommendationdefinition",
+      "name": "MLRecommendationDefinition",
+      "suffix": "mlRecommendation",
+      "directoryName": "mlRecommendations"
+    },
+    "applicationrecordtypeconfig": {
+      "id": "applicationrecordtypeconfig",
+      "name": "ApplicationRecordTypeConfig",
+      "suffix": "applicationRecordTypeConfig",
+      "directoryName": "ApplicationRecordTypeConfig"
+    },
+    "mktcalcinsightobjectdef": {
+      "id": "mktcalcinsightobjectdef",
+      "name": "MktCalcInsightObjectDef",
+      "suffix": "mktCalcInsightObjectDef",
+      "directoryName": "mktCalcInsightObjectDefs"
+    },
+    "internalorganization": {
+      "id": "internalorganization",
+      "name": "InternalOrganization",
+      "suffix": "internalOrganization",
+      "directoryName": "internalOrganizations"
+    },
+    "callcenterroutingmap": {
+      "id": "callcenterroutingmap",
+      "name": "CallCenterRoutingMap",
+      "suffix": "callCenterRoutingMap",
+      "directoryName": "callCenterRoutingMaps"
+    },
+    "viewdefinition": {
+      "id": "viewdefinition",
+      "name": "ViewDefinition",
+      "suffix": "view",
+      "directoryName": "viewdefinitions",
+      "strategies": {
+        "adapter": "matchingContentFile"
+      }
+    },
+    "slackapp": {
+      "id": "slackapp",
+      "name": "SlackApp",
+      "suffix": "slackapp",
+      "directoryName": "slackapps",
+      "strategies": {
+        "adapter": "matchingContentFile"
+      }
     }
   },
   "suffixes": {
+    "ai": "aiapplication",
+    "aiapplicationconfig": "aiapplicationconfig",
+    "mlDataDefinition": "mldatadefinition",
     "icon": "icon",
     "businessProcessGroup": "businessprocessgroup",
     "model": "discoveryaimodel",
@@ -2025,7 +2185,6 @@
     "decisionTableDatasetLink": "decisiontabledatasetlink",
     "briefcaseDefinition": "briefcasedefinition",
     "batchProcessJobDefinition": "batchprocessjobdefinition",
-    "webStoreTemplate": "webstoretemplate",
     "acctMgrTargetSetting": "acctmgrtargetsettings",
     "dataSourceObject": "datasourceobject",
     "externalDataConnector": "externaldataconnector",
@@ -2094,6 +2253,7 @@
     "homePageComponent": "homepagecomponent",
     "homePageLayout": "homepagelayout",
     "objectTranslation": "customobjecttranslation",
+    "fieldTranslation": "customfieldtranslation",
     "translation": "translations",
     "globalValueSetTranslation": "globalvaluesettranslation",
     "standardValueSetTranslation": "standardvaluesettranslation",
@@ -2197,6 +2357,7 @@
     "prompt": "prompt",
     "mlDomain": "mldomain",
     "bot": "bot",
+    "botVersion": "botversion",
     "animationRule": "animationrule",
     "deployment": "recordactiondeployment",
     "EmbeddedServiceFlowConfig": "embeddedserviceflowconfig",
@@ -2233,7 +2394,26 @@
     "accountRelationshipShareRule": "accountrelationshipsharerule",
     "IPAddressRange": "ipaddressrange",
     "xml": "emailservicesfunction",
+    "mlPrediction": "mlprediction",
+    "formSection": "formsection",
+    "workflowFieldUpdate": "workflowfieldupdate",
+    "workflowKnowledgePublish": "workflowknowledgepublish",
+    "workflowTask": "workflowtask",
+    "workflowAlert": "workflowalert",
+    "workflowSend": "workflowsend",
+    "workflowOutboundMessage": "workflowoutboundmessage",
+    "workflowRule": "workflowrule",
+    "assignmentRule": "assignmentrule",
+    "autoResponseRule": "autoresponserule",
+    "escalationRule": "escalationrule",
+    "sharingOwnerRule": "sharingownerrule",
+    "sharingCriteriaRule": "sharingcriteriarule",
+    "sharingGuestRule": "sharingguestrule",
+    "sharingTerritoryRule": "sharingterritoryrule",
+    "managedTopic": "managedtopic",
+    "workSkillRoutingAttribute": "workskillroutingattribute",
     "businessProcessFeedbackConfiguration": "businessprocessfeedbackconfiguration",
+    "webStoreTemplate": "webstoretemplate",
     "dynamicTrigger": "dynamictrigger",
     "salesAgreementSetting": "salesagreementsettings",
     "accountForecastSetting": "accountforecastsettings",
@@ -2246,7 +2426,28 @@
     "dataMappingSchema": "datamappingschema",
     "dataMapping": "datamapping",
     "federationDataMappingUsage": "federationdatamappingusage",
-    "connectedSystem": "connectedsystem"
+    "connectedSystem": "connectedsystem",
+    "userAuthCertificate": "userauthcertificate",
+    "forecastingTypeSource": "forecastingtypesource",
+    "forecastingType": "forecastingtype",
+    "forecastingSourceDefinition": "forecastingsourcedefinition",
+    "assistantVersion": "assistantversion",
+    "assistantSkillSobjectAction": "assistantskillsobjectaction",
+    "assistantSkillQuickAction": "assistantskillquickaction",
+    "assistantDefinition": "assistantdefinition",
+    "assistantContextItem": "assistantcontextitem",
+    "advAcctForecastPeriodGroup": "advacctforecastperiodgroup",
+    "advAccountForecastSet": "advaccountforecastset",
+    "documentGenerationSetting": "documentgenerationsetting",
+    "uiObjectRelationConfig": "uiobjectrelationconfig",
+    "careRequestConfiguration": "carerequestconfiguration",
+    "mlRecommendation": "mlrecommendationdefinition",
+    "applicationRecordTypeConfig": "applicationrecordtypeconfig",
+    "mktCalcInsightObjectDef": "mktcalcinsightobjectdef",
+    "internalOrganization": "internalorganization",
+    "callCenterRoutingMap": "callcenterroutingmap",
+    "view": "viewdefinition",
+    "slackapp": "slackapp"
   },
   "strictDirectoryNames": {
     "experiences": "experiencebundle",
@@ -2260,11 +2461,11 @@
     "staticresources": "staticresource",
     "sites": "customsite",
     "restrictionRules": "restrictionrule",
+    "mktDataSources": "datasource",
     "accessControlPolicies": "accesscontrolpolicy",
     "integrationHub": "integrationhubsettings",
     "ObjectHierarchyRelationship": "objecthierarchyrelationship",
-    "IndustriesManufacturingSettings": "industriesmanufacturingsettings",
-    "mktDataSources": "datasource"
+    "IndustriesManufacturingSettings": "industriesmanufacturingsettings"
   },
   "childTypes": {
     "customlabel": "customlabels",
@@ -2278,26 +2479,26 @@
     "sharingreason": "customobject",
     "listview": "customobject",
     "fieldset": "customobject",
+    "formsection": "form",
+    "workflowknowledgepublish": "workflow",
     "workflowfieldupdate": "workflow",
     "workflowtask": "workflow",
     "workflowalert": "workflow",
     "workflowsend": "workflow",
     "workflowoutboundmessage": "workflow",
     "workflowrule": "workflow",
-    "workflowknowledgepublish": "workflow",
+    "workskillroutingattribute": "workskillrouting",
     "assignmentrule": "assignmentrules",
     "autoresponserule": "autoresponserules",
     "escalationrule": "escalationrules",
     "matchingrule": "matchingrules",
     "sharingownerrule": "sharingrules",
-    "sharingcriteriarule": "sharingrules",
-    "botversion": "bot",
-    "customfieldtranslation": "customobjecttranslation",
-    "formsection": "form",
     "sharingguestrule": "sharingrules",
     "sharingterritoryrule": "sharingrules",
     "managedtopic": "managedtopics",
-    "workskillroutingattribute": "workskillrouting"
+    "sharingcriteriarule": "sharingrules",
+    "botversion": "bot",
+    "customfieldtranslation": "customobjecttranslation"
   },
-  "apiVersion": "52.0"
+  "apiVersion": "53.0"
 }
