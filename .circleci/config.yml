@@ -51,7 +51,7 @@ jobs:
   node-14:
     <<: *node-test
     docker:
-      - image: node:14.17.6
+      - image: node:14.18.1
   release:
     <<: *defaults
     steps:

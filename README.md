@@ -15,6 +15,7 @@ sfdx ALM commands & more
 * [Usage](#usage)
 * [Commands](#commands)
 * [Hooks](#hooks)
+* [Related Plugins](#related-plugins)
 <!-- tocstop -->
 
 ## Usage
@@ -226,7 +227,7 @@ OPTIONS
                                                                                     this command invocation
 ```
 
-_See code: [src/commands/jayree/manifest/cleanup.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.1.0/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.0/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -234,9 +235,8 @@ generate a complete package xml form the specified org
 
 ```
 USAGE
-  $ sfdx jayree:manifest:generate [--configfile <string>] [-q <string>] [-c] [-w] [--includeflowversions] [-f <string>] 
-  [-x] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:manifest:generate [-q <array>] [-c] [-w] [--includeflowversions] [-f <string>] [-x] [-u <string>] 
+  [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 OPTIONS
   -c, --matchcase                                                                   enable 'match case' for the
@@ -258,8 +258,6 @@ OPTIONS
   --apiversion=apiversion                                                           override the api version used for
                                                                                     api requests made by this command
 
-  --configfile=configfile                                                           path to config file
-
   --includeflowversions                                                             include flow versions as with api
                                                                                     version 43.0
 
@@ -271,13 +269,13 @@ OPTIONS
 ALIASES
   $ sfdx jayree:packagexml
 
-EXAMPLE
+EXAMPLES
   $ sfdx jayree:manifest:generate --targetusername myOrg@example.com
-       <?xml version="1.0" encoding="UTF-8"?>
-       <Package xmlns="http://soap.sforce.com/2006/04/metadata">...</Package>
+  <?xml version='1.0' encoding='UTF-8'?>
+  <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [src/commands/jayree/manifest/generate.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.1.0/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.0/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -320,7 +318,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [src/commands/jayree/manifest/git/diff.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.1.0/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.0/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -845,3 +843,8 @@ run();
 ```
 
 - Calls `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
+
+## Related Plugins
+
+- [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/main/README.md) - Contains all jayree sfdx manifest commands
+- [@jayree/sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier/blob/develop/README.md) - Contains an sfdx plugin hook to format Salesforce metadata source files
