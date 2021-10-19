@@ -1,3 +1,15 @@
+# [4.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.1.0...v4.2.0) (2021-10-19)
+
+
+### Bug Fixes
+
+* update changelog hook ([75877b1](https://github.com/jayree/sfdx-jayree-plugin/commit/75877b11d81879936d001ebd6f2e523cb35fe407))
+
+
+### Features
+
+* use new manifest commands from @jayree/sfdx-plugin-manifest ([dd9ffdc](https://github.com/jayree/sfdx-jayree-plugin/commit/dd9ffdc841b8ea484cc18386c61e0f550dccfe19))
+
 # [4.1.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.0.7...v4.1.0) (2021-09-20)
 
 
