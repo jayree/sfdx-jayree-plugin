@@ -1,3 +1,11 @@
+## [4.2.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.0...v4.2.1) (2021-10-22)
+
+
+### Bug Fixes
+
+* better wsl support for commands using puppeteer ([2724285](https://github.com/jayree/sfdx-jayree-plugin/commit/27242850c41debf2deb0950028e7581ba3142148))
+* update dependencies ([107c6a6](https://github.com/jayree/sfdx-jayree-plugin/commit/107c6a6de11156d686a829e5098d3086c89dd619))
+
 # [4.2.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.1.0...v4.2.0) (2021-10-19)
 
 
