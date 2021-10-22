@@ -8,6 +8,8 @@
 import { join } from 'path';
 import * as fs from 'fs-extra';
 import isDocker from 'is-docker';
+import isWsl from 'is-wsl';
+
 import { SfdxProject } from '@salesforce/core';
 
 const CONFIG_DEFAULTS = {
@@ -20,6 +22,10 @@ const CONFIG_DEFAULTS = {
     headless: true,
     executablePath: '/usr/bin/chromium-browser',
     args: ['--no-sandbox', '--disable-gpu'],
+  },
+  puppeteerWSL: {
+    headless: true,
+    executablePath: '/bin/google-chrome',
   },
   puppeteer: {
     headless: true,
@@ -49,6 +55,10 @@ export default (path = SfdxProject.resolveProjectPathSync()) => {
     configFromFile.puppeteer = { ...defaults.puppeteerDocker, ...configFromFile.puppeteer };
   }
 
+  if (configFromFile.puppeteer && isWsl) {
+    configFromFile.puppeteer = { ...defaults.puppeteerWSL, ...configFromFile.puppeteer };
+  }
+
   const config = {
     ...configFromFile,
     ensureUserPermissions: configFromFile.ensureUserPermissions || defaults.ensureUserPermissions,
@@ -56,7 +66,11 @@ export default (path = SfdxProject.resolveProjectPathSync()) => {
     moveSourceFolders: configFromFile.moveSourceFolders || defaults.moveSourceFolders,
     applySourceFixes: configFromFile.applySourceFixes || defaults.applySourceFixes,
     runHooks: configFromFile.runHooks || defaults.runHooks,
-    puppeteer: configFromFile.puppeteer || (isDocker() && defaults.puppeteerDocker) || defaults.puppeteer,
+    puppeteer:
+      configFromFile.puppeteer ||
+      (isWsl && defaults.puppeteerWSL) ||
+      (isDocker() && defaults.puppeteerDocker) ||
+      defaults.puppeteer,
   };
 
   resolvedConfigs[path] = config;
