@@ -225,13 +225,20 @@ OPTIONS
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
+
+DESCRIPTION
+  Use this command to remove components or metadata types from a manifes file.
+  If the 'cleanup' manifest file (--file) doesn't exist, a template file is created, which can then be modified.
+
+EXAMPLE
+  $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.1/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.3/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
-generate a complete package xml form the specified org
+generate a complete manifest file form the specified org
 
 ```
 USAGE
@@ -266,6 +273,9 @@ OPTIONS
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
+DESCRIPTION
+  Use this command to generate a manifest file based on an existing org.
+
 ALIASES
   $ sfdx jayree:packagexml
 
@@ -275,7 +285,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.1/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.3/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -297,7 +307,8 @@ OPTIONS
                                                                                     this command invocation
 
 DESCRIPTION
-  Creates a manifest and destructiveChanges manifest using 'git diff' data.
+  Use this command to create a manifest and destructiveChanges manifest file based on the difference (git diff) of two 
+  git refs.
 
   You can use all ways to spell <commit> which are valid for 'git diff'.
   (See https://git-scm.com/docs/git-diff)
@@ -318,7 +329,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.1/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.3/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
