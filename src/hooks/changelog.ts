@@ -7,7 +7,7 @@
 import { join } from 'path';
 import * as fs from 'fs-extra';
 import { Hook } from '@oclif/config';
-import marked from 'marked';
+import { marked } from 'marked';
 import terminalRenderer from 'marked-terminal';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
