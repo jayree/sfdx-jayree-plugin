@@ -1,3 +1,10 @@
+## [4.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.3...v4.2.4) (2021-11-09)
+
+
+### Bug Fixes
+
+* fix changelog hook ([cbdb4f6](https://github.com/jayree/sfdx-jayree-plugin/commit/cbdb4f62a923e5921476df0b02ccc1931d02e2af))
+
 ## [4.2.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.2...v4.2.3) (2021-11-08)
 
 
