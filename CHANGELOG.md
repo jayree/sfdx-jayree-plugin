@@ -1,3 +1,10 @@
+## [4.2.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.4...v4.2.5) (2021-11-16)
+
+
+### Bug Fixes
+
+* update dependencies ([8dc9e42](https://github.com/jayree/sfdx-jayree-plugin/commit/8dc9e42d68a4cc893edaa9dfbbab8536f74f47a2))
+
 ## [4.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.3...v4.2.4) (2021-11-09)
 
 
