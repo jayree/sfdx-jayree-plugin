@@ -47,7 +47,6 @@ USAGE
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
 * [`sfdx jayree:org:configure:country`](#sfdx-jayreeorgconfigurecountry)
 * [`sfdx jayree:org:configure:state`](#sfdx-jayreeorgconfigurestate)
-* [`sfdx jayree:org:open`](#sfdx-jayreeorgopen)
 * [`sfdx jayree:org:settings`](#sfdx-jayreeorgsettings)
 * [`sfdx jayree:org:streaming`](#sfdx-jayreeorgstreaming)
 * [`sfdx jayree:packagedescription:create`](#sfdx-jayreepackagedescriptioncreate)
@@ -234,7 +233,7 @@ EXAMPLE
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.6/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -285,7 +284,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.6/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -293,7 +292,7 @@ create a manifest and destructiveChanges manifest using 'git diff' data
 
 ```
 USAGE
-  $ sfdx jayree:manifest:git:diff [--json] [--loglevel 
+  $ sfdx jayree:manifest:git:diff [-o <string>] [-d] [--json] [--loglevel 
   trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 ARGUMENTS
@@ -301,6 +300,12 @@ ARGUMENTS
   REF2  commit or branch to compare to the base commit
 
 OPTIONS
+  -d, --destructivechangesonly                                                      create a destructiveChanges manifest
+                                                                                    only (package.xml will be empty)
+
+  -o, --outputdir=outputdir                                                         directory to save the created
+                                                                                    manifest files
+
   --json                                                                            format output as json
 
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
@@ -329,7 +334,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v1.0.6/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -435,45 +440,6 @@ ALIASES
 ```
 
 _See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.2.5/src/commands/jayree/org/configure/state.ts)_
-
-### `sfdx jayree:org:open`
-
-open an org in your preferred browser
-
-```
-USAGE
-  $ sfdx jayree:org:open [-b <string>] [-p <string>] [-r] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -b, --browser=firefox|chrome|edge|safari                                          [default: chrome] browser to be
-                                                                                    launched
-
-  -p, --path=path                                                                   navigation URL path
-
-  -r, --urlonly                                                                     display navigation URL, but don’t
-                                                                                    launch browser
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLE
-  $ sfdx jayree:org:open
-  $ sfdx jayree:org:open -u me@my.org
-  $ sfdx jayree:org:open -u MyTestOrg1 -b firefox
-  $ sfdx jayree:org:open -r -p lightning -b safari
-  $ sfdx jayree:org:open -u me@my.org
-```
-
-_See code: [src/commands/jayree/org/open.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.2.5/src/commands/jayree/org/open.ts)_
 
 ### `sfdx jayree:org:settings`
 
