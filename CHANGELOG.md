@@ -1,3 +1,36 @@
+# [4.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.5...v4.3.0) (2021-11-27)
+
+
+### Bug Fixes
+
+* update dependencies ([f56f9fd](https://github.com/jayree/sfdx-jayree-plugin/commit/f56f9fd1586089b4112ea8965192611f448f2dbc))
+
+
+### Features
+
+* remove org:open (replaced by official command) ([8eb6195](https://github.com/jayree/sfdx-jayree-plugin/commit/8eb61959af494c9287185490aae48aeaade89ce7))
+
+## [4.2.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.4...v4.2.5) (2021-11-16)
+
+
+### Bug Fixes
+
+* update dependencies ([8dc9e42](https://github.com/jayree/sfdx-jayree-plugin/commit/8dc9e42d68a4cc893edaa9dfbbab8536f74f47a2))
+
+## [4.2.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.3...v4.2.4) (2021-11-09)
+
+
+### Bug Fixes
+
+* fix changelog hook ([cbdb4f6](https://github.com/jayree/sfdx-jayree-plugin/commit/cbdb4f62a923e5921476df0b02ccc1931d02e2af))
+
+## [4.2.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.2...v4.2.3) (2021-11-08)
+
+
+### Bug Fixes
+
+* update dependencies ([6ec509a](https://github.com/jayree/sfdx-jayree-plugin/commit/6ec509ae5a335eb156c4c0dd5077e1ea1864c21a))
+
 ## [4.2.2](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.1...v4.2.2) (2021-10-31)
 
 
