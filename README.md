@@ -167,10 +167,10 @@ OPTIONS
 
 EXAMPLE
   $ sfdx jayree:automation:ltngsync:status -o 'Name'
-       configSetup: User assigned to active Lightning Sync configuration... Yes
-       userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
-       userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
-       userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
+  configSetup: User assigned to active Lightning Sync configuration... Yes
+  userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
+  userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
+  userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
 _See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.0/src/commands/jayree/automation/ltngsync/status.ts)_
@@ -233,7 +233,7 @@ EXAMPLE
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.2/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -284,7 +284,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.2/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -334,7 +334,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.1/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.1.2/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -550,7 +550,7 @@ OPTIONS
 
 EXAMPLE
   $ sfdx jayree:packagedescription:get --file FILENAME
-       Description of Package FILENAME
+  Description of Package FILENAME
 ```
 
 _See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.0/src/commands/jayree/packagedescription/get.ts)_
