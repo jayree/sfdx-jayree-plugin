@@ -89,7 +89,8 @@
     "/messages",
     "/oclif.manifest.json",
     "/CHANGELOG.md",
-    "/yarn.lock"
+    "/yarn.lock",
+    "/bin/is-sfdx.js"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
   "keywords": [
@@ -191,11 +192,11 @@
     "lint": "sf-lint",
     "lint-fix": "sf-lint --fix",
     "postcompile": "oclif-dev manifest && oclif-dev readme",
-    "postinstall": "patch-package",
+    "postinstall": "node ./bin/is-sfdx.js || patch-package",
     "postpack": "rimraf oclif.manifest.json",
     "postpublish": "pinst --enable",
     "prepack": "sf-prepack",
-    "prepare": "is-ci || husky install",
+    "prepare": "is-ci || node ./bin/is-sfdx.js || husky install",
     "prepublishOnly": "pinst --disable",
     "pretest": "sf-compile-test",
     "test": "sf-test",
