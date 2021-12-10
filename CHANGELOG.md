@@ -1,3 +1,11 @@
+## [4.3.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.0...v4.3.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* update dependencies ([89f7162](https://github.com/jayree/sfdx-jayree-plugin/commit/89f7162cefc2ebafbac1e14d44422851b98cd4dd))
+* update docker config ([4815263](https://github.com/jayree/sfdx-jayree-plugin/commit/4815263d6c20ad725d8e37d827f31a5cd89f76f6))
+
 # [4.3.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.2.5...v4.3.0) (2021-11-27)
 
 
