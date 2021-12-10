@@ -29,12 +29,12 @@ index 07e8816..88bab29 100755
  log(`rm -rf ${toClean}`);
  shell.rm('-rf', toClean);
 diff --git a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
-index 9b64188..a29751b 100644
+index 026246e..a076ee5 100644
 --- a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
 +++ b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
 @@ -1,4 +1,4 @@
--Copyright (c) 2018, Salesforce.com, Inc.
-+Copyright (c) 2021, jayree
+-Copyright (c) REPLACE_YEAR, Salesforce.com, Inc.
++Copyright (c) REPLACE_YEAR, jayree
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
