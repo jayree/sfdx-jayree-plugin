@@ -21,7 +21,7 @@ export default class GetPackageDescription extends SfdxCommand {
 
   public static examples = [
     `$ sfdx jayree:packagedescription:get --file FILENAME
-    Description of Package FILENAME
+Description of Package FILENAME
     `,
   ];
 

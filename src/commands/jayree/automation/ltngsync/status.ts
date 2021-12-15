@@ -16,11 +16,11 @@ export default class LtngSyncStatus extends SfdxCommand {
 
   public static examples = [
     `$ sfdx jayree:automation:ltngsync:status -o 'Name'
-    configSetup: User assigned to active Lightning Sync configuration... Yes
-    userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
-    userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
-    userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
-    `,
+configSetup: User assigned to active Lightning Sync configuration... Yes
+userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
+userContacts/userEvents: Salesforce to Exchange sync status... Initial sync completed/Initial sync completed
+userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
+`,
   ];
 
   protected static flagsConfig = {

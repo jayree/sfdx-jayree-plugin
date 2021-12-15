@@ -20,8 +20,7 @@ const CONFIG_DEFAULTS = {
   runHooks: false,
   puppeteerDocker: {
     headless: true,
-    executablePath: '/usr/bin/chromium-browser',
-    args: ['--no-sandbox', '--disable-gpu'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-features=site-per-process'],
   },
   puppeteerWSL: {
     headless: true,
