@@ -248,9 +248,10 @@ export class PuppeteerConfigureTasks {
           /* eslint no-constant-condition: ["error", { "checkLoops": false }] */
           while (true) {
             try {
-              await page.waitForFunction((selector) => !document.querySelector(selector), {}, call.waitFor[1]);
+              await page.waitForSelector(call.waitFor[1], { hidden: true });
               break;
-            } catch {
+            } catch (e) {
+              debug(e.message);
               await page.reload({
                 waitUntil: 'networkidle0',
               });
