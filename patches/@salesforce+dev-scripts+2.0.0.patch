@@ -29,7 +29,7 @@ index 07e8816..88bab29 100755
  log(`rm -rf ${toClean}`);
  shell.rm('-rf', toClean);
 diff --git a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
-index 026246e..a076ee5 100644
+index 026246e..b146616 100644
 --- a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
 +++ b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
 @@ -1,4 +1,4 @@
@@ -46,6 +46,7 @@ index 026246e..a076ee5 100644
 +* Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+\ No newline at end of file
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 index d3870e6..4585630 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
@@ -59,33 +60,31 @@ index d3870e6..4585630 100644
    },
  };
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 5a65034..6b9fa71 100644
+index 7b838be..0a328f5 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-@@ -94,16 +94,16 @@ module.exports = (projectPath, inLernaProject) => {
+@@ -94,15 +94,15 @@ module.exports = (projectPath, inLernaProject) => {
    add('sinon');
    add('chai');
  
 -  remove('@commitlint/cli');
 -  remove('@commitlint/config-conventional');
 -  remove('source-map-support');
--  remove('xunit-file');
 -  remove('@types/chai');
 -  remove('@types/mocha');
 -  remove('@types/node');
 -  remove('@types/sinon');
 -  remove('typedoc');
--  remove('typedoc-plugin-external-module-name');
+-  remove('typedoc-plugin-missing-exports');
 +  add('@commitlint/cli');
 +  add('@commitlint/config-conventional');
 +  add('source-map-support');
-+  // remove('xunit-file');
 +  add('@types/chai');
 +  add('@types/mocha');
 +  add('@types/node');
 +  add('@types/sinon');
 +  // remove('typedoc');
-+  // remove('typedoc-plugin-external-module-name');
++  // remove('typedoc-plugin-missing-exports');
  
    // We use eslint now
    remove('tslint');
