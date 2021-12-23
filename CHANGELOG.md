@@ -1,3 +1,10 @@
+## [4.3.5](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.4...v4.3.5) (2021-12-23)
+
+
+### Bug Fixes
+
+* set node version to 14.17.1 ([ab84448](https://github.com/jayree/sfdx-jayree-plugin/commit/ab844487df2356f59521edd6647d3d52d19b217b))
+
 ## [4.3.4](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.3...v4.3.4) (2021-12-22)
 
 
