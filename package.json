@@ -1,7 +1,7 @@
 {
   "name": "sfdx-jayree",
   "description": "sfdx ALM commands & more",
-  "version": "4.3.5",
+  "version": "4.3.6",
   "author": "jayree <jayree.git@icloud.com>",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "dependencies": {
