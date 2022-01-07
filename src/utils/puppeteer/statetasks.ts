@@ -106,9 +106,9 @@ export class PuppeteerStateTasks {
           waitUntil: 'networkidle0',
         });
 
-        await page.waitForSelector('#gwt-uid-12');
-        await page.click('#gwt-uid-12');
-        await page.evaluate(() => document.querySelector('#gwt-uid-12')['checked']);
+        await page.waitForSelector('#gwt-uid-23');
+        await page.click('#gwt-uid-23');
+        await page.evaluate(() => document.querySelector('#gwt-uid-23')['checked']);
         await page.click('.go');
 
         await page.waitForSelector('.v-grid-tablewrapper');
