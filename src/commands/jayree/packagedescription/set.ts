@@ -67,7 +67,7 @@ export default class SetPackageDescription extends SfdxCommand {
         }
         xml.Package['description'] = text;
         this.ux.log(action + ' description: ' + text);
-        newZip.addFile(fileName, Buffer.from(js2Manifest(xml)), '', 0o644);
+        newZip.addFile(fileName, Buffer.from(js2Manifest({ Package: xml.Package })), '', 0o644);
       } else {
         newZip.addFile(fileName, fileContent, '', 0o644);
       }
