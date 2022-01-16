@@ -1,3 +1,18 @@
+## [4.3.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.7...v4.3.8) (2022-01-15)
+
+
+### Bug Fixes
+
+* update dependencies ([ec487c2](https://github.com/jayree/sfdx-jayree-plugin/commit/ec487c23e5a68aca67131f1776f1a9c0f6324be6))
+
+## [4.3.7](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.6...v4.3.7) (2022-01-08)
+
+
+### Bug Fixes
+
+* **configurestate:** fix org:configure:state error ([a3efaa9](https://github.com/jayree/sfdx-jayree-plugin/commit/a3efaa96e55b832071978dd77b05cbaae85008e2))
+* update dependencies ([91ab401](https://github.com/jayree/sfdx-jayree-plugin/commit/91ab401405a86d6e6c553f1342108d95a7acdad9))
+
 ## [4.3.6](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.5...v4.3.6) (2022-01-06)
 
 
