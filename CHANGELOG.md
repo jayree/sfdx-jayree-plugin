@@ -1,3 +1,10 @@
+## [4.3.9](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.8...v4.3.9) (2022-01-24)
+
+
+### Bug Fixes
+
+* **sourcefix:** fix source:fix xml decl generation ([8fa1c49](https://github.com/jayree/sfdx-jayree-plugin/commit/8fa1c4901cae3f7f6e627f3178aee35bc8b0168c))
+
 ## [4.3.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.7...v4.3.8) (2022-01-15)
 
 
