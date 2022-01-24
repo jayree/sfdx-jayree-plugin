@@ -21,9 +21,11 @@ export function js2Manifest(jsData) {
   return XML_DECL.concat(js2Xml.build(jsData));
 }
 
+const XML_DECL_KEY = '?xml';
+
 export function js2SourceComponent(jsData) {
   const js2Xml = new XMLBuilder({ format: true, indentBy: '    ', ignoreAttributes: false });
-  jsData[Object.keys(jsData)[0]][XML_NS_KEY] = XML_NS_URL;
+  delete jsData[XML_DECL_KEY];
   return XML_DECL.concat(js2Xml.build(jsData));
 }
 
@@ -31,7 +33,6 @@ export function parseSourceComponent(xmlData: string) {
   const parser = new XMLParser({
     ignoreAttributes: false,
     parseTagValue: false,
-    removeNSPrefix: true,
   });
   return parser.parse(xmlData);
 }
