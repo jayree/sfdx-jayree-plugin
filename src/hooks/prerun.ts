@@ -10,8 +10,9 @@ import { Hook } from '@oclif/config';
 import { cli } from 'cli-ux';
 import { env } from '@salesforce/kit';
 import * as fs from 'fs-extra';
-import execa from 'execa';
 import chalk from 'chalk';
+import { SourceTracking } from '@salesforce/source-tracking';
+import { SfdxProject, Org } from '@salesforce/core';
 import { runHooks } from '../utils/hookUtils';
 import { getConnectionFromArgv, getProjectPath } from '../utils/souceUtils';
 
@@ -29,14 +30,16 @@ export const prerun: Hook<'prerun'> = async function (options) {
       let storedServerMaxRevisionCounter;
       let storedServerMaxRevisionCounterPath;
       const projectPath = await getProjectPath();
+      const project = SfdxProject.getInstance(projectPath);
       const userName = (await getConnectionFromArgv()).username;
+      const org = await Org.create({ aliasOrUsername: userName });
       try {
         storedServerMaxRevisionCounterPath = path.join(
           projectPath,
-          '.sfdx-jayree',
+          '.sfdx',
           'orgs',
-          userName,
-          'storedMaxRevision.json'
+          org.getOrgId(),
+          'jayreeStoredMaxRevision.json'
         );
         const { serverMaxRevisionCounter } = await fs.readJSON(storedServerMaxRevisionCounterPath, { throws: false });
         storedServerMaxRevisionCounter = serverMaxRevisionCounter;
@@ -44,20 +47,26 @@ export const prerun: Hook<'prerun'> = async function (options) {
       } catch {}
       if (storedServerMaxRevisionCounter >= 0) {
         try {
-          cli.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
-          await execa('sfdx', [
-            'force:source:tracking:reset',
-            '--noprompt',
-            '--revision',
-            storedServerMaxRevisionCounter,
+          const sourceTracking = await SourceTracking.create({ project, org });
+          await Promise.all([
+            sourceTracking.resetRemoteTracking(storedServerMaxRevisionCounter as number),
+            sourceTracking.resetLocalTracking(),
           ]);
+
+          cli.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
           // eslint-disable-next-line no-empty
         } catch (error) {}
       } else {
         let localServerMaxRevisionCounter = 0;
         try {
           const { serverMaxRevisionCounter } = await fs.readJSON(
-            path.join(projectPath, '.sfdx', 'orgs', userName, 'maxRevision.json'),
+            path.join(
+              projectPath,
+              '.sfdx',
+              'orgs',
+              (await Org.create({ aliasOrUsername: userName })).getOrgId(),
+              'maxRevision.json'
+            ),
             { throws: false }
           );
           localServerMaxRevisionCounter = serverMaxRevisionCounter;

@@ -46,7 +46,7 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
 
     const maxRev = maxCounter >= maxNum ? maxCounter : maxNum;
 
-    const maxrevpath = path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getUsername(), 'maxRevision.json');
+    const maxrevpath = path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'maxRevision.json');
 
     let maxrevfile;
 
@@ -77,7 +77,7 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
 
     try {
       const { serverMaxRevisionCounter } = await fs.readJSON(
-        path.join(this.project.getPath(), '.sfdx-jayree', 'orgs', this.org.getUsername(), 'storedMaxRevision.json'),
+        path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
         { throws: false }
       );
       storedServerMaxRevisionCounter = serverMaxRevisionCounter;
@@ -142,24 +142,30 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
       return x < y ? -1 : x > y ? 1 : 0;
     });
 
-    this.ux.styledHeader(chalk.blue(`SourceMember revision counter numbers list for: ${this.org.getUsername()}`));
+    this.ux.styledHeader(
+      chalk.blue(`SourceMember revision counter numbers list for: ${this.org.getUsername()}/${this.org.getOrgId()}`)
+    );
     this.ux.table(sourceMemberResults, {
       columns: [
         {
-          key: 'RevisionCounter',
+          key: 'REVISIONCOUNTER',
           get: (row: any) => row.RevisionCounterString,
         },
         {
-          key: 'Id',
+          key: 'ID',
+          get: (row: any) => row.Id,
         },
         {
-          key: 'IsNameObsolete',
+          key: 'FULL NAME',
+          get: (row: any) => row.MemberName,
         },
         {
-          key: 'MemberType',
+          key: 'TYPE',
+          get: (row: any) => row.MemberType,
         },
         {
-          key: 'MemberName',
+          key: 'OBSOLETE',
+          get: (row: any) => row.IsNameObsolete.toString(),
         },
       ],
     });

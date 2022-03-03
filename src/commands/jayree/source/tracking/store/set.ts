@@ -50,10 +50,10 @@ $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101`,
 
     const storedmaxrevpath = path.join(
       this.project.getPath(),
-      '.sfdx-jayree',
+      '.sfdx',
       'orgs',
-      this.org.getUsername(),
-      'storedMaxRevision.json'
+      this.org.getOrgId(),
+      'jayreeStoredMaxRevision.json'
     );
 
     const newMaxRev = this.flags.revision >= 0 ? this.flags.revision : maxRev;
@@ -62,18 +62,31 @@ $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101`,
     await fs.writeJSON(storedmaxrevpath, { serverMaxRevisionCounter: newMaxRev });
 
     this.ux.styledHeader(chalk.blue('Set stored SourceMember revision counter number'));
-    this.ux.table([{ username: this.org.getUsername(), serverMaxRevisionCounter: newMaxRev.toString() }], {
-      columns: [
+    this.ux.table(
+      [
         {
-          key: 'Username',
-          get: (row: any) => row.username,
-        },
-        {
-          key: 'RevisionCounter',
-          get: (row: any) => row.serverMaxRevisionCounter,
+          username: this.org.getUsername(),
+          orgid: this.org.getOrgId(),
+          serverMaxRevisionCounter: newMaxRev.toString(),
         },
       ],
-    });
+      {
+        columns: [
+          {
+            key: 'Username',
+            get: (row: any) => row.username,
+          },
+          {
+            key: 'OrgId',
+            get: (row: any) => row.orgid,
+          },
+          {
+            key: 'RevisionCounter',
+            get: (row: any) => row.serverMaxRevisionCounter,
+          },
+        ],
+      }
+    );
 
     return {
       revision: newMaxRev,

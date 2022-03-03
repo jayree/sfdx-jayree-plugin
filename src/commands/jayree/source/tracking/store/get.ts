@@ -29,17 +29,27 @@ $ sfdx jayree:source:tracking:store:get -u me@my.org`,
 
   public async run(): Promise<AnyJson> {
     const { serverMaxRevisionCounter } = await fs.readJSON(
-      path.join(this.project.getPath(), '.sfdx-jayree', 'orgs', this.org.getUsername(), 'storedMaxRevision.json'),
+      path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
       { throws: false }
     );
     this.ux.styledHeader(chalk.blue('Get stored SourceMember revision counter number'));
     this.ux.table(
-      [{ username: this.org.getUsername(), serverMaxRevisionCounter: serverMaxRevisionCounter.toString() }],
+      [
+        {
+          username: this.org.getUsername(),
+          orgid: this.org.getOrgId(),
+          serverMaxRevisionCounter: serverMaxRevisionCounter.toString(),
+        },
+      ],
       {
         columns: [
           {
             key: 'Username',
             get: (row: any) => row.username,
+          },
+          {
+            key: 'OrgId',
+            get: (row: any) => row.orgid,
           },
           {
             key: 'RevisionCounter',
