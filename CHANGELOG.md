@@ -1,3 +1,13 @@
+## [4.3.10](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.9...v4.3.10) (2022-03-03)
+
+
+### Bug Fixes
+
+* fix changelog hook ([b3611ff](https://github.com/jayree/sfdx-jayree-plugin/commit/b3611ff994a257b7c1bbccf873f0c14d8ef2f176))
+* **orgstreaming:** fix auth issues ([dea87b7](https://github.com/jayree/sfdx-jayree-plugin/commit/dea87b713634225f5bc604e5847938a55fe0e391))
+* **sourcetracking:** support new source tracking ([cb3721e](https://github.com/jayree/sfdx-jayree-plugin/commit/cb3721e1f261b394b14c1f02397a827f28fb46b0))
+* update dependencies ([40b4c9f](https://github.com/jayree/sfdx-jayree-plugin/commit/40b4c9fea6cc4b93ca2ac305c2723b4d5b031e0e))
+
 ## [4.3.9](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.8...v4.3.9) (2022-01-24)
 
 
