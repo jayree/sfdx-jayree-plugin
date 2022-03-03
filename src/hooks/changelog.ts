@@ -82,9 +82,14 @@ export const changelog: Hook<'changelog'> = function () {
       };
       const changelogFile = fs.readFileSync(join(pluginRootPath, 'CHANGELOG.md'), 'utf8');
       const cacheDir = join(this.config.cacheDir, name);
-      fs.ensureDirSync(cacheDir);
       const versionFile = join(cacheDir, 'version');
-      const latestVersion = fs.readJSONSync(versionFile) as { version: string };
+      fs.ensureFileSync(versionFile);
+      let latestVersion: { version: string };
+      try {
+        latestVersion = fs.readJSONSync(versionFile) as { version: string };
+      } catch (error) {
+        latestVersion = { version: '0.0.0' };
+      }
       debug({ latestVersion: latestVersion.version, version });
       if (latestVersion.version !== version) {
         const tokens = parseReleaseNotes(changelogFile, version);
