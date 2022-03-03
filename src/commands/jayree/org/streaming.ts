@@ -35,7 +35,7 @@ export default class Streaming extends SfdxCommand {
 
   // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
-    // await this.org.refreshAuth();
+    await this.org.refreshAuth();
     const conn = this.org.getConnection();
     // '/event/SAPAccountRequest__e'
     conn.streaming.topic(this.flags.topic).subscribe((event) => {
