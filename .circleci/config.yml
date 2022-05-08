@@ -48,18 +48,18 @@ jobs:
       - run: *build
       - run: *test
       - save_cache: *save-cache
-  node-14:
+  node-16:
     <<: *node-test
     docker:
-      - image: node:14.18.1
+      - image: node:16.15.0
   release:
     <<: *defaults
     steps:
       - checkout
       - restore_cache: *restore-cache
       - run: *gh-config
-      - run: npm install -global semantic-release@18
-      - run: npm install -global https://github.com/jayree/semantic-release
+      - run: npm install -global semantic-release
+      - run: npm install -global https://github.com/jayree/semantic-release/raw/master/oclif-semantic-release-v3.1.5.tgz
       - run: *install
       - run: semantic-release -e @oclif/semantic-release
       - save_cache: *save-cache
@@ -83,7 +83,7 @@ workflows:
   sfdx-jayree:
     jobs:
       - node-latest
-      - node-14
+      - node-16
       - release:
           filters:
             branches:
@@ -92,7 +92,7 @@ workflows:
                 - next
           requires:
             - node-latest
-            - node-14
+            - node-16
       - merge:
           filters:
             branches:
