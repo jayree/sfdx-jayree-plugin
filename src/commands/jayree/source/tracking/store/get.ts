@@ -10,6 +10,7 @@ import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import chalk from 'chalk';
+import { getCurrentStateFolderFilePath } from '../../../../../utils/stateFolderHandler';
 
 Messages.importMessagesDirectory(__dirname);
 
@@ -29,7 +30,11 @@ $ sfdx jayree:source:tracking:store:get -u me@my.org`,
 
   public async run(): Promise<AnyJson> {
     const { serverMaxRevisionCounter } = await fs.readJSON(
-      path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+      await getCurrentStateFolderFilePath(
+        this.project.getPath(),
+        path.join('orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+        true
+      ),
       { throws: false }
     );
     this.ux.styledHeader(chalk.blue('Get stored SourceMember revision counter number'));
@@ -42,20 +47,18 @@ $ sfdx jayree:source:tracking:store:get -u me@my.org`,
         },
       ],
       {
-        columns: [
-          {
-            key: 'Username',
-            get: (row: any) => row.username,
-          },
-          {
-            key: 'OrgId',
-            get: (row: any) => row.orgid,
-          },
-          {
-            key: 'RevisionCounter',
-            get: (row: any) => row.serverMaxRevisionCounter,
-          },
-        ],
+        Username: {
+          header: 'Username',
+          get: (row: any) => row.username,
+        },
+        OrgId: {
+          header: 'OrgId',
+          get: (row: any) => row.orgid,
+        },
+        RevisionCounter: {
+          header: 'RevisionCounter',
+          get: (row: any) => row.serverMaxRevisionCounter,
+        },
       }
     );
     return {

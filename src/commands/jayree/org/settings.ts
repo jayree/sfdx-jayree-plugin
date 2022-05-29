@@ -7,11 +7,12 @@
 import * as path from 'path';
 import os from 'os';
 import { flags } from '@salesforce/command';
-import { Messages, SfdxProject, fs as corefs } from '@salesforce/core';
+import { Messages, SfProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import * as fs from 'fs-extra';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
+import mkdirp from 'mkdirp';
 import { parseSourceComponent } from '../../../utils/xml';
 import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
@@ -86,13 +87,13 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
     // this.ux.startSpinner('Generating settings');
 
     try {
-      await corefs.mkdirp(destRoot, corefs.DEFAULT_USER_DIR_MODE);
+      await mkdirp(destRoot, '700');
 
       let sfdxProjectVersion;
       /* istanbul ignore next*/
       try {
-        const sfdxProject = await SfdxProject.resolve();
-        const sfdxProjectJson = await sfdxProject.retrieveSfdxProjectJson();
+        const sfdxProject = await SfProject.resolve();
+        const sfdxProjectJson = await sfdxProject.retrieveSfProjectJson();
         sfdxProjectVersion = sfdxProjectJson.getContents().sourceApiVersion;
         // eslint-disable-next-line no-empty
       } catch (error) {}

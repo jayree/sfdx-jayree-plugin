@@ -1,2 +1,2 @@
-import { Hook } from '@oclif/config';
+import { Hook } from '@oclif/core';
 export declare const prerun: Hook<'prerun'>;

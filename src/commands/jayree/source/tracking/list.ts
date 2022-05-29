@@ -11,6 +11,7 @@ import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as fs from 'fs-extra';
 import chalk from 'chalk';
+import { getCurrentStateFolderFilePath } from '../../../../utils/stateFolderHandler';
 
 Messages.importMessagesDirectory(__dirname);
 
@@ -45,8 +46,11 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
     } = await conn.tooling.query('SELECT MAX(RevisionCounter) maxCounter,MAX(RevisionNum) maxNum from SourceMember');
 
     const maxRev = maxCounter >= maxNum ? maxCounter : maxNum;
-
-    const maxrevpath = path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'maxRevision.json');
+    const maxrevpath = await getCurrentStateFolderFilePath(
+      this.project.getPath(),
+      path.join('orgs', this.org.getOrgId(), 'maxRevision.json'),
+      false
+    );
 
     let maxrevfile;
 
@@ -77,7 +81,12 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
 
     try {
       const { serverMaxRevisionCounter } = await fs.readJSON(
-        path.join(this.project.getPath(), '.sfdx', 'orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+        await getCurrentStateFolderFilePath(
+          this.project.getPath(),
+          path.join('orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+          true
+        ),
+
         { throws: false }
       );
       storedServerMaxRevisionCounter = serverMaxRevisionCounter;
@@ -146,28 +155,26 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
       chalk.blue(`SourceMember revision counter numbers list for: ${this.org.getUsername()}/${this.org.getOrgId()}`)
     );
     this.ux.table(sourceMemberResults, {
-      columns: [
-        {
-          key: 'REVISIONCOUNTER',
-          get: (row: any) => row.RevisionCounterString,
-        },
-        {
-          key: 'ID',
-          get: (row: any) => row.Id,
-        },
-        {
-          key: 'FULL NAME',
-          get: (row: any) => row.MemberName,
-        },
-        {
-          key: 'TYPE',
-          get: (row: any) => row.MemberType,
-        },
-        {
-          key: 'OBSOLETE',
-          get: (row: any) => row.IsNameObsolete.toString(),
-        },
-      ],
+      REVISIONCOUNTER: {
+        header: 'REVISIONCOUNTER',
+        get: (row: any) => row.RevisionCounterString,
+      },
+      ID: {
+        header: 'ID',
+        get: (row: any) => row.Id,
+      },
+      'FULL NAME': {
+        header: 'FULL NAME',
+        get: (row: any) => row.MemberName,
+      },
+      TYPE: {
+        header: 'TYPE',
+        get: (row: any) => row.MemberType,
+      },
+      OBSOLETE: {
+        header: 'OBSOLETE',
+        get: (row: any) => row.IsNameObsolete.toString(),
+      },
     });
 
     sourceMemberResults.forEach((sourceMember) => {

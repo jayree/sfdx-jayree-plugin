@@ -5,7 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { flags, SfdxCommand } from '@salesforce/command';
-import { Messages, fs as corefs } from '@salesforce/core';
+import { Messages } from '@salesforce/core';
+import { traverse } from '@salesforce/core/lib/util/internal';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
 import * as kit from '@salesforce/kit';
@@ -53,7 +54,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
     this.isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);
 
     await this.org.refreshAuth();
-    const configPath = await corefs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
+    const configPath = await traverse.forFile(process.cwd(), '.sfdx-jayree.json');
 
     let allTasks = [];
     let selectedSetupTasks = [];

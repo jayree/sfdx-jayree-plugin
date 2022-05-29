@@ -6,40 +6,33 @@
  */
 /* istanbul ignore file */
 import * as path from 'path';
-import { Hook } from '@oclif/config';
-import { cli } from 'cli-ux';
+import { Hook, CliUx } from '@oclif/core';
 import { env } from '@salesforce/kit';
 import * as fs from 'fs-extra';
 import chalk from 'chalk';
 import { SourceTracking } from '@salesforce/source-tracking';
-import { SfdxProject, Org } from '@salesforce/core';
-import { runHooks } from '../utils/hookUtils';
+import { SfProject, Org } from '@salesforce/core';
 import { getConnectionFromArgv, getProjectPath } from '../utils/souceUtils';
+import { getCurrentStateFolderFilePath } from '../utils/stateFolderHandler';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('jayree:hooks');
 export const prerun: Hook<'prerun'> = async function (options) {
   debug(`called 'jayree:prerun' by: ${options.Command.id}`);
-  if (!runHooks) {
-    debug('hooks disabled');
-    return;
-  }
   if (options.Command.id === 'force:source:pull') {
     if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL', false)) {
       debug('force:source:pull detected');
       let storedServerMaxRevisionCounter;
       let storedServerMaxRevisionCounterPath;
       const projectPath = await getProjectPath();
-      const project = SfdxProject.getInstance(projectPath);
+      const project = SfProject.getInstance(projectPath);
       const userName = (await getConnectionFromArgv()).username;
       const org = await Org.create({ aliasOrUsername: userName });
       try {
-        storedServerMaxRevisionCounterPath = path.join(
+        storedServerMaxRevisionCounterPath = await getCurrentStateFolderFilePath(
           projectPath,
-          '.sfdx',
-          'orgs',
-          org.getOrgId(),
-          'jayreeStoredMaxRevision.json'
+          path.join('orgs', org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+          true
         );
         const { serverMaxRevisionCounter } = await fs.readJSON(storedServerMaxRevisionCounterPath, { throws: false });
         storedServerMaxRevisionCounter = serverMaxRevisionCounter;
@@ -53,26 +46,24 @@ export const prerun: Hook<'prerun'> = async function (options) {
             sourceTracking.resetLocalTracking(),
           ]);
 
-          cli.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
+          CliUx.ux.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
           // eslint-disable-next-line no-empty
         } catch (error) {}
       } else {
         let localServerMaxRevisionCounter = 0;
         try {
           const { serverMaxRevisionCounter } = await fs.readJSON(
-            path.join(
+            await getCurrentStateFolderFilePath(
               projectPath,
-              '.sfdx',
-              'orgs',
-              (await Org.create({ aliasOrUsername: userName })).getOrgId(),
-              'maxRevision.json'
+              path.join('orgs', (await Org.create({ aliasOrUsername: userName })).getOrgId(), 'maxRevision.json'),
+              false
             ),
             { throws: false }
           );
           localServerMaxRevisionCounter = serverMaxRevisionCounter;
           // eslint-disable-next-line no-empty
         } catch (error) {}
-        const answer = await cli.confirm(
+        const answer = await CliUx.ux.confirm(
           chalk.dim(
             `WARNING: No stored revision found for scratch org with name: ${userName}.
 Store current local revision: ${localServerMaxRevisionCounter}? (y/n)`

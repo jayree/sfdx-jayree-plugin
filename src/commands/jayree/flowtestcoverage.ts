@@ -69,16 +69,10 @@ Coverage: 82%
       });
     }
 
-    this.ux.table(x, {
-      columns: [
-        {
-          key: 'all flows and processes that have test coverage',
-        },
-        {
-          key: 'all active autolaunched flows and processes that don’t have test coverage',
-        },
-      ],
-    });
+    this.ux.table(x, [
+      'all flows and processes that have test coverage',
+      'all active autolaunched flows and processes that don’t have test coverage',
+    ]);
 
     if (covered.length !== numberOfCoveredActiveAutolaunchedFlowsAndProcesses) {
       this.ux.warn(
