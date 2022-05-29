@@ -1,3 +1,10 @@
+## [4.3.12](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.11...v4.3.12) (2022-05-29)
+
+
+### Bug Fixes
+
+* upgrade to oclif/core ([9dfbb20](https://github.com/jayree/sfdx-jayree-plugin/commit/9dfbb2094919ea19ee5d54ca88e29aa66a4cccc7))
+
 ## [4.3.11](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.10...v4.3.11) (2022-05-08)
 
 
