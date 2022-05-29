@@ -5,10 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as path from 'path';
-import { Command, Hook, IConfig } from '@oclif/config';
-import { cli } from 'cli-ux';
+import { Hook, Config, CliUx } from '@oclif/core';
 import { env } from '@salesforce/kit';
-import { SfdxProject } from '@salesforce/core';
+import { SfProject } from '@salesforce/core';
 import { FileResponse, ComponentStatus } from '@salesforce/source-deploy-retrieve';
 import { shrinkPermissionSets, updateProfiles, applySourceFixes, logFixes } from '../utils/souceUtils';
 import { runHooks } from '../utils/hookUtils';
@@ -16,11 +15,11 @@ import { runHooks } from '../utils/hookUtils';
 type HookFunction = (this: Hook.Context, options: HookOptions) => any;
 
 type HookOptions = {
-  Command: Command.Class;
+  Command;
   argv: string[];
   commandId: string;
   result: FileResponse[];
-  config: IConfig;
+  config: Config;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -81,7 +80,7 @@ export const postretrieve: HookFunction = async function (options) {
       });
     debug({ toUpdate });
 
-    const projectPath = await SfdxProject.resolveProjectPath();
+    const projectPath = await SfProject.resolveProjectPath();
     const inboundFiles = [];
 
     result.forEach((element) => {
@@ -103,8 +102,8 @@ export const postretrieve: HookFunction = async function (options) {
       void logFixes(updatedfiles);
     } else {
       if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT', false)) {
-        cli.log(',');
-        cli.styledJSON({
+        CliUx.ux.log(',');
+        CliUx.ux.styledJSON({
           result: {
             [options.Command.id === 'force:source:pull' ? 'pulledSource' : 'inboundFiles']: inboundFiles,
             fixedFiles: Object.values(updatedfiles)

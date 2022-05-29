@@ -1,11 +1,11 @@
-import { Command, Hook, IConfig } from '@oclif/config';
+import { Hook, Config } from '@oclif/core';
 declare type HookFunction = (this: Hook.Context, options: HookOptions) => any;
 declare type HookOptions = {
-    Command: Command.Class;
+    Command: any;
     argv: string[];
     commandId: string;
     result?: PreRetrieveResult;
-    config: IConfig;
+    config: Config;
 };
 declare type PreRetrieveResult = {
     packageXmlPath: string;

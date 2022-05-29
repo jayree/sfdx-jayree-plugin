@@ -10,7 +10,7 @@ import * as fs from 'fs-extra';
 import isDocker from 'is-docker';
 import isWsl from 'is-wsl';
 
-import { SfdxProject } from '@salesforce/core';
+import { SfProject } from '@salesforce/core';
 
 const CONFIG_DEFAULTS = {
   ensureUserPermissions: [],
@@ -33,7 +33,7 @@ const CONFIG_DEFAULTS = {
 
 const resolvedConfigs = {};
 
-export default (path = SfdxProject.resolveProjectPathSync()) => {
+export default (path = SfProject.resolveProjectPathSync()) => {
   if (path && resolvedConfigs[path]) {
     return resolvedConfigs[path];
   }

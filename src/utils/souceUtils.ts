@@ -8,9 +8,10 @@
 import * as path from 'path';
 import os from 'os';
 import * as fs from 'fs-extra';
-import { SfdxProject, fs as corefs } from '@salesforce/core';
+import { SfProject } from '@salesforce/core';
+import { traverse } from '@salesforce/core/lib/util/internal';
 import * as kit from '@salesforce/kit';
-import cli from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
@@ -47,7 +48,7 @@ export async function getProjectPath(): Promise<string> {
     return projectPath;
   }
   try {
-    projectPath = (await SfdxProject.resolveProjectPath()).split(path.sep).join(path.posix.sep);
+    projectPath = (await SfProject.resolveProjectPath()).split(path.sep).join(path.posix.sep);
     return projectPath;
   } catch (error) {
     return undefined;
@@ -84,7 +85,7 @@ export async function profileElementInjection(profiles, customObjectsFilter = []
   }
   if (ensureObjectPermissions.length === 0) {
     process.once('exit', () => {
-      cli.warn('no ensureObjectPermissions list configured');
+      CliUx.ux.warn('no ensureObjectPermissions list configured');
     });
   }
   for (const file of profiles) {
@@ -149,8 +150,8 @@ export async function logFixes(updatedfiles) {
     const root = await getProjectPath();
     Object.keys(updatedfiles).forEach((workaround) => {
       if (updatedfiles[workaround].length > 0) {
-        cli.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
-        cli.table(updatedfiles[workaround], {
+        CliUx.ux.styledHeader(chalk.blue(`Fixed Source: ${workaround}`));
+        CliUx.ux.table(updatedfiles[workaround], {
           filePath: {
             header: 'FILEPATH',
             get: (row: fixResult) => path.relative(root, row.filePath),
@@ -229,7 +230,12 @@ export async function getConnectionFromArgv(): Promise<argvConnection> {
   let aliasOrUsername = '';
   while (argv.length && aliasOrUsername.length === 0) {
     const input = argv.shift();
-    if (input.startsWith('-u') || input.startsWith('--targetusername')) {
+    if (
+      input.startsWith('-u') ||
+      input.startsWith('--targetusername') ||
+      input.startsWith('-o') ||
+      input.startsWith('--target-org')
+    ) {
       const i = input.indexOf('=');
       if (i !== -1) {
         aliasOrUsername = input.slice(i + 1, input.length);
@@ -242,10 +248,10 @@ export async function getConnectionFromArgv(): Promise<argvConnection> {
   if (aliasOrUsername.length === 0) {
     try {
       const aggregator = await ConfigAggregator.create();
-      aliasOrUsername = aggregator.getPropertyValue('defaultusername').toString();
+      aliasOrUsername = aggregator.getPropertyValue('target-org').toString();
     } catch {
       throw new Error(
-        'This command requires a username to apply <mydomain> or <username>. Specify it with the -u parameter or with the "sfdx config:set defaultusername=<username>" command.'
+        'This command requires a username to apply <mydomain> or <username>. Specify it with the -u (-o) parameter or with the "sfdx config:set defaultusername=<username>" command.'
       );
     }
   }
@@ -513,7 +519,7 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   if (!root) {
     root = await getProjectPath();
   }
-  const configPath = await corefs.traverseForFile(process.cwd(), '.sfdx-jayree.json');
+  const configPath = await traverse.forFile(process.cwd(), '.sfdx-jayree.json');
   const updatedfiles: aggregatedFixResults = {};
   for (const tag of tags) {
     const fix = config(configPath)[tag];
@@ -633,6 +639,7 @@ export async function updateProfiles(profiles, customObjects, forceSourcePull) {
 
     const mdapiRetrieve = await componentSet.retrieve({
       usernameOrConnection: (await getConnectionFromArgv()).username,
+      merge: true,
       output: destRoot,
     });
 

@@ -23,11 +23,11 @@ sfdx ALM commands & more
 <!-- usage -->
 ```sh-session
 $ sfdx plugins:install sfdx-jayree
-$ sfdx jayree:COMMAND
+$ sfdx jayree:[COMMAND]
 running command...
 $ sfdx plugins
 sfdx-jayree 4.3.11
-$ sfdx help jayree:COMMAND
+$ sfdx help jayree:[COMMAND]
 USAGE
   $ sfdx jayree:COMMAND
 ...
@@ -39,7 +39,12 @@ USAGE
 <!-- commands -->
 * [`sfdx jayree:automation:changeset:deploy`](#sfdx-jayreeautomationchangesetdeploy)
 * [`sfdx jayree:automation:changeset:list`](#sfdx-jayreeautomationchangesetlist)
+* [`sfdx jayree:automation:country:update`](#sfdx-jayreeautomationcountryupdate)
 * [`sfdx jayree:automation:ltngsync:status`](#sfdx-jayreeautomationltngsyncstatus)
+* [`sfdx jayree:automation:state:import`](#sfdx-jayreeautomationstateimport)
+* [`sfdx jayree:automation:statecountry:create`](#sfdx-jayreeautomationstatecountrycreate)
+* [`sfdx jayree:automation:statecountry:import`](#sfdx-jayreeautomationstatecountryimport)
+* [`sfdx jayree:automation:statecountry:update`](#sfdx-jayreeautomationstatecountryupdate)
 * [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
 * [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
 * [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
@@ -53,6 +58,7 @@ USAGE
 * [`sfdx jayree:packagedescription:get`](#sfdx-jayreepackagedescriptionget)
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
+* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
 * [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
 * [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
@@ -64,39 +70,35 @@ deploy incomming change set to an org (beta)
 
 ```
 USAGE
-  $ sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] 
-  [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:automation:changeset:deploy [-r <string> -l <string>] [-c] [--nodialog -s <string>] [-u <string>] [--apiversion
+    <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
+FLAGS
   -c, --checkonly                                                                   validate deploy but don’t save to
                                                                                     the org (default:false)
-
-  -l, --testlevel=Default|RunSpecifiedTests|RunLocalTests|RunAllTestsInOrg          deployment testing level
+  -l, --testlevel=<option>                                                          deployment testing level
                                                                                     (Default,RunSpecifiedTests,RunLocalT
                                                                                     ests,RunAllTestsInOrg)
-
-  -r, --runtests=runtests                                                           tests to run if --testlevel
+                                                                                    <options: Default|RunSpecifiedTests|
+                                                                                    RunLocalTests|RunAllTestsInOrg>
+  -r, --runtests=<value>                                                            tests to run if --testlevel
                                                                                     RunSpecifiedTests
-
-  -s, --changeset=changeset                                                         name of changeset to deploy
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+  -s, --changeset=<value>                                                           name of changeset to deploy
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
-
   --nodialog                                                                        don't show the dialog wizard
+
+DESCRIPTION
+  deploy incomming change set to an org (beta)
 
 EXAMPLES
   $ sfdx jayree:automation:changeset:deploy -s ChangeSet -l RunLocalTests --nodialog
   Deploying Change Set 'ChangeSet'...
-
   === Status
   Status: Pending
   jobid:  0Xxx100000xx1x1
@@ -108,7 +110,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [src/src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ### `sfdx jayree:automation:changeset:list`
 
@@ -116,23 +118,48 @@ list incomming change sets of an org (beta)
 
 ```
 USAGE
-  $ sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:automation:changeset:list [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
+
+DESCRIPTION
+  list incomming change sets of an org (beta)
 ```
 
-_See code: [src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [src/src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/automation/changeset/list.ts)_
+
+### `sfdx jayree:automation:country:update`
+
+update country integration values in the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  update country integration values in the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:country:update
+```
 
 ### `sfdx jayree:automation:ltngsync:status`
 
@@ -140,32 +167,29 @@ check the Lightning Sync User Sync Status and reset sync if needed (beta)
 
 ```
 USAGE
-  $ sfdx jayree:automation:ltngsync:status -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] 
-  [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:automation:ltngsync:status -o <string> [-s] [-w <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -o, --officeuser=officeuser                                                       (required) 'name' (firstname
+FLAGS
+  -o, --officeuser=<value>                                                          (required) 'name' (firstname
                                                                                     lastname) of the SF user
-
   -s, --statusonly                                                                  get Lightning Sync status of the SF
                                                                                     user, only
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  -w, --wait=wait                                                                   wait time for command to wait for
+  -w, --wait=<value>                                                                wait time for command to wait for
                                                                                     status change in minutes (default:
                                                                                     infinitely)
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  check the Lightning Sync User Sync Status and reset sync if needed (beta)
+
+EXAMPLES
   $ sfdx jayree:automation:ltngsync:status -o 'Name'
   configSetup: User assigned to active Lightning Sync configuration... Yes
   userContacts/userEvents: Salesforce and Exchange email addresses linked... Linked/Linked
@@ -173,266 +197,33 @@ EXAMPLE
   userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/automation/ltngsync/status.ts)_
+_See code: [src/src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/automation/ltngsync/status.ts)_
 
-### `sfdx jayree:flowtestcoverage`
-
-check the flow test coverage of an org
-
-```
-USAGE
-  $ sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-EXAMPLE
-  $ sfdx jayree:flowtestcoverage
-  === Flow Test Coverage
-  Coverage: 82%
-  ...
-```
-
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/flowtestcoverage.ts)_
-
-### `sfdx jayree:manifest:cleanup`
-
-removes those tags from a manifest file that are present in a second manifest file
-
-```
-USAGE
-  $ sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -f, --file=file                                                                   path to the second 'cleanup'
-                                                                                    manifest file
-
-  -x, --manifest=manifest                                                           path to the manifest file
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  Use this command to remove components or metadata types from a manifes file.
-  If the 'cleanup' manifest file (--file) doesn't exist, a template file is created, which can then be modified.
-
-EXAMPLE
-  $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
-```
-
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.1/commands/jayree/manifest/cleanup.ts)_
-
-### `sfdx jayree:manifest:generate`
-
-generate a complete manifest file form the specified org
-
-```
-USAGE
-  $ sfdx jayree:manifest:generate [-q <array>] [-c] [-w] [--includeflowversions] [-f <string>] [-x | -a] [-u <string>] 
-  [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -a, --excludeall                                                                  exclude all packages from output
-
-  -c, --matchcase                                                                   enable 'match case' for the
-                                                                                    quickfilter
-
-  -f, --file=file                                                                   write to 'file' instead of stdout
-
-  -q, --quickfilter=quickfilter                                                     csv separated list of metadata type,
-                                                                                    member or file names to filter on
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  -w, --matchwholeword                                                              enable 'match whole word' for the
-                                                                                    quickfilter
-
-  -x, --excludemanaged                                                              exclude managed packages from output
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --includeflowversions                                                             include flow versions as with api
-                                                                                    version 43.0
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  Use this command to generate a manifest file based on an existing org.
-
-ALIASES
-  $ sfdx jayree:packagexml
-
-EXAMPLES
-  $ sfdx jayree:manifest:generate --targetusername myOrg@example.com
-  <?xml version='1.0' encoding='UTF-8'?>
-  <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
-```
-
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.1/commands/jayree/manifest/generate.ts)_
-
-### `sfdx jayree:manifest:git:diff`
-
-create a manifest and destructiveChanges manifest using 'git diff' data
-
-```
-USAGE
-  $ sfdx jayree:manifest:git:diff [-o <string>] [-d] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-ARGUMENTS
-  REF1  base commit or branch
-  REF2  commit or branch to compare to the base commit
-
-OPTIONS
-  -d, --destructivechangesonly                                                      create a destructiveChanges manifest
-                                                                                    only (package.xml will be empty)
-
-  -o, --outputdir=outputdir                                                         directory to save the created
-                                                                                    manifest files
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  Use this command to create a manifest and destructiveChanges manifest file based on the difference (git diff) of two 
-  git refs.
-
-  You can use all ways to spell <commit> which are valid for 'git diff'.
-  (See https://git-scm.com/docs/git-diff)
-
-EXAMPLES
-  $ sfdx jayree:manifest:git:diff <commit> <commit>
-  $ sfdx jayree:manifest:git:diff <commit>..<commit>
-  uses the changes between two arbitrary <commit>
-
-  $ sfdx jayree:manifest:git:diff <commit>...<commit>
-  uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both 
-  <commit>.
-    
-  $ sfdx jayree:manifest:git:diff branchA..branchB
-  uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1)
-
-  $ sfdx jayree:manifest:git:diff branchA...branchB
-  uses the diff of what is unique in branchB (REF2)
-```
-
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.1/commands/jayree/manifest/git/diff.ts)_
-
-### `sfdx jayree:org:configure`
-
-make configuration changes that are not covered by the metadata API
-
-```
-USAGE
-  $ sfdx jayree:org:configure [-t <array>] [--concurrent] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -t, --tasks=tasks                                                                 list of task titles, if no tasks are
-                                                                                    specified, all tasks marked as
-                                                                                    active will be executed
-
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --concurrent                                                                      execute tasks in parallel
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  See example configuration on how to define tasks
-
-EXAMPLE
-  $ sfdx jayree:org:configure
-  $ sfdx jayree:org:configure -u me@my.org
-  $ sfdx jayree:org:configure --tasks="Asset Settings","Activity Settings"
-  $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
-```
-
-_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/org/configure/index.ts)_
-
-### `sfdx jayree:org:configure:country`
-
-update country integration values in the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:org:configure:country [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
-                                                                                    org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
-                                                                                    api requests made by this command
-
-  --json                                                                            format output as json
-
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-ALIASES
-  $ sfdx jayree:automation:country:update
-```
-
-_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/org/configure/country.ts)_
-
-### `sfdx jayree:org:configure:state`
+### `sfdx jayree:automation:state:import`
 
 import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:org:configure:state [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent 
-  <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:automation:state:import [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
+    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
-  --category=category                                                               Subdivision category
-
-  --concurrent=concurrent                                                           [default: 1] ccc
-
-  --countrycode=countrycode                                                         Alpha-2 code
-
+  --category=<value>                                                                Subdivision category
+  --concurrent=<value>                                                              [default: 1] ccc
+  --countrycode=<value>                                                             Alpha-2 code
   --json                                                                            format output as json
-
-  --language=language                                                               Language code
-
+  --language=<value>                                                                Language code
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
+
+DESCRIPTION
+  import (create/update) states into the State/Country Picklists
 
 ALIASES
   $ sfdx jayree:automation:statecountry:import
@@ -441,7 +232,366 @@ ALIASES
   $ sfdx jayree:automation:state:import
 ```
 
-_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/org/configure/state.ts)_
+### `sfdx jayree:automation:statecountry:create`
+
+import (create/update) states into the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:automation:statecountry:create [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
+    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --category=<value>                                                                Subdivision category
+  --concurrent=<value>                                                              [default: 1] ccc
+  --countrycode=<value>                                                             Alpha-2 code
+  --json                                                                            format output as json
+  --language=<value>                                                                Language code
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  import (create/update) states into the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:statecountry:import
+  $ sfdx jayree:automation:statecountry:create
+  $ sfdx jayree:automation:statecountry:update
+  $ sfdx jayree:automation:state:import
+```
+
+### `sfdx jayree:automation:statecountry:import`
+
+import (create/update) states into the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:automation:statecountry:import [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
+    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --category=<value>                                                                Subdivision category
+  --concurrent=<value>                                                              [default: 1] ccc
+  --countrycode=<value>                                                             Alpha-2 code
+  --json                                                                            format output as json
+  --language=<value>                                                                Language code
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  import (create/update) states into the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:statecountry:import
+  $ sfdx jayree:automation:statecountry:create
+  $ sfdx jayree:automation:statecountry:update
+  $ sfdx jayree:automation:state:import
+```
+
+### `sfdx jayree:automation:statecountry:update`
+
+import (create/update) states into the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:automation:statecountry:update [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
+    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --category=<value>                                                                Subdivision category
+  --concurrent=<value>                                                              [default: 1] ccc
+  --countrycode=<value>                                                             Alpha-2 code
+  --json                                                                            format output as json
+  --language=<value>                                                                Language code
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  import (create/update) states into the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:statecountry:import
+  $ sfdx jayree:automation:statecountry:create
+  $ sfdx jayree:automation:statecountry:update
+  $ sfdx jayree:automation:state:import
+```
+
+### `sfdx jayree:flowtestcoverage`
+
+check the flow test coverage of an org
+
+```
+USAGE
+  $ sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  check the flow test coverage of an org
+
+EXAMPLES
+  $ sfdx jayree:flowtestcoverage
+  === Flow Test Coverage
+  Coverage: 82%
+  ...
+```
+
+_See code: [src/src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/flowtestcoverage.ts)_
+
+### `sfdx jayree:manifest:cleanup`
+
+removes those tags from a manifest file that are present in a second manifest file
+
+```
+USAGE
+  $ sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -f, --file=<value>                                                                path to the second 'cleanup'
+                                                                                    manifest file
+  -x, --manifest=<value>                                                            path to the manifest file
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  removes those tags from a manifest file that are present in a second manifest file
+
+  Use this command to remove components or metadata types from a manifes file.
+
+  If the 'cleanup' manifest file (--file) doesn't exist, a template file is created, which can then be modified.
+
+EXAMPLES
+  $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
+```
+
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.3/src/commands/jayree/manifest/cleanup.ts)_
+
+### `sfdx jayree:manifest:generate`
+
+generate a complete manifest file form the specified org
+
+```
+USAGE
+  $ sfdx jayree:manifest:generate [-q <array>] [-c] [-w] [--includeflowversions] [-f <string>] [-x | -a] [-u <string>]
+    [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -a, --excludeall                                                                  exclude all packages from output
+  -c, --matchcase                                                                   enable 'match case' for the
+                                                                                    quickfilter
+  -f, --file=<value>                                                                write to 'file' instead of stdout
+  -q, --quickfilter=<value>                                                         csv separated list of metadata type,
+                                                                                    member or file names to filter on
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  -w, --matchwholeword                                                              enable 'match whole word' for the
+                                                                                    quickfilter
+  -x, --excludemanaged                                                              exclude managed packages from output
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --includeflowversions                                                             include flow versions as with api
+                                                                                    version 43.0
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  generate a complete manifest file form the specified org
+
+  Use this command to generate a manifest file based on an existing org.
+
+EXAMPLES
+  $ sfdx jayree:manifest:generate --targetusername myOrg@example.com
+
+  <?xml version='1.0' encoding='UTF-8'?>
+
+  <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
+```
+
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.3/src/commands/jayree/manifest/generate.ts)_
+
+### `sfdx jayree:manifest:git:diff`
+
+create a manifest and destructiveChanges manifest using 'git diff' data
+
+```
+USAGE
+  $ sfdx jayree:manifest:git:diff [-o <string>] [-d] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+ARGUMENTS
+  REF1  base commit or branch
+  REF2  commit or branch to compare to the base commit
+
+FLAGS
+  -d, --destructivechangesonly                                                      create a destructiveChanges manifest
+                                                                                    only (package.xml will be empty)
+  -o, --outputdir=<value>                                                           directory to save the created
+                                                                                    manifest files
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  create a manifest and destructiveChanges manifest using 'git diff' data
+
+  Use this command to create a manifest and destructiveChanges manifest file based on the difference (git diff) of two
+  git refs.
+
+  You can use all ways to spell <commit> which are valid for 'git diff'.
+
+  (See https://git-scm.com/docs/git-diff)
+
+EXAMPLES
+  $ sfdx jayree:manifest:git:diff <commit> <commit>
+
+  $ sfdx jayree:manifest:git:diff <commit>..<commit>
+
+  uses the changes between two arbitrary <commit>
+
+
+
+  $ sfdx jayree:manifest:git:diff <commit>...<commit>
+
+  uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both <commit>.
+
+    
+
+  $ sfdx jayree:manifest:git:diff branchA..branchB
+
+  uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1)
+
+
+
+  $ sfdx jayree:manifest:git:diff branchA...branchB
+
+  uses the diff of what is unique in branchB (REF2)
+```
+
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.3/src/commands/jayree/manifest/git/diff.ts)_
+
+### `sfdx jayree:org:configure`
+
+make configuration changes that are not covered by the metadata API
+
+```
+USAGE
+  $ sfdx jayree:org:configure [-t <array>] [--concurrent] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -t, --tasks=<value>                                                               list of task titles, if no tasks are
+                                                                                    specified, all tasks marked as
+                                                                                    active will be executed
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --concurrent                                                                      execute tasks in parallel
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  make configuration changes that are not covered by the metadata API
+
+  See example configuration on how to define tasks
+
+EXAMPLES
+  $ sfdx jayree:org:configure
+  $ sfdx jayree:org:configure -u me@my.org
+  $ sfdx jayree:org:configure --tasks="Asset Settings","Activity Settings"
+  $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
+```
+
+_See code: [src/src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/org/configure/index.ts)_
+
+### `sfdx jayree:org:configure:country`
+
+update country integration values in the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:org:configure:country [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  update country integration values in the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:country:update
+```
+
+_See code: [src/src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/org/configure/country.ts)_
+
+### `sfdx jayree:org:configure:state`
+
+import (create/update) states into the State/Country Picklists
+
+```
+USAGE
+  $ sfdx jayree:org:configure:state [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
+    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --category=<value>                                                                Subdivision category
+  --concurrent=<value>                                                              [default: 1] ccc
+  --countrycode=<value>                                                             Alpha-2 code
+  --json                                                                            format output as json
+  --language=<value>                                                                Language code
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  import (create/update) states into the State/Country Picklists
+
+ALIASES
+  $ sfdx jayree:automation:statecountry:import
+  $ sfdx jayree:automation:statecountry:create
+  $ sfdx jayree:automation:statecountry:update
+  $ sfdx jayree:automation:state:import
+```
+
+_See code: [src/src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree:org:settings`
 
@@ -449,37 +599,35 @@ write the current settings from an Org to a scratch org def file
 
 ```
 USAGE
-  $ sfdx jayree:org:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -f, --file=file                                                                   write to 'file' instead of
+FLAGS
+  -f, --file=<value>                                                                write to 'file' instead of
                                                                                     project-scratch-def.json
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
   -w, --writetoprojectscratchdeffile                                                write output to
                                                                                     project-scratch-def.json file
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
+
+DESCRIPTION
+  write the current settings from an Org to a scratch org def file
 
 ALIASES
   $ sfdx jayree:scratchorg:settings
 
-EXAMPLE
+EXAMPLES
   $ sfdx jayree:org:settings
   $ sfdx jayree:org:settings -u me@my.org
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/org/settings.ts)_
+_See code: [src/src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/org/settings.ts)_
 
 ### `sfdx jayree:org:streaming`
 
@@ -487,29 +635,28 @@ listen to streaming api and platform events
 
 ```
 USAGE
-  $ sfdx jayree:org:streaming -p <string> [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:streaming -p <string> [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -p, --topic=topic                                                                 (required) topic name
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+FLAGS
+  -p, --topic=<value>                                                               (required) topic name
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  listen to streaming api and platform events
+
+EXAMPLES
   $ sfdx jayree:org:streaming --topic=/event/eventName__e
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/org/streaming.ts)_
+_See code: [src/src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/org/streaming.ts)_
 
 ### `sfdx jayree:packagedescription:create`
 
@@ -517,22 +664,24 @@ creates an empty package with the description
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:packagedescription:create (-d <string> -f <string>) [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -d, --description=description                                                     (required) new description value
-  -f, --file=file                                                                   (required) file to create
+FLAGS
+  -d, --description=<value>                                                         (required) new description value
+  -f, --file=<value>                                                                (required) file to create
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  creates an empty package with the description
+
+EXAMPLES
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/packagedescription/create.ts)_
+_See code: [src/src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/packagedescription/create.ts)_
 
 ### `sfdx jayree:packagedescription:get`
 
@@ -540,22 +689,24 @@ get the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:packagedescription:get -f <string> [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -f, --file=file                                                                   (required) file to read
+FLAGS
+  -f, --file=<value>                                                                (required) file to read
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  get the description within a package
+
+EXAMPLES
   $ sfdx jayree:packagedescription:get --file FILENAME
   Description of Package FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/packagedescription/get.ts)_
+_See code: [src/src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/packagedescription/get.ts)_
 
 ### `sfdx jayree:packagedescription:remove`
 
@@ -563,21 +714,23 @@ remove the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:packagedescription:remove -f <string> [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -f, --file=file                                                                   (required) file to read
+FLAGS
+  -f, --file=<value>                                                                (required) file to read
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  remove the description within a package
+
+EXAMPLES
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [src/src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/packagedescription/remove.ts)_
 
 ### `sfdx jayree:packagedescription:set`
 
@@ -585,22 +738,58 @@ set the description within a package
 
 ```
 USAGE
-  $ sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:packagedescription:set (-d <string> -f <string>) [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -d, --description=description                                                     (required) new description value
-  -f, --file=file                                                                   (required) file to read
+FLAGS
+  -d, --description=<value>                                                         (required) new description value
+  -f, --file=<value>                                                                (required) file to read
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  set the description within a package
+
+EXAMPLES
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/packagedescription/set.ts)_
+_See code: [src/src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/packagedescription/set.ts)_
+
+### `sfdx jayree:scratchorg:settings`
+
+write the current settings from an Org to a scratch org def file
+
+```
+USAGE
+  $ sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -f, --file=<value>                                                                write to 'file' instead of
+                                                                                    project-scratch-def.json
+  -u, --targetusername=<value>                                                      username or alias for the target
+                                                                                    org; overrides default target org
+  -w, --writetoprojectscratchdeffile                                                write output to
+                                                                                    project-scratch-def.json file
+  --apiversion=<value>                                                              override the api version used for
+                                                                                    api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  write the current settings from an Org to a scratch org def file
+
+ALIASES
+  $ sfdx jayree:scratchorg:settings
+
+EXAMPLES
+  $ sfdx jayree:org:settings
+  $ sfdx jayree:org:settings -u me@my.org
+  $ sfdx jayree:org:settings -u MyTestOrg1 -w
+```
 
 ### `sfdx jayree:source:fix`
 
@@ -608,31 +797,28 @@ fix local source files
 
 ```
 USAGE
-  $ sfdx jayree:source:fix [-t <array>] [-u <string>] [--apiversion <string>] [--verbose] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:fix [-t <array>] [-u <string>] [--apiversion <string>] [--verbose] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -t, --tag=tag                                                                     comma-separated list of tag names
+FLAGS
+  -t, --tag=<value>                                                                 comma-separated list of tag names
                                                                                     listed in .sfdx-jayree.json
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
-
   --verbose                                                                         log output to console
 
 DESCRIPTION
+  fix local source files
+
   (examples will follow)
 ```
 
-_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/source/fix.ts)_
+_See code: [src/src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/source/fix.ts)_
 
 ### `sfdx jayree:source:tracking:list`
 
@@ -640,31 +826,30 @@ list changes in a scratch org by remote revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:list [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:list [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -r, --revision=revision                                                           [default: 0] start at a specific
-                                                                                    revision counter number
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+FLAGS
+  -r, --revision=<value>                                                            start at a specific revision counter
+                                                                                    number
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  list changes in a scratch org by remote revision counter number
+
+EXAMPLES
   $ sfdx jayree:source:tracking:list
   $ sfdx jayree:source:tracking:list -u me@my.org
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/source/tracking/list.ts)_
+_See code: [src/src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/source/tracking/list.ts)_
 
 ### `sfdx jayree:source:tracking:store:get`
 
@@ -672,27 +857,27 @@ get stored revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:get [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:store:get [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -u, --targetusername=targetusername                                               username or alias for the target
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  get stored revision counter number
+
+EXAMPLES
   $ sfdx jayree:source:tracking:store:get
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/source/tracking/store/get.ts)_
+_See code: [src/src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/source/tracking/store/get.ts)_
 
 ### `sfdx jayree:source:tracking:store:set`
 
@@ -700,31 +885,30 @@ store revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:set [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel 
-  trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:store:set [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
-OPTIONS
-  -r, --revision=revision                                                           revision counter number (default:
+FLAGS
+  -r, --revision=<value>                                                            revision counter number (default:
                                                                                     remote revision counter number)
-
-  -u, --targetusername=targetusername                                               username or alias for the target
+  -u, --targetusername=<value>                                                      username or alias for the target
                                                                                     org; overrides default target org
-
-  --apiversion=apiversion                                                           override the api version used for
+  --apiversion=<value>                                                              override the api version used for
                                                                                     api requests made by this command
-
   --json                                                                            format output as json
-
   --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
                                                                                     this command invocation
 
-EXAMPLE
+DESCRIPTION
+  store revision counter number
+
+EXAMPLES
   $ sfdx jayree:source:tracking:store:set
   $ sfdx jayree:source:tracking:store:set -u me@my.org
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/commands/jayree/source/tracking/store/set.ts)_
+_See code: [src/src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.11/src/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks

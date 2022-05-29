@@ -1,0 +1,155 @@
+[
+  {
+    "command": "jayree:automation:changeset:deploy",
+    "plugin": "sfdx-jayree",
+    "flags": [
+      "apiversion",
+      "changeset",
+      "checkonly",
+      "json",
+      "loglevel",
+      "nodialog",
+      "runtests",
+      "targetusername",
+      "testlevel"
+    ],
+    "alias": []
+  },
+  {
+    "command": "jayree:automation:changeset:list",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "targetusername"],
+    "alias": []
+  },
+  {
+    "command": "jayree:automation:ltngsync:status",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "officeuser", "statusonly", "targetusername", "wait"],
+    "alias": []
+  },
+  {
+    "command": "jayree:flowtestcoverage",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "targetusername"],
+    "alias": []
+  },
+  {
+    "command": "jayree:manifest:cleanup",
+    "plugin": "@jayree/sfdx-plugin-manifest",
+    "flags": ["file", "json", "loglevel", "manifest"],
+    "alias": []
+  },
+  {
+    "command": "jayree:manifest:generate",
+    "plugin": "@jayree/sfdx-plugin-manifest",
+    "flags": [
+      "apiversion",
+      "excludeall",
+      "excludemanaged",
+      "file",
+      "includeflowversions",
+      "json",
+      "loglevel",
+      "matchcase",
+      "matchwholeword",
+      "quickfilter",
+      "targetusername"
+    ],
+    "alias": []
+  },
+  {
+    "command": "jayree:manifest:git:diff",
+    "plugin": "@jayree/sfdx-plugin-manifest",
+    "flags": ["destructivechangesonly", "json", "loglevel", "outputdir"],
+    "alias": []
+  },
+  {
+    "command": "jayree:org:configure",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "concurrent", "json", "loglevel", "targetusername", "tasks"],
+    "alias": []
+  },
+  {
+    "command": "jayree:org:configure:country",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "silent", "targetusername"],
+    "alias": ["jayree:automation:country:update"]
+  },
+  {
+    "command": "jayree:org:configure:state",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "category", "concurrent", "countrycode", "json", "language", "loglevel", "targetusername"],
+    "alias": [
+      "jayree:automation:statecountry:import",
+      "jayree:automation:statecountry:create",
+      "jayree:automation:statecountry:update",
+      "jayree:automation:state:import"
+    ]
+  },
+  {
+    "command": "jayree:org:settings",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "file", "json", "loglevel", "targetusername", "writetoprojectscratchdeffile"],
+    "alias": ["jayree:scratchorg:settings"]
+  },
+  {
+    "command": "jayree:org:streaming",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "targetusername", "topic"],
+    "alias": []
+  },
+  {
+    "command": "jayree:packagedescription:create",
+    "plugin": "sfdx-jayree",
+    "flags": ["description", "file", "json", "loglevel"],
+    "alias": []
+  },
+  {
+    "command": "jayree:packagedescription:get",
+    "plugin": "sfdx-jayree",
+    "flags": ["file", "json", "loglevel"],
+    "alias": []
+  },
+  {
+    "command": "jayree:packagedescription:remove",
+    "plugin": "sfdx-jayree",
+    "flags": ["file", "json", "loglevel"],
+    "alias": []
+  },
+  {
+    "command": "jayree:packagedescription:set",
+    "plugin": "sfdx-jayree",
+    "flags": ["description", "file", "json", "loglevel"],
+    "alias": []
+  },
+  {
+    "command": "jayree:source:fix",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "tag", "targetusername", "verbose"],
+    "alias": []
+  },
+  {
+    "command": "jayree:source:tracking:list",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "revision", "targetusername"],
+    "alias": []
+  },
+  {
+    "command": "jayree:source:tracking:store:get",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "targetusername"],
+    "alias": []
+  },
+  {
+    "command": "jayree:source:tracking:store:set",
+    "plugin": "sfdx-jayree",
+    "flags": ["apiversion", "json", "loglevel", "revision", "targetusername"],
+    "alias": []
+  },
+  {
+    "command": "jayree:version",
+    "plugin": "sfdx-jayree",
+    "flags": ["json", "loglevel"],
+    "alias": []
+  }
+]

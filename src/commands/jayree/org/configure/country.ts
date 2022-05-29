@@ -8,7 +8,7 @@ import { flags } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
-import { cli } from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import config from '../../../../utils/config';
@@ -63,7 +63,7 @@ export default class UpdateCountry extends JayreeSfdxCommand {
       }
     };
 
-    const bar = cli.progress({
+    const bar = CliUx.ux.progress({
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
       format: 'State and Country/Territory Picklist | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}',

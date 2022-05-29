@@ -38,7 +38,7 @@ export default class Streaming extends SfdxCommand {
     await this.org.refreshAuth();
     const conn = this.org.getConnection();
     // '/event/SAPAccountRequest__e'
-    conn.streaming.topic(this.flags.topic).subscribe((event) => {
+    await conn.streaming.topic(this.flags.topic).subscribe((event) => {
       this.ux.logJson(event);
     });
 
