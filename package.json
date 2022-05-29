@@ -20,7 +20,7 @@
     "fs-extra": "^10.1.0",
     "ignore": "^5.2.0",
     "inquirer": "^8.2.4",
-    "is-docker": "^2.2.1",
+    "is-docker": "^3.0.0",
     "is-wsl": "^2.2.0",
     "listr2": "^4.0.5",
     "marked": "^4.0.16",
