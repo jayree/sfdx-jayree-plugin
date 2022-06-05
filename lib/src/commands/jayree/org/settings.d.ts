@@ -1,8 +1,6 @@
-import { flags } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
-export default class ScratchOrgSettings extends JayreeSfdxCommand {
-    static aliases: string[];
+export default class ScratchOrgSettings extends SfdxCommand {
     static description: string;
     static examples: string[];
     protected static flagsConfig: {

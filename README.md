@@ -4,9 +4,7 @@ sfdx ALM commands & more
 
 [![sfdx](https://img.shields.io/badge/cli-sfdx-brightgreen.svg)](https://developer.salesforce.com/tools/sfdxcli)
 [![Version](https://img.shields.io/npm/v/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
-[![CircleCI](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/main.svg?style=shield)](https://circleci.com/gh/jayree/sfdx-jayree-plugin/tree/main)
-[![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/jayree/sfdx-jayree-plugin?branch=main&svg=true)](https://ci.appveyor.com/project/jayree/sfdx-jayree-plugin/branch/main)
-[![Codecov](https://codecov.io/gh/jayree/sfdx-jayree-plugin/branch/main/graph/badge.svg)](https://codecov.io/gh/jayree/sfdx-jayree-plugin)
+[![test-and-release](https://github.com/jayree/sfdx-jayree-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/jayree/sfdx-jayree-plugin/actions/workflows/release.yml)
 [![Downloads/week](https://img.shields.io/npm/dw/sfdx-jayree.svg)](https://npmjs.org/package/sfdx-jayree)
 [![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/main/package.json)
 [![Gitter](https://badges.gitter.im/sfdx-jayree-plugin/community.svg)](https://gitter.im/sfdx-jayree-plugin/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -39,12 +37,7 @@ USAGE
 <!-- commands -->
 * [`sfdx jayree:automation:changeset:deploy`](#sfdx-jayreeautomationchangesetdeploy)
 * [`sfdx jayree:automation:changeset:list`](#sfdx-jayreeautomationchangesetlist)
-* [`sfdx jayree:automation:country:update`](#sfdx-jayreeautomationcountryupdate)
 * [`sfdx jayree:automation:ltngsync:status`](#sfdx-jayreeautomationltngsyncstatus)
-* [`sfdx jayree:automation:state:import`](#sfdx-jayreeautomationstateimport)
-* [`sfdx jayree:automation:statecountry:create`](#sfdx-jayreeautomationstatecountrycreate)
-* [`sfdx jayree:automation:statecountry:import`](#sfdx-jayreeautomationstatecountryimport)
-* [`sfdx jayree:automation:statecountry:update`](#sfdx-jayreeautomationstatecountryupdate)
 * [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
 * [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
 * [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
@@ -58,7 +51,6 @@ USAGE
 * [`sfdx jayree:packagedescription:get`](#sfdx-jayreepackagedescriptionget)
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
-* [`sfdx jayree:scratchorg:settings`](#sfdx-jayreescratchorgsettings)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
 * [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
 * [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
@@ -110,7 +102,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [src/src/commands/jayree/automation/changeset/deploy.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ### `sfdx jayree:automation:changeset:list`
 
@@ -134,32 +126,7 @@ DESCRIPTION
   list incomming change sets of an org (beta)
 ```
 
-_See code: [src/src/commands/jayree/automation/changeset/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/automation/changeset/list.ts)_
-
-### `sfdx jayree:automation:country:update`
-
-update country integration values in the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:country:update [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  update country integration values in the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:country:update
-```
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/automation/changeset/list.ts)_
 
 ### `sfdx jayree:automation:ltngsync:status`
 
@@ -197,139 +164,7 @@ EXAMPLES
   userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [src/src/commands/jayree/automation/ltngsync/status.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/automation/ltngsync/status.ts)_
-
-### `sfdx jayree:automation:state:import`
-
-import (create/update) states into the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:state:import [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
-    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --category=<value>                                                                Subdivision category
-  --concurrent=<value>                                                              [default: 1] ccc
-  --countrycode=<value>                                                             Alpha-2 code
-  --json                                                                            format output as json
-  --language=<value>                                                                Language code
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  import (create/update) states into the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-  $ sfdx jayree:automation:state:import
-```
-
-### `sfdx jayree:automation:statecountry:create`
-
-import (create/update) states into the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:statecountry:create [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
-    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --category=<value>                                                                Subdivision category
-  --concurrent=<value>                                                              [default: 1] ccc
-  --countrycode=<value>                                                             Alpha-2 code
-  --json                                                                            format output as json
-  --language=<value>                                                                Language code
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  import (create/update) states into the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-  $ sfdx jayree:automation:state:import
-```
-
-### `sfdx jayree:automation:statecountry:import`
-
-import (create/update) states into the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:statecountry:import [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
-    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --category=<value>                                                                Subdivision category
-  --concurrent=<value>                                                              [default: 1] ccc
-  --countrycode=<value>                                                             Alpha-2 code
-  --json                                                                            format output as json
-  --language=<value>                                                                Language code
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  import (create/update) states into the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-  $ sfdx jayree:automation:state:import
-```
-
-### `sfdx jayree:automation:statecountry:update`
-
-import (create/update) states into the State/Country Picklists
-
-```
-USAGE
-  $ sfdx jayree:automation:statecountry:update [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
-    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --category=<value>                                                                Subdivision category
-  --concurrent=<value>                                                              [default: 1] ccc
-  --countrycode=<value>                                                             Alpha-2 code
-  --json                                                                            format output as json
-  --language=<value>                                                                Language code
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  import (create/update) states into the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-  $ sfdx jayree:automation:state:import
-```
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/automation/ltngsync/status.ts)_
 
 ### `sfdx jayree:flowtestcoverage`
 
@@ -389,7 +224,7 @@ EXAMPLES
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.4/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.5/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -433,7 +268,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.4/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.5/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -493,7 +328,7 @@ EXAMPLES
   uses the diff of what is unique in branchB (REF2)
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.4/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.2.5/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -551,9 +386,6 @@ FLAGS
 
 DESCRIPTION
   update country integration values in the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:country:update
 ```
 
 _See code: [src/src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/org/configure/country.ts)_
@@ -583,12 +415,6 @@ FLAGS
 
 DESCRIPTION
   import (create/update) states into the State/Country Picklists
-
-ALIASES
-  $ sfdx jayree:automation:statecountry:import
-  $ sfdx jayree:automation:statecountry:create
-  $ sfdx jayree:automation:statecountry:update
-  $ sfdx jayree:automation:state:import
 ```
 
 _See code: [src/src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/org/configure/state.ts)_
@@ -617,9 +443,6 @@ FLAGS
 
 DESCRIPTION
   write the current settings from an Org to a scratch org def file
-
-ALIASES
-  $ sfdx jayree:scratchorg:settings
 
 EXAMPLES
   $ sfdx jayree:org:settings
@@ -681,7 +504,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [src/src/commands/jayree/packagedescription/create.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/packagedescription/create.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/packagedescription/create.ts)_
 
 ### `sfdx jayree:packagedescription:get`
 
@@ -706,7 +529,7 @@ EXAMPLES
   Description of Package FILENAME
 ```
 
-_See code: [src/src/commands/jayree/packagedescription/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/packagedescription/get.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/packagedescription/get.ts)_
 
 ### `sfdx jayree:packagedescription:remove`
 
@@ -730,7 +553,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [src/src/commands/jayree/packagedescription/remove.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/packagedescription/remove.ts)_
 
 ### `sfdx jayree:packagedescription:set`
 
@@ -755,41 +578,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [src/src/commands/jayree/packagedescription/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.3.12/src/src/commands/jayree/packagedescription/set.ts)_
-
-### `sfdx jayree:scratchorg:settings`
-
-write the current settings from an Org to a scratch org def file
-
-```
-USAGE
-  $ sfdx jayree:scratchorg:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
-
-FLAGS
-  -f, --file=<value>                                                                write to 'file' instead of
-                                                                                    project-scratch-def.json
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  -w, --writetoprojectscratchdeffile                                                write output to
-                                                                                    project-scratch-def.json file
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-
-DESCRIPTION
-  write the current settings from an Org to a scratch org def file
-
-ALIASES
-  $ sfdx jayree:scratchorg:settings
-
-EXAMPLES
-  $ sfdx jayree:org:settings
-  $ sfdx jayree:org:settings -u me@my.org
-  $ sfdx jayree:org:settings -u MyTestOrg1 -w
-```
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.0/src/commands/jayree/packagedescription/set.ts)_
 
 ### `sfdx jayree:source:fix`
 

@@ -1,5 +1,0 @@
-{
-  "commandDescription": "removes those tags from a manifest file that are present in a second manifest file",
-  "manifestFlagDescription": "path to the manifest file",
-  "fileFlagDescription": "path to the second 'cleanup' manifest file"
-}

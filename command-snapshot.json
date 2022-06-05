@@ -1,7 +1,7 @@
 [
   {
     "command": "jayree:automation:changeset:deploy",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": [
       "apiversion",
       "changeset",
@@ -17,13 +17,13 @@
   },
   {
     "command": "jayree:automation:changeset:list",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["apiversion", "json", "loglevel", "targetusername"],
     "alias": []
   },
   {
     "command": "jayree:automation:ltngsync:status",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["apiversion", "json", "loglevel", "officeuser", "statusonly", "targetusername", "wait"],
     "alias": []
   },
@@ -73,24 +73,19 @@
     "command": "jayree:org:configure:country",
     "plugin": "sfdx-jayree",
     "flags": ["apiversion", "json", "loglevel", "silent", "targetusername"],
-    "alias": ["jayree:automation:country:update"]
+    "alias": []
   },
   {
     "command": "jayree:org:configure:state",
     "plugin": "sfdx-jayree",
     "flags": ["apiversion", "category", "concurrent", "countrycode", "json", "language", "loglevel", "targetusername"],
-    "alias": [
-      "jayree:automation:statecountry:import",
-      "jayree:automation:statecountry:create",
-      "jayree:automation:statecountry:update",
-      "jayree:automation:state:import"
-    ]
+    "alias": []
   },
   {
     "command": "jayree:org:settings",
     "plugin": "sfdx-jayree",
     "flags": ["apiversion", "file", "json", "loglevel", "targetusername", "writetoprojectscratchdeffile"],
-    "alias": ["jayree:scratchorg:settings"]
+    "alias": []
   },
   {
     "command": "jayree:org:streaming",
@@ -100,25 +95,25 @@
   },
   {
     "command": "jayree:packagedescription:create",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["description", "file", "json", "loglevel"],
     "alias": []
   },
   {
     "command": "jayree:packagedescription:get",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["file", "json", "loglevel"],
     "alias": []
   },
   {
     "command": "jayree:packagedescription:remove",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["file", "json", "loglevel"],
     "alias": []
   },
   {
     "command": "jayree:packagedescription:set",
-    "plugin": "sfdx-jayree",
+    "plugin": "@jayree/sfdx-plugin-legacy",
     "flags": ["description", "file", "json", "loglevel"],
     "alias": []
   },

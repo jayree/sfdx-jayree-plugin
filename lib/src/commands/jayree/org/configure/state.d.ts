@@ -1,8 +1,6 @@
-import { flags } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
-import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
-export default class ImportState extends JayreeSfdxCommand {
-    static aliases: string[];
+export default class ImportState extends SfdxCommand {
     static description: string;
     protected static flagsConfig: {
         countrycode: flags.Discriminated<flags.String>;

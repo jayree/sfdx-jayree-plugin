@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { flags } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
@@ -13,13 +13,11 @@ import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import config from '../../../../utils/config';
 import * as CSconfig from '../../../../../config/countrystate.json';
-import { JayreeSfdxCommand } from '../../../../jayreeSfdxCommand';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
-export default class UpdateCountry extends JayreeSfdxCommand {
-  public static aliases = ['jayree:automation:country:update'];
+export default class UpdateCountry extends SfdxCommand {
   public static description = messages.getMessage('commandCountryDescription');
 
   protected static flagsConfig = {
@@ -36,7 +34,6 @@ export default class UpdateCountry extends JayreeSfdxCommand {
   protected static requiresProject = false;
 
   public async run(): Promise<AnyJson> {
-    this.warnIfRunByAlias(UpdateCountry.aliases, UpdateCountry.id);
     let spinnermessage = '';
 
     const browser = await puppeteer.launch(config().puppeteer);

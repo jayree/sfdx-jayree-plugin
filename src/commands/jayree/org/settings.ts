@@ -6,7 +6,7 @@
  */
 import * as path from 'path';
 import os from 'os';
-import { flags } from '@salesforce/command';
+import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages, SfProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
@@ -14,7 +14,6 @@ import * as fs from 'fs-extra';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
 import mkdirp from 'mkdirp';
 import { parseSourceComponent } from '../../../utils/xml';
-import { JayreeSfdxCommand } from '../../../jayreeSfdxCommand';
 
 Messages.importMessagesDirectory(__dirname);
 
@@ -27,9 +26,7 @@ function camelize(str) {
   });
 }
 
-export default class ScratchOrgSettings extends JayreeSfdxCommand {
-  public static aliases = ['jayree:scratchorg:settings'];
-
+export default class ScratchOrgSettings extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');
 
   public static examples = [
@@ -55,7 +52,6 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
 
   // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
-    this.warnIfRunByAlias(ScratchOrgSettings.aliases, ScratchOrgSettings.id);
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {
