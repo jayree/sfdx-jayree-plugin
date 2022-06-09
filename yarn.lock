@@ -1249,9 +1249,9 @@
     chalk "^2.4.2"
 
 "@salesforce/core@^3.19.0", "@salesforce/core@^3.19.1":
-  version "3.19.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.19.2.tgz#45b55fec4425ec9a447aba682a0add084c8ba73a"
-  integrity sha512-uz2ehET9zz8WJj9Gicui3zxSN34TsmjgxrP22XCdQS7/GNhye1SlV8a6ayyQLqJbYlANrPFAs1RhF6LV1mPokg==
+  version "3.20.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.20.1.tgz#2f293a84eb793ce549ee42045877b82b9cf5e8d0"
+  integrity sha512-lOy+qJ9YxwUmvKG9eAvnWJn1yOHvd4G/3vuvUTXugj9G8JTqUyPwKFmWgIS2FSEBWkRIhDQnEIXbgrM6/ytC4A==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.5.41"
