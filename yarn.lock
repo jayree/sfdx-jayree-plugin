@@ -1237,18 +1237,18 @@
     safe-json-stringify "~1"
 
 "@salesforce/command@^5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.1.3.tgz#a55e9b8e746a5a68322f59a637f920470da6b51f"
-  integrity sha512-spVCcHh/SYM9L5oI52z+VSEOsAXgDxj6GTlEvkm+KPctsIUhtxS1xKzjeeVCuUmRmvfq5LgwtjcgTSIqkeoL9w==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.0.tgz#908b2fe38a6147b04d0a2316e459a3775889e4b1"
+  integrity sha512-HDr3oZTMkCeytL+MWL9+FxodDDhUzc+TyZKf4v+dF0VKevA8NFr2Hw6GyXJzLq/p8BKETHTe6cnq5KeiNIOsPg==
   dependencies:
     "@oclif/core" "^1.7.0"
     "@oclif/plugin-help" "^5.1.11"
-    "@salesforce/core" "^3.19.0"
+    "@salesforce/core" "^3.20.1"
     "@salesforce/kit" "^1.5.34"
     "@salesforce/ts-types" "^1.5.20"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.19.0", "@salesforce/core@^3.19.1":
+"@salesforce/core@^3.19.0", "@salesforce/core@^3.19.1", "@salesforce/core@^3.20.1":
   version "3.21.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.21.1.tgz#3e51454d6e5f5fbf523e0372378210b8cf85f60f"
   integrity sha512-TdOhTeXrfUhRsqqwQKQsA410uBvHsRQiD66wtC0lmUGHRBNxUYEmK6+zbMvVLyPLo6Db4GOPuZ/3DV839fIVBg==
