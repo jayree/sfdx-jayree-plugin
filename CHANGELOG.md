@@ -1,3 +1,15 @@
+## [4.3.14](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.13...v4.3.14) (2022-06-19)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 1.9.0 to 1.9.3 ([f37e253](https://github.com/jayree/sfdx-jayree-plugin/commit/f37e2535e3de31a5310b4430206382d386f2d9f5))
+* **deps:** bump @salesforce/command from 5.1.3 to 5.2.0 ([dfd628e](https://github.com/jayree/sfdx-jayree-plugin/commit/dfd628e6a18c13cb96c11368e4b20f45aa9d049b))
+* **deps:** bump @salesforce/core from 3.19.2 to 3.21.1 ([2eb2cd6](https://github.com/jayree/sfdx-jayree-plugin/commit/2eb2cd67a3d25e5624846e2cbf6acfbf47c30112))
+* **deps:** bump @salesforce/source-deploy-retrieve from 6.0.2 to 6.0.4 ([a93e56c](https://github.com/jayree/sfdx-jayree-plugin/commit/a93e56cb90ea0a0a00ad04dba0ff5cc8f828067f))
+* **deps:** bump marked from 4.0.16 to 4.0.17 ([61d71a6](https://github.com/jayree/sfdx-jayree-plugin/commit/61d71a6de0db473c93bb4284dbaf01be6f6f9d05))
+* **deps:** bump puppeteer from 14.2.1 to 14.4.0 ([ad6b672](https://github.com/jayree/sfdx-jayree-plugin/commit/ad6b672ac8ecee1332c17da69ec699c31fdd8140))
+
 ## [4.3.13](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.12...v4.3.13) (2022-06-05)
 
 
