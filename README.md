@@ -102,7 +102,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ### `sfdx jayree:automation:changeset:list`
 
@@ -126,7 +126,7 @@ DESCRIPTION
   list incomming change sets of an org (beta)
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/automation/changeset/list.ts)_
 
 ### `sfdx jayree:automation:ltngsync:status`
 
@@ -164,7 +164,7 @@ EXAMPLES
   userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/automation/ltngsync/status.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/automation/ltngsync/status.ts)_
 
 ### `sfdx jayree:flowtestcoverage`
 
@@ -504,7 +504,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/packagedescription/create.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/packagedescription/create.ts)_
 
 ### `sfdx jayree:packagedescription:get`
 
@@ -529,7 +529,7 @@ EXAMPLES
   Description of Package FILENAME
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/packagedescription/get.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/packagedescription/get.ts)_
 
 ### `sfdx jayree:packagedescription:remove`
 
@@ -553,7 +553,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/packagedescription/remove.ts)_
 
 ### `sfdx jayree:packagedescription:set`
 
@@ -578,7 +578,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.1/src/commands/jayree/packagedescription/set.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.0.2/src/commands/jayree/packagedescription/set.ts)_
 
 ### `sfdx jayree:source:fix`
 
