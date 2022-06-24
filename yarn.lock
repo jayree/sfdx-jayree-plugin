@@ -1337,16 +1337,16 @@
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
 "@salesforce/source-deploy-retrieve@^6.0.1", "@salesforce/source-deploy-retrieve@^6.0.4":
-  version "6.0.4"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.0.4.tgz#fa9640cda9ce90f4d3e3e3c76ad424a8f13a9947"
-  integrity sha512-dZy7ttWPLC8P0vFbqg2dcn6pfjfHZvaEdDs9c/RiSrTPzkzPuy/trTiIBEUwzz2oK5pOUVQhAhvzeS4/QcHQMg==
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.2.0.tgz#0b5928d4719102bad58702b1276f2197f5f169da"
+  integrity sha512-KtklCoPBW0hrIFxfXrB7MI8wVffQu0lE69HRmUPJW7RtLK5hdk8YEyvP0yzvDVuiYrJN3+RS7uKkM2zDc9VbPA==
   dependencies:
-    "@salesforce/core" "^3.19.0"
+    "@salesforce/core" "^3.21.1"
     "@salesforce/kit" "^1.5.41"
     "@salesforce/ts-types" "^1.5.20"
     archiver "^5.3.0"
     fast-xml-parser "^3.17.4"
-    got "^11.8.2"
+    got "^11.8.5"
     graceful-fs "^4.2.8"
     ignore "^5.1.8"
     mime "2.6.0"
@@ -4391,7 +4391,7 @@ globby@^11.0.1, globby@^11.0.3, globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-got@^11.8.2:
+got@^11.8.2, got@^11.8.5:
   version "11.8.5"
   resolved "https://registry.yarnpkg.com/got/-/got-11.8.5.tgz#ce77d045136de56e8f024bebb82ea349bc730046"
   integrity sha512-o0Je4NvQObAuZPHLFoRSkdG2lTgtcynqymzg2Vupdx6PorhaT5MCbIyXG6d4D94kk8ZG57QeosgdiqfJWhEhlQ==
