@@ -1236,9 +1236,9 @@
     safe-json-stringify "~1"
 
 "@salesforce/command@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.0.tgz#908b2fe38a6147b04d0a2316e459a3775889e4b1"
-  integrity sha512-HDr3oZTMkCeytL+MWL9+FxodDDhUzc+TyZKf4v+dF0VKevA8NFr2Hw6GyXJzLq/p8BKETHTe6cnq5KeiNIOsPg==
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.1.tgz#b102003252ba89c9894ab93b5d23946dbea88784"
+  integrity sha512-78JWHof7N/bH6hFKj6hQOucnk+YfH9E+9Zcm23ykmk4LPig4q4dkqgTEC563KSjCTZ3wtd7rUqEhy3HOK7sH2g==
   dependencies:
     "@oclif/core" "^1.7.0"
     "@oclif/plugin-help" "^5.1.11"
