@@ -1,5 +1,5 @@
 diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
-index 945d8fb..4bcee5d 100644
+index 17c31cc..47cf225 100644
 --- a/node_modules/oclif/lib/commands/readme.js
 +++ b/node_modules/oclif/lib/commands/readme.js
 @@ -50,8 +50,8 @@ class Readme extends core_1.Command {
@@ -36,21 +36,21 @@ index 945d8fb..4bcee5d 100644
          return [
              ...commands.map(c => {
                  const usage = this.commandUsage(config, c);
--                return `* [\`${config.bin} ${usage}\`](#${slugify.slug(`${config.bin}-${usage}`)})`;
-+                return `* [\`${config.bin} ${c.id}\`](#${slugify.slug(`${config.bin}-${c.id}`)})`;
+-                return usage ? `* [\`${config.bin} ${usage}\`](#${slugify.slug(`${config.bin}-${usage}`)})` : `* [\`${config.bin}\`](#${slugify.slug(`${config.bin}`)})`;
++                return usage ? `* [\`${config.bin} ${c.id}\`](#${slugify.slug(`${config.bin}-${c.id}`)})` : `* [\`${config.bin}\`](#${slugify.slug(`${config.bin}`)})`;
              }),
              '',
              ...commands.map(c => this.renderCommand(config, c)).map(s => s.trim() + '\n'),
-@@ -119,7 +113,7 @@ USAGE
-         const title = (0, util_1.template)({ config, command: c })(c.summary || c.description || '').trim().split('\n')[0];
-         const help = new this.HelpClass(config, { stripAnsi: true, maxWidth: columns });
+@@ -121,7 +115,7 @@ USAGE
          const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
--        const header = () => `## \`${config.bin} ${this.commandUsage(config, c)}\``;
-+        const header = () => `### \`${config.bin} ${c.id}\``;
+         const header = () => {
+             const usage = this.commandUsage(config, c);
+-            return usage ? `## \`${config.bin} ${usage}\`` : `## \`${config.bin}\``;
++            return usage ? `### \`${config.bin} ${c.id}\`` : `### \`${config.bin}\``;
+         };
          try {
              return (0, util_1.compact)([
-                 header(),
-@@ -225,9 +219,9 @@ USAGE
+@@ -228,9 +222,9 @@ USAGE
  exports.default = Readme;
  Readme.description = `adds commands to README.md in current directory
  The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
@@ -60,5 +60,5 @@ index 945d8fb..4bcee5d 100644
 -# Commands
 +## Commands
  <!-- commands -->
- 
+
  Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
