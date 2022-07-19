@@ -106,9 +106,9 @@ export class PuppeteerStateTasks {
           waitUntil: 'networkidle0',
         });
 
-        await page.waitForSelector('#gwt-uid-23');
-        await page.click('#gwt-uid-23');
-        await page.evaluate(() => document.querySelector('#gwt-uid-23')['checked']);
+        await page.waitForSelector('#gwt-uid-12');
+        await page.click('#gwt-uid-12');
+        await page.evaluate(() => document.querySelector('#gwt-uid-12')['checked']);
         await page.click('.go');
 
         await page.waitForSelector('.v-grid-tablewrapper');
@@ -118,6 +118,7 @@ export class PuppeteerStateTasks {
 
         let converted = [];
         do {
+          // eslint-disable-next-line no-await-in-loop
           const table = await page.evaluate(() => document.querySelector('.v-grid-tablewrapper').outerHTML);
           converted = tabletojson.convert(table)[0];
         } while (converted.length !== converted.map((x) => x['Alpha-2 code']).filter(Boolean).length);
@@ -172,7 +173,7 @@ export class PuppeteerStateTasks {
     if (this.ISOData) {
       categories = Object.keys(this.ISOData);
     }
-    if (categories && categories.includes(category)) {
+    if (categories?.includes(category)) {
       this.category = category;
     } else if (categories) {
       if (categories.length === 1) {
@@ -191,7 +192,7 @@ export class PuppeteerStateTasks {
         .map((v) => v['Language code'])
         .filter((v, i, s) => s.indexOf(v) === i);
     }
-    if (languagecodes && languagecodes.includes(language)) {
+    if (languagecodes?.includes(language)) {
       this.language = language;
     } else if (languagecodes) {
       if (languagecodes.length === 1) {
@@ -365,12 +366,14 @@ export class PuppeteerStateTasks {
     update = null;
     for (let retries = 0; ; retries++) {
       try {
+        // eslint-disable-next-line no-await-in-loop
         await page.waitForSelector('.mainTitle', { timeout: 100 });
         update = true;
         // eslint-disable-next-line no-empty
       } catch (e) {}
 
       try {
+        // eslint-disable-next-line no-await-in-loop
         await page.waitForSelector('#errorTitle', {
           timeout: 100,
         });
@@ -433,10 +436,8 @@ export class PuppeteerStateTasks {
       if (editNameResult === 'changed' || editIntValResult === 'changed' || editVisibleResult === 'changed') {
         return 'updated';
       }
-    } else {
-      if (editNameResult === 'changed' || editIntValResult === 'changed' || editVisibleResult === 'changed') {
-        return 'created';
-      }
+    } else if (editNameResult === 'changed' || editIntValResult === 'changed' || editVisibleResult === 'changed') {
+      return 'created';
     }
     return 'skipped';
   }

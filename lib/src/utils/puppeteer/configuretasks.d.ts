@@ -5,9 +5,9 @@ export declare class PuppeteerConfigureTasks {
     private browser;
     private auth;
     constructor(auth: any, tasks: string[]);
+    private static subExec;
     getNext(): this;
     close(): Promise<void>;
     open(): Promise<void>;
     execute(listrTask: any): Promise<boolean>;
-    private subExec;
 }

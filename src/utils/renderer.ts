@@ -238,26 +238,39 @@ export class MyDefaultRenderer implements ListrRenderer {
     this.options = { ...MyDefaultRenderer.rendererOptions, ...this.options };
   }
 
-  public getTaskOptions(
+  private static getTaskOptions(
     task: ListrTaskObject<any, typeof MyDefaultRenderer>
   ): typeof MyDefaultRenderer['rendererTaskOptions'] {
     return { ...MyDefaultRenderer.rendererTaskOptions, ...task.rendererTaskOptions };
   }
 
-  public isBottomBar(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
-    const bottomBar = this.getTaskOptions(task).bottomBar;
+  private static isBottomBar(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
+    const bottomBar = MyDefaultRenderer.getTaskOptions(task).bottomBar;
 
     return (
       (typeof bottomBar === 'number' && bottomBar !== 0) || (typeof bottomBar === 'boolean' && bottomBar !== false)
     );
   }
 
-  public hasPersistentOutput(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
-    return this.getTaskOptions(task).persistentOutput === true;
+  private static hasPersistentOutput(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
+    return MyDefaultRenderer.getTaskOptions(task).persistentOutput === true;
   }
 
-  public hasTimer(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
-    return this.getTaskOptions(task).showTimer === true;
+  private static hasTimer(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean {
+    return MyDefaultRenderer.getTaskOptions(task).showTimer === true;
+  }
+
+  /* istanbul ignore next */
+  private static getTaskTime(task: ListrTaskObject<any, typeof MyDefaultRenderer>): string {
+    return colorette.dim(`[${parseTaskTime(task.message.duration)}]`);
+  }
+
+  private static indentMultilineOutput(str: string, i: number): string {
+    return i > 0 ? indentString(str.trim(), 2) : str.trim();
+  }
+
+  private static addSuffixToMessage(message: string, suffix: string, condition?: boolean): string {
+    return condition ?? true ? message + colorette.dim(` [${suffix}]`) : message;
   }
 
   public getSelfOrParentOption<T extends keyof typeof MyDefaultRenderer['rendererOptions']>(
@@ -265,11 +278,6 @@ export class MyDefaultRenderer implements ListrRenderer {
     key: T
   ): typeof MyDefaultRenderer['rendererOptions'][T] {
     return task?.rendererOptions?.[key] ?? this.options?.[key];
-  }
-
-  /* istanbul ignore next */
-  public getTaskTime(task: ListrTaskObject<any, typeof MyDefaultRenderer>): string {
-    return colorette.dim(`[${parseTaskTime(task.message.duration)}]`);
   }
 
   public createRender(options?: { tasks?: boolean; bottomBar?: boolean; prompt?: boolean }): string {
@@ -424,7 +432,7 @@ export class MyDefaultRenderer implements ListrRenderer {
                 output = [
                   ...output,
                   this.formatString(
-                    this.addSuffixToMessage(
+                    MyDefaultRenderer.addSuffixToMessage(
                       task.message.skip && this.getSelfOrParentOption(task, 'showSkipMessage')
                         ? task.message.skip
                         : task.title,
@@ -439,7 +447,7 @@ export class MyDefaultRenderer implements ListrRenderer {
                 output = [
                   ...output,
                   this.formatString(
-                    this.addSuffixToMessage(task.title, `RETRYING-${task.message.retry.count}`),
+                    MyDefaultRenderer.addSuffixToMessage(task.title, `RETRYING-${task.message.retry.count}`),
                     this.getSymbol(task),
                     level
                   ),
@@ -447,12 +455,16 @@ export class MyDefaultRenderer implements ListrRenderer {
               } else if (
                 task.isCompleted() &&
                 task.hasTitle() &&
-                (this.getSelfOrParentOption(task, 'showTimer') || this.hasTimer(task))
+                (this.getSelfOrParentOption(task, 'showTimer') || MyDefaultRenderer.hasTimer(task))
               ) {
                 // task with timer
                 output = [
                   ...output,
-                  this.formatString(`${task?.title} ${this.getTaskTime(task)}`, this.getSymbol(task), level),
+                  this.formatString(
+                    `${task?.title} ${MyDefaultRenderer.getTaskTime(task)}`,
+                    this.getSymbol(task),
+                    level
+                  ),
                 ];
               } else {
                 // normal state
@@ -491,7 +503,7 @@ export class MyDefaultRenderer implements ListrRenderer {
             if ((task.isPending() || task.isRetrying() || task.isRollingBack()) && task.isPrompt()) {
               // data output to prompt bar if prompt
               this.promptBar = task.output;
-            } else if (this.isBottomBar(task) || !task.hasTitle()) {
+            } else if (MyDefaultRenderer.isBottomBar(task) || !task.hasTitle()) {
               // data output to bottom bar
               const data = [this.dumpData(task, -1)];
 
@@ -500,7 +512,7 @@ export class MyDefaultRenderer implements ListrRenderer {
                 this.bottomBar[task.id] = {};
                 this.bottomBar[task.id].data = [];
 
-                const bottomBar = this.getTaskOptions(task).bottomBar;
+                const bottomBar = MyDefaultRenderer.getTaskOptions(task).bottomBar;
                 if (typeof bottomBar === 'boolean') {
                   this.bottomBar[task.id].items = 1;
                 } else {
@@ -516,7 +528,7 @@ export class MyDefaultRenderer implements ListrRenderer {
               task.isPending() ||
               task.isRetrying() ||
               task.isRollingBack() ||
-              this.hasPersistentOutput(task)
+              MyDefaultRenderer.hasPersistentOutput(task)
             ) {
               // keep output if persistent output is set
               output = [...output, this.dumpData(task, level)];
@@ -563,7 +575,7 @@ export class MyDefaultRenderer implements ListrRenderer {
             }
 
             // clean up bottom bar items if not indicated otherwise
-            if (!this.hasPersistentOutput(task)) {
+            if (!MyDefaultRenderer.hasPersistentOutput(task)) {
               delete this.bottomBar[task.id];
             }
           }
@@ -593,7 +605,9 @@ export class MyDefaultRenderer implements ListrRenderer {
   private renderBottomBar(): string {
     // parse through all objects return only the last mentioned items
     if (Object.keys(this.bottomBar).length > 0) {
-      this.bottomBar = Object.keys(this.bottomBar).reduce((o, key) => {
+      this.bottomBar = Object.keys(this.bottomBar).reduce<
+        Record<PropertyKey, { data?: string[]; items?: number } | undefined>
+      >((o, key) => {
         if (!o?.[key]) {
           o[key] = {};
         }
@@ -603,7 +617,7 @@ export class MyDefaultRenderer implements ListrRenderer {
         this.bottomBar[key].data = this.bottomBar[key].data.slice(-this.bottomBar[key].items);
         o[key].data = this.bottomBar[key].data;
         return o;
-      }, {} as Record<PropertyKey, { data?: string[]; items?: number } | undefined>);
+      }, {});
 
       return Object.values(this.bottomBar)
         .reduce((o, value) => (o = [...o, ...value.data]), [])
@@ -661,14 +675,14 @@ export class MyDefaultRenderer implements ListrRenderer {
     switch (this.options.formatOutput) {
       case 'truncate':
         parsedStr = str.split(EOL).map((s, i) => {
-          return cliTruncate(this.indentMultilineOutput(s, i), columns);
+          return cliTruncate(MyDefaultRenderer.indentMultilineOutput(s, i), columns);
         });
         break;
 
       case 'wrap':
         parsedStr = cliWrap(str, columns, { hard: true })
           .split(EOL)
-          .map((s, i) => this.indentMultilineOutput(s, i));
+          .map((s, i) => MyDefaultRenderer.indentMultilineOutput(s, i));
         break;
 
       default:
@@ -681,10 +695,6 @@ export class MyDefaultRenderer implements ListrRenderer {
     }
 
     return indentString(parsedStr.join(EOL), level * this.options.indentation);
-  }
-
-  private indentMultilineOutput(str: string, i: number): string {
-    return i > 0 ? indentString(str.trim(), 2) : str.trim();
   }
 
   // eslint-disable-next-line complexity
@@ -717,9 +727,5 @@ export class MyDefaultRenderer implements ListrRenderer {
     }
 
     return !data ? colorette.dim(figures.squareSmallFilled) : figures.pointerSmall;
-  }
-
-  private addSuffixToMessage(message: string, suffix: string, condition?: boolean): string {
-    return condition ?? true ? message + colorette.dim(` [${suffix}]`) : message;
   }
 }

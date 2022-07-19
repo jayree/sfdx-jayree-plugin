@@ -100,18 +100,16 @@ export const postretrieve: HookFunction = async function (options) {
 
     if (isOutputEnabled) {
       void logFixes(updatedfiles);
-    } else {
-      if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT', false)) {
-        CliUx.ux.log(',');
-        CliUx.ux.styledJSON({
-          result: {
-            [options.Command.id === 'force:source:pull' ? 'pulledSource' : 'inboundFiles']: inboundFiles,
-            fixedFiles: Object.values(updatedfiles)
-              .filter((value) => value.length > 0)
-              .reduce((acc, val) => acc.concat(val), []),
-          },
-        });
-      }
+    } else if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT', false)) {
+      CliUx.ux.log(',');
+      CliUx.ux.styledJSON({
+        result: {
+          [options.Command.id === 'force:source:pull' ? 'pulledSource' : 'inboundFiles']: inboundFiles,
+          fixedFiles: Object.values(updatedfiles)
+            .filter((value) => value.length > 0)
+            .reduce((acc, val) => acc.concat(val), []),
+        },
+      });
     }
     void this.config.runHook('prettierFormat', {
       ...options,

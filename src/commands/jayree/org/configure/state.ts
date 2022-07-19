@@ -95,6 +95,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Category: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
+                skip: (): boolean => !ctx.category.values.length,
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.category.selected === undefined) {
@@ -113,6 +114,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Language: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
+                skip: (): boolean => !ctx.category.values.length || !ctx.language.values.length,
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.language.selected === undefined) {
@@ -131,6 +133,7 @@ export default class ImportState extends SfdxCommand {
           },
         },
         {
+          skip: (ctx): boolean => !ctx.category.values.length || !ctx.language.values.length,
           task: async (ctx): Promise<void> => {
             try {
               ctx.data = await taskRunner.getData2();
@@ -153,7 +156,7 @@ export default class ImportState extends SfdxCommand {
         },
         {
           title: 'Deactivate/Hide States',
-          enabled: (ctx): boolean => (ctx.data && ctx.data.deactivate ? ctx.data.deactivate.length > 0 : false),
+          enabled: (ctx): boolean => (ctx.data?.deactivate ? ctx.data.deactivate.length > 0 : false),
           task: (ctx, task): Listr =>
             task.newListr(
               () => {
@@ -183,7 +186,7 @@ export default class ImportState extends SfdxCommand {
         },
         {
           title: 'Add States',
-          enabled: (ctx): boolean => (ctx.data && ctx.data.add ? ctx.data.add.length > 0 : false),
+          enabled: (ctx): boolean => (ctx.data?.add ? ctx.data.add.length > 0 : false),
           task: (ctx, task): Listr =>
             task.newListr(
               () => {
@@ -239,7 +242,7 @@ export default class ImportState extends SfdxCommand {
         throw new Error(context.error);
       }
 
-      context.result = context.result.sort(function (a, b) {
+      context.result = context.result?.sort(function (a, b) {
         return a['3166-2 code'] < b['3166-2 code'] ? -1 : a['3166-2 code'] > b['3166-2 code'] ? 1 : 0;
       });
 

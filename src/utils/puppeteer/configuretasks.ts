@@ -23,73 +23,9 @@ export class PuppeteerConfigureTasks {
     this.auth = auth;
   }
 
-  public getNext() {
-    this.nextTaskIndex = this.nextTaskIndex + 1;
-    this.currenTask = this.tasks[this.nextTaskIndex];
-    return this;
-  }
-
-  public async close() {
-    if (this.browser) {
-      await this.browser.close();
-    }
-  }
-
-  public async open() {
-    if (!this.browser) {
-      this.browser = await puppeteer.launch(config().puppeteer);
-
-      const login = await this.browser.newPage();
-      await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
-        waitUntil: 'networkidle0',
-        timeout: 300000,
-      });
-    }
-  }
-
-  public async execute(listrTask): Promise<boolean> {
-    const task = this.currenTask;
-    if (!this.browser) {
-      await this.open();
-    }
-
-    if (!task.tasks) {
-      task.tasks = [{ evaluate: task.evaluate }];
-    }
-
-    let retValue = false;
-    for (const subTask of task.tasks) {
-      const page = await this.browser.newPage();
-      await page.goto(this.auth.instanceUrl + task.url, {
-        waitUntil: 'networkidle0',
-        timeout: 300000,
-      });
-      if (task.iframe) {
-        await page.waitForSelector('iframe', { timeout: 300000, visible: true });
-        await page.goto((await page.frames())[task.iframe].url(), {
-          waitUntil: 'networkidle0',
-          timeout: 300000,
-        });
-      }
-      if ((await this.subExec(page, subTask)) === true) {
-        retValue = true;
-        if (subTask.title) {
-          listrTask.output = `${subTask.title}`;
-        }
-      } else {
-        if (subTask.title) {
-          listrTask.output = `${subTask.title} ${chalk.dim('[SKIPPED]')}`;
-        }
-      }
-      debug({ retValue });
-    }
-    debug({ retValue });
-    return retValue;
-  }
-
   // eslint-disable-next-line complexity
-  private async subExec(page, task): Promise<boolean> {
-    for (const call of task.evaluate) {
+  private static async subExec(page, task): Promise<boolean> {
+    for await (const call of task.evaluate) {
       if (call.action === 'click') {
         try {
           if (typeof call.waitFor === 'string') {
@@ -248,10 +184,12 @@ export class PuppeteerConfigureTasks {
           /* eslint no-constant-condition: ["error", { "checkLoops": false }] */
           while (true) {
             try {
+              // eslint-disable-next-line no-await-in-loop
               await page.waitForSelector(call.waitFor[1], { hidden: true });
               break;
             } catch (e) {
               debug(e.message);
+              // eslint-disable-next-line no-await-in-loop
               await page.reload({
                 waitUntil: 'networkidle0',
               });
@@ -288,5 +226,67 @@ export class PuppeteerConfigureTasks {
       }
     }
     return true;
+  }
+
+  public getNext() {
+    this.nextTaskIndex = this.nextTaskIndex + 1;
+    this.currenTask = this.tasks[this.nextTaskIndex];
+    return this;
+  }
+
+  public async close() {
+    if (this.browser) {
+      await this.browser.close();
+    }
+  }
+
+  public async open() {
+    if (!this.browser) {
+      this.browser = await puppeteer.launch(config().puppeteer);
+
+      const login = await this.browser.newPage();
+      await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
+        waitUntil: 'networkidle0',
+        timeout: 300000,
+      });
+    }
+  }
+
+  public async execute(listrTask): Promise<boolean> {
+    const task = this.currenTask;
+    if (!this.browser) {
+      await this.open();
+    }
+
+    if (!task.tasks) {
+      task.tasks = [{ evaluate: task.evaluate }];
+    }
+
+    let retValue = false;
+    for await (const subTask of task.tasks) {
+      const page = await this.browser.newPage();
+      await page.goto(this.auth.instanceUrl + task.url, {
+        waitUntil: 'networkidle0',
+        timeout: 300000,
+      });
+      if (task.iframe) {
+        await page.waitForSelector('iframe', { timeout: 300000, visible: true });
+        await page.goto((await page.frames())[task.iframe].url(), {
+          waitUntil: 'networkidle0',
+          timeout: 300000,
+        });
+      }
+      if ((await PuppeteerConfigureTasks.subExec(page, subTask)) === true) {
+        retValue = true;
+        if (subTask.title) {
+          listrTask.output = `${subTask.title}`;
+        }
+      } else if (subTask.title) {
+        listrTask.output = `${subTask.title} ${chalk.dim('[SKIPPED]')}`;
+      }
+      debug({ retValue });
+    }
+    debug({ retValue });
+    return retValue;
   }
 }

@@ -152,12 +152,14 @@ export declare class MyDefaultRenderer implements ListrRenderer {
     private currentTasks;
     private hiddenTasks;
     constructor(tasks: Array<ListrTaskObject<any, typeof MyDefaultRenderer>>, options: typeof MyDefaultRenderer['rendererOptions'], renderHook$?: ListrTaskObject<any, any>['renderHook$']);
-    getTaskOptions(task: ListrTaskObject<any, typeof MyDefaultRenderer>): typeof MyDefaultRenderer['rendererTaskOptions'];
-    isBottomBar(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
-    hasPersistentOutput(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
-    hasTimer(task: ListrTaskObject<any, typeof MyDefaultRenderer>): boolean;
+    private static getTaskOptions;
+    private static isBottomBar;
+    private static hasPersistentOutput;
+    private static hasTimer;
+    private static getTaskTime;
+    private static indentMultilineOutput;
+    private static addSuffixToMessage;
     getSelfOrParentOption<T extends keyof typeof MyDefaultRenderer['rendererOptions']>(task: ListrTaskObject<any, typeof MyDefaultRenderer>, key: T): typeof MyDefaultRenderer['rendererOptions'][T];
-    getTaskTime(task: ListrTaskObject<any, typeof MyDefaultRenderer>): string;
     createRender(options?: {
         tasks?: boolean;
         bottomBar?: boolean;
@@ -170,7 +172,5 @@ export declare class MyDefaultRenderer implements ListrRenderer {
     private renderPrompt;
     private dumpData;
     private formatString;
-    private indentMultilineOutput;
     private getSymbol;
-    private addSuffixToMessage;
 }

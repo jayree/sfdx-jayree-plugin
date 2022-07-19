@@ -56,7 +56,7 @@ export async function getProjectPath(): Promise<string> {
 }
 
 export async function shrinkPermissionSets(permissionsets) {
-  for (const file of permissionsets) {
+  for await (const file of permissionsets) {
     if (await fs.pathExists(file)) {
       const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
       const mutingOrPermissionSet = Object.keys(data)[0];
@@ -88,7 +88,7 @@ export async function profileElementInjection(profiles, customObjectsFilter = []
       CliUx.ux.warn('no ensureObjectPermissions list configured');
     });
   }
-  for (const file of profiles) {
+  for await (const file of profiles) {
     if (await fs.pathExists(file)) {
       const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
 
@@ -173,19 +173,19 @@ async function getGlobbyBaseDirectory(globbypath) {
     (await fs.lstat(globbypath)).isDirectory();
     return globbypath;
   } catch (error) {
-    return await getGlobbyBaseDirectory(path.dirname(globbypath));
+    return getGlobbyBaseDirectory(path.dirname(globbypath));
   }
 }
 
 async function sourcemove(movesources, root, filter): Promise<fixResults> {
   const array = [];
-  for (const filepath of movesources) {
+  for await (const filepath of movesources) {
     let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath[0]));
     if (filter.length > 0) {
       files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
     }
     const from = await getGlobbyBaseDirectory(filepath[0]);
-    for (const file of files) {
+    for await (const file of files) {
       if (await fs.pathExists(file)) {
         const destinationFile = path.join(filepath[1], path.relative(from, file));
         debug(`move file: ${file} to ${destinationFile}`);
@@ -202,12 +202,12 @@ async function sourcemove(movesources, root, filter): Promise<fixResults> {
 
 async function sourcedelete(deletesources, root, filter): Promise<fixResults> {
   const array = [];
-  for (const filepath of deletesources) {
+  for await (const filepath of deletesources) {
     let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filepath));
     if (filter.length > 0) {
       files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
     }
-    for (const file of files) {
+    for await (const file of files) {
       if (await fs.pathExists(file)) {
         debug(`delete file: ${file}`);
         await fs.remove(file);
@@ -264,12 +264,12 @@ export async function getConnectionFromArgv(): Promise<argvConnection> {
 // eslint-disable-next-line complexity
 async function sourcefix(fixsources, root, filter): Promise<fixResults> {
   const array = [];
-  for (const filename of Object.keys(fixsources)) {
+  for await (const filename of Object.keys(fixsources)) {
     let files = await globby(path.posix.join(root.split(path.sep).join(path.posix.sep), filename));
     if (filter.length > 0) {
       files = files.filter((el) => filter.map((f) => f.split(path.sep).join(path.posix.sep)).includes(el));
     }
-    for (const file of files) {
+    for await (const file of files) {
       if (await fs.pathExists(file)) {
         const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
         debug(`modify file: ${file}`);
@@ -341,10 +341,10 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
         }
 
         if (fixsources[filename].set) {
-          for (const settask of fixsources[filename].set) {
+          for await (const settask of fixsources[filename].set) {
             const settaskpaths = new ObjectPathResolver(data).resolveString(settask.path).value();
             if (settaskpaths.length > 0) {
-              for (const settaskpath of settaskpaths) {
+              for await (const settaskpath of settaskpaths) {
                 if (typeof settaskpath !== 'undefined') {
                   if (settask.value) {
                     if (JSON.stringify(settask.value).includes('<mydomain>')) {
@@ -395,15 +395,13 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                           }
                           if (typeof n[attributename] === 'object') {
                             recursive(n[attributename], attpath);
-                          } else {
-                            if (n[attributename] === '<username>') {
-                              replaceArray.push([n[attributename], attpath]);
-                            }
+                          } else if (n[attributename] === '<username>') {
+                            replaceArray.push([n[attributename], attpath]);
                           }
                         }
                       };
                       recursive(node, '');
-                      for (const element of replaceArray) {
+                      for await (const element of replaceArray) {
                         if (element[0] === '<username>') {
                           objectPath.set(node, element[1], (await getConnectionFromArgv()).username);
                         }
@@ -455,28 +453,26 @@ async function sourcefix(fixsources, root, filter): Promise<fixResults> {
                   }
                 }
               }
-            } else {
-              if (settask.value) {
-                debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
-                if (objectPath.has(data, settask.path)) {
-                  objectPath.set(data, settask.path, `${settask.value}`);
-                  fs.writeFileSync(file, js2SourceComponent(data));
-                  array.push({
-                    filePath: file,
-                    operation: 'set',
-                    message: `${settask.path} => ${JSON.stringify(settask.value)}`,
-                  });
-                }
-              } else if (typeof settask.object === 'object') {
-                objectPath.set(data, settask.path + '.0', settask.object);
-                debug(objectPath.get(data, settask.path));
+            } else if (settask.value) {
+              debug(`Set: ${JSON.stringify(settask.value)} at ${settask.path}`);
+              if (objectPath.has(data, settask.path)) {
+                objectPath.set(data, settask.path, `${settask.value}`);
                 fs.writeFileSync(file, js2SourceComponent(data));
                 array.push({
                   filePath: file,
                   operation: 'set',
-                  message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+                  message: `${settask.path} => ${JSON.stringify(settask.value)}`,
                 });
               }
+            } else if (typeof settask.object === 'object') {
+              objectPath.set(data, settask.path + '.0', settask.object);
+              debug(objectPath.get(data, settask.path));
+              fs.writeFileSync(file, js2SourceComponent(data));
+              array.push({
+                filePath: file,
+                operation: 'set',
+                message: `${settask.path} ==> ${JSON.stringify(settask.object)}`,
+              });
             }
           }
         }
@@ -521,12 +517,12 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   }
   const configPath = await traverse.forFile(process.cwd(), '.sfdx-jayree.json');
   const updatedfiles: aggregatedFixResults = {};
-  for (const tag of tags) {
+  for await (const tag of tags) {
     const fix = config(configPath)[tag];
     if (fix) {
       let result = [];
-      for (const workarounds of Object.keys(fix)) {
-        for (const workaround of Object.keys(fix[workarounds])) {
+      for await (const workarounds of Object.keys(fix)) {
+        for await (const workaround of Object.keys(fix[workarounds])) {
           if (
             fix[workarounds][workaround].isactive === true &&
             fix[workarounds][workaround].files &&
@@ -547,11 +543,11 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
       });
     }
   }
-  for (const tag of tags) {
+  for await (const tag of tags) {
     const fix = config(configPath)[tag];
     if (fix) {
-      for (const workarounds of Object.keys(fix)) {
-        for (const workaround of Object.keys(fix[workarounds])) {
+      for await (const workarounds of Object.keys(fix)) {
+        for await (const workaround of Object.keys(fix[workarounds])) {
           if (
             fix[workarounds][workaround].isactive === true &&
             fix[workarounds][workaround].files &&
@@ -568,11 +564,11 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
       }
     }
   }
-  for (const tag of tags) {
+  for await (const tag of tags) {
     const fix = config(configPath)[tag];
     if (fix) {
-      for (const workarounds of Object.keys(fix)) {
-        for (const workaround of Object.keys(fix[workarounds])) {
+      for await (const workarounds of Object.keys(fix)) {
+        for await (const workaround of Object.keys(fix[workarounds])) {
           if (
             fix[workarounds][workaround].isactive === true &&
             fix[workarounds][workaround].files &&
@@ -593,8 +589,8 @@ export async function applyFixes(tags, root?, filter = []): Promise<aggregatedFi
   return updatedfiles;
 }
 
-export async function applySourceFixes(filter: string[]) {
-  return await applyFixes(config(await getProjectPath()).applySourceFixes, null, filter);
+export async function applySourceFixes(filter: string[]): Promise<aggregatedFixResults> {
+  return applyFixes(config(await getProjectPath()).applySourceFixes, null, filter);
 }
 
 export type aggregatedFixResults = {
@@ -646,7 +642,7 @@ export async function updateProfiles(profiles, customObjects, forceSourcePull) {
     const retrieveResult = await mdapiRetrieve.pollStatus(1000);
     customObjects = retrieveResult.getFileResponses().filter((el) => el.type === 'CustomObject');
 
-    for (const retrieveProfile of retrieveResult
+    for await (const retrieveProfile of retrieveResult
       .getFileResponses()
       .filter((component) => component.type === 'Profile')) {
       const index = profiles.findIndex((profile) => profile.fullName === retrieveProfile.fullName);
