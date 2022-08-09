@@ -1258,10 +1258,10 @@
     "@salesforce/ts-types" "^1.5.20"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.20.1", "@salesforce/core@^3.21.1", "@salesforce/core@^3.23.1":
-  version "3.25.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.25.0.tgz#ae163d45d640326c999da1664a1e6111ce7d6482"
-  integrity sha512-Rfj9uOXu/rABXJ6gLgO39Epw8FlRL7QNpVj0Q0VN+vHkxCs+icuQQ3iBAczkKfjXRqRLfjGZc+iiJBDWUyWdXw==
+"@salesforce/core@^3.20.1", "@salesforce/core@^3.21.1", "@salesforce/core@^3.22.0", "@salesforce/core@^3.23.1":
+  version "3.26.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.26.1.tgz#8d65c6b12085494106a2c7d2545902fa1ff95522"
+  integrity sha512-B2mhsiiAu9hkLAwkDu+Y5ArAtRJIx2oeqP8ofupLlSH4tohzcUmfKgCDZEk9iLC1sc5kmD1S/4DlS1QZhnNs8A==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.5.41"
@@ -1277,7 +1277,7 @@
     form-data "^4.0.0"
     graceful-fs "^4.2.9"
     js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.16"
+    jsforce beta
     jsonwebtoken "8.5.1"
     ts-retry-promise "^0.6.0"
 
@@ -1346,23 +1346,23 @@
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
 "@salesforce/source-deploy-retrieve@^6.1.0", "@salesforce/source-deploy-retrieve@^6.2.6":
-  version "6.2.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.2.6.tgz#cee185098f76c3b65f1cb83407114e9c98953f3e"
-  integrity sha512-mAbAdYQdKF1ff2FQZlQ2vyUoQYrTLBI6ax7QsqEkVXTUHAKn3zhj3Dp6EECxIEoJaG5M47dwPpG7vH7CpZqJJg==
+  version "6.2.8"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.2.8.tgz#b2268b4c7715d304392104fe4fd09cc92d7534cc"
+  integrity sha512-h10E/DMbh5Ns7tMcTtogKFipNZ7uHc40/xed2IAiJqQoSIGEQolXuW0sNOk083n6NHaQH05we2U6YmUk9TIoAg==
   dependencies:
-    "@salesforce/core" "^3.21.1"
-    "@salesforce/kit" "^1.5.41"
+    "@salesforce/core" "^3.22.0"
+    "@salesforce/kit" "^1.5.42"
     "@salesforce/ts-types" "^1.5.20"
-    archiver "^5.3.0"
-    fast-xml-parser "^3.17.4"
+    archiver "^5.3.1"
+    fast-xml-parser "^3.21.1"
     got "^11.8.5"
-    graceful-fs "^4.2.8"
-    ignore "^5.1.8"
+    graceful-fs "^4.2.10"
+    ignore "^5.2.0"
     mime "2.6.0"
     proxy-agent "^5.0.0"
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
-    xmldom-sfdx-encoding "^0.1.29"
+    xmldom-sfdx-encoding "^0.1.30"
 
 "@salesforce/source-tracking@^2.2.1":
   version "2.2.1"
@@ -1996,7 +1996,7 @@ archiver-utils@^2.1.0:
     normalize-path "^3.0.0"
     readable-stream "^2.0.0"
 
-archiver@^5.3.0:
+archiver@^5.3.0, archiver@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/archiver/-/archiver-5.3.1.tgz#21e92811d6f09ecfce649fbefefe8c79e57cbbb6"
   integrity sha512-8KyabkmbYrH+9ibcTScQ1xCJC/CGcugdVIwB+53f5sZziXgwUh3iXlAlANMxcZyDEfTHMe6+Z5FofV8nopXP7w==
@@ -3973,7 +3973,7 @@ fast-levenshtein@^3.0.0:
   dependencies:
     fastest-levenshtein "^1.0.7"
 
-fast-xml-parser@^3.17.4:
+fast-xml-parser@^3.21.1:
   version "3.21.1"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-3.21.1.tgz#152a1d51d445380f7046b304672dd55d15c9e736"
   integrity sha512-FTFVjYoBOZTJekiUsawGsSYV9QL0A+zDYCRj7y34IO6Jg+2IMYEtQa+bbictpdpV8dHxXywqU7C0gRDEOFtBFg==
@@ -4525,7 +4525,7 @@ got@^11.8.2, got@^11.8.5:
     p-cancelable "^2.0.0"
     responselike "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.2, graceful-fs@^4.2.6, graceful-fs@^4.2.8, graceful-fs@^4.2.9:
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.2, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
   version "4.2.10"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
@@ -4786,7 +4786,7 @@ ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-ignore@^5.1.1, ignore@^5.1.4, ignore@^5.1.8, ignore@^5.2.0:
+ignore@^5.1.1, ignore@^5.1.4, ignore@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
@@ -5349,10 +5349,10 @@ jsesc@^2.5.1:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
-jsforce@^2.0.0-beta.16:
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-2.0.0-beta.16.tgz#3e5bdbe660d3be2be80fa144456380345011584b"
-  integrity sha512-oeeOYiRI/1nkUT7YK3irIhyc+J12Ti2sKkGELmeJkPRvcbR2txIenVsV9zW+Q/Ie2uUulhl3pWXk38IyqySSpA==
+jsforce@beta:
+  version "2.0.0-beta.18"
+  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-2.0.0-beta.18.tgz#2791a2e6ec15d4d8b41f0782e23b833f5dbe5678"
+  integrity sha512-9IKv3M/U/FCdL6G8WlFqWiBTvLx1TRmGW+JhcSWHZb0YlMLHiGNVymvLyPsvRfO9sNP6VR3A5AIntqD+UsDKkQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@babel/runtime-corejs3" "^7.12.5"
@@ -8897,7 +8897,7 @@ xmlcreate@^2.0.4:
   resolved "https://registry.yarnpkg.com/xmlcreate/-/xmlcreate-2.0.4.tgz#0c5ab0f99cdd02a81065fa9cd8f8ae87624889be"
   integrity sha512-nquOebG4sngPmGPICTS5EnxqhKbCmz5Ox5hsszI2T6U5qdrJizBc+0ilYSEjTSzU0yZcmvppztXe/5Al5fUwdg==
 
-xmldom-sfdx-encoding@^0.1.29:
+xmldom-sfdx-encoding@^0.1.30:
   version "0.1.30"
   resolved "https://registry.yarnpkg.com/xmldom-sfdx-encoding/-/xmldom-sfdx-encoding-0.1.30.tgz#bc075757788573b8988facd6f7e7f073440b20b9"
   integrity sha512-NOZCfMfwvCMBlSMBr971cnjmToNswV68A1CA3pnM0WGauo1BhWpTgSsj6Lbq8HNAI2OOdWktCSMLtaZU5wVBHA==
