@@ -680,19 +680,19 @@
     tslib "^2.4.0"
 
 "@jayree/sfdx-plugin-prettier@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.1.6.tgz#8b76a98d65769854566ea5cc251e17cf07219606"
-  integrity sha512-0Nf8ZyFJhETmWTSp71TU7v8kzc/duLuJNb5EYXjFls4OHELmuPr+qzIVJF8WgtuNudy7rl0hQM0qWGBZqixmjA==
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.1.7.tgz#40aa5833354e576ecee66cdbe1fe77dfaceefcfe"
+  integrity sha512-39RZlPreeeRIJm9FF2OQrLWN+ZOzN/BHdoUgSX4c+j7wG+MKCFGi57vRKG7UIlf0lwQkZuniS7QtEwAdixnauA==
   dependencies:
-    "@oclif/core" "^1.9.3"
+    "@oclif/core" "^1.13.3"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.21.1"
-    "@salesforce/kit" "^1.5.42"
-    cli-progress "^3.11.1"
+    "@salesforce/core" "^3.26.0"
+    "@salesforce/kit" "^1.5.45"
+    cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.0"
-    marked "^4.0.17"
+    marked "^4.0.18"
     marked-terminal "^4.2.0"
     prettier "^2.7.1"
     prettier-plugin-apex "^1.10.0"
@@ -961,7 +961,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.0.8", "@oclif/core@^1.13.0", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.7.0", "@oclif/core@^1.9.3", "@oclif/core@^1.9.9":
+"@oclif/core@^1.0.8", "@oclif/core@^1.13.0", "@oclif/core@^1.13.3", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.7.0", "@oclif/core@^1.9.3", "@oclif/core@^1.9.9":
   version "1.13.10"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.13.10.tgz#d2014cd75efcd8529d78f1eda5ddc2a4d07c860e"
   integrity sha512-nwpjXwWscETdvO+/z94V1zd95vnzmCB6VRaobR4BdBllwWU6jHF/eCi1Ud2Tk9RSedChoLneZuDCkKnRCmxyng==
@@ -1267,7 +1267,7 @@
     "@salesforce/ts-types" "^1.5.20"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.20.1", "@salesforce/core@^3.21.1", "@salesforce/core@^3.26.1":
+"@salesforce/core@^3.20.1", "@salesforce/core@^3.26.0", "@salesforce/core@^3.26.1":
   version "3.26.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.26.1.tgz#8d65c6b12085494106a2c7d2545902fa1ff95522"
   integrity sha512-B2mhsiiAu9hkLAwkDu+Y5ArAtRJIx2oeqP8ofupLlSH4tohzcUmfKgCDZEk9iLC1sc5kmD1S/4DlS1QZhnNs8A==
@@ -1335,7 +1335,7 @@
     typedoc-plugin-missing-exports "0.23.0"
     typescript "^4.1.3"
 
-"@salesforce/kit@^1.5.34", "@salesforce/kit@^1.5.41", "@salesforce/kit@^1.5.42", "@salesforce/kit@^1.5.45":
+"@salesforce/kit@^1.5.34", "@salesforce/kit@^1.5.41", "@salesforce/kit@^1.5.45":
   version "1.5.45"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-1.5.45.tgz#200a85f75681f4567820cf206a04b3d44e43e0b0"
   integrity sha512-e7iER8s/f8N52rSRZ7uJXSKnOTDTH9NHfGnmkFXPuz/1Waaeqso+CxqmqCh8aVe//frj11NGkazR0rJPuF/bfA==
@@ -2668,7 +2668,7 @@ cli-cursor@^3.1.0:
   dependencies:
     restore-cursor "^3.1.0"
 
-cli-progress@^3.10.0, cli-progress@^3.11.1, cli-progress@^3.4.0:
+cli-progress@^3.10.0, cli-progress@^3.11.2, cli-progress@^3.4.0:
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/cli-progress/-/cli-progress-3.11.2.tgz#f8c89bd157e74f3f2c43bcfb3505670b4d48fc77"
   integrity sha512-lCPoS6ncgX4+rJu5bS3F/iCz17kZ9MPZ6dpuTtI0KXKABkhyXIdYB3Inby1OpaGti3YlI3EeEkM9AuWpelJrVA==
