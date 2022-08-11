@@ -5560,9 +5560,9 @@ listenercount@~1.0.1:
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
 listr2@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-5.0.1.tgz#e9e2ffb51361881671eabf60f9f512dab7c24c73"
-  integrity sha512-ZDCi/xtStQ+hKHSHdECCzcSqclmluGi7ArEHs55r5GEa6r5OgP2uzdBNice9q+hy111bQ3QJpMg/gCxMmn8/Mw==
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-5.0.2.tgz#875516cd9cd7150444bdd3874e9ca7f3aeb45c45"
+  integrity sha512-/yIYitiJgIkzVIKqQc+Dpcpwaj4PjeW/hSi7/xoGJ5mil7vQYedr5kKuEyLhANlnifCcumafnIR6azpb8loODw==
   dependencies:
     cli-truncate "^2.1.0"
     colorette "^2.0.19"
