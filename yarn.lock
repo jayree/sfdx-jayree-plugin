@@ -1355,13 +1355,14 @@
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
 "@salesforce/source-deploy-retrieve@^6.2.6", "@salesforce/source-deploy-retrieve@^6.2.7", "@salesforce/source-deploy-retrieve@^6.2.9":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.3.0.tgz#b928172d1f6da1246043ff4b62f7b8b48e1d2592"
-  integrity sha512-SvoVGFVwgPS+DczPxBpq1LveIL3p2ptl5JU2Is7bdV9pwIULIEnoMzfyTQI/yJ3WYDi4P6WnzGRRBXFrFg2s5w==
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.3.1.tgz#4ca3e6db51f7c889489e12787dd52676673897b7"
+  integrity sha512-f0oBqBJ/R57cf5CqO7/LclGL3+fEfk2zlWbzhh3wDdgTP6M24rE0Nwc5TQKXZZr150l6ScjcnhYdLbTrkYxJvA==
   dependencies:
     "@salesforce/core" "^3.26.1"
     "@salesforce/kit" "^1.5.45"
     "@salesforce/ts-types" "^1.5.20"
+    "@xmldom/xmldom" "^0.8.2"
     archiver "^5.3.1"
     fast-xml-parser "^3.21.1"
     got "^11.8.5"
@@ -1371,7 +1372,6 @@
     proxy-agent "^5.0.0"
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
-    xmldom-sfdx-encoding "^0.1.30"
 
 "@salesforce/source-tracking@^2.2.1":
   version "2.2.2"
@@ -1823,6 +1823,11 @@
   integrity sha512-aKqQ077XnR+oQtHJlrAflaZaL7qZsulWc/i/ZEooar5JiWj1eLt0+Wg28cpa+XLney107wXqneC+oG1IZvxkTA==
   dependencies:
     chevrotain "7.1.1"
+
+"@xmldom/xmldom@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.2.tgz#b695ff674e8216efa632a3d36ad51ae9843380c0"
+  integrity sha512-+R0juSseERyoPvnBQ/cZih6bpF7IpCXlWbHRoCRzYzqpz6gWHOgf8o4MOEf6KBVuOyqU+gCNLkCWVIJAro8XyQ==
 
 "@yarnpkg/lockfile@^1.1.0":
   version "1.1.0"
@@ -8942,11 +8947,6 @@ xmlcreate@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/xmlcreate/-/xmlcreate-2.0.4.tgz#0c5ab0f99cdd02a81065fa9cd8f8ae87624889be"
   integrity sha512-nquOebG4sngPmGPICTS5EnxqhKbCmz5Ox5hsszI2T6U5qdrJizBc+0ilYSEjTSzU0yZcmvppztXe/5Al5fUwdg==
-
-xmldom-sfdx-encoding@^0.1.30:
-  version "0.1.30"
-  resolved "https://registry.yarnpkg.com/xmldom-sfdx-encoding/-/xmldom-sfdx-encoding-0.1.30.tgz#bc075757788573b8988facd6f7e7f073440b20b9"
-  integrity sha512-NOZCfMfwvCMBlSMBr971cnjmToNswV68A1CA3pnM0WGauo1BhWpTgSsj6Lbq8HNAI2OOdWktCSMLtaZU5wVBHA==
 
 xregexp@2.0.0:
   version "2.0.0"
