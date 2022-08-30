@@ -7226,17 +7226,16 @@ puppeteer@^14.4.1:
     unbzip2-stream "1.4.3"
     ws "8.7.0"
 
-puppeteer@^16.1.0:
-  version "16.1.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-16.1.0.tgz#06a32dc347c94642601017fbf83e1d37379b9651"
-  integrity sha512-lhykJLbH2bbBaP3NfYI2Vj0T4ctrdfVdEVf8glZITPnLfqrJ0nfUzAYuIz5YcA79k5lmFKANIhEXex+jQChU3g==
+puppeteer@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-17.0.0.tgz#85fea801a7b8b8c9e2913b1491e98c867be49a6b"
+  integrity sha512-T2rdzlPxnPezF218kywFP3O+0YI5/8Kl8riNUicGb+KuMyDTrqRjhSOSDp6coQ1T4QYPBARTFp4EMBepMOzAQA==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
     devtools-protocol "0.0.1019158"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.1"
-    pkg-dir "4.2.0"
     progress "2.0.3"
     proxy-from-env "1.1.0"
     rimraf "3.0.2"

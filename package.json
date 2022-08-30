@@ -25,7 +25,7 @@
     "marked-terminal": "^4.2.0",
     "mkdirp": "^1.0.4",
     "object-path": "^0.11.8",
-    "puppeteer": "^16.1.0",
+    "puppeteer": "^17.0.0",
     "semver": "^7.3.7",
     "tabletojson": "^2.0.7",
     "tslib": "^2.4.0"
