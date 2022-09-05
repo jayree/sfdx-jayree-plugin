@@ -3292,10 +3292,10 @@ devtools-protocol@0.0.1001819:
   resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1001819.tgz#0a98f44cefdb02cc684f3d5e6bd898a1690231d9"
   integrity sha512-G6OsIFnv/rDyxSqBa2lDLR6thp9oJioLsb2Gl+LbQlyoA9/OBAkrTU9jiCcQ8Pnh7z4d6slDiLaogR5hzgJLmQ==
 
-devtools-protocol@0.0.1019158:
-  version "0.0.1019158"
-  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1019158.tgz#4b08d06108a784a2134313149626ba55f030a86f"
-  integrity sha512-wvq+KscQ7/6spEV7czhnZc9RM/woz1AY+/Vpd8/h2HFMwJSdTliu7f/yr1A6vDdJfKICZsShqsYpEQbdhg8AFQ==
+devtools-protocol@0.0.1036444:
+  version "0.0.1036444"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.1036444.tgz#a570d3cdde61527c82f9b03919847b8ac7b1c2b9"
+  integrity sha512-0y4f/T8H9lsESV9kKP1HDUXgHxCdniFeJh6Erq+FbdOEvp/Ydp9t8kcAAM5gOd17pMrTDlFWntoHtzzeTUWKNw==
 
 dezalgo@^1.0.0:
   version "1.0.4"
@@ -7226,17 +7226,16 @@ puppeteer@^14.4.1:
     unbzip2-stream "1.4.3"
     ws "8.7.0"
 
-puppeteer@^16.1.0:
-  version "16.1.0"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-16.1.0.tgz#06a32dc347c94642601017fbf83e1d37379b9651"
-  integrity sha512-lhykJLbH2bbBaP3NfYI2Vj0T4ctrdfVdEVf8glZITPnLfqrJ0nfUzAYuIz5YcA79k5lmFKANIhEXex+jQChU3g==
+puppeteer@^17.1.1:
+  version "17.1.1"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-17.1.1.tgz#e981b17e8edee72a7c7b676878040ce2ff1cc3d0"
+  integrity sha512-sOq3+q4UpKmAl/LxGvraMVe9GnhDkmQLZrRkFswpWp46Vz3dv79LylMwebo047/xIc9dlOi9VMrNN5yLafCpGg==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
-    devtools-protocol "0.0.1019158"
+    devtools-protocol "0.0.1036444"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.1"
-    pkg-dir "4.2.0"
     progress "2.0.3"
     proxy-from-env "1.1.0"
     rimraf "3.0.2"
