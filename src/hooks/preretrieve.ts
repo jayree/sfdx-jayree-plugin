@@ -6,7 +6,8 @@
  */
 import { Hook, Config } from '@oclif/core';
 import { env } from '@salesforce/kit';
-import { runHooks } from '../utils/hookUtils';
+import Debug from 'debug';
+import { runHooks } from '../utils/hookUtils.js';
 
 type HookFunction = (this: Hook.Context, options: HookOptions) => any;
 
@@ -22,8 +23,7 @@ type PreRetrieveResult = {
   packageXmlPath: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:hooks');
+const debug = Debug('jayree:hooks');
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const preretrieve: HookFunction = async function (options) {

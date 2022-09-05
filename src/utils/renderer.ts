@@ -674,9 +674,7 @@ export class MyDefaultRenderer implements ListrRenderer {
 
     switch (this.options.formatOutput) {
       case 'truncate':
-        parsedStr = str.split(EOL).map((s, i) => {
-          return cliTruncate(MyDefaultRenderer.indentMultilineOutput(s, i), columns);
-        });
+        parsedStr = str.split(EOL).map((s, i) => cliTruncate(MyDefaultRenderer.indentMultilineOutput(s, i), columns));
         break;
 
       case 'wrap':

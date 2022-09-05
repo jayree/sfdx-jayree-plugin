@@ -5,18 +5,19 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* istanbul ignore file */
-import * as path from 'path';
+import path from 'path';
 import { Hook, CliUx } from '@oclif/core';
 import { env } from '@salesforce/kit';
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import chalk from 'chalk';
 import { SourceTracking } from '@salesforce/source-tracking';
 import { SfProject, Org } from '@salesforce/core';
-import { getConnectionFromArgv, getProjectPath } from '../utils/souceUtils';
-import { getCurrentStateFolderFilePath } from '../utils/stateFolderHandler';
+import Debug from 'debug';
+import { getConnectionFromArgv, getProjectPath } from '../utils/souceUtils.js';
+import { getCurrentStateFolderFilePath } from '../utils/stateFolderHandler.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:hooks');
+const debug = Debug('jayree:hooks');
+
 export const prerun: Hook<'prerun'> = async function (options) {
   debug(`called 'jayree:prerun' by: ${options.Command.id}`);
   if (options.Command.id === 'force:source:pull') {

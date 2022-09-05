@@ -8,18 +8,18 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
-import * as kit from '@salesforce/kit';
+import kit from '@salesforce/kit';
 import Enquirer from 'enquirer';
-import { MyDefaultRenderer } from '../../../../utils/renderer';
-import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks';
+import Debug from 'debug';
+import { MyDefaultRenderer } from '../../../../utils/renderer.js';
+import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
 const messages = Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
 const logger = new Logger({ useIcons: false });
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:x:y');
+const debug = Debug('jayree:x:y');
 
 export default class ImportState extends SfdxCommand {
   public static description = messages.getMessage('commandStateDescription');
@@ -242,9 +242,9 @@ export default class ImportState extends SfdxCommand {
         throw new Error(context.error);
       }
 
-      context.result = context.result?.sort(function (a, b) {
-        return a['3166-2 code'] < b['3166-2 code'] ? -1 : a['3166-2 code'] > b['3166-2 code'] ? 1 : 0;
-      });
+      context.result = context.result?.sort((a, b) =>
+        a['3166-2 code'] < b['3166-2 code'] ? -1 : a['3166-2 code'] > b['3166-2 code'] ? 1 : 0
+      );
 
       if (debug.enabled) {
         if (this.isOutputEnabled) {

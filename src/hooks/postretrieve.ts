@@ -4,13 +4,14 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import * as path from 'path';
+import path from 'path';
 import { Hook, Config, CliUx } from '@oclif/core';
 import { env } from '@salesforce/kit';
 import { SfProject } from '@salesforce/core';
 import { FileResponse, ComponentStatus } from '@salesforce/source-deploy-retrieve';
-import { shrinkPermissionSets, updateProfiles, applySourceFixes, logFixes } from '../utils/souceUtils';
-import { runHooks } from '../utils/hookUtils';
+import Debug from 'debug';
+import { shrinkPermissionSets, updateProfiles, applySourceFixes, logFixes } from '../utils/souceUtils.js';
+import { runHooks } from '../utils/hookUtils.js';
 
 type HookFunction = (this: Hook.Context, options: HookOptions) => any;
 
@@ -22,8 +23,7 @@ type HookOptions = {
   config: Config;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:hooks');
+const debug = Debug('jayree:hooks');
 
 const isContentTypeJSON = env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON';
 const isOutputEnabled = !(process.argv.find((arg) => arg === '--json') || isContentTypeJSON);

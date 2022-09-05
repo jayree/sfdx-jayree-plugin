@@ -5,20 +5,21 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* istanbul ignore file */
-import * as path from 'path';
+import path from 'path';
 import os from 'os';
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import { SfProject } from '@salesforce/core';
-import { traverse } from '@salesforce/core/lib/util/internal';
-import * as kit from '@salesforce/kit';
+import { traverse } from '@salesforce/core/lib/util/internal.js';
+import kit from '@salesforce/kit';
 import { CliUx } from '@oclif/core';
 import globby from 'globby';
 import { Org, ConfigAggregator } from '@salesforce/core';
 import chalk from 'chalk';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
-import { parseSourceComponent, normalizeToArray, js2SourceComponent } from '../utils/xml';
-import config from './config';
-import { objectPath, ObjectPathResolver } from './object-path';
+import Debug from 'debug';
+import { parseSourceComponent, js2SourceComponent } from '../utils/xml.js';
+import config from './config.js';
+import { objectPath, ObjectPathResolver } from './object-path.js';
 
 const isOutputEnabled = !(
   process.argv.find((arg) => arg === '--json') || kit.env.getString('SFDX_CONTENT_TYPE', '').toUpperCase() === 'JSON'
@@ -29,11 +30,10 @@ function arrayEquals(arr1, arr2) {
 }
 
 function compareobj(obj1, obj2) {
-  return arrayEquals(!Array.isArray(obj2) ? [obj2] : obj2, !Array.isArray(obj1) ? [obj1] : obj1);
+  return arrayEquals(kit.ensureArray(obj1), kit.ensureArray(obj2));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-export const debug = require('debug')('jayree:source');
+const debug = Debug('jayree:source');
 
 type argvConnection = {
   username: string;
@@ -60,7 +60,7 @@ export async function shrinkPermissionSets(permissionsets) {
     if (await fs.pathExists(file)) {
       const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
       const mutingOrPermissionSet = Object.keys(data)[0];
-      const fieldPermissions = normalizeToArray(data[mutingOrPermissionSet].fieldPermissions);
+      const fieldPermissions = kit.ensureArray(data[mutingOrPermissionSet].fieldPermissions);
       if (fieldPermissions) {
         debug({
           [mutingOrPermissionSet]: file,
@@ -93,7 +93,7 @@ export async function profileElementInjection(profiles, customObjectsFilter = []
       const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
 
       if (data.Profile.custom === 'true') {
-        const objectPermissions = normalizeToArray(data.Profile['objectPermissions']);
+        const objectPermissions = kit.ensureArray(data.Profile['objectPermissions']);
         const injectedObjectPermission = [];
         ensureObjectPermissions.forEach((object) => {
           if (objectPermissions && !objectPermissions.some((e) => compareobj(e.object, object))) {
@@ -110,7 +110,7 @@ export async function profileElementInjection(profiles, customObjectsFilter = []
         });
         data.Profile['objectPermissions'] = objectPermissions.concat(injectedObjectPermission);
 
-        const userPermissions = normalizeToArray(data.Profile['userPermissions']);
+        const userPermissions = kit.ensureArray(data.Profile['userPermissions']);
         const injectedUserPermission = [];
         ensureUserPermissions.forEach((name) => {
           if (userPermissions && !userPermissions.some((e) => compareobj(e.name, name))) {

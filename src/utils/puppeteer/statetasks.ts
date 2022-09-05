@@ -4,13 +4,16 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+import { createRequire } from 'module';
 import puppeteer from 'puppeteer';
 import { Tabletojson as tabletojson } from 'tabletojson';
-import * as CSconfig from '../../../config/countrystate.json';
-import config from '../config';
+import Debug from 'debug';
+import config from '../config.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:x:y');
+const require = createRequire(import.meta.url);
+const CSconfig = require('../../../config/countrystate.json');
+
+const debug = Debug('jayree:x:y');
 
 export class PuppeteerStateTasks {
   public currentAddTask;
@@ -67,9 +70,7 @@ export class PuppeteerStateTasks {
 
   private static async setHTMLInputElementChecked(page, element, newstate, waitForEnable) {
     element = element.replace(/:/g, '\\:');
-    const elementCheckedState = await page.evaluate((s) => {
-      return document.querySelector(s)['checked'];
-    }, element);
+    const elementCheckedState = await page.evaluate((s) => document.querySelector(s)['checked'], element);
     if (!elementCheckedState === newstate) {
       if (waitForEnable) {
         await page.waitForFunction(
@@ -83,9 +84,7 @@ export class PuppeteerStateTasks {
           element
         );
       }
-      const elementDisabledState = await page.evaluate((s) => {
-        return document.querySelector(s)['disabled'];
-      }, element);
+      const elementDisabledState = await page.evaluate((s) => document.querySelector(s)['disabled'], element);
       if (!elementDisabledState) {
         await page.click(element);
         return 'changed';
@@ -123,9 +122,7 @@ export class PuppeteerStateTasks {
           converted = tabletojson.convert(table)[0];
         } while (converted.length !== converted.map((x) => x['Alpha-2 code']).filter(Boolean).length);
         this.countries = converted
-          .map((x) => {
-            return { name: `${x['English short name']} (${x['Alpha-2 code']})`, value: x['Alpha-2 code'] };
-          })
+          .map((x) => ({ name: `${x['English short name']} (${x['Alpha-2 code']})`, value: x['Alpha-2 code'] }))
           .filter(Boolean)
           .sort((a, b) => {
             const x = a.value;

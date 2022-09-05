@@ -8,7 +8,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'streaming');
 

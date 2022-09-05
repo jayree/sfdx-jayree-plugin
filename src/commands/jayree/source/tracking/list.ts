@@ -5,15 +5,15 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* eslint-disable no-console */
-import * as path from 'path';
+import path from 'path';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import * as fs from 'fs-extra';
+import fs from 'fs-extra';
 import chalk from 'chalk';
-import { getCurrentStateFolderFilePath } from '../../../../utils/stateFolderHandler';
+import { getCurrentStateFolderFilePath } from '../../../../utils/stateFolderHandler.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'scratchorgtrackinglist');
 

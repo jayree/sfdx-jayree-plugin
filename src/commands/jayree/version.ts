@@ -15,7 +15,7 @@ export default class Version extends SfdxCommand {
   // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     const root = () => {
-      let currentPath = __dirname;
+      let currentPath = new URL('./', import.meta.url).pathname;
       let rootpath;
       while (!rootpath) {
         try {

@@ -6,10 +6,10 @@
  */
 import puppeteer from 'puppeteer';
 import chalk from 'chalk';
-import config from '../config';
+import Debug from 'debug';
+import config from '../config.js';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:org:configure');
+const debug = Debug('jayree:org:configure');
 
 export class PuppeteerConfigureTasks {
   public currenTask;
@@ -68,12 +68,13 @@ export class PuppeteerConfigureTasks {
           }
 
           if (typeof call.type === 'object' && call.type.checkbox) {
-            const state = await page.evaluate((c) => {
-              return {
+            const state = await page.evaluate(
+              (c) => ({
                 checked: document.querySelector(c.querySelector).checked,
                 disabled: document.querySelector(c.querySelector).disabled,
-              };
-            }, call);
+              }),
+              call
+            );
 
             debug(state);
 

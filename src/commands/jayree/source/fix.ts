@@ -7,9 +7,9 @@
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import { applyFixes, logFixes, aggregatedFixResults } from '../../../utils/souceUtils';
+import { applyFixes, logFixes, aggregatedFixResults } from '../../../utils/souceUtils.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'sourceretrievefix');
 

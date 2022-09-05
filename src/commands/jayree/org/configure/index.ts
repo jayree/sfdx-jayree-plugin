@@ -6,21 +6,21 @@
  */
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
-import { traverse } from '@salesforce/core/lib/util/internal';
+import { traverse } from '@salesforce/core/lib/util/internal.js';
 import { AnyJson } from '@salesforce/ts-types';
 import { Logger, Listr } from 'listr2';
-import * as kit from '@salesforce/kit';
-import config from '../../../../utils/config';
-import { PuppeteerConfigureTasks } from '../../../../utils/puppeteer/configuretasks';
+import kit from '@salesforce/kit';
+import Debug from 'debug';
+import config from '../../../../utils/config.js';
+import { PuppeteerConfigureTasks } from '../../../../utils/puppeteer/configuretasks.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'configure');
 
 const logger = new Logger({ useIcons: false });
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('jayree:org:configure');
+const debug = Debug('jayree:org:configure');
 
 export default class ConfigureOrg extends SfdxCommand {
   public static description = messages.getMessage('commandDescription');

@@ -6,8 +6,8 @@
  */
 /* istanbul ignore file */
 import { SfProject } from '@salesforce/core';
-import * as kit from '@salesforce/kit';
-import config from '../utils/config';
+import kit from '@salesforce/kit';
+import config from '../utils/config.js';
 
 export const runHooks = (() => {
   try {

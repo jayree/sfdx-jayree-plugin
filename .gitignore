@@ -11,6 +11,9 @@ npm-error.log
 yarn-error.log
 lerna-debug.log
 
+# compile source
+# lib
+
 # test artifacts
 *xunit.xml
 *checkstyle.xml

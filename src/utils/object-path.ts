@@ -5,14 +5,15 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* istanbul ignore file */
-import * as objectPath from 'object-path';
+import objectPath from 'object-path';
+import kit from '@salesforce/kit';
 
 function arrayEquals(arr1, arr2) {
   return arr1.length === arr2.length && arr1.every((u, i) => u === arr2[i]);
 }
 
 function compareobj(obj1, obj2) {
-  return arrayEquals(!Array.isArray(obj2) ? [obj2] : obj2, !Array.isArray(obj1) ? [obj1] : obj1);
+  return arrayEquals(kit.ensureArray(obj1), kit.ensureArray(obj2));
 }
 
 interface QueryParameters {

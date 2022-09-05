@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { XMLParser, XMLBuilder } from 'fast-xml-parser';
-import { XML_DECL, XML_NS_KEY, XML_NS_URL } from '@salesforce/source-deploy-retrieve/lib/src/common';
+import { XML_DECL, XML_NS_KEY, XML_NS_URL } from '@salesforce/source-deploy-retrieve/lib/src/common/index.js';
 
 export function parseManifest(xmlData: string) {
   const parser = new XMLParser({
@@ -35,11 +35,4 @@ export function parseSourceComponent(xmlData: string) {
     parseTagValue: false,
   });
   return parser.parse(xmlData);
-}
-
-export function normalizeToArray<T>(entryOrArray: T | T[] | undefined): T[] {
-  if (entryOrArray) {
-    return Array.isArray(entryOrArray) ? entryOrArray : [entryOrArray];
-  }
-  return [];
 }
