@@ -538,20 +538,20 @@
     tslib "^2.4.0"
 
 "@jayree/sfdx-plugin-prettier@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.1.7.tgz#40aa5833354e576ecee66cdbe1fe77dfaceefcfe"
-  integrity sha512-39RZlPreeeRIJm9FF2OQrLWN+ZOzN/BHdoUgSX4c+j7wG+MKCFGi57vRKG7UIlf0lwQkZuniS7QtEwAdixnauA==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.0.tgz#9b221d187320fedb0898d434d5f5c7a66e1f0580"
+  integrity sha512-K16Ai/IMkM5a72F8soNc3xYSuELfqACzwPwHZpRlhrGgnS1T7WKino0saByVS6XCGqzDrfZslFfKnoA61idrMw==
   dependencies:
-    "@oclif/core" "^1.13.3"
+    "@oclif/core" "^1.16.1"
     "@prettier/plugin-xml" "^2.2.0"
     "@salesforce/core" "^3.26.0"
-    "@salesforce/kit" "^1.5.45"
+    "@salesforce/kit" "^1.6.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.0"
-    marked "^4.0.18"
-    marked-terminal "^4.2.0"
+    marked "^4.1.0"
+    marked-terminal "^5.1.1"
     prettier "^2.7.1"
     prettier-plugin-apex "^1.10.0"
     semver "^7.3.7"
@@ -819,7 +819,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.0.8", "@oclif/core@^1.13.3", "@oclif/core@^1.14.1", "@oclif/core@^1.16.0", "@oclif/core@^1.16.1", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.9.9":
+"@oclif/core@^1.0.8", "@oclif/core@^1.14.1", "@oclif/core@^1.16.0", "@oclif/core@^1.16.1", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.9.9":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.16.1.tgz#39663c903f859f8e37b375d7466b92b4394e1c8d"
   integrity sha512-MfzgqcWzWymndd934pd52JAwy0RIgWWYnC0Ed7bxUVYWF4HFb3KmsE7x9/QBP9392Q14vxXi2GNLHboM/5vaDA==
@@ -1803,7 +1803,7 @@ ansi-escapes@^3.1.0:
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
   integrity sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==
 
-ansi-escapes@^4.2.1, ansi-escapes@^4.3.0, ansi-escapes@^4.3.1, ansi-escapes@^4.3.2:
+ansi-escapes@^4.2.1, ansi-escapes@^4.3.0, ansi-escapes@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
   integrity sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==
@@ -2596,7 +2596,7 @@ cli-spinners@^2.5.0, cli-spinners@^2.6.1:
   resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-2.7.0.tgz#f815fd30b5f9eaac02db604c7a231ed7cb2f797a"
   integrity sha512-qu3pN8Y3qHNgE2AFweciB1IfMnmZ/fsNTEE+NOFjmGB2F/7rLhnhzppvpCnN4FovtP26k8lHyy9ptEbNwWFLzw==
 
-cli-table3@^0.6.0, cli-table3@^0.6.1:
+cli-table3@^0.6.1:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/cli-table3/-/cli-table3-0.6.2.tgz#aaf5df9d8b5bf12634dc8b3040806a0c07120d2a"
   integrity sha512-QyavHCaIC80cMivimWu4aWHilIpiDpfm3hGmqAmXVL1UsnbLuBSMd21hTX6VY4ZSDSM73ESLeF8TOYId3rBTbw==
@@ -5796,18 +5796,6 @@ map-obj@^4.0.0:
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-4.3.0.tgz#9304f906e93faae70880da102a9f1df0ea8bb05a"
   integrity sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ==
 
-marked-terminal@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/marked-terminal/-/marked-terminal-4.2.0.tgz#593734a53cf9a4bb01ea961aa579bd21889ce502"
-  integrity sha512-DQfNRV9svZf0Dm9Cf5x5xaVJ1+XjxQW6XjFJ5HFkVyK52SDpj5PCBzS5X5r2w9nHr3mlB0T5201UMLue9fmhUw==
-  dependencies:
-    ansi-escapes "^4.3.1"
-    cardinal "^2.1.1"
-    chalk "^4.1.0"
-    cli-table3 "^0.6.0"
-    node-emoji "^1.10.0"
-    supports-hyperlinks "^2.1.0"
-
 marked-terminal@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/marked-terminal/-/marked-terminal-5.1.1.tgz#d2edc2991841d893ee943b44b40b2ee9518b4d9f"
@@ -5820,7 +5808,7 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16, marked@^4.0.18, marked@^4.1.0:
+marked@^4.0.16, marked@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.0.tgz#3fc6e7485f21c1ca5d6ec4a39de820e146954796"
   integrity sha512-+Z6KDjSPa6/723PQYyc1axYZpYYpDnECDaU6hkaf5gqBieBkMKYReL5hteF2QizhlMbgbo8umXl/clZ67+GlsA==
@@ -6294,7 +6282,7 @@ nock@^13.0.0, nock@^13.2.9:
     lodash "^4.17.21"
     propagate "^2.0.0"
 
-node-emoji@^1.10.0, node-emoji@^1.11.0:
+node-emoji@^1.11.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.11.0.tgz#69a0150e6946e2f115e9d7ea4df7971e2628301c"
   integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==
