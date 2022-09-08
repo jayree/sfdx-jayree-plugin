@@ -516,23 +516,23 @@
     tslib "^2.4.0"
 
 "@jayree/sfdx-plugin-manifest@^2.2.10":
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.2.10.tgz#875b4bda9bf6da189dd06248768a6f876d29d4d3"
-  integrity sha512-ht3eS0ARST56iJP6PO0jnhyHq66CSBj/PrD5FMgNUAgQoa4prNXIpv23kDQLfWJPPFEZnvPGtk9YdfXIZERH+g==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.3.0.tgz#07c01fce3924c3cb9686061e0619f45438eef321"
+  integrity sha512-+CEERCbRKOA+pCS32zKu5d6gzCmb8d/Dzezem4mteVkncn0LrUn2gK0oCkHKPyaJtEuCeUl51HTMUPxaBN9ncA==
   dependencies:
-    "@oclif/core" "^1.13.10"
-    "@salesforce/command" "^5.2.4"
-    "@salesforce/kit" "^1.5.45"
-    "@salesforce/source-deploy-retrieve" "^6.2.9"
+    "@oclif/core" "^1.16.1"
+    "@salesforce/command" "^5.2.6"
+    "@salesforce/kit" "^1.6.0"
+    "@salesforce/source-deploy-retrieve" "^6.7.0"
     "@salesforce/ts-types" "^1.5.20"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.0.9"
     fs-extra "^10.1.0"
-    isomorphic-git "^1.19.1"
-    listr2 "^5.0.2"
-    marked "^4.0.18"
-    marked-terminal "^4.2.0"
+    isomorphic-git "^1.21.0"
+    listr2 "^5.0.5"
+    marked "^4.1.0"
+    marked-terminal "^5.1.1"
     semver "^7.3.7"
     tslib "^2.4.0"
 
@@ -818,7 +818,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.0.8", "@oclif/core@^1.13.10", "@oclif/core@^1.13.3", "@oclif/core@^1.14.1", "@oclif/core@^1.16.0", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.9.3", "@oclif/core@^1.9.9":
+"@oclif/core@^1.0.8", "@oclif/core@^1.13.3", "@oclif/core@^1.14.1", "@oclif/core@^1.16.0", "@oclif/core@^1.16.1", "@oclif/core@^1.2.1", "@oclif/core@^1.3.4", "@oclif/core@^1.3.6", "@oclif/core@^1.6.4", "@oclif/core@^1.9.3", "@oclif/core@^1.9.9":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.16.1.tgz#39663c903f859f8e37b375d7466b92b4394e1c8d"
   integrity sha512-MfzgqcWzWymndd934pd52JAwy0RIgWWYnC0Ed7bxUVYWF4HFb3KmsE7x9/QBP9392Q14vxXi2GNLHboM/5vaDA==
@@ -1111,7 +1111,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.0", "@salesforce/command@^5.2.4", "@salesforce/command@^5.2.6":
+"@salesforce/command@^5.2.0", "@salesforce/command@^5.2.6":
   version "5.2.6"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.6.tgz#649e3c1ab2c4f5a71b1c908f95a644c1b398d7da"
   integrity sha512-Rsvk8k4ZKwZiMD6STSTHMNPigqkr+hycuRwjm1pk57vDDSllVVa3R8yv0em1OoJsiyIH7l/zhRQ6IcZ7ObM7Jg==
@@ -1210,7 +1210,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.1.3.tgz#fce83f55c7557d47b9c814d5d02978ad734300b3"
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
-"@salesforce/source-deploy-retrieve@^6.2.7", "@salesforce/source-deploy-retrieve@^6.2.9", "@salesforce/source-deploy-retrieve@^6.5.0":
+"@salesforce/source-deploy-retrieve@^6.2.7", "@salesforce/source-deploy-retrieve@^6.5.0", "@salesforce/source-deploy-retrieve@^6.7.0":
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.7.0.tgz#46f524e5bae8841deeff5553f8f303bc9933f285"
   integrity sha512-51feOkMW4Evdh4K89ljd1Y0XOR3iZU9wCVuRIaxFqSCPXRdGLBe/5DDmc3erMnmZ3XBe6P72Z53RG/aCpq68CQ==
@@ -5061,7 +5061,7 @@ isomorphic-git@1.17.0:
     sha.js "^2.4.9"
     simple-get "^4.0.1"
 
-isomorphic-git@^1.19.1:
+isomorphic-git@^1.21.0:
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.21.0.tgz#4e9dbea901bf81f959d0cc3d13ca46bb1dda513a"
   integrity sha512-ZqCAUM63CYepA3fB8H7NVyPSiOkgzIbQ7T+QPrm9xtYgQypN9JUJ5uLMjB5iTfomdJf3mdm6aSxjZwnT6ubvEA==
@@ -5427,7 +5427,7 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
-listr2@^5.0.2, listr2@^5.0.5:
+listr2@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-5.0.5.tgz#4651a940d12b984abecfae4450e40edd5695f808"
   integrity sha512-DpBel6fczu7oQKTXMekeprc0o3XDgGMkD7JNYyX+X0xbwK+xgrx9dcyKoXKqpLSUvAWfmoePS7kavniOcq3r4w==
