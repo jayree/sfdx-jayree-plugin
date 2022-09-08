@@ -1,3 +1,26 @@
+# [4.4.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.18...v4.4.0) (2022-09-08)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-legacy from 1.0.2 to 1.1.0 ([1c1d0d7](https://github.com/jayree/sfdx-jayree-plugin/commit/1c1d0d798125b7fed237b1cd1ff45de66c59b255))
+* **deps:** bump @jayree/sfdx-plugin-manifest from 2.2.10 to 2.3.0 ([19525e4](https://github.com/jayree/sfdx-jayree-plugin/commit/19525e40c86f4d49084be7419f46bc436242eda3))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.1.7 to 1.2.0 ([91c767b](https://github.com/jayree/sfdx-jayree-plugin/commit/91c767b881db0bd10f501772d055c2174b60abc2))
+* **deps:** bump @oclif/core from 1.13.10 to 1.16.0 ([4963ab7](https://github.com/jayree/sfdx-jayree-plugin/commit/4963ab79eec67e9bf2411fe7204c5b8592f48947))
+* **deps:** bump @oclif/core from 1.16.0 to 1.16.1 ([dfcfb6a](https://github.com/jayree/sfdx-jayree-plugin/commit/dfcfb6ae3f8a87e129145fefff3e4d21851f9b42))
+* **deps:** bump @salesforce/command from 5.2.4 to 5.2.6 ([9ba33be](https://github.com/jayree/sfdx-jayree-plugin/commit/9ba33bee5b8b9c36b7bb675f758aa1aed4c80501))
+* **deps:** bump @salesforce/kit from 1.5.45 to 1.6.0 ([01941b7](https://github.com/jayree/sfdx-jayree-plugin/commit/01941b75811166d201e0b547e1e82ba119782c3e))
+* **deps:** bump @salesforce/source-deploy-retrieve from 6.3.0 to 6.5.0 ([42c603b](https://github.com/jayree/sfdx-jayree-plugin/commit/42c603b43ea2510dade2d70acbdf4ed396e0557c))
+* **deps:** bump @salesforce/source-deploy-retrieve from 6.5.0 to 6.7.0 ([9b8f1d8](https://github.com/jayree/sfdx-jayree-plugin/commit/9b8f1d84b8341f09713d0572a98a8a59bd7a63e0))
+* **deps:** bump listr2 from 5.0.2 to 5.0.5 ([9f9b4aa](https://github.com/jayree/sfdx-jayree-plugin/commit/9f9b4aab85cfc02197f18ebd883223d67e6d9652))
+* **deps:** bump puppeteer from 16.1.0 to 17.1.1 ([5e0af79](https://github.com/jayree/sfdx-jayree-plugin/commit/5e0af79c6f25d99a07ac781b3bf42ff20484e023))
+* **deps:** bump puppeteer from 17.1.1 to 17.1.3 ([f60b8ad](https://github.com/jayree/sfdx-jayree-plugin/commit/f60b8ad05e2449fa4ffdf02add9ede8a1a5bc85a))
+
+
+### Features
+
+* move to ESM ([a649c40](https://github.com/jayree/sfdx-jayree-plugin/commit/a649c40bbd86a7be3c4be667082b661229d9d581))
+
 ## [4.3.18](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.3.17...v4.3.18) (2022-08-11)
 
 
