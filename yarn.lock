@@ -498,21 +498,21 @@
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
 "@jayree/sfdx-plugin-legacy@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.0.tgz#f83771a034fd74c67cc5a4b3e2b9dc05db3aa967"
-  integrity sha512-f9OPZDhVNVhHbEl+jfNR/17GbwSTIIShsPhCeOSQp77i63MQPliT8oX+ChUhr6hFgRK4Y/JNnsOCe0Vph2afbg==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.1.tgz#bc465d9c438df8ad9ea391e926b855521c5b8653"
+  integrity sha512-ongkK4f28GZV+N4+/B/YouwluW+uUBGmC5YKLDJWLar2J5s/FZSfF0rD3MDtCZ799+RLrOIZzooPuJed1aWcUA==
   dependencies:
-    "@oclif/core" "^1.16.1"
-    "@salesforce/command" "^5.2.6"
-    "@salesforce/source-deploy-retrieve" "^6.7.0"
+    "@oclif/core" "^1.16.3"
+    "@salesforce/command" "^5.2.8"
+    "@salesforce/source-deploy-retrieve" "^6.8.1"
     adm-zip "^0.5.9"
     debug "^4.3.4"
-    fast-xml-parser "^4.0.9"
+    fast-xml-parser "^4.0.10"
     fs-extra "^10.1.0"
-    inquirer "^9.1.1"
+    inquirer "^9.1.2"
     marked "^4.1.0"
     marked-terminal "^5.1.1"
-    puppeteer "^17.1.3"
+    puppeteer "^18.0.4"
     semver "^7.3.7"
     tslib "^2.4.0"
 
@@ -1112,7 +1112,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.6":
+"@salesforce/command@^5.2.6", "@salesforce/command@^5.2.8":
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.8.tgz#667e78c5c530371b39c61c1250ff2269bef55099"
   integrity sha512-tCW3UaaJwT1O53ZhlbzVP3KrijvgGp31ZguQAKT6uOY+ZDH933jiCoDzIsiUu1jezryXvo9sp0GXPkCzDoouww==
@@ -1211,7 +1211,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.1.3.tgz#fce83f55c7557d47b9c814d5d02978ad734300b3"
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
-"@salesforce/source-deploy-retrieve@^6.7.0", "@salesforce/source-deploy-retrieve@^6.8.0":
+"@salesforce/source-deploy-retrieve@^6.7.0", "@salesforce/source-deploy-retrieve@^6.8.0", "@salesforce/source-deploy-retrieve@^6.8.1":
   version "6.8.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.8.1.tgz#ba0084af91275a17199df688e28899d801f2c7c2"
   integrity sha512-lonMQj91Ojp7wMXxZ2xG7R2mNHO7vFnak9ypjxSqNx98usq+yWuiG83lp1eHdmuVRfPHAyEc3mGuOkYm7/O0Ug==
@@ -3899,7 +3899,7 @@ fast-xml-parser@^3.21.1:
   dependencies:
     strnum "^1.0.4"
 
-fast-xml-parser@^4.0.9:
+fast-xml-parser@^4.0.10, fast-xml-parser@^4.0.9:
   version "4.0.10"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.0.10.tgz#72c81f74a0ef98af77ef37dd19d227533aae2994"
   integrity sha512-mYMMIk7Ho1QOiedyvafdyPamn1Vlda+5n95lcn0g79UiCQoLQ2xfPQ8m3pcxBMpVaftYXtoIE2wrNTjmLQnnkg==
@@ -4787,10 +4787,10 @@ inquirer@^8.0.0:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
-inquirer@^9.1.1:
-  version "9.1.1"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.1.1.tgz#e15a12723f4f607d1b4489b56a0ecc7a6965e17d"
-  integrity sha512-hfS9EJ1pVkGNbYKqzdGwMj0Dqosd36Qvxd5pFy4657QT23gmtFTSqoYBisZR75DReeSMWPNa8J0Lf6TQCz8PvA==
+inquirer@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.1.2.tgz#37f5486f3de0e38820aad83a1f75c52c747e2f9a"
+  integrity sha512-Hj2Ml1WpxKJU2npP2Rj0OURGkHV+GtNW2CwFdHDiXlqUBAUrWTcZHxCkFywX/XHzOS7wrG/kExgJFbUkVgyHzg==
   dependencies:
     ansi-escapes "^5.0.0"
     chalk "^5.0.1"
@@ -7120,23 +7120,6 @@ punycode@^2.1.0, punycode@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
-
-puppeteer@^17.1.3:
-  version "17.1.3"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-17.1.3.tgz#2814cf221925e19c681c69aa97401a68b30240c9"
-  integrity sha512-tVtvNSOOqlq75rUgwLeDAEQoLIiBqmRg0/zedpI6fuqIocIkuxG23A7FIl1oVSkuSMMLgcOP5kVhNETmsmjvPw==
-  dependencies:
-    cross-fetch "3.1.5"
-    debug "4.3.4"
-    devtools-protocol "0.0.1036444"
-    extract-zip "2.0.1"
-    https-proxy-agent "5.0.1"
-    progress "2.0.3"
-    proxy-from-env "1.1.0"
-    rimraf "3.0.2"
-    tar-fs "2.1.1"
-    unbzip2-stream "1.4.3"
-    ws "8.8.1"
 
 puppeteer@^18.0.4:
   version "18.0.4"
