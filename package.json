@@ -13,7 +13,7 @@
     "@salesforce/command": "^5.2.8",
     "@salesforce/kit": "^1.6.1",
     "@salesforce/source-deploy-retrieve": "^6.8.1",
-    "@salesforce/source-tracking": "^2.2.3",
+    "@salesforce/source-tracking": "^2.2.4",
     "debug": "^4.3.4",
     "enquirer": "^2.3.6",
     "fast-xml-parser": "^4.0.10",
