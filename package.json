@@ -35,7 +35,7 @@
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@oclif/plugin-command-snapshot": "^3",
-    "@oclif/plugin-help": "^5.1.12",
+    "@oclif/plugin-help": "^5.1.14",
     "@salesforce/dev-config": "^3.1.0",
     "@salesforce/dev-scripts": "3.1.0",
     "@salesforce/prettier-config": "^0.0.2",
