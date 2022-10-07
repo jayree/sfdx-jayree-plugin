@@ -497,23 +497,23 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.1.tgz#bc465d9c438df8ad9ea391e926b855521c5b8653"
-  integrity sha512-ongkK4f28GZV+N4+/B/YouwluW+uUBGmC5YKLDJWLar2J5s/FZSfF0rD3MDtCZ799+RLrOIZzooPuJed1aWcUA==
+"@jayree/sfdx-plugin-legacy@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.2.tgz#64ac1f8e3d9b0d28ff0bfd660c4e03f325e61673"
+  integrity sha512-ggL+spdUhzYHU9bzp9MroMPnqTi7AmClSGXDl+tpAbtgXoyWYU4xaPwshtSv0O7vlWO/1irsEA1LbB/KE4fvpg==
   dependencies:
     "@oclif/core" "^1.16.3"
-    "@salesforce/command" "^5.2.8"
-    "@salesforce/source-deploy-retrieve" "^6.8.1"
+    "@salesforce/command" "^5.2.11"
+    "@salesforce/source-deploy-retrieve" "^6.9.0"
     adm-zip "^0.5.9"
     debug "^4.3.4"
-    fast-xml-parser "^4.0.10"
+    fast-xml-parser "^4.0.11"
     fs-extra "^10.1.0"
-    inquirer "^9.1.2"
-    marked "^4.1.0"
+    inquirer "^9.1.3"
+    marked "^4.1.1"
     marked-terminal "^5.1.1"
-    puppeteer "^18.0.4"
-    semver "^7.3.7"
+    puppeteer "^18.2.1"
+    semver "^7.3.8"
     tslib "^2.4.0"
 
 "@jayree/sfdx-plugin-manifest@^2.3.5":
@@ -1112,7 +1112,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.11", "@salesforce/command@^5.2.8":
+"@salesforce/command@^5.2.11":
   version "5.2.11"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.11.tgz#43fdb687c8cd6a5f76dafd548ea176663c8a6620"
   integrity sha512-6KhXbxlV+noVFL8FNhVBPDiD5Z4fEcezh1rClcjdturt2Zg/cp9KPIFqZoFn34zt30u+DlhhU3GDlfE18IoNHw==
@@ -1211,7 +1211,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.1.3.tgz#fce83f55c7557d47b9c814d5d02978ad734300b3"
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
-"@salesforce/source-deploy-retrieve@^6.8.1", "@salesforce/source-deploy-retrieve@^6.8.2", "@salesforce/source-deploy-retrieve@^6.9.0":
+"@salesforce/source-deploy-retrieve@^6.8.2", "@salesforce/source-deploy-retrieve@^6.9.0":
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.9.0.tgz#940ecfb80f4ab626c00e8364676288ec6ec0ecdd"
   integrity sha512-1yR/UPWkZrQ/66/sjy9IkoBPfnz//Wyfgoj+8TkDlJi+bq9J2MonfTWzNScFF7Km5CUoNUoRx6Gwg9fRPews0Q==
@@ -4813,10 +4813,10 @@ inquirer@^8.0.0:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
-inquirer@^9.1.2:
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.1.2.tgz#37f5486f3de0e38820aad83a1f75c52c747e2f9a"
-  integrity sha512-Hj2Ml1WpxKJU2npP2Rj0OURGkHV+GtNW2CwFdHDiXlqUBAUrWTcZHxCkFywX/XHzOS7wrG/kExgJFbUkVgyHzg==
+inquirer@^9.1.3:
+  version "9.1.3"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.1.3.tgz#c7a03b7e799259f5b90eb52ac6dd2d8040da7362"
+  integrity sha512-3OoUzit8tEebW4tpIZUXPRvcGNm4xhGeQp+GpdupDiz2OdWAqjO50EoeVOXx1Z91M0GLe6d16jJUArIhI/cNPQ==
   dependencies:
     ansi-escapes "^5.0.0"
     chalk "^5.0.1"
@@ -4828,7 +4828,7 @@ inquirer@^9.1.2:
     mute-stream "0.0.8"
     ora "^6.1.2"
     run-async "^2.4.0"
-    rxjs "^7.5.6"
+    rxjs "^7.5.7"
     string-width "^5.1.2"
     strip-ansi "^7.0.1"
     through "^2.3.6"
@@ -7163,7 +7163,7 @@ puppeteer-core@18.2.1:
     unbzip2-stream "1.4.3"
     ws "8.9.0"
 
-puppeteer@^18.0.4, puppeteer@^18.2.1:
+puppeteer@^18.2.1:
   version "18.2.1"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-18.2.1.tgz#08967cd423efe511ee4c6e3a5c882ffaf2e6bbf3"
   integrity sha512-7+UhmYa7wxPh2oMRwA++k8UGVDxh3YdWFB52r9C3tM81T6BU7cuusUSxImz0GEYSOYUKk/YzIhkQ6+vc0gHbxQ==
@@ -7528,6 +7528,13 @@ rxjs@^7.0.0, rxjs@^7.5.5, rxjs@^7.5.6:
   version "7.5.6"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.6.tgz#0446577557862afd6903517ce7cae79ecb9662bc"
   integrity sha512-dnyv2/YsXhnm461G+R/Pe5bWP41Nm6LBXEYWI6eiFP4fiwx6WRI/CD0zbdVAudd9xwLEF2IDcKXLHit0FYjUzw==
+  dependencies:
+    tslib "^2.1.0"
+
+rxjs@^7.5.7:
+  version "7.5.7"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.7.tgz#2ec0d57fdc89ece220d2e702730ae8f1e49def39"
+  integrity sha512-z9MzKh/UcOqB3i20H6rtrlaE/CgjLOvheWK/9ILrbhROGTweAi1BaFsTT9FbwZi5Trr1qNRs+MXkhmR06awzQA==
   dependencies:
     tslib "^2.1.0"
 
