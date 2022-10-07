@@ -86,7 +86,8 @@
     "/config",
     "/messages",
     "/oclif.manifest.json",
-    "/CHANGELOG.md"
+    "/CHANGELOG.md",
+    "/yarn.lock"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
   "keywords": [

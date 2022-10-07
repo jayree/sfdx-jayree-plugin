@@ -1,9 +1,9 @@
 name: build-and-test
 on:
   pull_request:
-    branches: [main, next]
+    branches: [main]
   push:
-    branches: [main, next]
+    branches: [main]
   workflow_dispatch:
 jobs:
   test:
