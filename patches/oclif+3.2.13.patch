@@ -1,8 +1,8 @@
 diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
-index 17c31cc..47cf225 100644
+index 48cb3c4..3c411b7 100644
 --- a/node_modules/oclif/lib/commands/readme.js
 +++ b/node_modules/oclif/lib/commands/readme.js
-@@ -50,8 +50,8 @@ class Readme extends core_1.Command {
+@@ -51,8 +51,8 @@ class Readme extends core_1.Command {
          return readme.replace(`<!-- ${tag} -->`, `<!-- ${tag} -->\n${body}\n<!-- ${tag}stop -->`);
      }
      toc(__, readme) {
@@ -13,7 +13,7 @@ index 17c31cc..47cf225 100644
              .map(l => `* [${l}](#${slugify.slug(l)})`)
              .join('\n');
      }
-@@ -61,15 +61,9 @@ class Readme extends core_1.Command {
+@@ -62,15 +62,9 @@ class Readme extends core_1.Command {
          const versionFlagsString = `(${versionFlags.join('|')})`;
          return [
              `\`\`\`sh-session
@@ -32,7 +32,7 @@ index 17c31cc..47cf225 100644
  \`\`\`\n`,
          ].join('\n').trim();
      }
-@@ -108,7 +102,7 @@ USAGE
+@@ -109,7 +103,7 @@ USAGE
          return [
              ...commands.map(c => {
                  const usage = this.commandUsage(config, c);
@@ -41,7 +41,7 @@ index 17c31cc..47cf225 100644
              }),
              '',
              ...commands.map(c => this.renderCommand(config, c)).map(s => s.trim() + '\n'),
-@@ -121,7 +115,7 @@ USAGE
+@@ -122,7 +116,7 @@ USAGE
          const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
          const header = () => {
              const usage = this.commandUsage(config, c);
@@ -50,7 +50,7 @@ index 17c31cc..47cf225 100644
          };
          try {
              return (0, util_1.compact)([
-@@ -228,9 +222,9 @@ USAGE
+@@ -229,11 +223,11 @@ USAGE
  exports.default = Readme;
  Readme.description = `adds commands to README.md in current directory
  The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
@@ -60,5 +60,8 @@ index 17c31cc..47cf225 100644
 -# Commands
 +## Commands
  <!-- commands -->
-
+-# Table of contents
++## Table of contents
+ <!-- toc -->
+ 
  Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
