@@ -1125,7 +1125,7 @@
     "@salesforce/ts-types" "^1.5.21"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.26.2", "@salesforce/core@^3.30.10", "@salesforce/core@^3.30.9":
+"@salesforce/core@^3.30.10", "@salesforce/core@^3.30.9":
   version "3.30.10"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.30.10.tgz#146724f2bbc294afbcb3fa41eac281d5d880f2f7"
   integrity sha512-mVt/gLuF/zimBEs1oDThHm6GjKCRYkc6MuLjfwZrAo3m2H2QFH828HZEVU0nulkC4lF7F0kMXuLqk8n6sWwScw==
@@ -1192,7 +1192,7 @@
     typedoc-plugin-missing-exports "0.23.0"
     typescript "^4.1.3"
 
-"@salesforce/kit@^1.5.41", "@salesforce/kit@^1.6.0", "@salesforce/kit@^1.6.1", "@salesforce/kit@^1.7.0":
+"@salesforce/kit@^1.5.41", "@salesforce/kit@^1.6.1", "@salesforce/kit@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-1.7.0.tgz#f14ef71662742edf0fb74ffb23c530fad5ccb4c9"
   integrity sha512-AxJi7W9skYEVQrZMGyWtG3xOOLzdRu7638Hlea3gtPdMpMRc0aB1Nvpg7Ru+VLtULNhXnnQ3nXesDl0d2TA04w==
@@ -1211,7 +1211,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.1.3.tgz#fce83f55c7557d47b9c814d5d02978ad734300b3"
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
-"@salesforce/source-deploy-retrieve@^6.8.0", "@salesforce/source-deploy-retrieve@^6.8.1", "@salesforce/source-deploy-retrieve@^6.9.0":
+"@salesforce/source-deploy-retrieve@^6.8.1", "@salesforce/source-deploy-retrieve@^6.8.2", "@salesforce/source-deploy-retrieve@^6.9.0":
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.9.0.tgz#940ecfb80f4ab626c00e8364676288ec6ec0ecdd"
   integrity sha512-1yR/UPWkZrQ/66/sjy9IkoBPfnz//Wyfgoj+8TkDlJi+bq9J2MonfTWzNScFF7Km5CUoNUoRx6Gwg9fRPews0Q==
@@ -1230,14 +1230,14 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.3.tgz#53d5c1df68e3ce2997f0458a520d8b27447bc414"
-  integrity sha512-a9ywSW5jllJ8iynLzBQI1dmYbDcy2CEH1CaiBgceAoN3jEakIrhTaozlmdEGncKtkpaIqFS+eosiCVM1dUUfvw==
+"@salesforce/source-tracking@^2.2.8":
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.8.tgz#f47401d48374a35e9a89a7468ee267d212d73668"
+  integrity sha512-qeDwZuUXlMh6If7j3MUPAdxtL5vVhhKptGLHP6z5QnU2SugHxr1THmMqVC3S1mYOIYYUoTFqsU2irnA7/BdG+A==
   dependencies:
-    "@salesforce/core" "^3.26.2"
-    "@salesforce/kit" "^1.6.0"
-    "@salesforce/source-deploy-retrieve" "^6.8.0"
+    "@salesforce/core" "^3.30.9"
+    "@salesforce/kit" "^1.6.1"
+    "@salesforce/source-deploy-retrieve" "^6.8.2"
     graceful-fs "^4.2.9"
     isomorphic-git "1.17.0"
     ts-retry-promise "^0.7.0"
