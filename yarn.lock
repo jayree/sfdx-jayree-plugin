@@ -492,14 +492,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.2.tgz#64ac1f8e3d9b0d28ff0bfd660c4e03f325e61673"
-  integrity sha512-ggL+spdUhzYHU9bzp9MroMPnqTi7AmClSGXDl+tpAbtgXoyWYU4xaPwshtSv0O7vlWO/1irsEA1LbB/KE4fvpg==
+"@jayree/sfdx-plugin-legacy@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.3.tgz#1386e13bd52f6b86b529874f94543858fe26133d"
+  integrity sha512-Ynu1SiGm1RxgO/GYwJ3pjPQJiEPPstbOzg5/CR5lTo/VsNOrKY1x2fGJYs4tih/Ym8MRaEEEO5ZAUoZZg5UzdA==
   dependencies:
-    "@oclif/core" "^1.16.3"
-    "@salesforce/command" "^5.2.11"
-    "@salesforce/source-deploy-retrieve" "^6.9.0"
+    "@oclif/core" "^1.16.4"
+    "@salesforce/command" "^5.2.12"
+    "@salesforce/source-deploy-retrieve" "^6.9.1"
     adm-zip "^0.5.9"
     debug "^4.3.4"
     fast-xml-parser "^4.0.11"
@@ -826,7 +826,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.14.1", "@oclif/core@^1.16.3", "@oclif/core@^1.16.4", "@oclif/core@^1.16.5", "@oclif/core@^1.16.7":
+"@oclif/core@^1.14.1", "@oclif/core@^1.16.4", "@oclif/core@^1.16.5", "@oclif/core@^1.16.7":
   version "1.16.7"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.16.7.tgz#fceeabff86679cc22bb6cafbc7610648bf029a98"
   integrity sha512-r6FUZVp5ID6lQHGUbDhFYng+Q6xQtp36VSRnQFMh9Bay5+Gwg4+MzxfgW+CAGhPfPk45iu+/PvYaVayo4Tb0Dg==
@@ -1130,7 +1130,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.11", "@salesforce/command@^5.2.12":
+"@salesforce/command@^5.2.12":
   version "5.2.12"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.12.tgz#89e29e267366ef4840c8633d5c8be2bc22506ded"
   integrity sha512-BPYbj9rxySO1egpmtOsEzaic6kWRG8PRL2v732KXrC5lrplvkZAovbOd84bz1HVWO4Knbj28N+iV4qXXfrhPAA==
