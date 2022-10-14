@@ -1691,7 +1691,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.39.0", "@typescript-eslint/utils@^5.38.0":
+"@typescript-eslint/utils@5.39.0":
   version "5.39.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.39.0.tgz#b7063cca1dcf08d1d21b0d91db491161ad0be110"
   integrity sha512-+DnY5jkpOpgj+EBtYPyHRjXampJfC0yUZZzfzLuUWVZvCuKqSdJVC8UhdWipIw7VKNTfwfAPiOWzYkAwuIhiAg==
@@ -1702,6 +1702,19 @@
     "@typescript-eslint/typescript-estree" "5.39.0"
     eslint-scope "^5.1.1"
     eslint-utils "^3.0.0"
+
+"@typescript-eslint/utils@^5.39.0":
+  version "5.40.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.40.0.tgz#647f56a875fd09d33c6abd70913c3dd50759b772"
+  integrity sha512-MO0y3T5BQ5+tkkuYZJBjePewsY+cQnfkYeRqS6tPh28niiIwPnQ1t59CSRcs1ZwJJNOdWw7rv9pF8aP58IMihA==
+  dependencies:
+    "@types/json-schema" "^7.0.9"
+    "@typescript-eslint/scope-manager" "5.40.0"
+    "@typescript-eslint/types" "5.40.0"
+    "@typescript-eslint/typescript-estree" "5.40.0"
+    eslint-scope "^5.1.1"
+    eslint-utils "^3.0.0"
+    semver "^7.3.7"
 
 "@typescript-eslint/visitor-keys@5.39.0":
   version "5.39.0"
@@ -3621,12 +3634,12 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-sf-plugin@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.1.1.tgz#5ccaa9ffee1253cc117361367b4d792bc2b494ff"
-  integrity sha512-Ee9NFePj4jWoXJgLHJNbrCZ58ERUtmC8VbNc2d66QGzjCsoS0rM9eqLsE0EYRLc+TTPNmTxhGpzQaMycmC/WRA==
+eslint-plugin-sf-plugin@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.1.2.tgz#ac8390950fcc123f6c2dd802d282184d2a13c6f8"
+  integrity sha512-gTEmgHciuRFTxEiSn85Nu09WDVBYijmOUR1ZxFQZcCHyPvK7AJ+ii0q7FZZFBRNo2a5FWJspCjElR4rANlDscQ==
   dependencies:
-    "@typescript-eslint/utils" "^5.38.0"
+    "@typescript-eslint/utils" "^5.39.0"
 
 eslint-scope@^5.1.1:
   version "5.1.1"
