@@ -1248,6 +1248,24 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
+"@salesforce/source-deploy-retrieve@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.0.1.tgz#e2b7341ae46eb013c19da70fd7f51c8f7f947789"
+  integrity sha512-gvgq/ymdfz+CnHWVcs6p9h+GT9MKUI12Kdis8MxZ500mcuKzoCysIrWeZhaHAobroXNO9uxYf3hPOxBaXKQ6UQ==
+  dependencies:
+    "@salesforce/core" "^3.31.9"
+    "@salesforce/kit" "^1.7.0"
+    "@salesforce/ts-types" "^1.5.20"
+    archiver "^5.3.1"
+    fast-xml-parser "^3.21.1"
+    got "^11.8.5"
+    graceful-fs "^4.2.10"
+    ignore "^5.2.0"
+    mime "2.6.0"
+    proxy-agent "^5.0.0"
+    proxy-from-env "^1.1.0"
+    unzipper "0.10.11"
+
 "@salesforce/source-tracking@^2.2.9":
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.9.tgz#c5a99c8a571a14ca3180c07f0ba434a010b6f9e4"
