@@ -511,12 +511,12 @@
     semver "^7.3.8"
     tslib "^2.4.0"
 
-"@jayree/sfdx-plugin-manifest@^2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.3.7.tgz#ca75ce56c6f8b6e9fd56e6d8b0ce1300fabac4f5"
-  integrity sha512-6Hrc9vmzYvpPEhiJGCg3cdk28F17Fvqj8xsRCB9gSy8EN6NWdGH5Zi7A9ymlhZ0NuzHiAc3NyM2XXxhUIrRUVg==
+"@jayree/sfdx-plugin-manifest@^2.3.8":
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.3.8.tgz#77ef5c08af416633e914663ad13115f4b69d80e4"
+  integrity sha512-etOcdVpHu5OjrfzTD3qwmXEsvxy/5wG47OgChtsSTKQTdndqekrthcZa+h1IAaG6skzcWOgjkyuCCTng+GY6hg==
   dependencies:
-    "@oclif/core" "^1.16.4"
+    "@oclif/core" "^1.19.1"
     "@salesforce/command" "^5.2.13"
     "@salesforce/kit" "^1.7.0"
     "@salesforce/source-deploy-retrieve" "^7.0.1"
