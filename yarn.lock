@@ -860,6 +860,40 @@
     widest-line "^3.1.0"
     wrap-ansi "^7.0.0"
 
+"@oclif/core@^1.18.0":
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.19.1.tgz#6dba92cfb7f1412e43068db3e9716215786f85a3"
+  integrity sha512-+LtMYQNzfLoYUcBTsWSFQ/4mqiA70XRU6tP+lDNmQQTrB5FHzDoBbyYvdjvMeS42izg78gjlN++rLUaAUCloNw==
+  dependencies:
+    "@oclif/linewrap" "^1.0.0"
+    "@oclif/screen" "^3.0.2"
+    ansi-escapes "^4.3.2"
+    ansi-styles "^4.3.0"
+    cardinal "^2.1.1"
+    chalk "^4.1.2"
+    clean-stack "^3.0.1"
+    cli-progress "^3.10.0"
+    debug "^4.3.4"
+    ejs "^3.1.6"
+    fs-extra "^9.1.0"
+    get-package-type "^0.1.0"
+    globby "^11.1.0"
+    hyperlinker "^1.0.0"
+    indent-string "^4.0.0"
+    is-wsl "^2.2.0"
+    js-yaml "^3.14.1"
+    natural-orderby "^2.0.3"
+    object-treeify "^1.1.33"
+    password-prompt "^1.1.2"
+    semver "^7.3.7"
+    string-width "^4.2.3"
+    strip-ansi "^6.0.1"
+    supports-color "^8.1.1"
+    supports-hyperlinks "^2.2.0"
+    tslib "^2.3.1"
+    widest-line "^3.1.0"
+    wrap-ansi "^7.0.0"
+
 "@oclif/dev-cli@^1":
   version "1.26.10"
   resolved "https://registry.yarnpkg.com/@oclif/dev-cli/-/dev-cli-1.26.10.tgz#d8df3a79009b68552f5e7f249d1d19ca52278382"
@@ -931,12 +965,12 @@
     chalk "^4.1.0"
     tslib "^2.3.1"
 
-"@oclif/plugin-command-snapshot@^3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.2.3.tgz#6a59acb88a4c52ef362b345c77f6f635cdc3700d"
-  integrity sha512-GV6asL3JZw8DPlKCMbxE1ZzuvTEvx770fGBpcxn/VbKa/rjlRVcvVtk5u3TmIToEA4W1PdspD8ZNqIiEuW804w==
+"@oclif/plugin-command-snapshot@^3.2.3":
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.2.5.tgz#ad08db0dceaf22cf8c612057fc4cc3d3a76091c7"
+  integrity sha512-oVIz7Q3sh6OzWzCCQBdAVACgWts9kYomfUFxG4rWMXpehLN4a0PI6yp859O2OdKRe192IQSwZzhwKU6ktLS53w==
   dependencies:
-    "@oclif/core" "^1.16.5"
+    "@oclif/core" "^1.18.0"
     chalk "^4.1.2"
     just-diff "^5.1.1"
     lodash "^4.17.21"
@@ -1229,7 +1263,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.1.3.tgz#fce83f55c7557d47b9c814d5d02978ad734300b3"
   integrity sha512-XWohlOT2oQDqAJH00OXS3f2MGjkwZ6pr4emnnkHSQbg7UdGW0rvGpEnRKqBbDUfZ4K5YKSo9Gj216ZtaP3JLXg==
 
-"@salesforce/source-deploy-retrieve@^6.9.0", "@salesforce/source-deploy-retrieve@^6.9.1":
+"@salesforce/source-deploy-retrieve@^6.9.1":
   version "6.9.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-6.9.1.tgz#8ab5747887efdb28ad00906350268b6e298ff5d7"
   integrity sha512-QQMyFk/dJiE0UwAc0YhAOd2TE34SzmvBpGoLqzB8Z6X4wpHYtO0NL/xOL8ksoQ+wUAz6RBDzUB8tnNHYhQj1Dg==
@@ -1266,14 +1300,14 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.9":
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.9.tgz#c5a99c8a571a14ca3180c07f0ba434a010b6f9e4"
-  integrity sha512-oDbI+P44/ucKbFUDMUsntr9yRLu426DHdkNZU4TY+7Wuj05FjooYxw70Vm/BlbKXUVbV/ixzN9X6ihT0/e7viQ==
+"@salesforce/source-tracking@^2.2.10":
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.10.tgz#3f1bee89aec4255cc03341fcd706786790c917be"
+  integrity sha512-SAjDHqqJFjsemPDSh5PGF/o/5qZv/kyGPeEXqNnA2O3z52GpQSpR8XwVgwWz8J+oD0fNds5mrFPOs8DobK8xDA==
   dependencies:
     "@salesforce/core" "^3.30.9"
     "@salesforce/kit" "^1.6.1"
-    "@salesforce/source-deploy-retrieve" "^6.9.0"
+    "@salesforce/source-deploy-retrieve" "^7.0.1"
     graceful-fs "^4.2.9"
     isomorphic-git "1.17.0"
     ts-retry-promise "^0.7.0"
