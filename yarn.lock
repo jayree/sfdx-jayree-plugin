@@ -532,12 +532,12 @@
     semver "^7.3.8"
     tslib "^2.4.0"
 
-"@jayree/sfdx-plugin-prettier@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.5.tgz#2727da521103c7451f7441a468e1400fd803d048"
-  integrity sha512-aR474atwm7GSZ6acHsjRzdSa0PxeiaeeL+ILZFy3tdCXdlZSuumHSUEcO/AAlyUuotgUfNhnesdlxWEQN13ypw==
+"@jayree/sfdx-plugin-prettier@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.6.tgz#9cc2bf60158cc1c4e689d8b9861111f9d2d658f6"
+  integrity sha512-h+KypX2RkZlci5fef5TmrA4L6Wew2J+q0BasOAYO2cjemXXAaeSUkJlf0/1vgThV3qanNb+n+H5gNXynPR3+OA==
   dependencies:
-    "@oclif/core" "^1.16.4"
+    "@oclif/core" "^1.19.1"
     "@prettier/plugin-xml" "^2.2.0"
     "@salesforce/core" "^3.31.16"
     "@salesforce/kit" "^1.7.0"
