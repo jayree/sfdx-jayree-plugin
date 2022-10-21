@@ -826,7 +826,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.14.1", "@oclif/core@^1.16.4", "@oclif/core@^1.16.5", "@oclif/core@^1.18.0", "@oclif/core@^1.19.1":
+"@oclif/core@^1.16.4", "@oclif/core@^1.16.5", "@oclif/core@^1.18.0", "@oclif/core@^1.19.1":
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.19.1.tgz#6dba92cfb7f1412e43068db3e9716215786f85a3"
   integrity sha512-+LtMYQNzfLoYUcBTsWSFQ/4mqiA70XRU6tP+lDNmQQTrB5FHzDoBbyYvdjvMeS42izg78gjlN++rLUaAUCloNw==
@@ -961,7 +961,7 @@
     widest-line "^3.1.0"
     wrap-ansi "^6.2.0"
 
-"@oclif/plugin-help@^5.1.11", "@oclif/plugin-help@^5.1.14", "@oclif/plugin-help@^5.1.15":
+"@oclif/plugin-help@^5.1.14", "@oclif/plugin-help@^5.1.15":
   version "5.1.15"
   resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.1.15.tgz#c9466d3efc694cfd0e83eaca565b8799b477549c"
   integrity sha512-RfLo7vOTga/02w7jTAHFOi3m4X34Xbfyl20spg4Jq7NM6WduDaIj2auXrHW3w8OkEi4Zl/g0AvB4PIyLr+NYYw==
@@ -1001,12 +1001,12 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-3.0.2.tgz#969054308fe98d130c02844a45cc792199b75670"
   integrity sha512-S/SF/XYJeevwIgHFmVDAFRUvM3m+OjhvCAYMk78ZJQCYCQ5wS7j+LTt1ZEv2jpEEGg2tx/F6TYYWxddNAYHrFQ==
 
-"@oclif/test@^2.1.0":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.2.2.tgz#1dc0992b85b6e6bf8f463758f410994866a572fa"
-  integrity sha512-gzVB+sstU45NHHjaMws3+/VjQmmO4VbDr1AcUg+/IzjMIwEvM6ssYD/d1kNPup0OjIgQqRQgGyVxKJX/vqHMtg==
+"@oclif/test@^2.2.0":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.2.4.tgz#30c29cb4a0cd370e8d95280fe40097473edbd884"
+  integrity sha512-bLaapIKHWyeuWCbD64uUCJCH+OJHFlEi6u/3sRPgi00kEyP95mM23IvkggDWEzQNh92IFj1xx5Bg8qnp0E2tjw==
   dependencies:
-    "@oclif/core" "^1.16.4"
+    "@oclif/core" "^1.18.0"
     fancy-test "^2.0.4"
 
 "@octokit/auth-token@^2.4.4":
@@ -1130,14 +1130,13 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.12":
-  version "5.2.12"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.12.tgz#89e29e267366ef4840c8633d5c8be2bc22506ded"
-  integrity sha512-BPYbj9rxySO1egpmtOsEzaic6kWRG8PRL2v732KXrC5lrplvkZAovbOd84bz1HVWO4Knbj28N+iV4qXXfrhPAA==
+"@salesforce/command@^5.2.12", "@salesforce/command@^5.2.13":
+  version "5.2.13"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.13.tgz#9bd019bc997a9619977362a7348af1b65b1800c0"
+  integrity sha512-+7+ZWjB3kQqJtcJpqiSrhW8mclgEmy+d26kDch0YUCxhUvoWQjCk23D4jDkZrFPJrv7sudeQXLSosqEIGppF3w==
   dependencies:
-    "@oclif/core" "^1.14.1"
-    "@oclif/plugin-help" "^5.1.11"
-    "@oclif/test" "^2.1.0"
+    "@oclif/core" "^1.18.0"
+    "@oclif/test" "^2.2.0"
     "@salesforce/core" "^3.31.9"
     "@salesforce/kit" "^1.6.1"
     "@salesforce/ts-types" "^1.5.21"
