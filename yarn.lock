@@ -492,14 +492,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.5.tgz#9c61900f6a0fc4032b9a96c2f6c2311bd279d6be"
-  integrity sha512-sejappYZA2BCks/GMDXBjVnJB7pXfnqh0WYrHCSv3vLyvC+4raSQUmkugGRhYKf4iwIVCHKIUzP5DP/vPamNXA==
+"@jayree/sfdx-plugin-legacy@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.6.tgz#0ebf4ac0c5387c57c216fb79015c5e5033560766"
+  integrity sha512-3B/hYWvN821v4sAhzUO1tMdGcXnyO51oraSm2dhOHMcHFKiTRzAl1pdyUFQfQLZWNHTNNY0FiLcXg6emg2bCXw==
   dependencies:
-    "@oclif/core" "^1.19.1"
-    "@salesforce/command" "^5.2.13"
-    "@salesforce/source-deploy-retrieve" "^7.0.1"
+    "@oclif/core" "^1.19.2"
+    "@salesforce/command" "^5.2.16"
+    "@salesforce/source-deploy-retrieve" "^7.4.0"
     adm-zip "^0.5.9"
     debug "^4.3.4"
     fast-xml-parser "^4.0.11"
@@ -507,7 +507,7 @@
     inquirer "^9.1.4"
     marked "^4.1.1"
     marked-terminal "^5.1.1"
-    puppeteer "^19.1.0"
+    puppeteer "^19.2.0"
     semver "^7.3.8"
     tslib "^2.4.0"
 
@@ -1118,7 +1118,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.13", "@salesforce/command@^5.2.16":
+"@salesforce/command@^5.2.16":
   version "5.2.16"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.16.tgz#e9fd778403dfe29ff992d225f0105389e20152cd"
   integrity sha512-rYC/URrIae8LjeuMlg+/PrxyWBEYgOTy2aHfTryiL4dEr9F28b2/xgSLh+5RGEblhPo52GXR33bFQU81pkq/BQ==
@@ -7163,7 +7163,7 @@ puppeteer-core@19.2.0:
     unbzip2-stream "1.4.3"
     ws "8.10.0"
 
-puppeteer@^19.1.0, puppeteer@^19.2.0:
+puppeteer@^19.2.0:
   version "19.2.0"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.2.0.tgz#6d39c6b6da4a648928d8dc736b864de493f175f7"
   integrity sha512-rhr5ery8htpOTikmm/wrDU707wtmJ7ccX2WLkBf0A8eYYpscck5/iz04/fHOiIRWMFfnYOvaO9wNb4jcO3Mjyg==
