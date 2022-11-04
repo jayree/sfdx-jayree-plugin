@@ -1,7 +1,7 @@
 {
   "name": "sfdx-jayree",
   "description": "A Salesforce CLI plugin containing commands and hooks for Salesforce Application Lifecycle Management tasks.",
-  "version": "4.4.6",
+  "version": "4.4.7",
   "author": "jayree <jayree.git@icloud.com>",
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "type": "module",
