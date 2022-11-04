@@ -4,7 +4,6 @@ declare type argvConnection = {
 };
 declare let argvConnection: argvConnection;
 export declare function getProjectPath(): Promise<string>;
-export declare function shrinkPermissionSets(permissionsets: any): Promise<void>;
 export declare function profileElementInjection(profiles: any, customObjectsFilter?: any[]): Promise<void>;
 export declare function logFixes(updatedfiles: any): Promise<void>;
 export declare function getConnectionFromArgv(): Promise<argvConnection>;

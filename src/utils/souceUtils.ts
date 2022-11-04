@@ -55,28 +55,6 @@ export async function getProjectPath(): Promise<string> {
   }
 }
 
-export async function shrinkPermissionSets(permissionsets) {
-  for await (const file of permissionsets) {
-    if (await fs.pathExists(file)) {
-      const data = parseSourceComponent(await fs.readFile(file, 'utf8'));
-      const mutingOrPermissionSet = Object.keys(data)[0];
-      const fieldPermissions = kit.ensureArray(data[mutingOrPermissionSet].fieldPermissions);
-      if (fieldPermissions) {
-        debug({
-          [mutingOrPermissionSet]: file,
-          removedFieldPermsissions: JSON.stringify(
-            fieldPermissions.filter((el) => el.editable.toString() === 'false' && el.readable.toString() === 'false')
-          ),
-        });
-        data[mutingOrPermissionSet].fieldPermissions = fieldPermissions.filter(
-          (el) => el.editable.toString() === 'true' || el.readable.toString() === 'true'
-        );
-        fs.writeFileSync(file, js2SourceComponent(data));
-      }
-    }
-  }
-}
-
 export async function profileElementInjection(profiles, customObjectsFilter = []) {
   const ensureUserPermissions = config(await getProjectPath()).ensureUserPermissions;
   let ensureObjectPermissions = config(await getProjectPath()).ensureObjectPermissions;

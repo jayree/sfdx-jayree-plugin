@@ -10,7 +10,7 @@ import { env } from '@salesforce/kit';
 import { SfProject } from '@salesforce/core';
 import { FileResponse, ComponentStatus } from '@salesforce/source-deploy-retrieve';
 import Debug from 'debug';
-import { shrinkPermissionSets, updateProfiles, applySourceFixes, logFixes } from '../utils/souceUtils.js';
+import { updateProfiles, applySourceFixes, logFixes } from '../utils/souceUtils.js';
 import { runHooks } from '../utils/hookUtils.js';
 
 type HookFunction = (this: Hook.Context, options: HookOptions) => any;
@@ -51,11 +51,6 @@ export const postretrieve: HookFunction = async function (options) {
   if (profiles.length > 0) {
     const customObjects = result.filter((el) => el.type === 'CustomObject');
     await updateProfiles(profiles, customObjects, 'force:source:pull' === options.Command.id);
-  }
-
-  const permissionsets = result.filter((el) => ['PermissionSet', 'MutingPermissionSet'].includes(el.type));
-  if (permissionsets.length > 0) {
-    await shrinkPermissionSets(permissionsets.map((permset) => permset.filePath).filter(Boolean));
   }
 
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
