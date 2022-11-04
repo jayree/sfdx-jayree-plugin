@@ -532,10 +532,10 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.7":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.7.tgz#a5c9e7201efbb3b12e031fa408e02f40503a3908"
-  integrity sha512-u1cpAEF5CGi+/FAwxujjusIRI/Qk9rkAbw1HTZdmhFg2w7jmXOXllMrdfaNATSqv83S1uiSsWXyLSb5tTw6Vog==
+"@jayree/sfdx-plugin-prettier@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.8.tgz#87fef2945676d4046378210701c9e55b18f3627d"
+  integrity sha512-h5FQ5fSQnHNJ3hBVnRGjuyYdjhGz4Vj6tXLzw+en+ZCT/IrR8U0Xj5UuGP39WNkgaEWczaQcHWu0J7F8M3qGtQ==
   dependencies:
     "@oclif/core" "^1.19.2"
     "@prettier/plugin-xml" "^2.2.0"
@@ -545,12 +545,12 @@
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.0"
-    marked "^4.1.1"
+    marked "^4.2.1"
     marked-terminal "^5.1.1"
     prettier "^2.7.1"
     prettier-plugin-apex "^1.11.0"
     semver "^7.3.8"
-    tslib "^2.4.0"
+    tslib "^2.4.1"
 
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
