@@ -68,7 +68,7 @@
     "nock": "^13.2.9",
     "nyc": "^15.1.0",
     "oclif": "^3.2.22",
-    "patch-package": "^6.4.7",
+    "patch-package": "^6.5.0",
     "pinst": "^3.0.0",
     "prettier": "^2.7.1",
     "pretty-quick": "^3.1.3",
