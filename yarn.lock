@@ -532,20 +532,20 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.8":
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.8.tgz#87fef2945676d4046378210701c9e55b18f3627d"
-  integrity sha512-h5FQ5fSQnHNJ3hBVnRGjuyYdjhGz4Vj6tXLzw+en+ZCT/IrR8U0Xj5UuGP39WNkgaEWczaQcHWu0J7F8M3qGtQ==
+"@jayree/sfdx-plugin-prettier@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.9.tgz#fd25e728d1707c12c7064defe2d6838606e164d6"
+  integrity sha512-smQKbDzLhe5HyfBMOMp8mLqsjBj2t0SU5PEPkAKn0NmMjPaleoNqekEKhUXtBZCFvmlZhW4PKm17NunuUhJYHw==
   dependencies:
     "@oclif/core" "^1.19.2"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.31.17"
-    "@salesforce/kit" "^1.7.1"
+    "@salesforce/core" "^3.31.18"
+    "@salesforce/kit" "^1.8.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.0"
-    marked "^4.2.1"
+    marked "^4.2.2"
     marked-terminal "^5.1.1"
     prettier "^2.7.1"
     prettier-plugin-apex "^1.11.0"
@@ -1130,10 +1130,10 @@
     "@salesforce/ts-types" "^1.5.21"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.31.16", "@salesforce/core@^3.31.17":
-  version "3.31.17"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.31.17.tgz#83ab3c9c4730223943ceef4798aaa901fec7981e"
-  integrity sha512-rn3AYyePp3m1+IH+KVi+DWwMPcAPDYFiUxyJLh+Jr2hNj9i79eQBcUix6wunK3HaVz0N6Tm5FGIpjqfEVsU0cA==
+"@salesforce/core@^3.31.16", "@salesforce/core@^3.31.17", "@salesforce/core@^3.31.18":
+  version "3.31.18"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.31.18.tgz#ceaf2333c98bacd59b8666b5b69b659268165d61"
+  integrity sha512-t2T7BzuNXdLGyAXMBHm9PtGbRvqCZQga+c3ceKKufJXW+ahQ2X8SXrOnXRzoZOt8DgTjWO3hLJmTCzC4AVgl7w==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.7.0"
@@ -5872,10 +5872,10 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16, marked@^4.1.1, marked@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.1.tgz#eaa32594e45b4e58c02e4d118531fd04345de3b4"
-  integrity sha512-VK1/jNtwqDLvPktNpL0Fdg3qoeUZhmRsuiIjPEy/lHwXW4ouLoZfO4XoWd4ClDt+hupV1VLpkZhEovjU0W/kqA==
+marked@^4.0.16, marked@^4.1.1, marked@^4.2.1, marked@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.2.tgz#1d2075ad6cdfe42e651ac221c32d949a26c0672a"
+  integrity sha512-JjBTFTAvuTgANXx82a5vzK9JLSMoV6V3LBVn4Uhdso6t7vXrGx7g1Cd2r6NYSsxrYbQGFCMqBDhFHyK5q2UvcQ==
 
 "mem-fs-editor@^8.1.2 || ^9.0.0":
   version "9.5.0"
