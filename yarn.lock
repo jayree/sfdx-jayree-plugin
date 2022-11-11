@@ -511,15 +511,15 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-manifest@^2.3.10":
-  version "2.3.10"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.3.10.tgz#02dbcb5e5ed202ea1bcdb3e2055db8f79440f877"
-  integrity sha512-8KjataDgUHXBDM4RMwa43ZNShlYHQ91n6qTsZZ1yQ6RLJ+8cmrBUpluHVQbZQCm6sOnsvIlhi81FMXgu1VeWpw==
+"@jayree/sfdx-plugin-manifest@^2.3.11":
+  version "2.3.11"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.3.11.tgz#7fb1be09fec3909cd2f56767bfd16d95b6a99319"
+  integrity sha512-isna7BPq6HCyxXDYLIbns4oX+yWdLpphMo67+U+d0YBQ7Ty2Nbm6TJcsbr/pRMW39pxwc/cGthixAxTg9BW9hQ==
   dependencies:
     "@oclif/core" "^1.19.2"
-    "@salesforce/command" "^5.2.18"
+    "@salesforce/command" "^5.2.20"
     "@salesforce/kit" "^1.7.1"
-    "@salesforce/source-deploy-retrieve" "^7.5.1"
+    "@salesforce/source-deploy-retrieve" "^7.5.6"
     "@salesforce/ts-types" "^1.5.21"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
@@ -527,7 +527,7 @@
     fs-extra "^10.1.0"
     isomorphic-git "^1.21.0"
     listr2 "^5.0.5"
-    marked "^4.2.1"
+    marked "^4.2.2"
     marked-terminal "^5.1.1"
     semver "^7.3.8"
     tslib "^2.4.1"
@@ -1118,7 +1118,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.18", "@salesforce/command@^5.2.20":
+"@salesforce/command@^5.2.20":
   version "5.2.20"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.20.tgz#27b5f7837af3f8e4e263fb2d2ddd68cdee7ed9ee"
   integrity sha512-AXusWyYc1IZeQtmOHO2Can7/Up+GxLmDrp13VMq+mQDDm+phZ1CkNMoBCFW9Y81vFb3nyu3xz+LekFIhJ/75AA==
@@ -5873,7 +5873,7 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16, marked@^4.1.1, marked@^4.2.1, marked@^4.2.2:
+marked@^4.0.16, marked@^4.1.1, marked@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.2.tgz#1d2075ad6cdfe42e651ac221c32d949a26c0672a"
   integrity sha512-JjBTFTAvuTgANXx82a5vzK9JLSMoV6V3LBVn4Uhdso6t7vXrGx7g1Cd2r6NYSsxrYbQGFCMqBDhFHyK5q2UvcQ==
