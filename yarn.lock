@@ -1235,10 +1235,10 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.11":
-  version "2.2.11"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.11.tgz#d7387c8aedeff810195e159794736b2fc061a81e"
-  integrity sha512-jwE++n17EjeczZfAy429udMuJYf+DOizaI+NUWTrGkzZwvZHFw9kuYprXSuUNsWswi42oDlqeLiZUhnGL4KCuw==
+"@salesforce/source-tracking@^2.2.12":
+  version "2.2.12"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.12.tgz#c44e2c03e32d6ebb38ec69a83e06fb00066807a0"
+  integrity sha512-Clff5+mzkhwvz0cZYP8BNW4j0w6q1z7DzdTgwlSXedxBznTNgBPgsKn6ZGw7eOQOci5O2RknX+VedAcZKcRnUg==
   dependencies:
     "@salesforce/core" "^3.31.16"
     "@salesforce/kit" "^1.6.1"
