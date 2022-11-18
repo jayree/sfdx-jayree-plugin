@@ -10,7 +10,7 @@
     "@jayree/sfdx-plugin-manifest": "^2.3.11",
     "@jayree/sfdx-plugin-prettier": "^1.2.9",
     "@oclif/core": "^1.20.4",
-    "@salesforce/command": "^5.2.20",
+    "@salesforce/command": "^5.2.24",
     "@salesforce/kit": "^1.8.0",
     "@salesforce/source-deploy-retrieve": "^7.5.1",
     "@salesforce/source-tracking": "^2.2.12",
