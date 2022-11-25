@@ -532,22 +532,22 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.10":
-  version "1.2.10"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.10.tgz#b52d87357c834dc55d7748a415ebfbb23233b944"
-  integrity sha512-lMJnfnxitSRtwxOJkhYkehxgOZLzZL+2I0L/2dXUfS33aynqylHQebW5rlP1tMyr8SHNw9tg861MjplIeeQCZg==
+"@jayree/sfdx-plugin-prettier@^1.2.11":
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.11.tgz#bef18cdf1ae0603c2b0cd9f943daa47b8fd3da06"
+  integrity sha512-yWl1FLOETnZ6vW/Vh7U3bM7BkQzsoyHP+1MdDhwBD1sqGklA635uxBXYpjrQWZ9ajWJ4K2Bnal9nYYX4GNN1Lg==
   dependencies:
     "@oclif/core" "^1.19.2"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.32.1"
+    "@salesforce/core" "^3.32.2"
     "@salesforce/kit" "^1.8.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.0"
-    marked "^4.2.2"
+    marked "^4.2.3"
     marked-terminal "^5.1.1"
-    prettier "^2.7.1"
+    prettier "^2.8.0"
     prettier-plugin-apex "^1.11.0"
     semver "^7.3.8"
     tslib "^2.4.1"
@@ -1130,7 +1130,7 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.31.17", "@salesforce/core@^3.31.19", "@salesforce/core@^3.32.1":
+"@salesforce/core@^3.31.17", "@salesforce/core@^3.31.19", "@salesforce/core@^3.32.1", "@salesforce/core@^3.32.2":
   version "3.32.2"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.2.tgz#ea4f9cb4df59b77517aafaafbf188a654d2b25d9"
   integrity sha512-KQCserM6EWx4NQUzNMh34XXPUR5wV0IEItMg1kCrEhUq9FyXtW2KQWYgrTHeyAIYl9a0bUgcj6VDba1ADSsVYA==
@@ -7055,10 +7055,10 @@ prettier-plugin-apex@^1.11.0:
     wait-on "^6.0.0"
     yargs "^17.0.0"
 
-prettier@>=2.4.0, prettier@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
-  integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
+prettier@>=2.4.0, prettier@^2.7.1, prettier@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.0.tgz#c7df58393c9ba77d6fba3921ae01faf994fb9dc9"
+  integrity sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==
 
 pretty-bytes@^5.3.0:
   version "5.6.0"
