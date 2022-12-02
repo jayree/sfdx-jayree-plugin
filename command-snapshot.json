@@ -60,7 +60,7 @@
   {
     "command": "jayree:manifest:git:diff",
     "plugin": "@jayree/sfdx-plugin-manifest",
-    "flags": ["destructivechangesonly", "json", "loglevel", "outputdir"],
+    "flags": ["destructivechangesonly", "json", "loglevel", "outputdir", "sourcepath"],
     "alias": []
   },
   {
