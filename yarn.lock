@@ -538,23 +538,23 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.12":
-  version "1.2.12"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.12.tgz#601caac2d1e8b32cf7cc8407868e5a8b3f4dbdc4"
-  integrity sha512-45j8+Te1UC7bg3Av11GYMWvutaXaL4yQVYrVIpXYh0NjXvF7N27PM3udNyooukXhiFjSJrkuBfSgtI9BUIbyqA==
+"@jayree/sfdx-plugin-prettier@^1.2.13":
+  version "1.2.13"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.13.tgz#715c1c94656db6bda708651affa2f661dd296bd3"
+  integrity sha512-kNHvbhVkhcw/fvXUfZm3y5OP+rVWxWOcRr1woMIpdNbk4BI55ZLD01rlqRCAACJPN0yCqT5MNySsYGPOXLMi0Q==
   dependencies:
-    "@oclif/core" "^1.19.2"
+    "@oclif/core" "^1.21.0"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.32.6"
+    "@salesforce/core" "^3.32.9"
     "@salesforce/kit" "^1.8.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.1"
-    marked "^4.2.3"
+    marked "^4.2.4"
     marked-terminal "^5.1.1"
-    prettier "^2.8.0"
-    prettier-plugin-apex "^1.11.0"
+    prettier "^2.8.1"
+    prettier-plugin-apex "^1.12.0"
     semver "^7.3.8"
     tslib "^2.4.1"
 
@@ -820,7 +820,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.19.2", "@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.21.0":
+"@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.21.0":
   version "1.21.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.21.0.tgz#d91b2f40a4f446279ab6335c619fc1716fc23ab6"
   integrity sha512-B/AKYfHcNRAbb6Xz2kj0FlH9gWEi8aFS4iEr7EzguP3E2DpDk4wcf7eOMOfJYEmhuVd9sOpVWSnI2yP+FL/3Sg==
@@ -1136,10 +1136,10 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.31.19", "@salesforce/core@^3.32.6":
-  version "3.32.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.6.tgz#ee42663ffbf9db2478247fa7e6af3df652eebb5f"
-  integrity sha512-+j9nXnVnK4H+YmRfhcmSW/RZu2XIM6zKlXImsy+XhWBV1zOvM1JZiQngj3pdrGck7hoMc68YfWP0UEVzmM/k+g==
+"@salesforce/core@^3.31.19", "@salesforce/core@^3.32.6", "@salesforce/core@^3.32.9":
+  version "3.32.9"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.9.tgz#bb655f7cdfc5b97538421147add20e8b84a364ff"
+  integrity sha512-dpvatNXEtxuT0/8dW/iO6KHTVGO38rUVfZ5HgPRoOOfKt0bq0KSi3PrVj1LyA7iyE7wCzliXY4vTdLhqYtZY6g==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.8.0"
@@ -1147,7 +1147,7 @@
     "@salesforce/ts-types" "^1.5.21"
     "@types/graceful-fs" "^4.1.5"
     "@types/semver" "^7.3.13"
-    ajv "^8.11.0"
+    ajv "^8.11.2"
     archiver "^5.3.0"
     change-case "^4.1.2"
     debug "^3.2.7"
@@ -1795,6 +1795,16 @@ ajv@^8.0.1, ajv@^8.11.0:
   version "8.11.0"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.0.tgz#977e91dd96ca669f54a11e23e378e33b884a565f"
   integrity sha512-wGgprdCvMalC0BztXvitD2hC04YffAvtsUn93JbGXYLAtCUO4xd17mCCZQxUOItiBwZvJScWo8NIvQMQ71rdpg==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
+
+ajv@^8.11.2:
+  version "8.11.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.11.2.tgz#aecb20b50607acf2569b6382167b65a96008bb78"
+  integrity sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -5895,7 +5905,7 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16, marked@^4.2.3, marked@^4.2.4:
+marked@^4.0.16, marked@^4.2.4:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.4.tgz#5a4ce6c7a1ae0c952601fce46376ee4cf1797e1c"
   integrity sha512-Wcc9ikX7Q5E4BYDPvh1C6QNSxrjC9tBgz+A/vAhp59KXUgachw++uMvMKiSW8oA85nopmPZcEvBoex/YLMsiyA==
@@ -7101,17 +7111,17 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-apex@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-1.11.0.tgz#879ab7c44f67618524dedc7abf0599345e01dadb"
-  integrity sha512-snt2WXdS6++c54G3q30L7PmYHmVW08YzMJ0T3lPE8xvS+RmV0AhrWBUDmIl7jlcStUU4nntPwq8EO3di1PB6SQ==
+prettier-plugin-apex@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-1.12.0.tgz#2b7e7f9806e922da1f32f9fb9c9b13ee844aeece"
+  integrity sha512-8tnF2Pp5RMoEYipgFudrujlWRlXqags4lJZD7xSgordX+Bsh8Pq1jXPihkkquHKy4PeZMIuJAtYIEOFLBQIv/w==
   dependencies:
     axios "^1.0.0"
     jest-docblock "^29.0.0"
     wait-on "^6.0.0"
     yargs "^17.0.0"
 
-prettier@>=2.4.0, prettier@^2.7.1, prettier@^2.8.0, prettier@^2.8.1:
+prettier@>=2.4.0, prettier@^2.7.1, prettier@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.1.tgz#4e1fd11c34e2421bc1da9aea9bd8127cd0a35efc"
   integrity sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==
