@@ -538,14 +538,14 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.13":
-  version "1.2.13"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.13.tgz#715c1c94656db6bda708651affa2f661dd296bd3"
-  integrity sha512-kNHvbhVkhcw/fvXUfZm3y5OP+rVWxWOcRr1woMIpdNbk4BI55ZLD01rlqRCAACJPN0yCqT5MNySsYGPOXLMi0Q==
+"@jayree/sfdx-plugin-prettier@^1.2.14":
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.14.tgz#3a8e1248783d61640e0f17c5635641d49c2d9a4a"
+  integrity sha512-RlR7p7DssWDoTM05ua6SNmHgbsDP0bIj8a9s0IoXnYMk0nPwcId1NA04RKJ7npDUTOkw6nB3chtmG4GEmMDJVg==
   dependencies:
     "@oclif/core" "^1.21.0"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.32.9"
+    "@salesforce/core" "^3.32.10"
     "@salesforce/kit" "^1.8.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
@@ -1136,7 +1136,7 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.32.8", "@salesforce/core@^3.32.9":
+"@salesforce/core@^3.32.10", "@salesforce/core@^3.32.8", "@salesforce/core@^3.32.9":
   version "3.32.10"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.10.tgz#594e40a7c7b05e0578ff81bff6b8b9918088350a"
   integrity sha512-4FWSDlhjY4HwZvMkVsfJKNPIa0TwsLiiHTd89mZ2jeL53pQBpLvIm2kxvCfJrI0kn3Q9H4+I/37GUa2l3yXt0A==
