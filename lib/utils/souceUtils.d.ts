@@ -1,4 +1,4 @@
-declare type argvConnection = {
+type argvConnection = {
     username: string;
     instanceUrl: string;
 };
@@ -9,11 +9,11 @@ export declare function logFixes(updatedfiles: any): Promise<void>;
 export declare function getConnectionFromArgv(): Promise<argvConnection>;
 export declare function applyFixes(tags: any, root?: any, filter?: any[]): Promise<aggregatedFixResults>;
 export declare function applySourceFixes(filter: string[]): Promise<aggregatedFixResults>;
-export declare type aggregatedFixResults = {
+export type aggregatedFixResults = {
     [workaround: string]: fixResults;
 };
-declare type fixResults = fixResult[];
-declare type fixResult = {
+type fixResults = fixResult[];
+type fixResult = {
     filePath: string;
     operation: string;
     message: string;
