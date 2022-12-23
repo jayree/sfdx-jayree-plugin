@@ -1,3 +1,15 @@
+## [4.4.16](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.15...v4.4.16) (2022-12-23)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-legacy from 1.1.14 to 1.1.15 ([#459](https://github.com/jayree/sfdx-jayree-plugin/issues/459)) ([e260446](https://github.com/jayree/sfdx-jayree-plugin/commit/e260446157e80a96d4c8e0057c7b89f7006b1912))
+* **deps:** bump @jayree/sfdx-plugin-manifest from 2.4.7 to 2.4.8 ([#460](https://github.com/jayree/sfdx-jayree-plugin/issues/460)) ([5bfa5a6](https://github.com/jayree/sfdx-jayree-plugin/commit/5bfa5a6e7dc1587ec1171514e892f7fb7b886272))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.2.14 to 1.2.15 ([#452](https://github.com/jayree/sfdx-jayree-plugin/issues/452)) ([18b9675](https://github.com/jayree/sfdx-jayree-plugin/commit/18b9675d939c349855e38f0838b5763af58c7f27))
+* **deps:** bump @oclif/core from 1.21.0 to 1.22.0 ([#453](https://github.com/jayree/sfdx-jayree-plugin/issues/453)) ([1829b8f](https://github.com/jayree/sfdx-jayree-plugin/commit/1829b8f26a1261090af1b0f21ec812afb01901ef))
+* **deps:** bump ignore from 5.2.1 to 5.2.4 ([#449](https://github.com/jayree/sfdx-jayree-plugin/issues/449)) ([f5f41c3](https://github.com/jayree/sfdx-jayree-plugin/commit/f5f41c394c2a7086097aa492e1665f22ee74c248))
+* **deps:** bump puppeteer from 19.4.0 to 19.4.1 ([#458](https://github.com/jayree/sfdx-jayree-plugin/issues/458)) ([ea895aa](https://github.com/jayree/sfdx-jayree-plugin/commit/ea895aac1a454ad5e4605301b023c81210fb90cf))
+
 ## [4.4.15](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.14...v4.4.15) (2022-12-16)
 
 
