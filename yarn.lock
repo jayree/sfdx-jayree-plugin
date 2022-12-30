@@ -3616,10 +3616,10 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-sf-plugin@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.3.0.tgz#d222815d9f28097de0aab1057071391b01527bc5"
-  integrity sha512-1oTpcvujKqgzW4SdO0wYn8t2cpb8lo4LX1Qs1DFo3C/HyDbwslsLR7lGIV94ar9Mfr8kR7+8HgDoTnSOTDBwUQ==
+eslint-plugin-sf-plugin@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.3.1.tgz#c122b74719cdc46bdd27c7d5dd157357c00a110e"
+  integrity sha512-KqH/XpbkbMR4tPdcjDNBoCpgBZK6YiDSdc03XEM/zr0LrzdZUtos0K1Y76n+A3ZMROHr9xzRu127e1/oLEK0bg==
   dependencies:
     "@typescript-eslint/utils" "^5.47.0"
 
