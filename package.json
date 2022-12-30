@@ -22,7 +22,7 @@
     "is-docker": "^3.0.0",
     "is-wsl": "^2.2.0",
     "listr2": "^5.0.6",
-    "marked": "^4.2.4",
+    "marked": "^4.2.5",
     "marked-terminal": "^5.1.1",
     "mkdirp": "^1.0.4",
     "object-path": "^0.11.8",
