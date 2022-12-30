@@ -538,20 +538,20 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.15":
-  version "1.2.15"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.15.tgz#8195848247daf5ab2e54d8ed2875def86fe93ab3"
-  integrity sha512-VoQrKYeBFcBwKF8024NujABO0abZcQf46R6+6UT5Bsy2Dwumr3KkmXXyOGeyHE8Vdt2izVxjlpOMkbDotb4Kvg==
+"@jayree/sfdx-plugin-prettier@^1.2.16":
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.16.tgz#7d3edc6307f3c18e2a98b1da82664d734a6d2288"
+  integrity sha512-ObOMsm/EmHCGyaWq+zasXgfKG9vxaNXscY8y0/H8UAk2PzwxwsLSQPNEJKWbVV3JIZNEGjoruyvct2RQqe/6MQ==
   dependencies:
-    "@oclif/core" "^1.22.0"
+    "@oclif/core" "^1.23.0"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.32.11"
+    "@salesforce/core" "^3.32.12"
     "@salesforce/kit" "^1.8.0"
     cli-progress "^3.11.2"
     debug "^4.3.4"
     fs-extra "^10.1.0"
     ignore "^5.2.4"
-    marked "^4.2.4"
+    marked "^4.2.5"
     marked-terminal "^5.1.1"
     prettier "^2.8.1"
     prettier-plugin-apex "^1.12.0"
@@ -1136,7 +1136,7 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.32.11", "@salesforce/core@^3.32.12", "@salesforce/core@^3.32.8":
+"@salesforce/core@^3.32.12", "@salesforce/core@^3.32.8":
   version "3.32.12"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.12.tgz#853cc5b6a5f95d4896b2d34a40a6042ef9aa6d2c"
   integrity sha512-27rqSiQWul7b/OkJs19FYDv2M/S4oI4efiGv+6sR7UWv7D7CG1P+0XpgLS3d9xRYF30h98n6VQr4W2a+BWFRvA==
