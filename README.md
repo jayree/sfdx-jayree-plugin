@@ -24,7 +24,7 @@ $ sfdx plugins:install sfdx-jayree
 $ sfdx jayree:[COMMAND]
 running command...
 $ sfdx plugins
-sfdx-jayree 4.4.17
+sfdx-jayree 4.4.18
 $ sfdx help jayree:[COMMAND]
 USAGE
   $ sfdx jayree:COMMAND
@@ -194,7 +194,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/flowtestcoverage.ts)_
 
 ### `sfdx jayree:manifest:cleanup`
 
@@ -354,7 +354,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/org/configure/index.ts)_
+_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree:org:configure:country`
 
@@ -378,7 +378,7 @@ DESCRIPTION
   update country integration values in the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/org/configure/country.ts)_
+_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree:org:configure:state`
 
@@ -407,7 +407,7 @@ DESCRIPTION
   import (create/update) states into the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/org/configure/state.ts)_
+_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree:org:settings`
 
@@ -440,7 +440,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/org/settings.ts)_
+_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/org/settings.ts)_
 
 ### `sfdx jayree:org:streaming`
 
@@ -469,7 +469,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/org/streaming.ts)_
+_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/org/streaming.ts)_
 
 ### `sfdx jayree:packagedescription:create`
 
@@ -596,7 +596,7 @@ DESCRIPTION
   (examples will follow)
 ```
 
-_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/source/fix.ts)_
+_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/source/fix.ts)_
 
 ### `sfdx jayree:source:tracking:list`
 
@@ -627,7 +627,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/source/tracking/list.ts)_
+_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/source/tracking/list.ts)_
 
 ### `sfdx jayree:source:tracking:store:get`
 
@@ -655,7 +655,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/source/tracking/store/get.ts)_
+_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/source/tracking/store/get.ts)_
 
 ### `sfdx jayree:source:tracking:store:set`
 
@@ -686,7 +686,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.17/src/commands/jayree/source/tracking/store/set.ts)_
+_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.18/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
