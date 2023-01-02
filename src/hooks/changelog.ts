@@ -14,27 +14,25 @@ import semver from 'semver';
 import { Hook } from '@oclif/core';
 
 // original from https://github.com/salesforcecli/plugin-info/blob/main/src/shared/parseReleaseNotes.ts
-const parseReleaseNotes = (notes: string, version: string): marked.Token[] => {
+const parseReleaseNotes = (notes: string, version: string, currentVersion: string): marked.Token[] => {
   let found = false;
-  let closestVersion: string;
   let versions: string[];
 
   const parsed = marked.lexer(notes);
 
   let tokens: marked.Token[];
 
-  const findVersion = (desiredVersion: string): void => {
+  const findVersion = (desiredVersion: string, localVersion: string): void => {
     versions = [];
 
     tokens = parsed.filter((token) => {
       // TODO: Could make header depth (2) a setting in oclif.info.releasenotes
       if (token.type === 'heading' && token.depth <= 2) {
         const coercedVersion = semver.coerce(token.text).version;
-
         // We will use this to find the closest patch if passed version is not found
         versions.push(coercedVersion);
 
-        if (coercedVersion === desiredVersion) {
+        if (coercedVersion <= desiredVersion && coercedVersion > localVersion) {
           found = true;
 
           return token;
@@ -47,18 +45,13 @@ const parseReleaseNotes = (notes: string, version: string): marked.Token[] => {
     });
   };
 
-  findVersion(version);
+  findVersion(version, currentVersion);
 
-  if (!tokens.length) {
-    // If version was not found, try again with the closest patch version
+  if (!versions.includes(version)) {
     const semverRange = `${semver.major(version)}.${semver.minor(version)}.x`;
 
-    closestVersion = semver.maxSatisfying<string>(versions, semverRange);
+    const closestVersion = semver.maxSatisfying<string>(versions, semverRange);
 
-    findVersion(closestVersion);
-  }
-
-  if (closestVersion !== undefined) {
     const warning = marked.lexer(
       `# ATTENTION: Version ${version} was not found. Showing notes for closest patch version ${closestVersion}.`
     )[0];
@@ -91,7 +84,7 @@ export const changelog: Hook<'changelog'> = async function () {
       }
       debug({ latestVersion: latestVersion.version, version });
       if (latestVersion.version !== version) {
-        const tokens = parseReleaseNotes(changelogFile, version);
+        const tokens = parseReleaseNotes(changelogFile, version, latestVersion.version);
         if (!tokens.length) {
           debug(`${name} - didn't find version '${version}'.`);
         } else {
