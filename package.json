@@ -7,7 +7,7 @@
   "type": "module",
   "dependencies": {
     "@jayree/sfdx-plugin-legacy": "^1.1.17",
-    "@jayree/sfdx-plugin-manifest": "^2.5.2",
+    "@jayree/sfdx-plugin-manifest": "^2.6.2",
     "@jayree/sfdx-plugin-prettier": "^1.2.17",
     "@oclif/core": "^1.22.0",
     "@salesforce/command": "^5.2.37",

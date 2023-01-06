@@ -517,20 +517,20 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-manifest@^2.5.2":
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.5.2.tgz#daf037d71a6aea904cbc3abf1c373913c946d7df"
-  integrity sha512-GR07Q4JdDjFprvjHqCmlq1wp/rDnOA1aETl2DuwYZDsiLYuQX5PHOLOo9fWqbOzO96oqt363IrxNqjli4jBkKw==
+"@jayree/sfdx-plugin-manifest@^2.6.2":
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.6.2.tgz#65f5006713f19301a482b23178b9d879a1ada938"
+  integrity sha512-iWoZMG01XPZePXA2chb58Hies6KLqItWhwvKqNHQLltZwDRK/5acKmTKejNYG1S7DyTlVRpg9pA5PrFyF+znNQ==
   dependencies:
     "@oclif/core" "^1.23.0"
     "@salesforce/command" "^5.2.35"
-    "@salesforce/kit" "^1.7.1"
+    "@salesforce/kit" "^1.8.0"
     "@salesforce/source-deploy-retrieve" "^7.5.19"
-    "@salesforce/ts-types" "^1.5.21"
+    "@salesforce/ts-types" "^1.7.1"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.0.12"
-    fs-extra "^10.1.0"
+    fs-extra "^11.1.0"
     isomorphic-git "^1.21.0"
     listr2 "^5.0.6"
     marked "^4.2.5"
@@ -1203,7 +1203,7 @@
     typedoc-plugin-missing-exports "0.23.0"
     typescript "^4.1.3"
 
-"@salesforce/kit@^1.7.1", "@salesforce/kit@^1.8.0", "@salesforce/kit@^1.8.1", "@salesforce/kit@^1.8.2":
+"@salesforce/kit@^1.8.0", "@salesforce/kit@^1.8.1", "@salesforce/kit@^1.8.2":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-1.8.2.tgz#97d652bef37d02a13dffd6e9b68050e779db2bc4"
   integrity sha512-UoY1bgWjw198QMyLKYXlF1bdqBqVtffBgtIT1M/cEwBF/Es1Oz3HaF1TwF98CmyC1dr6rL08Hr2SE5zHGijcLw==
@@ -4147,6 +4147,15 @@ fs-extra@^10.0.0, fs-extra@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
+fs-extra@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.0.tgz#5784b102104433bb0e090f48bfc4a30742c357ed"
+  integrity sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
