@@ -6,7 +6,7 @@
   "bugs": "https://github.com/jayree/sfdx-jayree-plugin/issues",
   "type": "module",
   "dependencies": {
-    "@jayree/sfdx-plugin-legacy": "^1.1.16",
+    "@jayree/sfdx-plugin-legacy": "^1.1.17",
     "@jayree/sfdx-plugin-manifest": "^2.5.2",
     "@jayree/sfdx-plugin-prettier": "^1.2.17",
     "@oclif/core": "^1.22.0",
