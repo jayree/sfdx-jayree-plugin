@@ -5,6 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { createRequire } from 'module';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
@@ -17,7 +19,12 @@ import config from '../../../../utils/config.js';
 const require = createRequire(import.meta.url);
 const CSconfig = require('../../../../../config/countrystate.json');
 
-Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
+
+Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
 export default class UpdateCountry extends SfdxCommand {

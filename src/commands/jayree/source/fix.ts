@@ -4,12 +4,19 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { applyFixes, logFixes, aggregatedFixResults } from '../../../utils/souceUtils.js';
 
-Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
+
+Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'sourceretrievefix');
 

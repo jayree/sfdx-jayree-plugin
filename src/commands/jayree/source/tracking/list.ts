@@ -5,7 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* eslint-disable no-console */
-import path from 'path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
@@ -13,7 +14,12 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import { getCurrentStateFolderFilePath } from '../../../../utils/stateFolderHandler.js';
 
-Messages.importMessagesDirectory(new URL('./', import.meta.url).pathname);
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
+
+Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'scratchorgtrackinglist');
 
@@ -48,7 +54,7 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
     const maxRev = maxCounter >= maxNum ? maxCounter : maxNum;
     const maxrevpath = await getCurrentStateFolderFilePath(
       this.project.getPath(),
-      path.join('orgs', this.org.getOrgId(), 'maxRevision.json'),
+      join('orgs', this.org.getOrgId(), 'maxRevision.json'),
       false
     );
 
@@ -83,7 +89,7 @@ $ sfdx jayree:source:tracking:list -u me@my.org -r 101`,
       const { serverMaxRevisionCounter } = await fs.readJSON(
         await getCurrentStateFolderFilePath(
           this.project.getPath(),
-          path.join('orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
+          join('orgs', this.org.getOrgId(), 'jayreeStoredMaxRevision.json'),
           true
         ),
 

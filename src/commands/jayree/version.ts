@@ -5,9 +5,15 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { accessSync, readFileSync } from 'fs';
-import { dirname, join } from 'path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { SfdxCommand } from '@salesforce/command';
 import { AnyJson } from '@salesforce/ts-types';
+
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
 
 export default class Version extends SfdxCommand {
   public static hidden = true;
@@ -15,7 +21,7 @@ export default class Version extends SfdxCommand {
   // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
     const root = () => {
-      let currentPath = new URL('./', import.meta.url).pathname;
+      let currentPath = __dirname;
       let rootpath;
       while (!rootpath) {
         try {

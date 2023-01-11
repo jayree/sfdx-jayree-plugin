@@ -5,13 +5,19 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 /* istanbul ignore file */
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import fs from 'fs-extra';
 import Debug from 'debug';
 import TerminalRenderer from 'marked-terminal';
 import { marked } from 'marked';
 import semver from 'semver';
 import { Hook } from '@oclif/core';
+
+// eslint-disable-next-line no-underscore-dangle
+const __filename = fileURLToPath(import.meta.url);
+// eslint-disable-next-line no-underscore-dangle
+const __dirname = dirname(__filename);
 
 // original from https://github.com/salesforcecli/plugin-info/blob/main/src/shared/parseReleaseNotes.ts
 const parseReleaseNotes = (notes: string, version: string, currentVersion: string): marked.Token[] => {
@@ -67,7 +73,7 @@ export const changelog: Hook<'changelog'> = async function () {
   const debug = Debug(`${this.config.bin}:jayree-sfdx-plugin:hooks:changelog`);
   process.once('exit', () => {
     try {
-      const pluginRootPath = join(new URL('./', import.meta.url).pathname, '..', '..');
+      const pluginRootPath = join(__dirname, '..', '..');
       const { name, version } = fs.readJsonSync(join(pluginRootPath, 'package.json')) as {
         name: string;
         version: string;
