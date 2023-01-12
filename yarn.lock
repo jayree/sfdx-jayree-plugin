@@ -498,10 +498,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.18":
-  version "1.1.18"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.18.tgz#8b30ee06a4a2c676bb4a70af8a9db98be939607b"
-  integrity sha512-SFu0+DRYi6nJgUD51ab/wJR8nUWXRXho8LADNqH9Zo/StW/SefYKbyzaDmjQDBrJ5w9uBdsabvmhq4PCKNwPTw==
+"@jayree/sfdx-plugin-legacy@^1.1.19":
+  version "1.1.19"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.19.tgz#1796c7628ba2ae69e8add3bed7beda30a8ee0cc0"
+  integrity sha512-JfhkXGbt4sel/tzawMuuE4B1dQxhItSHGHowdzPH4HSB7+ovKgSLDPQBTF4tdvjqTqmn3VqHJPdUsTxlCmkdiw==
   dependencies:
     "@oclif/core" "^1.23.0"
     "@salesforce/command" "^5.2.37"
