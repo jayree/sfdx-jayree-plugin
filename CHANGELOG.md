@@ -1,3 +1,18 @@
+## [4.4.20](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.19...v4.4.20) (2023-01-12)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-legacy from 1.1.18 to 1.1.19 ([#507](https://github.com/jayree/sfdx-jayree-plugin/issues/507)) ([7a69e34](https://github.com/jayree/sfdx-jayree-plugin/commit/7a69e34bce435de34fb6df744cff6c7c31a3a40b))
+* **deps:** bump @jayree/sfdx-plugin-manifest from 2.6.3 to 2.7.1 ([#508](https://github.com/jayree/sfdx-jayree-plugin/issues/508)) ([62cd533](https://github.com/jayree/sfdx-jayree-plugin/commit/62cd5334fc5fcdade26c392f599c70f75e930903))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.2.18 to 1.2.19 ([#498](https://github.com/jayree/sfdx-jayree-plugin/issues/498)) ([90d83ba](https://github.com/jayree/sfdx-jayree-plugin/commit/90d83ba567d609da1421a9765498da64c2612bf3))
+* **deps:** bump @oclif/core from 1.23.1 to 1.24.0 ([#501](https://github.com/jayree/sfdx-jayree-plugin/issues/501)) ([5fc1894](https://github.com/jayree/sfdx-jayree-plugin/commit/5fc18940ca0d57ac5aa8f4a4714ec38436e72526))
+* **deps:** bump @salesforce/command from 5.2.37 to 5.2.40 ([#512](https://github.com/jayree/sfdx-jayree-plugin/issues/512)) ([ef621ff](https://github.com/jayree/sfdx-jayree-plugin/commit/ef621ff9c6205600479fb6ba754e4943dc51a397))
+* **deps:** bump @salesforce/source-deploy-retrieve from 7.5.22 to 7.6.0 ([#503](https://github.com/jayree/sfdx-jayree-plugin/issues/503)) ([849ebb8](https://github.com/jayree/sfdx-jayree-plugin/commit/849ebb8e97ad309268a35b656d37ee08f114fb4a))
+* **deps:** bump fast-xml-parser from 4.0.12 to 4.0.13 ([#505](https://github.com/jayree/sfdx-jayree-plugin/issues/505)) ([c6e33e7](https://github.com/jayree/sfdx-jayree-plugin/commit/c6e33e735e6bf27774234fa034e77760016707b7))
+* **deps:** bump puppeteer from 19.4.1 to 19.5.1 ([#504](https://github.com/jayree/sfdx-jayree-plugin/issues/504)) ([216ac0f](https://github.com/jayree/sfdx-jayree-plugin/commit/216ac0fbc20e2bce5964df69a030e9738dc890bc))
+* restore windows compatibility ([7b37318](https://github.com/jayree/sfdx-jayree-plugin/commit/7b3731804eaa02c617fbf8f832119c11257cc70c))
+
 ## [4.4.19](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.18...v4.4.19) (2023-01-06)
 
 
