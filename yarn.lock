@@ -540,14 +540,14 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.19":
-  version "1.2.19"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.19.tgz#528e7af34902e2cf43241cff5967464e829e0d0f"
-  integrity sha512-F8X3FeSxazvLnoqQYgkBH9RSF3tPY59hMb+1x9jZGJEpNLfDs5HkTcI0ht3GwJHSwt6HH/tMfGf2d7GeKHxaTg==
+"@jayree/sfdx-plugin-prettier@^1.2.20":
+  version "1.2.20"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.20.tgz#f0fd470ea05707e9b0ca3c2216d4f3f6bf117e92"
+  integrity sha512-050qrh3jGYgMTaTzMz05D0ojCvqbStJup8guLew/4WOJGWTA71QAKHViOXKvxhgkF15CfUt+LXGrtGUHEhpDVA==
   dependencies:
-    "@oclif/core" "^1.23.0"
+    "@oclif/core" "^1.24.0"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.32.12"
+    "@salesforce/core" "^3.32.13"
     "@salesforce/kit" "^1.8.2"
     cli-progress "^3.11.2"
     debug "^4.3.4"
@@ -555,7 +555,7 @@
     ignore "^5.2.4"
     marked "^4.2.5"
     marked-terminal "^5.1.1"
-    prettier "^2.8.1"
+    prettier "^2.8.2"
     prettier-plugin-apex "^1.12.0"
     semver "^7.3.8"
     tslib "^2.4.1"
@@ -1138,15 +1138,15 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.32.12":
-  version "3.32.12"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.12.tgz#853cc5b6a5f95d4896b2d34a40a6042ef9aa6d2c"
-  integrity sha512-27rqSiQWul7b/OkJs19FYDv2M/S4oI4efiGv+6sR7UWv7D7CG1P+0XpgLS3d9xRYF30h98n6VQr4W2a+BWFRvA==
+"@salesforce/core@^3.32.12", "@salesforce/core@^3.32.13":
+  version "3.32.13"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.32.13.tgz#dbfe221180361ab10f2e1a4b9d35f41c3aeb2a8e"
+  integrity sha512-AiJ14GTCK3HqbHqhZ+G52vpLtkEKK2Liy5FnpEed/a8DXQZGNHlatGvIANRBPwSSAhnP2JkyiFUHtHHkc+ThYA==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.8.0"
     "@salesforce/schemas" "^1.4.0"
-    "@salesforce/ts-types" "^1.5.21"
+    "@salesforce/ts-types" "^1.7.2"
     "@types/graceful-fs" "^4.1.5"
     "@types/semver" "^7.3.13"
     ajv "^8.11.2"
@@ -1276,7 +1276,7 @@
     sinon "^5.1.1"
     tslib "^2.2.0"
 
-"@salesforce/ts-types@^1.5.21", "@salesforce/ts-types@^1.7.1", "@salesforce/ts-types@^1.7.2":
+"@salesforce/ts-types@^1.7.1", "@salesforce/ts-types@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-1.7.2.tgz#ab40399d291c7eca57efc9890daf2fa2632197ec"
   integrity sha512-eCpWKEb03UCKBJ6Svp0Vwcwt+fG6BQbopO4x5wt6CYeT8Rjt0dbDQicZPmVL59j2qyt3Q4Y4EYsxXUGZmdfvDw==
@@ -7232,7 +7232,7 @@ prettier-plugin-apex@^1.12.0:
     wait-on "^6.0.0"
     yargs "^17.0.0"
 
-prettier@>=2.4.0, prettier@^2.7.1, prettier@^2.8.1, prettier@^2.8.2:
+prettier@>=2.4.0, prettier@^2.7.1, prettier@^2.8.2:
   version "2.8.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.2.tgz#c4ea1b5b454d7c4b59966db2e06ed7eec5dfd160"
   integrity sha512-BtRV9BcncDyI2tsuS19zzhzoxD8Dh8LiCx7j7tHzrkz8GFXAexeWFdi22mjE1d16dftH2qNaytVxqiRTGlMfpw==
