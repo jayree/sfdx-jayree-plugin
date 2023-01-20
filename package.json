@@ -12,7 +12,7 @@
     "@oclif/core": "^1.24.0",
     "@salesforce/command": "^5.2.40",
     "@salesforce/kit": "^1.8.2",
-    "@salesforce/source-deploy-retrieve": "^7.7.0",
+    "@salesforce/source-deploy-retrieve": "^7.7.3",
     "@salesforce/source-tracking": "^2.2.17",
     "debug": "^4.3.4",
     "enquirer": "^2.3.6",
