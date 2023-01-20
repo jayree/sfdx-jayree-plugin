@@ -822,7 +822,7 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.23.0", "@oclif/core@^1.23.1", "@oclif/core@^1.24.0", "@oclif/core@^1.25.0":
+"@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.23.0", "@oclif/core@^1.23.1", "@oclif/core@^1.24.0", "@oclif/core@^1.24.1", "@oclif/core@^1.25.0":
   version "1.25.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.25.0.tgz#a3891f903bf211ce1f3c8a05419b686f02c5bbd6"
   integrity sha512-vS8L5Uqc5Wuq3zmKVvX5LLcyxhfH2X2q+LG1P6czzkh6k09uLeDaZfwaYPXD7ItM4Vfy+KEctfKiWePeLDnOpg==
@@ -1031,12 +1031,12 @@
   resolved "https://registry.yarnpkg.com/@oclif/screen/-/screen-3.0.4.tgz#663db0ecaf23f3184e7f01886ed578060e4a7f1c"
   integrity sha512-IMsTN1dXEXaOSre27j/ywGbBjrzx0FNd1XmuhCWCB9NTPrhWI1Ifbz+YLSEcstfQfocYsrbrIessxXb2oon4lA==
 
-"@oclif/test@^2.2.19":
-  version "2.2.20"
-  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.2.20.tgz#c5c76f9ab3eeb6df3c1af81a95428c95fb0065e9"
-  integrity sha512-SaSMgeB9DKcfRRIvh461eK1eEkjgV/iYHWU5XhWli8psAnqKFgxar3ESpMfQKwYjVMxKdKSjOhEFHaHMOgPJOQ==
+"@oclif/test@^2.2.21":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.3.0.tgz#c62efef4e4fa2ec3d44a3a79b58cc9e43898413b"
+  integrity sha512-DgoEOY/Y1FvNwA1J0Sy7u6jZSHbDutw6kNOWqVizlf1wSJiHKV6Ia9DyhHsg2Nb4EZ+1AKcetC0fI7ixLxxJHw==
   dependencies:
-    "@oclif/core" "^1.23.1"
+    "@oclif/core" "^2.0.2-beta.6"
     fancy-test "^2.0.11"
 
 "@octokit/auth-token@^2.4.4":
@@ -1160,13 +1160,13 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.40":
-  version "5.2.40"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.40.tgz#2b5e98abe693698d4945178835053eabe0f6e99e"
-  integrity sha512-HCGtzPTbZwjAOHlRM0cd6gWcMicGZTfemfj+1qCVNWArFuTtYZu2JEjXCZRm5UgV9F+d4aFLMQtMQDiZYENq8g==
+"@salesforce/command@^5.2.40", "@salesforce/command@^5.2.41":
+  version "5.2.41"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.41.tgz#a56ae554ea8b75f6dbc34e1282f9d650bb42e8fa"
+  integrity sha512-uSsIftl7JC10keU2LQp7tDXfJUT7hLmRT2fa5Bk5Mve4SpFcP7Z4hwahoOkoeGtZdhrFJNNVFii60NQFMsSvXw==
   dependencies:
-    "@oclif/core" "^1.23.0"
-    "@oclif/test" "^2.2.19"
+    "@oclif/core" "^1.24.1"
+    "@oclif/test" "^2.2.21"
     "@salesforce/core" "^3.32.12"
     "@salesforce/kit" "^1.8.2"
     "@salesforce/ts-types" "^1.7.1"
