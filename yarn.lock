@@ -991,12 +991,12 @@
     widest-line "^3.1.0"
     wrap-ansi "^6.2.0"
 
-"@oclif/plugin-help@^5.1.19", "@oclif/plugin-help@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.0.tgz#5f75e6977c0f6c37cb67168170f032338a19efb6"
-  integrity sha512-Sp6Eywj3V2Moif/CJeJsyInPJhzifs2JjsaVbsrLS77WOL2/XAmca1sE5QxfakOGYH21g8xz/Ht9ZgiNy8u1zQ==
+"@oclif/plugin-help@^5.1.19", "@oclif/plugin-help@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.1.tgz#beee5beb1accb4100f57f0354f2d261271642d51"
+  integrity sha512-6z/ZholfRZ/k6XonAzV6p34A7LAhr2r2JUOlaCF2ZMrF6LjMN21dWXVK0Sxra+TQqZEm0B2oeSbTmHFtDkbIlw==
   dependencies:
-    "@oclif/core" "^2.0.2-beta.6"
+    "@oclif/core" "^2.0.3"
 
 "@oclif/plugin-not-found@^2.3.7":
   version "2.3.8"
