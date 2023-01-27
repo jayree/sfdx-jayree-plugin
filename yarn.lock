@@ -498,24 +498,24 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.20":
-  version "1.1.20"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.20.tgz#e08b31bcca3c8c8d0b189c89d0ccf0ba2ac9dc5b"
-  integrity sha512-2w/ykQ183aR6f5KOJvF919BEr+0o6DnKnwAnww4icJQqzQH88Ci1p6qZGn2ftLpDhEfM8ob25C7CBXg8SqWaNQ==
+"@jayree/sfdx-plugin-legacy@^1.1.22":
+  version "1.1.22"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.22.tgz#1957eebe086a1a49a04969f21959a67ca1def9e8"
+  integrity sha512-qAk41vXw7iM2ImfYavLH7iORhE4iI6WedwhIhax4if5wUOL9Q8xLtvbmYJt7G87hD7HKq7ZuU/bsmzpbZVIZ5g==
   dependencies:
-    "@oclif/core" "^1.24.0"
-    "@salesforce/command" "^5.2.40"
-    "@salesforce/source-deploy-retrieve" "^7.7.0"
+    "@oclif/core" "^1.26.1"
+    "@salesforce/command" "^5.2.42"
+    "@salesforce/source-deploy-retrieve" "^7.7.5"
     adm-zip "^0.5.10"
     debug "^4.3.4"
-    fast-xml-parser "^4.0.13"
+    fast-xml-parser "^4.0.15"
     fs-extra "^10.1.0"
     inquirer "^9.1.4"
-    marked "^4.2.5"
+    marked "^4.2.12"
     marked-terminal "^5.1.1"
-    puppeteer "^19.5.2"
+    puppeteer "^19.6.1"
     semver "^7.3.8"
-    tslib "^2.4.1"
+    tslib "^2.5.0"
 
 "@jayree/sfdx-plugin-manifest@^2.7.4":
   version "2.7.4"
@@ -1160,7 +1160,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.40", "@salesforce/command@^5.2.42":
+"@salesforce/command@^5.2.42":
   version "5.2.42"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.42.tgz#88c56cc3e1b6a8e7a79b244d13c0879ad4de7c22"
   integrity sha512-aCTn1Ob+Esek6GaWsje4j22t9oQLOIbBKBRx135WSg5SZj8stEOXF2uJgPZCINsAhuvEY1Kq8mINql79Jg9qXQ==
@@ -4165,7 +4165,7 @@ fast-xml-parser@^3.21.1:
   dependencies:
     strnum "^1.0.4"
 
-fast-xml-parser@^4.0.13, fast-xml-parser@^4.0.15:
+fast-xml-parser@^4.0.15:
   version "4.0.15"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.0.15.tgz#9befe85c68ee90cf3757f1ef9cf3f1497888dbea"
   integrity sha512-bF4/E33/K/EZDHV23IJpSK2SU7rZTaSkDH5G85nXX8SKlQ9qBpWQhyPpm2nlTBewDJgtpd6+1x4TNpKmocmthQ==
@@ -6119,7 +6119,7 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16, marked@^4.2.12, marked@^4.2.4, marked@^4.2.5:
+marked@^4.0.16, marked@^4.2.12, marked@^4.2.4:
   version "4.2.12"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.2.12.tgz#d69a64e21d71b06250da995dcd065c11083bebb5"
   integrity sha512-yr8hSKa3Fv4D3jdZmtMMPghgVt6TWbk86WQaWhDloQjRSQhMMYCAro7jP7VDJrjjdV8pxVxMssXS8B8Y5DZ5aw==
@@ -7466,7 +7466,7 @@ puppeteer-core@19.6.1:
     unbzip2-stream "1.4.3"
     ws "8.11.0"
 
-puppeteer@^19.5.2, puppeteer@^19.6.1:
+puppeteer@^19.6.1:
   version "19.6.1"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.6.1.tgz#25d0a188d44b99d8ea3870f89ea1931a48def189"
   integrity sha512-gcqNilThyBPrUMvo2UZNG4KVoMjhCfCV7/84mTVk3oo0k65iO7hEKrB4waiJ15O0MHQpM79+XBHavRgBbRXUWQ==
