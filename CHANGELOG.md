@@ -1,3 +1,17 @@
+## [4.4.23](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.22...v4.4.23) (2023-01-27)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-legacy from 1.1.20 to 1.1.22 ([#556](https://github.com/jayree/sfdx-jayree-plugin/issues/556)) ([200fa47](https://github.com/jayree/sfdx-jayree-plugin/commit/200fa47ce62df4d35bb2473b564a6091b919e2fa))
+* **deps:** bump @jayree/sfdx-plugin-manifest from 2.7.3 to 2.7.4 ([#554](https://github.com/jayree/sfdx-jayree-plugin/issues/554)) ([5659dcf](https://github.com/jayree/sfdx-jayree-plugin/commit/5659dcf54d5db81eb9cbc744a1377ac9e1039b13))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.2.21 to 1.2.22 ([#557](https://github.com/jayree/sfdx-jayree-plugin/issues/557)) ([ff63200](https://github.com/jayree/sfdx-jayree-plugin/commit/ff63200235a5866f9e4d495fb21a1a6cfe1a2596))
+* **deps:** bump @salesforce/command from 5.2.41 to 5.2.42 ([#552](https://github.com/jayree/sfdx-jayree-plugin/issues/552)) ([7b992ef](https://github.com/jayree/sfdx-jayree-plugin/commit/7b992ef4d0163f06139e139cb592f68e6e070c18))
+* **deps:** bump @salesforce/source-tracking from 2.2.18 to 2.2.19 ([#547](https://github.com/jayree/sfdx-jayree-plugin/issues/547)) ([0f9deb3](https://github.com/jayree/sfdx-jayree-plugin/commit/0f9deb3c45d352ff2902476f50c13b6298687441))
+* **deps:** bump fast-xml-parser from 4.0.13 to 4.0.15 ([#546](https://github.com/jayree/sfdx-jayree-plugin/issues/546)) ([4cc1e92](https://github.com/jayree/sfdx-jayree-plugin/commit/4cc1e92eae3f309fa67cf54a9d23b1ab53b1dd72))
+* **deps:** bump puppeteer from 19.5.2 to 19.6.1 ([#543](https://github.com/jayree/sfdx-jayree-plugin/issues/543)) ([fc30af4](https://github.com/jayree/sfdx-jayree-plugin/commit/fc30af4f43ebd1f854fc2f6b9efd246c70dcdfcc))
+* **deps:** bump tslib from 2.4.1 to 2.5.0 ([#544](https://github.com/jayree/sfdx-jayree-plugin/issues/544)) ([2a3cb99](https://github.com/jayree/sfdx-jayree-plugin/commit/2a3cb992a9e8f319a781ad3a1be32068391efcff))
+
 ## [4.4.22](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.21...v4.4.22) (2023-01-20)
 
 
