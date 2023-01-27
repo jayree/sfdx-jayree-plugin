@@ -8,7 +8,7 @@
   "dependencies": {
     "@jayree/sfdx-plugin-legacy": "^1.1.20",
     "@jayree/sfdx-plugin-manifest": "^2.7.3",
-    "@jayree/sfdx-plugin-prettier": "^1.2.21",
+    "@jayree/sfdx-plugin-prettier": "^1.2.22",
     "@oclif/core": "^1.24.0",
     "@salesforce/command": "^5.2.42",
     "@salesforce/kit": "^1.8.3",

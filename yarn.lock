@@ -540,14 +540,14 @@
     semver "^7.3.8"
     tslib "^2.4.1"
 
-"@jayree/sfdx-plugin-prettier@^1.2.21":
-  version "1.2.21"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.21.tgz#2078ccf5702469504d0897c3f35eee9003888732"
-  integrity sha512-jsOTeQ/ed1AhlgbmS2YIWSvbc0J6Hbux840rNs/V33E6ZJdeGpjBlBpPmsqJwvn4R1zqlEjl27LjkDsqeQr8NQ==
+"@jayree/sfdx-plugin-prettier@^1.2.22":
+  version "1.2.22"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.22.tgz#e683d6caedb75a14f5c4067a68c3691a9527c035"
+  integrity sha512-fKL7tZwSPGZhW+xDUrCRZ8UaZTOjzAays4SQ6BfNkV2IsbEAtwWzLNx0QEsMhXFDWn3QSOCewWjrwyS6brzJbg==
   dependencies:
-    "@oclif/core" "^1.25.0"
+    "@oclif/core" "^1.26.1"
     "@prettier/plugin-xml" "^2.2.0"
-    "@salesforce/core" "^3.33.0"
+    "@salesforce/core" "^3.33.1"
     "@salesforce/kit" "^1.8.3"
     cli-progress "^3.11.2"
     debug "^4.3.4"
@@ -558,7 +558,7 @@
     prettier "^2.8.3"
     prettier-plugin-apex "^1.12.0"
     semver "^7.3.8"
-    tslib "^2.4.1"
+    tslib "^2.5.0"
 
 "@jridgewell/gen-mapping@^0.1.0":
   version "0.1.1"
@@ -822,10 +822,10 @@
     is-wsl "^2.1.1"
     tslib "^2.3.1"
 
-"@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.23.0", "@oclif/core@^1.23.1", "@oclif/core@^1.24.0", "@oclif/core@^1.25.0":
-  version "1.25.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.25.0.tgz#a3891f903bf211ce1f3c8a05419b686f02c5bbd6"
-  integrity sha512-vS8L5Uqc5Wuq3zmKVvX5LLcyxhfH2X2q+LG1P6czzkh6k09uLeDaZfwaYPXD7ItM4Vfy+KEctfKiWePeLDnOpg==
+"@oclif/core@^1.20.3", "@oclif/core@^1.20.4", "@oclif/core@^1.23.0", "@oclif/core@^1.23.1", "@oclif/core@^1.24.0", "@oclif/core@^1.25.0", "@oclif/core@^1.26.1":
+  version "1.26.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.26.1.tgz#26e46c96143d3e2b1dd9bd558ae1653fe9a4f3fa"
+  integrity sha512-g+OWJcM7JOVI53caTEtq0BB1nPotWctRLUyFODPgvDqXhVR7QED+Qz3LwFAMD8dt7/Ar2ZNq15U3bnpnOv453A==
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     "@oclif/screen" "^3.0.4"
@@ -1172,10 +1172,10 @@
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.32.12", "@salesforce/core@^3.32.13", "@salesforce/core@^3.33.0":
-  version "3.33.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.33.0.tgz#481cbd58955a7384a1f9200e02effc4dfe8e59da"
-  integrity sha512-nz7qKwm1GpNr8swksthm5jKORj4wn647iCm6Ij1X5oRts1uynLdnqyNDtWD6OJCOaMXunjRmnhRB82JXq/TnFg==
+"@salesforce/core@^3.32.12", "@salesforce/core@^3.32.13", "@salesforce/core@^3.33.1":
+  version "3.33.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.33.1.tgz#3dd0a44ba22763e8e0c2c97df03393e5c2c845d9"
+  integrity sha512-jaed8rK+NhSxB6MjYUN8f/2VkvtbFN/Ce/l6JvgFE+cvOf2g+lPv1pSsnKKlaSiiYcXkOvIRDT9d9ns1RLJzUw==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.8.0"
