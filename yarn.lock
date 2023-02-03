@@ -498,22 +498,22 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.22":
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.22.tgz#1957eebe086a1a49a04969f21959a67ca1def9e8"
-  integrity sha512-qAk41vXw7iM2ImfYavLH7iORhE4iI6WedwhIhax4if5wUOL9Q8xLtvbmYJt7G87hD7HKq7ZuU/bsmzpbZVIZ5g==
+"@jayree/sfdx-plugin-legacy@^1.1.24":
+  version "1.1.24"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.24.tgz#1d3f882191fe994715e86ee9c5081f2ce47c2f30"
+  integrity sha512-F0zV1zRdERBtUvqkO32Socmi9R6mnHedODB2E+4TD6DadTuiqfYQQ7EjUM2UjQSUYhNoIVBrz/ni6QJjKnSgKg==
   dependencies:
     "@oclif/core" "^1.26.1"
-    "@salesforce/command" "^5.2.42"
-    "@salesforce/source-deploy-retrieve" "^7.7.5"
+    "@salesforce/command" "^5.2.43"
+    "@salesforce/source-deploy-retrieve" "^7.8.0"
     adm-zip "^0.5.10"
     debug "^4.3.4"
-    fast-xml-parser "^4.0.15"
+    fast-xml-parser "^4.1.1"
     fs-extra "^10.1.0"
     inquirer "^9.1.4"
     marked "^4.2.12"
     marked-terminal "^5.1.1"
-    puppeteer "^19.6.1"
+    puppeteer "^19.6.3"
     semver "^7.3.8"
     tslib "^2.5.0"
 
@@ -1160,14 +1160,14 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.2.42":
-  version "5.2.42"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.42.tgz#88c56cc3e1b6a8e7a79b244d13c0879ad4de7c22"
-  integrity sha512-aCTn1Ob+Esek6GaWsje4j22t9oQLOIbBKBRx135WSg5SZj8stEOXF2uJgPZCINsAhuvEY1Kq8mINql79Jg9qXQ==
+"@salesforce/command@^5.2.42", "@salesforce/command@^5.2.43":
+  version "5.2.43"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.2.43.tgz#32934cea940ade9246d9019a08275d509737e07d"
+  integrity sha512-FIG5VjY5WSyB8oVUxS7/ow69EwD8fweHCU7oO9SJf6zlM2D+Vd/zJf8hw3aX+j/whb28runX5rDAtI6oelQ8rg==
   dependencies:
     "@oclif/core" "^1.25.0"
     "@oclif/test" "^2.2.21"
-    "@salesforce/core" "^3.32.12"
+    "@salesforce/core" "^3.33.1"
     "@salesforce/kit" "^1.8.2"
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
@@ -4084,10 +4084,10 @@ fast-xml-parser@^3.21.1:
   dependencies:
     strnum "^1.0.4"
 
-fast-xml-parser@^4.0.15:
-  version "4.0.15"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.0.15.tgz#9befe85c68ee90cf3757f1ef9cf3f1497888dbea"
-  integrity sha512-bF4/E33/K/EZDHV23IJpSK2SU7rZTaSkDH5G85nXX8SKlQ9qBpWQhyPpm2nlTBewDJgtpd6+1x4TNpKmocmthQ==
+fast-xml-parser@^4.0.15, fast-xml-parser@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.1.1.tgz#28c878b7f1eb4555fa898f1c715adf9d4007306e"
+  integrity sha512-4gAP5PvNyrqePBOIIcpaEeE+nKBry1n6qTQiJsE59sLP0OC+YwhU7/XVmLLEMexbiluFQX1yEYm82Pk9B7xEiw==
   dependencies:
     strnum "^1.0.5"
 
@@ -7369,10 +7369,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer-core@19.6.1:
-  version "19.6.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.6.1.tgz#952726a364f3acff8cd8df8def798555962dbfe0"
-  integrity sha512-TdbqPYGHRgaqO1XPOM5ThE7uSs5NsYraOUU546okJz7jR9He5wnGuFd6LppoeWt8a4eM5RgzmICxeDUD5QwQtA==
+puppeteer-core@19.6.3:
+  version "19.6.3"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.6.3.tgz#e3334fbb4ccb2c1ca6f4597e2f082de5a80599da"
+  integrity sha512-8MbhioSlkDaHkmolpQf9Z7ui7jplFfOFTnN8d5kPsCazRRTNIH6/bVxPskn0v5Gh9oqOBlknw0eHH0/OBQAxpQ==
   dependencies:
     cross-fetch "3.1.5"
     debug "4.3.4"
@@ -7385,16 +7385,16 @@ puppeteer-core@19.6.1:
     unbzip2-stream "1.4.3"
     ws "8.11.0"
 
-puppeteer@^19.6.1:
-  version "19.6.1"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.6.1.tgz#25d0a188d44b99d8ea3870f89ea1931a48def189"
-  integrity sha512-gcqNilThyBPrUMvo2UZNG4KVoMjhCfCV7/84mTVk3oo0k65iO7hEKrB4waiJ15O0MHQpM79+XBHavRgBbRXUWQ==
+puppeteer@^19.6.1, puppeteer@^19.6.3:
+  version "19.6.3"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.6.3.tgz#4edc7ea87f7e7e7b2885395326a6c9e5a222a10b"
+  integrity sha512-K03xTtGDwS6cBXX/EoqoZxglCUKcX2SLIl92fMnGMRjYpPGXoAV2yKEh3QXmXzKqfZXd8TxjjFww+tEttWv8kw==
   dependencies:
     cosmiconfig "8.0.0"
     https-proxy-agent "5.0.1"
     progress "2.0.3"
     proxy-from-env "1.1.0"
-    puppeteer-core "19.6.1"
+    puppeteer-core "19.6.3"
 
 q@^1.5.1:
   version "1.5.1"
