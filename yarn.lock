@@ -1270,13 +1270,13 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.7.0", "@salesforce/source-deploy-retrieve@^7.7.5":
-  version "7.7.5"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.7.5.tgz#4eb64f02d4759f98e1e64187a081c472ebe8a2ae"
-  integrity sha512-zkGpbvTVr2nBJfbTxShFfaa4DAOvbXiaaWjZg0oVLUDoAQh+uQKX4aPdsXqJR4pKdQR8u1JwEV7TlR1f5gMCrg==
+"@salesforce/source-deploy-retrieve@^7.7.0", "@salesforce/source-deploy-retrieve@^7.7.5", "@salesforce/source-deploy-retrieve@^7.8.0":
+  version "7.8.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.8.0.tgz#fc0195a049282509f9687e49bf0d623e1c5fe89a"
+  integrity sha512-DpUK4QW8Ee5Mrjv1+43+gLhlFm9GgvMbQ4dRW3IkwMiGwhTIxZ/kyV3gqWK6/YI81P2EY46B3suV6QBnbk97gg==
   dependencies:
     "@salesforce/core" "^3.32.13"
-    "@salesforce/kit" "^1.8.0"
+    "@salesforce/kit" "^1.8.3"
     "@salesforce/ts-types" "^1.7.2"
     archiver "^5.3.1"
     fast-xml-parser "^3.21.1"
@@ -1289,14 +1289,14 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.19":
-  version "2.2.19"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.19.tgz#754d02b9b6c51547a4055fa26baa6e895e498202"
-  integrity sha512-2OfIpQ1O02MSB+1Pjlmsi6nRw8PijwXcArh//tSRwYc3YEmR+5DvKS3zh5/rJFAgOpfeeT7SLmvYFTAIhQTzCQ==
+"@salesforce/source-tracking@^2.2.21":
+  version "2.2.21"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.21.tgz#de1559ac6bf7081c54c392cd51b0e6db6f29414d"
+  integrity sha512-el2mEsEV+CMGTq0g7cp+23wnRLzivYiIp3QtIOgVThZkHmwueuaNFlP0swWcoX/g5GKo+LuVf6VpUnrmq+nJNg==
   dependencies:
-    "@salesforce/core" "^3.32.12"
+    "@salesforce/core" "^3.33.1"
     "@salesforce/kit" "^1.8.3"
-    "@salesforce/source-deploy-retrieve" "^7.7.5"
+    "@salesforce/source-deploy-retrieve" "^7.8.0"
     graceful-fs "^4.2.10"
     isomorphic-git "1.17.0"
     ts-retry-promise "^0.7.0"
