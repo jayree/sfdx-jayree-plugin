@@ -69,7 +69,6 @@
         "flags": [
             "file",
             "json",
-            "loglevel",
             "manifest"
         ],
         "alias": []
@@ -78,17 +77,16 @@
         "command": "jayree:manifest:generate",
         "plugin": "@jayree/sfdx-plugin-manifest",
         "flags": [
-            "apiversion",
-            "excludeall",
-            "excludemanaged",
+            "api-version",
+            "exclude-all",
+            "exclude-managed",
             "file",
-            "includeflowversions",
+            "include-flow-versions",
             "json",
-            "loglevel",
-            "matchcase",
-            "matchwholeword",
-            "quickfilter",
-            "targetusername"
+            "match-case",
+            "match-whole-word",
+            "quick-filter",
+            "target-org"
         ],
         "alias": []
     },
@@ -96,11 +94,10 @@
         "command": "jayree:manifest:git:diff",
         "plugin": "@jayree/sfdx-plugin-manifest",
         "flags": [
-            "destructivechangesonly",
+            "destructive-changes-only",
             "json",
-            "loglevel",
-            "outputdir",
-            "sourcepath"
+            "output-dir",
+            "source-dir"
         ],
         "alias": []
     },
