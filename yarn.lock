@@ -961,18 +961,18 @@
     chalk "^4.1.0"
     tslib "^2.3.1"
 
-"@oclif/plugin-command-snapshot@^3.3.1":
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.1.tgz#d7ce5fbae9def1817807b4e1bfd77a8562e25bb0"
-  integrity sha512-f4ZwDIW9Jly/o0iqxIs52NUlkdkEkYv3/9UQVRIZ5pHihi+nv/wBLaEu/z4qRgZQ/MvOxyWjHhy9mrZtnuDFww==
+"@oclif/plugin-command-snapshot@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.3.tgz#df8fb70a19d94cc2e03559c7d668eeff9f09b3a8"
+  integrity sha512-6VQ2ZyMaQoHNzpNy5oYYJmNja59JSGG/yJfykp98/t+JC2qdBOkMPIMobpffV+pzO8Vo1XErAcrbGAHpJ0uQCA==
   dependencies:
-    "@oclif/core" "^2.0.3"
+    "@oclif/core" "^2.0.8"
     chalk "^4.1.2"
     just-diff "^5.2.0"
     lodash "^4.17.21"
     semver "^7.3.8"
     ts-json-schema-generator "^1.2.0"
-    tslib "^2.4.1"
+    tslib "^2.5.0"
 
 "@oclif/plugin-help@3.2.18":
   version "3.2.18"
