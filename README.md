@@ -24,7 +24,7 @@ $ sfdx plugins:install sfdx-jayree
 $ sfdx jayree:[COMMAND]
 running command...
 $ sfdx plugins
-sfdx-jayree 4.4.25
+sfdx-jayree 4.4.26
 $ sfdx help jayree:[COMMAND]
 USAGE
   $ sfdx jayree:COMMAND
@@ -195,7 +195,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/flowtestcoverage.ts)_
 
 ### `sfdx jayree:manifest:beta:git:diff`
 
@@ -207,8 +207,8 @@ USAGE
     [--destructive-changes-only]
 
 ARGUMENTS
-  REF1  base commit or branch
-  REF2  commit or branch to compare to the base commit
+  REF1  Base commit or branch.
+  REF2  Commit or branch to compare to the base commit.
 
 FLAGS
   -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
@@ -274,132 +274,149 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.7.4/src/commands/jayree/manifest/beta/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.8.2/src/commands/jayree/manifest/beta/git/diff.ts)_
 
 ### `sfdx jayree:manifest:cleanup`
 
-removes those tags from a manifest file that are present in a second manifest file
+Removes those tags from a manifest file that are present in a second manifest file.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:cleanup [-x <filepath>] [-f <filepath>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:manifest:cleanup -f <value> [--json] [-x <value>]
 
 FLAGS
-  -f, --file=<value>                                                                path to the second 'cleanup'
-                                                                                    manifest file
-  -x, --manifest=<value>                                                            path to the manifest file
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -f, --file=<value>      (required) Path to the second 'cleanup' manifest file.
+  -x, --manifest=<value>  Path to the manifest file.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
-  removes those tags from a manifest file that are present in a second manifest file
+  Removes those tags from a manifest file that are present in a second manifest file.
+
   Use this command to remove components or metadata types from a manifes file.
+
   If the 'cleanup' manifest file (--file) doesn't exist, a template file is created, which can then be modified.
 
 EXAMPLES
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.7.4/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.8.2/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
-generate a complete manifest file form the specified org
+Generate a complete manifest file form the specified org.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:generate [-q <array>] [-c] [-w] [--includeflowversions] [-f <string>] [-x | -a] [-u <string>]
-    [--apiversion <string>] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:manifest:generate -o <value> [--json] [--api-version <value>] [-q <value>] [-c] [-w] [--include-flow-versions]
+    [-f <value>] [--exclude-managed | --exclude-all]
 
 FLAGS
-  -a, --excludeall                                                                  exclude all packages from output
-  -c, --matchcase                                                                   enable 'match case' for the
-                                                                                    quickfilter
-  -f, --file=<value>                                                                write to 'file' instead of stdout
-  -q, --quickfilter=<value>                                                         csv separated list of metadata type,
-                                                                                    member or file names to filter on
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  -w, --matchwholeword                                                              enable 'match whole word' for the
-                                                                                    quickfilter
-  -x, --excludemanaged                                                              exclude managed packages from output
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --includeflowversions                                                             include flow versions as with api
-                                                                                    version 43.0
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -c, --match-case               Enable 'match case' for the quickfilter.
+  -f, --file=<value>             Write to 'file' instead of stdout.
+  -o, --target-org=<value>       (required) Username or alias of the target org.
+  -q, --quick-filter=<value>...  Metadata type, member or file path to filter on.
+  -w, --match-whole-word         Enable 'match whole word' for the quickfilter.
+  --api-version=<value>          Override the api version used for api requests made by this command
+  --exclude-all                  Exclude all packages from output.
+  --exclude-managed              Exclude managed packages from output.
+  --include-flow-versions        Include flow versions as with api version 43.0.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
-  generate a complete manifest file form the specified org
+  Generate a complete manifest file form the specified org.
+
   Use this command to generate a manifest file based on an existing org.
 
 EXAMPLES
   $ sfdx jayree:manifest:generate --targetusername myOrg@example.com
-
   <?xml version='1.0' encoding='UTF-8'?>
-
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.7.4/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.8.2/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
-create a manifest and destructiveChanges manifest using 'git diff' data
+Create a project manifest and destructiveChanges manifest that lists the metadata components you want to deploy or delete based on changes in your git history.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:git:diff [-p <array>] [-o <string>] [-d] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:manifest:git:diff [REF1] [REF2] [--json] [-d <value>] [--output-dir <value>]
+  [--destructive-changes-only]
 
 ARGUMENTS
-  REF1  base commit or branch
-  REF2  commit or branch to compare to the base commit
+  REF1  Base commit or branch.
+  REF2  Commit or branch to compare to the base commit.
 
 FLAGS
-  -d, --destructivechangesonly                                                      create a destructiveChanges manifest
-                                                                                    only (package.xml will be empty)
-  -o, --outputdir=<value>                                                           directory to save the created
-                                                                                    manifest files
-  -p, --sourcepath=<value>                                                          comma-separated list of source file
-                                                                                    paths to limit the diff
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
+  --destructive-changes-only   Create a destructiveChanges manifest only.
+  --output-dir=<value>         Directory to save the created manifest files.
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
-  create a manifest and destructiveChanges manifest using 'git diff' data
+  Create a project manifest and destructiveChanges manifest that lists the metadata components you want to deploy or
+  delete based on changes in your git history.
+
   Use this command to create a manifest and destructiveChanges manifest file based on the difference (git diff) of two
   git refs.
 
-  You can use all ways to spell <commit> which are valid for 'git diff'.
-  (See https://git-scm.com/docs/git-diff)
+  You can use all ways to spell <commit> which are valid for 'git diff' (See https://git-scm.com/docs/git-diff).
 
 EXAMPLES
-  $ sfdx jayree:manifest:git:diff <commit> <commit>
+  Uses the changes between two arbitrary <commit>.
 
-  $ sfdx jayree:manifest:git:diff <commit>..<commit>
+    $ sfdx jayree:manifest:git:diff <commit> <commit>
+    $ sfdx jayree:manifest:git:diff <commit>..<commit>
 
-  uses the changes between two arbitrary <commit>
+  Uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both
+  <commit>.
 
-  $ sfdx jayree:manifest:git:diff <commit>...<commit>
+    $ sfdx jayree:manifest:git:diff <commit>...<commit>
 
-  uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both <commit>.
+  Uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1).
 
-  $ sfdx jayree:manifest:git:diff branchA..branchB
+    $ sfdx jayree:manifest:git:diff branchA..branchB
 
-  uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1)
+  Uses the diff of what is unique in branchB (REF2).
 
-  $ sfdx jayree:manifest:git:diff branchA...branchB
+    $ sfdx jayree:manifest:git:diff branchA...branchB
 
-  uses the diff of what is unique in branchB (REF2)
+  Specify the flags before or after the REF args
+
+    $ sfdx jayree:manifest:git:diff --output-dir package <commit> <commit>
+    $ sfdx jayree:manifest:git:diff <commit> <commit> --output-dir package
+
+  If you specify the 'source-dir' flag before the REF args, use '--' to separate the args from the 'source-dir'
+  values.
+
+    $ sfdx jayree:manifest:git:diff --source-dir force-app -- <commit> <commit>
+
+FLAG DESCRIPTIONS
+  -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
+
+    The supplied path can be to a single file (in which case the operation is applied to only one file) or to a folder
+    (in which case the operation is applied to all metadata types in the directory and its subdirectories).
+
+    You can specify this flag more than once.
+
+  --destructive-changes-only  Create a destructiveChanges manifest only.
+
+    Use this flag to create a 'destructiveChanges.xml' and a blank 'package.xml'.
+
+  --output-dir=<value>  Directory to save the created manifest files.
+
+    The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.7.4/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.8.2/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -434,7 +451,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/org/configure/index.ts)_
+_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree:org:configure:country`
 
@@ -458,7 +475,7 @@ DESCRIPTION
   update country integration values in the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/org/configure/country.ts)_
+_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree:org:configure:state`
 
@@ -487,7 +504,7 @@ DESCRIPTION
   import (create/update) states into the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/org/configure/state.ts)_
+_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree:org:settings`
 
@@ -520,7 +537,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/org/settings.ts)_
+_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/org/settings.ts)_
 
 ### `sfdx jayree:org:streaming`
 
@@ -549,7 +566,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/org/streaming.ts)_
+_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/org/streaming.ts)_
 
 ### `sfdx jayree:packagedescription:create`
 
@@ -676,7 +693,7 @@ DESCRIPTION
   (examples will follow)
 ```
 
-_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/source/fix.ts)_
+_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/source/fix.ts)_
 
 ### `sfdx jayree:source:tracking:list`
 
@@ -707,7 +724,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/source/tracking/list.ts)_
+_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/source/tracking/list.ts)_
 
 ### `sfdx jayree:source:tracking:store:get`
 
@@ -735,7 +752,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/source/tracking/store/get.ts)_
+_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/source/tracking/store/get.ts)_
 
 ### `sfdx jayree:source:tracking:store:set`
 
@@ -766,7 +783,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.25/src/commands/jayree/source/tracking/store/set.ts)_
+_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.26/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
