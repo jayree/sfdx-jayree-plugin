@@ -855,7 +855,7 @@
     widest-line "^3.1.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^2.0.11", "@oclif/core@^2.0.2-beta.6", "@oclif/core@^2.0.3", "@oclif/core@^2.0.8", "@oclif/core@^2.1.1", "@oclif/core@^2.1.5":
+"@oclif/core@^2.0.11", "@oclif/core@^2.0.2-beta.6", "@oclif/core@^2.0.3", "@oclif/core@^2.0.8", "@oclif/core@^2.1.1", "@oclif/core@^2.1.2", "@oclif/core@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.1.5.tgz#c6a926fa53bf9e40d86369f405bcfda448b81464"
   integrity sha512-vwktkhUFco3roVCaK20RLUQURb/IcPyvBQrZBn02mmNw+l5S4w4LEII60ArPY+pf0NjG5ElFKnrOXPaqaYxyYw==
@@ -960,12 +960,12 @@
     chalk "^4.1.0"
     tslib "^2.3.1"
 
-"@oclif/plugin-command-snapshot@^3.3.4":
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.4.tgz#be6b995ec5e578917ebebb21e74c5cface7b64b7"
-  integrity sha512-mfAfInRRaSXSHTXkmIMFzW0I4EWwdjtS3iaTxWz/anP26++sQOAFeRSEKtMQc58XzvqYbLutbywEw3dzr6trSQ==
+"@oclif/plugin-command-snapshot@^3.3.5":
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.5.tgz#a1eab2517f13bb29f7239c9161cca876ac077f61"
+  integrity sha512-T0xK88sDLBbdlgQzKLDbJuBw9h43nLWshR/dJsvOBzabStDyiBDBF2f3W0ylCEKJzDcGt1q4V9rjFNaAmT5Hlw==
   dependencies:
-    "@oclif/core" "^2.0.8"
+    "@oclif/core" "^2.1.2"
     chalk "^4.1.2"
     just-diff "^5.2.0"
     lodash "^4.17.21"
