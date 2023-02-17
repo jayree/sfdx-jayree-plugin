@@ -539,12 +539,12 @@
     semver "^7.3.8"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-prettier@^1.2.25":
-  version "1.2.25"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.25.tgz#5fadc589d7891a666360c1476ccffaa037e415b6"
-  integrity sha512-lmc0UfecUWmWpKT7QQR1Z9rt34JQZkaiRvvgVEIhNWPbCXrLmSETuw8uIpkSgaLwBKJ9xd8iXXzyIuEeI82qDg==
+"@jayree/sfdx-plugin-prettier@^1.2.26":
+  version "1.2.26"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.26.tgz#32e232876348510559fdedab14846502197bf677"
+  integrity sha512-liWCsa+urDdxyfv6AaFKpBO5m/JBlWdzZ/UBi4ujiy5r9ZT9eEHSU00qnUS/3aPFe4XQhz+a9mFfPc/plFL8sQ==
   dependencies:
-    "@oclif/core" "^2.0.11"
+    "@oclif/core" "^2.1.5"
     "@prettier/plugin-xml" "^2.2.0"
     "@salesforce/core" "^3.33.1"
     "@salesforce/kit" "^1.8.5"
@@ -855,7 +855,7 @@
     widest-line "^3.1.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^2.0.11", "@oclif/core@^2.0.2-beta.6", "@oclif/core@^2.0.3", "@oclif/core@^2.0.8", "@oclif/core@^2.1.1", "@oclif/core@^2.1.2", "@oclif/core@^2.1.5":
+"@oclif/core@^2.0.2-beta.6", "@oclif/core@^2.0.3", "@oclif/core@^2.0.8", "@oclif/core@^2.1.1", "@oclif/core@^2.1.2", "@oclif/core@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.1.5.tgz#c6a926fa53bf9e40d86369f405bcfda448b81464"
   integrity sha512-vwktkhUFco3roVCaK20RLUQURb/IcPyvBQrZBn02mmNw+l5S4w4LEII60ArPY+pf0NjG5ElFKnrOXPaqaYxyYw==
