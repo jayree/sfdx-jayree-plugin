@@ -32,7 +32,7 @@
     "tslib": "^2.5.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.2",
+    "@commitlint/cli": "^17.4.3",
     "@commitlint/config-conventional": "^17.4.3",
     "@oclif/plugin-command-snapshot": "^3.3.5",
     "@oclif/plugin-help": "^5.2.4",
