@@ -1,3 +1,16 @@
+## [4.4.28](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.27...v4.4.28) (2023-02-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-legacy from 1.1.26 to 1.1.27 ([#616](https://github.com/jayree/sfdx-jayree-plugin/issues/616)) ([953628f](https://github.com/jayree/sfdx-jayree-plugin/commit/953628ff80973e937cf5adeefb44046ea523d246))
+* **deps:** bump @jayree/sfdx-plugin-manifest from 2.8.3 to 2.8.7 ([#620](https://github.com/jayree/sfdx-jayree-plugin/issues/620)) ([2d2bf45](https://github.com/jayree/sfdx-jayree-plugin/commit/2d2bf45daae6a8c1b631df39459a8eee1e9e0f8d))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.2.26 to 1.2.28 ([#614](https://github.com/jayree/sfdx-jayree-plugin/issues/614)) ([e2655a4](https://github.com/jayree/sfdx-jayree-plugin/commit/e2655a41701c818dd84e95536ad90437e7459452))
+* **deps:** bump @salesforce/command from 5.3.0 to 5.3.1 ([#611](https://github.com/jayree/sfdx-jayree-plugin/issues/611)) ([5f98cbb](https://github.com/jayree/sfdx-jayree-plugin/commit/5f98cbba4b451bbd00621139a1451a2e33803462))
+* **deps:** bump @salesforce/kit from 1.8.5 to 1.9.0 ([#621](https://github.com/jayree/sfdx-jayree-plugin/issues/621)) ([f19d56e](https://github.com/jayree/sfdx-jayree-plugin/commit/f19d56e4cd505ee46527524a61637b13eaf82b13))
+* **deps:** bump @salesforce/source-tracking from 2.2.21 to 2.2.22 ([#608](https://github.com/jayree/sfdx-jayree-plugin/issues/608)) ([2fb53e9](https://github.com/jayree/sfdx-jayree-plugin/commit/2fb53e998d7b7a7e6bed2338c3dce8984a90c6ea))
+* **deps:** bump puppeteer from 19.7.1 to 19.7.2 ([#617](https://github.com/jayree/sfdx-jayree-plugin/issues/617)) ([01896fd](https://github.com/jayree/sfdx-jayree-plugin/commit/01896fdf237a5c511d45bb61048ee5d64d5ad5e4))
+
 ## [4.4.27](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.26...v4.4.27) (2023-02-17)
 
 
