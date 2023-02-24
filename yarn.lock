@@ -498,14 +498,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.26":
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.26.tgz#68a48cfde279e66b8b15aa802082f60bb82344a1"
-  integrity sha512-fjTajOj9sfy3Xfg225F2smMdHcHN8YeW/6WJouAeJtgRYdaVsNAbQ2q2PpxpksgiqcXK8Orsc8aEtkBYFpWIWA==
+"@jayree/sfdx-plugin-legacy@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.27.tgz#0411e7817ec45af42df6c0b1acf3547f7841f914"
+  integrity sha512-F+0YaujkpGeOjqHPAWsmXdTOmq9JljKexcakg0YNfDNCnHFQFB1pnNcHyAWhy6qtN/sYx3dDt4C58y4k2jyp0A==
   dependencies:
     "@oclif/core" "^1.26.2"
-    "@salesforce/command" "^5.3.0"
-    "@salesforce/source-deploy-retrieve" "^7.9.3"
+    "@salesforce/command" "^5.3.1"
+    "@salesforce/source-deploy-retrieve" "^7.10.1"
     adm-zip "^0.5.10"
     debug "^4.3.4"
     fast-xml-parser "^4.1.2"
@@ -513,7 +513,7 @@
     inquirer "^9.1.4"
     marked "^4.2.12"
     marked-terminal "^5.1.1"
-    puppeteer "^19.7.1"
+    puppeteer "^19.7.2"
     semver "^7.3.8"
     tslib "^2.5.0"
 
@@ -1159,7 +1159,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.3.0", "@salesforce/command@^5.3.1":
+"@salesforce/command@^5.3.1":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.1.tgz#da84ec2ceb11a89ba4e4aaab9bdb27de0f0a6565"
   integrity sha512-4+79WUmMtCvjmoIc/EW78oG1q7k2FIKY1IrYUhvnqoDCIeMNtVyTuABIac6ZVfdTFPU1XdQOO8XipbygRmixSA==
@@ -1269,13 +1269,13 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.8.0", "@salesforce/source-deploy-retrieve@^7.9.1", "@salesforce/source-deploy-retrieve@^7.9.3":
-  version "7.9.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.9.3.tgz#71fd6bafcec5eabd77de2480ccb40453b47f91a6"
-  integrity sha512-yoFEM+OLDPOynHH1jEJvDtSHuCbF/oiB/cJeKTWGzWj3pDXoxQU9+r1dCsxU/s9TwgfOcSU1kpTBL0ZSPgWI5Q==
+"@salesforce/source-deploy-retrieve@^7.10.1", "@salesforce/source-deploy-retrieve@^7.8.0", "@salesforce/source-deploy-retrieve@^7.9.1", "@salesforce/source-deploy-retrieve@^7.9.3":
+  version "7.10.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.10.1.tgz#9e35a444c56237d10021cd4f4f53f5ddb5503c65"
+  integrity sha512-stptCD5sUUNvlIvjSQrpOBy5D8QtDUfdyYQZdPueHA4M3oOZAxKEHbdajyHZ/RE+xpYUfyXzQyNtVfSLp5wywA==
   dependencies:
     "@salesforce/core" "^3.33.1"
-    "@salesforce/kit" "^1.8.4"
+    "@salesforce/kit" "^1.8.5"
     "@salesforce/ts-types" "^1.7.2"
     archiver "^5.3.1"
     fast-xml-parser "^3.21.1"
@@ -7445,7 +7445,7 @@ puppeteer-core@19.7.2:
     unbzip2-stream "1.4.3"
     ws "8.11.0"
 
-puppeteer@^19.7.1, puppeteer@^19.7.2:
+puppeteer@^19.7.2:
   version "19.7.2"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.7.2.tgz#1b3ce99a093cc2f8f84dfb06f066d0757ea79d4b"
   integrity sha512-4Lm7Qpe/LU95Svirei/jDLDvR5oMrl9BPGd7HMY5+Q28n+BhvKuW97gKkR+1LlI86bO8J3g8rG/Ll5kv9J1nlQ==
