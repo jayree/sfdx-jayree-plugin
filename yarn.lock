@@ -1164,14 +1164,14 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.3.1":
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.1.tgz#da84ec2ceb11a89ba4e4aaab9bdb27de0f0a6565"
-  integrity sha512-4+79WUmMtCvjmoIc/EW78oG1q7k2FIKY1IrYUhvnqoDCIeMNtVyTuABIac6ZVfdTFPU1XdQOO8XipbygRmixSA==
+"@salesforce/command@^5.3.1", "@salesforce/command@^5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.2.tgz#b91c3e81effe5720a7aa80fa62c01ebcc68ff12f"
+  integrity sha512-avg3al0avAMZr9EJCP/MVZjPEViXn72pVJCFPPuxlfUaYBBpk52vXlxO7HSNErQK+moCKyEPCPMxbs6vJK2UbQ==
   dependencies:
     "@oclif/core" "^1.25.0"
     "@oclif/test" "^2.2.21"
-    "@salesforce/core" "^3.33.1"
+    "@salesforce/core" "^3.33.4"
     "@salesforce/kit" "^1.8.5"
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
