@@ -503,14 +503,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/sfdx-plugin-legacy@^1.1.28":
-  version "1.1.28"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.28.tgz#ea82d0fc387122f2ee2fb6dee739140e077eddb1"
-  integrity sha512-5Q9MJzzKuGy7QyhMI2Ts4S9OO+0hsS5roOzZ4nfDNC/EPJ66CvClwZYuEf6PUgsXdiswKBTZqzJ2ddcMgSyhCA==
+"@jayree/sfdx-plugin-legacy@^1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.29.tgz#8df5dd1c933618b9540ea419a34fe20a81f4bed3"
+  integrity sha512-P89MDMwV9gUm4ST1ePde1PlUWr7n5r5xCA2EqmWx8Vtwn6WCJOvbRKozTdFDBQtgp4xDLaDjVC0IyeUNIUgqUg==
   dependencies:
     "@oclif/core" "^1.26.2"
-    "@salesforce/command" "^5.3.2"
-    "@salesforce/source-deploy-retrieve" "^7.11.0"
+    "@salesforce/command" "^5.3.3"
+    "@salesforce/source-deploy-retrieve" "^7.11.3"
     adm-zip "^0.5.10"
     debug "^4.3.4"
     fast-xml-parser "^4.1.3"
@@ -518,7 +518,7 @@
     inquirer "^9.1.4"
     marked "^4.2.12"
     marked-terminal "^5.1.1"
-    puppeteer "^19.7.2"
+    puppeteer "^19.7.3"
     semver "^7.3.8"
     tslib "^2.5.0"
 
@@ -1164,14 +1164,14 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.3.2":
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.2.tgz#b91c3e81effe5720a7aa80fa62c01ebcc68ff12f"
-  integrity sha512-avg3al0avAMZr9EJCP/MVZjPEViXn72pVJCFPPuxlfUaYBBpk52vXlxO7HSNErQK+moCKyEPCPMxbs6vJK2UbQ==
+"@salesforce/command@^5.3.2", "@salesforce/command@^5.3.3":
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.3.tgz#863380090d8febeb803ceb32690302c490ffe1fc"
+  integrity sha512-p6I5AiQG85Ptk6hxh0r9Xg34MTshnGmDkGSY+S1yqodOF8oV+frCnUenInjwibxyuSqL0hPm+scx8/jwhqLNVA==
   dependencies:
     "@oclif/core" "^1.25.0"
     "@oclif/test" "^2.2.21"
-    "@salesforce/core" "^3.33.4"
+    "@salesforce/core" "^3.33.6"
     "@salesforce/kit" "^1.8.5"
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
@@ -1274,13 +1274,13 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.11.0", "@salesforce/source-deploy-retrieve@^7.9.1":
-  version "7.11.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.11.0.tgz#f7c272b8c62e8fc7e41ffc2984a95835b25b5757"
-  integrity sha512-19wmIT3KfvoWfL12wdyZSFF+o9JfYx7Fe7o0EV6yg2szOXbaKAdH0dHUJEXhTPNIloOAcYwVjG8VLwJTsI+RxQ==
+"@salesforce/source-deploy-retrieve@^7.11.0", "@salesforce/source-deploy-retrieve@^7.11.3", "@salesforce/source-deploy-retrieve@^7.9.1":
+  version "7.11.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.11.3.tgz#17d63abd0b0d33de1ac9585fcc294235cb42429e"
+  integrity sha512-d5kVkLcqJBFNaPIWZlKKAExKo/HbQ2ycDsWyDlpxyweox2t2wMc+YLCvxOzhk1x+UnQmHWiSS7JaoTExM/Dx3Q==
   dependencies:
     "@salesforce/core" "^3.33.1"
-    "@salesforce/kit" "^1.8.5"
+    "@salesforce/kit" "^1.9.0"
     "@salesforce/ts-types" "^1.7.2"
     archiver "^5.3.1"
     fast-xml-parser "^3.21.1"
@@ -3038,10 +3038,10 @@ cosmiconfig-typescript-loader@^4.0.0:
   resolved "https://registry.yarnpkg.com/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-4.1.1.tgz#38dd3578344038dae40fdf09792bc2e9df529f78"
   integrity sha512-9DHpa379Gp0o0Zefii35fcmuuin6q92FnLDffzdZ0l9tVd3nEobG3O+MZ06+kuBvFTSVScvNb/oHA13Nd4iipg==
 
-cosmiconfig@8.0.0, cosmiconfig@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.0.0.tgz#e9feae014eab580f858f8a0288f38997a7bebe97"
-  integrity sha512-da1EafcpH6b/TD8vDRaWV7xFINlHlF6zKsGwS1TsuVJTZRkquaS5HTMq7uq6h31619QjbsYl21gVDOm32KM1vQ==
+cosmiconfig@8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.1.0.tgz#947e174c796483ccf0a48476c24e4fefb7e1aea8"
+  integrity sha512-0tLZ9URlPGU7JsKq0DQOQ3FoRsYX8xDZ7xMiATQfaiGMz7EHowNkbU9u1coAOmnh9p/1ySpm0RB3JNWRXM5GCg==
   dependencies:
     import-fresh "^3.2.1"
     js-yaml "^4.1.0"
@@ -3058,6 +3058,16 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+cosmiconfig@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.0.0.tgz#e9feae014eab580f858f8a0288f38997a7bebe97"
+  integrity sha512-da1EafcpH6b/TD8vDRaWV7xFINlHlF6zKsGwS1TsuVJTZRkquaS5HTMq7uq6h31619QjbsYl21gVDOm32KM1vQ==
+  dependencies:
+    import-fresh "^3.2.1"
+    js-yaml "^4.1.0"
+    parse-json "^5.0.0"
+    path-type "^4.0.0"
 
 crc-32@^1.2.0:
   version "1.2.2"
@@ -7400,10 +7410,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer-core@19.7.2:
-  version "19.7.2"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.7.2.tgz#deee9ef915829b6a1d1a3a008625c29eeb251161"
-  integrity sha512-PvI+fXqgP0uGJxkyZcX51bnzjFA73MODZOAv0fSD35yR7tvbqwtMV3/Y+hxQ0AMMwzxkEebP6c7po/muqxJvmQ==
+puppeteer-core@19.7.3:
+  version "19.7.3"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.7.3.tgz#fc5b7ac3d8e9363265bb96f816cb834991c51beb"
+  integrity sha512-9Q5HahsstfoTnllcpNkxNu2z9J7V0Si5Mr5q90K6XSXwW1P8iqe8q3HzWViVuBuEYTSMZ2LaXXzTEYeoCzLEWg==
   dependencies:
     chromium-bidi "0.4.4"
     cross-fetch "3.1.5"
@@ -7412,21 +7422,20 @@ puppeteer-core@19.7.2:
     extract-zip "2.0.1"
     https-proxy-agent "5.0.1"
     proxy-from-env "1.1.0"
-    rimraf "3.0.2"
     tar-fs "2.1.1"
     unbzip2-stream "1.4.3"
-    ws "8.11.0"
+    ws "8.12.1"
 
-puppeteer@^19.7.2:
-  version "19.7.2"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.7.2.tgz#1b3ce99a093cc2f8f84dfb06f066d0757ea79d4b"
-  integrity sha512-4Lm7Qpe/LU95Svirei/jDLDvR5oMrl9BPGd7HMY5+Q28n+BhvKuW97gKkR+1LlI86bO8J3g8rG/Ll5kv9J1nlQ==
+puppeteer@^19.7.2, puppeteer@^19.7.3:
+  version "19.7.3"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.7.3.tgz#3cf3af65aaf425d13f18dfb67cbe2c3dae913c4e"
+  integrity sha512-QEiRHPUAJp8VOK27zE6h2ne4xKVYibKUZpvjCuLYaAe8/2SOLKIgstF8wK3YaLgTkeruMrYfqZo+Qlw4ZkJDAQ==
   dependencies:
-    cosmiconfig "8.0.0"
+    cosmiconfig "8.1.0"
     https-proxy-agent "5.0.1"
     progress "2.0.3"
     proxy-from-env "1.1.0"
-    puppeteer-core "19.7.2"
+    puppeteer-core "19.7.3"
 
 q@^1.5.1:
   version "1.5.1"
@@ -7746,7 +7755,7 @@ rimraf@2, rimraf@^2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rimraf@3.0.2, rimraf@^3.0.0, rimraf@^3.0.2:
+rimraf@^3.0.0, rimraf@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
@@ -9183,10 +9192,10 @@ write-json-file@^4.1.1:
     sort-keys "^4.0.0"
     write-file-atomic "^3.0.0"
 
-ws@8.11.0:
-  version "8.11.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-8.11.0.tgz#6a0d36b8edfd9f96d8b25683db2f8d7de6e8e143"
-  integrity sha512-HPG3wQd9sNQoT9xHyNCXoDUa+Xw/VevmY9FoHyQ+g+rrMn4j6FB4np7Z0OhdTgjx6MgQLK7jwSy1YecU1+4Asg==
+ws@8.12.1:
+  version "8.12.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.12.1.tgz#c51e583d79140b5e42e39be48c934131942d4a8f"
+  integrity sha512-1qo+M9Ba+xNhPB+YTWUlK6M17brTut5EXbcBaMRN5pH5dFrXz7lzz1ChFSUq3bOUl8yEvSenhHmYUNJxFzdJew==
 
 xml2js@0.4.19:
   version "0.4.19"
