@@ -503,6 +503,18 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
+"@jayree/changelog@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.1.0.tgz#77137797daaa13dd4dbece7965a9e6b3b52dfb1b"
+  integrity sha512-JBIlQLiCHpThkSX5vwg7Ih3qAGFFMylPif+qlKyTfRn8SF8t/+5uKAR/P6yNGPQnYUvumpQJCiD4UzLgTEAHfw==
+  dependencies:
+    debug "^4.3.4"
+    fs-extra "^11.1.0"
+    marked "^4.2.12"
+    marked-terminal "^5.1.1"
+    semver "^7.3.8"
+    semver-compare "^1.0.0"
+
 "@jayree/sfdx-plugin-legacy@^1.1.29":
   version "1.1.29"
   resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.29.tgz#8df5dd1c933618b9540ea419a34fe20a81f4bed3"
@@ -522,15 +534,16 @@
     semver "^7.3.8"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-manifest@^2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-2.9.1.tgz#33725e00eb7c397e8d942a6e4371ca4e3b18bcf7"
-  integrity sha512-HAM3fsCZ5cizydonj0LE0erWdaUtaQvhXioPAVHHyYM2c4QAPKutM8qoxc6aOx8tr710JsVgRlEdI15aDIli2A==
+"@jayree/sfdx-plugin-manifest@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.2.tgz#e2b406c02b05177033cda6483e5f1b516dd2b63f"
+  integrity sha512-fyixSxXTAjHqOJyQ4/uRn71Pw7usWPh01CCTczhA0wZNoT9Kg5+uJg60h3gaMC8h9u8tWWO4BlhWBBlItNc0wA==
   dependencies:
-    "@oclif/core" "^2.3.0"
-    "@salesforce/kit" "^1.9.0"
+    "@jayree/changelog" "^1.1.0"
+    "@oclif/core" "^2.6.2"
+    "@salesforce/kit" "^1.9.2"
     "@salesforce/sf-plugins-core" "^2.2.4"
-    "@salesforce/source-deploy-retrieve" "^7.11.0"
+    "@salesforce/source-deploy-retrieve" "^7.11.3"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
@@ -539,9 +552,6 @@
     graceful-fs "^4.2.10"
     isomorphic-git "^1.21.0"
     listr2 "^5.0.7"
-    marked "^4.2.12"
-    marked-terminal "^5.1.1"
-    semver "^7.3.8"
     tslib "^2.5.0"
 
 "@jayree/sfdx-plugin-prettier@^1.2.31":
@@ -889,6 +899,41 @@
     strip-ansi "^6.0.1"
     supports-color "^8.1.1"
     supports-hyperlinks "^2.2.0"
+    tslib "^2.5.0"
+    widest-line "^3.1.0"
+    wordwrap "^1.0.0"
+    wrap-ansi "^7.0.0"
+
+"@oclif/core@^2.6.2":
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.6.3.tgz#2f02e4510eb76d694d00c488b3ea957436289f51"
+  integrity sha512-kLwg+lmeZt4vfUlYN1XI8bPkcNBozfPOqciFOJMzHkPnq18lmoMu3+Xnm4wL1A9dXEyzoa5jidFhdyP/kZMBCw==
+  dependencies:
+    "@types/cli-progress" "^3.11.0"
+    ansi-escapes "^4.3.2"
+    ansi-styles "^4.3.0"
+    cardinal "^2.1.1"
+    chalk "^4.1.2"
+    clean-stack "^3.0.1"
+    cli-progress "^3.12.0"
+    debug "^4.3.4"
+    ejs "^3.1.8"
+    fs-extra "^9.1.0"
+    get-package-type "^0.1.0"
+    globby "^11.1.0"
+    hyperlinker "^1.0.0"
+    indent-string "^4.0.0"
+    is-wsl "^2.2.0"
+    js-yaml "^3.14.1"
+    natural-orderby "^2.0.3"
+    object-treeify "^1.1.33"
+    password-prompt "^1.1.2"
+    semver "^7.3.7"
+    string-width "^4.2.3"
+    strip-ansi "^6.0.1"
+    supports-color "^8.1.1"
+    supports-hyperlinks "^2.2.0"
+    ts-node "^10.9.1"
     tslib "^2.5.0"
     widest-line "^3.1.0"
     wordwrap "^1.0.0"
@@ -7848,6 +7893,11 @@ scoped-regex@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/scoped-regex/-/scoped-regex-2.1.0.tgz#7b9be845d81fd9d21d1ec97c61a0b7cf86d2015f"
   integrity sha512-g3WxHrqSWCZHGHlSrF51VXFdjImhwvH8ZO/pryFH56Qi0cDsZfylQa/t0jCzVQFNbNvM00HfHjkDPEuarKDSWQ==
+
+semver-compare@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/semver-compare/-/semver-compare-1.0.0.tgz#0dee216a1c941ab37e9efb1788f6afc5ff5537fc"
+  integrity sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow==
 
 "semver@2 || 3 || 4 || 5", semver@^5.5.0, semver@^5.6.0:
   version "5.7.1"

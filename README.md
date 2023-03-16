@@ -43,6 +43,7 @@ USAGE
 * [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
 * [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
 * [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
+* [`sfdx jayree:manifest:legacy:git:diff`](#sfdx-jayreemanifestlegacygitdiff)
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
 * [`sfdx jayree:org:configure:country`](#sfdx-jayreeorgconfigurecountry)
 * [`sfdx jayree:org:configure:state`](#sfdx-jayreeorgconfigurestate)
@@ -228,6 +229,9 @@ DESCRIPTION
 
   You can use all ways to spell <commit> which are valid for 'git diff' (See https://git-scm.com/docs/git-diff).
 
+ALIASES
+  $ sfdx jayree:manifest:beta:git:diff
+
 EXAMPLES
   Uses the changes between two arbitrary <commit>.
 
@@ -274,8 +278,6 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.9.1/src/commands/jayree/manifest/beta/git/diff.ts)_
-
 ### `sfdx jayree:manifest:cleanup`
 
 Removes those tags from a manifest file that are present in a second manifest file.
@@ -302,7 +304,7 @@ EXAMPLES
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.9.1/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.2/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -338,7 +340,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.9.1/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.2/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -346,7 +348,8 @@ Create a project manifest and destructiveChanges manifest that lists the metadat
 
 ```
 USAGE
-  $ sfdx jayree:manifest:git:diff REF1 [REF2] [--json] [-d <value>] [--output-dir <value>] [--destructive-changes-only]
+  $ sfdx jayree:manifest:git:diff REF1 [REF2] [--json] [--api-version <value>] [-d <value>] [--output-dir <value>]
+    [--destructive-changes-only]
 
 ARGUMENTS
   REF1  Base commit or branch.
@@ -354,6 +357,7 @@ ARGUMENTS
 
 FLAGS
   -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
+  --api-version=<value>        Override the api version used for api requests made by this command
   --destructive-changes-only   Create a destructiveChanges manifest only.
   --output-dir=<value>         Directory to save the created manifest files.
 
@@ -368,6 +372,9 @@ DESCRIPTION
   git refs.
 
   You can use all ways to spell <commit> which are valid for 'git diff' (See https://git-scm.com/docs/git-diff).
+
+ALIASES
+  $ sfdx jayree:manifest:beta:git:diff
 
 EXAMPLES
   Uses the changes between two arbitrary <commit>.
@@ -415,7 +422,85 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v2.9.1/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.2/src/commands/jayree/manifest/git/diff.ts)_
+
+### `sfdx jayree:manifest:legacy:git:diff`
+
+Create a project manifest and destructiveChanges manifest that lists the metadata components you want to deploy or delete based on changes in your git history.
+
+```
+USAGE
+  $ sfdx jayree:manifest:legacy:git:diff REF1 [REF2] [--json] [-d <value>] [--output-dir <value>]
+  [--destructive-changes-only]
+
+ARGUMENTS
+  REF1  Base commit or branch.
+  REF2  Commit or branch to compare to the base commit.
+
+FLAGS
+  -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
+  --destructive-changes-only   Create a destructiveChanges manifest only.
+  --output-dir=<value>         Directory to save the created manifest files.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Create a project manifest and destructiveChanges manifest that lists the metadata components you want to deploy or
+  delete based on changes in your git history.
+
+  Use this command to create a manifest and destructiveChanges manifest file based on the difference (git diff) of two
+  git refs.
+
+  You can use all ways to spell <commit> which are valid for 'git diff' (See https://git-scm.com/docs/git-diff).
+
+EXAMPLES
+  Uses the changes between two arbitrary <commit>.
+
+    $ sfdx jayree:manifest:legacy:git:diff <commit> <commit>
+    $ sfdx jayree:manifest:legacy:git:diff <commit>..<commit>
+
+  Uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both
+  <commit>.
+
+    $ sfdx jayree:manifest:legacy:git:diff <commit>...<commit>
+
+  Uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1).
+
+    $ sfdx jayree:manifest:legacy:git:diff branchA..branchB
+
+  Uses the diff of what is unique in branchB (REF2).
+
+    $ sfdx jayree:manifest:legacy:git:diff branchA...branchB
+
+  Specify the flags before or after the REF args
+
+    $ sfdx jayree:manifest:legacy:git:diff --output-dir package <commit> <commit>
+    $ sfdx jayree:manifest:legacy:git:diff <commit> <commit> --output-dir package
+
+  If you specify the 'source-dir' flag before the REF args, use '--' to separate the args from the 'source-dir'
+  values.
+
+    $ sfdx jayree:manifest:legacy:git:diff --source-dir force-app -- <commit> <commit>
+
+FLAG DESCRIPTIONS
+  -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
+
+    The supplied path can be to a single file (in which case the operation is applied to only one file) or to a folder
+    (in which case the operation is applied to all metadata types in the directory and its subdirectories).
+
+    You can specify this flag more than once.
+
+  --destructive-changes-only  Create a destructiveChanges manifest only.
+
+    Use this flag to create a 'destructiveChanges.xml' and a blank 'package.xml'.
+
+  --output-dir=<value>  Directory to save the created manifest files.
+
+    The location can be an absolute path or relative to the current working directory.
+```
+
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.2/src/commands/jayree/manifest/legacy/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
