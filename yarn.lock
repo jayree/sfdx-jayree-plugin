@@ -527,14 +527,14 @@
     semver "^7.3.8"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-legacy@^1.1.29":
-  version "1.1.29"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.29.tgz#8df5dd1c933618b9540ea419a34fe20a81f4bed3"
-  integrity sha512-P89MDMwV9gUm4ST1ePde1PlUWr7n5r5xCA2EqmWx8Vtwn6WCJOvbRKozTdFDBQtgp4xDLaDjVC0IyeUNIUgqUg==
+"@jayree/sfdx-plugin-legacy@^1.1.30":
+  version "1.1.30"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.30.tgz#40f0058b1640ac5ace1ca0f9dab9b1d55a06618d"
+  integrity sha512-uvAq4eDM/O/G4OYIzLnhom/Xo0e0XWnqTHYVVo7V61t7PJau7DwDgtltdEVuXCnkwlNg8JTMcD8RUAj9YiYg5w==
   dependencies:
     "@oclif/core" "^1.26.2"
     "@salesforce/command" "^5.3.3"
-    "@salesforce/source-deploy-retrieve" "^7.11.3"
+    "@salesforce/source-deploy-retrieve" "^7.12.0"
     adm-zip "^0.5.10"
     debug "^4.3.4"
     fast-xml-parser "^4.1.3"
@@ -542,7 +542,7 @@
     inquirer "^9.1.4"
     marked "^4.2.12"
     marked-terminal "^5.1.1"
-    puppeteer "^19.7.3"
+    puppeteer "^19.7.5"
     semver "^7.3.8"
     tslib "^2.5.0"
 
@@ -7466,7 +7466,7 @@ puppeteer-core@19.7.5:
     unbzip2-stream "1.4.3"
     ws "8.12.1"
 
-puppeteer@^19.7.3, puppeteer@^19.7.5:
+puppeteer@^19.7.5:
   version "19.7.5"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.7.5.tgz#d7db0dfcc80ca2cdf8eb0100bae1ce888a841389"
   integrity sha512-UqD8K+yaZa6/hwzP54AATCiHrEYGGxzQcse9cZzrtsVGd8wT0llCdYhsBp8n+zvnb1ofY0YFgI3TYZ/MiX5uXQ==
