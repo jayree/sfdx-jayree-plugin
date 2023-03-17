@@ -546,24 +546,24 @@
     semver "^7.3.8"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-manifest@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.2.tgz#e2b406c02b05177033cda6483e5f1b516dd2b63f"
-  integrity sha512-fyixSxXTAjHqOJyQ4/uRn71Pw7usWPh01CCTczhA0wZNoT9Kg5+uJg60h3gaMC8h9u8tWWO4BlhWBBlItNc0wA==
+"@jayree/sfdx-plugin-manifest@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.3.tgz#d9cdd4bbe33469d99118706c4aefad1e584a1699"
+  integrity sha512-XLO+Jx78V3UiB/wZ4opQfAYY/OqWNGNVPSl+dWh5YIi2EjTvDwNHaBSFeTa6cH7Jcue0fYduKrj4vUPUrD+Tbw==
   dependencies:
     "@jayree/changelog" "^1.1.0"
-    "@oclif/core" "^2.6.2"
+    "@oclif/core" "^2.6.4"
     "@salesforce/kit" "^1.9.2"
     "@salesforce/sf-plugins-core" "^2.2.4"
-    "@salesforce/source-deploy-retrieve" "^7.11.3"
+    "@salesforce/source-deploy-retrieve" "^7.12.0"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.1.3"
     fs-extra "^11.1.0"
-    graceful-fs "^4.2.10"
-    isomorphic-git "^1.21.0"
-    listr2 "^5.0.7"
+    graceful-fs "^4.2.11"
+    isomorphic-git "^1.22.0"
+    listr2 "^5.0.8"
     tslib "^2.5.0"
 
 "@jayree/sfdx-plugin-prettier@^1.2.33":
@@ -4684,10 +4684,10 @@ got@^11, got@^11.8.2, got@^11.8.6:
     p-cancelable "^2.0.0"
     responselike "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.2, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
-  version "4.2.10"
-  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
-  integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.11, graceful-fs@^4.2.2, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
+  version "4.2.11"
+  resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
+  integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
 grapheme-splitter@^1.0.4:
   version "1.0.4"
@@ -5426,10 +5426,10 @@ isomorphic-git@1.17.0:
     sha.js "^2.4.9"
     simple-get "^4.0.1"
 
-isomorphic-git@^1.21.0:
-  version "1.21.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.21.0.tgz#4e9dbea901bf81f959d0cc3d13ca46bb1dda513a"
-  integrity sha512-ZqCAUM63CYepA3fB8H7NVyPSiOkgzIbQ7T+QPrm9xtYgQypN9JUJ5uLMjB5iTfomdJf3mdm6aSxjZwnT6ubvEA==
+isomorphic-git@^1.22.0:
+  version "1.22.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.22.0.tgz#486f273c2c45df647abcfce2ce0eaaf3daa16cce"
+  integrity sha512-ZFmfyjj28DthNDDj/aQvxeUIVCj18YGMEjatVGig8ixvUe3oGfqjS7lAbqFXxJQ928oSgmUMcKv6+wz6YMiqZA==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
@@ -5786,7 +5786,7 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
-listr2@^5.0.7, listr2@^5.0.8:
+listr2@^5.0.8:
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-5.0.8.tgz#a9379ffeb4bd83a68931a65fb223a11510d6ba23"
   integrity sha512-mC73LitKHj9w6v30nLNGPetZIlfpUniNSsxxrbaPcWOjDb92SHPzJPi/t+v1YC/lxKz/AJ9egOjww0qUuFxBpA==
