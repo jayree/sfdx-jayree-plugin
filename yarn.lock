@@ -1295,7 +1295,7 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.11.3", "@salesforce/source-deploy-retrieve@^7.12.0", "@salesforce/source-deploy-retrieve@^7.13.0":
+"@salesforce/source-deploy-retrieve@^7.12.0", "@salesforce/source-deploy-retrieve@^7.13.0":
   version "7.13.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.13.0.tgz#8c5b41e502a13efd8016a247fd4571c1acd9bfb5"
   integrity sha512-jjDYLidwcJH54dJRl4Jm0kyaUAgWd2L6VhNFRYudTCQIjVcoY/Iqq4D5yawCEBOCs++z+6yC4FbnAtsTRZXE3Q==
@@ -1314,15 +1314,15 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.24":
-  version "2.2.24"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.24.tgz#ab6746748956eff3150bf9e1d1a97fae8d1dbead"
-  integrity sha512-7VhYDaFrjyOYIKiaVA3ZtcVTmwZ9KuakDIetgXHnwKMQ/oHB1N5i8aw70aM2+L+BVTzzbY2ki+Wnortsv2e+2Q==
+"@salesforce/source-tracking@^2.2.26":
+  version "2.2.26"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.26.tgz#7db291c29987d169721ad7b23912b39472dc6843"
+  integrity sha512-Atvh87ZVBgGtRuDQHLmZRAv7fmZFsDDeukgd+9vCDPG5fEiBaphjwbFBlhLxRrggwFqkT3od+KiH2FiVeFqMPw==
   dependencies:
     "@salesforce/core" "^3.33.6"
     "@salesforce/kit" "^1.9.0"
-    "@salesforce/source-deploy-retrieve" "^7.11.3"
-    graceful-fs "^4.2.10"
+    "@salesforce/source-deploy-retrieve" "^7.12.0"
+    graceful-fs "^4.2.11"
     isomorphic-git "1.17.0"
     ts-retry-promise "^0.7.0"
 
@@ -4674,7 +4674,7 @@ got@^11, got@^11.8.2, got@^11.8.6:
     p-cancelable "^2.0.0"
     responselike "^2.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.11, graceful-fs@^4.2.2, graceful-fs@^4.2.6:
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.11, graceful-fs@^4.2.2, graceful-fs@^4.2.6:
   version "4.2.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
