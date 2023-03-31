@@ -527,14 +527,14 @@
     semver "^7.3.8"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-legacy@^1.1.31":
-  version "1.1.31"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.31.tgz#eca012a1abe819c827c41ddf220b572cf764c3b9"
-  integrity sha512-wVr8xkxuZq6EQwoGLNXLAZJHD14oPSaZ047lRqolqY/Zg95Tyx1b0sDgud1wXEz9EIKIecNcTejcjjsO66mzfw==
+"@jayree/sfdx-plugin-legacy@^1.1.32":
+  version "1.1.32"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.32.tgz#6f20047e1c7d511a2715f69ca68f19cecf50637f"
+  integrity sha512-z+3Qj0+IGscdc5PYDRX3urUyGFD1tFCxYr8QY+A1FeQqO2UUXuSJpcMwOaZOmaUntC1MQl9GGNZ0+H9Rpcdr6w==
   dependencies:
     "@oclif/core" "^1.26.2"
     "@salesforce/command" "^5.3.4"
-    "@salesforce/source-deploy-retrieve" "^7.13.0"
+    "@salesforce/source-deploy-retrieve" "^7.14.2"
     adm-zip "^0.5.10"
     debug "^4.3.4"
     fast-xml-parser "^4.1.3"
@@ -542,7 +542,7 @@
     inquirer "^9.1.5"
     marked "^4.3.0"
     marked-terminal "^5.1.1"
-    puppeteer "^19.7.5"
+    puppeteer "^19.8.2"
     semver "^7.3.8"
     tslib "^2.5.0"
 
@@ -1309,7 +1309,7 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.12.0", "@salesforce/source-deploy-retrieve@^7.13.0", "@salesforce/source-deploy-retrieve@^7.14.2":
+"@salesforce/source-deploy-retrieve@^7.12.0", "@salesforce/source-deploy-retrieve@^7.14.2":
   version "7.14.2"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.14.2.tgz#39ae1d7506544d22e787ec6b1fedfa2d86ff3ccf"
   integrity sha512-AgwpTYUh4y7+mz8nY1okkiCCX+L1yC2hXGDcpIlaWQOVqiX8a2ZBFmd4Suq1WluPhRDg6Awztky1L/tHH6VUMw==
@@ -7483,7 +7483,7 @@ puppeteer-core@19.8.1:
     unbzip2-stream "1.4.3"
     ws "8.13.0"
 
-puppeteer@^19.7.5, puppeteer@^19.8.2:
+puppeteer@^19.8.2:
   version "19.8.2"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.8.2.tgz#e8a3a9aa725b5d445f97454cf13ad9007709576b"
   integrity sha512-LPdNVYMR6ddp4YS3GK1bqKsasCJj1aZjt9dNOKcnzKezuMoishlHY6bCnFLjTc34iqnGzIrJp07TQ9M+aML2+g==
