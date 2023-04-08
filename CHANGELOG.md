@@ -1,3 +1,10 @@
+## [4.4.36](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.35...v4.4.36) (2023-04-08)
+
+
+### Bug Fixes
+
+* **deps:** bump vm2 from 3.9.11 to 3.9.15 ([#702](https://github.com/jayree/sfdx-jayree-plugin/issues/702)) ([1edb67c](https://github.com/jayree/sfdx-jayree-plugin/commit/1edb67cb2b7c31bd512bcc105b746fb8daf3104c))
+
 ## [4.4.35](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.34...v4.4.35) (2023-04-07)
 
 
