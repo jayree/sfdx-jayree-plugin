@@ -566,13 +566,13 @@
     listr2 "^5.0.8"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-prettier@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.35.tgz#e82bcbc1f20ab794d91f49041733cbaa9c6be674"
-  integrity sha512-VcfmYA18nb0sBsdMRKbvP90J4Q3YQOfn7JuVVAK3Mkqwr2wOQ1Z/OJx4y65jWFPBL9dT/TKzXbb+yK8zA75RSg==
+"@jayree/sfdx-plugin-prettier@^1.2.36":
+  version "1.2.36"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.2.36.tgz#7496184c3de9b7e4cf845e7c5456eee8679c2628"
+  integrity sha512-CGjtf8vQ0s+qtASe2miLOUiVpfZrIBeecdW0PnMUeH9ucHOL4lwbQeegVwdFznyJxNKV+hKHMC7MiCVa638t+A==
   dependencies:
     "@jayree/changelog" "^1.1.0"
-    "@oclif/core" "^2.8.0"
+    "@oclif/core" "^2.8.2"
     "@prettier/plugin-xml" "^2.2.0"
     "@salesforce/core" "^3.34.6"
     "@salesforce/kit" "^1.9.2"
