@@ -16,7 +16,7 @@
     "@salesforce/source-tracking": "^2.2.26",
     "debug": "^4.3.4",
     "enquirer": "^2.3.6",
-    "fast-xml-parser": "^4.1.1",
+    "fast-xml-parser": "^4.2.0",
     "fs-extra": "^11.1.1",
     "ignore": "^5.2.4",
     "is-docker": "^3.0.0",
