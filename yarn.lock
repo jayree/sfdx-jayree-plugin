@@ -1309,7 +1309,7 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.12.0", "@salesforce/source-deploy-retrieve@^7.15.1":
+"@salesforce/source-deploy-retrieve@^7.15.1":
   version "7.15.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.15.1.tgz#059d088f5fb5726323d9822599d730474ce6dc70"
   integrity sha512-37jjQWb24FBEwP0aAW1UnSkVk+TMr8KEtCN5tNa43LXK21m06suMDx92Y+lS8xJ9esgj/GEEuXgG8OCf+L5qcg==
@@ -1328,14 +1328,33 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.26":
-  version "2.2.26"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.26.tgz#7db291c29987d169721ad7b23912b39472dc6843"
-  integrity sha512-Atvh87ZVBgGtRuDQHLmZRAv7fmZFsDDeukgd+9vCDPG5fEiBaphjwbFBlhLxRrggwFqkT3od+KiH2FiVeFqMPw==
+"@salesforce/source-deploy-retrieve@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.0.1.tgz#769d761cf2a3015282ad6a77e103d2a9c1e99052"
+  integrity sha512-uXgMwBXaCH0SM93e8Q/ptGc4xi+wna/CO+SFfZHvy3nnlGHi7MQOUNRnAn2L5NzqEg0ZX9HrXpx4ILf4hLFl3w==
   dependencies:
-    "@salesforce/core" "^3.33.6"
-    "@salesforce/kit" "^1.9.0"
-    "@salesforce/source-deploy-retrieve" "^7.12.0"
+    "@salesforce/core" "^3.34.6"
+    "@salesforce/kit" "^1.9.2"
+    "@salesforce/ts-types" "^1.7.2"
+    archiver "^5.3.1"
+    fast-xml-parser "^4.1.4"
+    got "^11.8.6"
+    graceful-fs "^4.2.11"
+    ignore "^5.2.4"
+    mime "2.6.0"
+    minimatch "^5.1.6"
+    proxy-agent "^5.0.0"
+    proxy-from-env "^1.1.0"
+    unzipper "0.10.11"
+
+"@salesforce/source-tracking@^2.2.28":
+  version "2.2.28"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.28.tgz#54d31694630743c6d1df4fb55b788c73b64d61bc"
+  integrity sha512-vp983Cf0FDOd1cNxTOgU81ltPC49E4lAQOS+KSteJKGg/Dox+gy2vhFtcVIJWP5dVfy1KnfFcQJ3ZGgjZatUZg==
+  dependencies:
+    "@salesforce/core" "^3.34.6"
+    "@salesforce/kit" "^1.9.2"
+    "@salesforce/source-deploy-retrieve" "^8.0.1"
     graceful-fs "^4.2.11"
     isomorphic-git "1.17.0"
     ts-retry-promise "^0.7.0"
