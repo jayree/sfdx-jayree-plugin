@@ -1,3 +1,17 @@
+# [4.5.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.38...v4.5.0) (2023-04-16)
+
+
+### Bug Fixes
+
+* **deps:** bump listr2 from 5.0.8 to 6.2.0 ([bc507f8](https://github.com/jayree/sfdx-jayree-plugin/commit/bc507f8bb8dd6ea03268e09a6a212dedb46feb3d))
+* replace puppeteer with playwright ([54313b5](https://github.com/jayree/sfdx-jayree-plugin/commit/54313b5a61014f866ab95e99d98c1844ad328eee))
+* use new changelog ([48a9dad](https://github.com/jayree/sfdx-jayree-plugin/commit/48a9dad12726b70ecd023f723fe25a190f3ee266))
+
+
+### Features
+
+* use new source tracking commands plugin ([18648af](https://github.com/jayree/sfdx-jayree-plugin/commit/18648af21dc0a593ffb0a647cbc4bdce89682c87))
+
 ## [4.4.38](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.4.37...v4.4.38) (2023-04-14)
 
 
