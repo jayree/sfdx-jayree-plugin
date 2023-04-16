@@ -13,7 +13,7 @@ import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
 import fs from 'fs-extra';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
-import mkdirp from 'mkdirp';
+import { mkdirp } from 'mkdirp';
 import { parseSourceComponent } from '../../../utils/xml.js';
 
 // eslint-disable-next-line no-underscore-dangle
