@@ -6,7 +6,7 @@
  */
 /* istanbul ignore file */
 import path from 'path';
-import { Hook, CliUx } from '@oclif/core';
+import { Hook, ux } from '@oclif/core';
 import { env } from '@salesforce/kit';
 import fs from 'fs-extra';
 import chalk from 'chalk';
@@ -47,7 +47,7 @@ export const prerun: Hook<'prerun'> = async function (options) {
             sourceTracking.resetLocalTracking(),
           ]);
 
-          CliUx.ux.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
+          ux.log(`Reset local tracking files to revision ${storedServerMaxRevisionCounter}.`);
           // eslint-disable-next-line no-empty
         } catch (error) {}
       } else {
@@ -64,7 +64,7 @@ export const prerun: Hook<'prerun'> = async function (options) {
           localServerMaxRevisionCounter = serverMaxRevisionCounter;
           // eslint-disable-next-line no-empty
         } catch (error) {}
-        const answer = await CliUx.ux.confirm(
+        const answer = await ux.confirm(
           chalk.dim(
             `WARNING: No stored revision found for scratch org with name: ${userName}.
 Store current local revision: ${localServerMaxRevisionCounter}? (y/n)`

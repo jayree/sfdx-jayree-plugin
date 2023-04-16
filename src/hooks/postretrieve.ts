@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import path from 'path';
-import { Hook, Config, CliUx } from '@oclif/core';
+import { Hook, Config, ux } from '@oclif/core';
 import { env } from '@salesforce/kit';
 import { SfProject } from '@salesforce/core';
 import { FileResponse, ComponentStatus } from '@salesforce/source-deploy-retrieve';
@@ -96,8 +96,8 @@ export const postretrieve: HookFunction = async function (options) {
     if (isOutputEnabled) {
       void logFixes(updatedfiles);
     } else if (env.getBoolean('SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT', false)) {
-      CliUx.ux.log(',');
-      CliUx.ux.styledJSON({
+      ux.log(',');
+      ux.styledJSON({
         result: {
           [options.Command.id === 'force:source:pull' ? 'pulledSource' : 'inboundFiles']: inboundFiles,
           fixedFiles: Object.values(updatedfiles)
