@@ -54,6 +54,8 @@ USAGE
 * [`sfdx jayree:packagedescription:remove`](#sfdx-jayreepackagedescriptionremove)
 * [`sfdx jayree:packagedescription:set`](#sfdx-jayreepackagedescriptionset)
 * [`sfdx jayree:source:fix`](#sfdx-jayreesourcefix)
+* [`sfdx jayree:source:snapshot:compare`](#sfdx-jayreesourcesnapshotcompare)
+* [`sfdx jayree:source:snapshot:generate`](#sfdx-jayreesourcesnapshotgenerate)
 * [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
 * [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
 * [`sfdx jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)
@@ -779,28 +781,55 @@ DESCRIPTION
 
 _See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.38/src/commands/jayree/source/fix.ts)_
 
+### `sfdx jayree:source:snapshot:compare`
+
+compares sfdx source snapshot files
+
+```
+USAGE
+  $ sfdx jayree:source:snapshot:compare [--json] [--filepath <value>]
+
+FLAGS
+  --filepath=<value>  [default: ./sfdx-source-snapshot.json] path of the generated snapshot file
+
+GLOBAL FLAGS
+  --json  Format output as json.
+```
+
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.0.3/src/commands/jayree/source/snapshot/compare.ts)_
+
+### `sfdx jayree:source:snapshot:generate`
+
+generates sfdx source snapshot files
+
+```
+USAGE
+  $ sfdx jayree:source:snapshot:generate [--json] [--filepath <value>]
+
+FLAGS
+  --filepath=<value>  [default: ./sfdx-source-snapshot.json] path to save the generated snapshot file
+
+GLOBAL FLAGS
+  --json  Format output as json.
+```
+
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.0.3/src/commands/jayree/source/snapshot/generate.ts)_
+
 ### `sfdx jayree:source:tracking:list`
 
 list changes in a scratch org by remote revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:list [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:list -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
-  -r, --revision=<value>                                                            start at a specific revision counter
-                                                                                    number
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  -r, --revision=<value>    start at a specific revision counter number
+  --api-version=<value>     Override the api version used for api requests made by this command
 
-DESCRIPTION
-  list changes in a scratch org by remote revision counter number
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:source:tracking:list
@@ -808,7 +837,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/list.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.38/src/commands/jayree/source/tracking/list.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.0.3/src/commands/jayree/source/tracking/list.ts)_
 
 ### `sfdx jayree:source:tracking:store:get`
 
@@ -816,27 +845,20 @@ get stored revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:get [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:store:get -o <value> [--json]
 
 FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
 
-DESCRIPTION
-  get stored revision counter number
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:get
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/get.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.38/src/commands/jayree/source/tracking/store/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.0.3/src/commands/jayree/source/tracking/store/get.ts)_
 
 ### `sfdx jayree:source:tracking:store:set`
 
@@ -844,22 +866,15 @@ store revision counter number
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:set [-r <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:tracking:store:set -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
-  -r, --revision=<value>                                                            revision counter number (default:
-                                                                                    remote revision counter number)
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  -r, --revision=<value>    revision counter number (default: remote revision counter number)
+  --api-version=<value>     Override the api version used for api requests made by this command
 
-DESCRIPTION
-  store revision counter number
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:set
@@ -867,7 +882,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [src/commands/jayree/source/tracking/store/set.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.4.38/src/commands/jayree/source/tracking/store/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.0.3/src/commands/jayree/source/tracking/store/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks

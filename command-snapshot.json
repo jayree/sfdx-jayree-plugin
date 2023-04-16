@@ -129,21 +129,33 @@
     "alias": []
   },
   {
+    "command": "jayree:source:snapshot:compare",
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["filepath", "json"],
+    "alias": []
+  },
+  {
+    "command": "jayree:source:snapshot:generate",
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["filepath", "json"],
+    "alias": []
+  },
+  {
     "command": "jayree:source:tracking:list",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "revision", "targetusername"],
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["api-version", "json", "revision", "target-org"],
     "alias": []
   },
   {
     "command": "jayree:source:tracking:store:get",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "targetusername"],
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["json", "target-org"],
     "alias": []
   },
   {
     "command": "jayree:source:tracking:store:set",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "revision", "targetusername"],
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["api-version", "json", "revision", "target-org"],
     "alias": []
   },
   {

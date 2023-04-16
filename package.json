@@ -10,7 +10,7 @@
     "@jayree/sfdx-plugin-legacy": "^1.1.34",
     "@jayree/sfdx-plugin-manifest": "^3.0.10",
     "@jayree/sfdx-plugin-prettier": "^1.2.36",
-    "@oclif/core": "^1.26.2",
+    "@jayree/sfdx-plugin-source": "^1.0.3",
     "@salesforce/command": "^5.3.5",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/source-deploy-retrieve": "^7.15.1",
@@ -134,17 +134,7 @@
             }
           },
           "source": {
-            "description": "sync your project with your orgs",
-            "subtopics": {
-              "tracking": {
-                "description": "manipulate local source tracking files",
-                "subtopics": {
-                  "store": {
-                    "description": "get and set/store revision counter number"
-                  }
-                }
-              }
-            }
+            "description": "sync your project with your orgs"
           }
         }
       }
@@ -156,6 +146,7 @@
     "plugins": [
       "@jayree/sfdx-plugin-prettier",
       "@jayree/sfdx-plugin-manifest",
+      "@jayree/sfdx-plugin-source",
       "@jayree/sfdx-plugin-legacy"
     ],
     "info": {
