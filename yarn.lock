@@ -584,16 +584,16 @@
     prettier-plugin-apex "^1.12.0"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-source@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.0.3.tgz#de2f937f091bc51b65ad490b953f301ce094b45e"
-  integrity sha512-bp9klMQIQL9JlAcKffzmwsZSGQ2MpD1eBZz5VTCr+nw0BjrulrmFMlbnIgYvxhCp86asIbuKrOL7IVEjU1atng==
+"@jayree/sfdx-plugin-source@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.0.4.tgz#4f79d894eea28224401e4a632abed52bedc331b2"
+  integrity sha512-9WsvEfUuD5CXVM/KhKhD6vD7tQh6mejXyIqeC3spLrn7aFSnbo/1MUk2Bk1Ncj2G2o4h5VHQD8i7NQW1GS8Neg==
   dependencies:
     "@jayree/changelog" "^1.1.0"
-    "@oclif/core" "^2.8.0"
+    "@oclif/core" "^2.8.2"
     "@salesforce/kit" "^1.9.2"
     "@salesforce/sf-plugins-core" "^2.2.7"
-    "@salesforce/source-deploy-retrieve" "^7.15.0"
+    "@salesforce/source-deploy-retrieve" "^7.15.1"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
@@ -1326,7 +1326,7 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^7.15.0", "@salesforce/source-deploy-retrieve@^7.15.1":
+"@salesforce/source-deploy-retrieve@^7.15.1":
   version "7.15.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-7.15.1.tgz#059d088f5fb5726323d9822599d730474ce6dc70"
   integrity sha512-37jjQWb24FBEwP0aAW1UnSkVk+TMr8KEtCN5tNa43LXK21m06suMDx92Y+lS8xJ9esgj/GEEuXgG8OCf+L5qcg==
