@@ -1,2 +1,2 @@
 import { Hook } from '@oclif/core';
-export declare const changelog: Hook<'changelog'>;
+export declare const changelog: Hook<'update'>;
