@@ -1272,7 +1272,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-3.1.0.tgz#8eb5b35860ff60d1c1dc3fd9329b01a28475d5b9"
   integrity sha512-cPph7ibj3DeSzWDFLcLtxOh5fmUlDUY2Ezq43n0V6auVP+l8orxRHjCExHS86SB3QKVgXkC8yYhryXiS8KF7Zw==
 
-"@salesforce/dev-scripts@3.1.1":
+"@salesforce/dev-scripts@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-3.1.1.tgz#39682a690f42d72af0419a7a74270fabd6905634"
   integrity sha512-2D/cP6XRl5u3/7I12YGoGW/Wvoe41R3CDA3+usdvQ8A/bapjWrjLS8ByhWlEFhO1FRij+9LM6uFhNfVaJ4B3dg==
@@ -1380,16 +1380,16 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-tracking@^2.2.28":
-  version "2.2.28"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-2.2.28.tgz#54d31694630743c6d1df4fb55b788c73b64d61bc"
-  integrity sha512-vp983Cf0FDOd1cNxTOgU81ltPC49E4lAQOS+KSteJKGg/Dox+gy2vhFtcVIJWP5dVfy1KnfFcQJ3ZGgjZatUZg==
+"@salesforce/source-tracking@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-3.1.1.tgz#a25b6693c24c7288c35151826616dfb8175f9275"
+  integrity sha512-ivnw1eBzRwTqhLu+lZnU3sasHvEgf0FoUgFDMRgSEs+c2PVmXIhhF/uYbN2mUdhlwcPY1sMKJZ2C4pM26DhSyg==
   dependencies:
     "@salesforce/core" "^3.34.6"
     "@salesforce/kit" "^1.9.2"
     "@salesforce/source-deploy-retrieve" "^8.0.1"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.17.0"
+    isomorphic-git "1.23.0"
     ts-retry-promise "^0.7.0"
 
 "@salesforce/ts-sinon@^1.4.6":
@@ -5420,24 +5420,7 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@1.17.0:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.17.0.tgz#8bd423ddb8ebfb924799be0ac75fb5bede5cfad7"
-  integrity sha512-8ToEVqYLeTE1Ys3UQ21yAxQf0rW7GYRvsENhvXNDONAHgNks1fsgUJH3mVzgbsGf4LpW3kuJI6e/e3VIeaTW3w==
-  dependencies:
-    async-lock "^1.1.0"
-    clean-git-ref "^2.0.1"
-    crc-32 "^1.2.0"
-    diff3 "0.0.3"
-    ignore "^5.1.4"
-    minimisted "^2.0.0"
-    pako "^1.0.10"
-    pify "^4.0.1"
-    readable-stream "^3.4.0"
-    sha.js "^2.4.9"
-    simple-get "^4.0.1"
-
-isomorphic-git@^1.23.0:
+isomorphic-git@1.23.0, isomorphic-git@^1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.23.0.tgz#3afaeb2831e57a2eb95d6ef503cf8251424f03f2"
   integrity sha512-7mQlnZivFwrU6B3CswvmoNtVN8jqF9BcLf80uk7yh4fNA8PhFjAfQigi2Hu/Io0cmIvpOc7vn0/Rq3KtL5Ph8g==
