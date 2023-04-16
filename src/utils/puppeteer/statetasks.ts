@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { createRequire } from 'module';
-import puppeteer from 'puppeteer';
+import playwright from 'playwright-chromium';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import Debug from 'debug';
 import config from '../config.js';
@@ -22,8 +22,9 @@ export class PuppeteerStateTasks {
   private deactivateTasks: any;
   private nextAddTaskIndex = -1;
   private nextDeactivateTaskIndex = -1;
-  private browser;
-  private auth;
+  private browser: playwright.Browser;
+  private context: playwright.BrowserContext;
+  private auth: { instanceUrl: string; accessToken: string };
   private countrycode;
   private countries;
   private language;
@@ -34,10 +35,10 @@ export class PuppeteerStateTasks {
     this.auth = auth;
   }
 
-  private static async setHTMLInputElementValue(page, element, newvalue) {
+  private static async setHTMLInputElementValue(page: playwright.Page, element: string, newvalue: string) {
     element = element.replace(/:/g, '\\:');
     const elementCurrentValue = await page.evaluate((s) => {
-      const result = document.querySelector(s) as HTMLInputElement;
+      const result: HTMLInputElement = document.querySelector(s);
       if (result != null) {
         return result.value;
       } else {
@@ -54,11 +55,7 @@ export class PuppeteerStateTasks {
         }
       }, element);
       if (!elementDisabled) {
-        await page.evaluate(
-          (val, s) => ((document.querySelector(s) as HTMLInputElement).value = val),
-          newvalue,
-          element
-        );
+        await page.fill(element, newvalue);
         return 'changed';
       } else {
         return 'disabled';
@@ -68,7 +65,12 @@ export class PuppeteerStateTasks {
     }
   }
 
-  private static async setHTMLInputElementChecked(page, element, newstate, waitForEnable) {
+  private static async setHTMLInputElementChecked(
+    page: playwright.Page,
+    element: string,
+    newstate: boolean,
+    waitForEnable: boolean
+  ) {
     element = element.replace(/:/g, '\\:');
     const elementCheckedState = await page.evaluate((s) => document.querySelector(s)['checked'], element);
     if (!elementCheckedState === newstate) {
@@ -78,10 +80,10 @@ export class PuppeteerStateTasks {
             const val = document.querySelector(s)['disabled'];
             return (val as boolean) === false;
           },
+          element,
           {
             timeout: 0,
-          },
-          element
+          }
         );
       }
       const elementDisabledState = await page.evaluate((s) => document.querySelector(s)['disabled'], element);
@@ -96,13 +98,13 @@ export class PuppeteerStateTasks {
     }
   }
 
-  public async validateParameterCountryCode(countrycode): Promise<any> {
-    const page = await this.browser.newPage();
+  public async validateParameterCountryCode(countrycode: string) {
+    const page = await this.context.newPage();
 
     try {
       if (!this.countries) {
         await page.goto('https://www.iso.org/obp/ui/#search', {
-          waitUntil: 'networkidle0',
+          waitUntil: 'networkidle',
         });
 
         await page.waitForSelector('#gwt-uid-12');
@@ -111,7 +113,7 @@ export class PuppeteerStateTasks {
         await page.click('.go');
 
         await page.waitForSelector('.v-grid-tablewrapper');
-        await page.select('.v-select-select', '8');
+        await page.selectOption('.v-select-select', '8');
 
         await page.waitForFunction(() => document.querySelector('.paging-align-fix').innerHTML === '');
 
@@ -133,9 +135,9 @@ export class PuppeteerStateTasks {
 
       if (this.countries.map((x) => x.value).includes(countrycode)) {
         await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${countrycode}`, {
-          waitUntil: 'networkidle0',
+          waitUntil: 'networkidle',
         });
-        await page.waitForSelector('.tablesorter', { visible: true });
+        await page.waitForSelector('.tablesorter', { state: 'visible' });
         this.countrycode = countrycode.toUpperCase();
         const table = await page.evaluate(() => document.querySelector('table#subdivision').outerHTML);
 
@@ -165,7 +167,7 @@ export class PuppeteerStateTasks {
     return { selected: this.countrycode, values: this.countries };
   }
 
-  public validateParameterCategory(category): any {
+  public validateParameterCategory(category: string) {
     let categories;
     if (this.ISOData) {
       categories = Object.keys(this.ISOData);
@@ -182,7 +184,7 @@ export class PuppeteerStateTasks {
     return { selected: this.category, values: categories };
   }
 
-  public validateParameterLanguage(language): any {
+  public validateParameterLanguage(language: string) {
     let languagecodes;
     if (this.category && this.ISOData) {
       languagecodes = this.ISOData[this.category]
@@ -201,13 +203,13 @@ export class PuppeteerStateTasks {
     return { selected: this.language, values: languagecodes };
   }
 
-  public async validateParameter(countrycode, category, language): Promise<any> {
-    const page = await this.browser.newPage();
+  public async validateParameter(countrycode: string, category: string, language: string) {
+    const page = await this.context.newPage();
     try {
       await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.countrycode}`, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       });
-      await page.waitForSelector('.tablesorter', { visible: true });
+      await page.waitForSelector('.tablesorter', { state: 'visible' });
       this.countrycode = countrycode.toUpperCase();
     } catch (error) {
       this.countrycode = undefined;
@@ -241,7 +243,7 @@ export class PuppeteerStateTasks {
     return { countrycode, category, language };
   }
 
-  public getData2(): any {
+  public validateData() {
     if (this.countrycode === undefined) {
       // throw Error('The country code element was not found');
       throw Error('Expected --countrycode= to be one of: ' + this.countries.map((x) => x.value).toString());
@@ -266,15 +268,15 @@ export class PuppeteerStateTasks {
     return { add: this.addTasks, deactivate: this.deactivateTasks };
   }
 
-  public async getData(countrycode, category, language): Promise<any> {
+  public async getData(countrycode: string, category: string, language: string) {
     this.countrycode = countrycode.toUpperCase();
-    const page = await this.browser.newPage();
+    const page = await this.context.newPage();
     const list = { add: [], deactivate: [] };
     try {
       await page.goto(`https://www.iso.org/obp/ui/#iso:code:3166:${this.countrycode}`, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       });
-      await page.waitForSelector('.tablesorter', { visible: true });
+      await page.waitForSelector('.tablesorter', { state: 'visible' });
     } catch (error) {
       throw Error(`The country code element (${this.countrycode}) was not found`);
     }
@@ -308,14 +310,14 @@ export class PuppeteerStateTasks {
     return list;
   }
 
-  public async setCountryIntegrationValue(): Promise<boolean> {
-    const page = await this.browser.newPage();
+  public async setCountryIntegrationValue() {
+    const page = await this.context.newPage();
 
     await page.goto(
       this.auth.instanceUrl +
         `/i18n/ConfigureCountry.apexp?countryIso=${this.countrycode}&setupid=AddressCleanerOverview`,
       {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       }
     );
 
@@ -327,16 +329,14 @@ export class PuppeteerStateTasks {
     );
     debug({ editIntValResult });
     await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
-    await page.waitForNavigation({
-      waitUntil: 'networkidle0',
-    });
+    await page.waitForSelector('.message.confirmM3', { state: 'visible' });
     return editIntValResult === 'changed' ? true : false;
   }
 
   public async executeAdd(): Promise<string> {
     const task = this.currentAddTask;
 
-    const page = await this.browser.newPage();
+    const page = await this.context.newPage();
 
     const countrycode = task['3166-2 code'].split('-')[0];
     const stateintVal = task['3166-2 code'].split('*')[0];
@@ -355,36 +355,13 @@ export class PuppeteerStateTasks {
       this.auth.instanceUrl +
         `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
       {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       }
     );
+    let update = true;
 
-    let update;
-    update = null;
-    for (let retries = 0; ; retries++) {
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        await page.waitForSelector('.mainTitle', { timeout: 100 });
-        update = true;
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
-
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        await page.waitForSelector('#errorTitle', {
-          timeout: 100,
-        });
-        update = false;
-        // eslint-disable-next-line no-empty
-      } catch (e) {}
-
-      if (update == null && retries < 600) {
-        continue;
-      }
-      if (update === true || update === false) {
-        break;
-      }
-      throw Error(`faild to open picklist for ${countrycode}`);
+    if (await page.$('#errorTitle')) {
+      update = false;
     }
 
     if (update === false) {
@@ -392,7 +369,7 @@ export class PuppeteerStateTasks {
         this.auth.instanceUrl +
           `/i18n/ConfigureNewState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview`,
         {
-          waitUntil: 'networkidle0',
+          waitUntil: 'networkidle',
         }
       );
       await page.waitForSelector('.mainTitle');
@@ -423,9 +400,7 @@ export class PuppeteerStateTasks {
     debug({ editNameResult, editIsoCodeResult, editIntValResult, editActiveResult, editVisibleResult });
 
     await page.click(selector.save.replace(/:/g, '\\:'));
-    await page.waitForNavigation({
-      waitUntil: 'networkidle0',
-    });
+    await page.waitForSelector('.message.confirmM3', { state: 'visible' });
 
     await page.close();
 
@@ -442,7 +417,7 @@ export class PuppeteerStateTasks {
   public async executeDeactivate(): Promise<boolean> {
     const task = this.currentDeactivateTask;
 
-    const page = await this.browser.newPage();
+    const page = await this.context.newPage();
 
     const countrycode = task.split('-')[0];
     const stateIsoCode = task.split('-')[1].split('*')[0];
@@ -451,7 +426,7 @@ export class PuppeteerStateTasks {
       this.auth.instanceUrl +
         `/i18n/ConfigureState.apexp?countryIso=${countrycode}&setupid=AddressCleanerOverview&stateIso=${stateIsoCode}`,
       {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       }
     );
 
@@ -472,9 +447,7 @@ export class PuppeteerStateTasks {
     debug({ editVisibleResult, editActiveResult });
 
     await page.click(selector.save.replace(/:/g, '\\:'));
-    await page.waitForNavigation({
-      waitUntil: 'networkidle0',
-    });
+    await page.waitForSelector('.message.confirmM3', { state: 'visible' });
 
     await page.close();
 
@@ -501,10 +474,11 @@ export class PuppeteerStateTasks {
 
   public async open() {
     if (!this.browser) {
-      this.browser = await puppeteer.launch(config().puppeteer);
-      const login = await this.browser.newPage();
+      this.browser = await playwright['chromium'].launch(config().puppeteer);
+      this.context = await this.browser.newContext();
+      const login = await this.context.newPage();
       await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
         timeout: 300000,
       });
     }

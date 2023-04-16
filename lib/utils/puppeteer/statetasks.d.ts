@@ -6,6 +6,7 @@ export declare class PuppeteerStateTasks {
     private nextAddTaskIndex;
     private nextDeactivateTaskIndex;
     private browser;
+    private context;
     private auth;
     private countrycode;
     private countries;
@@ -15,12 +16,31 @@ export declare class PuppeteerStateTasks {
     constructor(auth: any);
     private static setHTMLInputElementValue;
     private static setHTMLInputElementChecked;
-    validateParameterCountryCode(countrycode: any): Promise<any>;
-    validateParameterCategory(category: any): any;
-    validateParameterLanguage(language: any): any;
-    validateParameter(countrycode: any, category: any, language: any): Promise<any>;
-    getData2(): any;
-    getData(countrycode: any, category: any, language: any): Promise<any>;
+    validateParameterCountryCode(countrycode: string): Promise<{
+        selected: any;
+        values: any;
+    }>;
+    validateParameterCategory(category: string): {
+        selected: any;
+        values: any;
+    };
+    validateParameterLanguage(language: string): {
+        selected: any;
+        values: any;
+    };
+    validateParameter(countrycode: string, category: string, language: string): Promise<{
+        countrycode: string;
+        category: string;
+        language: string;
+    }>;
+    validateData(): {
+        add: any;
+        deactivate: any;
+    };
+    getData(countrycode: string, category: string, language: string): Promise<{
+        add: any[];
+        deactivate: any[];
+    }>;
     setCountryIntegrationValue(): Promise<boolean>;
     executeAdd(): Promise<string>;
     executeDeactivate(): Promise<boolean>;

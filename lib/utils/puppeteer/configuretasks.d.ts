@@ -3,6 +3,7 @@ export declare class PuppeteerConfigureTasks {
     private tasks;
     private nextTaskIndex;
     private browser;
+    private context;
     private auth;
     constructor(auth: any, tasks: string[]);
     private static subExec;

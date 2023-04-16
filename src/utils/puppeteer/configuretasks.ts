@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import puppeteer from 'puppeteer';
+import playwright from 'playwright-chromium';
 import chalk from 'chalk';
 import Debug from 'debug';
 import config from '../config.js';
@@ -15,7 +15,8 @@ export class PuppeteerConfigureTasks {
   public currenTask;
   private tasks: any;
   private nextTaskIndex = -1;
-  private browser;
+  private browser: playwright.Browser;
+  private context: playwright.BrowserContext;
   private auth;
 
   public constructor(auth, tasks: string[]) {
@@ -24,7 +25,7 @@ export class PuppeteerConfigureTasks {
   }
 
   // eslint-disable-next-line complexity
-  private static async subExec(page, task): Promise<boolean> {
+  private static async subExec(page: playwright.Page, task): Promise<boolean> {
     for await (const call of task.evaluate) {
       if (call.action === 'click') {
         try {
@@ -93,7 +94,7 @@ export class PuppeteerConfigureTasks {
           if (typeof call.type === 'object' && call.type.list) {
             await page.waitForSelector('table', {
               timeout: 300000,
-              visible: true,
+              state: 'visible',
             });
             debug({
               [call.querySelectorAll]: await page.evaluate((c) => {
@@ -169,12 +170,12 @@ export class PuppeteerConfigureTasks {
       if (typeof call.waitFor === 'string') {
         if (call.waitFor === 'Navigation') {
           await page.waitForNavigation({
-            waitUntil: 'networkidle0',
+            waitUntil: 'networkidle',
             timeout: 300000,
           });
         } else if (call.waitFor !== '') {
           await page.waitForSelector(call.waitFor, {
-            visible: true,
+            state: 'visible',
             timeout: 300000,
           });
         }
@@ -186,20 +187,20 @@ export class PuppeteerConfigureTasks {
           while (true) {
             try {
               // eslint-disable-next-line no-await-in-loop
-              await page.waitForSelector(call.waitFor[1], { hidden: true });
+              await page.waitForSelector(call.waitFor[1], { state: 'hidden' });
               break;
             } catch (e) {
               debug(e.message);
               // eslint-disable-next-line no-await-in-loop
               await page.reload({
-                waitUntil: 'networkidle0',
+                waitUntil: 'networkidle',
               });
               continue;
             }
           }
         } else {
           await page.waitForSelector(call.waitFor[1], {
-            visible: true,
+            state: 'visible',
             timeout: 300000,
           });
         }
@@ -217,10 +218,10 @@ export class PuppeteerConfigureTasks {
                 }
                 return false;
               },
+              call,
               {
                 timeout: 300000,
-              },
-              call
+              }
             );
           }
         }
@@ -243,11 +244,12 @@ export class PuppeteerConfigureTasks {
 
   public async open() {
     if (!this.browser) {
-      this.browser = await puppeteer.launch(config().puppeteer);
+      this.browser = await playwright['chromium'].launch(config().puppeteer);
+      this.context = await this.browser.newContext();
 
-      const login = await this.browser.newPage();
+      const login = await this.context.newPage();
       await login.goto(`${this.auth.instanceUrl}/secur/frontdoor.jsp?sid=${this.auth.accessToken}`, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
         timeout: 300000,
       });
     }
@@ -265,15 +267,15 @@ export class PuppeteerConfigureTasks {
 
     let retValue = false;
     for await (const subTask of task.tasks) {
-      const page = await this.browser.newPage();
+      const page = await this.context.newPage();
       await page.goto(this.auth.instanceUrl + task.url, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
         timeout: 300000,
       });
       if (task.iframe) {
-        await page.waitForSelector('iframe', { timeout: 300000, visible: true });
-        await page.goto((await page.frames())[task.iframe].url(), {
-          waitUntil: 'networkidle0',
+        await page.waitForSelector('iframe', { timeout: 300000, state: 'visible' });
+        await page.goto(page.frames()[task.iframe].url(), {
+          waitUntil: 'networkidle',
           timeout: 300000,
         });
       }

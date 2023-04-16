@@ -1,5 +1,4 @@
 import { flags, SfdxCommand } from '@salesforce/command';
-import { AnyJson } from '@salesforce/ts-types';
 export default class UpdateCountry extends SfdxCommand {
     static description: string;
     protected static flagsConfig: {
@@ -8,5 +7,5 @@ export default class UpdateCountry extends SfdxCommand {
     protected static requiresUsername: boolean;
     protected static supportsDevhubUsername: boolean;
     protected static requiresProject: boolean;
-    run(): Promise<AnyJson>;
+    run(): Promise<void>;
 }

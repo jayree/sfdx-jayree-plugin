@@ -9,10 +9,8 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
-import { AnyJson } from '@salesforce/ts-types';
-import chalk from 'chalk';
-import { CliUx } from '@oclif/core';
-import puppeteer from 'puppeteer';
+import { ux } from '@oclif/core';
+import playwright from 'playwright-chromium';
 import { Tabletojson as tabletojson } from 'tabletojson';
 import config from '../../../../utils/config.js';
 
@@ -43,12 +41,13 @@ export default class UpdateCountry extends SfdxCommand {
   protected static supportsDevhubUsername = false;
   protected static requiresProject = false;
 
-  public async run(): Promise<AnyJson> {
+  public async run(): Promise<void> {
     let spinnermessage = '';
 
-    const browser = await puppeteer.launch(config().puppeteer);
+    const browser = await playwright['chromium'].launch(config().puppeteer);
+    const context = await browser.newContext();
 
-    const page = await browser.newPage();
+    const page = await context.newPage();
 
     const setHTMLInputElementValue = async (newvalue, element) => {
       element = element.replace(/:/g, '\\:');
@@ -62,15 +61,11 @@ export default class UpdateCountry extends SfdxCommand {
       }, element);
       // const currentvalue = await page.evaluate(s => (document.querySelector(s) as HTMLInputElement).value, element);
       if (!elementDisabled) {
-        return page.evaluate(
-          (val, s) => ((document.querySelector(s) as HTMLInputElement).value = val),
-          newvalue,
-          element
-        );
+        return page.fill(element, newvalue);
       }
     };
 
-    const bar = CliUx.ux.progress({
+    const bar = ux.progress({
       barCompleteChar: '\u2588',
       barIncompleteChar: '\u2591',
       format: 'State and Country/Territory Picklist | [{bar}] {percentage}% | ETA: {eta}s | {value}/{total} | {text}',
@@ -90,7 +85,7 @@ export default class UpdateCountry extends SfdxCommand {
       // eslint-disable-next-line no-unused-expressions
       !this.flags.silent ? this.ux.setSpinnerStatus(spinnermessage) : process.stdout.write('.');
       await page.goto(conn.instanceUrl + '/secur/frontdoor.jsp?sid=' + conn.accessToken, {
-        waitUntil: 'networkidle0',
+        waitUntil: 'networkidle',
       });
 
       spinnermessage = 'retrieve list of countries';
@@ -99,9 +94,9 @@ export default class UpdateCountry extends SfdxCommand {
 
       try {
         await page.goto(conn.instanceUrl + '/i18n/ConfigStateCountry.apexp?setupid=AddressCleanerOverview', {
-          waitUntil: 'networkidle0',
+          waitUntil: 'networkidle',
         });
-        await page.waitForSelector('.list', { visible: true });
+        await page.waitForSelector('.list', { state: 'visible' });
       } catch (error) {
         throw Error("list of countries couldn't be loaded");
       }
@@ -135,18 +130,21 @@ export default class UpdateCountry extends SfdxCommand {
         await page.goto(
           conn.instanceUrl + `/i18n/ConfigureCountry.apexp?countryIso=${countryCode}&setupid=AddressCleanerOverview`,
           {
-            waitUntil: 'networkidle0',
+            waitUntil: 'networkidle',
           }
         );
         const setCountrySelector = CSconfig.setCountry;
         await setHTMLInputElementValue(countryCode, setCountrySelector.editIntVal);
 
         await page.click(setCountrySelector.save.replace(/:/g, '\\:'));
-        await page.waitForNavigation({
-          waitUntil: 'networkidle0',
-        });
+        await page.waitForSelector('.message.confirmM3', { state: 'visible' });
       }
     } catch (error) {
+      throw new Error(error.message);
+    } finally {
+      // eslint-disable-next-line no-unused-expressions
+      !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
+
       this.ux.stopSpinner();
       bar.stop();
       if (page) {
@@ -155,18 +153,6 @@ export default class UpdateCountry extends SfdxCommand {
           await browser.close();
         }
       }
-      this.ux.error(chalk.bold('ERROR running jayree:automation:country:update:  ') + chalk.red(error.message));
-      process.exit(1);
     }
-    // eslint-disable-next-line no-unused-expressions
-    !this.flags.silent ? bar.update(bar.getTotal(), { text: '' }) : process.stdout.write('.');
-    bar.stop();
-    if (page) {
-      await page.close();
-      if (browser) {
-        await browser.close();
-      }
-    }
-    process.exit(0);
   }
 }
