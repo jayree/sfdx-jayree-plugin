@@ -10,7 +10,7 @@ import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { traverse } from '@salesforce/core/lib/util/internal.js';
 import { AnyJson } from '@salesforce/ts-types';
-import { Logger, Listr } from 'listr2';
+import { ListrLogger, Listr, PRESET_TIMER } from 'listr2';
 import kit from '@salesforce/kit';
 import Debug from 'debug';
 import config from '../../../../utils/config.js';
@@ -25,7 +25,7 @@ Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'configure');
 
-const logger = new Logger({ useIcons: false });
+const logger = new ListrLogger({ useIcons: false });
 
 const debug = Debug('jayree:org:configure');
 
@@ -122,9 +122,16 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
         },
       ],
       {
-        rendererOptions: { showTimer: true, collapseErrors: false, collapse: false },
-        rendererSilent: !this.isOutputEnabled,
-        rendererFallback: debug.enabled,
+        rendererOptions: {
+          timer: {
+            ...PRESET_TIMER,
+            condition: (duration): boolean => duration > 250,
+          },
+          collapseErrors: false,
+          collapseSubtasks: false,
+        },
+        silentRendererCondition: !this.isOutputEnabled,
+        fallbackRendererCondition: debug.enabled,
         exitOnError: false,
       }
     );
@@ -133,7 +140,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
       const context = await mainTasks.run();
       if (debug.enabled) {
         if (this.isOutputEnabled) {
-          logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
+          logger.toStderr(`Context: ${JSON.stringify(context, null, 2)}`);
         }
         return context as unknown as AnyJson;
       }
@@ -142,7 +149,7 @@ $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Sett
       };
     } catch (e) {
       if (this.isOutputEnabled) {
-        logger.fail(e);
+        logger.toStderr(e);
       }
       return { ...e };
     }

@@ -9,9 +9,8 @@ import { fileURLToPath } from 'node:url';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import { Logger, Listr } from 'listr2';
+import { ListrLogger, Listr, PRESET_TIMER } from 'listr2';
 import kit from '@salesforce/kit';
-import Enquirer from 'enquirer';
 import Debug from 'debug';
 import { MyDefaultRenderer } from '../../../../utils/renderer.js';
 import { PuppeteerStateTasks } from '../../../../utils/puppeteer/statetasks.js';
@@ -24,7 +23,7 @@ const __dirname = dirname(__filename);
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('sfdx-jayree', 'createstatecountry');
 
-const logger = new Logger({ useIcons: false });
+const logger = new ListrLogger({ useIcons: false });
 
 const debug = Debug('jayree:x:y');
 
@@ -67,12 +66,6 @@ export default class ImportState extends SfdxCommand {
     const mainTasks = new Listr(
       [
         {
-          title: 'Open Browser',
-          task: async (): Promise<void> => {
-            await taskRunner.open();
-          },
-        },
-        {
           title: 'Get ISO 3166 Data',
           task: async (ctx, task): Promise<Listr> => {
             ctx.CountryCode = await taskRunner.validateParameterCountryCode(this.flags.countrycode);
@@ -83,6 +76,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Country Code: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
+                skip: (): boolean => !!ctx.CountryCode.selected,
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.CountryCode.selected === undefined) {
@@ -102,7 +96,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Category: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                skip: (): boolean => !ctx.category.values.length,
+                skip: (): boolean => !!ctx.category.selected,
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.category.selected === undefined) {
@@ -121,7 +115,7 @@ export default class ImportState extends SfdxCommand {
               {
                 title: 'Language: ',
                 enabled: (): boolean => this.isOutputEnabled && process.stdout.isTTY,
-                skip: (): boolean => !ctx.category.values.length || !ctx.language.values.length,
+                skip: (): boolean => !!ctx.language.selected,
                 // eslint-disable-next-line @typescript-eslint/no-shadow
                 task: async (ctx, task): Promise<void> => {
                   if (ctx.language.selected === undefined) {
@@ -140,10 +134,9 @@ export default class ImportState extends SfdxCommand {
           },
         },
         {
-          skip: (ctx): boolean => !ctx.category.values.length || !ctx.language.values.length,
-          task: async (ctx): Promise<void> => {
+          task: (ctx): void => {
             try {
-              ctx.data = await taskRunner.getData2();
+              ctx.data = taskRunner.validateData();
               ctx.result = [];
             } catch (error) {
               ctx.error = error.message;
@@ -220,30 +213,26 @@ export default class ImportState extends SfdxCommand {
               { concurrent: this.flags.concurrent, exitOnError: false }
             ),
         },
-        {
-          title: 'Close Browser',
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          task: async (ctx): Promise<void> => {
-            await taskRunner.close();
-          },
-        },
       ],
       {
         renderer: MyDefaultRenderer,
         rendererOptions: {
-          showTimer: true,
+          timer: {
+            ...PRESET_TIMER,
+            condition: (duration): boolean => duration > 250,
+          },
           collapseErrors: false,
-          collapse: false,
+          collapseSubtasks: false,
           maxSubTasks: this.flags.concurrent >= 10 ? this.flags.concurrent : 10,
         },
-        rendererSilent: !this.isOutputEnabled,
-        rendererFallback: debug.enabled,
-        exitOnError: false,
-        injectWrapper: { enquirer: new Enquirer() as any },
+        silentRendererCondition: !this.isOutputEnabled,
+        fallbackRendererCondition: debug.enabled,
+        exitOnError: true,
       }
     );
 
     try {
+      await taskRunner.open();
       const context = await mainTasks.run();
       if (context.error) {
         throw new Error(context.error);
@@ -255,7 +244,7 @@ export default class ImportState extends SfdxCommand {
 
       if (debug.enabled) {
         if (this.isOutputEnabled) {
-          logger.success(`Context: ${JSON.stringify(context, null, 2)}`);
+          logger.toStderr(`Context: ${JSON.stringify(context, null, 2)}`);
         }
         return context;
       }
@@ -263,10 +252,12 @@ export default class ImportState extends SfdxCommand {
     } catch (e) {
       if (debug.enabled) {
         if (this.isOutputEnabled) {
-          logger.fail(e);
+          logger.toStderr(e);
         }
       }
       throw e;
+    } finally {
+      await taskRunner.close();
     }
   }
 }
