@@ -9,7 +9,7 @@
     "@jayree/changelog": "^1.1.0",
     "@jayree/sfdx-plugin-legacy": "^1.1.34",
     "@jayree/sfdx-plugin-manifest": "^3.0.10",
-    "@jayree/sfdx-plugin-prettier": "^1.2.36",
+    "@jayree/sfdx-plugin-prettier": "^1.2.37",
     "@jayree/sfdx-plugin-source": "^1.0.5",
     "@oclif/core": "^2.8.2",
     "@salesforce/command": "^5.3.5",
