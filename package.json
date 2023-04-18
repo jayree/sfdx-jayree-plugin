@@ -9,6 +9,7 @@
     "@jayree/changelog": "^1.1.0",
     "@jayree/sfdx-plugin-legacy": "^1.1.34",
     "@jayree/sfdx-plugin-manifest": "^3.0.11",
+    "@jayree/sfdx-plugin-org": "^1.0.0",
     "@jayree/sfdx-plugin-prettier": "^1.2.37",
     "@jayree/sfdx-plugin-source": "^1.0.5",
     "@oclif/core": "^2.8.2",
@@ -20,13 +21,8 @@
     "fast-xml-parser": "^4.2.0",
     "fs-extra": "^11.1.1",
     "ignore": "^5.2.4",
-    "is-docker": "^3.0.0",
-    "is-wsl": "^2.2.0",
-    "listr2": "^6.2.0",
     "mkdirp": "^3.0.0",
     "object-path": "^0.11.8",
-    "playwright-chromium": "^1.32.3",
-    "tabletojson": "^2.0.7",
     "tslib": "^2.5.0"
   },
   "devDependencies": {
@@ -126,12 +122,7 @@
         "description": "manifest, source, and org automation toolset",
         "subtopics": {
           "org": {
-            "description": "manage your orgs",
-            "subtopics": {
-              "configure": {
-                "description": "manage state and country picklist values"
-              }
-            }
+            "description": "manage your orgs"
           },
           "source": {
             "description": "sync your project with your orgs"
@@ -147,6 +138,7 @@
       "@jayree/sfdx-plugin-prettier",
       "@jayree/sfdx-plugin-manifest",
       "@jayree/sfdx-plugin-source",
+      "@jayree/sfdx-plugin-org",
       "@jayree/sfdx-plugin-legacy"
     ],
     "info": {

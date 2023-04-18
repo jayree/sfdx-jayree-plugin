@@ -70,20 +70,20 @@
   },
   {
     "command": "jayree:org:configure",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "concurrent", "json", "loglevel", "targetusername", "tasks"],
+    "plugin": "@jayree/sfdx-plugin-org",
+    "flags": ["api-version", "concurrent", "json", "target-org", "tasks"],
     "alias": []
   },
   {
     "command": "jayree:org:configure:country",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "silent", "targetusername"],
+    "plugin": "@jayree/sfdx-plugin-org",
+    "flags": ["api-version", "json", "silent", "target-org"],
     "alias": []
   },
   {
     "command": "jayree:org:configure:state",
-    "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "category", "concurrent", "countrycode", "json", "language", "loglevel", "targetusername"],
+    "plugin": "@jayree/sfdx-plugin-org",
+    "flags": ["api-version", "category", "concurrent", "country-code", "json", "language", "target-org"],
     "alias": []
   },
   {

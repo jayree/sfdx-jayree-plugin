@@ -510,23 +510,21 @@ make configuration changes that are not covered by the metadata API
 
 ```
 USAGE
-  $ sfdx jayree:org:configure [-t <array>] [--concurrent] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:configure -o <value> [--json] [--api-version <value>] [-t <value>] [--concurrent]
 
 FLAGS
-  -t, --tasks=<value>                                                               list of task titles, if no tasks are
-                                                                                    specified, all tasks marked as
-                                                                                    active will be executed
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --concurrent                                                                      execute tasks in parallel
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  -t, --tasks=<value>...    list of task titles, if no tasks are specified, all tasks marked as active will be executed
+  --api-version=<value>     Override the api version used for api requests made by this command
+  --concurrent              execute tasks in parallel
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
+  make configuration changes that are not covered by the metadata API
+  See example configuration on how to define tasks
+
   make configuration changes that are not covered by the metadata API
   See example configuration on how to define tasks
 
@@ -537,7 +535,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [src/commands/jayree/org/configure/index.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.5.1/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.0/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree:org:configure:country`
 
@@ -545,23 +543,22 @@ update country integration values in the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:org:configure:country [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:configure:country -o <value> [--json] [--api-version <value>]
 
 FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  --api-version=<value>     Override the api version used for api requests made by this command
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   update country integration values in the State/Country Picklists
+
+  update country integration values in the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/country.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.5.1/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.0/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree:org:configure:state`
 
@@ -569,28 +566,27 @@ import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:org:configure:state [--countrycode <string>] [--category <string>] [--language <string>] [--concurrent
-    <integer>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:configure:state -o <value> [--json] [--api-version <value>] [--country-code <value>] [--category <value>]
+    [--language <value>] [--concurrent <value>]
 
 FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --category=<value>                                                                Subdivision category
-  --concurrent=<value>                                                              [default: 1] ccc
-  --countrycode=<value>                                                             Alpha-2 code
-  --json                                                                            format output as json
-  --language=<value>                                                                Language code
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  --api-version=<value>     Override the api version used for api requests made by this command
+  --category=<value>        Subdivision category
+  --concurrent=<value>      [default: 1] execute tasks in parallel
+  --country-code=<value>    Alpha-2 code
+  --language=<value>        Language code
+
+GLOBAL FLAGS
+  --json  Format output as json.
 
 DESCRIPTION
   import (create/update) states into the State/Country Picklists
+
+  import (create/update) states into the State/Country Picklists
 ```
 
-_See code: [src/commands/jayree/org/configure/state.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.5.1/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.0/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree:org:settings`
 
