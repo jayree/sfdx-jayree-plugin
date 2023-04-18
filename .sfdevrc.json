@@ -1,3 +1,4 @@
 {
-  "exclude-scripts": ["docs"]
+  "exclude-scripts": ["docs", "test:command-reference", "test:compile", "test:only"],
+  "exclude-files": ["LICENSE.txt", ".eslintrc.js", "test/.eslintrc.js"]
 }

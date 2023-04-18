@@ -6,7 +6,12 @@
  */
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { flags, SfdxCommand } from '@salesforce/command';
+import {
+  Flags,
+  SfCommand,
+  requiredOrgFlagWithDeprecations,
+  orgApiVersionFlagWithDeprecations,
+} from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 
@@ -19,38 +24,37 @@ Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'streaming');
 
-export default class Streaming extends SfdxCommand {
-  public static description = messages.getMessage('commandDescription');
+export default class Streaming extends SfCommand<AnyJson> {
+  public static readonly summary = messages.getMessage('commandDescription');
 
-  public static examples = [
+  public static readonly examples = [
     `$ sfdx jayree:org:streaming --topic=/event/eventName__e
 ...
 `,
   ];
 
-  protected static flagsConfig = {
-    topic: flags.string({
+  public static readonly flags = {
+    'target-org': requiredOrgFlagWithDeprecations,
+    'api-version': orgApiVersionFlagWithDeprecations,
+    topic: Flags.string({
       char: 'p',
       required: true,
-      description: messages.getMessage('topicFlagDescription'),
+      summary: messages.getMessage('topicFlagDescription'),
     }),
   };
 
-  protected static requiresUsername = true;
-  protected static supportsDevhubUsername = false;
-  protected static requiresProject = false;
-
   // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
-    await this.org.refreshAuth();
-    const conn = this.org.getConnection();
+    const { flags } = await this.parse(Streaming);
+    await flags['target-org'].refreshAuth();
+    const conn = flags['target-org'].getConnection(flags['api-version']);
     // '/event/SAPAccountRequest__e'
-    await conn.streaming.topic(this.flags.topic).subscribe((event) => {
-      this.ux.logJson(event);
+    await conn.streaming.topic(flags.topic).subscribe((event) => {
+      this.styledJSON(event);
     });
 
     return {
-      orgId: this.org.getOrgId(),
+      orgId: flags['target-org'].getOrgId(),
     };
   }
 }

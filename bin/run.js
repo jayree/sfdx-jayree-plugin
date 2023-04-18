@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-
-import oclif from '@oclif/core';
-
-oclif.run().then(import('@oclif/core/flush.js')).catch(import('@oclif/core/handle.js'));
+// eslint-disable-next-line node/shebang
+(async () => {
+  const oclif = await import('@oclif/core');
+  await oclif.execute({ type: 'esm', dir: import.meta.url });
+})();

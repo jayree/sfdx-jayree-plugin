@@ -1,20 +1,6 @@
-#!/usr/bin/env node
-
-import oclif from '@oclif/core';
-
-const project = new URL('../tsconfig.json', import.meta.url).pathname;
-
-// In dev mode -> use ts-node and dev plugins
-process.env.NODE_ENV = 'development';
-
-import tsnode from 'ts-node';
-tsnode.register({ project });
-
-// In dev mode, always show stack traces
-oclif.settings.debug = true;
-
-// Start the CLI
-oclif
-  .run(process.argv.slice(2), { root: new URL('../', import.meta.url).pathname })
-  .then(oclif.flush)
-  .catch(oclif.Errors.handle);
+#!/usr/bin/env ts-node
+// eslint-disable-next-line node/shebang
+(async () => {
+  const oclif = await import('@oclif/core');
+  await oclif.execute({ type: 'esm', development: true, dir: import.meta.url });
+})();

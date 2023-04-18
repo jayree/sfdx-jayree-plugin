@@ -7,8 +7,9 @@
 
 {
   "plugins": ["eslint-plugin-header"],
-  "extends": ["eslint-config-salesforce-typescript", "eslint-config-prettier", "plugin:sf-plugin/recommended"],
+  "extends": ["eslint-config-salesforce-typescript", "plugin:sf-plugin/migration", "plugin:prettier/recommended"],
   "rules": {
+    "jsdoc/newline-after-description": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "@typescript-eslint/restrict-template-expressions": [
       "error",
@@ -27,7 +28,6 @@
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
     "header/header": [
       2,
       "block",

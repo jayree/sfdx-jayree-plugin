@@ -6,7 +6,11 @@
  */
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SfdxCommand } from '@salesforce/command';
+import {
+  SfCommand,
+  requiredOrgFlagWithDeprecations,
+  orgApiVersionFlagWithDeprecations,
+} from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 
@@ -19,10 +23,10 @@ Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'flowtestcoverage');
 
-export default class FlowTestCoverage extends SfdxCommand {
-  public static description = messages.getMessage('commandDescription');
+export default class FlowTestCoverage extends SfCommand<AnyJson> {
+  public static readonly summary = messages.getMessage('commandDescription');
 
-  public static examples = [
+  public static readonly examples = [
     `$ sfdx jayree:flowtestcoverage
 === Flow Test Coverage
 Coverage: 82%
@@ -30,12 +34,15 @@ Coverage: 82%
 `,
   ];
 
-  protected static requiresUsername = true;
-  protected static supportsDevhubUsername = false;
-  protected static requiresProject = false;
+  public static readonly flags = {
+    'target-org': requiredOrgFlagWithDeprecations,
+    'api-version': orgApiVersionFlagWithDeprecations,
+  };
 
   public async run(): Promise<AnyJson> {
-    const conn = this.org.getConnection();
+    const { flags } = await this.parse(FlowTestCoverage);
+    const org = flags['target-org'];
+    const conn = org.getConnection(flags['api-version']);
 
     const query1 = await conn.tooling.query(
       "SELECT count_distinct(DefinitionId) FROM Flow WHERE Status = 'Active' AND(ProcessType = 'AutolaunchedFlow' OR ProcessType = 'Workflow' OR ProcessType = 'CustomEvent' OR ProcessType = 'InvocableProcess')"
@@ -57,8 +64,8 @@ Coverage: 82%
     );
     const covered = query4.records.map((value) => value['DeveloperName']);
 
-    this.ux.styledHeader('Flow Test Coverage');
-    this.ux.styledObject({
+    this.styledHeader('Flow Test Coverage');
+    this.styledObject({
       'number of active autolaunched flows and processes': numberOfActiveAutolaunchedFlowsAndProcesses,
       'number of covered active autolaunched flows and processes': numberOfCoveredActiveAutolaunchedFlowsAndProcesses,
       Coverage:
@@ -76,19 +83,25 @@ Coverage: 82%
       });
     }
 
-    this.ux.table(x, [
-      'all flows and processes that have test coverage',
-      'all active autolaunched flows and processes that don’t have test coverage',
-    ]);
+    this.table(x, {
+      TESTCOVERAGE: {
+        header: 'all flows and processes that have test coverage',
+        get: (row) => row['all flows and processes that have test coverage'],
+      },
+      NOTESTCOVERAGE: {
+        header: 'all active autolaunched flows and processes that don’t have test coverage',
+        get: (row) => row['all active autolaunched flows and processes that don’t have test coverage'],
+      },
+    });
 
     if (covered.length !== numberOfCoveredActiveAutolaunchedFlowsAndProcesses) {
-      this.ux.warn(
+      this.warn(
         'Error in the FlowTestCoverage table found, please delete all records in the FlowTestCoverage table, then run all tests, and use this command to check the Flow Test Coverage again'
       );
     }
 
     return {
-      orgId: this.org.getOrgId(),
+      orgId: org.getOrgId(),
       Coverage:
         Math.floor(
           (numberOfCoveredActiveAutolaunchedFlowsAndProcesses / numberOfActiveAutolaunchedFlowsAndProcesses) * 100

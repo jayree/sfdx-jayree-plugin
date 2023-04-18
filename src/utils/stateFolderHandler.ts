@@ -7,8 +7,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import Debug from 'debug';
-import factory from 'ignore';
-const ignore = factory.default;
+import ignore from 'ignore';
 
 const debug = Debug('jayree:state:folder');
 

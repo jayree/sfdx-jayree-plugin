@@ -7,7 +7,7 @@
 import { accessSync, readFileSync } from 'fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SfdxCommand } from '@salesforce/command';
+import { SfCommand } from '@salesforce/sf-plugins-core';
 import { AnyJson } from '@salesforce/ts-types';
 
 // eslint-disable-next-line no-underscore-dangle
@@ -15,8 +15,9 @@ const __filename = fileURLToPath(import.meta.url);
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = dirname(__filename);
 
-export default class Version extends SfdxCommand {
-  public static hidden = true;
+// eslint-disable-next-line sf-plugin/command-example, sf-plugin/command-summary
+export default class Version extends SfCommand<AnyJson> {
+  public static readonly hidden = true;
 
   // eslint-disable-next-line @typescript-eslint/require-await
   public async run(): Promise<AnyJson> {
@@ -35,7 +36,7 @@ export default class Version extends SfdxCommand {
     };
 
     const packageJsonData = JSON.parse(readFileSync(join(root(), 'package.json'), 'utf-8'));
-    this.ux.log(packageJsonData.version);
+    this.log(packageJsonData.version);
     return {
       version: packageJsonData.version,
     };

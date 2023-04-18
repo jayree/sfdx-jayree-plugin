@@ -6,7 +6,7 @@
  */
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { flags, SfdxCommand } from '@salesforce/command';
+import { Flags, SfCommand, optionalOrgFlagWithDeprecations, arrayWithDeprecation } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { applyFixes, logFixes, aggregatedFixResults } from '../../../utils/souceUtils.js';
@@ -20,8 +20,9 @@ Messages.importMessagesDirectory(__dirname);
 
 const messages = Messages.loadMessages('sfdx-jayree', 'sourceretrievefix');
 
-export default class FixMetadata extends SfdxCommand {
-  public static description = messages.getMessage('commandDescription');
+// eslint-disable-next-line sf-plugin/command-example
+export default class FixMetadata extends SfCommand<AnyJson> {
+  public static readonly summary = messages.getMessage('commandDescription');
 
   /*   public static examples = [
     `$ sfdx jayree:flowtestcoverage
@@ -31,26 +32,26 @@ Coverage: 82%
 `
   ]; */
 
-  protected static flagsConfig = {
-    tag: flags.array({
+  public static readonly flags = {
+    'target-org': optionalOrgFlagWithDeprecations,
+    tag: arrayWithDeprecation({
       char: 't',
-      description: messages.getMessage('tag'),
+      summary: messages.getMessage('tag'),
     }),
-    verbose: flags.builtin({
+    verbose: Flags.boolean({
+      summary: messages.getMessage('log'),
       description: messages.getMessage('log'),
-      longDescription: messages.getMessage('log'),
     }),
   };
 
-  protected static supportsUsername = true;
-  protected static supportsDevhubUsername = false;
-  protected static requiresProject = true;
+  public static readonly requiresProject = true;
 
   public async run(): Promise<AnyJson> {
+    const { flags } = await this.parse(FixMetadata);
     let updatedfiles: aggregatedFixResults = {};
 
     try {
-      updatedfiles = await applyFixes(this.flags.tag);
+      updatedfiles = await applyFixes(flags.tag);
       // eslint-disable-next-line no-empty
     } finally {
     }

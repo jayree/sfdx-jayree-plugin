@@ -30,7 +30,7 @@
   {
     "command": "jayree:flowtestcoverage",
     "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "targetusername"],
+    "flags": ["api-version", "json", "target-org"],
     "alias": []
   },
   {
@@ -89,13 +89,13 @@
   {
     "command": "jayree:org:settings",
     "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "file", "json", "loglevel", "targetusername", "writetoprojectscratchdeffile"],
+    "flags": ["file", "json", "target-org", "writetoprojectscratchdeffile"],
     "alias": []
   },
   {
     "command": "jayree:org:streaming",
     "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "targetusername", "topic"],
+    "flags": ["api-version", "json", "target-org", "topic"],
     "alias": []
   },
   {
@@ -125,7 +125,7 @@
   {
     "command": "jayree:source:fix",
     "plugin": "sfdx-jayree",
-    "flags": ["apiversion", "json", "loglevel", "tag", "targetusername", "verbose"],
+    "flags": ["json", "tag", "target-org", "verbose"],
     "alias": []
   },
   {
@@ -161,7 +161,7 @@
   {
     "command": "jayree:version",
     "plugin": "sfdx-jayree",
-    "flags": ["json", "loglevel"],
+    "flags": ["json"],
     "alias": []
   }
 ]

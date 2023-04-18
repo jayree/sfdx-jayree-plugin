@@ -1,13 +1,12 @@
-import { flags, SfdxCommand } from '@salesforce/command';
+import { SfCommand } from '@salesforce/sf-plugins-core';
 import { AnyJson } from '@salesforce/ts-types';
-export default class FixMetadata extends SfdxCommand {
-    static description: string;
-    protected static flagsConfig: {
-        tag: flags.Discriminated<flags.Array<string>>;
-        verbose: flags.Builtin;
+export default class FixMetadata extends SfCommand<AnyJson> {
+    static readonly summary: string;
+    static readonly flags: {
+        'target-org': import("@oclif/core/lib/interfaces/parser.js").OptionFlag<import("@salesforce/core").Org, import("@oclif/core/lib/interfaces/parser.js").CustomOptions>;
+        tag: import("@oclif/core/lib/interfaces/parser.js").OptionFlag<string[], import("@oclif/core/lib/interfaces/parser.js").CustomOptions>;
+        verbose: import("@oclif/core/lib/interfaces/parser.js").BooleanFlag<boolean>;
     };
-    protected static supportsUsername: boolean;
-    protected static supportsDevhubUsername: boolean;
-    protected static requiresProject: boolean;
+    static readonly requiresProject = true;
     run(): Promise<AnyJson>;
 }

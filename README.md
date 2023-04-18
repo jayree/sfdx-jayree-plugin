@@ -9,28 +9,11 @@ A Salesforce CLI plugin containing commands and hooks for Salesforce Application
 [![License](https://img.shields.io/npm/l/sfdx-jayree.svg)](https://github.com/jayree/sfdx-jayree-plugin/blob/main/package.json)
 [![Gitter](https://badges.gitter.im/sfdx-jayree-plugin/community.svg)](https://gitter.im/sfdx-jayree-plugin/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-<!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
-* [Hooks](#hooks)
-* [Related Plugins](#related-plugins)
-<!-- tocstop -->
+## Install
 
-## Usage
-
-<!-- usage -->
-```sh-session
-$ sfdx plugins:install sfdx-jayree
-$ sfdx jayree:[COMMAND]
-running command...
-$ sfdx plugins
-sfdx-jayree 4.5.1
-$ sfdx help jayree:[COMMAND]
-USAGE
-  $ sfdx jayree:COMMAND
-...
+```bash
+sfdx plugins:install @jayree/sfdx-plugin-source
 ```
-<!-- usagestop -->
 
 ## Commands
 
@@ -176,20 +159,14 @@ check the flow test coverage of an org
 
 ```
 USAGE
-  $ sfdx jayree:flowtestcoverage [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:flowtestcoverage -o <value> [--json] [--api-version <value>]
 
 FLAGS
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  --api-version=<value>     Override the api version used for api requests made by this command
 
-DESCRIPTION
-  check the flow test coverage of an org
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:flowtestcoverage
@@ -594,24 +571,15 @@ write the current settings from an Org to a scratch org def file
 
 ```
 USAGE
-  $ sfdx jayree:org:settings [-w] [-f <string>] [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:settings -o <value> [--json] [-w] [-f <value>]
 
 FLAGS
-  -f, --file=<value>                                                                write to 'file' instead of
-                                                                                    project-scratch-def.json
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  -w, --writetoprojectscratchdeffile                                                write output to
-                                                                                    project-scratch-def.json file
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -f, --file=<value>                  write to 'file' instead of project-scratch-def.json
+  -o, --target-org=<value>            (required) Username or alias of the target org.
+  -w, --writetoprojectscratchdeffile  write output to project-scratch-def.json file
 
-DESCRIPTION
-  write the current settings from an Org to a scratch org def file
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:org:settings
@@ -627,21 +595,15 @@ listen to streaming api and platform events
 
 ```
 USAGE
-  $ sfdx jayree:org:streaming -p <string> [-u <string>] [--apiversion <string>] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:org:streaming -o <value> -p <value> [--json] [--api-version <value>]
 
 FLAGS
-  -p, --topic=<value>                                                               (required) topic name
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
+  -o, --target-org=<value>  (required) Username or alias of the target org.
+  -p, --topic=<value>       (required) topic name
+  --api-version=<value>     Override the api version used for api requests made by this command
 
-DESCRIPTION
-  listen to streaming api and platform events
+GLOBAL FLAGS
+  --json  Format output as json.
 
 EXAMPLES
   $ sfdx jayree:org:streaming --topic=/event/eventName__e
@@ -755,24 +717,20 @@ fix local source files
 
 ```
 USAGE
-  $ sfdx jayree:source:fix [-t <array>] [-u <string>] [--apiversion <string>] [--verbose] [--json] [--loglevel
-    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+  $ sfdx jayree:source:fix [--json] [-o <value>] [-t <value>] [--verbose]
 
 FLAGS
-  -t, --tag=<value>                                                                 comma-separated list of tag names
-                                                                                    listed in .sfdx-jayree.json
-  -u, --targetusername=<value>                                                      username or alias for the target
-                                                                                    org; overrides default target org
-  --apiversion=<value>                                                              override the api version used for
-                                                                                    api requests made by this command
-  --json                                                                            format output as json
-  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
-                                                                                    this command invocation
-  --verbose                                                                         log output to console
+  -o, --target-org=<value>
+  -t, --tag=<value>...      comma-separated list of tag names listed in .sfdx-jayree.json
+  --verbose                 log output to console
 
-DESCRIPTION
-  fix local source files
-  (examples will follow)
+GLOBAL FLAGS
+  --json  Format output as json.
+
+FLAG DESCRIPTIONS
+  --verbose  log output to console
+
+    log output to console
 ```
 
 _See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.5.1/src/commands/jayree/source/fix.ts)_

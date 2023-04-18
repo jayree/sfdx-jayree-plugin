@@ -7,7 +7,7 @@
 import os from 'os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { flags, SfdxCommand } from '@salesforce/command';
+import { Flags, SfCommand, requiredOrgFlagWithDeprecations } from '@salesforce/sf-plugins-core';
 import { Messages, SfProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import createDebug from 'debug';
@@ -32,32 +32,32 @@ function camelize(str) {
   });
 }
 
-export default class ScratchOrgSettings extends SfdxCommand {
-  public static description = messages.getMessage('commandDescription');
+export default class ScratchOrgSettings extends SfCommand<AnyJson> {
+  public static readonly summary = messages.getMessage('commandDescription');
 
-  public static examples = [
+  public static readonly examples = [
     `$ sfdx jayree:org:settings
 $ sfdx jayree:org:settings -u me@my.org
 $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
   ];
 
-  protected static flagsConfig = {
-    writetoprojectscratchdeffile: flags.boolean({
+  public static readonly flags = {
+    'target-org': requiredOrgFlagWithDeprecations,
+    writetoprojectscratchdeffile: Flags.boolean({
       char: 'w',
-      description: messages.getMessage('writetoprojectscratchdeffile'),
+      summary: messages.getMessage('writetoprojectscratchdeffile'),
     }),
-    file: flags.string({
+    file: Flags.string({
       char: 'f',
-      description: messages.getMessage('fileFlagDescription'),
+      summary: messages.getMessage('fileFlagDescription'),
     }),
   };
 
-  protected static requiresUsername = true;
-  protected static supportsDevhubUsername = false;
-  protected static requiresProject = true;
+  public static readonly requiresProject = true;
 
   // eslint-disable-next-line complexity
   public async run(): Promise<AnyJson> {
+    const { flags } = await this.parse(ScratchOrgSettings);
     const debug = createDebug('jayree:scratchorg:settings');
     const removeEmpty = (obj) => {
       Object.entries(obj).forEach(([key, val]) => {
@@ -100,14 +100,14 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
         // eslint-disable-next-line no-empty
       } catch (error) {}
 
-      const apiVersion = this.flags.apiversion || sfdxProjectVersion || (await this.org.retrieveMaxApiVersion());
+      const apiVersion = flags.apiversion || sfdxProjectVersion || (await flags['target-org'].retrieveMaxApiVersion());
 
-      this.ux.log(`Using ${destRoot} and apiVersion=${apiVersion}`);
+      this.log(`Using ${destRoot} and apiVersion=${apiVersion}`);
 
       const componentSet = new ComponentSet([{ fullName: '*', type: 'Settings' }]);
 
       const mdapiRetrieve = await componentSet.retrieve({
-        usernameOrConnection: this.org.getUsername(),
+        usernameOrConnection: flags['target-org'].getUsername(),
         output: destRoot,
         apiVersion,
       });
@@ -150,7 +150,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
           delete settings['activitiesSettings']['allowUsersToRelateMultipleContactsToTasksAndEvents'];
           debug('delete ' + 'activitiesSettings:allowUsersToRelateMultipleContactsToTasksAndEvents');
 
-          this.ux.warn(
+          this.warn(
             "You can't use the Tooling API or Metadata API to enable or disable Shared Activities.To enable this feature, visit the Activity Settings page in Setup.To disable this feature, contact Salesforce."
           );
         }
@@ -192,10 +192,10 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
       settings = removeEmpty(settings);
       settings = sortKeys(settings);
 
-      if (this.flags.writetoprojectscratchdeffile) {
+      if (flags.writetoprojectscratchdeffile) {
         const deffilepath =
           // eslint-disable-next-line @typescript-eslint/await-thenable
-          this.flags.file || join(await this.project.getPath(), 'config', 'project-scratch-def.json');
+          flags.file || join(await this.project.getPath(), 'config', 'project-scratch-def.json');
         let deffile = {};
 
         await fs
@@ -210,7 +210,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
                     if (settings['liveAgentSettings']['enableLiveAgent'] === 'false') {
                       delete settings['liveAgentSettings'];
                       debug('delete ' + 'liveAgentSettings');
-                      this.ux.warn('liveAgentSettings: Not available for deploy for this organization');
+                      this.warn('liveAgentSettings: Not available for deploy for this organization');
                     }
                   }
                 }
@@ -221,7 +221,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
                   if (settings['knowledgeSettings']['enableKnowledge'] === 'false') {
                     delete settings['knowledgeSettings'];
                     debug('delete ' + 'knowledgeSettings');
-                    this.ux.warn("knowledgeSettings: Once enabled, Salesforce Knowledge can't be disabled.");
+                    this.warn("knowledgeSettings: Once enabled, Salesforce Knowledge can't be disabled.");
                   }
                 }
               }
@@ -232,7 +232,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
                     if (settings['caseSettings']['emailToCase']['enableEmailToCase'] === 'false') {
                       delete settings['caseSettings']['emailToCase'];
                       debug('delete ' + 'caseSettings:emailToCase');
-                      this.ux.warn('EmailToCaseSettings: Email to case cannot be disabled once it has been enabled.');
+                      this.warn('EmailToCaseSettings: Email to case cannot be disabled once it has been enabled.');
                     }
                   }
                 }
@@ -242,7 +242,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
             deffile['settings'] = settings;
           })
           .catch((err) => {
-            if (err.code === 'ENOENT' && !this.flags.file) {
+            if (err.code === 'ENOENT' && !flags.file) {
               throw Error("default file 'project-scratch-def.json' not found, please use --file flag");
             } else {
               this.throwError(err);
@@ -253,16 +253,20 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
           this.throwError(err);
         });
       } else {
-        this.ux.styledHeader(
-          'received settings from Org: ' + this.org.getUsername() + ' (' + this.org.getOrgId() + ')'
+        this.styledHeader(
+          'received settings from Org: ' +
+            flags['target-org'].getUsername() +
+            ' (' +
+            flags['target-org'].getOrgId() +
+            ')'
         );
-        this.ux.styledJSON(settings);
+        this.styledJSON(settings);
       }
 
       return {
         settings,
-        orgId: this.org.getOrgId(),
-        username: this.org.getUsername(),
+        orgId: flags['target-org'].getOrgId(),
+        username: flags['target-org'].getUsername(),
       };
     } catch (error) {
       if (error.stdout) {
@@ -271,7 +275,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
         throw new Error(error.message.toLowerCase());
       }
     } finally {
-      if (!this.flags.keepcache) {
+      if (!flags.keepcache) {
         process.once('exit', () => {
           fs.removeSync(destRoot);
         });
@@ -280,7 +284,7 @@ $ sfdx jayree:org:settings -u MyTestOrg1 -w`,
   }
 
   private throwError(err: Error) {
-    this.ux.stopSpinner();
+    this.spinner.stop();
     throw err;
   }
 }
