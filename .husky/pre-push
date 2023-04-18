@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn build && yarn test --forbid-only
+npm run build && npm run test --forbid-only
