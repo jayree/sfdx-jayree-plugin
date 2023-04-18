@@ -1,3 +1,11 @@
+# [4.6.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.5.1...v4.6.0) (2023-04-18)
+
+
+### Features
+
+* migrate to sf-plugins ([4fa3932](https://github.com/jayree/sfdx-jayree-plugin/commit/4fa3932d60b368927be718d6e572ca61cb89ce46))
+* use new org configure commands plugin ([cbec61c](https://github.com/jayree/sfdx-jayree-plugin/commit/cbec61c8270e01dc9675792290d542beeee4778d))
+
 ## [4.5.1](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.5.0...v4.5.1) (2023-04-16)
 
 
