@@ -13,11 +13,9 @@
     "@jayree/sfdx-plugin-prettier": "^1.2.37",
     "@jayree/sfdx-plugin-source": "^1.0.5",
     "@oclif/core": "^2.8.2",
-    "@salesforce/command": "^5.3.5",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/sf-plugins-core": "^2.2.8",
     "@salesforce/source-deploy-retrieve": "^8.0.1",
-    "@salesforce/source-tracking": "^3.1.1",
     "debug": "^4.3.4",
     "fast-xml-parser": "^4.2.0",
     "fs-extra": "^11.1.1",
@@ -108,7 +106,6 @@
     "commands": "./lib/commands",
     "bin": "sfdx",
     "hooks": {
-      "prerun": "./lib/hooks/prerun",
       "update": "./lib/hooks/changelog",
       "preretrieve": "./lib/hooks/preretrieve",
       "postretrieve": "./lib/hooks/postretrieve"
