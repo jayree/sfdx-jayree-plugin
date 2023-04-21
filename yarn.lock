@@ -503,23 +503,23 @@
     semver "^7.3.8"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-legacy@^1.1.34":
-  version "1.1.34"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.34.tgz#4d00c74f365a4aeaebb1f9346c15c3f334ba267d"
-  integrity sha512-CEEsLBjK37Qu4+yog1XhDR+cL40EIn0ZeryirgESmk0dUBLJ1cVef3Ly3RGJdYou7ZPQqkYGFy310Jfx43V7vg==
+"@jayree/sfdx-plugin-legacy@^1.1.35":
+  version "1.1.35"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.35.tgz#2644bb3a044f04cfb33bd85e7bfe4409a7c5d2f3"
+  integrity sha512-QjS0zK4OV8BSr7zNzlGvBglhcyx5Yf3hT0SKpEChZF2UYWLg8cLnnfvBShMQF3ez6wGyuJ8lrWGR3NiZbGYcKA==
   dependencies:
     "@oclif/core" "^1.26.2"
     "@salesforce/command" "^5.3.5"
     "@salesforce/source-deploy-retrieve" "^7.15.1"
     adm-zip "^0.5.10"
     debug "^4.3.4"
-    fast-xml-parser "^4.1.3"
+    fast-xml-parser "^4.2.2"
     fs-extra "^10.1.0"
     inquirer "^9.1.5"
     marked "^4.3.0"
     marked-terminal "^5.1.1"
-    puppeteer "^19.9.0"
-    semver "^7.4.0"
+    puppeteer "^19.10.0"
+    semver "^7.5.0"
     tslib "^2.5.0"
 
 "@jayree/sfdx-plugin-manifest@^3.0.11":
@@ -1064,10 +1064,10 @@
     "@xml-tools/parser" "^1.0.11"
     prettier ">=2.4.0"
 
-"@puppeteer/browsers@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-0.4.1.tgz#fae81939adb743420cc2466f3aa37481f7081712"
-  integrity sha512-4IICvy1McAkT/HyNZHIs7sp8ngBX1dmO0TPQ+FWq9ATQMqI8p+Ulm5A3kS2wYDh5HDHHkYrrETOu6rlj64VuTw==
+"@puppeteer/browsers@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@puppeteer/browsers/-/browsers-0.5.0.tgz#1a1ee454b84a986b937ca2d93146f25a3fe8b670"
+  integrity sha512-Uw6oB7VvmPRLE4iKsjuOh8zgDabhNX67dzo8U/BB0f9527qx+4eeUs+korU98OhG5C4ubg7ufBgVi63XYwS6TQ==
   dependencies:
     debug "4.3.4"
     extract-zip "2.0.1"
@@ -3865,10 +3865,10 @@ fast-levenshtein@^3.0.0:
   dependencies:
     fastest-levenshtein "^1.0.7"
 
-fast-xml-parser@^4.1.3, fast-xml-parser@^4.1.4, fast-xml-parser@^4.2.0:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.2.1.tgz#ae1f447c14fe55d710c4b6abb1885cfeddf079a3"
-  integrity sha512-aiRXmcEtCTmqkoC9tfcgIXQN+7u9OONGFjZ4D3dXryNLNj7LSKxyabDppoRVMBrczQNrGr3fsMBKX8/d3AgYEA==
+fast-xml-parser@^4.1.4, fast-xml-parser@^4.2.0, fast-xml-parser@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.2.2.tgz#cb7310d1e9cf42d22c687b0fae41f3c926629368"
+  integrity sha512-DLzIPtQqmvmdq3VUKR7T6omPK/VCRNqgFlGtbESfyhcH2R4I8EzK1/K6E8PkRCK2EabWrUHK32NjYRbEFnnz0Q==
   dependencies:
     strnum "^1.0.5"
 
@@ -7112,12 +7112,12 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-puppeteer-core@19.9.1:
-  version "19.9.1"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.9.1.tgz#002148cbfaac98433067e40e1b950e4915998c5e"
-  integrity sha512-46JGqhqTgYO5DuUMRGUiMCKM/86uHMsMCK7Fw7cbY/p+eCKLIPGVyQyI/E0UcGYa0+OH3dz0ResaDdHxqCgDDw==
+puppeteer-core@19.10.1:
+  version "19.10.1"
+  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-19.10.1.tgz#b16263e201612e9145d063092e6cdf994584ad7c"
+  integrity sha512-vD4ojslBtnIWd56IQIEADIcAWrNel/Qt7YGlAxcSNB0b33U3tYe0A+0FLmPNgSa7UTlCOCCVEmzXi5QlDtLGjQ==
   dependencies:
-    "@puppeteer/browsers" "0.4.1"
+    "@puppeteer/browsers" "0.5.0"
     chromium-bidi "0.4.6"
     cross-fetch "3.1.5"
     debug "4.3.4"
@@ -7129,17 +7129,17 @@ puppeteer-core@19.9.1:
     unbzip2-stream "1.4.3"
     ws "8.13.0"
 
-puppeteer@^19.9.0:
-  version "19.9.1"
-  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.9.1.tgz#b68fcd41b0a61fefa52737414a9077f07bb2b181"
-  integrity sha512-Ii8yZySNdpPzeKAK6ROFQ+gAi04igoZ0cPsBE1LW9fmzkqQTqbJpEGhJ/5gBS8oVqkQ2CNFA4BskJl75zaWWgA==
+puppeteer@^19.10.0:
+  version "19.10.1"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-19.10.1.tgz#1d2bf9e1f1440dbe55dbeb6743191657a6b9878b"
+  integrity sha512-HqpY8sWqz28JfyZE8cGG9kBPgASD7iRHn/ryWLvVLXE10poR5AyU/mMsLmL175qoYl/chwMTN2pxKSz7HobaCg==
   dependencies:
-    "@puppeteer/browsers" "0.4.1"
+    "@puppeteer/browsers" "0.5.0"
     cosmiconfig "8.1.3"
     https-proxy-agent "5.0.1"
     progress "2.0.3"
     proxy-from-env "1.1.0"
-    puppeteer-core "19.9.1"
+    puppeteer-core "19.10.1"
 
 q@^1.5.1:
   version "1.5.1"
