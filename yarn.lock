@@ -580,16 +580,17 @@
     prettier-plugin-apex "^1.12.0"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-source@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.0.5.tgz#29912ed9c7644ee6daec9d073014010945ebf2e9"
-  integrity sha512-fmAjO/kvXPQFcEsIMYELY+zy8DI0MuUWmueo8NEQQNmJcqDqQ9unxdY4tCLr6lVrGLNp5b8HQX90O+rW8RHN5A==
+"@jayree/sfdx-plugin-source@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.1.0.tgz#0c070f37f213c09a6e5f4048de8686af80c5f6d0"
+  integrity sha512-NNelchLZBpDozPkf88RbY62xBfhMH5/2Gt5A3Zf9GNImtg6wLynSRBSAgxKCbeWd27l8BVsVm4H4zlYt6mbJ9w==
   dependencies:
     "@jayree/changelog" "^1.1.0"
     "@oclif/core" "^2.8.2"
     "@salesforce/kit" "^1.9.2"
-    "@salesforce/sf-plugins-core" "^2.2.8"
+    "@salesforce/sf-plugins-core" "^2.2.9"
     "@salesforce/source-deploy-retrieve" "^8.0.1"
+    "@salesforce/source-tracking" "^3.1.1"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
@@ -1238,6 +1239,18 @@
     proxy-agent "^5.0.0"
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
+
+"@salesforce/source-tracking@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-3.1.1.tgz#a25b6693c24c7288c35151826616dfb8175f9275"
+  integrity sha512-ivnw1eBzRwTqhLu+lZnU3sasHvEgf0FoUgFDMRgSEs+c2PVmXIhhF/uYbN2mUdhlwcPY1sMKJZ2C4pM26DhSyg==
+  dependencies:
+    "@salesforce/core" "^3.34.6"
+    "@salesforce/kit" "^1.9.2"
+    "@salesforce/source-deploy-retrieve" "^8.0.1"
+    graceful-fs "^4.2.11"
+    isomorphic-git "1.23.0"
+    ts-retry-promise "^0.7.0"
 
 "@salesforce/ts-sinon@^1.4.6":
   version "1.4.6"
@@ -5097,7 +5110,7 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@^1.23.0:
+isomorphic-git@1.23.0, isomorphic-git@^1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.23.0.tgz#3afaeb2831e57a2eb95d6ef503cf8251424f03f2"
   integrity sha512-7mQlnZivFwrU6B3CswvmoNtVN8jqF9BcLf80uk7yh4fNA8PhFjAfQigi2Hu/Io0cmIvpOc7vn0/Rq3KtL5Ph8g==

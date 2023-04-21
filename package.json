@@ -11,7 +11,7 @@
     "@jayree/sfdx-plugin-manifest": "^3.0.12",
     "@jayree/sfdx-plugin-org": "^1.0.0",
     "@jayree/sfdx-plugin-prettier": "^1.2.37",
-    "@jayree/sfdx-plugin-source": "^1.0.5",
+    "@jayree/sfdx-plugin-source": "^1.1.0",
     "@oclif/core": "^2.8.2",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/sf-plugins-core": "^2.2.9",
