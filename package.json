@@ -7,7 +7,7 @@
   "type": "module",
   "dependencies": {
     "@jayree/changelog": "^1.1.0",
-    "@jayree/sfdx-plugin-legacy": "^1.1.34",
+    "@jayree/sfdx-plugin-legacy": "^1.1.35",
     "@jayree/sfdx-plugin-manifest": "^3.0.11",
     "@jayree/sfdx-plugin-org": "^1.0.0",
     "@jayree/sfdx-plugin-prettier": "^1.2.37",
