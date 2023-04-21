@@ -1220,10 +1220,10 @@
     proxy-from-env "^1.1.0"
     unzipper "0.10.11"
 
-"@salesforce/source-deploy-retrieve@^8.0.1":
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.0.1.tgz#769d761cf2a3015282ad6a77e103d2a9c1e99052"
-  integrity sha512-uXgMwBXaCH0SM93e8Q/ptGc4xi+wna/CO+SFfZHvy3nnlGHi7MQOUNRnAn2L5NzqEg0ZX9HrXpx4ILf4hLFl3w==
+"@salesforce/source-deploy-retrieve@^8.0.1", "@salesforce/source-deploy-retrieve@^8.0.2":
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.0.2.tgz#b07b768c8fbf0214a3f843ad0da65fec48d5b7f2"
+  integrity sha512-w73QgWRSd41Kx/6z9/bUpShm36hIoTj/YUswzjfyNzQEuRovaSsBWKXWqWvoserOkz3PBPTYD9t8rHsm98D0SA==
   dependencies:
     "@salesforce/core" "^3.34.6"
     "@salesforce/kit" "^1.9.2"
