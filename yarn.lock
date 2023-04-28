@@ -522,16 +522,16 @@
     semver "^7.5.0"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-manifest@^3.0.12":
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.12.tgz#8d3f5150cc7610be71a50a724322900e9d323619"
-  integrity sha512-0YFouT9IRBJKpgVEyjZbfkWL/kPH8i7FzKW9cjEI+ZEB/x0uXmX7kfEuQ5dDIUt/qtKSMlKEmRgHSJ75g22htQ==
+"@jayree/sfdx-plugin-manifest@^3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.13.tgz#b79a7f12f78f761b96843ac13842d3673320bd76"
+  integrity sha512-yY9VGgoFHK6bAb//IsUmZj6RWzUVq89+NnJ40XX1NCNHNjojNdXtbod7IvasdTebKsHvWaQG5Gmq6tody1DkUA==
   dependencies:
-    "@jayree/changelog" "^1.1.0"
+    "@jayree/changelog" "^1.1.1"
     "@oclif/core" "^2.8.2"
     "@salesforce/kit" "^1.9.2"
-    "@salesforce/sf-plugins-core" "^2.2.9"
-    "@salesforce/source-deploy-retrieve" "^8.0.2"
+    "@salesforce/sf-plugins-core" "^2.2.11"
+    "@salesforce/source-deploy-retrieve" "^8.0.4"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
