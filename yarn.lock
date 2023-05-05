@@ -503,19 +503,19 @@
     semver "^7.5.0"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-legacy@^1.1.36":
-  version "1.1.36"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.36.tgz#500ce6f8c615c685d6a5d5c830a64dea0e8a6401"
-  integrity sha512-SyXImkq5ayqCeW85AFpSr3KW6xZkK00Gymn2w6a8LvIwmLHzDq14IDz9UmC0oO5d9GL4j8J1mp/kk8p25+JA0Q==
+"@jayree/sfdx-plugin-legacy@^1.1.37":
+  version "1.1.37"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-legacy/-/sfdx-plugin-legacy-1.1.37.tgz#a8a2b7c49e51b92dde897c2227e7f23a73cfe431"
+  integrity sha512-vPt75rTuJAQER9eYwdehKI/Cl6aVCL2UjXMNcuLiZjxWl94Jp0GAiRhyWDDUX9Kr1O47dg9EjRk7is1tMr+2Og==
   dependencies:
     "@oclif/core" "^1.26.2"
-    "@salesforce/command" "^5.3.6"
+    "@salesforce/command" "^5.3.7"
     "@salesforce/source-deploy-retrieve" "^7.15.1"
     adm-zip "^0.5.10"
     debug "^4.3.4"
     fast-xml-parser "^4.2.2"
     fs-extra "^10.1.0"
-    inquirer "^9.2.0"
+    inquirer "^9.2.1"
     marked "^4.3.0"
     marked-terminal "^5.1.1"
     puppeteer "^19.11.1"
@@ -1091,19 +1091,19 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/command@^5.3.6":
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.6.tgz#37fb6770a960e753c7737ca479d4e8d190488d31"
-  integrity sha512-4cw3OK1eWZZV9jPZ1WCAOW6uEHcAmcSCcjcZwE34UloalE+tzM5W8ud0d7YnROLVjjNNsJFstZD14RIlfjs5aA==
+"@salesforce/command@^5.3.7":
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/@salesforce/command/-/command-5.3.7.tgz#d71662c30c6b7d9524242e969c7c5d824ef33474"
+  integrity sha512-3bNiduvL8KvWBbUin4JfVko0DOu0zTa60W4TddGWFF962V9cQMFpciHhNrL8g/QLgKRsbo3/KcavUptMaJxSKg==
   dependencies:
     "@oclif/core" "^1.25.0"
     "@oclif/test" "^2.2.21"
-    "@salesforce/core" "^3.34.8"
+    "@salesforce/core" "^3.36.0"
     "@salesforce/kit" "^1.8.5"
     "@salesforce/ts-types" "^1.7.1"
     chalk "^2.4.2"
 
-"@salesforce/core@^3.34.6", "@salesforce/core@^3.34.8", "@salesforce/core@^3.36.0":
+"@salesforce/core@^3.34.6", "@salesforce/core@^3.36.0":
   version "3.36.0"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.36.0.tgz#cbff147d888eee0b921e368c1fdc1a1a3c2eacab"
   integrity sha512-LOeSJgozf5B1S8C98/K3afewRsathfEm+HrXxaFXJjITFfIhxqcIDB5xC1cw0VikfRUlq7dQocmVsvezcK0Ghw==
@@ -1795,10 +1795,10 @@ ansi-escapes@^5.0.0:
   dependencies:
     type-fest "^1.0.2"
 
-ansi-escapes@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-6.1.0.tgz#f2912cdaa10785f3f51f4b562a2497b885aadc5e"
-  integrity sha512-bQyg9bzRntwR/8b89DOEhGwctcwCrbWW/TuqTQnpqpy5Fz3aovcOTj5i8NJV6AHc8OGNdMaqdxAWww8pz2kiKg==
+ansi-escapes@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-6.2.0.tgz#8a13ce75286f417f1963487d86ba9f90dccf9947"
+  integrity sha512-kzRaCqXnpzWs+3z5ABPQiVke+iq0KXkHo8xiWV4RPTi5Yli0l97BEQuhXV1s7+aSU/fu1kUuxgS4MsQ0fRuygw==
   dependencies:
     type-fest "^3.0.0"
 
@@ -4744,12 +4744,12 @@ inquirer@^8.0.0, inquirer@^8.2.5:
     through "^2.3.6"
     wrap-ansi "^7.0.0"
 
-inquirer@^9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.2.0.tgz#930d56d682cda629419e80eb92c45828a0fa5924"
-  integrity sha512-WWERbVqjsTXjXub1ZW0ZHDit1dyHqy0T9XIkky9TnmKAPrjU9Jkd59nZPK0dUuM3s73GZAZu2Jo4iFU3XSPVLA==
+inquirer@^9.2.1:
+  version "9.2.1"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-9.2.1.tgz#26019a270e7c451d54883e60959059aedcc60fa1"
+  integrity sha512-M7LcHl1GcKt8na7NKNvqkiB3btN73+Z5NjhbckpTi9Yr8Ul7sTHXe7cFEudH0WMPcvHfQ4pHjpVOnhaQ4IC4fw==
   dependencies:
-    ansi-escapes "^6.0.0"
+    ansi-escapes "^6.2.0"
     chalk "^5.2.0"
     cli-cursor "^4.0.0"
     cli-width "^4.0.0"
@@ -4757,9 +4757,9 @@ inquirer@^9.2.0:
     figures "^5.0.0"
     lodash "^4.17.21"
     mute-stream "1.0.0"
-    ora "^6.1.2"
+    ora "^6.3.0"
     run-async "^2.4.0"
-    rxjs "^7.8.0"
+    rxjs "^7.8.1"
     string-width "^5.1.2"
     strip-ansi "^7.0.1"
     through "^2.3.6"
@@ -6601,7 +6601,7 @@ ora@^5.4.1:
     strip-ansi "^6.0.0"
     wcwidth "^1.0.1"
 
-ora@^6.1.2:
+ora@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/ora/-/ora-6.3.0.tgz#a314600999f514a989a0904f5c17c8b7c1f7c878"
   integrity sha512-1/D8uRFY0ay2kgBpmAwmSA404w4OoPVhHMqRqtjvrcK/dnzcEZxMJ+V4DUbyICu8IIVRclHcOf5wlD1tMY4GUQ==
@@ -7482,6 +7482,13 @@ rxjs@^7.0.0, rxjs@^7.5.5, rxjs@^7.8.0:
   version "7.8.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.0.tgz#90a938862a82888ff4c7359811a595e14e1e09a4"
   integrity sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==
+  dependencies:
+    tslib "^2.1.0"
+
+rxjs@^7.8.1:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.8.1.tgz#6f6f3d99ea8044291efd92e7c7fcf562c4057543"
+  integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
   dependencies:
     tslib "^2.1.0"
 
