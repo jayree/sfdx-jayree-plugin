@@ -12,7 +12,7 @@
     "@jayree/sfdx-plugin-org": "^1.0.2",
     "@jayree/sfdx-plugin-prettier": "^1.2.38",
     "@jayree/sfdx-plugin-source": "^1.1.1",
-    "@oclif/core": "^2.8.2",
+    "@oclif/core": "^2.8.5",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/sf-plugins-core": "^2.2.11",
     "@salesforce/source-deploy-retrieve": "^8.0.4",
