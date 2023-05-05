@@ -522,10 +522,10 @@
     semver "^7.5.0"
     tslib "^2.5.0"
 
-"@jayree/sfdx-plugin-manifest@^3.0.13":
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.13.tgz#b79a7f12f78f761b96843ac13842d3673320bd76"
-  integrity sha512-yY9VGgoFHK6bAb//IsUmZj6RWzUVq89+NnJ40XX1NCNHNjojNdXtbod7IvasdTebKsHvWaQG5Gmq6tody1DkUA==
+"@jayree/sfdx-plugin-manifest@^3.0.14":
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.14.tgz#84938b04cecbd8f50e88b1408c0a30935015843c"
+  integrity sha512-g4+2TMLLhuxjePnSIkkNFu+fs3+tPYwKqZWPq1lQaMegyAKn/MTka/eEMDXudhIoayjDR1fmSCBTCrHQjZh3dA==
   dependencies:
     "@jayree/changelog" "^1.1.1"
     "@oclif/core" "^2.8.2"
@@ -539,7 +539,7 @@
     fs-extra "^11.1.1"
     graceful-fs "^4.2.11"
     isomorphic-git "^1.23.0"
-    listr2 "^6.3.1"
+    listr2 "^6.4.2"
     tslib "^2.5.0"
 
 "@jayree/sfdx-plugin-org@^1.0.3":
@@ -5462,7 +5462,7 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
-listr2@^6.3.1, listr2@^6.4.2:
+listr2@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-6.4.2.tgz#8ee2ee09de031b4a84e501a98561619962834636"
   integrity sha512-v55SFIDP7SiPEYFeIFGbKW44B4NPpqGEklbAc1EKacMxIqFVXpDlc93e/Q6hE3IgIGRu5870rh5yJc+ESwGUpQ==
