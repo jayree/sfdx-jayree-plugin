@@ -897,12 +897,12 @@
   resolved "https://registry.yarnpkg.com/@oclif/linewrap/-/linewrap-1.0.0.tgz#aedcb64b479d4db7be24196384897b5000901d91"
   integrity sha512-Ups2dShK52xXa8w6iBWLgcjPJWjais6KPJQq3gQ/88AY6BXoTX+MIGFPrWQO1KLMiQfoTpcLnUwloN4brrVUHw==
 
-"@oclif/plugin-command-snapshot@^3.3.13":
-  version "3.3.13"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.13.tgz#1b200d565c0d7f223d633c27e580232977c23332"
-  integrity sha512-oFOXYGJ/DNp6VKwVlyynL7DG09CflXxTFRt2xVatupQKx4+2/otsGHENYwZv0RUpQalWCXWTu+8iEGZOXTgN2A==
+"@oclif/plugin-command-snapshot@^3.3.14":
+  version "3.3.14"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-command-snapshot/-/plugin-command-snapshot-3.3.14.tgz#0c068aee8a56b7f23a01c4d5e4f76105bae51cae"
+  integrity sha512-Qr58pS8iuKwFNB/GcPCT9mo1ukdZFrW771n+mcB1yV4WNPfxCL7Zj1bCebrX14mxoqujBqojGYTuiSTwc0QrYg==
   dependencies:
-    "@oclif/core" "^2.8.2"
+    "@oclif/core" "^2.8.5"
     chalk "^4.1.2"
     just-diff "^5.2.0"
     lodash "^4.17.21"
