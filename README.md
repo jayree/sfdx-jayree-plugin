@@ -88,7 +88,7 @@ EXAMPLES
   ❯ ChangeSet1
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/automation/changeset/deploy.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/automation/changeset/deploy.ts)_
 
 ### `sfdx jayree:automation:changeset:list`
 
@@ -112,7 +112,7 @@ DESCRIPTION
   list incomming change sets of an org (beta)
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/automation/changeset/list.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/automation/changeset/list.ts)_
 
 ### `sfdx jayree:automation:ltngsync:status`
 
@@ -150,7 +150,7 @@ EXAMPLES
   userContacts/userEvents: Exchange to Salesforce sync status... Initial sync completed/Initial sync completed
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/automation/ltngsync/status.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/automation/ltngsync/status.ts)_
 
 ### `sfdx jayree:flowtestcoverage`
 
@@ -174,7 +174,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.2/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.3/src/commands/jayree/flowtestcoverage.ts)_
 
 ### `sfdx jayree:manifest:cleanup`
 
@@ -202,7 +202,7 @@ EXAMPLES
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.14/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.16/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -238,7 +238,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.14/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.16/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -320,7 +320,7 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.14/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.16/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:manifest:legacy:git:diff`
 
@@ -398,7 +398,7 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.14/src/commands/jayree/manifest/legacy/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.0.16/src/commands/jayree/manifest/legacy/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -506,7 +506,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.2/src/commands/jayree/org/settings.ts)_
+_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.3/src/commands/jayree/org/settings.ts)_
 
 ### `sfdx jayree:org:streaming`
 
@@ -529,7 +529,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.2/src/commands/jayree/org/streaming.ts)_
+_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.3/src/commands/jayree/org/streaming.ts)_
 
 ### `sfdx jayree:packagedescription:create`
 
@@ -554,7 +554,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:create --file FILENAME --description 'DESCRIPTION'
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/packagedescription/create.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/packagedescription/create.ts)_
 
 ### `sfdx jayree:packagedescription:get`
 
@@ -579,7 +579,7 @@ EXAMPLES
   Description of Package FILENAME
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/packagedescription/get.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/packagedescription/get.ts)_
 
 ### `sfdx jayree:packagedescription:remove`
 
@@ -603,7 +603,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:remove --file FILENAME
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/packagedescription/remove.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/packagedescription/remove.ts)_
 
 ### `sfdx jayree:packagedescription:set`
 
@@ -628,7 +628,7 @@ EXAMPLES
   $ sfdx jayree:packagedescription:set --file FILENAME --description 'NEW DESCRIPTION'
 ```
 
-_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.37/src/commands/jayree/packagedescription/set.ts)_
+_See code: [@jayree/sfdx-plugin-legacy](https://github.com/jayree/sfdx-plugin-legacy/blob/v1.1.38/src/commands/jayree/packagedescription/set.ts)_
 
 ### `sfdx jayree:source:fix`
 
@@ -652,7 +652,7 @@ FLAG DESCRIPTIONS
     log output to console
 ```
 
-_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.2/src/commands/jayree/source/fix.ts)_
+_See code: [src/commands/jayree/source/fix.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.7.3/src/commands/jayree/source/fix.ts)_
 
 ### `sfdx jayree:source:snapshot:compare`
 
