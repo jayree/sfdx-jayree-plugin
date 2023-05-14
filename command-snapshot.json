@@ -123,10 +123,10 @@
     "alias": []
   },
   {
-    "command": "jayree:source:fix",
-    "plugin": "sfdx-jayree",
-    "flags": ["json", "tag", "target-org", "verbose"],
-    "alias": []
+    "command": "jayree:project:fix",
+    "plugin": "@jayree/sfdx-plugin-source",
+    "flags": ["json", "target-org", "task"],
+    "alias": ["jayree:source:fix"]
   },
   {
     "command": "jayree:source:snapshot:compare",

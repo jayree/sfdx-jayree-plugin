@@ -14,7 +14,7 @@ import createDebug from 'debug';
 import fs from 'fs-extra';
 import { ComponentSet } from '@salesforce/source-deploy-retrieve';
 import { mkdirp } from 'mkdirp';
-import { parseSourceComponent } from '../../../utils/xml.js';
+import { XMLParser } from 'fast-xml-parser';
 
 // eslint-disable-next-line no-underscore-dangle
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +30,14 @@ function camelize(str) {
     if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
+}
+
+function parseSourceComponent(xmlData: string) {
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    parseTagValue: false,
+  });
+  return parser.parse(xmlData);
 }
 
 export default class ScratchOrgSettings extends SfCommand<AnyJson> {

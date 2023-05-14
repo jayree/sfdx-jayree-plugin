@@ -1,5 +1,0 @@
-{
-  "commandDescription": "fix local source files\n(examples will follow)",
-  "tag": "comma-separated list of tag names listed in .sfdx-jayree.json",
-  "log": "log output to console"
-}

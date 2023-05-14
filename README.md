@@ -759,102 +759,48 @@ _See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-so
 <!-- commandsstop -->
 
 ## Hooks
+### prerun
 
-The following hooks are triggered after running `force:source:retrieve` or `force:source:pull`. They extend both standard commands with the same logic as `jayree:source:retrieve:all` and `jayree:source:retrieve:full`.
+- Resets source tracking using `force:source:tracking:reset` before executing `force:source:pull` or `project:retrieve:start`.
 
-### Enable/Disable
+> **_IMPORTANT:_** This hook will only run if  `SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL=true` is set. It uses the stored `serverMaxRevisionCounter` as revision counter number (see: [`jayree:project:store:tracking:set`](#sfdx-jayreeprojectstoretrackingset)). If the hook doesn't find a stored value it asks if the current *local* revision counter number should be stored and used.
 
-Set the following parameter in `.sfdx-jayree.json` to enable (true) or disable (false) the hooks:
-
-```json
-{
-  "runHooks": true,
-}
-```
-
-### Hook flow
-
-![Hooks Flow](images/jayree_hooks_flow.svg)
-
-#### prerun
-
-- Resets source tracking using `force:source:tracking:reset` before executing `force:source:pull`.
-
-> **_IMPORTANT:_** This hook will only run if  `SFDX_ENABLE_JAYREE_HOOKS_RESET_BEFORE_PULL=true` is set. It uses the stored `serverMaxRevisionCounter` as revision counter number (see: [`jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)). If the hook doesn't find a stored value it asks if the current *local* revision counter number should be stored and used.
-
-#### preretrieve
+### scopedPreRetrieve
 
 - Disables the `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
 
-#### postretrieve (plugin-source plugin) / postsourceupdate (legacy salesforce-alm plugin)
+### scopedPostRetrieve
 
-- Re-retrieves Profiles if `source:pull` triggered the hook.
-- Ensures Object- and User-Permissions settings. Review [.sfdx-jayree-example.json](.sfdx-jayree-example.json) how the configuration should look like.
-- Shrinks Permission Sets to avoid merge conflicts in git.
-- Applies source fixes of the `jayree:source:fix` command and moves source files to separate package directories. See the configuration file [.sfdx-jayree-example.json](.sfdx-jayree-example.json) for examples. Use the following parameter in `.sfdx-jayree.json` to specify which tags should be applied by the hooks:
-```json
-{
-  "applySourceFixes": ["source:retrieve:full", "source:retrieve:all"],
-}
-```
+- Applies source fixes of the `jayree project fix` command, deletes and moves source files to separate package directories. See the configuration file [sfdx-project.json](https://github.com/jayree/sfdx-plugin-source/blob/main/sfdx-project.json) for examples. Set `"isActive": true`, to apply this fix during `scopedPostRetrieve` hook.
 
 > **_IMPORTANT:_** Since the hook is not able to update the (JSON) output of the command, an additional output is generated. Set the environment variable `SFDX_ENABLE_JAYREE_HOOKS_JSON_OUTPUT=true` and additional comma-separated JSON output will be appended, where the output must be parsed as an array, e.g. ``JSON.parse(`[${stdout}]`)``. See an example below:
 
 ```javascript
-import * as execa from 'execa';
-import { cli } from 'cli-ux';
+import execa from "execa";
+import { CliUx } from "@oclif/core";
 
 async function run() {
-    const { stdout } = await execa('sfdx', [
-        'force:source:retrieve',
-        '--metadata="Group:*"',
-        '--json'
-    ]);
-    const parsedStdout = JSON.parse(`[${stdout}]`);
-        let consolidatedStdout: {
+  const { stdout } = await execa("sfdx", [
+    "force:source:retrieve",
+    "--metadata",
+    "Group:*",
+    "--json"
+  ]);
+  const parsedStdout = JSON.parse(`[${stdout}]`);
+  CliUx.ux.styledJSON(
+    parsedStdout.length > 1
+      ? {
+          ...parsedStdout[0],
           result: {
-            pulledSource?: any[];
-            inboundFiles?: any[];
-            fixedFiles?: any[];
-          };
-        };
-    if (parsedStdout.length > 1) {
-        const pulledSourceOrinboundFiles =
-            parsedStdout[0].result?.pulledSource !== undefined
-                ? 'pulledSource'
-                : 'inboundFiles';
-        consolidatedStdout = {
-            ...parsedStdout[0],
-            result: {
-                ...parsedStdout[0].result,
-                [pulledSourceOrinboundFiles]: [],
-                fixedFiles: []
-            }
-        };
-        parsedStdout.shift();
-        parsedStdout.forEach((element) => {
-            consolidatedStdout.result[
-                pulledSourceOrinboundFiles
-            ] = consolidatedStdout.result[pulledSourceOrinboundFiles].concat(
-                element.result[pulledSourceOrinboundFiles]
-            );
-            consolidatedStdout.result.fixedFiles = consolidatedStdout.result.fixedFiles.concat(
-                element.result.fixedFiles
-            );
-        });
-    } else {
-        consolidatedStdout = parsedStdout[0];
-    }
-    cli.styledJSON(consolidatedStdout);
-}
+            ...parsedStdout[0].result,
+            fixedFiles: parsedStdout[1].fixedFiles
+          }
+        }
+      : parsedStdout[0]
+  );
 }
 
 run();
 ```
 
 - Calls `prettierFormat` hook. See [sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier) for more details.
-
-## Related Plugins
-
-- [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/main/README.md) - Contains all jayree sfdx manifest commands
-- [@jayree/sfdx-plugin-prettier](https://github.com/jayree/sfdx-plugin-prettier/blob/develop/README.md) - Contains an sfdx plugin hook to format Salesforce metadata source files
