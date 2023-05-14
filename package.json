@@ -26,7 +26,7 @@
     "@oclif/plugin-help": "^5.2.9",
     "@salesforce/dev-config": "^4.0.1",
     "@salesforce/dev-scripts": "^5.0.1",
-    "@salesforce/prettier-config": "^0.0.2",
+    "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.6",
     "@types/fs-extra": "^11.0.1",
     "@types/jsforce": "^1.11.0",
