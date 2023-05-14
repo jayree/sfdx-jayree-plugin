@@ -1,3 +1,17 @@
+# [4.8.0](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.7.3...v4.8.0) (2023-05-14)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-source from 1.1.2 to 1.2.3 ([#765](https://github.com/jayree/sfdx-jayree-plugin/issues/765)) ([1d04718](https://github.com/jayree/sfdx-jayree-plugin/commit/1d047188b2f140935e875a9d8712a05133753f52))
+* **deps:** bump @salesforce/sf-plugins-core from 2.4.2 to 2.4.3 ([#777](https://github.com/jayree/sfdx-jayree-plugin/issues/777)) ([54d2a6d](https://github.com/jayree/sfdx-jayree-plugin/commit/54d2a6d4412ba18bcf2a7f5b875cb7edb9dcc804))
+
+
+### Features
+
+* remove sfdx-plugin-legacy plugin from bundle ([cfacae9](https://github.com/jayree/sfdx-jayree-plugin/commit/cfacae9935c963f602ccac3f066f68fbca0f583c))
+* use new source commands from source-plugin ([9ca1e6a](https://github.com/jayree/sfdx-jayree-plugin/commit/9ca1e6a6d907ec7963bd37154f921ec2bced39d0))
+
 ## [4.7.3](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.7.2...v4.7.3) (2023-05-12)
 
 
