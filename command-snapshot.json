@@ -1,33 +1,5 @@
 [
   {
-    "command": "jayree:automation:changeset:deploy",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": [
-      "apiversion",
-      "changeset",
-      "checkonly",
-      "json",
-      "loglevel",
-      "nodialog",
-      "runtests",
-      "targetusername",
-      "testlevel"
-    ],
-    "alias": []
-  },
-  {
-    "command": "jayree:automation:changeset:list",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["apiversion", "json", "loglevel", "targetusername"],
-    "alias": []
-  },
-  {
-    "command": "jayree:automation:ltngsync:status",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["apiversion", "json", "loglevel", "officeuser", "statusonly", "targetusername", "wait"],
-    "alias": []
-  },
-  {
     "command": "jayree:flowtestcoverage",
     "plugin": "sfdx-jayree",
     "flags": ["api-version", "json", "target-org"],
@@ -96,30 +68,6 @@
     "command": "jayree:org:streaming",
     "plugin": "sfdx-jayree",
     "flags": ["api-version", "json", "target-org", "topic"],
-    "alias": []
-  },
-  {
-    "command": "jayree:packagedescription:create",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["description", "file", "json", "loglevel"],
-    "alias": []
-  },
-  {
-    "command": "jayree:packagedescription:get",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["file", "json", "loglevel"],
-    "alias": []
-  },
-  {
-    "command": "jayree:packagedescription:remove",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["file", "json", "loglevel"],
-    "alias": []
-  },
-  {
-    "command": "jayree:packagedescription:set",
-    "plugin": "@jayree/sfdx-plugin-legacy",
-    "flags": ["description", "file", "json", "loglevel"],
     "alias": []
   },
   {
