@@ -520,25 +520,25 @@
     listr2 "^6.6.0"
     tslib "^2.5.2"
 
-"@jayree/sfdx-plugin-org@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.0.3.tgz#b8a26e1e6cb6ffd28612b6b6e7423bdce9f5d05c"
-  integrity sha512-rkf78LwWtGBKSu5+cve4APILuThj7QxsQ2GVBRLfMOJva34Asq2MHpbL/xFnI0TPtuNn62bUQpIJHtprV7h09g==
+"@jayree/sfdx-plugin-org@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.0.4.tgz#5b87b9f6395dc39e05992bf477a7aaa95cdfa755"
+  integrity sha512-TSnBlROP2t0nMrUSad1rIjGtSq1SPS5+bg1GXgOKeDqE8z2A0YXOEjhRzEu5LH8oJ7OnM9RhjMucSm7hpymRFA==
   dependencies:
     "@jayree/changelog" "^1.1.1"
     "@oclif/core" "^2.8.2"
     "@salesforce/kit" "^1.9.2"
-    "@salesforce/sf-plugins-core" "^2.4.2"
+    "@salesforce/sf-plugins-core" "^2.4.3"
     "@salesforce/ts-types" "^1.7.3"
     debug "^4.3.4"
     enquirer "^2.3.6"
     fs-extra "^11.1.1"
     is-docker "^3.0.0"
     is-wsl "^2.2.0"
-    listr2 "^6.4.2"
+    listr2 "^6.6.0"
     playwright-chromium "^1.33.0"
     tabletojson "^2.0.7"
-    tslib "^2.5.0"
+    tslib "^2.5.2"
 
 "@jayree/sfdx-plugin-prettier@^1.3.2":
   version "1.3.2"
@@ -1093,7 +1093,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.5.1.tgz#2d1bfdcf593caaa04cd4b3e6fe621097ff7f28fe"
   integrity sha512-MRqU+tn8w5IFvZ0Lm9YKLgxYxr2MQMI+fXXsTrwfUnijsps+ybF9IOTu6MOMxxl2vCUkO8XDjA435wXlWSLI6g==
 
-"@salesforce/sf-plugins-core@^2.4.2", "@salesforce/sf-plugins-core@^2.4.3":
+"@salesforce/sf-plugins-core@^2.4.3":
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-2.4.3.tgz#9d578dc116becf8fd9c4f5d7849692aaa9095538"
   integrity sha512-gB1GY5GscR5vjLC2GJTO7hjmKH1IqeMj1cvvsnTdKpb3z0GAMpCZN3gPyC9OiIEE2JBQSlm3HUV4K+4zcMJjmQ==
@@ -5178,7 +5178,7 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
-listr2@^6.4.2, listr2@^6.6.0:
+listr2@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/listr2/-/listr2-6.6.0.tgz#cb8a0f45fb93ae50c43fb34f934759f8de9395ce"
   integrity sha512-qkLg7IeYcZGkxo5sZzl676xHwQzNZ8qAQLQSDMA88sLM1SDcabwyXD1mXHi/PGQHyt/mu81adJdkqsCSUSuQzQ==
