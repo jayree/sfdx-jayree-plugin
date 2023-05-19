@@ -503,22 +503,22 @@
     semver "^7.5.0"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.0.16":
-  version "3.0.16"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.16.tgz#0539fa4fb344f120a910d1adf01cd7f026edcc7a"
-  integrity sha512-PgKAsCOjqxtB8sEaEHAZtkq5klsvrhkAHlAbKhEGT0bjZHK+PmtNEBoIys4XNwZP2Rq3F46hokl3TeHRc7ditg==
+"@jayree/sfdx-plugin-manifest@^3.0.19":
+  version "3.0.19"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.0.19.tgz#6e7a6cbef357a5c700f33315b4045240adce868f"
+  integrity sha512-6ykFbJSvVp/gtLB5IoYQFpjMSV2f67yPKerv5XOsOVnlxTW3TbHxSBFjBQdAsD6L7VH4pHfKP8S64l6ncrtxfA==
   dependencies:
     "@jayree/changelog" "^1.1.1"
-    "@salesforce/sf-plugins-core" "^2.4.2"
-    "@salesforce/source-deploy-retrieve" "^8.4.0"
+    "@salesforce/sf-plugins-core" "^2.4.3"
+    "@salesforce/source-deploy-retrieve" "^8.5.1"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.2.2"
     fs-extra "^11.1.1"
     graceful-fs "^4.2.11"
     isomorphic-git "^1.23.0"
-    listr2 "^6.4.2"
-    tslib "^2.5.0"
+    listr2 "^6.6.0"
+    tslib "^2.5.2"
 
 "@jayree/sfdx-plugin-org@^1.0.3":
   version "1.0.3"
@@ -1003,7 +1003,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^3.34.6", "@salesforce/core@^3.36.0", "@salesforce/core@^3.36.1":
+"@salesforce/core@^3.34.6", "@salesforce/core@^3.36.1":
   version "3.36.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.36.1.tgz#053a5e1079b9749b62e461e6ac3e630b5689694a"
   integrity sha512-kcjyr9bj35nnL8Bqv8U39xeho3CrZYXJiS/X5X1eEHVNZLd9zckrmKrh1V7z8ElCFpsJrewT989SJsdvi9kE8w==
@@ -1105,12 +1105,12 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^8.0.1", "@salesforce/source-deploy-retrieve@^8.4.0":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.4.0.tgz#10cadb7a02dc4657c5b941161b30a5017dabd788"
-  integrity sha512-eAOuhmbNAMoJdvhdzF1cBtqNIG/WhLR/GRCA89wevvPLidCdzMNzNGPUQWO0N+PSVWskRbbNeZG3n9ws4SV1vA==
+"@salesforce/source-deploy-retrieve@^8.0.1", "@salesforce/source-deploy-retrieve@^8.4.0", "@salesforce/source-deploy-retrieve@^8.5.1":
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.5.1.tgz#f66f590348857aa51e11fdb69dbd9fcf1d2fba93"
+  integrity sha512-bdbyLlpILlGiNzsqrZjOEu3rtp3pqQyPzixL2CA9UebKGytG6zT3J6+/0Br1jAVefbl62KW6dgwurAVL7bp6+w==
   dependencies:
-    "@salesforce/core" "^3.36.0"
+    "@salesforce/core" "^3.36.1"
     "@salesforce/kit" "^1.9.2"
     "@salesforce/ts-types" "^1.7.2"
     archiver "^5.3.1"
@@ -5177,10 +5177,10 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha512-3mk/Zag0+IJxeDrxSgaDPy4zZ3w05PRZeJNnlWhzFz5OkX49J4krc+A8X2d2M69vGMBEX0uyl8M+W+8gH+kBqQ==
 
-listr2@^6.4.2:
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-6.4.2.tgz#8ee2ee09de031b4a84e501a98561619962834636"
-  integrity sha512-v55SFIDP7SiPEYFeIFGbKW44B4NPpqGEklbAc1EKacMxIqFVXpDlc93e/Q6hE3IgIGRu5870rh5yJc+ESwGUpQ==
+listr2@^6.4.2, listr2@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-6.6.0.tgz#cb8a0f45fb93ae50c43fb34f934759f8de9395ce"
+  integrity sha512-qkLg7IeYcZGkxo5sZzl676xHwQzNZ8qAQLQSDMA88sLM1SDcabwyXD1mXHi/PGQHyt/mu81adJdkqsCSUSuQzQ==
   dependencies:
     cli-truncate "^3.1.0"
     colorette "^2.0.20"
@@ -7906,10 +7906,10 @@ tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
-  integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
+tslib@^2, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.1, tslib@^2.5.0, tslib@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.2.tgz#1b6f07185c881557b0ffa84b111a0106989e8338"
+  integrity sha512-5svOrSA2w3iGFDs1HibEVBGbDrAY82bFQ3HZ3ixB+88nsbsWQoKqDRb5UBYAUPEzbBn6dAp5gRNXglySbx1MlA==
 
 tsutils@^3.21.0:
   version "3.21.0"
