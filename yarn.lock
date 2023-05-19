@@ -1003,7 +1003,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^3.34.6", "@salesforce/core@^3.36.0", "@salesforce/core@^3.36.1":
+"@salesforce/core@^3.34.6", "@salesforce/core@^3.36.1":
   version "3.36.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.36.1.tgz#053a5e1079b9749b62e461e6ac3e630b5689694a"
   integrity sha512-kcjyr9bj35nnL8Bqv8U39xeho3CrZYXJiS/X5X1eEHVNZLd9zckrmKrh1V7z8ElCFpsJrewT989SJsdvi9kE8w==
@@ -1105,12 +1105,12 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^8.0.1", "@salesforce/source-deploy-retrieve@^8.4.0":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.4.0.tgz#10cadb7a02dc4657c5b941161b30a5017dabd788"
-  integrity sha512-eAOuhmbNAMoJdvhdzF1cBtqNIG/WhLR/GRCA89wevvPLidCdzMNzNGPUQWO0N+PSVWskRbbNeZG3n9ws4SV1vA==
+"@salesforce/source-deploy-retrieve@^8.0.1", "@salesforce/source-deploy-retrieve@^8.4.0", "@salesforce/source-deploy-retrieve@^8.5.1":
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-8.5.1.tgz#f66f590348857aa51e11fdb69dbd9fcf1d2fba93"
+  integrity sha512-bdbyLlpILlGiNzsqrZjOEu3rtp3pqQyPzixL2CA9UebKGytG6zT3J6+/0Br1jAVefbl62KW6dgwurAVL7bp6+w==
   dependencies:
-    "@salesforce/core" "^3.36.0"
+    "@salesforce/core" "^3.36.1"
     "@salesforce/kit" "^1.9.2"
     "@salesforce/ts-types" "^1.7.2"
     archiver "^5.3.1"
