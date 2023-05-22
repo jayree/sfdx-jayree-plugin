@@ -18,7 +18,7 @@ sfdx plugins:install @jayree/sfdx-plugin-source
 ## Commands
 
 <!-- commands -->
-* [`sfdx jayree:flowtestcoverage`](#sfdx-jayreeflowtestcoverage)
+* [`sfdx jayree:flow:get:coverage`](#sfdx-jayreeflowgetcoverage)
 * [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
 * [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
 * [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
@@ -26,22 +26,22 @@ sfdx plugins:install @jayree/sfdx-plugin-source
 * [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
 * [`sfdx jayree:org:configure:country`](#sfdx-jayreeorgconfigurecountry)
 * [`sfdx jayree:org:configure:state`](#sfdx-jayreeorgconfigurestate)
-* [`sfdx jayree:org:settings`](#sfdx-jayreeorgsettings)
-* [`sfdx jayree:org:streaming`](#sfdx-jayreeorgstreaming)
+* [`sfdx jayree:org:get:settings`](#sfdx-jayreeorggetsettings)
+* [`sfdx jayree:org:stream`](#sfdx-jayreeorgstream)
+* [`sfdx jayree:project:compare:snapshot`](#sfdx-jayreeprojectcomparesnapshot)
 * [`sfdx jayree:project:fix`](#sfdx-jayreeprojectfix)
-* [`sfdx jayree:source:snapshot:compare`](#sfdx-jayreesourcesnapshotcompare)
-* [`sfdx jayree:source:snapshot:generate`](#sfdx-jayreesourcesnapshotgenerate)
-* [`sfdx jayree:source:tracking:list`](#sfdx-jayreesourcetrackinglist)
-* [`sfdx jayree:source:tracking:store:get`](#sfdx-jayreesourcetrackingstoreget)
-* [`sfdx jayree:source:tracking:store:set`](#sfdx-jayreesourcetrackingstoreset)
+* [`sfdx jayree:project:generate:snapshot`](#sfdx-jayreeprojectgeneratesnapshot)
+* [`sfdx jayree:project:list:tracking`](#sfdx-jayreeprojectlisttracking)
+* [`sfdx jayree:project:store:tracking:get`](#sfdx-jayreeprojectstoretrackingget)
+* [`sfdx jayree:project:store:tracking:set`](#sfdx-jayreeprojectstoretrackingset)
 
-### `sfdx jayree:flowtestcoverage`
+### `sfdx jayree:flow:get:coverage`
 
-check the flow test coverage of an org
+Check the flow test coverage of an Org.
 
 ```
 USAGE
-  $ sfdx jayree:flowtestcoverage -o <value> [--json] [--api-version <value>]
+  $ sfdx jayree:flow:get:coverage -o <value> [--json] [--api-version <value>]
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
@@ -50,6 +50,9 @@ FLAGS
 GLOBAL FLAGS
   --json  Format output as json.
 
+ALIASES
+  $ sfdx jayree:flowtestcoverage
+
 EXAMPLES
   $ sfdx jayree:flowtestcoverage
   === Flow Test Coverage
@@ -57,7 +60,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [src/commands/jayree/flowtestcoverage.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.8.2/src/commands/jayree/flowtestcoverage.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/flow/get/coverage.ts)_
 
 ### `sfdx jayree:manifest:cleanup`
 
@@ -285,7 +288,7 @@ _See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-
 
 ### `sfdx jayree:org:configure`
 
-make configuration changes that are not covered by the metadata API
+Make configuration changes that are not covered by the metadata API.
 
 ```
 USAGE
@@ -293,18 +296,18 @@ USAGE
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
-  -t, --tasks=<value>...    list of task titles, if no tasks are specified, all tasks marked as active will be executed
+  -t, --tasks=<value>...    List of task titles, if no tasks are specified, all tasks marked as active will be executed.
   --api-version=<value>     Override the api version used for api requests made by this command
-  --concurrent              execute tasks in parallel
+  --concurrent              Execute tasks in parallel.
 
 GLOBAL FLAGS
   --json  Format output as json.
 
 DESCRIPTION
-  make configuration changes that are not covered by the metadata API
+  Make configuration changes that are not covered by the metadata API.
   See example configuration on how to define tasks
 
-  make configuration changes that are not covered by the metadata API
+  Make configuration changes that are not covered by the metadata API.
   See example configuration on how to define tasks
 
 EXAMPLES
@@ -314,7 +317,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.4/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree:org:configure:country`
 
@@ -337,7 +340,7 @@ DESCRIPTION
   update country integration values in the State/Country Picklists
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.4/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree:org:configure:state`
 
@@ -351,10 +354,10 @@ USAGE
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
   --api-version=<value>     Override the api version used for api requests made by this command
-  --category=<value>        Subdivision category
-  --concurrent=<value>      [default: 1] execute tasks in parallel
-  --country-code=<value>    Alpha-2 code
-  --language=<value>        Language code
+  --category=<value>        Subdivision category.
+  --concurrent=<value>      [default: 1] execute tasks in parallel.
+  --country-code=<value>    Alpha-2 code.
+  --language=<value>        Language code.
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -365,23 +368,27 @@ DESCRIPTION
   import (create/update) states into the State/Country Picklists
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.0.4/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/org/configure/state.ts)_
 
-### `sfdx jayree:org:settings`
+### `sfdx jayree:org:get:settings`
 
-write the current settings from an Org to a scratch org def file
+Write the current settings from an Org to a scratch org def file.
 
 ```
 USAGE
-  $ sfdx jayree:org:settings -o <value> [--json] [-w] [-f <value>]
+  $ sfdx jayree:org:get:settings -o <value> [--json] [--api-version <value>] [-w] [-f <value>]
 
 FLAGS
-  -f, --file=<value>                  write to 'file' instead of project-scratch-def.json
+  -f, --file=<value>                  Write to 'file' instead of project-scratch-def.json.
   -o, --target-org=<value>            (required) Username or alias of the target org.
-  -w, --writetoprojectscratchdeffile  write output to project-scratch-def.json file
+  -w, --writetoprojectscratchdeffile  Write output to project-scratch-def.json file.
+  --api-version=<value>               Override the api version used for api requests made by this command
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:org:settings
 
 EXAMPLES
   $ sfdx jayree:org:settings
@@ -389,30 +396,57 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [src/commands/jayree/org/settings.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.8.2/src/commands/jayree/org/settings.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/org/get/settings.ts)_
 
-### `sfdx jayree:org:streaming`
+### `sfdx jayree:org:stream`
 
-listen to streaming api and platform events
+Listen to streaming api and platform events.
 
 ```
 USAGE
-  $ sfdx jayree:org:streaming -o <value> -p <value> [--json] [--api-version <value>]
+  $ sfdx jayree:org:stream -o <value> -c <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
+  -c, --channel=<value>     (required) The event name.
   -o, --target-org=<value>  (required) Username or alias of the target org.
-  -p, --topic=<value>       (required) topic name
+  -r, --replay-id=<value>   Receive all stored events after the event specified by the replayId value and new events.
+                            [default: -1] Receive new events that are broadcast after the command subscribes. [-2]
+                            Receive all event, including past events that are within the retention window and new
+                            events.
   --api-version=<value>     Override the api version used for api requests made by this command
 
 GLOBAL FLAGS
   --json  Format output as json.
 
+ALIASES
+  $ sfdx jayree:org:streaming
+
 EXAMPLES
-  $ sfdx jayree:org:streaming --topic=/event/eventName__e
+  $ sfdx jayree org stream --channel=/event/eventName__e
   ...
 ```
 
-_See code: [src/commands/jayree/org/streaming.ts](https://github.com/jayree/sfdx-jayree-plugin/blob/v4.8.2/src/commands/jayree/org/streaming.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.1.0/src/commands/jayree/org/stream.ts)_
+
+### `sfdx jayree:project:compare:snapshot`
+
+Compare sfdx source snapshot files.
+
+```
+USAGE
+  $ sfdx jayree:project:compare:snapshot [--json] [--filepath <value>]
+
+FLAGS
+  --filepath=<value>  [default: ./sfdx-source-snapshot.json] Path of the generated snapshot file.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:source:snapshot:compare
+```
+
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/compare/snapshot.ts)_
 
 ### `sfdx jayree:project:fix`
 
@@ -424,7 +458,7 @@ USAGE
 
 FLAGS
   -o, --target-org=<value>
-  -t, --task=<value>...     Comma-separated list of task names listed in sfdx-project.json.
+  -t, --task=<value>...     Task name(s) listed in sfdx-project.json.
 
 GLOBAL FLAGS
   --json  Format output as json.
@@ -433,57 +467,46 @@ ALIASES
   $ sfdx jayree:source:fix
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/project/fix.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/fix.ts)_
 
-### `sfdx jayree:source:snapshot:compare`
+### `sfdx jayree:project:generate:snapshot`
 
-compares sfdx source snapshot files
+Generate sfdx source snapshot files.
 
 ```
 USAGE
-  $ sfdx jayree:source:snapshot:compare [--json] [--filepath <value>]
+  $ sfdx jayree:project:generate:snapshot [--json] [--filepath <value>]
 
 FLAGS
-  --filepath=<value>  [default: ./sfdx-source-snapshot.json] path of the generated snapshot file
+  --filepath=<value>  [default: ./sfdx-source-snapshot.json] Path to save the generated snapshot file.
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:source:snapshot:generate
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/source/snapshot/compare.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/generate/snapshot.ts)_
 
-### `sfdx jayree:source:snapshot:generate`
+### `sfdx jayree:project:list:tracking`
 
-generates sfdx source snapshot files
-
-```
-USAGE
-  $ sfdx jayree:source:snapshot:generate [--json] [--filepath <value>]
-
-FLAGS
-  --filepath=<value>  [default: ./sfdx-source-snapshot.json] path to save the generated snapshot file
-
-GLOBAL FLAGS
-  --json  Format output as json.
-```
-
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/source/snapshot/generate.ts)_
-
-### `sfdx jayree:source:tracking:list`
-
-list changes in a scratch org by remote revision counter number
+List changes in a scratch org by remote revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:list -o <value> [--json] [--api-version <value>] [-r <value>]
+  $ sfdx jayree:project:list:tracking -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
-  -r, --revision=<value>    start at a specific revision counter number
+  -r, --revision=<value>    Start at a specific revision counter number.
   --api-version=<value>     Override the api version used for api requests made by this command
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:source:tracking:list
 
 EXAMPLES
   $ sfdx jayree:source:tracking:list
@@ -491,44 +514,50 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/source/tracking/list.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/list/tracking.ts)_
 
-### `sfdx jayree:source:tracking:store:get`
+### `sfdx jayree:project:store:tracking:get`
 
-get stored revision counter number
+Get stored revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:get -o <value> [--json]
+  $ sfdx jayree:project:store:tracking:get -o <value> [--json]
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:source:tracking:store:get
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:get
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/source/tracking/store/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/store/tracking/get.ts)_
 
-### `sfdx jayree:source:tracking:store:set`
+### `sfdx jayree:project:store:tracking:set`
 
-store revision counter number
+Store revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:source:tracking:store:set -o <value> [--json] [--api-version <value>] [-r <value>]
+  $ sfdx jayree:project:store:tracking:set -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org.
-  -r, --revision=<value>    revision counter number (default: remote revision counter number)
+  -r, --revision=<value>    Revision counter number (default: remote revision counter number).
   --api-version=<value>     Override the api version used for api requests made by this command
 
 GLOBAL FLAGS
   --json  Format output as json.
+
+ALIASES
+  $ sfdx jayree:source:tracking:store:set
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:set
@@ -536,7 +565,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.2.4/src/commands/jayree/source/tracking/store/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.0/src/commands/jayree/project/store/tracking/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
