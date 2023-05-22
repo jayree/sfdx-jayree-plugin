@@ -2,7 +2,7 @@
 // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 
 {
-  "extends": "@salesforce/dev-config/tsconfig",
+  "extends": "@salesforce/dev-config/tsconfig-strict",
   "compilerOptions": {
     "outDir": "lib",
     "module": "ES2020",

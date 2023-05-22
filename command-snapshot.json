@@ -1,9 +1,9 @@
 [
   {
-    "command": "jayree:flowtestcoverage",
-    "plugin": "sfdx-jayree",
+    "command": "jayree:flow:get:coverage",
+    "plugin": "@jayree/sfdx-plugin-org",
     "flags": ["api-version", "json", "target-org"],
-    "alias": []
+    "alias": ["jayree:flowtestcoverage"]
   },
   {
     "command": "jayree:manifest:cleanup",
@@ -59,16 +59,16 @@
     "alias": []
   },
   {
-    "command": "jayree:org:settings",
-    "plugin": "sfdx-jayree",
-    "flags": ["file", "json", "target-org", "writetoprojectscratchdeffile"],
-    "alias": []
+    "command": "jayree:org:get:settings",
+    "plugin": "@jayree/sfdx-plugin-org",
+    "flags": ["api-version", "file", "json", "target-org", "writetoprojectscratchdeffile"],
+    "alias": ["jayree:org:settings"]
   },
   {
-    "command": "jayree:org:streaming",
-    "plugin": "sfdx-jayree",
-    "flags": ["api-version", "json", "target-org", "topic"],
-    "alias": []
+    "command": "jayree:org:stream",
+    "plugin": "@jayree/sfdx-plugin-org",
+    "flags": ["api-version", "channel", "json", "replay-id", "target-org"],
+    "alias": ["jayree:org:streaming"]
   },
   {
     "command": "jayree:project:fix",
@@ -104,12 +104,6 @@
     "command": "jayree:source:tracking:store:set",
     "plugin": "@jayree/sfdx-plugin-source",
     "flags": ["api-version", "json", "revision", "target-org"],
-    "alias": []
-  },
-  {
-    "command": "jayree:version",
-    "plugin": "sfdx-jayree",
-    "flags": ["json"],
     "alias": []
   }
 ]

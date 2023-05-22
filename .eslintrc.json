@@ -9,25 +9,7 @@
   "plugins": ["eslint-plugin-header"],
   "extends": ["eslint-config-salesforce-typescript", "plugin:sf-plugin/migration", "plugin:prettier/recommended"],
   "rules": {
-    "jsdoc/newline-after-description": "off",
-    "@typescript-eslint/prefer-nullish-coalescing": "off",
-    "@typescript-eslint/restrict-template-expressions": [
-      "error",
-      {
-        "allowAny": true,
-        "allowNullish": true,
-        "allowBoolean": true,
-        "allowNumber": true
-      }
-    ],
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/no-unsafe-call": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off",
-    "@typescript-eslint/no-unsafe-return": "off",
-    "@typescript-eslint/restrict-plus-operands": "off",
+    "sf-plugin/no-missing-messages": "off",
     "header/header": [
       2,
       "block",
