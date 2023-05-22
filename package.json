@@ -27,7 +27,7 @@
     "@salesforce/dev-config": "^4.0.1",
     "@salesforce/dev-scripts": "^5.0.1",
     "@salesforce/prettier-config": "^0.0.3",
-    "@salesforce/ts-sinon": "^1.4.6",
+    "@salesforce/ts-sinon": "^1.4.7",
     "@types/debug": "^4.1.7",
     "@types/fs-extra": "^11.0.1",
     "@types/jsforce": "^1.11.0",
