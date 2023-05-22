@@ -520,16 +520,15 @@
     listr2 "^6.6.0"
     tslib "^2.5.2"
 
-"@jayree/sfdx-plugin-org@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.0.4.tgz#5b87b9f6395dc39e05992bf477a7aaa95cdfa755"
-  integrity sha512-TSnBlROP2t0nMrUSad1rIjGtSq1SPS5+bg1GXgOKeDqE8z2A0YXOEjhRzEu5LH8oJ7OnM9RhjMucSm7hpymRFA==
+"@jayree/sfdx-plugin-org@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.1.0.tgz#c730e6e4dbcad6d1b31009d416359c0ccdbafbb7"
+  integrity sha512-jiGk5s6B178MPaN9nzHpsOb61sHIvnXALIxRFXg7ep23ofW7vdp8fCHsec0VuiSK4Go4DRm5LqzZWpNzG8RHlQ==
   dependencies:
     "@jayree/changelog" "^1.1.1"
-    "@oclif/core" "^2.8.2"
-    "@salesforce/kit" "^1.9.2"
     "@salesforce/sf-plugins-core" "^2.4.3"
-    "@salesforce/ts-types" "^1.7.3"
+    "@salesforce/source-deploy-retrieve" "^8.5.1"
+    "@salesforce/ts-types" "^2.0.2"
     debug "^4.3.4"
     enquirer "^2.3.6"
     fs-extra "^11.1.1"
@@ -1153,6 +1152,13 @@
   integrity sha512-jpmekGqZ7tpHRJwf1rF0yBJ/IMC5mOrryNi4HZkKuNQn8RF97WpynmL8Om04mLTCESvCiif3y7NWfIcxtID2Gw==
   dependencies:
     tslib "^2.5.0"
+
+"@salesforce/ts-types@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-2.0.2.tgz#44c2ab3a765b57a9a285f2be31a661ac5b373ac3"
+  integrity sha512-FxQnTtdn9mcnGpc6qxQbpP+0CnDY1OcMNM+QL+TgC5uSyxnzo6vBrK7OenrK9jdgfvJZAKH1PjeAj2QahbpBwQ==
+  dependencies:
+    tslib "^2.5.2"
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
