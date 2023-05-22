@@ -10,7 +10,7 @@
     "@jayree/sfdx-plugin-manifest": "^3.0.19",
     "@jayree/sfdx-plugin-org": "^1.1.0",
     "@jayree/sfdx-plugin-prettier": "^1.3.2",
-    "@jayree/sfdx-plugin-source": "^1.2.4",
+    "@jayree/sfdx-plugin-source": "^1.3.0",
     "@salesforce/sf-plugins-core": "^2.4.3",
     "@salesforce/source-deploy-retrieve": "^8.5.2",
     "debug": "^4.3.4",
