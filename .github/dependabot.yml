@@ -16,7 +16,3 @@ updates:
       prefix: 'fix'
       prefix-development: 'chore'
       include: 'scope'
-    ignore:
-      - dependency-name: '@salesforce/dev-scripts'
-      - dependency-name: '*'
-        update-types: ['version-update:semver-major']
