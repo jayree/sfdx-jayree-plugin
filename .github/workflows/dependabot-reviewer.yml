@@ -1,12 +1,9 @@
-name: Dependabot reviewer
-
+name: dependabot-reviewer
 on: pull_request_target
-
 permissions:
   pull-requests: write
   contents: write
   repository-projects: read
-
 jobs:
   review-dependabot-pr:
     runs-on: ubuntu-latest
@@ -15,28 +12,45 @@ jobs:
       - name: Dependabot metadata
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@v1
+      - uses: actions/checkout@v3
+      - name: Approve a PR if not already approved
+        id: check-approval
+        run: |
+          gh pr checkout "$PR_URL"
+          echo "approved=true" >> "$GITHUB_OUTPUT"
+          if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ];
+          then echo "approved=false" >> "$GITHUB_OUTPUT";
+          else echo "PR already approved, skipping additional approvals to minimize emails/notification noise.";
+          fi
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Approve patch and minor updates
-        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor'}}
+        if: ${{(steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor') && steps.check-approval.outputs.approved != 'true'}}
         run: gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a patch or minor update**"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Approve major updates of development dependencies
-        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:development'}}
+        if: ${{(steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:development') && steps.check-approval.outputs.approved != 'true'}}
         run: gh pr review $PR_URL --approve -b "I'm **approving** this pull request because **it includes a major update of a dependency used only in development**"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Comment on major updates of non-development dependencies
-        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:production'}}
+        if: ${{(steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major' && steps.dependabot-metadata.outputs.dependency-type == 'direct:production') && steps.check-approval.outputs.approved != 'true'}}
         run: |
-          gh pr comment $PR_URL --body "I'm **not approving** this PR because **it includes a major update of a dependency used in production**"
-          gh pr edit $PR_URL --add-label "requires-manual-qa"
+          if [ "$(gh pr view --json comments --jq '[.comments[] | select(.author.login == "github-actions") | .body | contains("not approving")] | any')" != "true" ];
+          then 
+            gh pr comment $PR_URL --body "I'm **not approving** this PR because **it includes a major update of a dependency used in production**";
+            gh pr edit $PR_URL --add-label "requires-manual-qa";
+          else echo "PR already approved, skipping additional approvals to minimize emails/notification noise.";
+          fi
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
