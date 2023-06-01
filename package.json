@@ -30,7 +30,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsdoc": "^44.2.7",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-sf-plugin": "^1.15.3",
+    "eslint-plugin-sf-plugin": "^1.15.6",
     "husky": "^8.0.3",
     "mocha": "^10.2.0",
     "nock": "^13.3.1",
