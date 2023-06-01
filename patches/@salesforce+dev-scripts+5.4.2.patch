@@ -54,7 +54,7 @@ index 2e6bae4..4253f30 100644
 +  "node-option": ["experimental-specifier-resolution=node", "loader=ts-node/esm"]
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
-index d4f6ee8..3ddeeee 100644
+index d4f6ee8..73ad6fa 100644
 --- a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
 +++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
 @@ -5,7 +5,14 @@
@@ -62,11 +62,11 @@ index d4f6ee8..3ddeeee 100644
    "compilerOptions": {
      "outDir": "lib",
 -    "incremental": true
-+    "module": "ES2020",
-+    "allowSyntheticDefaultImports": true,
-+    "skipLibCheck": true,
 +    "incremental": true,
-+    "tsBuildInfoFile": ".tsbuildinfo"
++    "module": "node16",
++    "moduleResolution": "node16",
++    "allowSyntheticDefaultImports": true,
++    "skipLibCheck": true
 +  },
 +  "ts-node": {
 +    "esm": true
@@ -86,36 +86,6 @@ index 44147cc..25e4a7c 100644
 +  },
    "include": ["./**/*.ts"]
  }
-diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig.json b/node_modules/@salesforce/dev-scripts/files/tsconfig.json
-index f4f0945..90c250a 100644
---- a/node_modules/@salesforce/dev-scripts/files/tsconfig.json
-+++ b/node_modules/@salesforce/dev-scripts/files/tsconfig.json
-@@ -1,7 +1,12 @@
- {
-   "extends": "@salesforce/dev-config/tsconfig",
-   "compilerOptions": {
--    "outDir": "lib"
-+    "outDir": "lib",
-+    "module": "node16",
-+    "moduleResolution": "node16",
-+    "skipLibCheck": true,
-+    "incremental": true,
-+    "tsBuildInfoFile": ".tsbuildinfo"
-   },
-   "include": ["./src/**/*.ts"]
- }
-diff --git a/node_modules/@salesforce/dev-scripts/package.json b/node_modules/@salesforce/dev-scripts/package.json
-index 2351d52..4e51627 100644
---- a/node_modules/@salesforce/dev-scripts/package.json
-+++ b/node_modules/@salesforce/dev-scripts/package.json
-@@ -39,6 +39,7 @@
-     "@types/mocha": "^9.0.0",
-     "@types/node": "^15.6.1",
-     "@types/sinon": "10.0.11",
-+    "c8": "^7.12.0",
-     "chai": "^4.2.0",
-     "chalk": "^4.0.0",
-     "cosmiconfig": "^7.0.0",
 diff --git a/node_modules/@salesforce/dev-scripts/utils/husky-init.js b/node_modules/@salesforce/dev-scripts/utils/husky-init.js
 index df35b6e..b9197ce 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/husky-init.js
@@ -133,6 +103,18 @@ index df35b6e..b9197ce 100644
      }
    } catch (err) {
      if (err.code === 'ENOENT') {
+diff --git a/node_modules/@salesforce/dev-scripts/utils/package-json.js b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+index c1d55c8..24ee631 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/package-json.js
++++ b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+@@ -41,6 +41,7 @@ class PackageJson {
+ 
+       writeFileSync(this.pjsonPath, pjson);
+       log(`wrote changes to ${this.pjsonPath}`, 1);
++      process.exit(1);
+     }
+   }
+ 
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 index 769dbfe..944d00b 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
@@ -238,24 +220,30 @@ index 6a851f6..ac30cf1 100644
    const scripts = config.scripts;
  
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 928b982..5fc50dd 100644
+index c28252e..4989211 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-@@ -69,7 +69,7 @@ module.exports = (projectPath) => {
-   add('@salesforce/dev-config');
+@@ -24,6 +24,7 @@ const nonPjsonDependencyMinimums = new Map([
+   ['@oclif/plugin-command-snapshot', '^4.0.2'],
+   ['eslint-plugin-sf-plugin', '^1.15.6'],
+   ['oclif', '^3.9.0'],
++  ['c8', '^7.14.0'],
+ ]);
  
-   // Included by dev-scripts
--  add('nyc');
-+  add('c8');
-   add('ts-node');
-   add('mocha');
-   add('sinon');
-@@ -85,7 +85,7 @@ module.exports = (projectPath) => {
-   remove('@types/sinon');
-   remove('typedoc');
-   remove('typedoc-plugin-missing-exports');
--  remove('eslint-plugin-prettier');
-+  // remove('eslint-plugin-prettier');
-   remove('lint-staged');
-   remove('cz-conventional-changelog');
-   // We use eslint now
+ const getVersionNum = (ver) => (ver.startsWith('^') || ver.startsWith('~') ? ver.slice(1) : ver);
+@@ -82,7 +83,6 @@ module.exports = (projectPath) => {
+   const requiredDeps = [
+     'husky',
+     'pretty-quick',
+-    'nyc',
+     'ts-node',
+     'mocha',
+     'sinon',
+@@ -110,7 +110,6 @@ module.exports = (projectPath) => {
+     '@types/node',
+     '@types/sinon',
+     'typedoc-plugin-missing-exports',
+-    'eslint-plugin-prettier',
+   ].concat(scripts.format ? [] : ['prettier', '@salesforce/prettier-config']);
+   // removes go before adds because some are "added back"
+   bannedDeps.forEach((dep) => remove(dep));
