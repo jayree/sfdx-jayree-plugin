@@ -503,10 +503,10 @@
     semver "^7.5.0"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.2.tgz#f45e20b0b0e3ebe7db7357683ff70331f35e9b8e"
-  integrity sha512-iGwwj6cD/BNPtISOyiztk2A0glhmnhGKb+w1DtzGuJzA6eE96aaROKfoHyrr4PB7b7bWn9+rc8/U05j0vvWUng==
+"@jayree/sfdx-plugin-manifest@^3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.3.tgz#dab0768026434562bb3038c609cae929f4deeb99"
+  integrity sha512-qGxFV0BZLWCmOoS7uU2Y6jkSVXcQnQHowfjPJ6rO+/a+EkF3adh21NkwjbFK7/ebTA17iG4q9AVmy5VWAb/Plw==
   dependencies:
     "@jayree/changelog" "^1.1.2"
     "@salesforce/sf-plugins-core" "^3.0.2"
@@ -516,7 +516,7 @@
     fast-xml-parser "^4.2.2"
     fs-extra "^11.1.1"
     graceful-fs "^4.2.11"
-    isomorphic-git "^1.24.0"
+    isomorphic-git "1.23.0"
     tslib "^2.5.2"
 
 "@jayree/sfdx-plugin-org@^1.1.4":
@@ -4761,23 +4761,6 @@ isomorphic-git@1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.23.0.tgz#3afaeb2831e57a2eb95d6ef503cf8251424f03f2"
   integrity sha512-7mQlnZivFwrU6B3CswvmoNtVN8jqF9BcLf80uk7yh4fNA8PhFjAfQigi2Hu/Io0cmIvpOc7vn0/Rq3KtL5Ph8g==
-  dependencies:
-    async-lock "^1.1.0"
-    clean-git-ref "^2.0.1"
-    crc-32 "^1.2.0"
-    diff3 "0.0.3"
-    ignore "^5.1.4"
-    minimisted "^2.0.0"
-    pako "^1.0.10"
-    pify "^4.0.1"
-    readable-stream "^3.4.0"
-    sha.js "^2.4.9"
-    simple-get "^4.0.1"
-
-isomorphic-git@^1.24.0:
-  version "1.24.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.24.0.tgz#d3c7487ba67724d63dec0158572cb33767298f4d"
-  integrity sha512-4wV95pUr9kGTRZWB9a266bHfD3QAZzWWLIPxlTou4tgOaz4WKmaMOMKKHywudzigsU8h7YwbXyBLE4OEaK8F9Q==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
