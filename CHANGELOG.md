@@ -1,3 +1,10 @@
+## [4.8.9](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.8...v4.8.9) (2023-06-07)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-xml-parser from 4.2.2 to 4.2.4 ([#821](https://github.com/jayree/sfdx-jayree-plugin/issues/821)) ([6ecf9fd](https://github.com/jayree/sfdx-jayree-plugin/commit/6ecf9fdca942d78125d8838e687cafaf7bcd389a))
+
 ## [4.8.8](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.7...v4.8.8) (2023-06-02)
 
 
