@@ -7,7 +7,7 @@ index 90af01f..ff466a9 100755
    // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
    if (segments['CLEAN']) {
 -    toClean = segments['CLEAN'];
-+    toClean = toClean.concat(segments['CLEAN']);
++    toClean = toClean.concat(segments['CLEAN ']);
    } else {
      const example = join(__dirname, '..', 'files', '.gitignore');
      log(
