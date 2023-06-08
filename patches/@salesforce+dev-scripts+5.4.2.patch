@@ -38,7 +38,7 @@ index 2e1a739..67d15b0 100755
 -  if (exists('.git')) {
 +  const isCi = process.env.CI !== undefined;
 +  if (exists('.git') && !isCi) {
-     require('../utils/husky-init')();//ad
+     require('../utils/husky-init')();
    }
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/mocharc.json b/node_modules/@salesforce/dev-scripts/files/mocharc.json
