@@ -42,7 +42,7 @@ index 2e1a739..67d15b0 100755
    }
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/mocharc.json b/node_modules/@salesforce/dev-scripts/files/mocharc.json
-index 2e6bae4..4253f30 100644
+index 2e6bae4..6725c65 100644
 --- a/node_modules/@salesforce/dev-scripts/files/mocharc.json
 +++ b/node_modules/@salesforce/dev-scripts/files/mocharc.json
 @@ -3,5 +3,6 @@
@@ -51,7 +51,7 @@ index 2e6bae4..4253f30 100644
    "reporter": "spec",
 -  "timeout": 5000
 +  "timeout": 5000,
-+  "node-option": ["experimental-specifier-resolution=node", "loader=ts-node/esm"]
++  "node-option": ["experimental-specifier-resolution=node", "loader=ts-node/esm", "no-warnings"]
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
 index d4f6ee8..73ad6fa 100644
@@ -220,7 +220,7 @@ index 6a851f6..ac30cf1 100644
    const scripts = config.scripts;
  
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index c28252e..4989211 100644
+index c28252e..8618241 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -24,6 +24,7 @@ const nonPjsonDependencyMinimums = new Map([
@@ -239,10 +239,28 @@ index c28252e..4989211 100644
      'ts-node',
      'mocha',
      'sinon',
-@@ -110,7 +110,6 @@ module.exports = (projectPath) => {
+@@ -91,7 +91,7 @@ module.exports = (projectPath) => {
+     'eslint-config-salesforce',
+     'eslint-config-salesforce-typescript',
+     'eslint-config-salesforce-license',
+-  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []);
++  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []).concat(scripts.docs ? ['typedoc', 'typedoc-plugin-missing-exports',] : []);
+ 
+   /**
+    * if dev-scripts sees these in devDeps, they'll be removed
+@@ -101,7 +101,6 @@ module.exports = (projectPath) => {
+     '@commitlint/cli',
+     '@commitlint/config-conventional',
+     'source-map-support',
+-    'typedoc',
+     'cz-conventional-changelog',
+     'lint-staged',
+     'tslint',
+@@ -109,8 +108,6 @@ module.exports = (projectPath) => {
+     '@types/mocha',
      '@types/node',
      '@types/sinon',
-     'typedoc-plugin-missing-exports',
+-    'typedoc-plugin-missing-exports',
 -    'eslint-plugin-prettier',
    ].concat(scripts.format ? [] : ['prettier', '@salesforce/prettier-config']);
    // removes go before adds because some are "added back"
