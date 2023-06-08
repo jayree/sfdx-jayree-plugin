@@ -27,20 +27,6 @@ index 90af01f..ff466a9 100755
 +toClean = [...new Set(toClean)]
  log(`rm -rf ${toClean}`);
  shell.rm('-rf', toClean);
-diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-docs.js b/node_modules/@salesforce/dev-scripts/bin/sf-docs.js
-index d0695bb..7b083a4 100755
---- a/node_modules/@salesforce/dev-scripts/bin/sf-docs.js
-+++ b/node_modules/@salesforce/dev-scripts/bin/sf-docs.js
-@@ -22,9 +22,6 @@ try {
- 
- let outDir = 'docs';
- 
--// preserve perf test files, which are also stored in gh-pages
--shell.exec(`find ./${outDir}/* -not -path './${outDir}/perf*' -delete`);
--
- outDir = join(packageRoot, outDir, 'tmp');
- 
- let command = `yarn typedoc --out ${outDir}`;
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-install.js b/node_modules/@salesforce/dev-scripts/bin/sf-install.js
 index 2e1a739..67d15b0 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sf-install.js
