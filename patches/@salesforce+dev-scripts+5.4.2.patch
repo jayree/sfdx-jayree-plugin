@@ -42,7 +42,7 @@ index 2e1a739..67d15b0 100755
    }
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.js b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.js
-index 33b19f5..c149db6 100644
+index 33b19f5..60f35c1 100644
 --- a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.js
 +++ b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.js
 @@ -9,5 +9,24 @@
@@ -50,7 +50,7 @@ index 33b19f5..c149db6 100644
  
  module.exports = {
 -  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'eslint-config-prettier'],
-+  extends: ['eslint-config-salesforce-typescript', 'plugin:prettier/recommended'],
++  extends: ['eslint-config-salesforce-typescript', "plugin:sf-plugin/migration", 'plugin:prettier/recommended'],
 +  plugins: ['eslint-plugin-header'],
 +  ignorePatterns: ['**/*.d.ts', '**/*.cjs'],
 +  rules: {
@@ -303,7 +303,7 @@ index 6a851f6..0f1d740 100644
      }
  
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index c28252e..f2eb3a5 100644
+index c28252e..4840df5 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -24,6 +24,7 @@ const nonPjsonDependencyMinimums = new Map([
@@ -323,17 +323,18 @@ index c28252e..f2eb3a5 100644
      'ts-node',
      'mocha',
      'sinon',
-@@ -90,8 +91,7 @@ module.exports = (projectPath) => {
+@@ -90,8 +91,8 @@ module.exports = (projectPath) => {
      'wireit',
      'eslint-config-salesforce',
      'eslint-config-salesforce-typescript',
 -    'eslint-config-salesforce-license',
 -  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []);
++    'eslint-plugin-sf-plugin',
 +  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []).concat(scripts.docs ? ['typedoc', 'typedoc-plugin-missing-exports',] : []);
  
    /**
     * if dev-scripts sees these in devDeps, they'll be removed
-@@ -101,7 +101,6 @@ module.exports = (projectPath) => {
+@@ -101,7 +102,6 @@ module.exports = (projectPath) => {
      '@commitlint/cli',
      '@commitlint/config-conventional',
      'source-map-support',
@@ -341,7 +342,7 @@ index c28252e..f2eb3a5 100644
      'cz-conventional-changelog',
      'lint-staged',
      'tslint',
-@@ -109,8 +108,7 @@ module.exports = (projectPath) => {
+@@ -109,8 +109,7 @@ module.exports = (projectPath) => {
      '@types/mocha',
      '@types/node',
      '@types/sinon',
@@ -351,7 +352,7 @@ index c28252e..f2eb3a5 100644
    ].concat(scripts.format ? [] : ['prettier', '@salesforce/prettier-config']);
    // removes go before adds because some are "added back"
    bannedDeps.forEach((dep) => remove(dep));
-@@ -130,8 +128,16 @@ module.exports = (projectPath) => {
+@@ -130,8 +129,16 @@ module.exports = (projectPath) => {
  
    // eslint and all plugins must be installed on a local basis, regardless of if it uses a shared config.
    // https://eslint.org/docs/user-guide/getting-started
