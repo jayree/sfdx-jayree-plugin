@@ -28,7 +28,7 @@
     "eslint-config-salesforce-typescript": "^1.1.1",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsdoc": "^46.1.0",
+    "eslint-plugin-jsdoc": "^46.2.6",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-sf-plugin": "^1.15.6",
     "husky": "^8.0.3",
