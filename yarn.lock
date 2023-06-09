@@ -987,7 +987,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^4.0.1", "@salesforce/core@^4.1.2", "@salesforce/core@^4.2.0", "@salesforce/core@^4.2.1":
+"@salesforce/core@^4.1.0", "@salesforce/core@^4.1.2", "@salesforce/core@^4.2.0", "@salesforce/core@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.2.1.tgz#7fdbac22816d698b01b4007ba41028c230c7962e"
   integrity sha512-1bi3era5/0lFqYNU786b1As+8JTDay1o8EUMbrhNR/GhVAH1hlJlGNgfseASrKDR9vuITykKI/5jWUa7kzFU6w==
@@ -1474,7 +1474,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.59.9", "@typescript-eslint/utils@^5.59.7":
+"@typescript-eslint/utils@5.59.9", "@typescript-eslint/utils@^5.59.8":
   version "5.59.9"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.59.9.tgz#adee890107b5ffe02cd46fdaa6c2125fb3c6c7c4"
   integrity sha512-1PuMYsju/38I5Ggblaeb98TOoUvjhRvLpLa1DoTOFaLWqaXl/1iQ1eGurTXgBY58NUdtfTXKP5xBq7q9NDaLKg==
@@ -3317,13 +3317,13 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-sf-plugin@^1.15.6:
-  version "1.15.6"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.15.6.tgz#26e413e8ee31d9e752a0dbf1f327cda4364f8eee"
-  integrity sha512-wotrK2ld67ugJZ/n84OLE0MdYS7qMnfa7HcNheZTDTtKygavWhf65Cn5H3vrS760G2nQWSRj1rBK+OPzW4tCEA==
+eslint-plugin-sf-plugin@^1.15.8:
+  version "1.15.8"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.15.8.tgz#6926244f8f8ea7015b8109283abf44736e59aa76"
+  integrity sha512-78toJayNZinG0NFKPBVeRzGoYwUViQcrvCMQq/h/7D3f0XKZ6NRHEt1V+Dt3j0GOZ+A/UqWbrLuvMPl4sPMo2Q==
   dependencies:
-    "@salesforce/core" "^4.0.1"
-    "@typescript-eslint/utils" "^5.59.7"
+    "@salesforce/core" "^4.1.0"
+    "@typescript-eslint/utils" "^5.59.8"
 
 eslint-scope@^5.1.1:
   version "5.1.1"
