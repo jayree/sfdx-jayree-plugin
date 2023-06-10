@@ -50,7 +50,7 @@ index 33b19f5..60f35c1 100644
  
  module.exports = {
 -  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'eslint-config-prettier'],
-+  extends: ['eslint-config-salesforce-typescript', "plugin:sf-plugin/migration", 'plugin:prettier/recommended'],
++  extends: ['eslint-config-salesforce-typescript', 'plugin:sf-plugin/migration', 'plugin:prettier/recommended'],
 +  plugins: ['eslint-plugin-header'],
 +  ignorePatterns: ['**/*.d.ts', '**/*.cjs'],
 +  rules: {
