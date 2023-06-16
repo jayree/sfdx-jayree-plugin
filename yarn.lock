@@ -801,42 +801,7 @@
     supports-color "^8.1.1"
     tslib "^2"
 
-"@oclif/core@^2.8.0", "@oclif/core@^2.8.2", "@oclif/core@^2.8.4":
-  version "2.8.5"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.8.5.tgz#7964057bbee5e91dae8b35e030e767f38e50a19e"
-  integrity sha512-316DLfrHQDYmWDriI4Woxk9y1wVUrPN1sZdbQLHdOdlTA9v/twe7TdHpWOriEypfl6C85NWEJKc1870yuLtjrQ==
-  dependencies:
-    "@types/cli-progress" "^3.11.0"
-    ansi-escapes "^4.3.2"
-    ansi-styles "^4.3.0"
-    cardinal "^2.1.1"
-    chalk "^4.1.2"
-    clean-stack "^3.0.1"
-    cli-progress "^3.12.0"
-    debug "^4.3.4"
-    ejs "^3.1.8"
-    fs-extra "^9.1.0"
-    get-package-type "^0.1.0"
-    globby "^11.1.0"
-    hyperlinker "^1.0.0"
-    indent-string "^4.0.0"
-    is-wsl "^2.2.0"
-    js-yaml "^3.14.1"
-    natural-orderby "^2.0.3"
-    object-treeify "^1.1.33"
-    password-prompt "^1.1.2"
-    semver "^7.3.7"
-    string-width "^4.2.3"
-    strip-ansi "^6.0.1"
-    supports-color "^8.1.1"
-    supports-hyperlinks "^2.2.0"
-    ts-node "^10.9.1"
-    tslib "^2.5.0"
-    widest-line "^3.1.0"
-    wordwrap "^1.0.0"
-    wrap-ansi "^7.0.0"
-
-"@oclif/core@^2.8.6":
+"@oclif/core@^2.8.0", "@oclif/core@^2.8.2", "@oclif/core@^2.8.4", "@oclif/core@^2.8.6":
   version "2.8.7"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.8.7.tgz#e3fb73477cfb9e72c89bc68701d04953c084c0e8"
   integrity sha512-WTZUFgANYGyHQOmGc2YsczEdqdlG2/ZEfqksHnuYbz3egozpka/R9LrFwNfWPZETi9ydzcjDWwJKUGQmJG3ixA==
@@ -6134,10 +6099,10 @@ object.values@^1.1.6:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-oclif@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/oclif/-/oclif-3.9.0.tgz#d52beb9300a60a660f897fe9ae810fffd48a1571"
-  integrity sha512-fsFyHVQYJdE50EcKrBjwzl2WT5sZUtTiRY1vqMwykgLFUDYrQS0lj7yqy2IgcPSmAWaLQryODdfBujCWOU98Ww==
+oclif@^3.9.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/oclif/-/oclif-3.9.1.tgz#f7ddf8aacd3fd86029b5e66c6cac743459299f4b"
+  integrity sha512-gJ8gJrohFY8qEeVBOw7wgAFdwPt2CTTkEFXDTkfUeXap6URIy6ngP7g/E1A2zFt2I0wH/qQHwcfuTpfBbj1+Uw==
   dependencies:
     "@oclif/core" "^2.8.4"
     "@oclif/plugin-help" "^5.1.19"
