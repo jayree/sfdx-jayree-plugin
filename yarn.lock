@@ -503,20 +503,20 @@
     semver "^7.5.1"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.7":
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.7.tgz#56d9a0a8963aff507f62798aae1b38d7a01ae4d1"
-  integrity sha512-v7ey19vz9+y59lXlioE0pLanJ3h6fsVdBCv3I/qZFfPvFvT0xoKQrRfYdJEaFC6doDQ8DalmmOL20P4TO0r5gw==
+"@jayree/sfdx-plugin-manifest@^3.1.8":
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.8.tgz#d1534e73309d5a9e98ef4a0873a4966ddef251aa"
+  integrity sha512-Witt7RTkU93YcVR3Wa6ocOU650S1UqxfO+u2SldktDs+Vqux4njxk1WBJodkLSjSvqblicKM5dOm3fM6yuPysg==
   dependencies:
     "@jayree/changelog" "^1.1.3"
-    "@salesforce/sf-plugins-core" "^3.1.0"
-    "@salesforce/source-deploy-retrieve" "^9.2.2"
+    "@salesforce/sf-plugins-core" "^3.1.2"
+    "@salesforce/source-deploy-retrieve" "^9.2.5"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
-    fast-xml-parser "^4.2.4"
+    fast-xml-parser "^4.2.5"
     fs-extra "^11.1.1"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.23.0"
+    isomorphic-git "1.24.2"
     tslib "^2.5.2"
 
 "@jayree/sfdx-plugin-org@^1.1.7":
@@ -1071,7 +1071,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.5.1.tgz#2d1bfdcf593caaa04cd4b3e6fe621097ff7f28fe"
   integrity sha512-MRqU+tn8w5IFvZ0Lm9YKLgxYxr2MQMI+fXXsTrwfUnijsps+ybF9IOTu6MOMxxl2vCUkO8XDjA435wXlWSLI6g==
 
-"@salesforce/sf-plugins-core@^3.1.0", "@salesforce/sf-plugins-core@^3.1.2":
+"@salesforce/sf-plugins-core@^3.1.2":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-3.1.2.tgz#d0706c734c15ff996e4dd85dac66e10566d59e8c"
   integrity sha512-V43KB8wDC/lHwcSwO3UB4PplMROGwvJ64NK14v2QgwySrAbaLjDBhJW3lX1nkLqugwu8855NEOWL7T35SgdmWw==
@@ -4704,6 +4704,23 @@ isomorphic-git@1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.23.0.tgz#3afaeb2831e57a2eb95d6ef503cf8251424f03f2"
   integrity sha512-7mQlnZivFwrU6B3CswvmoNtVN8jqF9BcLf80uk7yh4fNA8PhFjAfQigi2Hu/Io0cmIvpOc7vn0/Rq3KtL5Ph8g==
+  dependencies:
+    async-lock "^1.1.0"
+    clean-git-ref "^2.0.1"
+    crc-32 "^1.2.0"
+    diff3 "0.0.3"
+    ignore "^5.1.4"
+    minimisted "^2.0.0"
+    pako "^1.0.10"
+    pify "^4.0.1"
+    readable-stream "^3.4.0"
+    sha.js "^2.4.9"
+    simple-get "^4.0.1"
+
+isomorphic-git@1.24.2:
+  version "1.24.2"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.24.2.tgz#16ee555f1cc8a812bb1337fa6d90def7f7ad03e6"
+  integrity sha512-J3TU97JENWUnOgpVMwaRP9a3OQXJq/8fCIzA4yrJ7+ko1IPJwXCYeA69CeC8GtHeBVhcOQrbZGw6fpIpz54Vpw==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
