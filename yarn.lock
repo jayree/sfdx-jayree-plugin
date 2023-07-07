@@ -508,14 +508,14 @@
     semver "^7.5.1"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.9":
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.9.tgz#e8b1c867dd5b535e7be350f9514c73ea5b7a50b2"
-  integrity sha512-pPKM8ez7O7OmMK6eC9o7Z6+fEcNGIXn1VXoPuliotNkDGptxyBCYQU685YuwW+iRRRCeVzMlzBDTIehSPiXziw==
+"@jayree/sfdx-plugin-manifest@^3.1.10":
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.10.tgz#23946d29dab177076b1d8960065cd017b3d1db40"
+  integrity sha512-2oyFx/B7N9qiuje0ODkbMpnL19l9KsDigY6QZKIuYgzOyCJgJY5z7lwkZ+FUA1uToWg3uqNmrDaaJty36OpMSA==
   dependencies:
     "@jayree/changelog" "^1.1.3"
-    "@salesforce/sf-plugins-core" "^3.1.3"
-    "@salesforce/source-deploy-retrieve" "^9.3.0"
+    "@salesforce/sf-plugins-core" "^3.1.4"
+    "@salesforce/source-deploy-retrieve" "^9.3.2"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.2.5"
