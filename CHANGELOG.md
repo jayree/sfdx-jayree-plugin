@@ -1,3 +1,10 @@
+## [4.8.15](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.14...v4.8.15) (2023-07-10)
+
+
+### Bug Fixes
+
+* **deps:** bump tough-cookie from 4.1.2 to 4.1.3 ([#877](https://github.com/jayree/sfdx-jayree-plugin/issues/877)) ([bb9c111](https://github.com/jayree/sfdx-jayree-plugin/commit/bb9c111ac6386639949356dfcb3857645f63208d))
+
 ## [4.8.14](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.13...v4.8.14) (2023-07-07)
 
 
