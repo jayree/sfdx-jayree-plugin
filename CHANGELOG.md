@@ -1,3 +1,10 @@
+## [4.8.16](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.15...v4.8.16) (2023-07-11)
+
+
+### Bug Fixes
+
+* **deps:** bump semver from 5.7.1 to 5.7.2 ([#878](https://github.com/jayree/sfdx-jayree-plugin/issues/878)) ([ca25f3f](https://github.com/jayree/sfdx-jayree-plugin/commit/ca25f3f55e7d62a7cd734674da65127e7c3431ff))
+
 ## [4.8.15](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.14...v4.8.15) (2023-07-10)
 
 
