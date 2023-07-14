@@ -992,29 +992,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^4.3.1", "@salesforce/core@^4.3.5", "@salesforce/core@^4.3.6":
-  version "4.3.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.3.6.tgz#2ee6e6bdffdd5f1c9836c809c38a8a8050dd7681"
-  integrity sha512-gJvY8rK0U0ELCcbQAAjqgjt3MHUB/ycrKW4e/M8Qg8iir+qIXd7hTD2SfuPYsuM/1y+inR9FdGDnh/tLvdoYWA==
-  dependencies:
-    "@salesforce/bunyan" "^2.0.0"
-    "@salesforce/kit" "^3.0.3"
-    "@salesforce/schemas" "^1.5.1"
-    "@salesforce/ts-types" "^2.0.2"
-    "@types/semver" "^7.5.0"
-    ajv "^8.12.0"
-    change-case "^4.1.2"
-    debug "^3.2.7"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.27"
-    jsonwebtoken "9.0.0"
-    jszip "3.10.1"
-    proper-lockfile "^4.1.2"
-    ts-retry-promise "^0.7.0"
-
-"@salesforce/core@^4.3.8":
+"@salesforce/core@^4.3.1", "@salesforce/core@^4.3.5", "@salesforce/core@^4.3.6", "@salesforce/core@^4.3.7", "@salesforce/core@^4.3.8":
   version "4.3.10"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.3.10.tgz#d3ada1411c41fbd182fbfbe6a7ab4cf5bc6afb9f"
   integrity sha512-xWwn9cSMXVSGobcROajVWNcEZ4QY3KbaSyZe7swXJtulJ26CB1Fv3QJB8RxStrj0XaXwt8m1nuiBwh03DTvCKg==
@@ -1100,11 +1078,6 @@
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@salesforce/prettier-config/-/prettier-config-0.0.3.tgz#ba648d4886bb38adabe073dbea0b3a91b3753bb0"
   integrity sha512-hYOhoPTCSYMDYn+U1rlEk16PoBeAJPkrdg4/UtAzupM1mRRJOwEPMG1d7U8DxJFKuXW3DMEYWr2MwAIBDaHmFg==
-
-"@salesforce/schemas@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.5.1.tgz#2d1bfdcf593caaa04cd4b3e6fe621097ff7f28fe"
-  integrity sha512-MRqU+tn8w5IFvZ0Lm9YKLgxYxr2MQMI+fXXsTrwfUnijsps+ybF9IOTu6MOMxxl2vCUkO8XDjA435wXlWSLI6g==
 
 "@salesforce/schemas@^1.6.0":
   version "1.6.0"
@@ -3394,12 +3367,12 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-sf-plugin@^1.15.10:
-  version "1.15.10"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.15.10.tgz#6b340a532572f80035f6d06626831cf5d8b058e1"
-  integrity sha512-OjSw7FIuoA+48d8KMKIYpcvCEs5rQagysHIpHZ2yJcEp2aGzP3+2R9qZcCnQjYSat4JKrPHWwjuJKRnV3txQtw==
+eslint-plugin-sf-plugin@^1.15.13:
+  version "1.15.13"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.15.13.tgz#ec785ab6f204bcd200af8e3858fb82868ece39d6"
+  integrity sha512-iAmGr1aAqAhnEN3jJpIRVdmDY6VpFn790ZZP/Z+KS1fChqdx/JLcItu9t+eVEah5bNWPJQ+gREea8ySfaSf62Q==
   dependencies:
-    "@salesforce/core" "^4.3.5"
+    "@salesforce/core" "^4.3.7"
     "@typescript-eslint/utils" "^5.59.11"
 
 eslint-scope@^5.1.1:
