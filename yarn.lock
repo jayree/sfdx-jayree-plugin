@@ -1128,12 +1128,12 @@
     isomorphic-git "1.23.0"
     ts-retry-promise "^0.7.0"
 
-"@salesforce/ts-sinon@^1.4.9":
-  version "1.4.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.9.tgz#e13fe614f20222beb53bd9002f52e9aa56485db5"
-  integrity sha512-N+w2kTHebWbEv/Tf3cnSOctz/a20ZTX86uU/Y+I4d3W0zjRm0W8PgT6vkmRVY8nKknYj8AQgnQbn3e5tk/soUA==
+"@salesforce/ts-sinon@^1.4.11":
+  version "1.4.11"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.11.tgz#f6ca5533ad11642c6dc1fa3518225015b6fa4f2b"
+  integrity sha512-CPBz0EhbaiLBQVJujv+O0oM00YBDhme9q4KxYo2Me8WeF1qEr04GHapqJS54l0QqXmicPIz/IWO+ueQkROG/9g==
   dependencies:
-    "@salesforce/ts-types" "^2.0.2"
+    "@salesforce/ts-types" "^2.0.4"
     sinon "^5.1.1"
     tslib "^2.6.0"
 
