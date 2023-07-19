@@ -1,3 +1,10 @@
+## [4.8.19](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.18...v4.8.19) (2023-07-19)
+
+
+### Bug Fixes
+
+* **deps:** bump word-wrap from 1.2.3 to 1.2.4 ([#893](https://github.com/jayree/sfdx-jayree-plugin/issues/893)) ([9c1ee08](https://github.com/jayree/sfdx-jayree-plugin/commit/9c1ee080386085ce54dc430b702e8c2dfabd4013))
+
 ## [4.8.18](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.17...v4.8.18) (2023-07-15)
 
 
