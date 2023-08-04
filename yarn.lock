@@ -561,17 +561,17 @@
     prettier-plugin-apex "^1.13.0"
     tslib "^2.6.1"
 
-"@jayree/sfdx-plugin-source@^1.3.11":
-  version "1.3.11"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.11.tgz#4f6130a442f261c2bdb50d6900308a35ac7f7746"
-  integrity sha512-DWS4CAHVvzN1VR9iyD/6x7tLnHp2W06sAaQpgd22Ajlgnx7YLdKmyZ0VT4VHHfYGwVBxCOCwQ/RpOM+qhMy85g==
+"@jayree/sfdx-plugin-source@^1.3.12":
+  version "1.3.12"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.12.tgz#bb57f73b20b99100e28f299510dcc18914f7053e"
+  integrity sha512-fKpVSKFbM0Uxsfsfz33KngClMntnNu8/AVJ2O2BTaNcNKsqLoBUsc4MeBefSQ/Rx46J3iT0TyJEGHIIuWBCl8A==
   dependencies:
     "@jayree/changelog" "^1.1.4"
     "@salesforce/sf-plugins-core" "^3.1.12"
     "@salesforce/source-tracking" "^4.2.9"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
-    fast-xml-parser "^4.2.6"
+    fast-xml-parser "^4.2.7"
     fs-extra "^11.1.1"
     globby "^13.2.2"
     ignore "^5.2.4"
