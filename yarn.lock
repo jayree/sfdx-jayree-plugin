@@ -806,10 +806,10 @@
     supports-color "^8.1.1"
     tslib "^2"
 
-"@oclif/core@^2.10.0", "@oclif/core@^2.9.3", "@oclif/core@^2.9.4":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.10.0.tgz#8fd4a46bdea2a45ccf090c1433e913ea454b0607"
-  integrity sha512-4csNtXBb+RKrhO2lBAwBvxuyk0B3NB45tAkSHOrJjUo1ufT+qpg9V+g7nHZBMlwoQmjlAjCOKtm6RHar8FrpZg==
+"@oclif/core@^2.10.0", "@oclif/core@^2.11.1", "@oclif/core@^2.9.3", "@oclif/core@^2.9.4":
+  version "2.11.7"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.11.7.tgz#7781a4dc65597ed9d8fda39cb1b209efca1c2d24"
+  integrity sha512-0jbHePVekndUTd+Wee0+pnCpRhuHJrKiG9OtMqf4JSBCxp5Q8V+ACf8QKN4gNH9ppbGORfnTIYtXWh60+DcIiw==
   dependencies:
     "@types/cli-progress" "^3.11.0"
     ansi-escapes "^4.3.2"
@@ -842,12 +842,12 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/plugin-help@^5.2.12", "@oclif/plugin-help@^5.2.14":
-  version "5.2.14"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.14.tgz#c89f623712fc7d74f01fd2c9d909434b335a2e7b"
-  integrity sha512-7hMLc6zqxeRfG4nvHHQPpbaBj60efM3ULFkCpHZkdLms/ezIkNo40F661QuraIjMP/NN+U6VSfBCGuPkRyxVkA==
+"@oclif/plugin-help@^5.2.14", "@oclif/plugin-help@^5.2.15":
+  version "5.2.15"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.15.tgz#3880e02689db948a868d2a6ce413fa667f189a2e"
+  integrity sha512-q3gC4kIRlTilA8sG/9Eq2BEW2wo2KWV0ZbQ+8i3uQCvrgY4qoCIp5JTfsbbKR5XWaqPDdZPWhWuS1Rveu5V4FA==
   dependencies:
-    "@oclif/core" "^2.9.3"
+    "@oclif/core" "^2.11.1"
 
 "@oclif/plugin-not-found@^2.3.32":
   version "2.3.32"
