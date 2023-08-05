@@ -1,0 +1,289 @@
+diff --git a/node_modules/pretty-quick/bin/pretty-quick.js b/node_modules/pretty-quick/bin/pretty-quick.js
+index 541745c..939050c 100755
+--- a/node_modules/pretty-quick/bin/pretty-quick.js
++++ b/node_modules/pretty-quick/bin/pretty-quick.js
+@@ -14,63 +14,67 @@ const args = mri(process.argv.slice(2), {
+   },
+ });
+ 
+-const prettyQuickResult = prettyQuick(
+-  process.cwd(),
+-  Object.assign({}, args, {
+-    onFoundSinceRevision: (scm, revision) => {
+-      console.log(
+-        `🔍  Finding changed files since ${chalk.bold(
+-          scm,
+-        )} revision ${chalk.bold(revision)}.`,
+-      );
+-    },
++async function run() {
++  const prettyQuickResult = await prettyQuick(
++    process.cwd(),
++    Object.assign({}, args, {
++      onFoundSinceRevision: (scm, revision) => {
++        console.log(
++          `🔍  Finding changed files since ${chalk.bold(
++            scm,
++          )} revision ${chalk.bold(revision)}.`,
++        );
++      },
+ 
+-    onFoundChangedFiles: (changedFiles) => {
+-      console.log(
+-        `🎯  Found ${chalk.bold(changedFiles.length)} changed ${
+-          changedFiles.length === 1 ? 'file' : 'files'
+-        }.`,
+-      );
+-    },
++      onFoundChangedFiles: (changedFiles) => {
++        console.log(
++          `🎯  Found ${chalk.bold(changedFiles.length)} changed ${
++            changedFiles.length === 1 ? 'file' : 'files'
++          }.`,
++        );
++      },
+ 
+-    onPartiallyStagedFile: (file) => {
+-      console.log(`✗ Found ${chalk.bold('partially')} staged file ${file}.`);
+-    },
++      onPartiallyStagedFile: (file) => {
++        console.log(`✗ Found ${chalk.bold('partially')} staged file ${file}.`);
++      },
+ 
+-    onWriteFile: (file) => {
+-      console.log(`✍️  Fixing up ${chalk.bold(file)}.`);
+-    },
++      onWriteFile: (file) => {
++        console.log(`✍️  Fixing up ${chalk.bold(file)}.`);
++      },
+ 
+-    onCheckFile: (file, isFormatted) => {
+-      if (!isFormatted) {
+-        console.log(`⛔️  Check failed: ${chalk.bold(file)}`);
+-      }
+-    },
++      onCheckFile: (file, isFormatted) => {
++        if (!isFormatted) {
++          console.log(`⛔️  Check failed: ${chalk.bold(file)}`);
++        }
++      },
+ 
+-    onExamineFile: (file) => {
+-      console.log(`🔍  Examining ${chalk.bold(file)}.`);
+-    },
+-  }),
+-);
++      onExamineFile: (file) => {
++        console.log(`🔍  Examining ${chalk.bold(file)}.`);
++      },
++    }),
++  );
+ 
+-if (prettyQuickResult.success) {
+-  console.log('✅  Everything is awesome!');
+-} else {
+-  if (prettyQuickResult.errors.indexOf('PARTIALLY_STAGED_FILE') !== -1) {
+-    console.log(
+-      '✗ Partially staged files were fixed up.' +
+-        ` ${chalk.bold('Please update stage before committing')}.`,
+-    );
+-  }
+-  if (prettyQuickResult.errors.indexOf('BAIL_ON_WRITE') !== -1) {
+-    console.log(
+-      '✗ File had to be prettified and prettyQuick was set to bail mode.',
+-    );
+-  }
+-  if (prettyQuickResult.errors.indexOf('CHECK_FAILED') !== -1) {
+-    console.log(
+-      '✗ Code style issues found in the above file(s). Forgot to run Prettier?',
+-    );
++  if (prettyQuickResult.success) {
++    console.log('✅  Everything is awesome!');
++  } else {
++    if (prettyQuickResult.errors.indexOf('PARTIALLY_STAGED_FILE') !== -1) {
++      console.log(
++        '✗ Partially staged files were fixed up.' +
++          ` ${chalk.bold('Please update stage before committing')}.`,
++      );
++    }
++    if (prettyQuickResult.errors.indexOf('BAIL_ON_WRITE') !== -1) {
++      console.log(
++        '✗ File had to be prettified and prettyQuick was set to bail mode.',
++      );
++    }
++    if (prettyQuickResult.errors.indexOf('CHECK_FAILED') !== -1) {
++      console.log(
++        '✗ Code style issues found in the above file(s). Forgot to run Prettier?',
++      );
++    }
++    process.exit(1); // ensure git hooks abort
+   }
+-  process.exit(1); // ensure git hooks abort
+ }
++
++run();
+diff --git a/node_modules/pretty-quick/dist/index.js b/node_modules/pretty-quick/dist/index.js
+index e44f553..816ad3f 100644
+--- a/node_modules/pretty-quick/dist/index.js
++++ b/node_modules/pretty-quick/dist/index.js
+@@ -4,20 +4,13 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.default = void 0;
+-
+ var _scms = _interopRequireDefault(require("./scms"));
+-
+ var _processFiles = _interopRequireDefault(require("./processFiles"));
+-
+ var _createIgnorer = _interopRequireDefault(require("./createIgnorer"));
+-
+ var _createMatcher = _interopRequireDefault(require("./createMatcher"));
+-
+ var _isSupportedExtension = _interopRequireDefault(require("./isSupportedExtension"));
+-
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+-
+-var _default = (currentDirectory, {
++var _default = async (currentDirectory, {
+   config,
+   since,
+   staged,
+@@ -37,11 +30,9 @@ var _default = (currentDirectory, {
+   resolveConfig = true
+ } = {}) => {
+   const scm = (0, _scms.default)(currentDirectory);
+-
+   if (!scm) {
+     throw new Error('Unable to detect a source control manager.');
+   }
+-
+   const directory = scm.rootDirectory;
+   const revision = since || scm.getSinceRevision(directory, {
+     staged,
+@@ -50,23 +41,21 @@ var _default = (currentDirectory, {
+   onFoundSinceRevision && onFoundSinceRevision(scm.name, revision);
+   const rootIgnorer = (0, _createIgnorer.default)(directory, ignorePath);
+   const cwdIgnorer = currentDirectory !== directory ? (0, _createIgnorer.default)(currentDirectory, ignorePath) : () => true;
+-  const changedFiles = scm.getChangedFiles(directory, revision, staged).filter((0, _createMatcher.default)(pattern)).filter(rootIgnorer).filter(cwdIgnorer).filter((0, _isSupportedExtension.default)(resolveConfig));
++  let changedFiles = scm.getChangedFiles(directory, revision, staged).filter((0, _createMatcher.default)(pattern)).filter(rootIgnorer).filter(cwdIgnorer);
++  const boolArray = await Promise.all(changedFiles.map((0, _isSupportedExtension.default)(resolveConfig)));
++  changedFiles = changedFiles.filter((value, index) => boolArray[index]);
+   const unstagedFiles = staged ? scm.getUnstagedChangedFiles(directory, revision).filter(_isSupportedExtension.default).filter((0, _createMatcher.default)(pattern)).filter(rootIgnorer).filter(cwdIgnorer) : [];
+-
+   const wasFullyStaged = f => unstagedFiles.indexOf(f) < 0;
+-
+   onFoundChangedFiles && onFoundChangedFiles(changedFiles);
+   const failReasons = new Set();
+-  (0, _processFiles.default)(directory, changedFiles, {
++  await (0, _processFiles.default)(directory, changedFiles, {
+     check,
+     config,
+     onWriteFile: file => {
+       onWriteFile && onWriteFile(file);
+-
+       if (bail) {
+         failReasons.add('BAIL_ON_WRITE');
+       }
+-
+       if (staged && restage) {
+         if (wasFullyStaged(file)) {
+           scm.stageFile(directory, file);
+@@ -78,7 +67,6 @@ var _default = (currentDirectory, {
+     },
+     onCheckFile: (file, isFormatted) => {
+       onCheckFile && onCheckFile(file, isFormatted);
+-
+       if (!isFormatted) {
+         failReasons.add('CHECK_FAILED');
+       }
+@@ -90,5 +78,4 @@ var _default = (currentDirectory, {
+     errors: Array.from(failReasons)
+   };
+ };
+-
+ exports.default = _default;
+\ No newline at end of file
+diff --git a/node_modules/pretty-quick/dist/isSupportedExtension.js b/node_modules/pretty-quick/dist/isSupportedExtension.js
+index 160d235..cad4305 100644
+--- a/node_modules/pretty-quick/dist/isSupportedExtension.js
++++ b/node_modules/pretty-quick/dist/isSupportedExtension.js
+@@ -4,16 +4,13 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.default = void 0;
+-
+ var _prettier = require("prettier");
+-
+-var _default = resolveConfig => file => Boolean(_prettier.getFileInfo.sync(file, {
++var _default = resolveConfig => async file => Boolean((await (0, _prettier.getFileInfo)(file, {
+   resolveConfig,
+-  ..._prettier.resolveConfig.sync(file, {
++  ...(await (0, _prettier.resolveConfig)(file, {
+     editorconfig: true
+   }, {
+     filepath: file
+-  })
+-}).inferredParser);
+-
++  }))
++})).inferredParser);
+ exports.default = _default;
+\ No newline at end of file
+diff --git a/node_modules/pretty-quick/dist/processFiles.js b/node_modules/pretty-quick/dist/processFiles.js
+index a9e7c14..af0ba03 100644
+--- a/node_modules/pretty-quick/dist/processFiles.js
++++ b/node_modules/pretty-quick/dist/processFiles.js
+@@ -4,18 +4,12 @@ Object.defineProperty(exports, "__esModule", {
+   value: true
+ });
+ exports.default = void 0;
+-
+ var _fs = require("fs");
+-
+ var prettier = _interopRequireWildcard(require("prettier"));
+-
+ var _path = require("path");
+-
+-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+-
+-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+-
+-var _default = (directory, files, {
++function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
++function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
++var _default = async (directory, files, {
+   check,
+   config,
+   onExamineFile,
+@@ -25,27 +19,23 @@ var _default = (directory, files, {
+   for (const relative of files) {
+     onExamineFile && onExamineFile(relative);
+     const file = (0, _path.join)(directory, relative);
+-    const options = Object.assign({}, prettier.resolveConfig.sync(file, {
++    const options = Object.assign({}, await prettier.resolveConfig(file, {
+       config,
+       editorconfig: true
+     }), {
+       filepath: file
+     });
+     const input = (0, _fs.readFileSync)(file, 'utf8');
+-
+     if (check) {
+-      const isFormatted = prettier.check(input, options);
++      const isFormatted = await prettier.check(input, options);
+       onCheckFile && onCheckFile(relative, isFormatted);
+       continue;
+     }
+-
+-    const output = prettier.format(input, options);
+-
++    const output = await prettier.format(input, options);
+     if (output !== input) {
+       (0, _fs.writeFileSync)(file, output);
+       onWriteFile && onWriteFile(relative);
+     }
+   }
+ };
+-
+ exports.default = _default;
+\ No newline at end of file
