@@ -6710,7 +6710,7 @@ prettier-plugin-apex@^2.0.1:
     jest-docblock "^29.0.0"
     wait-on "^7.0.0"
 
-prettier@^2.7.1, prettier@^2.8.8:
+prettier@^2.7.1:
   version "2.8.8"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
