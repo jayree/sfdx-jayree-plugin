@@ -4,7 +4,10 @@
 {
   "extends": "@salesforce/dev-config/tsconfig-test-strict",
   "compilerOptions": {
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "node16",
+    "moduleResolution": "node16"
   },
   "include": ["./**/*.ts"]
 }
