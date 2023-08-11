@@ -6140,10 +6140,10 @@ object.values@^1.1.6:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
 
-oclif@^3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/oclif/-/oclif-3.11.1.tgz#6e20d5ca30760490d910e1ae35af63d0391cbfbb"
-  integrity sha512-n6qDc0ZI9wgE4fQJ9UNhjO5tagYaRel1Kt3iw2lCJQzd+QNrdA1nChcvHTYQJ+a92zZIF9RvC1P2g6zHo5uyjQ==
+oclif@^3.11.3:
+  version "3.11.3"
+  resolved "https://registry.yarnpkg.com/oclif/-/oclif-3.11.3.tgz#2cccb4f9fe34191812bfa4dda7740e737cef1715"
+  integrity sha512-6bUVTbTflu+IN9UnuIt5S4ba052oqLqsZF6zV2U8bx6ZH+hzgc3aXPTJ5JHU2MbDUg1B9PG5zHAbmvoX7V+16Q==
   dependencies:
     "@oclif/core" "^2.11.4"
     "@oclif/plugin-help" "^5.2.14"
