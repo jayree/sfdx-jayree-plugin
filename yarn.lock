@@ -563,13 +563,13 @@
     prettier-plugin-apex "^2.0.1"
     tslib "^2.6.1"
 
-"@jayree/sfdx-plugin-source@^1.3.12":
-  version "1.3.12"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.12.tgz#bb57f73b20b99100e28f299510dcc18914f7053e"
-  integrity sha512-fKpVSKFbM0Uxsfsfz33KngClMntnNu8/AVJ2O2BTaNcNKsqLoBUsc4MeBefSQ/Rx46J3iT0TyJEGHIIuWBCl8A==
+"@jayree/sfdx-plugin-source@^1.3.13":
+  version "1.3.13"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.13.tgz#151529268df293e61e50a55b5748b10ca5cde3c0"
+  integrity sha512-TPJc4pGB9b4tfZvUxb2NPqO9vuhmuo3NTWW53nni05Iwb8MyxtVvJJrO9n2PHNY4pXuYYLdgIK/SbiHujwRMWg==
   dependencies:
     "@jayree/changelog" "^1.1.4"
-    "@salesforce/sf-plugins-core" "^3.1.12"
+    "@salesforce/sf-plugins-core" "^3.1.13"
     "@salesforce/source-tracking" "^4.2.9"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
@@ -1116,7 +1116,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.0.tgz#14505ebad2fb2d4f7b14837545d662766d293561"
   integrity sha512-SwhDTLucj/GRbPpxlEoDZeqlX22o+G6fiebTXTu1cZKmd1oE0W2L7SlTTgJnWck8bhTeBIgQi9cpD8c2t5ISKA==
 
-"@salesforce/sf-plugins-core@^3.1.12", "@salesforce/sf-plugins-core@^3.1.13", "@salesforce/sf-plugins-core@^3.1.14":
+"@salesforce/sf-plugins-core@^3.1.13", "@salesforce/sf-plugins-core@^3.1.14":
   version "3.1.14"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-3.1.14.tgz#b2ca3bacfdfe338ccceafc2b92b968aa0780be4b"
   integrity sha512-8tVZoJdTrE77ZEqj3Nh2T0oXB8AEB5o22ffYraeSrUZtGh6lH8feZ8bxAVN1z6wIT9vXW3GhXrqR22UZYDl4ng==
