@@ -110,10 +110,10 @@ index 2e6bae4..6725c65 100644
 +  "node-option": ["experimental-specifier-resolution=node", "loader=ts-node/esm", "no-warnings"]
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
-index d4f6ee8..73ad6fa 100644
+index d4f6ee8..3c42e31 100644
 --- a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
 +++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
-@@ -5,7 +5,14 @@
+@@ -5,7 +5,15 @@
    "extends": "@salesforce/dev-config/tsconfig-strict",
    "compilerOptions": {
      "outDir": "lib",
@@ -121,6 +121,7 @@ index d4f6ee8..73ad6fa 100644
 +    "incremental": true,
 +    "module": "node16",
 +    "moduleResolution": "node16",
++    "lib": ["es2021", "dom"],
 +    "allowSyntheticDefaultImports": true,
 +    "skipLibCheck": true
 +  },
