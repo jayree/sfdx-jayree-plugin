@@ -14,7 +14,7 @@
   "devDependencies": {
     "@oclif/plugin-help": "^5.2.16",
     "@salesforce/dev-config": "^4.0.1",
-    "@salesforce/dev-scripts": "^5.4.2",
+    "@salesforce/dev-scripts": "^5.4.3",
     "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.14",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
@@ -24,7 +24,6 @@
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-salesforce": "^2.0.2",
-    "eslint-config-salesforce-license": "^0.2.0",
     "eslint-config-salesforce-typescript": "^1.1.2",
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import": "^2.28.0",
