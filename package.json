@@ -8,7 +8,7 @@
   "dependencies": {
     "@jayree/sfdx-plugin-manifest": "^3.1.18",
     "@jayree/sfdx-plugin-org": "^1.2.4",
-    "@jayree/sfdx-plugin-prettier": "^1.3.17",
+    "@jayree/sfdx-plugin-prettier": "^1.3.18",
     "@jayree/sfdx-plugin-source": "^1.3.13"
   },
   "devDependencies": {
