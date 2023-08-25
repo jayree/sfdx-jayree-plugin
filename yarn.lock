@@ -1159,23 +1159,16 @@
     isomorphic-git "1.23.0"
     ts-retry-promise "^0.7.0"
 
-"@salesforce/ts-sinon@^1.4.14":
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.14.tgz#f36ff049f39f8f712b51e1b655e03cf2988d8a6b"
-  integrity sha512-Le8gueZW8opoJ7PeCS9C4lKad1bUKoBYaArGhBPUDaK+ZItcIeOMT8IXtjP0ajVBHk5wbqGgoxXyThTnTu8jRA==
+"@salesforce/ts-sinon@^1.4.15":
+  version "1.4.15"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.15.tgz#6214b73fc53fe0ee2583bbd87d4b4217e557279d"
+  integrity sha512-mw//jI+QkkS+PEwqMtazlhdi3eYY49InnJ/EipmrsdsdV9b+W79D5N4C92LROYe9VNq+3q5VHJcT/jhARxZsTg==
   dependencies:
-    "@salesforce/ts-types" "^2.0.6"
+    "@salesforce/ts-types" "^2.0.7"
     sinon "^5.1.1"
     tslib "^2.6.1"
 
-"@salesforce/ts-types@^2.0.5", "@salesforce/ts-types@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-2.0.6.tgz#659590ee6ece45213bbdb23c9e244d206a2f912e"
-  integrity sha512-hGSU3pwZKItAw567cD2hf+nwe4yPVANonb1E28bLVaRjYAI6FmdxjjTxA+wZRrTpTCpjd5TY67Lq2X1X1lY8bA==
-  dependencies:
-    tslib "^2.6.1"
-
-"@salesforce/ts-types@^2.0.7":
+"@salesforce/ts-types@^2.0.5", "@salesforce/ts-types@^2.0.6", "@salesforce/ts-types@^2.0.7":
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-2.0.7.tgz#02a6999d0b0e7bcd6c6d8ce621c79fa61af24701"
   integrity sha512-8csXgstPuy6QXL3JavkIi/f8DOWHBNCvWeszrFu5sbVlcKO3YqOOCE+rDFGPkrZsYv5OywV6H8kEi877bWOz6Q==
