@@ -1,0 +1,15 @@
+diff --git a/node_modules/eslint-plugin-sf-plugin/dist/rules/no-missing-messages.js b/node_modules/eslint-plugin-sf-plugin/dist/rules/no-missing-messages.js
+index ad4f6f9..19a6ad2 100644
+--- a/node_modules/eslint-plugin-sf-plugin/dist/rules/no-missing-messages.js
++++ b/node_modules/eslint-plugin-sf-plugin/dist/rules/no-missing-messages.js
+@@ -51,7 +51,9 @@ exports.noMissingMessages = utils_1.ESLintUtils.RuleCreator.withoutDocs({
+     },
+     defaultOptions: [],
+     create(context) {
+-        core_1.Messages.importMessagesDirectory(process.cwd());
++        try {
++            core_1.Messages.importMessagesDirectory(process.cwd());
++        } catch (error) {}
+         const loadedMessages = new Map();
+         const loadedMessageBundles = new Map();
+         const parserServices = utils_1.ESLintUtils.getParserServices(context);
