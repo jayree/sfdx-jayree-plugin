@@ -1,0 +1,39 @@
+diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
+index 1d99700..2c637fa 100644
+--- a/node_modules/oclif/lib/commands/readme.js
++++ b/node_modules/oclif/lib/commands/readme.js
+@@ -122,7 +122,7 @@ USAGE
+         const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
+         const header = () => {
+             const usage = this.commandUsage(config, c);
+-            return usage ? `## \`${config.bin} ${usage}\`` : `## \`${config.bin}\``;
++            return usage ? `### \`${config.bin} ${usage}\`` : `### \`${config.bin}\``;
+         };
+         try {
+             // copy c to keep the command ID with colons, see:
+@@ -222,21 +222,20 @@ USAGE
+         const defaultUsage = () => {
+             return (0, util_1.compact)([
+                 id,
+-                Object.values(command.args).filter(a => !a.hidden).map(a => arg(a)).join(' '),
+             ]).join(' ');
+         };
+         const usages = (0, util_1.castArray)(command.usage);
+-        return (0, util_1.template)({ config, command })(usages.length === 0 ? defaultUsage() : usages[0]);
++        return (0, util_1.template)({ config, command })(defaultUsage());
+     }
+ }
+ exports.default = Readme;
+ Readme.description = `adds commands to README.md in current directory
+ The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
+-# Usage
++## Usage
+ <!-- usage -->
+-# Commands
++## Commands
+ <!-- commands -->
+-# Table of contents
++## Table of contents
+ <!-- toc -->
+ 
+ Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
