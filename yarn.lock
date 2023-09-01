@@ -546,20 +546,20 @@
     tslib "^2.6.1"
     wrap-ansi "^8.1.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.19":
-  version "1.3.19"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.19.tgz#e20a341bd1f71b4dab0e62cfdcc2b5c60a6b4f35"
-  integrity sha512-Ix7a0xJUucheY6SCNBuiQouNeOHeQIUAjaWe+Qm/c7W6w6gOkhNe7vadQl8G1TJ8eBT9peZf4vvatQWueJCHjA==
+"@jayree/sfdx-plugin-prettier@^1.3.20":
+  version "1.3.20"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.20.tgz#06b6c6e78d573ed4d0f8a0e6ad4449ee3a920302"
+  integrity sha512-tW44gcWETxGyTkIh/JNAmwPZIomvsA2rpTwe8hZlbNXBM7emw+Zfb6VKmOVLXLb0dcOuEsq/Aext5m23TYou1Q==
   dependencies:
     "@jayree/changelog" "^1.1.5"
     "@prettier/plugin-xml" "^3.2.0"
-    "@salesforce/sf-plugins-core" "^3.1.18"
-    "@salesforce/source-deploy-retrieve" "^9.7.7"
+    "@salesforce/sf-plugins-core" "^3.1.20"
+    "@salesforce/source-deploy-retrieve" "^9.7.8"
     cli-progress "^3.12.0"
     debug "^4.3.4"
     fs-extra "^11.1.1"
     ignore "^5.2.4"
-    prettier "^3.0.2"
+    prettier "^3.0.3"
     prettier-plugin-apex "^2.0.1"
     tslib "^2.6.1"
 
@@ -844,6 +844,41 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
+"@oclif/core@^2.12.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.14.0.tgz#9289174b47fc0ef5f23ea7fe0e2380b5d3c88ad4"
+  integrity sha512-LlOM8okLrKNkCCiqOA+9tojwueVHRY/zM8PXUxT1hz1n4Xv1lj9aphWennx1pPnwUMJ3texbEPOkt57o+aDYPA==
+  dependencies:
+    "@types/cli-progress" "^3.11.0"
+    ansi-escapes "^4.3.2"
+    ansi-styles "^4.3.0"
+    cardinal "^2.1.1"
+    chalk "^4.1.2"
+    clean-stack "^3.0.1"
+    cli-progress "^3.12.0"
+    debug "^4.3.4"
+    ejs "^3.1.8"
+    get-package-type "^0.1.0"
+    globby "^11.1.0"
+    hyperlinker "^1.0.0"
+    indent-string "^4.0.0"
+    is-wsl "^2.2.0"
+    js-yaml "^3.14.1"
+    natural-orderby "^2.0.3"
+    object-treeify "^1.1.33"
+    password-prompt "^1.1.2"
+    semver "^7.5.4"
+    slice-ansi "^4.0.0"
+    string-width "^4.2.3"
+    strip-ansi "^6.0.1"
+    supports-color "^8.1.1"
+    supports-hyperlinks "^2.2.0"
+    ts-node "^10.9.1"
+    tslib "^2.5.0"
+    widest-line "^3.1.0"
+    wordwrap "^1.0.0"
+    wrap-ansi "^7.0.0"
+
 "@oclif/plugin-help@^5.2.14", "@oclif/plugin-help@^5.2.18":
   version "5.2.18"
   resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.18.tgz#6fa44c1bda0b9d59af4c981bceaa6fb4491cb1fa"
@@ -1060,6 +1095,14 @@
     typescript "^4.9.5"
     wireit "^0.9.5"
 
+"@salesforce/kit@^3.0.11":
+  version "3.0.11"
+  resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-3.0.11.tgz#d03160b658da9817c05e62479ca18283087a0fc0"
+  integrity sha512-ar44uFJfc/RCDWjz7LlrOtFCFHgNNUpddxe0eJCLqQuR/Xs3IlLZKuovWTx322Rzu+V9IIKrIdpz2IqA95/ClA==
+  dependencies:
+    "@salesforce/ts-types" "^2.0.7"
+    tslib "^2.6.2"
+
 "@salesforce/kit@^3.0.9":
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-3.0.9.tgz#6674559e27914a9c79dd4283eb94eaea6177fe87"
@@ -1078,25 +1121,25 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.0.tgz#14505ebad2fb2d4f7b14837545d662766d293561"
   integrity sha512-SwhDTLucj/GRbPpxlEoDZeqlX22o+G6fiebTXTu1cZKmd1oE0W2L7SlTTgJnWck8bhTeBIgQi9cpD8c2t5ISKA==
 
-"@salesforce/sf-plugins-core@^3.1.15", "@salesforce/sf-plugins-core@^3.1.18":
-  version "3.1.18"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-3.1.18.tgz#a3c47c02a8ffe774f09daac2fc641b9eee72b3d6"
-  integrity sha512-c0uhR9lcufRTz6UmEgZfAItoHVweYrJIllXtEU4Mr5qb3E03rJy0GHHf0TbO5PIH5tP1nxj9ABODoSMZBdewIw==
+"@salesforce/sf-plugins-core@^3.1.15", "@salesforce/sf-plugins-core@^3.1.18", "@salesforce/sf-plugins-core@^3.1.20":
+  version "3.1.20"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-3.1.20.tgz#dcefa33d16cc16f85fd546055d3b45d547f9ece2"
+  integrity sha512-27zrOdVt9Sc6byAJOTW1lA5yuIOIC/81Af/t0QQMSofLEj6UkUuMoGUGlKzO0mH82HI34BON5wVXjLjNffIPQg==
   dependencies:
-    "@oclif/core" "^2.11.10"
+    "@oclif/core" "^2.12.0"
     "@salesforce/core" "^5.2.1"
-    "@salesforce/kit" "^3.0.9"
+    "@salesforce/kit" "^3.0.11"
     "@salesforce/ts-types" "^2.0.7"
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^9.7.4", "@salesforce/source-deploy-retrieve@^9.7.6", "@salesforce/source-deploy-retrieve@^9.7.7":
-  version "9.7.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.7.tgz#7e418118cba20ba25efd5e6ecf01e89147915bf6"
-  integrity sha512-goSUKH8DKScummtoOmFjxfRZewebClmhJXHD9s7d2BoWOZyjRc0zEC04m4nPT8jwEUPCaa7DiS+jeQc28kHHRQ==
+"@salesforce/source-deploy-retrieve@^9.7.4", "@salesforce/source-deploy-retrieve@^9.7.6", "@salesforce/source-deploy-retrieve@^9.7.7", "@salesforce/source-deploy-retrieve@^9.7.8":
+  version "9.7.8"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.8.tgz#34119f33cf93b3991e2dbf33a0f223bb4ea57f1e"
+  integrity sha512-bDmn7ccYfcnmj2Meotk/TABcleVffK/cBiefdKrND+8eKKLWoZpb8VPCgoVaiShvOmKIy0tqrZ1oEF4AzFcn9g==
   dependencies:
     "@salesforce/core" "^5.2.1"
-    "@salesforce/kit" "^3.0.9"
+    "@salesforce/kit" "^3.0.11"
     "@salesforce/ts-types" "^2.0.7"
     fast-levenshtein "^3.0.0"
     fast-xml-parser "^4.2.7"
@@ -6789,7 +6832,7 @@ prettier@^2.7.1:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-prettier@^3.0.2, prettier@^3.0.3:
+prettier@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
   integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
