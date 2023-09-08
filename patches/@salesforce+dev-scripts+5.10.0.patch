@@ -1,0 +1,391 @@
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
+index 90af01f..ff466a9 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
+@@ -38,7 +38,7 @@ if (gitignorePath) {
+ 
+   // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
+   if (segments['CLEAN']) {
+-    toClean = segments['CLEAN'];
++    toClean = toClean.concat(segments['CLEAN']);
+   } else {
+     const example = join(__dirname, '..', 'files', '.gitignore');
+     log(
+@@ -48,7 +48,7 @@ if (gitignorePath) {
+     );
+   }
+   if (segments['CLEAN ALL']) {
+-    toCleanAll = segments['CLEAN ALL'];
++    toCleanAll = toCleanAll.concat(segments['CLEAN ALL']);
+   }
+ }
+ 
+@@ -57,5 +57,6 @@ if (cleanAll) {
+   toClean = [...toClean, ...toCleanAll];
+ }
+ 
++toClean = [...new Set(toClean)]
+ log(`rm -rf ${toClean}`);
+ shell.rm('-rf', toClean);
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-install.js b/node_modules/@salesforce/dev-scripts/bin/sf-install.js
+index 2e1a739..67d15b0 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sf-install.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sf-install.js
+@@ -19,7 +19,8 @@ if (changed) {
+ } else {
+   require('../utils/standardize-pjson')();
+   require('../utils/standardize-files')();
+-  if (exists('.git')) {
++  const isCi = process.env.CI !== undefined;
++  if (exists('.git') && !isCi) {
+     require('../utils/husky-init')();
+   }
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
+index 33b19f5..eac972b 100644
+--- a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
++++ b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
+@@ -9,5 +9,24 @@
+ // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
+ 
+ module.exports = {
+-  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'eslint-config-prettier'],
++  extends: ['eslint-config-salesforce-typescript', 'plugin:sf-plugin/migration', 'plugin:prettier/recommended'],
++  plugins: ['eslint-plugin-header'],
++  ignorePatterns: ['**/*.d.ts', '**/*.cjs'],
++  rules: {
++    'header/header': [
++      2,
++      'block',
++      [
++        '',
++        {
++          pattern: ' \\* Copyright \\(c\\) \\d{4}, jayree',
++          template: ' * Copyright (c) 2023, jayree',
++        },
++        ' * All rights reserved.',
++        ' * Licensed under the BSD 3-Clause license.',
++        ' * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause',
++        ' ',
++      ],
++    ],
++  },
+ };
+diff --git a/node_modules/@salesforce/dev-scripts/files/mocharc.json b/node_modules/@salesforce/dev-scripts/files/mocharc.json
+index 2e6bae4..6725c65 100644
+--- a/node_modules/@salesforce/dev-scripts/files/mocharc.json
++++ b/node_modules/@salesforce/dev-scripts/files/mocharc.json
+@@ -3,5 +3,6 @@
+   "watch-extensions": "ts",
+   "recursive": true,
+   "reporter": "spec",
+-  "timeout": 5000
++  "timeout": 5000,
++  "node-option": ["experimental-specifier-resolution=node", "loader=ts-node/esm", "no-warnings"]
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
+index d4f6ee8..3c42e31 100644
+--- a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
++++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
+@@ -5,7 +5,15 @@
+   "extends": "@salesforce/dev-config/tsconfig-strict",
+   "compilerOptions": {
+     "outDir": "lib",
+-    "incremental": true
++    "incremental": true,
++    "module": "node16",
++    "moduleResolution": "node16",
++    "lib": ["es2021", "dom"],
++    "allowSyntheticDefaultImports": true,
++    "skipLibCheck": true
++  },
++  "ts-node": {
++    "esm": true
+   },
+   "include": ["./src/**/*.ts"]
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
+index 44147cc..87197ec 100644
+--- a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
++++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
+@@ -3,5 +3,11 @@
+ 
+ {
+   "extends": "@salesforce/dev-config/tsconfig-test-strict",
++  "compilerOptions": {
++    "skipLibCheck": true,
++    "allowSyntheticDefaultImports": true,
++    "module": "node16",
++    "moduleResolution": "node16"
++  },
+   "include": ["./**/*.ts"]
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/utils/package-json.js b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+index c1d55c8..a33594b 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/package-json.js
++++ b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+@@ -25,6 +25,9 @@ class PackageJson {
+     if (this.contents.scripts) {
+       this.contents.scripts = orderMap(this.contents.scripts);
+     }
++    if (this.contents.wireit) {
++      this.contents.wireit = orderMap(this.contents.wireit);
++    }
+     if (this.contents.devDependencies) {
+       this.contents.devDependencies = orderMap(this.contents.devDependencies);
+     }
+@@ -41,6 +44,7 @@ class PackageJson {
+ 
+       writeFileSync(this.pjsonPath, pjson);
+       log(`wrote changes to ${this.pjsonPath}`, 1);
++      process.exit(1);
+     }
+   }
+ 
+@@ -53,6 +57,18 @@ class PackageJson {
+     }
+     return this.contents[name];
+   }
++
++  delete(name, value) {
++    if (!name) {
++      throw new Error('property name is required');
++    }
++    if (!value) {
++      throw new Error('property value is required');
++    }
++    if (this.contents[name][value]) {
++      delete this.contents[name][value];
++    }
++  }
+ }
+ 
+ module.exports = PackageJson;
+diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
+index 7ed2274..6ee18af 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
++++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
+@@ -21,7 +21,7 @@ const PACKAGE_DEFAULTS = {
+     pretest: undefined,
+     posttest: undefined,
+     test: 'wireit',
+-    'test:compile': undefined,
++    'test:compile': 'wireit',
+     'test:only': 'wireit',
+     lint: 'wireit',
+     prepack: 'sf-prepack',
+@@ -31,7 +31,7 @@ const PACKAGE_DEFAULTS = {
+       dependencies: ['compile', 'lint'],
+     },
+     compile: {
+-      command: 'tsc -p . --pretty --incremental',
++      command: 'tsc --build --pretty',
+       files: ['src/**/*.ts', '**/tsconfig.json', 'messages/**'],
+       output: ['lib/**', '*.tsbuildinfo'],
+       clean: 'if-file-deleted',
+@@ -42,7 +42,7 @@ const PACKAGE_DEFAULTS = {
+       output: [],
+     },
+     lint: {
+-      command: 'eslint src test --color --cache --cache-location .eslintcache',
++      command: 'eslint --color --cache --cache-location .eslintcache .',
+       files: ['src/**/*.ts', 'test/**/*.ts', 'messages/**', '**/.eslint*', '**/tsconfig.json'],
+       output: [],
+     },
+@@ -56,7 +56,7 @@ const PACKAGE_DEFAULTS = {
+       dependencies: ['test:only', 'test:compile'],
+     },
+     'test:only': {
+-      command: 'nyc mocha "test/**/*.test.ts"',
++      command: 'c8 mocha "test/**/*.test.ts"',
+       // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
+       // see https://github.com/chalk/supports-color/issues/106
+       env: {
+@@ -81,18 +81,18 @@ const PLUGIN_DEFAULTS = {
+   wireit: {
+     ...PACKAGE_DEFAULTS.wireit,
+     'test:command-reference': {
+-      command: `"./bin/dev" commandreference:generate --erroronwarnings`,
++      command: `"./bin/dev.js" commandreference:generate --erroronwarnings`,
+       files: ['src/**/*.ts', 'messages/**', 'package.json'],
+       output: ['tmp/root'],
+     },
+     'test:deprecation-policy': {
+-      command: '"./bin/dev" snapshot:compare',
++      command: '"./bin/dev.js" snapshot:compare',
+       files: ['src/**/*.ts'],
+       output: [],
+       dependencies: ['compile'],
+     },
+     'test:json-schema': {
+-      command: '"./bin/dev" schema:compare',
++      command: '"./bin/dev.js" schema:compare',
+       files: ['src/**/*.ts', 'schemas'],
+       output: [],
+     },
+@@ -129,7 +129,7 @@ const resolveConfig = (path) => {
+   const configFromFile = (result && result.config) || {};
+ 
+   if (configFromFile.test?.testsPath) {
+-    defaults.wireit['test:only'].command = `nyc mocha "${configFromFile.test.testsPath}"`;
++    defaults.wireit['test:only'].command = `c8 mocha "${configFromFile.test.testsPath}"`;
+   }
+ 
+   // Allow users to override certain scripts
+@@ -155,6 +155,12 @@ const resolveConfig = (path) => {
+     delete config.wireit[scriptName];
+   });
+ 
++  Object.keys(config.wireit).forEach((scriptName) => {
++    if (config.wireit[scriptName].dependencies) {
++      config.wireit[scriptName].dependencies = config.wireit[scriptName].dependencies.filter(depScriptName => !config['exclude-scripts']?.includes(depScriptName));
++    }
++  })
++
+   resolvedConfigs[path] = config;
+   return config;
+ };
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
+index b7f7d10..3c47746 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
+@@ -18,6 +18,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
+ const FILE_NAME_GITIGNORE = 'gitignore';
+ const FILE_NAME_MOCHARC = 'mocharc.json';
+ 
++let config;
++let pkgRoot;
++
+ function isDifferent(sourcePath, targetPath) {
+   try {
+     // Using .replace() to normalize line endings across operating systems.
+@@ -37,7 +40,7 @@ function copyFile(sourcePath, targetPath, override = false) {
+   const fileExists = exists(targetPath);
+   const shouldWriteFile = override || !fileExists;
+ 
+-  if (shouldWriteFile && isDifferent(sourcePath, targetPath)) {
++  if (shouldWriteFile && isDifferent(sourcePath, targetPath) && !(config['exclude-files'] || []).some((e) => targetPath === join(pkgRoot,e))) {
+     copyFileSync(sourcePath, targetPath);
+     return targetPath;
+   }
+@@ -102,7 +105,8 @@ function replaceInFile(filePath, replaceFn) {
+ 
+ // eslint-disable-next-line complexity
+ module.exports = (packageRoot = require('./package-path')) => {
+-  const config = resolveConfig(packageRoot);
++  config = resolveConfig(packageRoot);
++  pkgRoot = packageRoot;
+   const testPath = join(packageRoot, 'test');
+   const scripts = config.scripts;
+ 
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+index 6e21c89..6e0f279 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+@@ -24,27 +24,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+   const scriptList = Object.entries(config.scripts);
+   const wireitList = Object.entries(config.wireit);
+ 
++  let excludeScripts = config['exclude-scripts'] || [];
++
++  excludeScripts.forEach((scriptName) => {
++    pjson.delete('scripts',scriptName)
++    pjson.delete('wireit',scriptName)
++  });
++
+   if (scriptList.length > 0) {
+     const scriptsChanged = [];
+ 
+     const scripts = pjson.get('scripts');
+     // eslint-disable-next-line prefer-const
+     for (let [scriptName, scriptCommand] of scriptList) {
+-      if (scripts[scriptName] !== scriptCommand) {
++      if (JSON.stringify(scripts[scriptName]) !== JSON.stringify(scriptCommand)) {
+         scripts[scriptName] = scriptCommand;
+         scriptsChanged.push(scriptName);
+       }
+     }
+-    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+     if (wireitList.length > 0) {
+       const wireit = pjson.get('wireit');
+       for (const [scriptName, scriptCommand] of wireitList) {
+-        if (wireit[scriptName] !== scriptCommand) {
++        if (JSON.stringify(wireit[scriptName]) !== JSON.stringify(scriptCommand)) {
+           wireit[scriptName] = scriptCommand;
+           scriptsChanged.push(scriptName);
+         }
+       }
+     }
++    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+   }
+ 
+   try {
+diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
+index 0e852c3..f4685fe 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
++++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
+@@ -26,6 +26,7 @@ const nonPjsonDependencyMinimums = new Map([
+   ['@oclif/plugin-command-snapshot', '^4.0.2'],
+   ['eslint-plugin-sf-plugin', '^1.15.6'],
+   ['oclif', '^3.14.0'],
++  ['c8', '^8.0.1'],
+ ]);
+ 
+ const getVersionNum = (ver) => (ver.startsWith('^') || ver.startsWith('~') ? ver.slice(1) : ver);
+@@ -84,7 +85,7 @@ module.exports = (projectPath) => {
+   const requiredDeps = [
+     'husky',
+     'pretty-quick',
+-    'nyc',
++    'c8',
+     'ts-node',
+     'mocha',
+     'sinon',
+@@ -92,8 +93,8 @@ module.exports = (projectPath) => {
+     'wireit',
+     'eslint-config-salesforce',
+     'eslint-config-salesforce-typescript',
+-    'eslint-config-salesforce-license',
+-  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []);
++    'eslint-plugin-sf-plugin',
++  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []).concat(scripts.docs ? ['typedoc', 'typedoc-plugin-missing-exports',] : []);
+ 
+   /**
+    * if dev-scripts sees these in devDeps, they'll be removed
+@@ -103,7 +104,6 @@ module.exports = (projectPath) => {
+     '@commitlint/cli',
+     '@commitlint/config-conventional',
+     'source-map-support',
+-    'typedoc',
+     'cz-conventional-changelog',
+     'lint-staged',
+     'tslint',
+@@ -111,8 +111,7 @@ module.exports = (projectPath) => {
+     '@types/mocha',
+     '@types/node',
+     '@types/sinon',
+-    'typedoc-plugin-missing-exports',
+-    'eslint-plugin-prettier',
++    'eslint-config-salesforce-license',
+   ].concat(scripts.format ? [] : ['prettier', '@salesforce/prettier-config']);
+   // removes go before adds because some are "added back"
+   bannedDeps.forEach((dep) => remove(dep));
+@@ -132,8 +131,16 @@ module.exports = (projectPath) => {
+ 
+   // eslint and all plugins must be installed on a local basis, regardless of if it uses a shared config.
+   // https://eslint.org/docs/user-guide/getting-started
+-  Object.entries(eslintPjson.devDependencies).forEach(([name, version]) => add(name, version));
+-  Object.entries(eslintHeaderPjson.devDependencies).forEach(([name, version]) => add(name, version));
++  Object.entries(eslintPjson.devDependencies).forEach(([dep, version]) => {
++    if (!bannedDeps.includes(dep) && !requiredDeps.includes(dep) && version) {
++      add(dep, version);
++    }
++  });
++  Object.entries(eslintHeaderPjson.devDependencies).forEach(([dep, version]) => {
++    if (!bannedDeps.includes(dep) && !requiredDeps.includes(dep) && version) {
++      add(dep, version);
++    }
++  });
+ 
+   // update any non-devDeps to their minimum versions if devScripts specifies one
+   const dependencies = pjson.get('dependencies');
