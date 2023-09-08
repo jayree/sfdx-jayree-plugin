@@ -121,10 +121,20 @@ index 44147cc..87197ec 100644
    "include": ["./**/*.ts"]
  }
 diff --git a/node_modules/@salesforce/dev-scripts/utils/package-json.js b/node_modules/@salesforce/dev-scripts/utils/package-json.js
-index c1d55c8..24ee631 100644
+index c1d55c8..a33594b 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/package-json.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/package-json.js
-@@ -41,6 +41,7 @@ class PackageJson {
+@@ -25,6 +25,9 @@ class PackageJson {
+     if (this.contents.scripts) {
+       this.contents.scripts = orderMap(this.contents.scripts);
+     }
++    if (this.contents.wireit) {
++      this.contents.wireit = orderMap(this.contents.wireit);
++    }
+     if (this.contents.devDependencies) {
+       this.contents.devDependencies = orderMap(this.contents.devDependencies);
+     }
+@@ -41,6 +44,7 @@ class PackageJson {
  
        writeFileSync(this.pjsonPath, pjson);
        log(`wrote changes to ${this.pjsonPath}`, 1);
@@ -132,8 +142,27 @@ index c1d55c8..24ee631 100644
      }
    }
  
+@@ -53,6 +57,18 @@ class PackageJson {
+     }
+     return this.contents[name];
+   }
++
++  delete(name, value) {
++    if (!name) {
++      throw new Error('property name is required');
++    }
++    if (!value) {
++      throw new Error('property value is required');
++    }
++    if (this.contents[name][value]) {
++      delete this.contents[name][value];
++    }
++  }
+ }
+ 
+ module.exports = PackageJson;
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index 769dbfe..6ac102e 100644
+index 7ed2274..6ee18af 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 @@ -21,7 +21,7 @@ const PACKAGE_DEFAULTS = {
@@ -203,15 +232,19 @@ index 769dbfe..6ac102e 100644
    }
  
    // Allow users to override certain scripts
-@@ -151,6 +151,8 @@ const resolveConfig = (path) => {
-   // Remove excluded items
-   excludeScripts.forEach((scriptName) => {
-     delete config.scripts[scriptName];
-+    delete config.wireit[scriptName];
-+    config.wireit.test.dependencies = config.wireit.test.dependencies.filter(scriptName => !config['exclude-scripts'].includes(scriptName));
+@@ -155,6 +155,12 @@ const resolveConfig = (path) => {
+     delete config.wireit[scriptName];
    });
  
++  Object.keys(config.wireit).forEach((scriptName) => {
++    if (config.wireit[scriptName].dependencies) {
++      config.wireit[scriptName].dependencies = config.wireit[scriptName].dependencies.filter(depScriptName => !config['exclude-scripts']?.includes(depScriptName));
++    }
++  })
++
    resolvedConfigs[path] = config;
+   return config;
+ };
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 index b7f7d10..3c47746 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
@@ -245,15 +278,57 @@ index b7f7d10..3c47746 100644
    const testPath = join(packageRoot, 'test');
    const scripts = config.scripts;
  
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+index 6e21c89..6e0f279 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+@@ -24,27 +24,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+   const scriptList = Object.entries(config.scripts);
+   const wireitList = Object.entries(config.wireit);
+ 
++  let excludeScripts = config['exclude-scripts'] || [];
++
++  excludeScripts.forEach((scriptName) => {
++    pjson.delete('scripts',scriptName)
++    pjson.delete('wireit',scriptName)
++  });
++
+   if (scriptList.length > 0) {
+     const scriptsChanged = [];
+ 
+     const scripts = pjson.get('scripts');
+     // eslint-disable-next-line prefer-const
+     for (let [scriptName, scriptCommand] of scriptList) {
+-      if (scripts[scriptName] !== scriptCommand) {
++      if (JSON.stringify(scripts[scriptName]) !== JSON.stringify(scriptCommand)) {
+         scripts[scriptName] = scriptCommand;
+         scriptsChanged.push(scriptName);
+       }
+     }
+-    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+     if (wireitList.length > 0) {
+       const wireit = pjson.get('wireit');
+       for (const [scriptName, scriptCommand] of wireitList) {
+-        if (wireit[scriptName] !== scriptCommand) {
++        if (JSON.stringify(wireit[scriptName]) !== JSON.stringify(scriptCommand)) {
+           wireit[scriptName] = scriptCommand;
+           scriptsChanged.push(scriptName);
+         }
+       }
+     }
++    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+   }
+ 
+   try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index b4111d4..a8c7660 100644
+index 0e852c3..f4685fe 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -26,6 +26,7 @@ const nonPjsonDependencyMinimums = new Map([
    ['@oclif/plugin-command-snapshot', '^4.0.2'],
    ['eslint-plugin-sf-plugin', '^1.15.6'],
-   ['oclif', '^3.9.0'],
-+  ['c8', '^7.14.0'],
+   ['oclif', '^3.14.0'],
++  ['c8', '^8.0.1'],
  ]);
  
  const getVersionNum = (ver) => (ver.startsWith('^') || ver.startsWith('~') ? ver.slice(1) : ver);
