@@ -546,15 +546,15 @@
     tslib "^2.6.1"
     wrap-ansi "^8.1.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.20":
-  version "1.3.20"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.20.tgz#06b6c6e78d573ed4d0f8a0e6ad4449ee3a920302"
-  integrity sha512-tW44gcWETxGyTkIh/JNAmwPZIomvsA2rpTwe8hZlbNXBM7emw+Zfb6VKmOVLXLb0dcOuEsq/Aext5m23TYou1Q==
+"@jayree/sfdx-plugin-prettier@^1.3.21":
+  version "1.3.21"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.21.tgz#e5afa92afcf62943c9030695d616401aaa7e63ed"
+  integrity sha512-gryhBGNVi1BMIBjevwpxzMahD63nniOBfWu7NFSGRCKoUx3ovxddYUmOaXifMApydAUIdyoSR5ZqFfH5pAvH6Q==
   dependencies:
     "@jayree/changelog" "^1.1.5"
     "@prettier/plugin-xml" "^3.2.0"
-    "@salesforce/sf-plugins-core" "^3.1.20"
-    "@salesforce/source-deploy-retrieve" "^9.7.8"
+    "@salesforce/sf-plugins-core" "^3.1.22"
+    "@salesforce/source-deploy-retrieve" "^9.7.9"
     cli-progress "^3.12.0"
     debug "^4.3.4"
     fs-extra "^11.1.1"
@@ -808,7 +808,7 @@
     supports-color "^8.1.1"
     tslib "^2"
 
-"@oclif/core@^2.11.10", "@oclif/core@^2.11.4", "@oclif/core@^2.15.0", "@oclif/core@^2.9.3":
+"@oclif/core@^2.11.4", "@oclif/core@^2.15.0", "@oclif/core@^2.9.3":
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.15.0.tgz#f27797b30a77d13279fba88c1698fc34a0bd0d2a"
   integrity sha512-fNEMG5DzJHhYmI3MgpByTvltBOMyFcnRIUMxbiz2ai8rhaYgaTHMG3Q38HcosfIvtw9nCjxpcQtC8MN8QtVCcA==
@@ -842,12 +842,12 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/plugin-help@^5.2.14", "@oclif/plugin-help@^5.2.18":
-  version "5.2.18"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.18.tgz#6fa44c1bda0b9d59af4c981bceaa6fb4491cb1fa"
-  integrity sha512-0JjupXUuDzlI0Ojj7/YL42btfUNuvSgZxdi8ZfeYt/uhC1/zvsSkO29KjffPxKEnbhr6jrkjOgy/Vly5JquYLg==
+"@oclif/plugin-help@^5.2.14", "@oclif/plugin-help@^5.2.19":
+  version "5.2.19"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-5.2.19.tgz#be8019730c6540eefeb30e95fe13ff0b91364bf0"
+  integrity sha512-gf6/dFtzMJ8RA4ovlBCBGJsZsd4jPXhYWJho+Gh6KmA+Ev9LupoExbE0qT+a2uHJyHEvIg4uX/MBW3qdERD/8g==
   dependencies:
-    "@oclif/core" "^2.11.10"
+    "@oclif/core" "^2.15.0"
 
 "@oclif/plugin-not-found@^2.3.32":
   version "2.3.32"
@@ -1085,7 +1085,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.0.tgz#14505ebad2fb2d4f7b14837545d662766d293561"
   integrity sha512-SwhDTLucj/GRbPpxlEoDZeqlX22o+G6fiebTXTu1cZKmd1oE0W2L7SlTTgJnWck8bhTeBIgQi9cpD8c2t5ISKA==
 
-"@salesforce/sf-plugins-core@^3.1.20", "@salesforce/sf-plugins-core@^3.1.22":
+"@salesforce/sf-plugins-core@^3.1.22":
   version "3.1.22"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-3.1.22.tgz#caade6439366fe9a28c819bd3b8fef0cbb2a712a"
   integrity sha512-t8IvC+8LLzCU+skT3/FGjpkB6qm+VaL3uCbwrqgmZivzQc5tpRQpVcW9YbTgJUgkQrD58yurbkwX/jA9hMR6yg==
@@ -8544,10 +8544,10 @@ widest-line@^3.1.0:
   dependencies:
     string-width "^4.0.0"
 
-wireit@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/wireit/-/wireit-0.11.0.tgz#2229d77de03d1e046648df774832c32b37d30f5f"
-  integrity sha512-s0/bgBZ6y65BfxpCm7YA/x6QokPTQrA4mAN110FCxvvp4MotAupY8f/RH8f6tGfz74zfJafxEqHo/NyoMc0pNQ==
+wireit@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/wireit/-/wireit-0.13.0.tgz#7187478f514a72fb75b7276a16a5fe7cf3d7d0d6"
+  integrity sha512-J8+/kWDBLyDTM2isjEFf9nQZxhuXkgICVt6Nntl9ZyZSAjo/P+nxocwKX6D1jUFfT3TDPStUftsV6OYpx149Ow==
   dependencies:
     braces "^3.0.2"
     chokidar "^3.5.3"
