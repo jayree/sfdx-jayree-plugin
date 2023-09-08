@@ -524,14 +524,14 @@
     isomorphic-git "1.24.5"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.7":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.7.tgz#3613e04763d92498ab4cfd4ba24f24495e42dab2"
-  integrity sha512-ly4F46WH/VN3vwofzeWon7GroKli14dEBwzPNKzNIm1mmpxd0xy3+tZ5jURH7X/l84WlxWnPJb55JLSp5hUCnQ==
+"@jayree/sfdx-plugin-org@^1.2.8":
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.8.tgz#74d9a72a2b733513c19015b53b6669870f1d2181"
+  integrity sha512-hLunMMLrwZSlzze5MLni1a/MWLGgr5ueUYCxxZsjt69+thsv3zvhDws4NsRVNwaOKQ9Tsi+s4difma3gyfLLlA==
   dependencies:
     "@jayree/changelog" "^1.1.5"
-    "@salesforce/sf-plugins-core" "^3.1.20"
-    "@salesforce/source-deploy-retrieve" "^9.7.8"
+    "@salesforce/sf-plugins-core" "^3.1.22"
+    "@salesforce/source-deploy-retrieve" "^9.7.9"
     "@salesforce/ts-types" "^2.0.7"
     cli-truncate "^3.1.0"
     debug "^4.3.4"
@@ -1155,10 +1155,10 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^9.7.8":
-  version "9.7.8"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.8.tgz#34119f33cf93b3991e2dbf33a0f223bb4ea57f1e"
-  integrity sha512-bDmn7ccYfcnmj2Meotk/TABcleVffK/cBiefdKrND+8eKKLWoZpb8VPCgoVaiShvOmKIy0tqrZ1oEF4AzFcn9g==
+"@salesforce/source-deploy-retrieve@^9.7.8", "@salesforce/source-deploy-retrieve@^9.7.9":
+  version "9.7.9"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.9.tgz#ec24124950ec1365ad48b38bc0b8898b9eceb524"
+  integrity sha512-lp166IZX3Me8I2YUIZS4uAgKLnbGp1MdbAUlpUL5VhAQBh7dNuPcjDFSueTEVG/4vfGPkM4s+65WMi2sJfx8pg==
   dependencies:
     "@salesforce/core" "^5.2.1"
     "@salesforce/kit" "^3.0.11"
