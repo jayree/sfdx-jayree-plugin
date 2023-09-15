@@ -524,10 +524,10 @@
     isomorphic-git "1.24.5"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.8":
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.8.tgz#74d9a72a2b733513c19015b53b6669870f1d2181"
-  integrity sha512-hLunMMLrwZSlzze5MLni1a/MWLGgr5ueUYCxxZsjt69+thsv3zvhDws4NsRVNwaOKQ9Tsi+s4difma3gyfLLlA==
+"@jayree/sfdx-plugin-org@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.9.tgz#591cf374b4aab462210684100b81afb3b8999a34"
+  integrity sha512-+MPyWjDknvQi3UiPLxMSZ/SK2CNh04BAspFhHPGOpWUSpHy59XCJ7fJVQejnT7dNN/EKvpONrHeEgSIipcGSRQ==
   dependencies:
     "@jayree/changelog" "^1.1.5"
     "@salesforce/sf-plugins-core" "^3.1.22"
@@ -541,7 +541,7 @@
     is-wsl "^3.0.0"
     listr2 "^6.6.1"
     log-update "^5.0.1"
-    playwright-chromium "^1.37.1"
+    playwright-chromium "^1.38.0"
     tabletojson "^2.0.7"
     tslib "^2.6.1"
     wrap-ansi "^8.1.0"
@@ -6793,17 +6793,17 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.37.1:
-  version "1.37.1"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.37.1.tgz#490542720285ccf36b35683570e076d485000ed2"
-  integrity sha512-UMbu6AtNe3vb36VzEoHVTnsBKaPMuHJhzZm5zpBM2DeLN8A/+gTQRQyfSZzuktSSDU22acMKGvc8WU6NIjBFmQ==
+playwright-chromium@^1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.38.0.tgz#a84525e902969d5f6bf182dfb1ef24047c83b067"
+  integrity sha512-RoqqEMsBwOh7yfnb8hL/QEjd7O767GTqDLL6ZOg8tJtMoHc/66GS6Dl3ODWhLxrkAk6gVkprB0H1RYHnT9F7dg==
   dependencies:
-    playwright-core "1.37.1"
+    playwright-core "1.38.0"
 
-playwright-core@1.37.1:
-  version "1.37.1"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.37.1.tgz#cb517d52e2e8cb4fa71957639f1cd105d1683126"
-  integrity sha512-17EuQxlSIYCmEMwzMqusJ2ztDgJePjrbttaefgdsiqeLWidjYz9BxXaTaZWxH1J95SHGk6tjE+dwgWILJoUZfA==
+playwright-core@1.38.0:
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.38.0.tgz#cb8e135da1c0b1918b070642372040ed9aa7009a"
+  integrity sha512-f8z1y8J9zvmHoEhKgspmCvOExF2XdcxMW8jNRuX4vkQFrzV4MlZ55iwb5QeyiFQgOFCUolXiRHgpjSEnqvO48g==
 
 preferred-pm@^3.0.3:
   version "3.0.3"
