@@ -1,3 +1,10 @@
+## [4.8.29](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.28...v4.8.29) (2023-09-21)
+
+
+### Bug Fixes
+
+* add oclif.lock ([560053d](https://github.com/jayree/sfdx-jayree-plugin/commit/560053d3187d5e0445f73a930890423514c888f8))
+
 ## [4.8.28](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.27...v4.8.28) (2023-09-15)
 
 
