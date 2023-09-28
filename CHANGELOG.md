@@ -1,3 +1,10 @@
+## [4.8.31](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.30...v4.8.31) (2023-09-28)
+
+
+### Bug Fixes
+
+* **deps:** bump get-func-name from 2.0.0 to 2.0.2 ([#1010](https://github.com/jayree/sfdx-jayree-plugin/issues/1010)) ([5438e9e](https://github.com/jayree/sfdx-jayree-plugin/commit/5438e9ef8bed43a7c1b7bf7f03e23ffa852624bf))
+
 ## [4.8.30](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.29...v4.8.30) (2023-09-22)
 
 
