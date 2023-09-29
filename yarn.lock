@@ -991,34 +991,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^5.2.0", "@salesforce/core@^5.2.7":
-  version "5.2.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.2.9.tgz#812478061d766cdff28f7a0e8abefc9de562465a"
-  integrity sha512-ZWNxHnCPGT1pcJe1bjeRjd8VAeHELK4fftt/2WO+ZsPFHZnzmdowz2Th407v04et+uIzL0Z6+qOaRY/bZr5tLA==
-  dependencies:
-    "@salesforce/kit" "^3.0.11"
-    "@salesforce/schemas" "^1.6.0"
-    "@salesforce/ts-types" "^2.0.7"
-    "@types/semver" "^7.5.1"
-    ajv "^8.12.0"
-    change-case "^4.1.2"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.27"
-    jsonwebtoken "9.0.2"
-    jszip "3.10.1"
-    pino "^8.15.1"
-    pino-abstract-transport "^1.0.0"
-    pino-pretty "^10.2.0"
-    proper-lockfile "^4.1.2"
-    semver "^7.5.4"
-    ts-retry-promise "^0.7.1"
-
-"@salesforce/core@^5.2.9":
-  version "5.2.10"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.2.10.tgz#7f4824ddcef108b6ccec24434260c620de39012e"
-  integrity sha512-Xj1QRajmHWgl0ahivjKFGKJlGXwe9yFOZ3PwF91qEupGbO74XrCJ8OUM7EVlk53LKy9LlPZQFuy2ATX9MyEDKA==
+"@salesforce/core@^5.2.0", "@salesforce/core@^5.2.10", "@salesforce/core@^5.2.9":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.3.1.tgz#93c49760faa7b503bbfea8376d80a66815065e4a"
+  integrity sha512-LEQ3Yp7GxexsGXxT85Pp4AgOzzqY9Y3kol8ByVsHpHGvs8XLRbKl44IPxTXBdMB2roFM+Iosd46i0KbTuh2MQg==
   dependencies:
     "@salesforce/kit" "^3.0.11"
     "@salesforce/schemas" "^1.6.0"
@@ -1432,7 +1408,7 @@
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.0.tgz#591c1ce3a702c45ee15f47a42ade72c2fd78978a"
   integrity sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==
 
-"@types/semver@^7.5.1", "@types/semver@^7.5.2":
+"@types/semver@^7.5.2":
   version "7.5.2"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.5.2.tgz#31f6eec1ed7ec23f4f05608d3a2d381df041f564"
   integrity sha512-7aqorHYgdNO4DM36stTiGO3DvKoex9TQRwsJU6vMaFGyqpBA1MNZkz+PG3gaNUPpTAOYhT1WR7M1JyA3fbS9Cw==
@@ -3537,12 +3513,12 @@ eslint-plugin-prettier@^5.0.0:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.8.5"
 
-eslint-plugin-sf-plugin@^1.16.5:
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.5.tgz#41a9153e270625776e2a05ef6add3f27090b091f"
-  integrity sha512-W3E9KtClPHTZajCInxryxWS0tnNwg1ER4/W7ZRJj6heX4XLJ9LHu8x519g576urSuQx03i9APGGOh1mFeAgfgw==
+eslint-plugin-sf-plugin@^1.16.7:
+  version "1.16.7"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.7.tgz#dc3e7c451fea0cf642b7c45ec0c6d9ee1e53ae54"
+  integrity sha512-GS0/ylGA7ksr0aBB1DSVxW9NOu0QKFq/e0yJ/gSmZ33VP6Sx6LpwJ8uE2c3IY0KWLQ4D7zOR+jOJnxwjVlMGtA==
   dependencies:
-    "@salesforce/core" "^5.2.7"
+    "@salesforce/core" "^5.2.10"
     "@typescript-eslint/utils" "^5.59.11"
 
 eslint-scope@^5.1.1:
