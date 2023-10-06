@@ -991,31 +991,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^5.2.0", "@salesforce/core@^5.2.10":
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.3.1.tgz#93c49760faa7b503bbfea8376d80a66815065e4a"
-  integrity sha512-LEQ3Yp7GxexsGXxT85Pp4AgOzzqY9Y3kol8ByVsHpHGvs8XLRbKl44IPxTXBdMB2roFM+Iosd46i0KbTuh2MQg==
-  dependencies:
-    "@salesforce/kit" "^3.0.11"
-    "@salesforce/schemas" "^1.6.0"
-    "@salesforce/ts-types" "^2.0.7"
-    "@types/semver" "^7.5.2"
-    ajv "^8.12.0"
-    change-case "^4.1.2"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.27"
-    jsonwebtoken "9.0.2"
-    jszip "3.10.1"
-    pino "^8.15.1"
-    pino-abstract-transport "^1.0.0"
-    pino-pretty "^10.2.0"
-    proper-lockfile "^4.1.2"
-    semver "^7.5.4"
-    ts-retry-promise "^0.7.1"
-
-"@salesforce/core@^5.3.1":
+"@salesforce/core@^5.2.0", "@salesforce/core@^5.2.10", "@salesforce/core@^5.3.1":
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.3.4.tgz#bbf87238a4a6f31c07c8d01d4913c552fe0d0443"
   integrity sha512-FV5QG0+W/15IaWtaZCxzAZ1K6bonlzkv5v9vuicH2VeEltruGUYYf8Bq7hkoul1xHk3Kl4+9cXx7aGp8Z0kGzQ==
@@ -3528,12 +3504,12 @@ eslint-plugin-prettier@^5.0.0:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.8.5"
 
-eslint-plugin-sf-plugin@^1.16.7:
-  version "1.16.7"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.7.tgz#dc3e7c451fea0cf642b7c45ec0c6d9ee1e53ae54"
-  integrity sha512-GS0/ylGA7ksr0aBB1DSVxW9NOu0QKFq/e0yJ/gSmZ33VP6Sx6LpwJ8uE2c3IY0KWLQ4D7zOR+jOJnxwjVlMGtA==
+eslint-plugin-sf-plugin@^1.16.8:
+  version "1.16.8"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.8.tgz#3509bbd79aceae106eafbef0f4dbbcdb2fc90154"
+  integrity sha512-vPnJgZcAiqIHw1UJSfaA+aIrJXKfZxKurfxkn+WIU3LWJBPkp/nKOYEAXURcH9Qte3PH4J7WgkQXfJY09Hs9Yg==
   dependencies:
-    "@salesforce/core" "^5.2.10"
+    "@salesforce/core" "^5.3.1"
     "@typescript-eslint/utils" "^5.59.11"
 
 eslint-scope@^5.1.1:
