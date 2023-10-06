@@ -524,14 +524,14 @@
     isomorphic-git "1.24.5"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.12":
-  version "1.2.12"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.12.tgz#dbd3115e5c19f1af197272c3be3a59168d3a3d8a"
-  integrity sha512-fjs16hjqi7+F9zX771SutPdttdyH/dtFsrloq/393RCAlj+92KQk4WPYQ7RO8rDGlCYs090vjJWHJNGleteIGA==
+"@jayree/sfdx-plugin-org@^1.2.13":
+  version "1.2.13"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.13.tgz#708626135e53aa5497e91e0a122f4c24265edb63"
+  integrity sha512-IdqCP0cTNtRH51X8cFmvsos33905m61JTW6QVzdLfrhksZHWQXRimAUpkzrXAamMwaCAdZhgvj8uJfGiuXTshw==
   dependencies:
-    "@jayree/changelog" "^1.1.5"
+    "@jayree/changelog" "^1.1.6"
     "@salesforce/sf-plugins-core" "^3.1.25"
-    "@salesforce/source-deploy-retrieve" "^9.7.18"
+    "@salesforce/source-deploy-retrieve" "^9.7.22"
     "@salesforce/ts-types" "^2.0.8"
     cli-truncate "^3.1.0"
     debug "^4.3.4"
