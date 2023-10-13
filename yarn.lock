@@ -496,7 +496,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.1.6":
+"@jayree/changelog@^1.1.6", "@jayree/changelog@^1.1.7":
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.1.7.tgz#3b2175e25b8d2624c9214a7776925140f813fd8a"
   integrity sha512-YxTlf2c5uoqrIcEg7AwNT/Pn60h5RSbqK15PhElTX5d+R7/SHle2OV1ZBmlJR/S3gUFSY0MILcUpYJa6eeiuGg==
@@ -508,14 +508,15 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.30":
-  version "3.1.30"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.30.tgz#07a393e583a6919a994940212abe3838275f7c4d"
-  integrity sha512-S4mKSPKQOdvLdiYwCO88oDd1hMFF9AFd76Xx6fJYVdYrip9d4DtNQcvh3OKe7R/VWpPFTtgdbefoUg+6nyTQWw==
+"@jayree/sfdx-plugin-manifest@^3.1.31":
+  version "3.1.31"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.31.tgz#e0e7d2be61e4b9edc2a4b2ad28ab754fe19e8ec2"
+  integrity sha512-41MIZUaGC4d8ozOnwGajjKUhLzp6hP917jpxxDBfXnVz6ujkorjIDc2dyptzGsjNAqznGU/ZxLdvhieOZCh/NA==
   dependencies:
-    "@jayree/changelog" "^1.1.6"
-    "@salesforce/sf-plugins-core" "^3.1.25"
-    "@salesforce/source-deploy-retrieve" "^9.7.22"
+    "@jayree/changelog" "^1.1.7"
+    "@oclif/core" "^3.0.9"
+    "@salesforce/sf-plugins-core" "^4.0.0"
+    "@salesforce/source-deploy-retrieve" "^9.7.24"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.3.2"
@@ -842,7 +843,7 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^3.0.4", "@oclif/core@^3.0.9":
+"@oclif/core@^3.0.0", "@oclif/core@^3.0.4", "@oclif/core@^3.0.9":
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.9.tgz#655fcb2bf675b4ef0f673f2c4b39962b2c71cba8"
   integrity sha512-rwM6MWQ47W8U0++aG+qK6aATDqBl5sn5nkUqR6YmnJ4clR455gMyjUnzEqhwlzw+YfDf2MBhxC8wDlhPTImfvQ==
@@ -1135,16 +1136,28 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^9.7.20", "@salesforce/source-deploy-retrieve@^9.7.22":
-  version "9.7.22"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.22.tgz#22462311640cc34b46b66d06b6180f261d656891"
-  integrity sha512-RsAanMSmgEuQar9rPH/Qp/rBt3q9WCyrBdYLZW+oewswoDagFCkHdiwLOkzuk6F0my61EEglDK5OQm2MBEu5Yg==
+"@salesforce/sf-plugins-core@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-4.0.0.tgz#587d8131531b7a53392d73bc4d6d0b0fd75b7e08"
+  integrity sha512-rg0HeqJ4GsyJjow+Rs7icicm7c3Tp43XmwfVUurN/8mKdtG8vR0d5DmZapKP7+r45Mqtlgpkzp2fSjr5fjadNg==
+  dependencies:
+    "@oclif/core" "^3.0.0"
+    "@salesforce/core" "^5.3.1"
+    "@salesforce/kit" "^3.0.13"
+    "@salesforce/ts-types" "^2.0.7"
+    chalk "^4"
+    inquirer "^8.2.5"
+
+"@salesforce/source-deploy-retrieve@^9.7.20", "@salesforce/source-deploy-retrieve@^9.7.22", "@salesforce/source-deploy-retrieve@^9.7.24":
+  version "9.7.24"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.7.24.tgz#6a200b830311b0db08a86026ece98c734d56f8c2"
+  integrity sha512-nkP9KgzuCoV6LtdDxgxt7KRnoQ6ZS12DJgXErCBXm7Swmr0dnbo1LhxrH05C4UFFe0JuvSta+u+Oor8jxSGaCQ==
   dependencies:
     "@salesforce/core" "^5.3.1"
     "@salesforce/kit" "^3.0.11"
     "@salesforce/ts-types" "^2.0.7"
     fast-levenshtein "^3.0.0"
-    fast-xml-parser "^4.2.7"
+    fast-xml-parser "^4.3.2"
     got "^11.8.6"
     graceful-fs "^4.2.11"
     ignore "^5.2.4"
@@ -3770,7 +3783,7 @@ fast-safe-stringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.1.1.tgz#c406a83b6e70d9e35ce3b30a81141df30aeba884"
   integrity sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==
 
-fast-xml-parser@^4.2.5, fast-xml-parser@^4.2.7, fast-xml-parser@^4.3.2:
+fast-xml-parser@^4.2.5, fast-xml-parser@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.3.2.tgz#761e641260706d6e13251c4ef8e3f5694d4b0d79"
   integrity sha512-rmrXUXwbJedoXkStenj1kkljNF7ugn5ZjR9FJcwmCfcCbtOMDghPajbc+Tck6vE6F5XsDmx+Pr2le9fw8+pXBg==
