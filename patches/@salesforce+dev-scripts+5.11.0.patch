@@ -279,10 +279,10 @@ index b7f7d10..3c47746 100644
    const scripts = config.scripts;
  
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-index 6e21c89..6e0f279 100644
+index 9519d5c..2d9dcb6 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-@@ -24,27 +24,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -26,27 +26,34 @@ module.exports = (packageRoot = require('./package-path')) => {
    const scriptList = Object.entries(config.scripts);
    const wireitList = Object.entries(config.wireit);
  
@@ -321,13 +321,13 @@ index 6e21c89..6e0f279 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 0e852c3..f4685fe 100644
+index 7d01c20..0552e22 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -26,6 +26,7 @@ const nonPjsonDependencyMinimums = new Map([
    ['@oclif/plugin-command-snapshot', '^4.0.2'],
    ['eslint-plugin-sf-plugin', '^1.15.6'],
-   ['oclif', '^3.14.0'],
+   ['oclif', '^3.16.0'],
 +  ['c8', '^8.0.1'],
  ]);
  
