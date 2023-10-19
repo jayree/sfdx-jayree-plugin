@@ -1,3 +1,10 @@
+## [4.8.35](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.34...v4.8.35) (2023-10-19)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/traverse from 7.21.4 to 7.23.2 ([#1048](https://github.com/jayree/sfdx-jayree-plugin/issues/1048)) ([bfc6344](https://github.com/jayree/sfdx-jayree-plugin/commit/bfc6344bd0976ecaeb6eea7ead81cda82349a83c))
+
 ## [4.8.34](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.33...v4.8.34) (2023-10-13)
 
 
