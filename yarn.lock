@@ -923,10 +923,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^3.0.0", "@oclif/core@^3.0.4", "@oclif/core@^3.0.9":
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.9.tgz#655fcb2bf675b4ef0f673f2c4b39962b2c71cba8"
-  integrity sha512-rwM6MWQ47W8U0++aG+qK6aATDqBl5sn5nkUqR6YmnJ4clR455gMyjUnzEqhwlzw+YfDf2MBhxC8wDlhPTImfvQ==
+"@oclif/core@^3.0.0", "@oclif/core@^3.0.4", "@oclif/core@^3.0.9", "@oclif/core@^3.2.1":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.5.0.tgz#ce12e264f6eab051391489bf4df0340a133fc3fb"
+  integrity sha512-u1X8KguaIoLClbTWgnvXeVb6bu+GUCbmrY/1e1E6Xl3P8zw1cj8nm57RkvBnAHLVixnZ+4maVJrJ2vRVro/S+g==
   dependencies:
     ansi-escapes "^4.3.2"
     ansi-styles "^4.3.0"
@@ -935,7 +935,7 @@
     clean-stack "^3.0.1"
     cli-progress "^3.12.0"
     debug "^4.3.4"
-    ejs "^3.1.8"
+    ejs "^3.1.9"
     get-package-type "^0.1.0"
     globby "^11.1.0"
     hyperlinker "^1.0.0"
@@ -961,12 +961,12 @@
   dependencies:
     "@oclif/core" "^2.15.0"
 
-"@oclif/plugin-help@^6.0.2":
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.2.tgz#f9cf0ac668e5ffabdebec33d374350495e981830"
-  integrity sha512-rHe19ySqU+sIA1qJYQrnB8Jh+LvdMxIN2cIQPSsMobhdOThW5R7jRpMDe9iZwO+okQmvXiP/gIx/vEnWST33HQ==
+"@oclif/plugin-help@^6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.3.tgz#6c267215a8e1d6cc07aac2be8e9cc50432a839bb"
+  integrity sha512-4oJ/rqf9kIzNyNZ4R5dmOXSC5S8kKxn2NHMW2kRIBHzQBg2R0RCrY7aHPHqFWCArPUk4K+YlRyhsiSgdslkV4A==
   dependencies:
-    "@oclif/core" "^3.0.9"
+    "@oclif/core" "^3.2.1"
 
 "@oclif/plugin-not-found@^2.3.32":
   version "2.3.32"
@@ -3259,7 +3259,7 @@ ecdsa-sig-formatter@1.0.11:
   dependencies:
     safe-buffer "^5.0.1"
 
-ejs@^3.1.8:
+ejs@^3.1.8, ejs@^3.1.9:
   version "3.1.9"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-3.1.9.tgz#03c9e8777fe12686a9effcef22303ca3d8eeb361"
   integrity sha512-rC+QVNMJWv+MtPgkt0y+0rVEIdbtxVADApW9JXrUVlzHetgcyczP/E7DJmWJ4fJCZF2cPcBk0laWO9ZHMG3DmQ==
