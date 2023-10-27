@@ -1108,31 +1108,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^5.3.1", "@salesforce/core@^5.3.3", "@salesforce/core@^5.3.9":
-  version "5.3.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.3.9.tgz#1c8f793ce1a0798c5c7767a5a370a5926d3298de"
-  integrity sha512-/HX0PiXq3Sjc5eVJ0EaYetcDGsKU9O9Nj8jFGw5qYlITx8zogfxc0j07liH67tQXS1KbTysYoj/MQ2zbHSNkPA==
-  dependencies:
-    "@salesforce/kit" "^3.0.13"
-    "@salesforce/schemas" "^1.6.0"
-    "@salesforce/ts-types" "^2.0.8"
-    "@types/semver" "^7.5.3"
-    ajv "^8.12.0"
-    change-case "^4.1.2"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.27"
-    jsonwebtoken "9.0.2"
-    jszip "3.10.1"
-    pino "^8.15.6"
-    pino-abstract-transport "^1.0.0"
-    pino-pretty "^10.2.3"
-    proper-lockfile "^4.1.2"
-    semver "^7.5.4"
-    ts-retry-promise "^0.7.1"
-
-"@salesforce/core@^5.3.10":
+"@salesforce/core@^5.3.1", "@salesforce/core@^5.3.10", "@salesforce/core@^5.3.3":
   version "5.3.14"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-5.3.14.tgz#a5a3d02be6727492469ed39b23eaf3c56675496b"
   integrity sha512-IFmLZCpFBcreTFEaH+Rn4BozUpFx3vvf43yWuXWdOvALz4ad18yU3Kzk9GxwzablrQxPFmJ43ClQG10dmoh/ig==
@@ -1220,11 +1196,6 @@
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@salesforce/prettier-config/-/prettier-config-0.0.3.tgz#ba648d4886bb38adabe073dbea0b3a91b3753bb0"
   integrity sha512-hYOhoPTCSYMDYn+U1rlEk16PoBeAJPkrdg4/UtAzupM1mRRJOwEPMG1d7U8DxJFKuXW3DMEYWr2MwAIBDaHmFg==
-
-"@salesforce/schemas@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.0.tgz#14505ebad2fb2d4f7b14837545d662766d293561"
-  integrity sha512-SwhDTLucj/GRbPpxlEoDZeqlX22o+G6fiebTXTu1cZKmd1oE0W2L7SlTTgJnWck8bhTeBIgQi9cpD8c2t5ISKA==
 
 "@salesforce/schemas@^1.6.1":
   version "1.6.1"
@@ -3644,12 +3615,12 @@ eslint-plugin-prettier@^5.0.1:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.8.5"
 
-eslint-plugin-sf-plugin@^1.16.11:
-  version "1.16.11"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.11.tgz#cc30f8b3ac42d1ca3b33bec9b9d0d0eba1913e37"
-  integrity sha512-BjqiSahGVuYTVpbk4snbniIDQZeZIZzbnDpiwkfliTQKK/FOqzoDPPOEMHNGT9cVXQBC1xKkCedWYHNpTPAbaQ==
+eslint-plugin-sf-plugin@^1.16.12:
+  version "1.16.12"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.16.12.tgz#053e27f75df4e5b2d350c43aca2ddcfee4239109"
+  integrity sha512-iW7kFN7qEx9iqhRUcWNUqO2jkdRDX8m/wOfLXFkoq9b+6QuOnhmV4sD5G6GUvPrKP9Sv7A/Ke2hQdXT8wxfm8Q==
   dependencies:
-    "@salesforce/core" "^5.3.9"
+    "@salesforce/core" "^5.3.10"
     "@typescript-eslint/utils" "^5.59.11"
 
 eslint-scope@^5.1.1:
@@ -5266,32 +5237,6 @@ jsesc@^2.5.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
-
-jsforce@^2.0.0-beta.27:
-  version "2.0.0-beta.27"
-  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-2.0.0-beta.27.tgz#ba822b18b77bea4529491060a9b07bc1009735ac"
-  integrity sha512-d9dDWWeHwayRKPo8FJBAIUyk8sNXGSHwdUjR6al3yK0YKci27Jc1XfNaQTxEAuymHQJVaCb1gxTKqmA4uznFdQ==
-  dependencies:
-    "@babel/runtime" "^7.12.5"
-    "@babel/runtime-corejs3" "^7.12.5"
-    "@types/node" "^12.19.9"
-    abort-controller "^3.0.0"
-    base64url "^3.0.1"
-    commander "^4.0.1"
-    core-js "^3.6.4"
-    csv-parse "^4.8.2"
-    csv-stringify "^5.3.4"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    fs-extra "^8.1.0"
-    https-proxy-agent "^5.0.0"
-    inquirer "^7.0.0"
-    multistream "^3.1.0"
-    node-fetch "^2.6.1"
-    open "^7.0.0"
-    regenerator-runtime "^0.13.3"
-    strip-ansi "^6.0.0"
-    xml2js "^0.5.0"
 
 jsforce@^2.0.0-beta.28:
   version "2.0.0-beta.28"
@@ -7034,23 +6979,6 @@ pino-std-serializers@^6.0.0:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-6.2.2.tgz#d9a9b5f2b9a402486a5fc4db0a737570a860aab3"
   integrity sha512-cHjPPsE+vhj/tnhCy/wiMh3M3z3h/j15zHQX+S9GkTBgqJuTuJzYJ4gUyACLhDaJ7kk9ba9iRDmbH2tJU03OiA==
-
-pino@^8.15.6:
-  version "8.16.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-8.16.0.tgz#2465012a1d11fa2e7a0545032f636e203990ae26"
-  integrity sha512-UUmvQ/7KTZt/vHjhRrnyS7h+J7qPBQnpG80V56xmIC+o9IqYmQOw/UIny9S9zYDfRBR0ClouCr464EkBMIT7Fw==
-  dependencies:
-    atomic-sleep "^1.0.0"
-    fast-redact "^3.1.1"
-    on-exit-leak-free "^2.1.0"
-    pino-abstract-transport v1.1.0
-    pino-std-serializers "^6.0.0"
-    process-warning "^2.0.0"
-    quick-format-unescaped "^4.0.3"
-    real-require "^0.2.0"
-    safe-stable-stringify "^2.3.1"
-    sonic-boom "^3.7.0"
-    thread-stream "^2.0.0"
 
 pino@^8.16.0:
   version "8.16.1"
