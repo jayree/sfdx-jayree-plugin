@@ -87,7 +87,7 @@ EXAMPLES
   $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.34/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.35/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree:manifest:generate`
 
@@ -123,7 +123,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.34/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.35/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree:manifest:git:diff`
 
@@ -205,7 +205,7 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.34/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.35/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree:org:configure`
 
@@ -351,7 +351,7 @@ ALIASES
   $ sfdx jayree:source:snapshot:compare
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/compare/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/compare/snapshot.ts)_
 
 ### `sfdx jayree:project:fix`
 
@@ -372,7 +372,7 @@ ALIASES
   $ sfdx jayree:source:fix
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/fix.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/fix.ts)_
 
 ### `sfdx jayree:project:generate:snapshot`
 
@@ -392,7 +392,7 @@ ALIASES
   $ sfdx jayree:source:snapshot:generate
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/generate/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/generate/snapshot.ts)_
 
 ### `sfdx jayree:project:list:tracking`
 
@@ -419,7 +419,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/list/tracking.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/list/tracking.ts)_
 
 ### `sfdx jayree:project:store:tracking:get`
 
@@ -443,7 +443,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/store/tracking/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/store/tracking/get.ts)_
 
 ### `sfdx jayree:project:store:tracking:set`
 
@@ -470,7 +470,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.24/src/commands/jayree/project/store/tracking/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.25/src/commands/jayree/project/store/tracking/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
