@@ -580,15 +580,15 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.35":
-  version "3.1.35"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.35.tgz#87c23f86f670b2f1e42cc801cc64b740b0693aca"
-  integrity sha512-lLQtGeU9VBI3830RYAMMNybuQrjG0zuEemvabCdY94SbbEBOCk/d10j8k7i9R2VZGR1G0gtBB3Si6Ba0pUjvhg==
+"@jayree/sfdx-plugin-manifest@^3.1.36":
+  version "3.1.36"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.36.tgz#3bcf140c4ae76707e87472d7587980ef7bf29c6b"
+  integrity sha512-G8zhkAKP3kcrzGEcnTJcwLtqELgFTSIfgWtC7d+6Sp57Mp7NGpmR9kI92oEDSroxlNxJgX8TNSB9vHvj/7zkjQ==
   dependencies:
     "@jayree/changelog" "^1.1.7"
-    "@oclif/core" "^3.10.0"
-    "@salesforce/sf-plugins-core" "^4.0.0"
-    "@salesforce/source-deploy-retrieve" "^9.8.3"
+    "@oclif/core" "^3.10.8"
+    "@salesforce/sf-plugins-core" "^4.1.0"
+    "@salesforce/source-deploy-retrieve" "^9.8.5"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.3.2"
@@ -923,10 +923,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^3.0.0", "@oclif/core@^3.0.4", "@oclif/core@^3.0.9", "@oclif/core@^3.10.0", "@oclif/core@^3.3.1", "@oclif/core@^3.9.1":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.10.0.tgz#d9aac186b9300b448479fdee75f1774b4ff4626f"
-  integrity sha512-gXats+3wTQRztZS2gy8rcZgkKqLY/FexCzcAkNe8Z4E+268hagAHMFxA8tsiUcOKaywgQAL55TCHD1bgni54GA==
+"@oclif/core@^3.0.0", "@oclif/core@^3.0.4", "@oclif/core@^3.0.9", "@oclif/core@^3.10.8", "@oclif/core@^3.3.1", "@oclif/core@^3.9.1":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.10.8.tgz#8a855841107576b88a2ebe2e20e6e0d7ee885713"
+  integrity sha512-DRiEiXUvijq/1dXL80/sFGdhTjejFiUzxURW7N310TEKlONujas66KhLATfF/nG3mICqTCU0f9B+VNfLtZoGqw==
   dependencies:
     ansi-escapes "^4.3.2"
     ansi-styles "^4.3.0"
@@ -1216,7 +1216,7 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^9.7.28", "@salesforce/source-deploy-retrieve@^9.8.1", "@salesforce/source-deploy-retrieve@^9.8.3", "@salesforce/source-deploy-retrieve@^9.8.5":
+"@salesforce/source-deploy-retrieve@^9.7.28", "@salesforce/source-deploy-retrieve@^9.8.1", "@salesforce/source-deploy-retrieve@^9.8.5":
   version "9.8.5"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-9.8.5.tgz#0cdcdd94894fd30c4923fbdcbd3f35f33bef7ecc"
   integrity sha512-6mkyKLz00M0cB/44w93/k9N2EEJeO7oUkCGPzfcxGOABdoqwQUZ15FetIuSKqfAWSbV5wFrw6TxGJ5Du8HrO6A==
