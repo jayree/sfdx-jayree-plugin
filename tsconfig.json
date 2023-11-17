@@ -8,6 +8,7 @@
     "incremental": true,
     "module": "node16",
     "moduleResolution": "node16",
+    "lib": ["es2021", "dom"],
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true
   },

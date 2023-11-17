@@ -1,12 +1,6 @@
 {
-  "exclude-scripts": [
-    "docs",
-    "test:command-reference",
-    "test:deprecation-policy",
-    "test:json-schema",
-    "test:compile",
-    "test:only"
-  ],
-  "exclude-files": ["LICENSE.txt", ".eslintrc.js", "test/.eslintrc.js"],
+  "exclude-scripts": ["test:command-reference", "test:deprecation-policy", "test:json-schema"],
+  "exclude-files": ["LICENSE.txt"],
+  "devDepOverrides": ["prettier", "pretty-quick", "typedoc", "typedoc-plugin-missing-exports"],
   "strict": true
 }
