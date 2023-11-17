@@ -162,10 +162,10 @@ index c1d55c8..a33594b 100644
  
  module.exports = PackageJson;
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index 7ed2274..6ee18af 100644
+index 10550c2..23288cd 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-@@ -21,7 +21,7 @@ const PACKAGE_DEFAULTS = {
+@@ -22,7 +22,7 @@ const PACKAGE_DEFAULTS = {
      pretest: undefined,
      posttest: undefined,
      test: 'wireit',
@@ -174,7 +174,7 @@ index 7ed2274..6ee18af 100644
      'test:only': 'wireit',
      lint: 'wireit',
      prepack: 'sf-prepack',
-@@ -31,7 +31,7 @@ const PACKAGE_DEFAULTS = {
+@@ -32,7 +32,7 @@ const PACKAGE_DEFAULTS = {
        dependencies: ['compile', 'lint'],
      },
      compile: {
@@ -183,7 +183,7 @@ index 7ed2274..6ee18af 100644
        files: ['src/**/*.ts', '**/tsconfig.json', 'messages/**'],
        output: ['lib/**', '*.tsbuildinfo'],
        clean: 'if-file-deleted',
-@@ -42,7 +42,7 @@ const PACKAGE_DEFAULTS = {
+@@ -43,7 +43,7 @@ const PACKAGE_DEFAULTS = {
        output: [],
      },
      lint: {
@@ -192,7 +192,7 @@ index 7ed2274..6ee18af 100644
        files: ['src/**/*.ts', 'test/**/*.ts', 'messages/**', '**/.eslint*', '**/tsconfig.json'],
        output: [],
      },
-@@ -56,7 +56,7 @@ const PACKAGE_DEFAULTS = {
+@@ -57,7 +57,7 @@ const PACKAGE_DEFAULTS = {
        dependencies: ['test:only', 'test:compile'],
      },
      'test:only': {
@@ -201,29 +201,7 @@ index 7ed2274..6ee18af 100644
        // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
        // see https://github.com/chalk/supports-color/issues/106
        env: {
-@@ -81,18 +81,18 @@ const PLUGIN_DEFAULTS = {
-   wireit: {
-     ...PACKAGE_DEFAULTS.wireit,
-     'test:command-reference': {
--      command: `"./bin/dev" commandreference:generate --erroronwarnings`,
-+      command: `"./bin/dev.js" commandreference:generate --erroronwarnings`,
-       files: ['src/**/*.ts', 'messages/**', 'package.json'],
-       output: ['tmp/root'],
-     },
-     'test:deprecation-policy': {
--      command: '"./bin/dev" snapshot:compare',
-+      command: '"./bin/dev.js" snapshot:compare',
-       files: ['src/**/*.ts'],
-       output: [],
-       dependencies: ['compile'],
-     },
-     'test:json-schema': {
--      command: '"./bin/dev" schema:compare',
-+      command: '"./bin/dev.js" schema:compare',
-       files: ['src/**/*.ts', 'schemas'],
-       output: [],
-     },
-@@ -129,7 +129,7 @@ const resolveConfig = (path) => {
+@@ -132,7 +132,7 @@ const resolveConfig = (path) => {
    const configFromFile = (result && result.config) || {};
  
    if (configFromFile.test?.testsPath) {
@@ -232,7 +210,7 @@ index 7ed2274..6ee18af 100644
    }
  
    // Allow users to override certain scripts
-@@ -155,6 +155,12 @@ const resolveConfig = (path) => {
+@@ -159,6 +159,12 @@ const resolveConfig = (path) => {
      delete config.wireit[scriptName];
    });
  
@@ -321,71 +299,15 @@ index 9519d5c..2d9dcb6 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 7d01c20..0552e22 100644
+index c270b54..54c573f 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-@@ -26,6 +26,7 @@ const nonPjsonDependencyMinimums = new Map([
-   ['@oclif/plugin-command-snapshot', '^4.0.2'],
-   ['eslint-plugin-sf-plugin', '^1.15.6'],
-   ['oclif', '^3.16.0'],
-+  ['c8', '^8.0.1'],
- ]);
- 
- const getVersionNum = (ver) => (ver.startsWith('^') || ver.startsWith('~') ? ver.slice(1) : ver);
-@@ -84,7 +85,7 @@ module.exports = (projectPath) => {
-   const requiredDeps = [
-     'husky',
-     'pretty-quick',
--    'nyc',
-+    'c8',
-     'ts-node',
-     'mocha',
-     'sinon',
-@@ -92,8 +93,8 @@ module.exports = (projectPath) => {
-     'wireit',
-     'eslint-config-salesforce',
-     'eslint-config-salesforce-typescript',
--    'eslint-config-salesforce-license',
--  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []);
-+    'eslint-plugin-sf-plugin',
-+  ].concat(scripts.format ? ['prettier', '@salesforce/prettier-config'] : []).concat(scripts.docs ? ['typedoc', 'typedoc-plugin-missing-exports',] : []);
- 
+@@ -116,7 +116,7 @@ module.exports = (projectPath) => {
    /**
-    * if dev-scripts sees these in devDeps, they'll be removed
-@@ -103,7 +104,6 @@ module.exports = (projectPath) => {
-     '@commitlint/cli',
-     '@commitlint/config-conventional',
-     'source-map-support',
--    'typedoc',
-     'cz-conventional-changelog',
-     'lint-staged',
-     'tslint',
-@@ -111,8 +111,7 @@ module.exports = (projectPath) => {
-     '@types/mocha',
-     '@types/node',
-     '@types/sinon',
--    'typedoc-plugin-missing-exports',
--    'eslint-plugin-prettier',
-+    'eslint-config-salesforce-license',
-   ].concat(scripts.format ? [] : ['prettier', '@salesforce/prettier-config']);
-   // removes go before adds because some are "added back"
-   bannedDeps.forEach((dep) => remove(dep));
-@@ -132,8 +131,16 @@ module.exports = (projectPath) => {
+    * We don't want these in any repo.  This is a good way to clean up things en masse
+    */
+-  const bannedDeps = ['cz-conventional-changelog', 'lint-staged', 'tslint', 'eslint-plugin-prettier'].concat(
++  const bannedDeps = ['cz-conventional-changelog', 'lint-staged', 'tslint'].concat(
+     scripts.format ? [] : ['prettier', '@salesforce/prettier-config']
+   );
  
-   // eslint and all plugins must be installed on a local basis, regardless of if it uses a shared config.
-   // https://eslint.org/docs/user-guide/getting-started
--  Object.entries(eslintPjson.devDependencies).forEach(([name, version]) => add(name, version));
--  Object.entries(eslintHeaderPjson.devDependencies).forEach(([name, version]) => add(name, version));
-+  Object.entries(eslintPjson.devDependencies).forEach(([dep, version]) => {
-+    if (!bannedDeps.includes(dep) && !requiredDeps.includes(dep) && version) {
-+      add(dep, version);
-+    }
-+  });
-+  Object.entries(eslintHeaderPjson.devDependencies).forEach(([dep, version]) => {
-+    if (!bannedDeps.includes(dep) && !requiredDeps.includes(dep) && version) {
-+      add(dep, version);
-+    }
-+  });
- 
-   // update any non-devDeps to their minimum versions if devScripts specifies one
-   const dependencies = pjson.get('dependencies');
