@@ -589,16 +589,16 @@
     isomorphic-git "1.25.0"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.20":
-  version "1.2.20"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.20.tgz#04441a59c204f9b82164f2f738e8a2434081600b"
-  integrity sha512-GCByjYbxl22TOlNRQKF6LEIn+G4JFGyv7/QGg61TUqWR61FTfABsedGFc8dhB7CNN3Ei8N8C9z11AVo/hktTcw==
+"@jayree/sfdx-plugin-org@^1.2.21":
+  version "1.2.21"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.21.tgz#5cc7ffd6b79f86ce368ac5ec93a62a6d20fda0b0"
+  integrity sha512-H0Bro2Th9ABu4eqmlUmCpvJfv6POraFg0rm5BCL2x1usrpu9GCmxKBpD1xi9m/weoc8q2qmVdjjrkbXx6sOYAQ==
   dependencies:
-    "@jayree/changelog" "^1.1.7"
+    "@jayree/changelog" "^1.1.8"
     "@listr2/prompt-adapter-enquirer" "^1.0.2"
-    "@oclif/core" "^3.11.0"
-    "@salesforce/sf-plugins-core" "^5.0.1"
-    "@salesforce/source-deploy-retrieve" "^10.0.0"
+    "@oclif/core" "^3.12.0"
+    "@salesforce/sf-plugins-core" "^5.0.3"
+    "@salesforce/source-deploy-retrieve" "^10.0.2"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
