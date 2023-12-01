@@ -18,7 +18,7 @@
     "c8": "^8.0.1",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-sf-plugin": "^1.16.15",
-    "nock": "^13.3.8",
+    "nock": "^13.4.0",
     "oclif": "^4.0.4",
     "patch-package": "^8.0.0",
     "pinst": "^3.0.0",
