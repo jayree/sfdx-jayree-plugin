@@ -1156,17 +1156,17 @@
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.1.0.tgz#e529576466d074e7a5f1441236510fef123da01e"
   integrity sha512-2iDDepiIwjXHS5IVY7pwv8jMo4xWosJ7p/UTj+lllpB/gnJiYLhjJPE4Z3FCGFKyvfg5jGaimCd8Ca6bLGsCQA==
 
-"@salesforce/dev-scripts@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-7.1.1.tgz#549b58fb7e8c2410ce594c46f780a0907618f19f"
-  integrity sha512-6SL+QDOMZCnmU4Lu2ZCjqsMRcHw96mnjUOPE7b2HcfmfPo2a/hAYUtv8v7UsZ/+3UPbSf+XsLJfUsF15QIUWrg==
+"@salesforce/dev-scripts@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-8.0.0.tgz#debdc8a311858259e7c972a55b82521c6eed101d"
+  integrity sha512-8TxQD+8Acn1CBiiSwhTPnYfbdaX9fASUPB5CvTSQJMr9aitoa9PFrC/wE7QTmtf+O8UAAVz4nndhjVABqpYf1Q==
   dependencies:
     "@commitlint/cli" "^17.1.2"
     "@commitlint/config-conventional" "^17.1.0"
     "@salesforce/dev-config" "^4.1.0"
     "@salesforce/prettier-config" "^0.0.3"
     "@types/chai" "^4.3.10"
-    "@types/mocha" "^10.0.4"
+    "@types/mocha" "^10.0.6"
     "@types/node" "^18"
     "@types/sinon" "^10.0.20"
     chai "^4.3.10"
@@ -1470,10 +1470,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.2.tgz#ee771e2ba4b3dc5b372935d549fd9617bf345b8c"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
-"@types/mocha@^10.0.4":
-  version "10.0.4"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-10.0.4.tgz#b5331955ebca216604691fd4fcd2dbdc2bd559a4"
-  integrity sha512-xKU7bUjiFTIttpWaIZ9qvgg+22O1nmbA+HRxdlR+u6TWsGfmFdXrheJoK4fFxrHNVIOBDvDNKZG+LYBpMHpX3w==
+"@types/mocha@^10.0.6":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-10.0.6.tgz#818551d39113081048bdddbef96701b4e8bb9d1b"
+  integrity sha512-dJvrYWxP/UcXm36Qn36fxhUKu8A/xMRXVT2cliFF1Z7UA9liG5Psj3ezNSZw+5puH2czDXRLcXQxf8JbJt0ejg==
 
 "@types/node@*", "@types/node@^18":
   version "18.18.9"
