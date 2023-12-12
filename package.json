@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@oclif/plugin-help": "^6.0.8",
-    "@salesforce/dev-scripts": "^8.0.0",
+    "@salesforce/dev-scripts": "^8.1.1",
     "@salesforce/ts-sinon": "^1.4.19",
     "c8": "^8.0.1",
     "eslint-plugin-prettier": "^5.0.1",
@@ -99,7 +99,6 @@
     "prepack": "sf-prepack",
     "prepare": "patch-package && sf-install",
     "test": "wireit",
-    "test:compile": "wireit",
     "test:only": "wireit",
     "version": "oclif readme --no-aliases"
   },

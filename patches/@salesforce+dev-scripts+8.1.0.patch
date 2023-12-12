@@ -171,19 +171,10 @@ index c1d55c8..a33594b 100644
  
  module.exports = PackageJson;
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index 10550c2..23288cd 100644
+index d027bac..a9fddb6 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-@@ -22,7 +22,7 @@ const PACKAGE_DEFAULTS = {
-     pretest: undefined,
-     posttest: undefined,
-     test: 'wireit',
--    'test:compile': undefined,
-+    'test:compile': 'wireit',
-     'test:only': 'wireit',
-     lint: 'wireit',
-     prepack: 'sf-prepack',
-@@ -32,7 +32,7 @@ const PACKAGE_DEFAULTS = {
+@@ -33,7 +33,7 @@ const PACKAGE_DEFAULTS = {
        dependencies: ['compile', 'lint'],
      },
      compile: {
@@ -192,7 +183,7 @@ index 10550c2..23288cd 100644
        files: ['src/**/*.ts', '**/tsconfig.json', 'messages/**'],
        output: ['lib/**', '*.tsbuildinfo'],
        clean: 'if-file-deleted',
-@@ -43,7 +43,7 @@ const PACKAGE_DEFAULTS = {
+@@ -44,7 +44,7 @@ const PACKAGE_DEFAULTS = {
        output: [],
      },
      lint: {
@@ -201,8 +192,8 @@ index 10550c2..23288cd 100644
        files: ['src/**/*.ts', 'test/**/*.ts', 'messages/**', '**/.eslint*', '**/tsconfig.json'],
        output: [],
      },
-@@ -57,7 +57,7 @@ const PACKAGE_DEFAULTS = {
-       dependencies: ['test:only', 'test:compile'],
+@@ -65,7 +65,7 @@ const PACKAGE_DEFAULTS = {
+       dependencies: ['test:only', 'test:compile', 'link-check'],
      },
      'test:only': {
 -      command: 'nyc mocha "test/**/*.test.ts"',
@@ -210,7 +201,7 @@ index 10550c2..23288cd 100644
        // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
        // see https://github.com/chalk/supports-color/issues/106
        env: {
-@@ -132,7 +132,7 @@ const resolveConfig = (path) => {
+@@ -142,7 +142,7 @@ const resolveConfig = (path) => {
    const configFromFile = (result && result.config) || {};
  
    if (configFromFile.test?.testsPath) {
@@ -219,7 +210,7 @@ index 10550c2..23288cd 100644
    }
  
    // Allow users to override certain scripts
-@@ -159,6 +159,12 @@ const resolveConfig = (path) => {
+@@ -169,6 +169,12 @@ const resolveConfig = (path) => {
      delete config.wireit[scriptName];
    });
  
