@@ -2,12 +2,6 @@
 // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 
 {
-  "extends": "@salesforce/dev-config/tsconfig-test-strict",
-  "compilerOptions": {
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "node16",
-    "moduleResolution": "node16"
-  },
+  "extends": "@salesforce/dev-config/tsconfig-test-strict-esm",
   "include": ["./**/*.ts"]
 }
