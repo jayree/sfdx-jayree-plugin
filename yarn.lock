@@ -601,16 +601,16 @@
     isomorphic-git "1.25.1"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.25":
-  version "1.2.25"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.25.tgz#4bfc5c5e8746ee68bf10f74df2e9b280cc6fff28"
-  integrity sha512-htEi8ASnKACzdMvuY6X6c2ITNuaQGuwId9enPFdwgao9jv1Cj01G4X+Fi5UIEzZZ5hpuxu6DPlXRKouGrsp0wg==
+"@jayree/sfdx-plugin-org@^1.2.26":
+  version "1.2.26"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.26.tgz#0b4681ac518780fd9008c3cd07b32c5def919e20"
+  integrity sha512-DyBKcdKXGqvEIYM1dddCDjR586omHf/i0CS5zBGEJ/7V/eM4tnY4118bJtEfYY32ZUj3ZtpEBW9zj3GLTws8Hg==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@listr2/prompt-adapter-enquirer" "^2.0.0"
+    "@listr2/prompt-adapter-enquirer" "^2.0.1"
     "@oclif/core" "^3.14.1"
-    "@salesforce/sf-plugins-core" "^5.0.10"
-    "@salesforce/source-deploy-retrieve" "^10.2.1"
+    "@salesforce/sf-plugins-core" "^5.0.12"
+    "@salesforce/source-deploy-retrieve" "^10.2.4"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
@@ -618,7 +618,7 @@
     fs-extra "^11.2.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
-    listr2 "^8.0.0"
+    listr2 "^8.0.1"
     log-update "^6.0.0"
     playwright-chromium "^1.40.1"
     tabletojson "4.0.1"
@@ -711,10 +711,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@listr2/prompt-adapter-enquirer@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.0.tgz#35d72fc9bf07266895bd6292ba85b5641c4545b2"
-  integrity sha512-041w06I7nubqKzH6L3DAAlPJRtdA2ygl+OuajMIuClK+kKN+Bu3sFplG6oTN6Gv4WDtZDXqhj3vPCSAc5pg7MA==
+"@listr2/prompt-adapter-enquirer@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.1.tgz#827acd01e4236aa5bffc01f6fa41543fd837d204"
+  integrity sha512-vRAa2raxKfpcUkh4ihszcb6vNb931sfz7af85zQn7oyJxQOffqr2QRwk0T2nBmKAk3dRD48b8nl3v0qoZ4sbyA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -5461,10 +5461,10 @@ linkinator@^6.0.2:
     server-destroy "^1.0.1"
     srcset "^5.0.0"
 
-listr2@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.0.0.tgz#aa7c230995f8ce378585f7c96c0c6d1cefa4700d"
-  integrity sha512-u8cusxAcyqAiQ2RhYvV7kRKNLgUvtObIbhOX2NCXqvp1UU32xIg5CT22ykS2TPKJXZWJwtK3IKLiqAGlGNE+Zg==
+listr2@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.0.1.tgz#4d3f50ae6cec3c62bdf0e94f5c2c9edebd4b9c34"
+  integrity sha512-ovJXBXkKGfq+CwmKTjluEqFi3p4h8xvkxGQQAQan22YCgef4KZ1mKGjzfGh6PL6AW5Csw0QiQPNuQyH+6Xk3hA==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
