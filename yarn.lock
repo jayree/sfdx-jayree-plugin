@@ -583,22 +583,22 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.43":
-  version "3.1.43"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.43.tgz#40a53ae4f30ab77c18f6cba543421ec356f66ae3"
-  integrity sha512-LrKnQb2/HaHcMySjaOdwAAVw6y8uiYWHD55mueBTIecjswZNGgjSp8OXY0JTGUp+1kyk2BLKc4QCH/lnJYbxxQ==
+"@jayree/sfdx-plugin-manifest@^3.1.44":
+  version "3.1.44"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.44.tgz#be7afdd93b7de07b0d43535d08520a958a0aa574"
+  integrity sha512-5oLzTJxKDyYaryzx/FdcEiDLRuLpbDBHPXJtS1lEUiZRBiFp4tuMcGlWI91QPgSSPnvUWBF9ad77DHE/CmHItA==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@oclif/core" "^3.15.0"
+    "@oclif/core" "^3.15.1"
     "@salesforce/core" "^6.4.2"
-    "@salesforce/sf-plugins-core" "^5.0.12"
+    "@salesforce/sf-plugins-core" "^5.0.13"
     "@salesforce/source-deploy-retrieve" "^10.2.4"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.3.2"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.25.1"
+    isomorphic-git "1.25.2"
     tslib "^2.6.2"
 
 "@jayree/sfdx-plugin-org@^1.2.26":
@@ -928,10 +928,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^3.0.4", "@oclif/core@^3.10.8", "@oclif/core@^3.14.1", "@oclif/core@^3.15.0", "@oclif/core@^3.3.1":
-  version "3.15.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.15.0.tgz#28405012137fa92efcc5a2c4d61336dd64c697cb"
-  integrity sha512-A1EVh4gv7mqAJ9OGVxLugaLcHvQnGwvOnPToP8OT9AldJ0LwVExOwhhlnOstYca33MIpGH00twYxWMS5nxMuDQ==
+"@oclif/core@^3.0.4", "@oclif/core@^3.10.8", "@oclif/core@^3.14.1", "@oclif/core@^3.15.0", "@oclif/core@^3.15.1", "@oclif/core@^3.3.1":
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.15.1.tgz#e03fa775d658e76056150ac0c7b8097b6f51ab9c"
+  integrity sha512-d4457zVo2agLoJG97CmdY6M3BeP5sogBP3BtP65hUvJH6wA6Us1hdY3UiPPtD/ZzZImq7cATVMABuCF9tM+rWA==
   dependencies:
     ansi-escapes "^4.3.2"
     ansi-styles "^4.3.0"
@@ -950,7 +950,7 @@
     js-yaml "^3.14.1"
     natural-orderby "^2.0.3"
     object-treeify "^1.1.33"
-    password-prompt "^1.1.2"
+    password-prompt "^1.1.3"
     slice-ansi "^4.0.0"
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
@@ -1199,12 +1199,12 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.1.tgz#7d1c071e1e509ca9d2d8a6e48ac7447dd67a534d"
   integrity sha512-eVy947ZMxCJReKJdgfddUIsBIbPTa/i8RwQGwxq4/ss38H5sLOAeSTaun9V7HpJ1hkpDznWKfgzYvjsst9K6ig==
 
-"@salesforce/sf-plugins-core@^5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-5.0.12.tgz#f638a8091316b70b4cb981b0847326fd8c32c2f4"
-  integrity sha512-2ZuD++T+c0mGmLep0K54ucA3GIjlRWdR0L+oMLlcTYcf6rxEV72D9MMszS3syVabSJeNGrKIgsO3kP9c13PCAQ==
+"@salesforce/sf-plugins-core@^5.0.12", "@salesforce/sf-plugins-core@^5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-5.0.13.tgz#f2941527d66ded5750a6646e146af047ab72acc9"
+  integrity sha512-b5R8krKeOIkW0hPxvfpm8T5tCSyWW7MDERnJwm/FXq4ueUJsC1/TCWSscyVKPSZ0VRcEFbzOWKJvpV/omB1D9w==
   dependencies:
-    "@oclif/core" "^3.15.0"
+    "@oclif/core" "^3.15.1"
     "@salesforce/core" "^6.4.1"
     "@salesforce/kit" "^3.0.15"
     "@salesforce/ts-types" "^2.0.9"
@@ -5061,10 +5061,10 @@ isomorphic-git@1.23.0:
     sha.js "^2.4.9"
     simple-get "^4.0.1"
 
-isomorphic-git@1.25.1:
-  version "1.25.1"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.1.tgz#120dba31fec0fd45eeb7a82ac6d007581e6d6eb1"
-  integrity sha512-1gJnJvW87mCPlwV1q8UBrqSE/AaFJltVmHRGignkSUgDvwK/7y2ijxGFoNHBp39mX07rffm3F915RWbJ5VVtqQ==
+isomorphic-git@1.25.2:
+  version "1.25.2"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.2.tgz#07932fe2d48f96c9d94b9a898c1b22f28539cdc0"
+  integrity sha512-GHMZVujE76NpZ7Za0Kus/46J6Y7UZsY+xcHMLnFHqvcGbJzkXB1LQCzpYaRq+xQinWGdkcjBDQoE+8Tv3StPCg==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
@@ -6819,6 +6819,14 @@ password-prompt@^1.1.2:
   dependencies:
     ansi-escapes "^3.1.0"
     cross-spawn "^6.0.5"
+
+password-prompt@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/password-prompt/-/password-prompt-1.1.3.tgz#05e539f4e7ca4d6c865d479313f10eb9db63ee5f"
+  integrity sha512-HkrjG2aJlvF0t2BMH0e2LB/EHf3Lcq3fNMzy4GYHcQblAvOl+QQji1Lx7WRBMqpVK8p+KR7bCg7oqAMXtdgqyw==
+  dependencies:
+    ansi-escapes "^4.3.2"
+    cross-spawn "^7.0.3"
 
 patch-package@^8.0.0:
   version "8.0.0"
