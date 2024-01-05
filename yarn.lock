@@ -583,16 +583,16 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.44":
-  version "3.1.44"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.44.tgz#be7afdd93b7de07b0d43535d08520a958a0aa574"
-  integrity sha512-5oLzTJxKDyYaryzx/FdcEiDLRuLpbDBHPXJtS1lEUiZRBiFp4tuMcGlWI91QPgSSPnvUWBF9ad77DHE/CmHItA==
+"@jayree/sfdx-plugin-manifest@^3.1.46":
+  version "3.1.46"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.46.tgz#29f0249cd0ff05e46ec59e3e1a30797c51b05a4d"
+  integrity sha512-+Ny/PNUi/2qEiHyy7NXU08LjDbCb1dV+oCMBBd5aYIMtlA3fHIWPYo1voCNfwMjOziEj4k9aQdzufY+OGgS4JA==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@oclif/core" "^3.15.1"
-    "@salesforce/core" "^6.4.2"
+    "@oclif/core" "^3.16.0"
+    "@salesforce/core" "^6.4.4"
     "@salesforce/sf-plugins-core" "^5.0.13"
-    "@salesforce/source-deploy-retrieve" "^10.2.4"
+    "@salesforce/source-deploy-retrieve" "^10.2.6"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.3.2"
@@ -1061,10 +1061,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.1", "@salesforce/core@^6.4.2":
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.2.tgz#e6e5e2d5e6ad17f1cbe0feb5a0e55e8b74c91e3c"
-  integrity sha512-ZtLwgI18f1th6SY0fKmuiyVGGwTXPy4nI+KfXzkww/vqdPxDhAfoHwqvFeo4tjFE2rldK7IPiIIYdtpsaI8d5g==
+"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.1", "@salesforce/core@^6.4.2", "@salesforce/core@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.4.tgz#e96d2ef9cd05c3894578374d1054af80bfdca119"
+  integrity sha512-VegX3ChnJUOOztSP05QPiXCTOSioShB22NyhYjL7vVhf6yqSOH0VT2oQ3ywrMYbYCbjLSdsmFdTVLiQIFpK57g==
   dependencies:
     "@salesforce/kit" "^3.0.15"
     "@salesforce/schemas" "^1.6.1"
@@ -1080,7 +1080,7 @@
     jszip "3.10.1"
     pino "^8.16.2"
     pino-abstract-transport "^1.1.0"
-    pino-pretty "^10.3.0"
+    pino-pretty "^10.3.1"
     proper-lockfile "^4.1.2"
     semver "^7.5.4"
     ts-retry-promise "^0.7.1"
@@ -1153,10 +1153,10 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^10.2.1", "@salesforce/source-deploy-retrieve@^10.2.4", "@salesforce/source-deploy-retrieve@^10.2.5":
-  version "10.2.5"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.2.5.tgz#bd2037e28d17ff9bead321acedc63bafb05bd952"
-  integrity sha512-8XDQgEgESToJX7/0f0/OTcCYt1bGpHSU+FwOddIBfmajILjKLRxHTAMMkVFuvniAFoyrlz9M6coy3DMp+gcltQ==
+"@salesforce/source-deploy-retrieve@^10.2.1", "@salesforce/source-deploy-retrieve@^10.2.5", "@salesforce/source-deploy-retrieve@^10.2.6":
+  version "10.2.6"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.2.6.tgz#37189ff3c2185158a856137e63a811bdd5b05b43"
+  integrity sha512-MGN5Jrz2dhk5f6XfrvfpD0SKGjSI+Jf/mCXc1svMZe7PMTg4RO3y/B9aTqLZmHcmUWLTvrKVIwN2PsZfNqrLgQ==
   dependencies:
     "@salesforce/core" "^6.4.2"
     "@salesforce/kit" "^3.0.15"
@@ -6751,10 +6751,10 @@ pino-abstract-transport@^1.1.0, pino-abstract-transport@v1.1.0:
     readable-stream "^4.0.0"
     split2 "^4.0.0"
 
-pino-pretty@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-10.3.0.tgz#483ff78b98d277c33d00e0419c00601d9152bc7e"
-  integrity sha512-JthvQW289q3454mhM3/38wFYGWPiBMR28T3CpDNABzoTQOje9UKS7XCJQSnjWF9LQGQkGd8D7h0oq+qwiM3jFA==
+pino-pretty@^10.3.1:
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-10.3.1.tgz#e3285a5265211ac6c7cd5988f9e65bf3371a0ca9"
+  integrity sha512-az8JbIYeN/1iLj2t0jR9DV48/LQ3RC6hZPpapKPkb84Q+yTidMCpgWxIT3N0flnBDilyBQ1luWNpOeJptjdp/g==
   dependencies:
     colorette "^2.0.7"
     dateformat "^4.6.3"
