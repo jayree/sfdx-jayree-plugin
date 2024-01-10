@@ -1,3 +1,10 @@
+## [4.8.49](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.48...v4.8.49) (2024-01-10)
+
+
+### Bug Fixes
+
+* **deps:** bump follow-redirects from 1.15.2 to 1.15.4 ([#1154](https://github.com/jayree/sfdx-jayree-plugin/issues/1154)) ([6126929](https://github.com/jayree/sfdx-jayree-plugin/commit/6126929ad4effc70ae6a4d0f0caf6895aa88de3e))
+
 ## [4.8.48](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.47...v4.8.48) (2024-01-05)
 
 
