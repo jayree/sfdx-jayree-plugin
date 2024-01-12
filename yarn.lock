@@ -883,7 +883,7 @@
     node-gyp "^8.2.0"
     read-package-json-fast "^2.0.1"
 
-"@oclif/core@^3.10.8", "@oclif/core@^3.15.0", "@oclif/core@^3.15.1", "@oclif/core@^3.16.0", "@oclif/core@^3.18.1":
+"@oclif/core@^3.10.8", "@oclif/core@^3.15.1", "@oclif/core@^3.16.0", "@oclif/core@^3.18.1":
   version "3.18.1"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.18.1.tgz#a8c9ee3848ad663d5694bef6079116c70d32fc55"
   integrity sha512-l0LsjzGcqjbUEdeSBX6bdZieVmEv82Q0W3StiyaDMEnPZ9KLH28HrLpcZg6d50mCYW9CUZNzmRo6qrCHWrgLKw==
@@ -916,12 +916,12 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/plugin-help@^6.0.9":
-  version "6.0.9"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.9.tgz#87bbf624372b9afe5dc183a13f52c929d6b022cf"
-  integrity sha512-O9zHzjsj8G3DWV+Ju4prrBwHUmwT1pcq7AJNxguedMk8jGZhwKWrcQHdZX6kjC+7QbupSzgjcvXvXpYVR1y3ow==
+"@oclif/plugin-help@^6.0.11", "@oclif/plugin-help@^6.0.9":
+  version "6.0.11"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.11.tgz#f287edbc16ab94e4395d36c827999b1be043cbd2"
+  integrity sha512-4O96jKw7E3c222jaS/s/zOCNghtw52fVpd/h7CaejmV/99bkLTCrN2haeNcIR5WbwhyhvkO+GQsLMurLGdfB2Q==
   dependencies:
-    "@oclif/core" "^3.15.0"
+    "@oclif/core" "^3.16.0"
 
 "@oclif/plugin-not-found@^3.0.7":
   version "3.0.7"
