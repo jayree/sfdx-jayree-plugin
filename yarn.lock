@@ -601,16 +601,16 @@
     isomorphic-git "1.25.2"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.28":
-  version "1.2.28"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.28.tgz#774439a8123fc8c4328de7e0d361d56f471684ab"
-  integrity sha512-ao4vuLCeQno52dw/q86ldZp6Wk/LVbb1NR3g5sVmZEAUE6Y1FW9e6VWcQMLrsqL48ETihC0MRJgD67a4863hzQ==
+"@jayree/sfdx-plugin-org@^1.2.29":
+  version "1.2.29"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.29.tgz#52e5c385966ac9cdeb0c117fbbc6b05d9684c23e"
+  integrity sha512-pdzkZSUO6Cb+/Bpm5xEcRxWGrF0+6txmlI7oQv3nOXukeHBtAl28od4KmC25kFWRLJNiEdPbhlcJwjMX2K+aQA==
   dependencies:
     "@jayree/changelog" "^1.1.9"
     "@listr2/prompt-adapter-enquirer" "^2.0.1"
-    "@oclif/core" "^3.16.0"
+    "@oclif/core" "^3.18.1"
     "@salesforce/sf-plugins-core" "^5.0.13"
-    "@salesforce/source-deploy-retrieve" "^10.2.6"
+    "@salesforce/source-deploy-retrieve" "^10.2.9"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
@@ -621,7 +621,7 @@
     listr2 "^8.0.1"
     log-update "^6.0.0"
     playwright-chromium "^1.40.1"
-    tabletojson "4.0.1"
+    tabletojson "4.1.0"
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
 
@@ -1153,12 +1153,12 @@
     chalk "^4"
     inquirer "^8.2.5"
 
-"@salesforce/source-deploy-retrieve@^10.2.1", "@salesforce/source-deploy-retrieve@^10.2.5", "@salesforce/source-deploy-retrieve@^10.2.6":
-  version "10.2.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.2.6.tgz#37189ff3c2185158a856137e63a811bdd5b05b43"
-  integrity sha512-MGN5Jrz2dhk5f6XfrvfpD0SKGjSI+Jf/mCXc1svMZe7PMTg4RO3y/B9aTqLZmHcmUWLTvrKVIwN2PsZfNqrLgQ==
+"@salesforce/source-deploy-retrieve@^10.2.1", "@salesforce/source-deploy-retrieve@^10.2.5", "@salesforce/source-deploy-retrieve@^10.2.6", "@salesforce/source-deploy-retrieve@^10.2.9":
+  version "10.2.9"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.2.9.tgz#8a3b543d42cedc6b1b2b05bf6b4352434af76850"
+  integrity sha512-an4GFw86lkLzz4q6212XyXEiNA0hs6B5cCjJF2jheS6ESbDk7Hmuvimvwcyp50eYYvmhI6fPqmzoOVVWJtjsNw==
   dependencies:
-    "@salesforce/core" "^6.4.2"
+    "@salesforce/core" "^6.4.4"
     "@salesforce/kit" "^3.0.15"
     "@salesforce/ts-types" "^2.0.9"
     fast-levenshtein "^3.0.0"
@@ -7991,10 +7991,10 @@ synckit@^0.8.6:
     "@pkgr/core" "^0.1.0"
     tslib "^2.6.2"
 
-tabletojson@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.0.1.tgz#ef8c3b5bb466ea5d9a1db5ad444bedbea712a8cf"
-  integrity sha512-/C2vM3fgxlstwUQqOx1DvjRKrLmDG6iJxebxOq/kGZbektLGD3RPGq+cPlMX3s9Ms6Z5SpAcgtBYDllw1fr2xw==
+tabletojson@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.0.tgz#8c1408f497086c13ecf769ea9b8c9825c23a449d"
+  integrity sha512-FuqrWdToWCMoZqb0sJdAZHoGAVOa8+LZdMErHSdBHtHcsf3k7vx5lJFlda4X9NEWn/MTZFuUik1VvLgtvHwnzg==
   dependencies:
     cheerio "^1.0.0-rc.12"
 
