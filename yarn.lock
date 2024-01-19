@@ -1227,16 +1227,16 @@
     isomorphic-git "1.25.3"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.29":
-  version "1.2.29"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.29.tgz#52e5c385966ac9cdeb0c117fbbc6b05d9684c23e"
-  integrity sha512-pdzkZSUO6Cb+/Bpm5xEcRxWGrF0+6txmlI7oQv3nOXukeHBtAl28od4KmC25kFWRLJNiEdPbhlcJwjMX2K+aQA==
+"@jayree/sfdx-plugin-org@^1.2.30":
+  version "1.2.30"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.30.tgz#441a2404e06ee3c1ad217f278cd02c193619e8d1"
+  integrity sha512-YO35NmRZgh1V7A9+bFbirWHkiK7yEUwN2s+8JGlp9A6/cVZTL/BH4HNHuERQy0rFOaBHUQ6rEO8DlOWVqWMtdw==
   dependencies:
     "@jayree/changelog" "^1.1.9"
     "@listr2/prompt-adapter-enquirer" "^2.0.1"
     "@oclif/core" "^3.18.1"
     "@salesforce/sf-plugins-core" "^5.0.13"
-    "@salesforce/source-deploy-retrieve" "^10.2.9"
+    "@salesforce/source-deploy-retrieve" "^10.2.11"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
@@ -1246,7 +1246,7 @@
     is-wsl "^3.1.0"
     listr2 "^8.0.1"
     log-update "^6.0.0"
-    playwright-chromium "^1.40.1"
+    playwright-chromium "^1.41.0"
     tabletojson "4.1.0"
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
@@ -7861,17 +7861,17 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.40.1:
-  version "1.40.1"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.40.1.tgz#243060b5c2a9a1edc46c72fdf8fe08ae8ea7f7ef"
-  integrity sha512-3atylP47OCTBW0siGI7LOEG/XKL/vnrFH8xdr4uaTnqMsc0Xq4gOLk2gGwniPJ76LSc++9ASc0w/nfqtLAmm3A==
+playwright-chromium@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.41.0.tgz#041470907d1109f3efa7327f4725621ad5618c05"
+  integrity sha512-8mg2Yqp4LUSQgAqoP0PA7rhVc8glazce4TLyyRCgydfcebO1ur9AMWUSAoalJtisciXuldsQuNfTGggC7eu7ig==
   dependencies:
-    playwright-core "1.40.1"
+    playwright-core "1.41.0"
 
-playwright-core@1.40.1:
-  version "1.40.1"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.40.1.tgz#442d15e86866a87d90d07af528e0afabe4c75c05"
-  integrity sha512-+hkOycxPiV534c4HhpfX6yrlawqVUzITRKwHAmYfmsVreltEl6fAZJ3DPfLMOODw0H3s1Itd6MDCWmP1fl/QvQ==
+playwright-core@1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.41.0.tgz#dbda9c3948df28a8deae76cc90b424e47174f9d7"
+  integrity sha512-UGKASUhXmvqm2Lxa1fNr8sFwAtqjpgBRr9jQ7XBI8Rn5uFiEowGUGwrruUQsVPIom4bk7Lt+oLGpXobnXzrBIw==
 
 pluralize@^8.0.0:
   version "8.0.0"
