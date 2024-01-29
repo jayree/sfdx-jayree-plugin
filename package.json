@@ -85,7 +85,8 @@
         "releaseNotesPath": "https://github.com/jayree/sfdx-jayree-plugin/tree/main",
         "releaseNotesFilename": "CHANGELOG.md"
       }
-    }
+    },
+    "topicSeparator": " "
   },
   "repository": "jayree/sfdx-jayree-plugin",
   "scripts": {
