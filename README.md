@@ -18,29 +18,29 @@ sfdx plugins:install @jayree/sfdx-plugin-source
 ## Commands
 
 <!-- commands -->
-* [`sfdx jayree:flow:get:coverage`](#sfdx-jayreeflowgetcoverage)
-* [`sfdx jayree:manifest:cleanup`](#sfdx-jayreemanifestcleanup)
-* [`sfdx jayree:manifest:generate`](#sfdx-jayreemanifestgenerate)
-* [`sfdx jayree:manifest:git:diff`](#sfdx-jayreemanifestgitdiff)
-* [`sfdx jayree:org:configure`](#sfdx-jayreeorgconfigure)
-* [`sfdx jayree:org:configure:country`](#sfdx-jayreeorgconfigurecountry)
-* [`sfdx jayree:org:configure:state`](#sfdx-jayreeorgconfigurestate)
-* [`sfdx jayree:org:get:settings`](#sfdx-jayreeorggetsettings)
-* [`sfdx jayree:org:stream`](#sfdx-jayreeorgstream)
-* [`sfdx jayree:project:compare:snapshot`](#sfdx-jayreeprojectcomparesnapshot)
-* [`sfdx jayree:project:fix`](#sfdx-jayreeprojectfix)
-* [`sfdx jayree:project:generate:snapshot`](#sfdx-jayreeprojectgeneratesnapshot)
-* [`sfdx jayree:project:list:tracking`](#sfdx-jayreeprojectlisttracking)
-* [`sfdx jayree:project:store:tracking:get`](#sfdx-jayreeprojectstoretrackingget)
-* [`sfdx jayree:project:store:tracking:set`](#sfdx-jayreeprojectstoretrackingset)
+* [`sfdx jayree flow get coverage`](#sfdx-jayree-flow-get-coverage)
+* [`sfdx jayree manifest cleanup`](#sfdx-jayree-manifest-cleanup)
+* [`sfdx jayree manifest generate`](#sfdx-jayree-manifest-generate)
+* [`sfdx jayree manifest git diff`](#sfdx-jayree-manifest-git-diff)
+* [`sfdx jayree org configure`](#sfdx-jayree-org-configure)
+* [`sfdx jayree org configure country`](#sfdx-jayree-org-configure-country)
+* [`sfdx jayree org configure state`](#sfdx-jayree-org-configure-state)
+* [`sfdx jayree org get settings`](#sfdx-jayree-org-get-settings)
+* [`sfdx jayree org stream`](#sfdx-jayree-org-stream)
+* [`sfdx jayree project compare snapshot`](#sfdx-jayree-project-compare-snapshot)
+* [`sfdx jayree project fix`](#sfdx-jayree-project-fix)
+* [`sfdx jayree project generate snapshot`](#sfdx-jayree-project-generate-snapshot)
+* [`sfdx jayree project list tracking`](#sfdx-jayree-project-list-tracking)
+* [`sfdx jayree project store tracking get`](#sfdx-jayree-project-store-tracking-get)
+* [`sfdx jayree project store tracking set`](#sfdx-jayree-project-store-tracking-set)
 
-### `sfdx jayree:flow:get:coverage`
+### `sfdx jayree flow get coverage`
 
 Check the flow test coverage of an Org.
 
 ```
 USAGE
-  $ sfdx jayree:flow:get:coverage -o <value> [--json] [--api-version <value>]
+  $ sfdx jayree flow get coverage -o <value> [--json] [--api-version <value>]
 
 FLAGS
   -o, --target-org=<value>   (required) Username or alias of the target org. Not required if the `target-org`
@@ -51,7 +51,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:flowtestcoverage
+  $ sfdx jayree flowtestcoverage
 
 EXAMPLES
   $ sfdx jayree:flowtestcoverage
@@ -60,15 +60,15 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/flow/get/coverage.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/flow/get/coverage.ts)_
 
-### `sfdx jayree:manifest:cleanup`
+### `sfdx jayree manifest cleanup`
 
 Removes those tags from a manifest file that are present in a second manifest file.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:cleanup -f <value> [--json] [-x <value>]
+  $ sfdx jayree manifest cleanup -f <value> [--json] [-x <value>]
 
 FLAGS
   -f, --file=<value>      (required) Path to the second 'cleanup' manifest file.
@@ -85,18 +85,18 @@ DESCRIPTION
   If the 'cleanup' manifest file (--file) doesn't exist, a template file is created, which can then be modified.
 
 EXAMPLES
-  $ sfdx jayree:manifest:cleanup --manifest=package.xml --file=packageignore.xml
+  $ sfdx jayree manifest cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.49/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.51/src/commands/jayree/manifest/cleanup.ts)_
 
-### `sfdx jayree:manifest:generate`
+### `sfdx jayree manifest generate`
 
 Generate a complete manifest file form the specified org.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:generate -o <value> [--json] [--api-version <value>] [-q <value>] [-c] [-w] [--include-flow-versions]
+  $ sfdx jayree manifest generate -o <value> [--json] [--api-version <value>] [-q <value>] [-c] [-w] [--include-flow-versions]
     [-f <value>] [--exclude-managed | --exclude-all]
 
 FLAGS
@@ -120,20 +120,20 @@ DESCRIPTION
   Use this command to generate a manifest file based on an existing org.
 
 EXAMPLES
-  $ sfdx jayree:manifest:generate --targetusername myOrg@example.com
+  $ sfdx jayree manifest generate --targetusername myOrg@example.com
   <?xml version='1.0' encoding='UTF-8'?>
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.49/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.51/src/commands/jayree/manifest/generate.ts)_
 
-### `sfdx jayree:manifest:git:diff`
+### `sfdx jayree manifest git diff`
 
 Create a project manifest and destructiveChanges manifest that lists the metadata components you want to deploy or delete based on changes in your git history.
 
 ```
 USAGE
-  $ sfdx jayree:manifest:git:diff REF1 [REF2] [--json] [--api-version <value>] [-d <value>] [--output-dir <value>]
+  $ sfdx jayree manifest git diff REF1 [REF2] [--json] [--api-version <value>] [-d <value>] [--output-dir <value>]
     [--destructive-changes-only]
 
 ARGUMENTS
@@ -159,36 +159,36 @@ DESCRIPTION
   You can use all ways to spell <commit> which are valid for 'git diff' (See https://git-scm.com/docs/git-diff).
 
 ALIASES
-  $ sfdx jayree:manifest:beta:git:diff
+  $ sfdx jayree manifest beta git diff
 
 EXAMPLES
   Uses the changes between two arbitrary <commit>.
 
-    $ sfdx jayree:manifest:git:diff <commit> <commit>
-    $ sfdx jayree:manifest:git:diff <commit>..<commit>
+    $ sfdx jayree manifest git diff <commit> <commit>
+    $ sfdx jayree manifest git diff <commit>..<commit>
 
   Uses the changes on the branch containing and up to the second <commit>, starting at a common ancestor of both
   <commit>.
 
-    $ sfdx jayree:manifest:git:diff <commit>...<commit>
+    $ sfdx jayree manifest git diff <commit>...<commit>
 
   Uses the diff of what is unique in branchB (REF2) and unique in branchA (REF1).
 
-    $ sfdx jayree:manifest:git:diff branchA..branchB
+    $ sfdx jayree manifest git diff branchA..branchB
 
   Uses the diff of what is unique in branchB (REF2).
 
-    $ sfdx jayree:manifest:git:diff branchA...branchB
+    $ sfdx jayree manifest git diff branchA...branchB
 
   Specify the flags before or after the REF args
 
-    $ sfdx jayree:manifest:git:diff --output-dir package <commit> <commit>
-    $ sfdx jayree:manifest:git:diff <commit> <commit> --output-dir package
+    $ sfdx jayree manifest git diff --output-dir package <commit> <commit>
+    $ sfdx jayree manifest git diff <commit> <commit> --output-dir package
 
   If you specify the 'source-dir' flag before the REF args, use '--' to separate the args from the 'source-dir'
   values.
 
-    $ sfdx jayree:manifest:git:diff --source-dir force-app -- <commit> <commit>
+    $ sfdx jayree manifest git diff --source-dir force-app -- <commit> <commit>
 
 FLAG DESCRIPTIONS
   -d, --source-dir=<value>...  Path to the local source files to include in the manifest.
@@ -207,15 +207,15 @@ FLAG DESCRIPTIONS
     The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.49/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.1.51/src/commands/jayree/manifest/git/diff.ts)_
 
-### `sfdx jayree:org:configure`
+### `sfdx jayree org configure`
 
 Make configuration changes that are not covered by the metadata API.
 
 ```
 USAGE
-  $ sfdx jayree:org:configure -o <value> [--json] [--api-version <value>] [-t <value>] [--concurrent]
+  $ sfdx jayree org configure -o <value> [--json] [--api-version <value>] [-t <value>] [--concurrent]
 
 FLAGS
   -o, --target-org=<value>   (required) Username or alias of the target org. Not required if the `target-org`
@@ -235,15 +235,15 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/org/configure/index.ts)_
 
-### `sfdx jayree:org:configure:country`
+### `sfdx jayree org configure country`
 
 update country integration values in the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:org:configure:country -o <value> [--json] [--api-version <value>]
+  $ sfdx jayree org configure country -o <value> [--json] [--api-version <value>]
 
 FLAGS
   -o, --target-org=<value>   (required) Username or alias of the target org. Not required if the `target-org`
@@ -254,15 +254,15 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/org/configure/country.ts)_
 
-### `sfdx jayree:org:configure:state`
+### `sfdx jayree org configure state`
 
 import (create/update) states into the State/Country Picklists
 
 ```
 USAGE
-  $ sfdx jayree:org:configure:state -o <value> [--json] [--api-version <value>] [--country-code <value>] [--category <value>]
+  $ sfdx jayree org configure state -o <value> [--json] [--api-version <value>] [--country-code <value>] [--category <value>]
     [--language <value>] [--concurrent <value>]
 
 FLAGS
@@ -278,15 +278,15 @@ GLOBAL FLAGS
   --json  Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/org/configure/state.ts)_
 
-### `sfdx jayree:org:get:settings`
+### `sfdx jayree org get settings`
 
 Write the current settings from an Org to a scratch org def file.
 
 ```
 USAGE
-  $ sfdx jayree:org:get:settings -o <value> [--json] [--api-version <value>] [-w] [-f <value>]
+  $ sfdx jayree org get settings -o <value> [--json] [--api-version <value>] [-w] [-f <value>]
 
 FLAGS
   -f, --file=<value>                  Write to 'file' instead of project-scratch-def.json.
@@ -299,7 +299,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:org:settings
+  $ sfdx jayree org settings
 
 EXAMPLES
   $ sfdx jayree:org:settings
@@ -307,15 +307,15 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/org/get/settings.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/org/get/settings.ts)_
 
-### `sfdx jayree:org:stream`
+### `sfdx jayree org stream`
 
 Listen to streaming api and platform events.
 
 ```
 USAGE
-  $ sfdx jayree:org:stream -o <value> -c <value> [--json] [--api-version <value>] [-r <value>]
+  $ sfdx jayree org stream -o <value> -c <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
   -c, --channel=<value>      (required) The event name.
@@ -331,22 +331,22 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:org:streaming
+  $ sfdx jayree org streaming
 
 EXAMPLES
   $ sfdx jayree org stream --channel=/event/eventName__e
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.31/src/commands/jayree/org/stream.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.32/src/commands/jayree/org/stream.ts)_
 
-### `sfdx jayree:project:compare:snapshot`
+### `sfdx jayree project compare snapshot`
 
 Compare sfdx source snapshot files.
 
 ```
 USAGE
-  $ sfdx jayree:project:compare:snapshot [--json] [--filepath <value>]
+  $ sfdx jayree project compare snapshot [--json] [--filepath <value>]
 
 FLAGS
   --filepath=<value>  [default: ./sfdx-source-snapshot.json] Path of the generated snapshot file.
@@ -355,18 +355,18 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:snapshot:compare
+  $ sfdx jayree source snapshot compare
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/compare/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/compare/snapshot.ts)_
 
-### `sfdx jayree:project:fix`
+### `sfdx jayree project fix`
 
 Fix retrieved metadata.
 
 ```
 USAGE
-  $ sfdx jayree:project:fix [--json] [-o <value>] [-t <value>]
+  $ sfdx jayree project fix [--json] [-o <value>] [-t <value>]
 
 FLAGS
   -o, --target-org=<value>
@@ -376,18 +376,18 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:fix
+  $ sfdx jayree source fix
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/fix.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/fix.ts)_
 
-### `sfdx jayree:project:generate:snapshot`
+### `sfdx jayree project generate snapshot`
 
 Generate sfdx source snapshot files.
 
 ```
 USAGE
-  $ sfdx jayree:project:generate:snapshot [--json] [--filepath <value>]
+  $ sfdx jayree project generate snapshot [--json] [--filepath <value>]
 
 FLAGS
   --filepath=<value>  [default: ./sfdx-source-snapshot.json] Path to save the generated snapshot file.
@@ -396,18 +396,18 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:snapshot:generate
+  $ sfdx jayree source snapshot generate
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/generate/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/generate/snapshot.ts)_
 
-### `sfdx jayree:project:list:tracking`
+### `sfdx jayree project list tracking`
 
 List changes in a scratch org by remote revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:project:list:tracking -o <value> [--json] [--api-version <value>] [-r <value>]
+  $ sfdx jayree project list tracking -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
   -o, --target-org=<value>   (required) Username or alias of the target org. Not required if the `target-org`
@@ -419,7 +419,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:tracking:list
+  $ sfdx jayree source tracking list
 
 EXAMPLES
   $ sfdx jayree:source:tracking:list
@@ -427,15 +427,15 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/list/tracking.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/list/tracking.ts)_
 
-### `sfdx jayree:project:store:tracking:get`
+### `sfdx jayree project store tracking get`
 
 Get stored revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:project:store:tracking:get -o <value> [--json]
+  $ sfdx jayree project store tracking get -o <value> [--json]
 
 FLAGS
   -o, --target-org=<value>  (required) Username or alias of the target org. Not required if the `target-org`
@@ -445,22 +445,22 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:tracking:store:get
+  $ sfdx jayree source tracking store get
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:get
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/store/tracking/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/store/tracking/get.ts)_
 
-### `sfdx jayree:project:store:tracking:set`
+### `sfdx jayree project store tracking set`
 
 Store revision counter number.
 
 ```
 USAGE
-  $ sfdx jayree:project:store:tracking:set -o <value> [--json] [--api-version <value>] [-r <value>]
+  $ sfdx jayree project store tracking set -o <value> [--json] [--api-version <value>] [-r <value>]
 
 FLAGS
   -o, --target-org=<value>   (required) Username or alias of the target org. Not required if the `target-org`
@@ -472,7 +472,7 @@ GLOBAL FLAGS
   --json  Format output as json.
 
 ALIASES
-  $ sfdx jayree:source:tracking:store:set
+  $ sfdx jayree source tracking store set
 
 EXAMPLES
   $ sfdx jayree:source:tracking:store:set
@@ -480,7 +480,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.39/src/commands/jayree/project/store/tracking/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.40/src/commands/jayree/project/store/tracking/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
