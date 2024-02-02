@@ -1288,16 +1288,16 @@
     isomorphic-git "1.25.3"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.31":
-  version "1.2.31"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.31.tgz#eb8a2d9d28588ae24914a55b28f1784bb92f3303"
-  integrity sha512-V/QvHeOeXDvl64/8blGcYWNbDmSJOC3vfW8wHOmAH5aSJ4a2q7tfFrXMfUSPGPSaiffylTBD4km7U2YbF/7tEQ==
+"@jayree/sfdx-plugin-org@^1.2.32":
+  version "1.2.32"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.32.tgz#4bc7186a560cf2e939fad02e498eccfa9ed79801"
+  integrity sha512-ywaIN/TXbBZnnhsXx+seDa74PK/vZfr/XEb1BQuz28l6sSriY/xtRfCQeNJOn23jLXYnUxCksJn7BQehZX4TmA==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@listr2/prompt-adapter-enquirer" "^2.0.1"
-    "@oclif/core" "^3.18.1"
-    "@salesforce/sf-plugins-core" "^5.0.13"
-    "@salesforce/source-deploy-retrieve" "^10.2.13"
+    "@listr2/prompt-adapter-enquirer" "^2.0.2"
+    "@oclif/core" "^3.18.2"
+    "@salesforce/sf-plugins-core" "^7.1.4"
+    "@salesforce/source-deploy-retrieve" "^10.3.1"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
@@ -1305,9 +1305,9 @@
     fs-extra "^11.2.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
-    listr2 "^8.0.1"
+    listr2 "^8.0.2"
     log-update "^6.0.0"
-    playwright-chromium "^1.41.1"
+    playwright-chromium "^1.41.2"
     tabletojson "4.1.0"
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
@@ -1398,10 +1398,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@listr2/prompt-adapter-enquirer@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.1.tgz#827acd01e4236aa5bffc01f6fa41543fd837d204"
-  integrity sha512-vRAa2raxKfpcUkh4ihszcb6vNb931sfz7af85zQn7oyJxQOffqr2QRwk0T2nBmKAk3dRD48b8nl3v0qoZ4sbyA==
+"@listr2/prompt-adapter-enquirer@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.2.tgz#4c35854ad28a3c9327d8ca60bc332566eace835c"
+  integrity sha512-rQVcPV9iwvRXrITFl+RPZcLjxZasXV2npg8CPvVGCoAMwEyw6+VC0YPpeBthR7MKBf5jrpIBY9OPRPFL9/Dilg==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -6476,16 +6476,16 @@ linkinator@^6.0.3:
     server-destroy "^1.0.1"
     srcset "^5.0.0"
 
-listr2@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.0.1.tgz#4d3f50ae6cec3c62bdf0e94f5c2c9edebd4b9c34"
-  integrity sha512-ovJXBXkKGfq+CwmKTjluEqFi3p4h8xvkxGQQAQan22YCgef4KZ1mKGjzfGh6PL6AW5Csw0QiQPNuQyH+6Xk3hA==
+listr2@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.0.2.tgz#07649d1f93ee28c9922c0fca64eaf348b7e4a6b7"
+  integrity sha512-v5jEMOeEJUpRjSXSB4U3w5A3YPmURYMUO/86f1PA4GGYcdbUQYpkbvKYT7Xaq1iu4Zjn51Rv1UeD1zsBXRijiQ==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
     eventemitter3 "^5.0.1"
     log-update "^6.0.0"
-    rfdc "^1.3.0"
+    rfdc "^1.3.1"
     wrap-ansi "^9.0.0"
 
 load-yaml-file@^0.2.0:
@@ -7981,17 +7981,17 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.41.1:
-  version "1.41.1"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.41.1.tgz#e0fba388a76acfecc28b005b4d318385c41145a5"
-  integrity sha512-Nr1/rnmRB4QzoAQwCors1Qsa9PLSdipsKiI4FZCQjSDzoBVBzoQqfXGtcIEnoAXEEEpzxuCPqjJNQwCVA66tCw==
+playwright-chromium@^1.41.2:
+  version "1.41.2"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.41.2.tgz#29ae799be26245ba9f83d2e26698c3b813daf10c"
+  integrity sha512-1XoW4aGGRbS2BJLldtLcv2QW3deMv8myE5iCtfGRPq99BWqmBLJvJTgY/SyfBCoklwQvl91zUWYWHjCAuvKGkw==
   dependencies:
-    playwright-core "1.41.1"
+    playwright-core "1.41.2"
 
-playwright-core@1.41.1:
-  version "1.41.1"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.41.1.tgz#9c152670010d9d6f970f34b68e3e935d3c487431"
-  integrity sha512-/KPO5DzXSMlxSX77wy+HihKGOunh3hqndhqeo/nMxfigiKzogn8kfL0ZBDu0L1RKgan5XHCPmn6zXd2NUJgjhg==
+playwright-core@1.41.2:
+  version "1.41.2"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.41.2.tgz#db22372c708926c697acc261f0ef8406606802d9"
+  integrity sha512-VaTvwCA4Y8kxEe+kfm2+uUUw5Lubf38RxF7FpBxLPmGe5sdNkSg5e3ChEigaGrX7qdqT3pt2m/98LiyvU2x6CA==
 
 pluralize@^8.0.0:
   version "8.0.0"
@@ -8461,10 +8461,10 @@ reusify@^1.0.4:
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
-rfdc@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/rfdc/-/rfdc-1.3.0.tgz#d0b7c441ab2720d05dc4cf26e01c89631d9da08b"
-  integrity sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==
+rfdc@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/rfdc/-/rfdc-1.3.1.tgz#2b6d4df52dffe8bb346992a10ea9451f24373a8f"
+  integrity sha512-r5a3l5HzYlIC68TpmYKlxWjmOP6wiPJ1vWv2HeLhNsRZMrCkxeqxiHlQ21oXmQ4F3SiryXBHhAD7JZqvOJjFmg==
 
 rimraf@^2.6.3:
   version "2.7.1"
