@@ -22,7 +22,7 @@
     "oclif": "^4.4.7",
     "patch-package": "^8.0.0",
     "pinst": "^3.0.0",
-    "prettier": "^3.2.4",
+    "prettier": "^3.2.5",
     "pretty-quick": "^4.0.0",
     "shx": "^0.3.4",
     "ts-node": "^10.9.2",
