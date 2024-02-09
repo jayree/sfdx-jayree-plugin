@@ -1622,16 +1622,16 @@
     isomorphic-git "1.25.3"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.32":
-  version "1.2.32"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.32.tgz#4bc7186a560cf2e939fad02e498eccfa9ed79801"
-  integrity sha512-ywaIN/TXbBZnnhsXx+seDa74PK/vZfr/XEb1BQuz28l6sSriY/xtRfCQeNJOn23jLXYnUxCksJn7BQehZX4TmA==
+"@jayree/sfdx-plugin-org@^1.2.33":
+  version "1.2.33"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.33.tgz#132363554cbbf8cecd8f5855568ec6e806c6b4d5"
+  integrity sha512-DmnLmvCEyu13Bny44gFwpFkzDjquSq2aAuzfHkm33/m3vYFcdPVtkgAhJjdgF9AeuKM3ej+qYdYIQu2Dmr8Mbg==
   dependencies:
     "@jayree/changelog" "^1.1.9"
     "@listr2/prompt-adapter-enquirer" "^2.0.2"
-    "@oclif/core" "^3.18.2"
-    "@salesforce/sf-plugins-core" "^7.1.4"
-    "@salesforce/source-deploy-retrieve" "^10.3.1"
+    "@oclif/core" "^3.19.1"
+    "@salesforce/sf-plugins-core" "^7.1.9"
+    "@salesforce/source-deploy-retrieve" "^10.3.7"
     "@salesforce/ts-types" "^2.0.9"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
@@ -2174,19 +2174,19 @@
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
 
-"@salesforce/source-deploy-retrieve@^10.3.1":
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.3.1.tgz#d5c26b20aebc0ba0a0f5cdb14017e75a4b4b8cde"
-  integrity sha512-S+nHAepnxLSf0vgo0b2CyH2matnGKsNBQ6AM/uEHrwpOBjLW/46cVXlY2umUG9fXQwG0ubeMYHm+IUmppDysUA==
+"@salesforce/source-deploy-retrieve@^10.3.1", "@salesforce/source-deploy-retrieve@^10.3.7":
+  version "10.3.7"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-10.3.7.tgz#04308d19177e661e14c6135d958b9589acd38a21"
+  integrity sha512-OQM9K2f+zbwI/hCKXF31NmERxv6r6E2xE1Zm/22svrmNVH3Eaw+T/HANiItjX5vssS0G6HflDSG7EDjUAmyoEw==
   dependencies:
     "@salesforce/core" "^6.5.1"
     "@salesforce/kit" "^3.0.15"
     "@salesforce/ts-types" "^2.0.9"
     fast-levenshtein "^3.0.0"
-    fast-xml-parser "^4.3.2"
+    fast-xml-parser "^4.3.4"
     got "^11.8.6"
     graceful-fs "^4.2.11"
-    ignore "^5.3.0"
+    ignore "^5.3.1"
     jszip "^3.10.1"
     mime "2.6.0"
     minimatch "^5.1.6"
@@ -5166,7 +5166,7 @@ fast-xml-parser@4.2.5:
   dependencies:
     strnum "^1.0.5"
 
-fast-xml-parser@^4.2.5, fast-xml-parser@^4.3.2, fast-xml-parser@^4.3.4:
+fast-xml-parser@^4.2.5, fast-xml-parser@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.3.4.tgz#385cc256ad7bbc57b91515a38a22502a9e1fca0d"
   integrity sha512-utnwm92SyozgA3hhH2I8qldf2lBqm6qHOICawRNRFu1qMe3+oqr+GcXjGqTmXTMGE5T4eC03kr/rlh5C1IRdZA==
