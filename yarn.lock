@@ -1799,10 +1799,10 @@
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.1.0.tgz#e529576466d074e7a5f1441236510fef123da01e"
   integrity sha512-2iDDepiIwjXHS5IVY7pwv8jMo4xWosJ7p/UTj+lllpB/gnJiYLhjJPE4Z3FCGFKyvfg5jGaimCd8Ca6bLGsCQA==
 
-"@salesforce/dev-scripts@^8.3.0":
-  version "8.3.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-8.3.0.tgz#8fcf223edc57dbdeb11397bf7db1f07a8a5e7720"
-  integrity sha512-NoaGfTtyIYed5lGXtLM7QsyGbZvPVa5uflbmIQdeFOefrvAv48k0+RbJzOl7nuj58EmvULzqrZHL6B7w5u4T5Q==
+"@salesforce/dev-scripts@^8.4.0":
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-8.4.0.tgz#bdf48878d1f12ce31f8f4ef9989eb1e5382656c7"
+  integrity sha512-Gn/OvBYUrr0bGd5e3Z+UyeHJ18ub0fwALJWPAZ54JEHNkcTWajek9BO/YER9a7/N2eU0/TDP9IfDdgVQrMAyWg==
   dependencies:
     "@commitlint/cli" "^17.1.2"
     "@commitlint/config-conventional" "^17.8.1"
@@ -1817,7 +1817,7 @@
     cosmiconfig "^7.0.0"
     eslint-config-salesforce-typescript "^3.0.5"
     husky "^7.0.4"
-    linkinator "^6.0.3"
+    linkinator "^6.0.4"
     mocha "^10.2.0"
     nyc "^15.1.0"
     prettier "^2.8.8"
@@ -2580,10 +2580,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*":
-  version "20.11.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.7.tgz#cb49aedd758c978c30806d0c38b520ed2a3df6e0"
-  integrity sha512-GPmeN1C3XAyV5uybAf4cMLWT9fDWcmQhZVtMFu7OR32WjrqGG+Wnk2V1d0bmtUyE/Zy1QJ9BxyiTih9z8Oks8A==
+"@types/node@*", "@types/node@^20.10.7":
+  version "20.11.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.17.tgz#cdd642d0e62ef3a861f88ddbc2b61e32578a9292"
+  integrity sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2601,13 +2601,6 @@
   version "18.18.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.9.tgz#5527ea1832db3bba8eb8023ce8497b7d3f299592"
   integrity sha512-0f5klcuImLnG4Qreu9hPj/rEfFq6YRc5n2mAjSsH+ec/mJL+3voBH0+8T7o8RpFjH7ovc+TRsL/c7OYIQsPTfQ==
-  dependencies:
-    undici-types "~5.26.4"
-
-"@types/node@^20.10.7":
-  version "20.11.17"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.17.tgz#cdd642d0e62ef3a861f88ddbc2b61e32578a9292"
-  integrity sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==
   dependencies:
     undici-types "~5.26.4"
 
@@ -6461,7 +6454,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.2.4.tgz#eca284f75d2965079309dc0ad9255abb2ebc1632"
   integrity sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==
 
-linkinator@^6.0.3:
+linkinator@^6.0.4:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/linkinator/-/linkinator-6.0.4.tgz#2a4a9f76732b0f8968abf35ed09d57a3a8be3427"
   integrity sha512-gxZ9ePUBeoaCk29p+2gAwrRIVnKOqAV8ZVCEM8N7MvpwbccDBQiKjXFyS6nQx56K1CCZLboan2i5iJfpWCsnSQ==
