@@ -1695,20 +1695,20 @@
     prettier-plugin-apex "^2.0.1"
     tslib "^2.6.1"
 
-"@jayree/sfdx-plugin-source@^1.3.41":
-  version "1.3.41"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.41.tgz#1a6c999e5724cd5da8447e4c3f3ccb6653cb2328"
-  integrity sha512-GohK+VkVwsP3rx1ibrhMxfRO0O0oGZqvMjNQT40RrFaqTyMcsq/P6j7EzOyc3eY/kqaH4WcQeCvduugZR8jKuA==
+"@jayree/sfdx-plugin-source@^1.3.42":
+  version "1.3.42"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.42.tgz#9a77b531dde1ddf19ca695275d3c73f43131cfff"
+  integrity sha512-v1gXjwZNq/WMs9OfyetTYVcSShfu/qZaf2Dl4ojaKG9PpFfihE3a8JfILB4QbLR99/rcW0eVBYKleuT5nWp/fg==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@oclif/core" "^3.18.2"
+    "@oclif/core" "^3.19.2"
     "@salesforce/sf-plugins-core" "^7.1.9"
     "@salesforce/source-tracking" "^5.1.11"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
     fast-xml-parser "^4.3.4"
     fs-extra "^11.2.0"
-    globby "^14.0.0"
+    globby "^14.0.1"
     ignore "^5.3.1"
     object-path "^0.11.8"
     tslib "^2.6.2"
@@ -2277,10 +2277,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-4.6.0.tgz#3c7c9c46e678feefe7a2e5bb609d3dbd665ffb3f"
   integrity sha512-t09vSN3MdfsyCHoFcTRCH/iUtG7OJ0CsjzB8cjAmKc/va/kIgeDI/TxsigdncE/4be734m0cvIYwNaV4i2XqAw==
 
-"@sindresorhus/merge-streams@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@sindresorhus/merge-streams/-/merge-streams-1.0.0.tgz#9cd84cc15bc865a5ca35fcaae198eb899f7b5c90"
-  integrity sha512-rUV5WyJrJLoloD4NDN1V1+LDMDWOa4OTsT4yYJwQNpTU6FWxkxHpL7eu4w+DmiH8x/EAM1otkPE1+LaspIbplw==
+"@sindresorhus/merge-streams@^2.1.0":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/merge-streams/-/merge-streams-2.2.1.tgz#82b5e1e135ef62ef8b522d6e7f43ad360a69f294"
+  integrity sha512-255V7MMIKw6aQ43Wbqp9HZ+VHn6acddERTLiiLnlcPLU9PdTq9Aijl12oklAgUEblLWye+vHLzmqBx6f2TGcZw==
 
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.3.0", "@sinonjs/commons@^1.6.0", "@sinonjs/commons@^1.7.0", "@sinonjs/commons@^1.8.1":
   version "1.8.6"
@@ -5702,12 +5702,12 @@ globby@^11.0.1, globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-globby@^14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-14.0.0.tgz#ea9c062a3614e33f516804e778590fcf055256b9"
-  integrity sha512-/1WM/LNHRAOH9lZta77uGbq0dAEQM+XjNesWwhlERDVenqothRbnzTrL3/LrIoEPPjeUHC3vrS6TwoyxeHs7MQ==
+globby@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-14.0.1.tgz#a1b44841aa7f4c6d8af2bc39951109d77301959b"
+  integrity sha512-jOMLD2Z7MAhyG8aJpNOpmziMOP4rPLcc95oQPKXBazW82z+CEgPFBQvEpRUa1KeIMUJo4Wsm+q6uzO/Q/4BksQ==
   dependencies:
-    "@sindresorhus/merge-streams" "^1.0.0"
+    "@sindresorhus/merge-streams" "^2.1.0"
     fast-glob "^3.3.2"
     ignore "^5.2.4"
     path-type "^5.0.0"
