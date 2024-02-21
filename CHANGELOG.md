@@ -1,3 +1,10 @@
+## [4.8.57](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.56...v4.8.57) (2024-02-21)
+
+
+### Bug Fixes
+
+* **deps:** bump ip from 1.1.8 to 1.1.9 ([#1199](https://github.com/jayree/sfdx-jayree-plugin/issues/1199)) ([c764627](https://github.com/jayree/sfdx-jayree-plugin/commit/c76462798ed702d3aefb93fb894bb360413d2e69))
+
 ## [4.8.56](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.55...v4.8.56) (2024-02-17)
 
 
