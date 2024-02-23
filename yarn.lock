@@ -1695,14 +1695,14 @@
     prettier-plugin-apex "^2.1.0"
     tslib "^2.6.1"
 
-"@jayree/sfdx-plugin-source@^1.3.42":
-  version "1.3.42"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.42.tgz#9a77b531dde1ddf19ca695275d3c73f43131cfff"
-  integrity sha512-v1gXjwZNq/WMs9OfyetTYVcSShfu/qZaf2Dl4ojaKG9PpFfihE3a8JfILB4QbLR99/rcW0eVBYKleuT5nWp/fg==
+"@jayree/sfdx-plugin-source@^1.3.43":
+  version "1.3.43"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.43.tgz#4683e4fe76582ea1703f7f84b78210f06a341abd"
+  integrity sha512-hlOpd+J1wwvvnGO/4oUvNNghLwztnUYLSg+Uws7w4Tcux8gtT/7h4fOVZVkJWqJWyiVttQ4CYM1MsGu0QBBkuw==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@oclif/core" "^3.19.2"
-    "@salesforce/sf-plugins-core" "^7.1.9"
+    "@oclif/core" "^3.19.5"
+    "@salesforce/sf-plugins-core" "^7.1.11"
     "@salesforce/source-tracking" "^5.1.11"
     debug "^4.3.4"
     deep-object-diff "^1.1.9"
@@ -2192,7 +2192,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.1.tgz#7d1c071e1e509ca9d2d8a6e48ac7447dd67a534d"
   integrity sha512-eVy947ZMxCJReKJdgfddUIsBIbPTa/i8RwQGwxq4/ss38H5sLOAeSTaun9V7HpJ1hkpDznWKfgzYvjsst9K6ig==
 
-"@salesforce/sf-plugins-core@^7.1.11", "@salesforce/sf-plugins-core@^7.1.9":
+"@salesforce/sf-plugins-core@^7.1.11":
   version "7.1.11"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-7.1.11.tgz#63c0ca8cdc2f94b36b8e4bd5f107f9d806f9f5be"
   integrity sha512-2EAv1OYxGo5e/rZ+3k3G96oVZKK2FBPKK4CiFhgp8bQ7BB0+7+bmSyBjoQ26Q2AaEp4k0GQeNsh+0RN2ZhTuVg==
