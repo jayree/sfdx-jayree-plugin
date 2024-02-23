@@ -1635,22 +1635,22 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.53":
-  version "3.1.53"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.53.tgz#592a9fb240b72667eaa9cfa35b81e6d6cc39c210"
-  integrity sha512-Qwe21xPqOSmaSSACul6zQH7A4OITPmcxcl2p1k6btwCdpsYKzdjgDL3Pkn4Tw8C+4EF4nYLhp0b5CBzMNLFhrg==
+"@jayree/sfdx-plugin-manifest@^3.1.55":
+  version "3.1.55"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.55.tgz#956fc2fa43a27595656557d6fc4148da1af44b79"
+  integrity sha512-THO/vY+T/i9xmFXYSbAm5369FwZvWrabPNRf+xquih8o1j9REMS4Y/9tM3wvLI4ZyUQMsrljWARa6Asy09kywg==
   dependencies:
     "@jayree/changelog" "^1.1.9"
-    "@oclif/core" "^3.19.2"
-    "@salesforce/core" "^6.5.3"
-    "@salesforce/sf-plugins-core" "^7.1.9"
-    "@salesforce/source-deploy-retrieve" "^10.3.9"
+    "@oclif/core" "^3.19.5"
+    "@salesforce/core" "^6.5.5"
+    "@salesforce/sf-plugins-core" "^7.1.11"
+    "@salesforce/source-deploy-retrieve" "^10.4.0"
     debug "^4.3.4"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.3.4"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.25.4"
+    isomorphic-git "1.25.6"
     tslib "^2.6.2"
 
 "@jayree/sfdx-plugin-org@^1.2.34":
@@ -1935,10 +1935,10 @@
     node-gyp "^8.2.0"
     read-package-json-fast "^2.0.1"
 
-"@oclif/core@^3.16.0", "@oclif/core@^3.18.1", "@oclif/core@^3.18.2", "@oclif/core@^3.19.1", "@oclif/core@^3.19.2":
-  version "3.19.2"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.19.2.tgz#1672061e7309f0048f9f9991607b303a9e5082fc"
-  integrity sha512-/kUZZQZO92esToSTn+fnfMQdAj8uDJ/lsMNXBRBCiLQpwnIskHXy8JzYpynxxkzY2wbGREBceQhxCyDV0XpY4g==
+"@oclif/core@^3.16.0", "@oclif/core@^3.18.1", "@oclif/core@^3.18.2", "@oclif/core@^3.19.1", "@oclif/core@^3.19.2", "@oclif/core@^3.19.5":
+  version "3.19.5"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.19.5.tgz#6523684c1ca94e05479569532177121cef35be21"
+  integrity sha512-banrxfcaWo0/xEk9LfDLt+jV+4+tR7bUBFRFXPIA9AAjikRWGV+mpSN5M3UvoaZM6aj4q5mZN7bhegxTzQcDtQ==
   dependencies:
     "@types/cli-progress" "^3.11.5"
     ansi-escapes "^4.3.2"
@@ -2113,7 +2113,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^6.5.1", "@salesforce/core@^6.5.3", "@salesforce/core@^6.5.4":
+"@salesforce/core@^6.5.1", "@salesforce/core@^6.5.3", "@salesforce/core@^6.5.4", "@salesforce/core@^6.5.5":
   version "6.5.5"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.5.5.tgz#ddfab1f6a51808ed1cadc98be3b7235d25ea436f"
   integrity sha512-2zWTwc9m+LGJNSKXk6I01dzWEjWKkHyYZbROksIPzfWJ5lGfErzpvsTcGAAskBrJD9EpQ4/BtMSLhPSwskI7Fw==
@@ -6460,10 +6460,10 @@ isomorphic-git@1.23.0:
     sha.js "^2.4.9"
     simple-get "^4.0.1"
 
-isomorphic-git@1.25.4:
-  version "1.25.4"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.4.tgz#602e8745d0590466eb9e5760a7650195bc562c08"
-  integrity sha512-14TsnmVy3uWxzFh088bUqv8IEKKMAO06yDzfbhEN2wiOlqnBUZub8kfRpV1NCOoPVA8tmwqCRTyC5bhf1Ld60A==
+isomorphic-git@1.25.6:
+  version "1.25.6"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.6.tgz#ec8ff6b5379fa0094c09b836fd68a8ddd8b88d3b"
+  integrity sha512-zA3k3QOO7doqOnBgwsaXJwHKSIIl5saEdH4xxalu082WHVES4KghsG6RE2SDwjXMCIlNa1bWocbitH6bRIrmLQ==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
