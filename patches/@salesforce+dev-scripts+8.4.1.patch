@@ -1,8 +1,8 @@
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-index 90af01f..ff466a9 100755
+index 9d8e66d..283771e 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-@@ -38,7 +38,7 @@ if (gitignorePath) {
+@@ -40,7 +40,7 @@ if (gitignorePath) {
  
    // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
    if (segments['CLEAN']) {
@@ -11,7 +11,7 @@ index 90af01f..ff466a9 100755
    } else {
      const example = join(__dirname, '..', 'files', '.gitignore');
      log(
-@@ -48,7 +48,7 @@ if (gitignorePath) {
+@@ -50,7 +50,7 @@ if (gitignorePath) {
      );
    }
    if (segments['CLEAN ALL']) {
@@ -20,8 +20,8 @@ index 90af01f..ff466a9 100755
    }
  }
  
-@@ -57,5 +57,6 @@ if (cleanAll) {
-   toClean = [...toClean, ...toCleanAll];
+@@ -63,5 +63,6 @@ if (ignoreSigningArtifacts) {
+   toClean = toClean.filter((item) => !item.endsWith('.tgz') && !item.endsWith('.sig'));
  }
  
 +toClean = [...new Set(toClean)]
@@ -171,7 +171,7 @@ index c1d55c8..a33594b 100644
  
  module.exports = PackageJson;
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index d027bac..a9fddb6 100644
+index 8d1bc90..ff2b105 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 @@ -33,7 +33,7 @@ const PACKAGE_DEFAULTS = {
@@ -201,7 +201,7 @@ index d027bac..a9fddb6 100644
        // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
        // see https://github.com/chalk/supports-color/issues/106
        env: {
-@@ -142,7 +142,7 @@ const resolveConfig = (path) => {
+@@ -144,7 +144,7 @@ const resolveConfig = (path) => {
    const configFromFile = (result && result.config) || {};
  
    if (configFromFile.test?.testsPath) {
@@ -210,7 +210,7 @@ index d027bac..a9fddb6 100644
    }
  
    // Allow users to override certain scripts
-@@ -169,6 +169,12 @@ const resolveConfig = (path) => {
+@@ -171,6 +171,12 @@ const resolveConfig = (path) => {
      delete config.wireit[scriptName];
    });
  
@@ -224,20 +224,20 @@ index d027bac..a9fddb6 100644
    return config;
  };
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
-index b7f7d10..ea4cf9f 100644
+index 0399acb..9f379bf 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
-@@ -18,6 +18,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
+@@ -19,6 +19,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
  const FILE_NAME_GITIGNORE = 'gitignore';
  const FILE_NAME_MOCHARC = 'mocharc.json';
  
 +let config;
 +let pkgRoot;
 +
- function isDifferent(sourcePath, targetPath) {
-   try {
-     // Using .replace() to normalize line endings across operating systems.
-@@ -37,7 +40,7 @@ function copyFile(sourcePath, targetPath, override = false) {
+ // We don't copy over the .gitignore file since plugins/libraries might have their own
+ // unique additions to the file. So in order to programmatically add entries, we need to
+ // read the existing .gitignore file and append these entries to it in case they don't exist.
+@@ -51,7 +54,7 @@ function copyFile(sourcePath, targetPath, override = false) {
    const fileExists = exists(targetPath);
    const shouldWriteFile = override || !fileExists;
  
@@ -246,7 +246,7 @@ index b7f7d10..ea4cf9f 100644
      copyFileSync(sourcePath, targetPath);
      return targetPath;
    }
-@@ -102,7 +105,8 @@ function replaceInFile(filePath, replaceFn) {
+@@ -164,7 +167,8 @@ function replaceInFile(filePath, replaceFn) {
  
  // eslint-disable-next-line complexity
  module.exports = (packageRoot = require('./package-path')) => {
@@ -256,7 +256,7 @@ index b7f7d10..ea4cf9f 100644
    const testPath = join(packageRoot, 'test');
    const scripts = config.scripts;
  
-@@ -181,12 +185,12 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -243,12 +247,12 @@ module.exports = (packageRoot = require('./package-path')) => {
      const compileConfig = config.compile || {};
      const strict = config.strict || compileConfig.strict;
  
@@ -272,10 +272,10 @@ index b7f7d10..ea4cf9f 100644
        added.push(copyFile(tsconfigTestSourcePath, tsconfigTestTargetPath, strict));
      }
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-index 9519d5c..2d9dcb6 100644
+index 8dc52ff..623b247 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-@@ -26,27 +26,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -33,27 +33,34 @@ module.exports = (packageRoot = require('./package-path')) => {
    const scriptList = Object.entries(config.scripts);
    const wireitList = Object.entries(config.wireit);
  
@@ -314,7 +314,7 @@ index 9519d5c..2d9dcb6 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 9d1eb50..1202b26 100644
+index 9ca4c57..f1fd51f 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -116,7 +116,7 @@ module.exports = (projectPath) => {
