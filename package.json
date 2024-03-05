@@ -31,12 +31,13 @@
     "node": ">=16.0.0"
   },
   "files": [
-    "/lib",
-    "/config",
-    "/messages",
-    "/oclif.manifest.json",
     "/CHANGELOG.md",
-    "/oclif.lock"
+    "/config",
+    "/lib",
+    "/messages",
+    "/npm-shrinkwrap.json",
+    "/oclif.lock",
+    "/oclif.manifest.json"
   ],
   "homepage": "https://github.com/jayree/sfdx-jayree-plugin",
   "keywords": [
@@ -96,6 +97,7 @@
     "docs": "sf-docs",
     "format": "wireit",
     "lint": "wireit",
+    "postpack": "sf-clean --ignore-signing-artifacts",
     "prepack": "sf-prepack",
     "prepare": "patch-package && sf-install",
     "test": "wireit",
