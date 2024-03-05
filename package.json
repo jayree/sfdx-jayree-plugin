@@ -24,7 +24,6 @@
     "pinst": "^3.0.0",
     "prettier": "^3.2.5",
     "pretty-quick": "^4.0.0",
-    "shx": "^0.3.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
