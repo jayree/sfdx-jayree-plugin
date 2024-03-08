@@ -1311,26 +1311,29 @@
     isomorphic-git "1.25.6"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.36":
-  version "1.2.36"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.36.tgz#cbce0b3a1cb082f87756c02ebd08a3dd10062988"
-  integrity sha512-2f+w4SmtA2FfoQK8t/QvLEXdkmQaXpTvqCcMv7agmiDtrXa9XwKyPmEYktLT8fHo92kt9gau2AHo2cc0K8GqSw==
+"@jayree/sfdx-plugin-org@^1.2.37":
+  version "1.2.37"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.37.tgz#f298e805c040748919207c4241d38062e1b4e5e4"
+  integrity sha512-laKKeL3m6gUW6/e3ZGg38Km9pZKAF6r7VP3FxxR0LXs6rdEgP5UT0ZWbsRHi4K+9WPaak3PnPPVXARSINPisyQ==
   dependencies:
     "@jayree/changelog" "^1.1.10"
     "@listr2/prompt-adapter-enquirer" "^2.0.2"
     "@oclif/core" "^3.20.0"
+    "@salesforce/core" "^6.7.0"
     "@salesforce/sf-plugins-core" "^7.1.14"
-    "@salesforce/source-deploy-retrieve" "^10.5.0"
+    "@salesforce/source-deploy-retrieve" "^10.5.1"
     "@salesforce/ts-types" "^2.0.9"
+    chalk "^5.3.0"
     cli-truncate "^4.0.0"
     debug "^4.3.4"
     enquirer "^2.4.1"
     fs-extra "^11.2.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
+    jsforce "^2.0.0-beta.29"
     listr2 "^8.0.2"
     log-update "^6.0.0"
-    playwright-chromium "^1.42.0"
+    playwright-chromium "^1.42.1"
     tabletojson "4.1.1"
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
@@ -1595,7 +1598,7 @@
     node-gyp "^8.2.0"
     read-package-json-fast "^2.0.1"
 
-"@oclif/core@^3.18.2", "@oclif/core@^3.19.2", "@oclif/core@^3.19.5", "@oclif/core@^3.19.6", "@oclif/core@^3.20.0", "@oclif/core@^3.23.0":
+"@oclif/core@^3.18.2", "@oclif/core@^3.19.2", "@oclif/core@^3.19.5", "@oclif/core@^3.19.6", "@oclif/core@^3.20.0", "@oclif/core@^3.21.0", "@oclif/core@^3.23.0":
   version "3.23.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.23.0.tgz#d0ccc5f99c376e4bcfce04e8e94efae8417a53f8"
   integrity sha512-giQ/8Ft8yXWg4IyPVtynPb7ihoQsa3A/1Q53UIJIhh+8k+EedE3lJ01yn6sq6Ha35IGqsG1WhkeHzlJIuldEaw==
@@ -1629,12 +1632,12 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/plugin-help@^6.0.12", "@oclif/plugin-help@^6.0.14":
-  version "6.0.14"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.14.tgz#9e572fb8394e9cbe2da3465c029eb9521f9c9198"
-  integrity sha512-orKUsV8hYtbnPf1W7y5wnnR2X6UFOl7hqTh/Uj4E+3ju/8TnvpavZXFA2UQecKWcfdbYjuTwxuZdeh8vBWFLIQ==
+"@oclif/plugin-help@^6.0.12", "@oclif/plugin-help@^6.0.17":
+  version "6.0.17"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.0.17.tgz#88aa0ba02effa7bb33a7ebddfd3a2d5bfb2399f0"
+  integrity sha512-zHKRQf/SkaOyF8xwz9EJxQ4bsB9bK+ED+i0YF24dud/1DkTj5cEDvrNV6sj+YH34ONz7z4et230URdFM3SJKeQ==
   dependencies:
-    "@oclif/core" "^3.19.2"
+    "@oclif/core" "^3.21.0"
 
 "@oclif/plugin-not-found@^3.0.10":
   version "3.0.10"
@@ -8034,17 +8037,17 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.42.0:
-  version "1.42.0"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.42.0.tgz#b366b202b6c18d34fe94d9af7f19bd5583a1cb33"
-  integrity sha512-KSr77+O8XAo7P86SD7B7Ww0Z2gJi45seLNHdUuomVE1U/Up7GPFELfvbZsAHL6oppTrfEYPq3QzdR56uOZ8uJQ==
+playwright-chromium@^1.42.1:
+  version "1.42.1"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.42.1.tgz#fd29e7f441889e3abdb79b55286c118ea06182b3"
+  integrity sha512-VelpmKJ+3G3QlAFfA9JIuEYyU8b8vQrlIPY3tIaGv+adn7mem56SP04e+zMudcxisfOT3suQOSTD1qs6YErdDg==
   dependencies:
-    playwright-core "1.42.0"
+    playwright-core "1.42.1"
 
-playwright-core@1.42.0:
-  version "1.42.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.42.0.tgz#bc6525268b13b8bed5fbead761a1a886984555c4"
-  integrity sha512-0HD9y8qEVlcbsAjdpBaFjmaTHf+1FeIddy8VJLeiqwhcNqGCBe4Wp2e8knpqiYbzxtxarxiXyNDw2cG8sCaNMQ==
+playwright-core@1.42.1:
+  version "1.42.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.42.1.tgz#13c150b93c940a3280ab1d3fbc945bc855c9459e"
+  integrity sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==
 
 pluralize@^8.0.0:
   version "8.0.0"
