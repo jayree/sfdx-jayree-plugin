@@ -1,5 +1,5 @@
 diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
-index 586111d..1061143 100644
+index 50c4fe8..3d04c32 100644
 --- a/node_modules/oclif/lib/commands/readme.js
 +++ b/node_modules/oclif/lib/commands/readme.js
 @@ -36,11 +36,11 @@ const lodashTemplate = require('lodash.template');
@@ -17,7 +17,7 @@ index 586111d..1061143 100644
  <!-- toc -->
  
  Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
-@@ -139,7 +139,7 @@ Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
+@@ -165,7 +165,7 @@ Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
          const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
          const header = () => {
              const usage = this.commandUsage(config, c);
@@ -26,7 +26,7 @@ index 586111d..1061143 100644
          };
          try {
              // copy c to keep the command ID with colons, see:
-@@ -279,13 +279,9 @@ USAGE
+@@ -317,13 +317,9 @@ USAGE
          const id = (0, core_1.toConfiguredId)(command.id, config);
          const defaultUsage = () => (0, util_1.compact)([
              id,
