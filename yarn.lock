@@ -1230,17 +1230,17 @@
     isomorphic-git "1.25.6"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.37":
-  version "1.2.37"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.37.tgz#f298e805c040748919207c4241d38062e1b4e5e4"
-  integrity sha512-laKKeL3m6gUW6/e3ZGg38Km9pZKAF6r7VP3FxxR0LXs6rdEgP5UT0ZWbsRHi4K+9WPaak3PnPPVXARSINPisyQ==
+"@jayree/sfdx-plugin-org@^1.2.38":
+  version "1.2.38"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.38.tgz#d78009c307dbc94bf6866305bcdc5c842f0eec29"
+  integrity sha512-JBjCGDSF0My00SR9lQr1n7ZXB0KpmREDxrC+CjcX5mEGmvzsHj0EukGL0Kb4AShhe7MROmPkpD0+1Dek9iGTSA==
   dependencies:
     "@jayree/changelog" "^1.1.10"
     "@listr2/prompt-adapter-enquirer" "^2.0.2"
     "@oclif/core" "^3.20.0"
-    "@salesforce/core" "^6.7.0"
-    "@salesforce/sf-plugins-core" "^7.1.14"
-    "@salesforce/source-deploy-retrieve" "^10.5.1"
+    "@salesforce/core" "^6.7.1"
+    "@salesforce/sf-plugins-core" "^7.1.15"
+    "@salesforce/source-deploy-retrieve" "^10.5.2"
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
     cli-truncate "^4.0.0"
@@ -1253,7 +1253,7 @@
     listr2 "^8.0.2"
     log-update "^6.0.0"
     playwright-chromium "^1.42.1"
-    tabletojson "4.1.1"
+    tabletojson "4.1.3"
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
 
@@ -9383,10 +9383,10 @@ synckit@^0.8.6:
     "@pkgr/core" "^0.1.0"
     tslib "^2.6.2"
 
-tabletojson@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.1.tgz#56cb5ad63c3bf654230d556f9a97e1800945f645"
-  integrity sha512-hGH2tY9fLveCl///istEvuRbkGquC1bqdWN3ahgmkqCtvsUJlPQIAsrEidC19HNcMyPjo6rrDnJvL/Fe6YSFdw==
+tabletojson@4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.3.tgz#7da49bc4f43245f46b872eb78aaa55c3558acb35"
+  integrity sha512-ac63/I5xfW1L162XZY9P1y1CtpZ0Hf7TW+PgRqOEeXFuLhm5D7kg/+7Wm2D6myU1H9qJlr4f+Jiozzq10BFjTg==
   dependencies:
     cheerio "^1.0.0-rc.12"
 
