@@ -1,11 +1,11 @@
 diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
-index 50c4fe8..3d04c32 100644
+index 2276050..5a622ea 100644
 --- a/node_modules/oclif/lib/commands/readme.js
 +++ b/node_modules/oclif/lib/commands/readme.js
-@@ -36,11 +36,11 @@ const lodashTemplate = require('lodash.template');
+@@ -35,11 +35,11 @@ const slugify = new (require('github-slugger'))();
+ const lodashTemplate = require('lodash.template');
  class Readme extends core_1.Command {
-     static description = `adds commands to README.md in current directory
- The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
+     static description = `The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
 -# Usage
 +## Usage
  <!-- usage -->
@@ -26,7 +26,7 @@ index 50c4fe8..3d04c32 100644
          };
          try {
              // copy c to keep the command ID with colons, see:
-@@ -317,13 +317,9 @@ USAGE
+@@ -316,13 +316,9 @@ USAGE
          const id = (0, core_1.toConfiguredId)(command.id, config);
          const defaultUsage = () => (0, util_1.compact)([
              id,
