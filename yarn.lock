@@ -1230,17 +1230,17 @@
     isomorphic-git "1.25.6"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.38":
-  version "1.2.38"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.38.tgz#d78009c307dbc94bf6866305bcdc5c842f0eec29"
-  integrity sha512-JBjCGDSF0My00SR9lQr1n7ZXB0KpmREDxrC+CjcX5mEGmvzsHj0EukGL0Kb4AShhe7MROmPkpD0+1Dek9iGTSA==
+"@jayree/sfdx-plugin-org@^1.2.39":
+  version "1.2.39"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.39.tgz#13fae44307ef642fd731e09b4dc2c6aaf4acf6fa"
+  integrity sha512-Wjo47QHHLm0v2MAEZd3LWE6Z4P7rSo+4IDwgFbXuBASp09Hpj7h4E1MEqwmo3H5g/0WD7icFpW+RyPATxJiGjg==
   dependencies:
     "@jayree/changelog" "^1.1.10"
     "@listr2/prompt-adapter-enquirer" "^2.0.2"
-    "@oclif/core" "^3.20.0"
+    "@oclif/core" "^3.25.3"
     "@salesforce/core" "^6.7.1"
-    "@salesforce/sf-plugins-core" "^7.1.15"
-    "@salesforce/source-deploy-retrieve" "^10.5.2"
+    "@salesforce/sf-plugins-core" "^7.1.16"
+    "@salesforce/source-deploy-retrieve" "^10.5.4"
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
     cli-truncate "^4.0.0"
@@ -1564,7 +1564,7 @@
     read-package-json-fast "^3.0.0"
     which "^3.0.0"
 
-"@oclif/core@^3.20.0", "@oclif/core@^3.21.0", "@oclif/core@^3.23.0", "@oclif/core@^3.25.1", "@oclif/core@^3.25.2", "@oclif/core@^3.25.3":
+"@oclif/core@^3.21.0", "@oclif/core@^3.23.0", "@oclif/core@^3.25.1", "@oclif/core@^3.25.2", "@oclif/core@^3.25.3":
   version "3.25.3"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.25.3.tgz#dac0e604c33267f879d3233cd4d0730146db4793"
   integrity sha512-2TLZmqnDZos9h73KbrdKqvUQEXIPpUfEzgIfqdQRZwszfk1RtiHAb/7ihtnJICnRRVXlD4XLDmUlY4cFJ0ka4g==
@@ -1822,7 +1822,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.6.1.tgz#7d1c071e1e509ca9d2d8a6e48ac7447dd67a534d"
   integrity sha512-eVy947ZMxCJReKJdgfddUIsBIbPTa/i8RwQGwxq4/ss38H5sLOAeSTaun9V7HpJ1hkpDznWKfgzYvjsst9K6ig==
 
-"@salesforce/sf-plugins-core@^7.1.15", "@salesforce/sf-plugins-core@^7.1.16":
+"@salesforce/sf-plugins-core@^7.1.16":
   version "7.1.16"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-7.1.16.tgz#a68673560f01421ac18a0bc1d4687abc35e11234"
   integrity sha512-v135A7TG1n97eFoh0j96kbHKbivXbbd7M5url3L0I5lJsCGGF+mMSL2Tpm8FNUN8DCLOGkvymR1s2QmNzMR7Tw==
