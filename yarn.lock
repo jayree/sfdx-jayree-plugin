@@ -1259,17 +1259,17 @@
     semver "^7.5.4"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.1.60":
-  version "3.1.60"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.60.tgz#678a028dc4fa621c8c206840c7d5845df084da85"
-  integrity sha512-qtAF3jW5B4sP90nGxKU59OK3rnkmFDZosYQ05rntGjH6yWao0safWSq8b4PYh7xl8oJgPnSnoEdL5H7pukdrew==
+"@jayree/sfdx-plugin-manifest@^3.1.62":
+  version "3.1.62"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.1.62.tgz#0378b0788e01d23191e9fb8130610ab55e821d53"
+  integrity sha512-8CuMy4S1FQ5qAu2kMmdiiC1aNqQegkfAnIvVvhC9Aqgh+LLIkgcQU6O3TZVT1HxRrtj0pkbKp+7+Y2xV1iNbkw==
   dependencies:
     "@jayree/changelog" "^1.1.10"
     "@oclif/core" "^3.25.3"
-    "@salesforce/core" "^6.7.3"
+    "@salesforce/core" "^6.7.6"
     "@salesforce/kit" "^3.0.15"
-    "@salesforce/sf-plugins-core" "^7.1.16"
-    "@salesforce/source-deploy-retrieve" "^10.6.1"
+    "@salesforce/sf-plugins-core" "^8.0.3"
+    "@salesforce/source-deploy-retrieve" "^10.9.0"
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
     debug "^4.3.4"
@@ -1277,7 +1277,7 @@
     fast-xml-parser "^4.3.6"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.25.6"
+    isomorphic-git "1.25.7"
     tslib "^2.6.2"
 
 "@jayree/sfdx-plugin-org@^1.2.41":
@@ -5371,10 +5371,10 @@ isomorphic-git@1.23.0:
     sha.js "^2.4.9"
     simple-get "^4.0.1"
 
-isomorphic-git@1.25.6:
-  version "1.25.6"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.6.tgz#ec8ff6b5379fa0094c09b836fd68a8ddd8b88d3b"
-  integrity sha512-zA3k3QOO7doqOnBgwsaXJwHKSIIl5saEdH4xxalu082WHVES4KghsG6RE2SDwjXMCIlNa1bWocbitH6bRIrmLQ==
+isomorphic-git@1.25.7:
+  version "1.25.7"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.25.7.tgz#f6f6fae81ee67d3982edad8c90ca0f096e39267c"
+  integrity sha512-KE10ejaIsEpQ+I/apS33qqTjyzCXgOniEaL32DwNbXtboKG8H3cu+RiBcdp3G9w4MpOOTQfGPsWp4i8UxRfDLg==
   dependencies:
     async-lock "^1.1.0"
     clean-git-ref "^2.0.1"
