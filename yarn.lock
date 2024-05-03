@@ -1525,18 +1525,18 @@
     isomorphic-git "1.25.7"
     tslib "^2.6.2"
 
-"@jayree/sfdx-plugin-org@^1.2.47":
-  version "1.2.47"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.47.tgz#cae70293dc6f986ec838bb87b5aee1fc683dc24a"
-  integrity sha512-UgM5eEM+4Yr6IvPNmuykW/epPmzjfPuPD6hkeISvRzmoNzZquPBreRTx6EO4qDudDNVtMbiHI3qhYgXKvoZvNg==
+"@jayree/sfdx-plugin-org@^1.2.48":
+  version "1.2.48"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.48.tgz#6ff0776ea829e7fc59f655f876070f12e037d5e3"
+  integrity sha512-sNMhjqaroI2qyXJH/pJiMj3m7WW3mvCBMmFGU6Mr5lwtANdxBX9w7h7PD9kKuEFXDA1oIjxK6MPsuGXDt+sdtg==
   dependencies:
     "@jayree/changelog" "^1.1.11"
     "@jsforce/jsforce-node" "^3.2.0"
     "@listr2/prompt-adapter-enquirer" "^2.0.8"
     "@oclif/core" "^3.26.4"
     "@salesforce/core" "^7.3.1"
-    "@salesforce/sf-plugins-core" "^9.0.5"
-    "@salesforce/source-deploy-retrieve" "^11.1.2"
+    "@salesforce/sf-plugins-core" "^9.0.7"
+    "@salesforce/source-deploy-retrieve" "^11.3.0"
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
     cli-truncate "^4.0.0"
@@ -1635,7 +1635,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.1.0", "@jsforce/jsforce-node@^3.2.0":
+"@jsforce/jsforce-node@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.2.0.tgz#4b104613fc9bb74e0e38d2c00936ea2b228ba73a"
   integrity sha512-3GjWNgWs0HFajVhIhwvBPb0B45o500wTBNEBYxy8XjeeRra+qw8A9xUrfVU7TAGev8kXuKhjJwaTiSzThpEnew==
@@ -1681,10 +1681,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^3.21.0", "@oclif/core@^3.26.0", "@oclif/core@^3.26.2", "@oclif/core@^3.26.4":
-  version "3.26.4"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.26.4.tgz#ab0c6d06f699abaf0fa6186466f64f02a8435c61"
-  integrity sha512-ntfo2ut7enNtAn/jB/dryMUPBM2Fh8Fydmi3k/Ybo6lCGU/hmsPFkBRjCEJAQMyNkK2yVZARaWogdOrcVgFz+w==
+"@oclif/core@^3.21.0", "@oclif/core@^3.26.0", "@oclif/core@^3.26.2", "@oclif/core@^3.26.4", "@oclif/core@^3.26.5":
+  version "3.26.5"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.26.5.tgz#6a1962971fcaa4e235c0d6a83d50681ccb2bd0e4"
+  integrity sha512-uRmAujGJjLhhgpLylbiuHuPt9Ec7u6aJ72utuSPNTRw47+W5vbQSGnLGPiil1Mt5YDL+zFOyTVH6Uv3NSP2SaQ==
   dependencies:
     "@types/cli-progress" "^3.11.5"
     ansi-escapes "^4.3.2"
@@ -1759,12 +1759,12 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^7.3.0", "@salesforce/core@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-7.3.1.tgz#cda324f7a5ff1be6d7381943b15b23dbe3cd5dec"
-  integrity sha512-jdc0GOUlV4xvyF9dPbBKNPDvQc06uj5YHFEHvdhCAFtCvqgtubpDzlyDppac2kdKujh4c7UH2KreboNvJ3LsoQ==
+"@salesforce/core@^7.3.0", "@salesforce/core@^7.3.1", "@salesforce/core@^7.3.3":
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-7.3.3.tgz#4b84aba806264dd13716f4c4774bd5a417259662"
+  integrity sha512-THjYnOrfj0vW+qvlm70NDasH3RHD03cm884yi1+1axA4ugS4FFxXrPDPWAEU5ve5B4vnT7CJfuD/Q56l67ug8w==
   dependencies:
-    "@jsforce/jsforce-node" "^3.1.0"
+    "@jsforce/jsforce-node" "^3.2.0"
     "@salesforce/kit" "^3.1.1"
     "@salesforce/schemas" "^1.7.0"
     "@salesforce/ts-types" "^2.0.9"
@@ -1775,7 +1775,7 @@
     js2xmlparser "^4.0.1"
     jsonwebtoken "9.0.2"
     jszip "3.10.1"
-    pino "^8.19.0"
+    pino "^8.21.0"
     pino-abstract-transport "^1.1.0"
     pino-pretty "^10.3.1"
     proper-lockfile "^4.1.2"
@@ -1837,23 +1837,23 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.7.0.tgz#b7e0af3ee414ae7160bce351c0184d77ccb98fe3"
   integrity sha512-Z0PiCEV55khm0PG+DsnRYCjaDmacNe3HDmsoSm/CSyYvJJm+D5vvkHKN9/PKD/gaRe8XAU836yfamIYFblLINw==
 
-"@salesforce/sf-plugins-core@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-9.0.5.tgz#34732af855a6b3205e89765a446ea01024cad227"
-  integrity sha512-il3/mKhmoDMbTdlX5G2YJw3LaJd1D3FlsPEr4gg8sXK1/gxRz0SCqcaXsjWa4Fo6i12zkW8Qgsd5vQ3N6ojiXA==
+"@salesforce/sf-plugins-core@^9.0.5", "@salesforce/sf-plugins-core@^9.0.7":
+  version "9.0.7"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-9.0.7.tgz#77ffc67df994e0cec205827462811f521e3086ba"
+  integrity sha512-5F6/ax7welNZrizpl9QSQmGADqlCzFDB8t8I5P/n2LplMb3CwJRrZPcOZxJNnhlfXNlLrYtoShv2C+yrxgqYUA==
   dependencies:
     "@inquirer/confirm" "^2.0.17"
     "@inquirer/password" "^1.1.16"
-    "@oclif/core" "^3.26.2"
-    "@salesforce/core" "^7.3.0"
+    "@oclif/core" "^3.26.5"
+    "@salesforce/core" "^7.3.3"
     "@salesforce/kit" "^3.1.0"
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
 
-"@salesforce/source-deploy-retrieve@^11.0.1", "@salesforce/source-deploy-retrieve@^11.1.2":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-11.1.2.tgz#f5c70b952eca711b2be0e110b289eb24aaa60b4d"
-  integrity sha512-QhRft7U/XMBDaZTbzacbHH4sapTW/d25V3Hiwua2lg/Ce6hEj/5w6l8LlO5UAyRpRMaMy2LfaTRygu+rT3AS8g==
+"@salesforce/source-deploy-retrieve@^11.0.1", "@salesforce/source-deploy-retrieve@^11.1.2", "@salesforce/source-deploy-retrieve@^11.3.0":
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-11.3.0.tgz#7487734f115fe8c92c432955b58116abc646c400"
+  integrity sha512-NsiDL1i+CWXcCOGYtQtggrtJuFIr5zHdoyn5atcgFuHk2X9H7Czf3kletpvZh0D2T0CHy6Q9ktf+Vv/UjFmxPw==
   dependencies:
     "@salesforce/core" "^7.3.1"
     "@salesforce/kit" "^3.1.1"
@@ -7048,10 +7048,18 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pino-abstract-transport@^1.0.0, pino-abstract-transport@^1.1.0, pino-abstract-transport@v1.1.0:
+pino-abstract-transport@^1.0.0, pino-abstract-transport@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pino-abstract-transport/-/pino-abstract-transport-1.1.0.tgz#083d98f966262164504afb989bccd05f665937a8"
   integrity sha512-lsleG3/2a/JIWUtf9Q5gUNErBqwIu1tUKTT3dUzaf5DySw9ra1wcqKjJjLX1VTY64Wk1eEOYsVGSaGfCK85ekA==
+  dependencies:
+    readable-stream "^4.0.0"
+    split2 "^4.0.0"
+
+pino-abstract-transport@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/pino-abstract-transport/-/pino-abstract-transport-1.2.0.tgz#97f9f2631931e242da531b5c66d3079c12c9d1b5"
+  integrity sha512-Guhh8EZfPCfH+PMXAb6rKOjGQEoy0xlAIn+irODG5kgfYV+BQ0rGYYWTIel3P5mmyXqkYkPmdIkywsn6QKUR1Q==
   dependencies:
     readable-stream "^4.0.0"
     split2 "^4.0.0"
@@ -7081,22 +7089,22 @@ pino-std-serializers@^6.0.0:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-6.2.2.tgz#d9a9b5f2b9a402486a5fc4db0a737570a860aab3"
   integrity sha512-cHjPPsE+vhj/tnhCy/wiMh3M3z3h/j15zHQX+S9GkTBgqJuTuJzYJ4gUyACLhDaJ7kk9ba9iRDmbH2tJU03OiA==
 
-pino@^8.19.0:
-  version "8.19.0"
-  resolved "https://registry.yarnpkg.com/pino/-/pino-8.19.0.tgz#ccc15ef736f103ec02cfbead0912bc436dc92ce4"
-  integrity sha512-oswmokxkav9bADfJ2ifrvfHUwad6MLp73Uat0IkQWY3iAw5xTRoznXbXksZs8oaOUMpmhVWD+PZogNzllWpJaA==
+pino@^8.21.0:
+  version "8.21.0"
+  resolved "https://registry.yarnpkg.com/pino/-/pino-8.21.0.tgz#e1207f3675a2722940d62da79a7a55a98409f00d"
+  integrity sha512-ip4qdzjkAyDDZklUaZkcRFb2iA118H9SgRh8yzTkSQK8HilsOJF7rSY8HoW5+I0M46AZgX/pxbprf2vvzQCE0Q==
   dependencies:
     atomic-sleep "^1.0.0"
     fast-redact "^3.1.1"
     on-exit-leak-free "^2.1.0"
-    pino-abstract-transport v1.1.0
+    pino-abstract-transport "^1.2.0"
     pino-std-serializers "^6.0.0"
     process-warning "^3.0.0"
     quick-format-unescaped "^4.0.3"
     real-require "^0.2.0"
     safe-stable-stringify "^2.3.1"
     sonic-boom "^3.7.0"
-    thread-stream "^2.0.0"
+    thread-stream "^2.6.0"
 
 pinst@^3.0.0:
   version "3.0.0"
@@ -8194,10 +8202,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-thread-stream@^2.0.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/thread-stream/-/thread-stream-2.4.1.tgz#6d588b14f0546e59d3f306614f044bc01ce43351"
-  integrity sha512-d/Ex2iWd1whipbT681JmTINKw0ZwOUBZm7+Gjs64DHuX34mmw8vJL2bFAaNacaW72zYiTJxSHi5abUuOi5nsfg==
+thread-stream@^2.6.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/thread-stream/-/thread-stream-2.7.0.tgz#d8a8e1b3fd538a6cca8ce69dbe5d3d097b601e11"
+  integrity sha512-qQiRWsU/wvNolI6tbbCKd9iKaTnCXsTwVxhhKM6nctPdujTyztjlbUkUTUymidWcMnZ5pWR0ej4a0tjsW021vw==
   dependencies:
     real-require "^0.2.0"
 
