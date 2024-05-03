@@ -4351,12 +4351,12 @@ eslint-plugin-prettier@^5.1.3:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.8.6"
 
-eslint-plugin-sf-plugin@^1.18.2:
-  version "1.18.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.18.2.tgz#36e275b82eb17586dcfe77d0aafedecc30124329"
-  integrity sha512-QkxCu/4aglqlduTCk4d+3C6kl5KoIL6a88HJGLjgm1zWjjxduEeecsBNcHz82KN6FZtV+oONmvXPNoMlwQpvvw==
+eslint-plugin-sf-plugin@^1.18.3:
+  version "1.18.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.18.3.tgz#8711ba1544e86fb8227375415865fca2c3566348"
+  integrity sha512-Cl2ZpraMOwOm/kDn2hlud7mkDH3OrImueAyX8nkX1LA0kFma9/yokdxabWE/uaPpWPUlADeqgKWwgTjgf75SYQ==
   dependencies:
-    "@salesforce/core" "^7.3.0"
+    "@salesforce/core" "^7.3.1"
     "@typescript-eslint/utils" "^6.17.0"
 
 eslint-plugin-unicorn@^50.0.1:
