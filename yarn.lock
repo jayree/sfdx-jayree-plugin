@@ -1552,18 +1552,18 @@
     tslib "^2.6.1"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.58":
-  version "1.3.58"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.58.tgz#1670f747737dd8e60932e1e38713535f3a6666b9"
-  integrity sha512-UlEyBKzc2018kLHEELD/cAPojNvw4W3uO3wxxMUjyAolWpVNewRNM7z722O081boLlnVjnyOMmgl9uXUqiT/oQ==
+"@jayree/sfdx-plugin-prettier@^1.3.59":
+  version "1.3.59"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.59.tgz#f86fff52f867659ed3fceb2c233135c33ad80fd0"
+  integrity sha512-A+WC7UrM+LrTbomhlkjUIMcGBibcqgxlE2cpS0JDzqun8gXq83k6FKODaK6c6wB65iLuajYlqqa+RMTU8c+VkQ==
   dependencies:
     "@jayree/changelog" "^1.1.11"
     "@oclif/core" "^3.26.4"
     "@prettier/plugin-xml" "^3.4.1"
-    "@salesforce/core" "^7.3.1"
+    "@salesforce/core" "^7.3.3"
     "@salesforce/kit" "^3.1.1"
-    "@salesforce/sf-plugins-core" "^9.0.5"
-    "@salesforce/source-deploy-retrieve" "^11.1.2"
+    "@salesforce/sf-plugins-core" "^9.0.7"
+    "@salesforce/source-deploy-retrieve" "^11.3.0"
     cli-progress "^3.12.0"
     debug "^4.3.4"
     fs-extra "^11.2.0"
