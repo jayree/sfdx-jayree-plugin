@@ -1,0 +1,32 @@
+diff --git a/node_modules/oclif/lib/commands/readme.js b/node_modules/oclif/lib/commands/readme.js
+index 1bb9cd1..67912bd 100644
+--- a/node_modules/oclif/lib/commands/readme.js
++++ b/node_modules/oclif/lib/commands/readme.js
+@@ -32,11 +32,11 @@ const path = __importStar(require("node:path"));
+ const readme_generator_1 = __importDefault(require("../readme-generator"));
+ class Readme extends core_1.Command {
+     static description = `The readme must have any of the following tags inside of it for it to be replaced or else it will do nothing:
+-# Usage
++## Usage
+ <!-- usage -->
+-# Commands
++## Commands
+ <!-- commands -->
+-# Table of contents
++## Table of contents
+ <!-- toc -->
+ 
+ Customize the code URL prefix by setting oclif.repositoryPrefix in package.json.
+diff --git a/node_modules/oclif/lib/readme-generator.js b/node_modules/oclif/lib/readme-generator.js
+index 368e69e..4ce7593 100644
+--- a/node_modules/oclif/lib/readme-generator.js
++++ b/node_modules/oclif/lib/readme-generator.js
+@@ -156,7 +156,7 @@ class ReadmeGenerator {
+         const wrapper = new help_compatibility_1.HelpCompatibilityWrapper(help);
+         const header = () => {
+             const usage = this.commandUsage(c);
+-            return usage ? `## \`${this.config.bin} ${usage}\`` : `## \`${this.config.bin}\``;
++            return usage ? `### \`${this.config.bin} ${usage}\`` : `### \`${this.config.bin}\``;
+         };
+         try {
+             // copy c to keep the command ID with colons, see:
