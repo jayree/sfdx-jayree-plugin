@@ -12,7 +12,7 @@
     "@jayree/sfdx-plugin-source": "^1.3.56"
   },
   "devDependencies": {
-    "@oclif/plugin-help": "^6.0.20",
+    "@oclif/plugin-help": "^6.0.22",
     "@salesforce/dev-scripts": "^9.1.2",
     "@salesforce/ts-sinon": "^1.4.19",
     "c8": "^9.1.0",
