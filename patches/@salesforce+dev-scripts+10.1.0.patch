@@ -1,8 +1,8 @@
 diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-index 9d8e66d..283771e 100755
+index 657c525..95676aa 100755
 --- a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
 +++ b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
-@@ -40,7 +40,7 @@ if (gitignorePath) {
+@@ -50,7 +50,7 @@ if (gitignorePath) {
  
    // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
    if (segments['CLEAN']) {
@@ -11,7 +11,7 @@ index 9d8e66d..283771e 100755
    } else {
      const example = join(__dirname, '..', 'files', '.gitignore');
      log(
-@@ -50,7 +50,7 @@ if (gitignorePath) {
+@@ -60,7 +60,7 @@ if (gitignorePath) {
      );
    }
    if (segments['CLEAN ALL']) {
@@ -20,7 +20,7 @@ index 9d8e66d..283771e 100755
    }
  }
  
-@@ -63,5 +63,6 @@ if (ignoreSigningArtifacts) {
+@@ -73,5 +73,6 @@ if (ignoreSigningArtifacts) {
    toClean = toClean.filter((item) => !item.endsWith('.tgz') && !item.endsWith('.sig'));
  }
  
@@ -85,10 +85,10 @@ index 2e6bae4..6725c65 100644
  }
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict-esm.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict-esm.json
 new file mode 100644
-index 0000000..832230f
+index 0000000..0e56a73
 --- /dev/null
 +++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict-esm.json
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,12 @@
 +// Generated - Do not modify. Controlled by @salesforce/dev-scripts
 +// See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 +
@@ -96,7 +96,8 @@ index 0000000..832230f
 +  "extends": "@salesforce/dev-config/tsconfig-strict-esm",
 +  "compilerOptions": {
 +    "outDir": "lib",
-+    "incremental": true
++    "incremental": true,
++    "skipLibCheck": true
 +  },
 +  "include": ["./src/**/*.ts"]
 +}
@@ -224,7 +225,7 @@ index 8d1bc90..ff2b105 100644
    return config;
  };
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
-index 0399acb..9f379bf 100644
+index b47f4f9..0d69e29 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 @@ -19,6 +19,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
@@ -246,7 +247,7 @@ index 0399acb..9f379bf 100644
      copyFileSync(sourcePath, targetPath);
      return targetPath;
    }
-@@ -164,7 +167,8 @@ function replaceInFile(filePath, replaceFn) {
+@@ -173,7 +176,8 @@ function replaceInFile(filePath, replaceFn) {
  
  // eslint-disable-next-line complexity
  module.exports = (packageRoot = require('./package-path')) => {
@@ -256,7 +257,7 @@ index 0399acb..9f379bf 100644
    const testPath = join(packageRoot, 'test');
    const scripts = config.scripts;
  
-@@ -243,12 +247,12 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -252,12 +256,12 @@ module.exports = (packageRoot = require('./package-path')) => {
      const compileConfig = config.compile || {};
      const strict = config.strict || compileConfig.strict;
  
@@ -272,10 +273,10 @@ index 0399acb..9f379bf 100644
        added.push(copyFile(tsconfigTestSourcePath, tsconfigTestTargetPath, strict));
      }
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-index 8dc52ff..623b247 100644
+index 3001ff7..6e422c3 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-@@ -33,27 +33,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -45,27 +45,34 @@ module.exports = (packageRoot = require('./package-path')) => {
    const scriptList = Object.entries(config.scripts);
    const wireitList = Object.entries(config.wireit);
  
@@ -314,7 +315,7 @@ index 8dc52ff..623b247 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 9ca4c57..f1fd51f 100644
+index 46a5477..e2510ce 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -116,7 +116,7 @@ module.exports = (projectPath) => {
