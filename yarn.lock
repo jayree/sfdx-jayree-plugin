@@ -1446,14 +1446,14 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.25.10"
 
-"@jayree/sfdx-plugin-org@^1.2.54":
-  version "1.2.54"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.54.tgz#77927cbe1aef951925847836f65ba082ad1c60fa"
-  integrity sha512-ZAqdtZ53y6R9Ot2+hZH/zaNjtcnoZuHtLDY2itX8KGLH+ztJcmuoz1JXpSTnj4fB/c5YzSl0w+Y4Z25W8ftjQg==
+"@jayree/sfdx-plugin-org@^1.2.55":
+  version "1.2.55"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.55.tgz#30c65c58d0d184a1c16649cab9d8a7ac8a9bed4d"
+  integrity sha512-a7DJfeLi8qmpf4ah1cUEgGW0YAD+57IcaSyecBIYWX6A/V327a54JIM7iKmwjOn6FhJmN5KifTGHw7WlotwEXQ==
   dependencies:
     "@jayree/changelog" "^1.2.0"
     "@jsforce/jsforce-node" "^3.2.0"
-    "@listr2/prompt-adapter-enquirer" "^2.0.8"
+    "@listr2/prompt-adapter-enquirer" "^2.0.9"
     "@oclif/core" "^3.26.6"
     "@salesforce/core" "^7.3.10"
     "@salesforce/sf-plugins-core" "^9.1.0"
@@ -1466,10 +1466,10 @@
     fs-extra "^11.2.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
-    listr2 "^8.2.1"
+    listr2 "^8.2.2"
     log-update "^6.0.0"
     playwright-chromium "^1.44.1"
-    tabletojson "4.1.3"
+    tabletojson "4.1.4"
     tslib "^2.6.3"
     wrap-ansi "^9.0.0"
 
@@ -1576,10 +1576,10 @@
     strip-ansi "^6.0.0"
     xml2js "^0.6.2"
 
-"@listr2/prompt-adapter-enquirer@^2.0.8":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.8.tgz#c82a65e565803b289d09d5884198bbd9d91c94a1"
-  integrity sha512-Z0i6ZVBgVW4k+chMJ61fh9H6S6P+8YHxzUzK13lxY0iv+Qky5OAeP6Qas+HlrVsLrdTgNZJTIyg968WP62hoBw==
+"@listr2/prompt-adapter-enquirer@^2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.9.tgz#c72b4217f5bb024c9c69a26e2679e7c164622c07"
+  integrity sha512-A40KuRK3g92E3ulJxXatDs7mi/oLscVP3X8U3P8ScAZgFo771MPbxptcb/vfiARQfqjJf1GTArjM6j5v1GTMdA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -6120,16 +6120,16 @@ linkinator@^6.0.5:
     server-destroy "^1.0.1"
     srcset "^5.0.0"
 
-listr2@^8.2.1:
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.2.1.tgz#06a1a6efe85f23c5324180d7c1ddbd96b5eefd6d"
-  integrity sha512-irTfvpib/rNiD637xeevjO2l3Z5loZmuaRi0L0YE5LfijwVY96oyVn0DFD3o/teAok7nfobMG1THvvcHh/BP6g==
+listr2@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.2.2.tgz#e00501c515242798d0ea4a0bbaffa8dc97158648"
+  integrity sha512-sy0dq+JPS+RAFiFk2K8Nbub7khNmeeoFALNUJ4Wzk34wZKAzaOhEXqGWs4RA5aui0RaM6Hgn7VEKhCj0mlKNLA==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
     eventemitter3 "^5.0.1"
     log-update "^6.0.0"
-    rfdc "^1.3.1"
+    rfdc "^1.4.1"
     wrap-ansi "^9.0.0"
 
 locate-path@^5.0.0:
@@ -7693,10 +7693,10 @@ reusify@^1.0.4:
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
 
-rfdc@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/rfdc/-/rfdc-1.3.1.tgz#2b6d4df52dffe8bb346992a10ea9451f24373a8f"
-  integrity sha512-r5a3l5HzYlIC68TpmYKlxWjmOP6wiPJ1vWv2HeLhNsRZMrCkxeqxiHlQ21oXmQ4F3SiryXBHhAD7JZqvOJjFmg==
+rfdc@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/rfdc/-/rfdc-1.4.1.tgz#778f76c4fb731d93414e8f925fbecf64cce7f6ca"
+  integrity sha512-q1b3N5QkRUWUl7iyylaaj3kOpIT0N2i9MqIEQXP73GVsN9cw3fdx8X63cEmWhJGi2PPCF23Ijp7ktmd39rawIA==
 
 rimraf@^2.6.3:
   version "2.7.1"
@@ -8346,10 +8346,10 @@ synckit@^0.8.6:
     "@pkgr/core" "^0.1.0"
     tslib "^2.6.2"
 
-tabletojson@4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.3.tgz#7da49bc4f43245f46b872eb78aaa55c3558acb35"
-  integrity sha512-ac63/I5xfW1L162XZY9P1y1CtpZ0Hf7TW+PgRqOEeXFuLhm5D7kg/+7Wm2D6myU1H9qJlr4f+Jiozzq10BFjTg==
+tabletojson@4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.4.tgz#b72d23c22f13b782ae4fa8c1da0b388010abc31d"
+  integrity sha512-Y2QpSgQk2ORLROr82dNIXbFKGJkqf8gwgGZ7pCFungVy3UCxaWb8xZT9yb3SHJsqVV6f8utLdbBJ4GVhPEPXog==
   dependencies:
     cheerio "^1.0.0-rc.12"
 
