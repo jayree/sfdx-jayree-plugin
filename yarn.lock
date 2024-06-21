@@ -1428,18 +1428,18 @@
     semver "^7.6.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.3.2.tgz#fbfe86e0f18bf21f7dbe45bef68426952b28bc54"
-  integrity sha512-a1QIqihhNpFXURHAba4rrH+cHIXRgjjxt5YfORumpsCIjTSxZlL8dYhoOgMNf8UlaKB4/KuZ00SGsJqIE4Fw4A==
+"@jayree/sfdx-plugin-manifest@^3.3.6":
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.3.6.tgz#776bf192f09017159d6de714ff58ac88e9210127"
+  integrity sha512-Zcxz6zxkMCc/DhOuPnEWaGACJbTcTtgHLtBVohBwKEoYswOksVlgLYkyUiqGB3bqZc2+tLShc9/JBVtyYNlCvA==
   dependencies:
     "@jayree/changelog" "^1.2.0"
-    "@oclif/core" "^4.0.3"
+    "@oclif/core" "^4.0.6"
     "@salesforce/core" "^7.3.12"
     "@salesforce/kit" "^3.1.2"
-    "@salesforce/sf-plugins-core" "^10.0.0"
-    "@salesforce/source-deploy-retrieve" "^11.6.4"
-    "@salesforce/ts-types" "^2.0.9"
+    "@salesforce/sf-plugins-core" "^11.0.1"
+    "@salesforce/source-deploy-retrieve" "^11.6.7"
+    "@salesforce/ts-types" "^2.0.10"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.4.0"
     fs-extra "^11.2.0"
@@ -1789,7 +1789,7 @@
     typescript "^5.4.3"
     wireit "^0.14.4"
 
-"@salesforce/kit@^3.1.1", "@salesforce/kit@^3.1.2", "@salesforce/kit@^3.1.3", "@salesforce/kit@^3.1.4", "@salesforce/kit@^3.1.6":
+"@salesforce/kit@^3.1.1", "@salesforce/kit@^3.1.2", "@salesforce/kit@^3.1.4", "@salesforce/kit@^3.1.6":
   version "3.1.6"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-3.1.6.tgz#aefb39c0e0f325e11f80551ff92cf6979dd74070"
   integrity sha512-zAYPmCSAvdonDOnL5AzuVRVv0sRMlQd6gi12HDE1964VqSjt5pzlLU90thh3Qq4A1Wxbdu0FbHYx9BvZ4fWPvQ==
@@ -1805,24 +1805,6 @@
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
-
-"@salesforce/sf-plugins-core@^10.0.0":
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-10.0.1.tgz#8df8e3b7a10f8ba75906c5d58eb3a7df32e42eb3"
-  integrity sha512-FsbZKshTgyHYO1KNuEuNGhzLj5diuh7lMElNkT4xfmwGjciDEIBtZf/aMAdN9AYpIj/TkAvi7Xnxs1gMHPOGNQ==
-  dependencies:
-    "@inquirer/confirm" "^3.1.9"
-    "@inquirer/password" "^2.1.9"
-    "@oclif/core" "^4.0.3"
-    "@salesforce/core" "^7.3.12"
-    "@salesforce/kit" "^3.1.3"
-    "@salesforce/ts-types" "^2.0.9"
-    ansis "^3.2.0"
-    cli-progress "^3.12.0"
-    natural-orderby "^3.0.2"
-    slice-ansi "^7.1.0"
-    string-width "^7.1.0"
-    terminal-link "^3.0.0"
 
 "@salesforce/sf-plugins-core@^11.0.1":
   version "11.1.2"
@@ -1855,7 +1837,7 @@
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
 
-"@salesforce/source-deploy-retrieve@^11.6.4", "@salesforce/source-deploy-retrieve@^11.6.5", "@salesforce/source-deploy-retrieve@^11.6.7":
+"@salesforce/source-deploy-retrieve@^11.6.5", "@salesforce/source-deploy-retrieve@^11.6.7":
   version "11.6.7"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-11.6.7.tgz#538042e31fdf92d6eeca9a45266d335e96d8af73"
   integrity sha512-66KY6EfNGRom7rGDutNzLE7wr8UIPylAruLwyvShuWbXGwXKlUIQli2Vc33h6UfU15NmcrbfiaRxyCgg9oqENw==
