@@ -7,7 +7,7 @@
   "type": "module",
   "dependencies": {
     "@jayree/sfdx-plugin-manifest": "^3.3.6",
-    "@jayree/sfdx-plugin-org": "^1.2.55",
+    "@jayree/sfdx-plugin-org": "^1.2.57",
     "@jayree/sfdx-plugin-prettier": "^1.3.67",
     "@jayree/sfdx-plugin-source": "^1.3.63"
   },
