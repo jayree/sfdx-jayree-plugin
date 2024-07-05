@@ -1648,18 +1648,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.26.2"
 
-"@jayree/sfdx-plugin-org@^1.2.57":
-  version "1.2.57"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.57.tgz#13d11a9a68af14880302c0eb9acbcfde11cdbf24"
-  integrity sha512-Nlju0oY/KrbGISf1CrxZg1Ry7qeBdI56HLS86IM794kk/9OXUZq6ICk86CqHlWwLSZRnSo7f4sDz3znosSBtcQ==
+"@jayree/sfdx-plugin-org@^1.2.58":
+  version "1.2.58"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.58.tgz#94a93edda1d25d29fc64cdbb1e01cd2a0f732d1f"
+  integrity sha512-uCJdBOVouECIUudOq87VfFcQTBcPb6iFmYvEGZnfhnBlMthlChgYTZUrAYqhG0DxO0Kx9dKy5YCMlNUiM3WxpA==
   dependencies:
     "@jayree/changelog" "^1.2.1"
-    "@jsforce/jsforce-node" "^3.2.1"
+    "@jsforce/jsforce-node" "^3.2.2"
     "@listr2/prompt-adapter-enquirer" "^2.0.10"
     "@oclif/core" "^3.26.6"
     "@salesforce/core" "^7.3.10"
     "@salesforce/sf-plugins-core" "^9.1.0"
-    "@salesforce/source-deploy-retrieve" "^12.0.2"
+    "@salesforce/source-deploy-retrieve" "^12.1.4"
     "@salesforce/ts-types" "^2.0.10"
     chalk "^5.3.0"
     cli-truncate "^4.0.0"
@@ -1670,7 +1670,7 @@
     is-wsl "^3.1.0"
     listr2 "^8.2.3"
     log-update "^6.0.0"
-    playwright-chromium "^1.45.0"
+    playwright-chromium "^1.45.1"
     tabletojson "4.1.4"
     tslib "^2.6.3"
     wrap-ansi "^9.0.0"
@@ -1758,10 +1758,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.2.0", "@jsforce/jsforce-node@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.2.1.tgz#00fab05919e0cbe91ae4d873377e56cfbc087b98"
-  integrity sha512-hjmZQbYVikm6ATmaErOp5NaKR2VofNZsrcGGHrdbGA+bAgpfg/+MA/HzRTb8BvYyPDq3RRc5A8Yk8gx9Vtcrxg==
+"@jsforce/jsforce-node@^3.2.0", "@jsforce/jsforce-node@^3.2.1", "@jsforce/jsforce-node@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.2.2.tgz#6bc1bf483f52023d63ae76534fc8665b2df215e0"
+  integrity sha512-wQl4iCkwbop3eJfl+PxgFfIEPE2Ka68MvgnxbxVX/yx+NhfiNqbl08uKLAG+VcI40D8sgApfm86Yx7o8Q9PZmw==
   dependencies:
     "@sindresorhus/is" "^4"
     "@types/node" "^18.15.3"
@@ -2039,12 +2039,12 @@
     "@salesforce/ts-types" "^2.0.9"
     chalk "^5.3.0"
 
-"@salesforce/source-deploy-retrieve@^12.0.1", "@salesforce/source-deploy-retrieve@^12.0.2":
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.0.2.tgz#f2eaf487834499be72391d38a2e6168f8bbc27cf"
-  integrity sha512-3Zq2BdLOBcsAuGHykZBDQbLKvjDfwGr5I9KnQW1EaGhxnwo7uK/RhhaFCpskjvbL0+D3PU7+wOlPLdB16FeIbg==
+"@salesforce/source-deploy-retrieve@^12.0.1", "@salesforce/source-deploy-retrieve@^12.0.2", "@salesforce/source-deploy-retrieve@^12.1.4":
+  version "12.1.4"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.1.4.tgz#c4cbb181b72bb215e24c3591df560f9bd40998b1"
+  integrity sha512-fsf/sH504dffjcWQsiILz6DUIi3YryyJiBqkYmLeQ+kx9G+r+ToFzZBO2NMn6vp8EYE+qPmpbHiV/Qpf4y5dpw==
   dependencies:
-    "@salesforce/core" "^8.0.3"
+    "@salesforce/core" "^8.1.0"
     "@salesforce/kit" "^3.1.6"
     "@salesforce/ts-types" "^2.0.10"
     fast-levenshtein "^3.0.0"
@@ -2054,7 +2054,7 @@
     ignore "^5.3.1"
     jszip "^3.10.1"
     mime "2.6.0"
-    minimatch "^5.1.6"
+    minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
 "@salesforce/source-tracking@^7.0.3":
@@ -7028,7 +7028,7 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimatch@^5.0.1, minimatch@^5.1.6:
+minimatch@^5.0.1:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-5.1.6.tgz#1cfcb8cf5522ea69952cd2af95ae09477f122a96"
   integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
@@ -7039,6 +7039,13 @@ minimatch@^9.0.4:
   version "9.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.4.tgz#8e49c731d1749cbec05050ee5145147b32496a51"
   integrity sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==
+  dependencies:
+    brace-expansion "^2.0.1"
+
+minimatch@^9.0.5:
+  version "9.0.5"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.5.tgz#d74f9dd6b57d83d8e98cfb82133b03978bc929e5"
+  integrity sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==
   dependencies:
     brace-expansion "^2.0.1"
 
@@ -7841,17 +7848,17 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.45.0:
-  version "1.45.0"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.45.0.tgz#791c725671cc6f7eb079e7a3cd21e375319f568d"
-  integrity sha512-wKZ1NeRZSXp25bYL00X4REv/3mgZQ6QUC6OGTfYZY/YZyorbC/3Fr1WATCB/yF9SCd79gSWBzRCYv4Bf7DzW7g==
+playwright-chromium@^1.45.1:
+  version "1.45.1"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.45.1.tgz#a20b513edbc0435b2e06a303aac61001f44bf094"
+  integrity sha512-BlYo+kuMg4Jo40Nems2GGVMWdKI2GeHL85D7pkwEW3aq6iEDW3XL7udmoNLOIfluSCKzVRJMB0ta1mt67B3tGA==
   dependencies:
-    playwright-core "1.45.0"
+    playwright-core "1.45.1"
 
-playwright-core@1.45.0:
-  version "1.45.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.45.0.tgz#5741a670b7c9060ce06852c0051d84736fb94edc"
-  integrity sha512-lZmHlFQ0VYSpAs43dRq1/nJ9G/6SiTI7VPqidld9TDefL9tX87bTKExWZZUF5PeRyqtXqd8fQi2qmfIedkwsNQ==
+playwright-core@1.45.1:
+  version "1.45.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.45.1.tgz#549a2701556b58245cc75263f9fc2795c1158dc1"
+  integrity sha512-LF4CUUtrUu2TCpDw4mcrAIuYrEjVDfT1cHbJMfwnE2+1b8PZcFzPNgvZCvq2JfQ4aTjRCCHw5EJ2tmr2NSzdPg==
 
 pluralize@^8.0.0:
   version "8.0.0"
