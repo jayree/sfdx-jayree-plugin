@@ -1574,18 +1574,18 @@
     prettier-plugin-apex "^2.1.4"
     tslib "^2.6.3"
 
-"@jayree/sfdx-plugin-source@^1.3.67":
-  version "1.3.67"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.67.tgz#866a81fe40fb18edd37638a5df785735b16f6f5a"
-  integrity sha512-w1U11UB8+dYyIUrPK/R6R/5f2JE34KbPhrJdAYXSfNYWttn2zQsyGpEhVn6Y4J+5fupmxisl8mhqCzSuTNbzaw==
+"@jayree/sfdx-plugin-source@^1.3.68":
+  version "1.3.68"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.68.tgz#ed20b07a1267249eeb8cd2c7a2909e307656c1c4"
+  integrity sha512-eTkmAWSvDI1kUNalrVRVj0KKQA5r3H9cfY+SUDsExJ26G+HHGFWvjsSG1cUYLlck73xUWOtBq5kb1RmEVjvGZQ==
   dependencies:
     "@jayree/changelog" "^1.2.1"
     "@oclif/core" "^4.0.11"
     "@salesforce/core" "^8.1.1"
     "@salesforce/kit" "^3.1.6"
-    "@salesforce/sf-plugins-core" "^11.1.6"
-    "@salesforce/source-deploy-retrieve" "^12.1.5"
-    "@salesforce/source-tracking" "^7.0.7"
+    "@salesforce/sf-plugins-core" "^11.1.9"
+    "@salesforce/source-deploy-retrieve" "^12.1.7"
+    "@salesforce/source-tracking" "^7.0.9"
     "@salesforce/ts-types" "^2.0.10"
     ansis "^3.2.0"
     debug "^4.3.4"
@@ -1717,7 +1717,7 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.11", "@oclif/core@^4.0.12", "@oclif/core@^4.0.8":
+"@oclif/core@^4", "@oclif/core@^4.0.11", "@oclif/core@^4.0.12":
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.12.tgz#b47089631827e2c909bfffc8c14d7b1781e502ce"
   integrity sha512-o2dfPtmi2uBGHgpvHr+GNfoRKysKgQGiffONoMN3R+qBVNeIkJIZhVk31HreDkAI9LAzS92BWNgp/l7lXDxdvg==
@@ -1887,22 +1887,22 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
 
-"@salesforce/sf-plugins-core@^11.1.6":
-  version "11.1.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.1.6.tgz#4e423488af9ba85aba8af5954df6749dd406c0ae"
-  integrity sha512-yfKnyC4oyYPpVzQVWRHMhLq2mrUzayDIc7zajtOajPk+n+C8Lxsl9KKNB9oA5iQIVrAHf/R9cWVogqO2myKWgQ==
+"@salesforce/sf-plugins-core@^11.1.6", "@salesforce/sf-plugins-core@^11.1.9":
+  version "11.1.9"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.1.9.tgz#0cf065e86c9397c3bae2c396e20df31d78a2b89c"
+  integrity sha512-Uz+H39axao5D9N0oKYqai4wUizl/GaFAzrcHbX7h6sVKzB3BBoVJSQ1IrOe1Pu29AP72QujCU5Huv/BOR/0DZA==
   dependencies:
     "@inquirer/confirm" "^3.1.14"
     "@inquirer/password" "^2.1.14"
-    "@oclif/core" "^4.0.8"
+    "@oclif/core" "^4.0.12"
     "@salesforce/core" "^8.1.1"
     "@salesforce/kit" "^3.1.6"
     "@salesforce/ts-types" "^2.0.10"
-    ansis "^3.2.0"
+    ansis "^3.2.1"
     cli-progress "^3.12.0"
     natural-orderby "^3.0.2"
     slice-ansi "^7.1.0"
-    string-width "^7.1.0"
+    string-width "^7.2.0"
     terminal-link "^3.0.0"
 
 "@salesforce/sf-plugins-core@^9.1.0":
@@ -1936,19 +1936,19 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.0.7":
-  version "7.0.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.0.7.tgz#c4505f22f4898645e41ea6d026054c72c40b9327"
-  integrity sha512-/qTk0UoX/O6nzFWXMMcxo9f1WH4zpc5wUl+2ET3/IZ3ivQorE/CFiHzKgmBW/SLnqJs7B7bEhIfgQff6gqXbTg==
+"@salesforce/source-tracking@^7.0.9":
+  version "7.0.9"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.0.9.tgz#d7779a90e65ffb2b13d44fa52deed992f4ff803d"
+  integrity sha512-1QHXPzZEk/wpBGfUy++3zBcUZ+rW1pNLkiNyfCRzJU1qx7CFn2+oXTsni1q935NmayuMyj4Eu38t/kwAbMX4yA==
   dependencies:
-    "@oclif/core" "^4.0.8"
+    "@oclif/core" "^4.0.11"
     "@salesforce/core" "^8.1.1"
     "@salesforce/kit" "^3.1.6"
     "@salesforce/source-deploy-retrieve" "^12.1.5"
     "@salesforce/ts-types" "^2.0.10"
     fast-xml-parser "^4.4.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "^1.27.0"
+    isomorphic-git "^1.27.1"
     ts-retry-promise "^0.8.1"
 
 "@salesforce/ts-sinon@^1.4.22":
@@ -3118,12 +3118,7 @@ ansicolors@~0.3.2:
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.3.2.tgz#665597de86a9ffe3aa9bfbe6cae5c6ea426b4979"
   integrity sha512-QXu7BPrP29VllRxH8GwB7x5iX5qWKAAMLqKQGWTeLWVlNHNOpVMJ91dsxQAIWXpjuW5wqvxu3Jd/nRjrJ+0pqg==
 
-ansis@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.2.0.tgz#0e050c5be94784f32ffdac4b84fccba064aeae4b"
-  integrity sha512-Yk3BkHH9U7oPyCN3gL5Tc7CpahG/+UFv/6UG03C311Vy9lzRmA5uoxDTpU9CO3rGHL6KzJz/pdDeXZCZ5Mu/Sg==
-
-ansis@^3.2.1:
+ansis@^3.2.0, ansis@^3.2.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.3.1.tgz#c89b7d3892cc5be0f0f302f17ec84f8d2502da75"
   integrity sha512-dW/sqnbVeWXW1UMRyKGHiJj+vBrlnnDcvyNMDB8BBI4Gu0tsohweIkvcqb3bNNwcVn70LTyvvnGgjUzUVFnK6Q==
@@ -5813,7 +5808,7 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@1.27.1, isomorphic-git@^1.27.0:
+isomorphic-git@1.27.1, isomorphic-git@^1.27.1:
   version "1.27.1"
   resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.27.1.tgz#a2752fce23a09f04baa590c41cfaf61e973405b3"
   integrity sha512-X32ph5zIWfT75QAqW2l3JCIqnx9/GWd17bRRehmn3qmWc34OYbSXY6Cxv0o9bIIY+CWugoN4nQFHNA+2uYf2nA==
@@ -8269,10 +8264,19 @@ string-width@^5.0.1, string-width@^5.1.2:
     emoji-regex "^9.2.2"
     strip-ansi "^7.0.1"
 
-string-width@^7.0.0, string-width@^7.1.0:
+string-width@^7.0.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-7.1.0.tgz#d994252935224729ea3719c49f7206dc9c46550a"
   integrity sha512-SEIJCWiX7Kg4c129n48aDRwLbFb2LJmXXFrWBG4NGaRtMQ3myKPKbwrD1BKqQn74oCoNMBVrfDEr5M9YxCsrkw==
+  dependencies:
+    emoji-regex "^10.3.0"
+    get-east-asian-width "^1.0.0"
+    strip-ansi "^7.1.0"
+
+string-width@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-7.2.0.tgz#b5bb8e2165ce275d4d43476dd2700ad9091db6dc"
+  integrity sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==
   dependencies:
     emoji-regex "^10.3.0"
     get-east-asian-width "^1.0.0"
