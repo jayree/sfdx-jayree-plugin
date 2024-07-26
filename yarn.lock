@@ -1581,18 +1581,18 @@
     prettier-plugin-apex "^2.1.4"
     tslib "^2.6.3"
 
-"@jayree/sfdx-plugin-source@^1.3.68":
-  version "1.3.68"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.68.tgz#ed20b07a1267249eeb8cd2c7a2909e307656c1c4"
-  integrity sha512-eTkmAWSvDI1kUNalrVRVj0KKQA5r3H9cfY+SUDsExJ26G+HHGFWvjsSG1cUYLlck73xUWOtBq5kb1RmEVjvGZQ==
+"@jayree/sfdx-plugin-source@^1.3.69":
+  version "1.3.69"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.69.tgz#cd765d219ccc67bcae67b91d157d2799635bd8dc"
+  integrity sha512-qJu+32UcQk7JJbIoaksGPxTOsM5YlLt8C9Rs94x5kYjQlB66675qvF2CPZBkAHci+ZqGRKwq/fgRwAdjZxeycA==
   dependencies:
     "@jayree/changelog" "^1.2.1"
-    "@oclif/core" "^4.0.11"
-    "@salesforce/core" "^8.1.1"
+    "@oclif/core" "^4.0.14"
+    "@salesforce/core" "^8.2.3"
     "@salesforce/kit" "^3.1.6"
-    "@salesforce/sf-plugins-core" "^11.1.9"
-    "@salesforce/source-deploy-retrieve" "^12.1.7"
-    "@salesforce/source-tracking" "^7.0.9"
+    "@salesforce/sf-plugins-core" "^11.2.1"
+    "@salesforce/source-deploy-retrieve" "^12.1.8"
+    "@salesforce/source-tracking" "^7.1.0"
     "@salesforce/ts-types" "^2.0.10"
     ansis "^3.2.0"
     debug "^4.3.4"
@@ -1869,7 +1869,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
 
-"@salesforce/sf-plugins-core@^11.1.6", "@salesforce/sf-plugins-core@^11.1.9", "@salesforce/sf-plugins-core@^11.2.1":
+"@salesforce/sf-plugins-core@^11.1.6", "@salesforce/sf-plugins-core@^11.2.1":
   version "11.2.1"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.2.1.tgz#22ef2bb8f32b8f0a26a72900653b6bb16965c4f4"
   integrity sha512-eKZn7RZHislXXfV/LYk1+wxysqIcENLicUHKy58JW0wH5hyZrcdFy1PnXxRSmSPwqFbMkZ+1YJZVWTlartCL2w==
@@ -1887,7 +1887,7 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.1.5", "@salesforce/source-deploy-retrieve@^12.1.7", "@salesforce/source-deploy-retrieve@^12.1.8":
+"@salesforce/source-deploy-retrieve@^12.1.5", "@salesforce/source-deploy-retrieve@^12.1.8":
   version "12.1.8"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.1.8.tgz#ad220582ace9142af40aa0b31f623f0c586aae25"
   integrity sha512-vso8dQ0Gjh68+EUsr4QLxxQ/L8+GBXdSEUQrYi8vXWqYT6u6Z5AX34OKpMeHsiVCo/Zrw/RkP/sDU64259L+xg==
@@ -1905,15 +1905,15 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.0.9":
-  version "7.0.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.0.9.tgz#d7779a90e65ffb2b13d44fa52deed992f4ff803d"
-  integrity sha512-1QHXPzZEk/wpBGfUy++3zBcUZ+rW1pNLkiNyfCRzJU1qx7CFn2+oXTsni1q935NmayuMyj4Eu38t/kwAbMX4yA==
+"@salesforce/source-tracking@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.1.0.tgz#6deded1e601d3747602a352189db1d02e93f0aab"
+  integrity sha512-VmHQKgotZfvmZ+5fSclkiSQS9Kya+5YGQ31bLOo1HSzCzFMpW7C7+C1VyJFIUs3w6so/3ftojHWMG+lncKPrgA==
   dependencies:
-    "@oclif/core" "^4.0.11"
-    "@salesforce/core" "^8.1.1"
+    "@oclif/core" "^4.0.14"
+    "@salesforce/core" "^8.2.3"
     "@salesforce/kit" "^3.1.6"
-    "@salesforce/source-deploy-retrieve" "^12.1.5"
+    "@salesforce/source-deploy-retrieve" "^12.1.8"
     "@salesforce/ts-types" "^2.0.10"
     fast-xml-parser "^4.4.0"
     graceful-fs "^4.2.11"
@@ -3072,12 +3072,7 @@ ansicolors@~0.3.2:
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.3.2.tgz#665597de86a9ffe3aa9bfbe6cae5c6ea426b4979"
   integrity sha512-QXu7BPrP29VllRxH8GwB7x5iX5qWKAAMLqKQGWTeLWVlNHNOpVMJ91dsxQAIWXpjuW5wqvxu3Jd/nRjrJ+0pqg==
 
-ansis@^3.2.0, ansis@^3.2.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.3.1.tgz#c89b7d3892cc5be0f0f302f17ec84f8d2502da75"
-  integrity sha512-dW/sqnbVeWXW1UMRyKGHiJj+vBrlnnDcvyNMDB8BBI4Gu0tsohweIkvcqb3bNNwcVn70LTyvvnGgjUzUVFnK6Q==
-
-ansis@^3.3.1:
+ansis@^3.2.0, ansis@^3.2.1, ansis@^3.3.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.3.2.tgz#15adc36fea112da95c74d309706e593618accac3"
   integrity sha512-cFthbBlt+Oi0i9Pv/j6YdVWJh54CtjGACaMPCIrEV4Ha7HWsIjXDwseYV79TIL0B4+KfSwD5S70PeQDkPUd1rA==
