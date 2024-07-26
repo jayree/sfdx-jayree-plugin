@@ -17,7 +17,7 @@
     "@salesforce/ts-sinon": "^1.4.22",
     "c8": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-sf-plugin": "^1.18.11",
+    "eslint-plugin-sf-plugin": "^1.19.1",
     "nock": "^13.5.4",
     "oclif": "^4.14.9",
     "patch-package": "^8.0.0",
