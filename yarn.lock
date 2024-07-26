@@ -1338,15 +1338,7 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.2.tgz#d9fae00a2d5cb40f92cfe64b47ad749fbc38f917"
   integrity sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==
 
-"@inquirer/confirm@^3.1.14", "@inquirer/confirm@^3.1.9":
-  version "3.1.14"
-  resolved "https://registry.yarnpkg.com/@inquirer/confirm/-/confirm-3.1.14.tgz#b50a156f2cc0a6f874f2d2ab1739e988fbf950f4"
-  integrity sha512-nbLSX37b2dGPtKWL3rPuR/5hOuD30S+pqJ/MuFiUEgN6GiMs8UMxiurKAMDzKt6C95ltjupa8zH6+3csXNHWpA==
-  dependencies:
-    "@inquirer/core" "^9.0.2"
-    "@inquirer/type" "^1.4.0"
-
-"@inquirer/confirm@^3.1.16":
+"@inquirer/confirm@^3.1.16", "@inquirer/confirm@^3.1.9":
   version "3.1.17"
   resolved "https://registry.yarnpkg.com/@inquirer/confirm/-/confirm-3.1.17.tgz#adca3b0f35e2d2ace53f652a92f987aaccb8482a"
   integrity sha512-qCpt/AABzPynz8tr69VDvhcjwmzAryipWXtW8Vi6m651da4H/d0Bdn55LkxXD7Rp2gfgxvxzTdb66AhIA8gzBA==
@@ -6868,14 +6860,14 @@ object.values@^1.1.7:
     define-properties "^1.2.0"
     es-abstract "^1.22.1"
 
-oclif@^4.14.6:
-  version "4.14.6"
-  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.14.6.tgz#8e8ecddcf41340bc88f1530d896dfc945949a719"
-  integrity sha512-pfyrDzzETLrGh2D4E+DDTfZetjP0N5DeZLLaNPcZ0ENuZPVC54XvW0q5OSDDYavzxD9y97z3SKh6qRyMPRwXLQ==
+oclif@^4.14.9:
+  version "4.14.9"
+  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.14.9.tgz#ed5f105840315b5a8b209c04f090420fd6c0934c"
+  integrity sha512-W2RqjzcJWudQp/qUngbj/7f6oPoRrNTjAMZUn7hLO86nUgEkIF7JsgmQ5+TSC2nt35htti/ARfyM2mzQyPUNUA==
   dependencies:
     "@aws-sdk/client-cloudfront" "^3.609.0"
     "@aws-sdk/client-s3" "^3.614.0"
-    "@inquirer/confirm" "^3.1.14"
+    "@inquirer/confirm" "^3.1.16"
     "@inquirer/input" "^2.2.1"
     "@inquirer/select" "^2.3.10"
     "@oclif/core" "^4"
