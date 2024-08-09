@@ -14,7 +14,7 @@
   "devDependencies": {
     "@oclif/plugin-help": "^6.2.8",
     "@salesforce/dev-scripts": "^10.2.9",
-    "@salesforce/ts-sinon": "^1.4.23",
+    "@salesforce/ts-sinon": "^1.4.24",
     "c8": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-sf-plugin": "^1.20.1",
