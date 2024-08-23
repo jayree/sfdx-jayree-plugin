@@ -1471,7 +1471,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.1", "@jayree/changelog@^1.2.2":
+"@jayree/changelog@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.2.tgz#34c4176a3b93d9a7bdf48eb58ddf99af19cf0607"
   integrity sha512-uVEUSc2w//xUL+f40mujuIQPUSOgdmQZxTyrTpgNN4Bk2Y3vL8bxj3PgQZvfTA6PgRP/XxruTKu/1IBC1kxNvA==
@@ -1530,18 +1530,18 @@
     tslib "^2.6.3"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.77":
-  version "1.3.77"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.77.tgz#63923def3661c89150a967ff82d2ae9cb8bdfa45"
-  integrity sha512-zPTdckPIpA3hWQw0AzwRYDi9a7yFjiGYGuTkOKKR8JdqweiEqY0bqCNg7Dg3WJyTLHq7/ZIKVmGidFhpwpSl5w==
+"@jayree/sfdx-plugin-prettier@^1.3.78":
+  version "1.3.78"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.78.tgz#23b5f6670003ce2bb81363ec07a4b6f66f27c7a0"
+  integrity sha512-+ydpmn/k98Qi0+3pE3yaBcJIjXgq0f71w2R+CF2vtKLhQKhrwqppI3pBc296ulIuQ86wmQ2I7VBmQjsSIWwFDA==
   dependencies:
-    "@jayree/changelog" "^1.2.1"
+    "@jayree/changelog" "^1.2.2"
     "@oclif/core" "^4.0.14"
     "@prettier/plugin-xml" "^3.4.1"
     "@salesforce/core" "^8.4.0"
     "@salesforce/kit" "^3.2.1"
-    "@salesforce/sf-plugins-core" "^11.3.2"
-    "@salesforce/source-deploy-retrieve" "^12.4.0"
+    "@salesforce/sf-plugins-core" "^11.3.4"
+    "@salesforce/source-deploy-retrieve" "^12.5.1"
     cli-progress "^3.12.0"
     debug "^4.3.6"
     fs-extra "^11.2.0"
