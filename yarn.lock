@@ -1471,14 +1471,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.2.tgz#34c4176a3b93d9a7bdf48eb58ddf99af19cf0607"
-  integrity sha512-uVEUSc2w//xUL+f40mujuIQPUSOgdmQZxTyrTpgNN4Bk2Y3vL8bxj3PgQZvfTA6PgRP/XxruTKu/1IBC1kxNvA==
+"@jayree/changelog@^1.2.2", "@jayree/changelog@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.3.tgz#5d394067b8843a47aa434f07e1ac53e7e428338d"
+  integrity sha512-12amQr8sNbxCAhwZGR7AYTFswpKuMKJkSAKdmV+MLs/TDjGKZQnsp25HRd3TCuNeRZO5CNXw4DJxfoS2jGVqDQ==
   dependencies:
     debug "^4.3.6"
     fs-extra "^11.2.0"
-    marked "^12.0.2"
+    marked "^13.0.3"
     marked-terminal "^7.1.0"
     semver "^7.6.3"
     semver-compare "^1.0.0"
@@ -1502,17 +1502,17 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.27.1"
 
-"@jayree/sfdx-plugin-org@^1.2.67":
-  version "1.2.67"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.67.tgz#b03020b9f23202446f47445fd10d39f5c284d8fa"
-  integrity sha512-SsJS4RlfU0HtgWh7ivCRIBBZkFFLMSNeS9X/Q16fzLXGGdaCueXBCWCpN1dJ4KjrH9q16klPjgGy4+umYtLppw==
+"@jayree/sfdx-plugin-org@^1.2.68":
+  version "1.2.68"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.68.tgz#5356240cc04d48c125b5790e3f0c61293a6baaa1"
+  integrity sha512-70unCj/MiXnPkQzm5Q/VKsn2muvC3yNmh5ozXmIAfRHeh2kx3FuYhHf0wqciKP5QBfnwc6XCXMwDUA6N6fLGcA==
   dependencies:
-    "@jayree/changelog" "^1.2.2"
+    "@jayree/changelog" "^1.2.3"
     "@jsforce/jsforce-node" "^3.4.1"
     "@listr2/prompt-adapter-enquirer" "^2.0.11"
-    "@oclif/core" "^4.0.14"
-    "@salesforce/core" "^8.4.0"
-    "@salesforce/sf-plugins-core" "^11.3.4"
+    "@oclif/core" "^4.0.19"
+    "@salesforce/core" "^8.5.1"
+    "@salesforce/sf-plugins-core" "^11.3.6"
     "@salesforce/source-deploy-retrieve" "^12.5.1"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.3.0"
@@ -1527,7 +1527,7 @@
     log-update "^6.0.0"
     playwright-chromium "^1.46.1"
     tabletojson "4.1.4"
-    tslib "^2.6.3"
+    tslib "^2.7.0"
     wrap-ansi "^9.0.0"
 
 "@jayree/sfdx-plugin-prettier@^1.3.78":
@@ -1657,10 +1657,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.14", "@oclif/core@^4.0.17", "@oclif/core@^4.0.18":
-  version "4.0.18"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.18.tgz#a4df3fc79645491b5335dca11451c44edf5bf3df"
-  integrity sha512-3EP4zJ+1ndc92UxdNmGX4HhFK5Xh94fWvUeOW1Tu/Ed+/jAljIsbmZyjVhDoE0vV5cftT+3QaVB/LFxaXxty/w==
+"@oclif/core@^4", "@oclif/core@^4.0.14", "@oclif/core@^4.0.17", "@oclif/core@^4.0.18", "@oclif/core@^4.0.19":
+  version "4.0.19"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.19.tgz#e52ba83c3eaa75c580c567067ed86b5bd4cadbe6"
+  integrity sha512-VXnsYNVfmucXp5BdOA/OcWi8F/h2h8ofW1GxQDdspodnmnUgALEpqrxXBl5NFuA+iEihtAJeXzX260ICHYDaBg==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.3.2"
@@ -1725,10 +1725,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.3.0", "@salesforce/core@^8.4.0":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.4.0.tgz#d2ddfe07994c42b1e917e581e9cf47ad27b97a93"
-  integrity sha512-P+n0+Sp+v6voLTShW2E5sdF7gCUxEXJjNcc9Jtto0ZMyQesmQJ6WGpWmAuRoi+BVYc8OPSlEffndaYDAo/u73g==
+"@salesforce/core@^8.3.0", "@salesforce/core@^8.4.0", "@salesforce/core@^8.5.1":
+  version "8.5.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.5.1.tgz#1e58f6de05c3fee8f0cf9518c8e51893057655f6"
+  integrity sha512-GZtvkd8NWAWsMKoCNoTO/YrsEk7kA5QjqLURQzk6euflnjpOCdaGuTyer5ZPIa2jFp3UksupLqM4p1NHwMJIQA==
   dependencies:
     "@jsforce/jsforce-node" "^3.4.0"
     "@salesforce/kit" "^3.1.6"
@@ -1803,14 +1803,14 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
 
-"@salesforce/sf-plugins-core@^11.3.2", "@salesforce/sf-plugins-core@^11.3.4":
-  version "11.3.4"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.3.4.tgz#84fe3f0a1a3b5497103d8b1ed6de67aca1087f40"
-  integrity sha512-tgrdLbK4iZUD430lmAdrkMMgqSFiKXrkR6RYK3J4oHNj1kSzwSU7xvg+0U9NgVgEJQaLTEO5h2gV7LPnphlA6Q==
+"@salesforce/sf-plugins-core@^11.3.2", "@salesforce/sf-plugins-core@^11.3.4", "@salesforce/sf-plugins-core@^11.3.6":
+  version "11.3.6"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.3.6.tgz#c59d0b3edd53b540c62631c6ef6f8f6a0a4b898f"
+  integrity sha512-UeWD2/FQejKz7BwB+c/Z/KoTCZ6eWuNlf7EObxdmPZgv1vGhL+jc5s/WETtCh9GrDYY8fJ9hycs2gTwy8rT2Dg==
   dependencies:
     "@inquirer/confirm" "^3.1.22"
     "@inquirer/password" "^2.1.22"
-    "@oclif/core" "^4.0.17"
+    "@oclif/core" "^4.0.19"
     "@salesforce/core" "^8.4.0"
     "@salesforce/kit" "^3.2.1"
     "@salesforce/ts-types" "^2.0.12"
@@ -6279,15 +6279,15 @@ marked-terminal@^7.1.0:
     node-emoji "^2.1.3"
     supports-hyperlinks "^3.0.0"
 
-marked@^12.0.2:
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-12.0.2.tgz#b31578fe608b599944c69807b00f18edab84647e"
-  integrity sha512-qXUm7e/YKFoqFPYPa3Ukg9xlI5cyAtGmyEIzMfW//m6kXwCy2Ps9DYf5ioijFKQ8qyuscrHoY04iJGctu2Kg0Q==
-
 marked@^13.0.0:
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/marked/-/marked-13.0.2.tgz#d5d05bd2683a85cb9cc6afbe5240e3a8bffcb92a"
   integrity sha512-J6CPjP8pS5sgrRqxVRvkCIkZ6MFdRIjDkwUwgJ9nL2fbmM6qGQeB2C16hi8Cc9BOzj6xXzy0jyi0iPIfnMHYzA==
+
+marked@^13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-13.0.3.tgz#5c5b4a5d0198060c7c9bc6ef9420a7fed30f822d"
+  integrity sha512-rqRix3/TWzE9rIoFGIn8JmsVfhiuC8VIQ8IdX5TfzmeBucdY05/0UlzKaw0eVtpcN/OdVFpBk7CjKGo9iHJ/zA==
 
 mdurl@^2.0.0:
   version "2.0.0"
