@@ -1,3 +1,10 @@
+## [4.8.90](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.89...v4.8.90) (2024-09-12)
+
+
+### Bug Fixes
+
+* **deps:** bump path-to-regexp from 1.8.0 to 1.9.0 ([#1417](https://github.com/jayree/sfdx-jayree-plugin/issues/1417)) ([029e10b](https://github.com/jayree/sfdx-jayree-plugin/commit/029e10bb6a3dc64ac852f3df70e374a7920c17c0))
+
 ## [4.8.89](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.88...v4.8.89) (2024-09-06)
 
 
