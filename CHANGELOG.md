@@ -1,3 +1,13 @@
+## [4.8.95](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.94...v4.8.95) (2024-10-04)
+
+
+### Bug Fixes
+
+* **deps:** bump @jayree/sfdx-plugin-manifest from 3.5.18 to 3.5.21 ([#1438](https://github.com/jayree/sfdx-jayree-plugin/issues/1438)) ([999ac6b](https://github.com/jayree/sfdx-jayree-plugin/commit/999ac6bf2aecc509616f1a037af4a5cf2f35297f))
+* **deps:** bump @jayree/sfdx-plugin-org from 1.2.73 to 1.2.75 ([#1440](https://github.com/jayree/sfdx-jayree-plugin/issues/1440)) ([639833e](https://github.com/jayree/sfdx-jayree-plugin/commit/639833e85172b8e7602ddb45c5feac08033eed92))
+* **deps:** bump @jayree/sfdx-plugin-prettier from 1.3.83 to 1.3.84 ([#1439](https://github.com/jayree/sfdx-jayree-plugin/issues/1439)) ([1d81cd9](https://github.com/jayree/sfdx-jayree-plugin/commit/1d81cd9152d435774d7abeb636f050643e303de4))
+* **deps:** bump @jayree/sfdx-plugin-source from 1.3.78 to 1.3.79 ([#1441](https://github.com/jayree/sfdx-jayree-plugin/issues/1441)) ([078e8a8](https://github.com/jayree/sfdx-jayree-plugin/commit/078e8a8f994863c4b1ae579ca44d6bc9cde28f3c))
+
 ## [4.8.94](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.93...v4.8.94) (2024-09-27)
 
 
