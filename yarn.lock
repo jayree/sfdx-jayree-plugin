@@ -1592,18 +1592,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.27.1"
 
-"@jayree/sfdx-plugin-org@^1.2.73":
-  version "1.2.73"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.73.tgz#9d29fb6df48dad13dab3829db0a1772b140cab42"
-  integrity sha512-lJp14HsBACxrBdGRYxi2/ZefJll80SrZEPz8YncjsQOGn29xUx+lyFiYE0eNtECMkoF6QvyYfBqrgVuAAHFpfw==
+"@jayree/sfdx-plugin-org@^1.2.75":
+  version "1.2.75"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.75.tgz#41754f3ffa618a9bcafddaa73ec4724d8fd35306"
+  integrity sha512-agqjhPmIxHCbp3uhDBBO3R2j22h/Heutqn1kPugSX3dRFwvEvwpoUy2MWO0PoE1GpMPqJ5Ill5zzB+imiZLaQw==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@jsforce/jsforce-node" "^3.4.2"
-    "@listr2/prompt-adapter-enquirer" "^2.0.11"
-    "@oclif/core" "^4.0.22"
+    "@jsforce/jsforce-node" "^3.5.1"
+    "@listr2/prompt-adapter-enquirer" "^2.0.12"
+    "@oclif/core" "^4.0.27"
     "@salesforce/core" "^8.6.1"
     "@salesforce/sf-plugins-core" "^11.3.10"
-    "@salesforce/source-deploy-retrieve" "^12.7.1"
+    "@salesforce/source-deploy-retrieve" "^12.7.3"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.3.0"
     cli-progress "^3.12.0"
@@ -1613,7 +1613,7 @@
     fs-extra "^11.2.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
-    listr2 "^8.2.4"
+    listr2 "^8.2.5"
     log-update "^6.0.0"
     playwright-chromium "^1.47.2"
     tabletojson "4.1.4"
@@ -1703,13 +1703,12 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.4.1", "@jsforce/jsforce-node@^3.4.2":
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.4.2.tgz#ad96c438a688c811d52fdb235fd9200352165b56"
-  integrity sha512-jQ22l9DzGouYGFpJtvtknxLE6O8Mwx+DizWEYsJjMnjFAkXPh8QJm3Ux6JCR0boNLuOcRW11urI7JGHvVULgJg==
+"@jsforce/jsforce-node@^3.4.1", "@jsforce/jsforce-node@^3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.5.1.tgz#f350e8c3897cce42f6b1cdbfc437c1c66aa13dd2"
+  integrity sha512-P+pfsLL6AddDeBP3iswjlB1+YM4w2ZsWTqunGjMA0/Aj8Jt4gA+XycV+fGEbGzsm6DvSvbZUnyrfkRYNsT9F8Q==
   dependencies:
     "@sindresorhus/is" "^4"
-    abort-controller "^3.0.0"
     base64url "^3.0.1"
     csv-parse "^5.5.2"
     csv-stringify "^6.4.4"
@@ -1721,10 +1720,10 @@
     strip-ansi "^6.0.0"
     xml2js "^0.6.2"
 
-"@listr2/prompt-adapter-enquirer@^2.0.11":
-  version "2.0.11"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.11.tgz#a0711917fe00ac4718b1711e7cfd219ceec47a3e"
-  integrity sha512-4xmQnYzB06d1iiutJdTZyEcvCR9RVC6QehogRqDQckBNfwD7i+6hEntFVAtewI1/52lT3HkgKptJeFwCwmjX0g==
+"@listr2/prompt-adapter-enquirer@^2.0.12":
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.12.tgz#e65d01880c653d6a03c1a4899cdee71ca157c1a0"
+  integrity sha512-WR1RvaiRuSOQ8i8Hr6CLlPXFsL2u9xwoADKYD2GeUsk7EBOx7cb9GFvJhHnlVUZq4LaPvY1U1NtrgXoslteaVA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -1747,10 +1746,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.19", "@oclif/core@^4.0.22", "@oclif/core@^4.0.23":
-  version "4.0.23"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.23.tgz#8772cfd57f850e2e17b703166b44da092a7986a0"
-  integrity sha512-wDl/eis7XDIM1pQWUGKLB+EQKJO9UrjaQ5NcwIbz7GW0gWuJfo9QAK75csgNUN/9Pbok9Ryt+sJgogS4RCIp5g==
+"@oclif/core@^4", "@oclif/core@^4.0.19", "@oclif/core@^4.0.22", "@oclif/core@^4.0.23", "@oclif/core@^4.0.27":
+  version "4.0.27"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.27.tgz#686079df278e681e3097cea301d5558fdb490e88"
+  integrity sha512-9j92jHr6k2tjQ6/mIwNi46Gqw+qbPFQ02mxT5T8/nxO2fgsPL3qL0kb9SR1il5AVfqpgLIG3uLUcw87rgaioUg==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.3.2"
@@ -1761,7 +1760,7 @@
     get-package-type "^0.1.0"
     globby "^11.1.0"
     indent-string "^4.0.0"
-    is-wsl "^2.2.0"
+    is-wsl "^3"
     lilconfig "^3.1.2"
     minimatch "^9.0.5"
     semver "^7.6.3"
@@ -1912,7 +1911,7 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.7.1", "@salesforce/source-deploy-retrieve@^12.7.2":
+"@salesforce/source-deploy-retrieve@^12.7.1", "@salesforce/source-deploy-retrieve@^12.7.2", "@salesforce/source-deploy-retrieve@^12.7.3":
   version "12.7.3"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.7.3.tgz#03e14fc44be423a52b3df35796bcfa8916494cfe"
   integrity sha512-hnaU4maxxHYc7B2fBKNevXjBJqTOdOqXIRhIHypeC1OMuUGYT6hchAxRIYGYaG+LEQ8Af4QG7t4zx3nJZuXV2Q==
@@ -5942,14 +5941,14 @@ is-windows@^1.0.2:
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
   integrity sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==
 
-is-wsl@^2.1.1, is-wsl@^2.2.0:
+is-wsl@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-2.2.0.tgz#74a4c76e77ca9fd3f932f290c17ea326cd157271"
   integrity sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==
   dependencies:
     is-docker "^2.0.0"
 
-is-wsl@^3.1.0:
+is-wsl@^3, is-wsl@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-3.1.0.tgz#e1c657e39c10090afcbedec61720f6b924c3cbd2"
   integrity sha512-UcVfVfaK4Sc4m7X3dUSoHoozQGBEFeDC+zVo06t98xe8CzHSZZBekNXH+tu0NalHolcJ/QAGqS46Hef7QXBIMw==
@@ -6365,10 +6364,10 @@ linkinator@^6.1.1:
     server-destroy "^1.0.1"
     srcset "^5.0.0"
 
-listr2@^8.2.4:
-  version "8.2.4"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.2.4.tgz#486b51cbdb41889108cb7e2c90eeb44519f5a77f"
-  integrity sha512-opevsywziHd3zHCVQGAj8zu+Z3yHNkkoYhWIGnq54RrCVwLz0MozotJEDnKsIBLvkfLGN6BLOyAeRrYI0pKA4g==
+listr2@^8.2.5:
+  version "8.2.5"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.2.5.tgz#5c9db996e1afeb05db0448196d3d5f64fec2593d"
+  integrity sha512-iyAZCeyD+c1gPyE9qpFu8af0Y+MRtmKOncdGoA2S5EY8iFq99dmmvkNnHiWo+pj0s7yH7l3KPIgee77tKpXPWQ==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
