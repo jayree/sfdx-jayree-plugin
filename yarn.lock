@@ -1620,24 +1620,24 @@
     tslib "^2.7.0"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.84":
-  version "1.3.84"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.84.tgz#19b7262596985562b0ee9c0ad36292997fc2379c"
-  integrity sha512-LGRbp7aK1pGIFPBXt2XSglrEJiE9PMxdjaLlPssluWx+T6imDPIq5vRTVIuJ8Cy/wmIXhs2B2Eu3Slk/fMTK/g==
+"@jayree/sfdx-plugin-prettier@^1.3.85":
+  version "1.3.85"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.85.tgz#bc5429fc3bc403b9b9440077e48ad3d061ad681a"
+  integrity sha512-ASRBOPlrQsBbgmTYHbGm1cngtBOc+mhg8EazcZR/j5Byo6HwjTwze0u3zxcRLCntDEyYwjrRTer04MP+Sh8Vig==
   dependencies:
     "@jayree/changelog" "^1.2.4"
     "@oclif/core" "^4.0.27"
     "@prettier/plugin-xml" "^3.4.1"
-    "@salesforce/core" "^8.6.1"
+    "@salesforce/core" "^8.6.2"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/sf-plugins-core" "^11.3.10"
-    "@salesforce/source-deploy-retrieve" "^12.7.3"
+    "@salesforce/sf-plugins-core" "^11.3.12"
+    "@salesforce/source-deploy-retrieve" "^12.8.0"
     cli-progress "^3.12.0"
     debug "^4.3.7"
     fs-extra "^11.2.0"
     ignore "^5.3.2"
     prettier "^3.3.3"
-    prettier-plugin-apex "^2.1.4"
+    prettier-plugin-apex "^2.1.5"
     tslib "^2.7.0"
 
 "@jayree/sfdx-plugin-source@^1.3.79":
@@ -1746,7 +1746,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.19", "@oclif/core@^4.0.22", "@oclif/core@^4.0.23", "@oclif/core@^4.0.27":
+"@oclif/core@^4", "@oclif/core@^4.0.22", "@oclif/core@^4.0.23", "@oclif/core@^4.0.27":
   version "4.0.27"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.27.tgz#686079df278e681e3097cea301d5558fdb490e88"
   integrity sha512-9j92jHr6k2tjQ6/mIwNi46Gqw+qbPFQ02mxT5T8/nxO2fgsPL3qL0kb9SR1il5AVfqpgLIG3uLUcw87rgaioUg==
@@ -1815,10 +1815,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.5.1", "@salesforce/core@^8.5.7", "@salesforce/core@^8.6.1":
-  version "8.6.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.6.1.tgz#180c489447190632cf48364a077510989fc1dea2"
-  integrity sha512-bOS6YIjk3IFzFtZcQXUIbJQ740Gh6EyzlcvoBpDpFA5eaz5ZrS0dO1e0rU6Gn4V1FZkvt84gQXA5G1M8tTNKVw==
+"@salesforce/core@^8.5.1", "@salesforce/core@^8.5.7", "@salesforce/core@^8.6.1", "@salesforce/core@^8.6.2":
+  version "8.6.2"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.6.2.tgz#50120d923504ceb04604b7f03e359386845a9f9d"
+  integrity sha512-LFzTLnavDeWsZBB7b2iuVz0F6yeuTcJzQxCy5n+rACY2/Lbw6UJDK/bOSt4wlss6fKrkyU1FTHNlUK5ZoBEveg==
   dependencies:
     "@jsforce/jsforce-node" "^3.4.1"
     "@salesforce/kit" "^3.2.2"
@@ -1893,16 +1893,16 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
 
-"@salesforce/sf-plugins-core@^11.3.10":
-  version "11.3.10"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.3.10.tgz#22dcb645e24110a5a50a5ee2602c62d855e85de6"
-  integrity sha512-Gvj6OM57cs1R/M/U8tWCo0srTyLNAsSOVtRWie8nz6x/qp6212ewkVgwwHBmP8XJsfuzjNvbzGcCjrCgwBzmCQ==
+"@salesforce/sf-plugins-core@^11.3.10", "@salesforce/sf-plugins-core@^11.3.12":
+  version "11.3.12"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-11.3.12.tgz#18b3a553688428bcffea9d36abc72847497f06ae"
+  integrity sha512-hi8EcSoRHRxj4sm/V5YDtzq9bPr/cKpM4fC6abo/jRzpXygwizinc2gVQkXfVdhjK7NGMskVRQB1N+0TThG7bA==
   dependencies:
     "@inquirer/confirm" "^3.1.22"
     "@inquirer/password" "^2.2.0"
-    "@oclif/core" "^4.0.19"
+    "@oclif/core" "^4.0.27"
     "@salesforce/core" "^8.5.1"
-    "@salesforce/kit" "^3.2.2"
+    "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
     ansis "^3.3.2"
     cli-progress "^3.12.0"
@@ -1911,10 +1911,10 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.7.1", "@salesforce/source-deploy-retrieve@^12.7.2", "@salesforce/source-deploy-retrieve@^12.7.3":
-  version "12.7.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.7.3.tgz#03e14fc44be423a52b3df35796bcfa8916494cfe"
-  integrity sha512-hnaU4maxxHYc7B2fBKNevXjBJqTOdOqXIRhIHypeC1OMuUGYT6hchAxRIYGYaG+LEQ8Af4QG7t4zx3nJZuXV2Q==
+"@salesforce/source-deploy-retrieve@^12.7.1", "@salesforce/source-deploy-retrieve@^12.7.2", "@salesforce/source-deploy-retrieve@^12.7.3", "@salesforce/source-deploy-retrieve@^12.8.0":
+  version "12.8.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.8.0.tgz#51e0ab2fb344e060f5a4314b633bf387104ed74f"
+  integrity sha512-Y7ySM1d7fJMyHqCn662WZm7OFbo8oNKzYrUzGaDAb1oWmX0vp8sljRVUw5qrPrMBTaHWNS3rsgL9pk2RNjcGiw==
   dependencies:
     "@salesforce/core" "^8.6.1"
     "@salesforce/kit" "^3.2.2"
@@ -3522,10 +3522,10 @@ available-typed-arrays@^1.0.6, available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-axios@^1.6.1:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.4.tgz#4c8ded1b43683c8dd362973c393f3ede24052aa2"
-  integrity sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==
+axios@^1.7.7:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.7.tgz#2f554296f9892a72ac8d8e4c5b79c14a91d0a47f"
+  integrity sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -6093,10 +6093,10 @@ jest-docblock@^29.0.0:
   dependencies:
     detect-newline "^3.0.0"
 
-joi@^17.11.0:
-  version "17.12.2"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-17.12.2.tgz#283a664dabb80c7e52943c557aab82faea09f521"
-  integrity sha512-RonXAIzCiHLc8ss3Ibuz45u28GOsWE1UpfDXLbN/9NKbL4tCJf8TWYVKsoYuuh+sAUt7fsSNpA+r2+TBA6Wjmw==
+joi@^17.13.3:
+  version "17.13.3"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.3.tgz#0f5cc1169c999b30d344366d384b12d92558bcec"
+  integrity sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==
   dependencies:
     "@hapi/hoek" "^9.3.0"
     "@hapi/topo" "^5.1.0"
@@ -7554,13 +7554,13 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-apex@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-2.1.4.tgz#53e99c93ae233bbec417f8722041007782a49c22"
-  integrity sha512-kGImHH2s+RsPtAXwbh5VmqqSTYhts626Zle2ryeUKJ4VY+vDyOQ53ppWOzFPA1XGdRpthh++WliD0ZVP1kdReA==
+prettier-plugin-apex@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-2.1.5.tgz#85593b6ba50572ddb28a184174d94e3c0440125b"
+  integrity sha512-OJ1PJmxbHRLxA3N5yzedYoqoSo/o7DJJzaZEwDKGWmNk+zeT5AJsBfiRe+g+p6Eo7ZZy91izgnh91RFo8IPzxw==
   dependencies:
     jest-docblock "^29.0.0"
-    wait-on "^7.2.0"
+    wait-on "^8.0.0"
 
 prettier@^2.8.8:
   version "2.8.8"
@@ -8978,13 +8978,13 @@ validate-npm-package-name@^5.0.1:
   resolved "https://registry.yarnpkg.com/validate-npm-package-name/-/validate-npm-package-name-5.0.1.tgz#a316573e9b49f3ccd90dbb6eb52b3f06c6d604e8"
   integrity sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==
 
-wait-on@^7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-7.2.0.tgz#d76b20ed3fc1e2bebc051fae5c1ff93be7892928"
-  integrity sha512-wCQcHkRazgjG5XoAq9jbTMLpNIjoSlZslrJ2+N9MxDsGEv1HnFoVjOCexL0ESva7Y9cu350j+DWADdk54s4AFQ==
+wait-on@^8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/wait-on/-/wait-on-8.0.1.tgz#13c8ec77115517f8fbc2d670521a444201f03f53"
+  integrity sha512-1wWQOyR2LVVtaqrcIL2+OM+x7bkpmzVROa0Nf6FryXkS+er5Sa1kzFGjzZRqLnHa3n1rACFLeTwUqE1ETL9Mig==
   dependencies:
-    axios "^1.6.1"
-    joi "^17.11.0"
+    axios "^1.7.7"
+    joi "^17.13.3"
     lodash "^4.17.21"
     minimist "^1.2.8"
     rxjs "^7.8.1"
