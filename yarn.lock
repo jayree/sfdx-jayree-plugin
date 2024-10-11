@@ -1573,18 +1573,18 @@
     semver "^7.6.3"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.5.21":
-  version "3.5.21"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.5.21.tgz#7390584e1000f2378269adcbea8fc439938f8c71"
-  integrity sha512-uLITlXaVH8NNZASXkeUVgwsD8hS6hn3Tawfa8wyvJ9TpEuc/vYifr2eSC5NcP9mKQCa7zA1D40Tc/3LgZOTHVA==
+"@jayree/sfdx-plugin-manifest@^3.5.26":
+  version "3.5.26"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.5.26.tgz#9003af719352f9388c35857ec489fcc9180e0355"
+  integrity sha512-1whhTeFrnIwxJDUuaYK2WKqa4wAOuQYPwHFO57C7htfFIjooydWrbB/9SOt8L6IGX4dINNwjk4Sdn47fIp1XBw==
   dependencies:
     "@jayree/changelog" "^1.2.4"
     "@oclif/core" "^4.0.23"
-    "@salesforce/core" "^8.5.7"
+    "@salesforce/core" "^8.6.2"
     "@salesforce/kit" "^3.2.2"
-    "@salesforce/sf-plugins-core" "^11.3.10"
-    "@salesforce/source-deploy-retrieve" "^12.7.2"
-    "@salesforce/source-tracking" "^7.1.16"
+    "@salesforce/sf-plugins-core" "^11.3.12"
+    "@salesforce/source-deploy-retrieve" "^12.8.0"
+    "@salesforce/source-tracking" "^7.1.17"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.4.1"
@@ -1911,7 +1911,7 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.7.1", "@salesforce/source-deploy-retrieve@^12.7.2", "@salesforce/source-deploy-retrieve@^12.7.3", "@salesforce/source-deploy-retrieve@^12.8.0":
+"@salesforce/source-deploy-retrieve@^12.7.3", "@salesforce/source-deploy-retrieve@^12.7.4", "@salesforce/source-deploy-retrieve@^12.8.0":
   version "12.8.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.8.0.tgz#51e0ab2fb344e060f5a4314b633bf387104ed74f"
   integrity sha512-Y7ySM1d7fJMyHqCn662WZm7OFbo8oNKzYrUzGaDAb1oWmX0vp8sljRVUw5qrPrMBTaHWNS3rsgL9pk2RNjcGiw==
@@ -1930,15 +1930,15 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.1.16":
-  version "7.1.16"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.1.16.tgz#fcadd0a65411647795e3368c54514234b9a03ebd"
-  integrity sha512-q+hvKihRupfRL5pKFoeAsBkUKY9OCjAcg6vnqkRigqF6KvsjoILt64dqRFDLmZ7iVw7K3RWgcDKSoQxgf14Kvw==
+"@salesforce/source-tracking@^7.1.16", "@salesforce/source-tracking@^7.1.17":
+  version "7.1.17"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.1.17.tgz#b9216790a6cfb8c4c72a699f613887f28e8469a0"
+  integrity sha512-QKKM/IsJHYQvE4sMREKChSyMQHLDUHP2Y3evcw4jJKTXA+je4d2v7GlAEVgOuMFUEH64j47EX2/FR/4EqzZeKA==
   dependencies:
     "@oclif/core" "^4.0.23"
     "@salesforce/core" "^8.6.1"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/source-deploy-retrieve" "^12.7.1"
+    "@salesforce/source-deploy-retrieve" "^12.7.4"
     "@salesforce/ts-types" "^2.0.12"
     fast-xml-parser "^4.5.0"
     graceful-fs "^4.2.11"
