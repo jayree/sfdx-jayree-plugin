@@ -1425,21 +1425,21 @@
     semver "^7.6.3"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.5.26":
-  version "3.5.26"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.5.26.tgz#9003af719352f9388c35857ec489fcc9180e0355"
-  integrity sha512-1whhTeFrnIwxJDUuaYK2WKqa4wAOuQYPwHFO57C7htfFIjooydWrbB/9SOt8L6IGX4dINNwjk4Sdn47fIp1XBw==
+"@jayree/sfdx-plugin-manifest@^3.5.27":
+  version "3.5.27"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.5.27.tgz#bc048db564bb80ec122519d438c0f58f5829a744"
+  integrity sha512-ylWjGsGWVZvWW3ix15mWoqeMVn4XRIu24pOYZFo+ISRkHDfpzt+cBBkc0fbuwhhhu+J94mRnvrCcVGJeTOApkw==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.0.23"
+    "@oclif/core" "^4.0.28"
     "@salesforce/core" "^8.6.2"
-    "@salesforce/kit" "^3.2.2"
+    "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^11.3.12"
     "@salesforce/source-deploy-retrieve" "^12.8.0"
     "@salesforce/source-tracking" "^7.1.17"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
-    fast-xml-parser "^4.4.1"
+    fast-xml-parser "^4.5.0"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
     isomorphic-git "1.27.1"
@@ -4492,7 +4492,7 @@ fast-xml-parser@4.4.1:
   dependencies:
     strnum "^1.0.5"
 
-fast-xml-parser@^4.4.1, fast-xml-parser@^4.5.0:
+fast-xml-parser@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.5.0.tgz#2882b7d01a6825dfdf909638f2de0256351def37"
   integrity sha512-/PlTQCI96+fZMAOLMZK4CWG1ItCbfZ/0jx7UIJFChPNrx7tcEgerUgWbeieCM9MfHInUDyK8DWYZ+YrywDJuTg==
