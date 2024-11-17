@@ -1,3 +1,10 @@
+## [4.8.104](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.103...v4.8.104) (2024-11-17)
+
+
+### Bug Fixes
+
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.5 ([#1486](https://github.com/jayree/sfdx-jayree-plugin/issues/1486)) ([0297440](https://github.com/jayree/sfdx-jayree-plugin/commit/029744013841b37cde7424a45fcca62ce393cb1f))
+
 ## [4.8.103](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.102...v4.8.103) (2024-11-16)
 
 
