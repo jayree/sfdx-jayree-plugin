@@ -1737,24 +1737,24 @@
     semver "^7.6.3"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.6.10":
-  version "3.6.10"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.10.tgz#c9815b38fbb5e27adb58bd739fbf3a8b4b6e9a38"
-  integrity sha512-+fIv4z98GHmcVhgu1ya31bJhDK7b6w5tXlzgYaarJzPmKNMNQ4A3gCMMRB2qlZRKBfHU2RaiZsS5nWoZyFKFNQ==
+"@jayree/sfdx-plugin-manifest@^3.6.14":
+  version "3.6.14"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.14.tgz#d5361492b9ceee8a22f08d25046b288f7d90709f"
+  integrity sha512-ldd7xD1x3MXT+jqJ1gH0qkp9cnZGhzyDz/OMvaCcUVu0LzVtEZmmiAkV4gGZAif7TEmRVyQPBTY5ayRV9xGTRw==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.0.32"
+    "@oclif/core" "^4.0.33"
     "@salesforce/core" "^8.6.4"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/sf-plugins-core" "^12.0.11"
+    "@salesforce/sf-plugins-core" "^12.0.13"
     "@salesforce/source-deploy-retrieve" "^12.10.0"
-    "@salesforce/source-tracking" "^7.1.23"
+    "@salesforce/source-tracking" "^7.1.25"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.5.0"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.27.1"
+    isomorphic-git "1.27.2"
 
 "@jayree/sfdx-plugin-org@^1.2.83":
   version "1.2.83"
@@ -2132,14 +2132,14 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/sf-plugins-core@^12.0.11":
-  version "12.0.11"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.0.11.tgz#5837bc385cb8f057c4bc86b71ead71464ba5063b"
-  integrity sha512-DYb54IeszQxcyl0N3e5qxSx3Vc571f36alZNE54qPqBTi9RAGEHQN4XR03dKLic0aNS/j4Z09RGH6YoH2zSL6A==
+"@salesforce/sf-plugins-core@^12.0.13":
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.1.0.tgz#874531acb39755a634ceda5de6462c3b6256baf6"
+  integrity sha512-xJXF0WE+4lq2kb/w24wcZc+76EUCIKv7dj1oATugk9JFzYKySdC1smzCY/BhPGzMQGvXcbkWo5PG5iXDBrtwYQ==
   dependencies:
     "@inquirer/confirm" "^3.1.22"
     "@inquirer/password" "^2.2.0"
-    "@oclif/core" "^4.0.27"
+    "@oclif/core" "^4.0.32"
     "@oclif/table" "^0.3.2"
     "@salesforce/core" "^8.5.1"
     "@salesforce/kit" "^3.2.3"
@@ -2167,7 +2167,7 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.1.23", "@salesforce/source-tracking@^7.2.0":
+"@salesforce/source-tracking@^7.1.25", "@salesforce/source-tracking@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.2.0.tgz#e87982e8bdb68aa64f5c249d500b1a8b6a9730a7"
   integrity sha512-PK/j/OOH6EBaHZQOXyheqvYmDbm960dP8Iwp2zbxFcHRHCKQIcIT1rLMtdSX8bBonVC6bGyBLaEae8Ak7Pmhcg==
@@ -6118,10 +6118,10 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@1.27.1, isomorphic-git@^1.27.1:
-  version "1.27.1"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.27.1.tgz#a2752fce23a09f04baa590c41cfaf61e973405b3"
-  integrity sha512-X32ph5zIWfT75QAqW2l3JCIqnx9/GWd17bRRehmn3qmWc34OYbSXY6Cxv0o9bIIY+CWugoN4nQFHNA+2uYf2nA==
+isomorphic-git@1.27.2, isomorphic-git@^1.27.1:
+  version "1.27.2"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.27.2.tgz#969727adf4e81ec313974e9ebe2d1d0982b25c7f"
+  integrity sha512-nCiz+ieOkWb5kDJSSckDTiMjTcgkxqH2xuiQmw1Y6O/spwx4d6TKYSfGCd4f71HGvUYcRSUGqJEI+3uN6UQlOw==
   dependencies:
     async-lock "^1.4.1"
     clean-git-ref "^2.0.1"
@@ -6130,6 +6130,7 @@ isomorphic-git@1.27.1, isomorphic-git@^1.27.1:
     ignore "^5.1.4"
     minimisted "^2.0.0"
     pako "^1.0.10"
+    path-browserify "^1.0.1"
     pify "^4.0.1"
     readable-stream "^3.4.0"
     sha.js "^2.4.9"
@@ -7532,6 +7533,11 @@ patch-package@^8.0.0:
     slash "^2.0.0"
     tmp "^0.0.33"
     yaml "^2.2.2"
+
+path-browserify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/path-browserify/-/path-browserify-1.0.1.tgz#d98454a9c3753d5790860f16f68867b9e46be1fd"
+  integrity sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==
 
 path-case@^3.0.4:
   version "3.0.4"
