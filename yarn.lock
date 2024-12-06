@@ -1784,13 +1784,13 @@
     tslib "^2.8.1"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.91":
-  version "1.3.91"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.91.tgz#fae43188bcc20f0cce56fe5096dfae20efd5029c"
-  integrity sha512-hECBllWzpGEQXEazgQ+yYlz0fBX2J5ppwxKZ5feH8BwK3sq1mIeloon25EqOyfmntB4Sj1rvDuw140pdsjhLXg==
+"@jayree/sfdx-plugin-prettier@^1.3.92":
+  version "1.3.92"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.92.tgz#de7a78a5a158b50d5d3c01666bd242ad0828af96"
+  integrity sha512-elGqiFmAQFhLR8fB5QUejHQm+Ou94umSWjEQZFv8CXph+RgGoZ2f/yfmuDDjJjFqUSoZzUCQwSNQJXEBpnX24Q==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.0.33"
+    "@oclif/core" "^4.0.34"
     "@prettier/plugin-xml" "^3.4.1"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
@@ -1800,7 +1800,7 @@
     debug "^4.3.7"
     fs-extra "^11.2.0"
     ignore "^5.3.2"
-    prettier "^3.3.3"
+    prettier "^3.4.2"
     prettier-plugin-apex "^2.2.2"
     tslib "^2.8.1"
 
@@ -7752,10 +7752,10 @@ prettier@^2.8.8:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
   integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
-prettier@^3.3.3, prettier@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.4.1.tgz#e211d451d6452db0a291672ca9154bc8c2579f7b"
-  integrity sha512-G+YdqtITVZmOJje6QkXQWzl3fSfMxFwm1tjTyo9exhkmWSqC4Yhd1+lug++IlR2mvRVAxEDDWYkQdeSztajqgg==
+prettier@^3.4.1, prettier@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.4.2.tgz#a5ce1fb522a588bf2b78ca44c6e6fe5aa5a2b13f"
+  integrity sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==
 
 pretty-quick@^3.3.1:
   version "3.3.1"
