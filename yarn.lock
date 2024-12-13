@@ -1373,10 +1373,10 @@
     semver "^7.6.3"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.6.16":
-  version "3.6.16"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.16.tgz#c39a09aa76ba294470b03aecc4ebaa96dcb85e08"
-  integrity sha512-Wq4Es2D9X8BFsbLvB+cBBCZPm/qbOqbnx07LlaME22MIshnYDhFCJnpqVZ+znPL/lJ5b3vPIy7ClaDcmxGyNUg==
+"@jayree/sfdx-plugin-manifest@^3.6.17":
+  version "3.6.17"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.17.tgz#a38723879660b4d383718934d773141746cefca9"
+  integrity sha512-mpr5uMNxbRLP+igJPyH1eVMmYv8qwJPfeE53Qtf9dW9w8HAjHhSe40tmXG3z7ixIGtpV7+QmDuhlZMY2xkDWuQ==
   dependencies:
     "@jayree/changelog" "^1.2.4"
     "@oclif/core" "^4.0.33"
@@ -1384,7 +1384,7 @@
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.1.0"
     "@salesforce/source-deploy-retrieve" "^12.10.0"
-    "@salesforce/source-tracking" "^7.2.2"
+    "@salesforce/source-tracking" "^7.3.1"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.5.0"
@@ -1803,12 +1803,12 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.2.2", "@salesforce/source-tracking@^7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.0.tgz#513cd92221441419ed92200b5c1c1942fb0d7761"
-  integrity sha512-kqAnp8bKPdSERa+OOzPviS/w5JL7DKP6JAg2wR9W3beW4eBVAwBGYlkAAXXXUIv8T4Fj7xGgYNF+7BlWxMkafA==
+"@salesforce/source-tracking@^7.3.0", "@salesforce/source-tracking@^7.3.1":
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.1.tgz#91def1981e77db9deb5fe7c2e70fb4e30ebb80eb"
+  integrity sha512-lzqDfOowJzwuyezqL9yooHzF4y3irkCZxEj0trX2uSE3cZJuu1QKeo+h75O7e2ZqM0zqoGvEQ30id9naf0VSww==
   dependencies:
-    "@oclif/core" "^4.0.33"
+    "@oclif/core" "^4.0.34"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/source-deploy-retrieve" "^12.10.2"
