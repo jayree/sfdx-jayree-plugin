@@ -1392,20 +1392,20 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.27.2"
 
-"@jayree/sfdx-plugin-org@^1.2.85":
-  version "1.2.85"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.85.tgz#c079c1ba3dca11dd29c8c63aac074c0448d0746b"
-  integrity sha512-dqkCd01/i1H+j+RY8mazYwzFZ41yskIyVZkuczXBl3CZWGpcfs0XsKbkZk/NjyRnSWAFumwGHM+dWFZeF6gaqg==
+"@jayree/sfdx-plugin-org@^1.2.86":
+  version "1.2.86"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.86.tgz#11d78b63803fbf6e1e6de40f828da7102fe8a4a7"
+  integrity sha512-jtMVgJTTpm8lhOFT8kov6VaiXPrl15oZ8rSONQghddSGq150RvessX5yQVD/O7/NLhbGNfqHo5WlH2FoDbbu+g==
   dependencies:
     "@jayree/changelog" "^1.2.4"
     "@jsforce/jsforce-node" "^3.6.3"
     "@listr2/prompt-adapter-enquirer" "^2.0.12"
-    "@oclif/core" "^4.0.37"
+    "@oclif/core" "^4.1.1"
     "@salesforce/core" "^8.8.0"
     "@salesforce/sf-plugins-core" "^11.3.12"
     "@salesforce/source-deploy-retrieve" "^12.10.3"
     "@salesforce/ts-types" "^2.0.12"
-    chalk "^5.3.0"
+    chalk "^5.4.0"
     cli-progress "^3.12.0"
     cli-truncate "^4.0.0"
     debug "^4.4.0"
@@ -1545,10 +1545,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.33", "@oclif/core@^4.0.34", "@oclif/core@^4.0.36", "@oclif/core@^4.0.37":
-  version "4.0.37"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.37.tgz#133d3f3951cd7a5fc52a3fec63ba2172921b535c"
-  integrity sha512-D69KH08/08kAPaDUPzDALYfqC2BXi4LRDQ/+59P3zZoVKYMoFO1kOouNILpI4bQKA+PpI2REctXMebB8U/bYHQ==
+"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.33", "@oclif/core@^4.0.34", "@oclif/core@^4.0.36", "@oclif/core@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.1.1.tgz#8bcf5a70c8b3ede7dafec46bdb4540a1d9d6ba79"
+  integrity sha512-GdGDKyGBGrqKdu1bCE+R8LtYvV0942RVYvVbT4vMM3OinsyUYRpYf2md1sYTvubu0Y9Euuwk8x6PckACaKU4bQ==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.3.2"
@@ -3375,10 +3375,10 @@ chalk@^4, chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^5.0.0, chalk@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.3.0.tgz#67c20a7ebef70e7f3970a01f90fa210cb6860385"
-  integrity sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==
+chalk@^5.0.0, chalk@^5.3.0, chalk@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.4.0.tgz#846fdb5d5d939d6fa3d565cd5545697b6f8b6923"
+  integrity sha512-ZkD35Mx92acjB2yNJgziGqT9oKHEOxjTBTDRpOsRWtdecL/0jM3z5kM/CTzHWvHIen1GvkM85p6TuFfDGfc8/Q==
 
 change-case@^4, change-case@^4.1.2:
   version "4.1.2"
