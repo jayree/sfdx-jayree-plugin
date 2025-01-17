@@ -1737,18 +1737,18 @@
     semver "^7.6.3"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^3.6.32":
-  version "3.6.32"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.32.tgz#fc115e59aeeb5afea2906dc95dfd6bc0c5c70a81"
-  integrity sha512-8gARbKZZcq8xhYM+YA5Fhgvjv6dWmdIPsGq9di33yPtmuPiWDaaFHiK1+17PMtPhJniS2QlQH3wxOoQCkQ0xCg==
+"@jayree/sfdx-plugin-manifest@^3.6.34":
+  version "3.6.34"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-3.6.34.tgz#e1f3ac2eafe70a95da8911c33ae67534d687f9a7"
+  integrity sha512-ZBgROqW83zqy6UP5a5W224icTG5WomHgsP878LhLQhOVC5cHMfnOekP/TP3GJF6J8CPPnrXV7vuZ586soOUa8A==
   dependencies:
     "@jayree/changelog" "^1.2.4"
     "@oclif/core" "^4.2.2"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.1.2"
-    "@salesforce/source-deploy-retrieve" "^12.11.3"
-    "@salesforce/source-tracking" "^7.3.6"
+    "@salesforce/source-deploy-retrieve" "12.12.3"
+    "@salesforce/source-tracking" "7.3.6"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^4.5.1"
@@ -2148,7 +2148,7 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.10.4", "@salesforce/source-deploy-retrieve@^12.11.2", "@salesforce/source-deploy-retrieve@^12.11.3", "@salesforce/source-deploy-retrieve@^12.12.1", "@salesforce/source-deploy-retrieve@^12.12.3":
+"@salesforce/source-deploy-retrieve@12.12.3", "@salesforce/source-deploy-retrieve@^12.10.4", "@salesforce/source-deploy-retrieve@^12.11.2", "@salesforce/source-deploy-retrieve@^12.12.1", "@salesforce/source-deploy-retrieve@^12.12.3":
   version "12.12.3"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.12.3.tgz#b03df07a60c55004c3b4c7ce8df3ecfd20b7742a"
   integrity sha512-kQ78RekRvTLh5yp8eB67szRoQr64R/0PETgszxf65RRPzLTmBGs0JpkZBMx0GN95Mb6BWvOEjTYLgyezVPUXsw==
@@ -2167,7 +2167,7 @@
     minimatch "^9.0.5"
     proxy-agent "^6.4.0"
 
-"@salesforce/source-tracking@^7.3.6":
+"@salesforce/source-tracking@7.3.6", "@salesforce/source-tracking@^7.3.6":
   version "7.3.6"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.6.tgz#70d1ffbe511394f64b5a28e0e5af88b8aed45c96"
   integrity sha512-U++xMp9gdU+Iq8C9vYOVpzMSkB2lcYMCs7VpC7h518pt1KC/GRV0ufWI6qwcSxZzsZMrPCpCdhGITpAgmM5YnA==
