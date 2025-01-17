@@ -12,7 +12,7 @@ A Salesforce CLI plugin containing commands and hooks for Salesforce Application
 ## Install
 
 ```bash
-sfdx plugins:install @jayree/sfdx-plugin-source
+sf plugins install sfdx-jayree
 ```
 
 ## Commands
