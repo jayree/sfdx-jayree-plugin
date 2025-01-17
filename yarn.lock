@@ -1784,22 +1784,22 @@
     tslib "^2.8.1"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.96":
-  version "1.3.96"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.96.tgz#2543caf3cfe4a3f993fac1365ac130114a3bd80d"
-  integrity sha512-eXxB0WSv5RCY6DjEOMRQT1kImcLxRQqKw4uZnIs1jcIh+z6j6hj6XtQLf7phuojt51S49P/m4iMWY2CgIUiGYw==
+"@jayree/sfdx-plugin-prettier@^1.3.98":
+  version "1.3.98"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.98.tgz#2634d638bd49832c39497d713ed81049a5aac7d4"
+  integrity sha512-DJEnq4s69RQ8MLdenFEmcSDPcfd80JZ9pXyT1kILbCfJippT6ii18XpxyqHIqqi+2NmzVpMsneZFDb0xubpluA==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.2.2"
+    "@oclif/core" "^4.2.3"
     "@prettier/plugin-xml" "^3.4.1"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.1.2"
-    "@salesforce/source-deploy-retrieve" "^12.12.1"
+    "@salesforce/source-deploy-retrieve" "^12.12.3"
     cli-progress "^3.12.0"
     debug "^4.3.7"
-    fs-extra "^11.2.0"
-    ignore "^5.3.2"
+    fs-extra "^11.3.0"
+    ignore "^7.0.0"
     prettier "^3.4.2"
     prettier-plugin-apex "^2.2.2"
     tslib "^2.8.1"
@@ -1909,13 +1909,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.34", "@oclif/core@^4.2.0", "@oclif/core@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.2.tgz#1f46f4a613f16dda636d27e0192d50f4b885e8d4"
-  integrity sha512-5jGzLDu96jG67G2sF21A3u67FJwSRnOnjaJwobiI7sgSg5uuVAHn4j1DahhfC4K7UEcXqXBBH064JyZ9yS4xHg==
+"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.34", "@oclif/core@^4.2.0", "@oclif/core@^4.2.2", "@oclif/core@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.3.tgz#b81399b7cf4758b5fe59777e060fb84c7c7e6153"
+  integrity sha512-JVEONwSZAfTNZCS81ah2u42Ya1mSeutCtHpoqMq/U+vP9Ka3Ni15/AqtcVtpH1afdUUn5RgtJYj+zlsrvMwksA==
   dependencies:
     ansi-escapes "^4.3.2"
-    ansis "^3.6.0"
+    ansis "^3.8.1"
     clean-stack "^3.0.1"
     cli-spinners "^2.9.2"
     debug "^4.4.0"
@@ -2148,10 +2148,10 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@^12.10.4", "@salesforce/source-deploy-retrieve@^12.11.2", "@salesforce/source-deploy-retrieve@^12.11.3", "@salesforce/source-deploy-retrieve@^12.12.1":
-  version "12.12.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.12.1.tgz#106730e75a76dc1f0b12d5b222f20bd10d4826bb"
-  integrity sha512-4xv2kFu+AcJB9FVK8G4ulUydCPgZSqtNKOz8hz0kTZzBF5MGQQ1C6I1d4Q/lnTotM/wkyJr+O1fEPrKTCkUwBw==
+"@salesforce/source-deploy-retrieve@^12.10.4", "@salesforce/source-deploy-retrieve@^12.11.2", "@salesforce/source-deploy-retrieve@^12.11.3", "@salesforce/source-deploy-retrieve@^12.12.1", "@salesforce/source-deploy-retrieve@^12.12.3":
+  version "12.12.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.12.3.tgz#b03df07a60c55004c3b4c7ce8df3ecfd20b7742a"
+  integrity sha512-kQ78RekRvTLh5yp8eB67szRoQr64R/0PETgszxf65RRPzLTmBGs0JpkZBMx0GN95Mb6BWvOEjTYLgyezVPUXsw==
   dependencies:
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.2"
@@ -3629,10 +3629,15 @@ ansi-styles@^6.0.0, ansi-styles@^6.1.0, ansi-styles@^6.2.1:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-ansis@^3.3.2, ansis@^3.5.2, ansis@^3.6.0, ansis@^3.8.0:
+ansis@^3.3.2, ansis@^3.5.2, ansis@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.8.0.tgz#e3fd998ee0088ce427c16c4566808559a13ffba3"
   integrity sha512-9cvbRlXv2evXl/OEFrdLxvorgbL9shTjqXthKyD1Gm42ZhzWYVjOOEKujaqKWmk+hMzX8XYMIDcCarsqxEW8nw==
+
+ansis@^3.8.1:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.9.0.tgz#d195c93c31a333916142ff8f0be4d7e3872f262e"
+  integrity sha512-PcDrVe15ldexeZMsVLBAzBwF2KhZgaU0R+CHxH+x5kqn/pO+UWVBZJ+NEXMPpEOLUFeNsnNdoWYc2gwO+MVkDg==
 
 any-promise@^1.0.0:
   version "1.3.0"
@@ -5507,10 +5512,10 @@ fromentries@^1.2.0:
   resolved "https://registry.yarnpkg.com/fromentries/-/fromentries-1.3.2.tgz#e4bca6808816bf8f93b52750f1127f5a6fd86e3a"
   integrity sha512-cHEpEQHUg0f8XdtZCc2ZAhrHzKzT0MrFUTcvx+hfxYu7rGMDc5SKoXFh+n4YigxsHXRzc6OrCshdR1bWH6HHyg==
 
-fs-extra@^11.0.0, fs-extra@^11.2.0:
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.2.0.tgz#e70e17dfad64232287d01929399e0ea7c86b0e5b"
-  integrity sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==
+fs-extra@^11.0.0, fs-extra@^11.2.0, fs-extra@^11.3.0:
+  version "11.3.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.3.0.tgz#0daced136bbaf65a555a326719af931adc7a314d"
+  integrity sha512-Z4XaCL6dUDHfP/jT25jJKMmtxvuwbkrD1vNSMFlo9lNLY2c5FHYSQgHPRZUjAB26TpDEoW9HCOgplrdbaPV/ew==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -6049,6 +6054,11 @@ ignore@^5.1.4, ignore@^5.2.0, ignore@^5.2.4, ignore@^5.3.0, ignore@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
+
+ignore@^7.0.0:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-7.0.3.tgz#397ef9315dfe0595671eefe8b633fec6943ab733"
+  integrity sha512-bAH5jbK/F3T3Jls4I0SO1hmPR0dKU0a7+SY6n1yzRtG54FLO8d6w/nxLFX2Nb7dBu6cCWXPaAME6cYqFUMmuCA==
 
 immediate@~3.0.5:
   version "3.0.6"
