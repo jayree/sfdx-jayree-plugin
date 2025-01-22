@@ -1,3 +1,10 @@
+## [4.8.116](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.115...v4.8.116) (2025-01-22)
+
+
+### Bug Fixes
+
+* **deps:** bump undici from 6.20.1 to 6.21.1 ([#1541](https://github.com/jayree/sfdx-jayree-plugin/issues/1541)) ([7939be2](https://github.com/jayree/sfdx-jayree-plugin/commit/7939be2a98604b8f0f063ed6955a020024190eff))
+
 ## [4.8.115](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.114...v4.8.115) (2025-01-17)
 
 
