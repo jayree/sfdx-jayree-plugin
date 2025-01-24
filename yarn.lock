@@ -1796,7 +1796,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.34", "@oclif/core@^4.2.0", "@oclif/core@^4.2.2", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4":
+"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.0.34", "@oclif/core@^4.2.2", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4":
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.4.tgz#0737063beb35e3d421135cd07983bc5306fb17bf"
   integrity sha512-JDqdhX6fBbijY3ouubfmX7yFBXy95YSpiAVk0TAaXXCoSqoo/2WMcV2Ufv2V+8zriafPU/rvKgI+ZE07/7HwfQ==
@@ -1837,10 +1837,10 @@
     ansis "^3.5.2"
     fast-levenshtein "^3.0.0"
 
-"@oclif/plugin-warn-if-update-available@^3.1.29":
-  version "3.1.29"
-  resolved "https://registry.yarnpkg.com/@oclif/plugin-warn-if-update-available/-/plugin-warn-if-update-available-3.1.29.tgz#0e4eabce38b3167cfc56c7b5871024859138cfae"
-  integrity sha512-NmD6hcyBquo9TV26tnYnsbyR69VzaeMC3kqks0YT2947CSJS7smONMxpkjU2P4kLTH4Tn8/n5w/sjoegNe1jdw==
+"@oclif/plugin-warn-if-update-available@^3.1.30":
+  version "3.1.31"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-warn-if-update-available/-/plugin-warn-if-update-available-3.1.31.tgz#203bc7e63f7f7df5bb1e31f42c3c1b52eaa00763"
+  integrity sha512-0ZN7o+Tv00gYrwlKsfMQ8VvJGb9Vhr3UYStFJh1AbEdGTPlURv51aatTW27AIV2atfluCh0MMntVZSzoDcuxSQ==
   dependencies:
     "@oclif/core" "^4"
     ansis "^3.5.2"
@@ -7064,20 +7064,20 @@ object.values@^1.1.7:
     define-properties "^1.2.0"
     es-abstract "^1.22.1"
 
-oclif@^4.17.13:
-  version "4.17.13"
-  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.17.13.tgz#6c18870b413d010a35887878bbb7fabd63e03580"
-  integrity sha512-cwkMIWPMYCLzB16cEGsHiW4xonl4vm++zYoQSSC+AXTKmOleeiVkDS6RXK92vhSUrsKaqhX4plQb0fSWj0V6YA==
+oclif@^4.17.17:
+  version "4.17.17"
+  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.17.17.tgz#6b5b8d1ec1cf27c83ec4b031c3b347c8eca43617"
+  integrity sha512-k1aiaYO6LVzIm6uaMbQ5QceH/OzyhEz5bHIJLfiGJCs17fwnfab/m7jUAZ/4BlJ5OiA69GYmt++jcqHAOWW8Yg==
   dependencies:
     "@aws-sdk/client-cloudfront" "^3.726.1"
     "@aws-sdk/client-s3" "^3.722.0"
     "@inquirer/confirm" "^3.1.22"
     "@inquirer/input" "^2.2.4"
     "@inquirer/select" "^2.5.0"
-    "@oclif/core" "^4.2.0"
+    "@oclif/core" "^4.2.3"
     "@oclif/plugin-help" "^6.2.21"
     "@oclif/plugin-not-found" "^3.2.32"
-    "@oclif/plugin-warn-if-update-available" "^3.1.29"
+    "@oclif/plugin-warn-if-update-available" "^3.1.30"
     async-retry "^1.3.3"
     chalk "^4"
     change-case "^4"
@@ -7090,7 +7090,7 @@ oclif@^4.17.13:
     lodash "^4.17.21"
     normalize-package-data "^6"
     semver "^7.6.3"
-    sort-package-json "^2.12.0"
+    sort-package-json "^2.14.0"
     tiny-jsonc "^1.0.1"
     validate-npm-package-name "^5.0.1"
 
@@ -8300,10 +8300,10 @@ sort-object-keys@^1.1.3:
   resolved "https://registry.yarnpkg.com/sort-object-keys/-/sort-object-keys-1.1.3.tgz#bff833fe85cab147b34742e45863453c1e190b45"
   integrity sha512-855pvK+VkU7PaKYPc+Jjnmt4EzejQHyhhF33q31qG8x7maDzkeFhAAThdCYay11CISO+qAMwjOBP+fPZe0IPyg==
 
-sort-package-json@^2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-2.12.0.tgz#4196a1ba82ba63c4a512add1d00ab39026bf8ab7"
-  integrity sha512-/HrPQAeeLaa+vbAH/znjuhwUluuiM/zL5XX9kop8UpDgjtyWKt43hGDk2vd/TBdDpzIyzIHVUgmYofzYrAQjew==
+sort-package-json@^2.14.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/sort-package-json/-/sort-package-json-2.14.0.tgz#ba0c7420dc6edea4b0eb7e9f502fda63f57586d8"
+  integrity sha512-xBRdmMjFB/KW3l51mP31dhlaiFmqkHLfWTfZAno8prb/wbDxwBPWFpxB16GZbiPbYr3wL41H8Kx22QIDWRe8WQ==
   dependencies:
     detect-indent "^7.0.1"
     detect-newline "^4.0.0"
