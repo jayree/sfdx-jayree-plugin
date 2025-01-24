@@ -61,7 +61,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/flow/get/coverage.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/flow/get/coverage.ts)_
 
 ### `sfdx jayree manifest cleanup`
 
@@ -90,7 +90,7 @@ EXAMPLES
   $ sfdx jayree manifest cleanup --manifest=package.xml --file=packageignore.xml
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.34/src/commands/jayree/manifest/cleanup.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.43/src/commands/jayree/manifest/cleanup.ts)_
 
 ### `sfdx jayree manifest generate`
 
@@ -99,18 +99,18 @@ Generate a complete manifest file form the specified org.
 ```
 USAGE
   $ sfdx jayree manifest generate -o <value> [--json] [--flags-dir <value>] [--api-version <value>] [-q <value>...] [-c] [-w]
-    [--include-flow-versions] [-f <value>] [--exclude-managed | --exclude-all]
+    [--include-flow-versions] [-f <value>] [-x | -a]
 
 FLAGS
+  -a, --exclude-all              Exclude all packages from output.
   -c, --match-case               Enable 'match case' for the quickfilter.
   -f, --file=<value>             Write to 'file' instead of stdout.
   -o, --target-org=<value>       (required) Username or alias of the target org. Not required if the `target-org`
                                  configuration variable is already set.
   -q, --quick-filter=<value>...  Metadata type, member or file path to filter on.
   -w, --match-whole-word         Enable 'match whole word' for the quickfilter.
+  -x, --exclude-managed          Exclude managed packages from output.
       --api-version=<value>      Override the api version used for api requests made by this command
-      --exclude-all              Exclude all packages from output.
-      --exclude-managed          Exclude managed packages from output.
       --include-flow-versions    Include flow versions as with api version 43.0.
 
 GLOBAL FLAGS
@@ -128,7 +128,7 @@ EXAMPLES
   <Package xmlns='http://soap.sforce.com/2006/04/metadata'>...</Package>
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.34/src/commands/jayree/manifest/generate.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.43/src/commands/jayree/manifest/generate.ts)_
 
 ### `sfdx jayree manifest git diff REF1 [REF2]`
 
@@ -136,8 +136,8 @@ Create a project manifest and destructiveChanges manifest that lists the metadat
 
 ```
 USAGE
-  $ sfdx jayree manifest git diff REF1 [REF2] [--json] [--flags-dir <value>] [--api-version <value>] [-d <value>...]
-    [--output-dir <value>] [--destructive-changes-only]
+  $ sfdx jayree manifest git diff REF1 [REF2] [--json] [--flags-dir <value>] [--api-version <value>] [-d <value>...] [-r
+    <value>] [--destructive-changes-only]
 
 ARGUMENTS
   REF1  Base commit or branch.
@@ -145,9 +145,9 @@ ARGUMENTS
 
 FLAGS
   -d, --source-dir=<value>...     Path to the local source files to include in the manifest.
+  -r, --output-dir=<value>        Directory to save the created manifest files.
       --api-version=<value>       Override the api version used for api requests made by this command
       --destructive-changes-only  Create a destructiveChanges manifest only.
-      --output-dir=<value>        Directory to save the created manifest files.
 
 GLOBAL FLAGS
   --flags-dir=<value>  Import flag values from a directory.
@@ -202,16 +202,16 @@ FLAG DESCRIPTIONS
 
     You can specify this flag more than once.
 
+  -r, --output-dir=<value>  Directory to save the created manifest files.
+
+    The location can be an absolute path or relative to the current working directory.
+
   --destructive-changes-only  Create a destructiveChanges manifest only.
 
     Use this flag to create a 'destructiveChanges.xml' and a blank 'package.xml'.
-
-  --output-dir=<value>  Directory to save the created manifest files.
-
-    The location can be an absolute path or relative to the current working directory.
 ```
 
-_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.34/src/commands/jayree/manifest/git/diff.ts)_
+_See code: [@jayree/sfdx-plugin-manifest](https://github.com/jayree/sfdx-plugin-manifest/blob/v3.6.43/src/commands/jayree/manifest/git/diff.ts)_
 
 ### `sfdx jayree org configure`
 
@@ -241,7 +241,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree org configure country`
 
@@ -261,7 +261,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree org configure state`
 
@@ -286,7 +286,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree org get settings`
 
@@ -316,7 +316,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/org/get/settings.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/org/get/settings.ts)_
 
 ### `sfdx jayree org stream`
 
@@ -348,7 +348,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.90/src/commands/jayree/org/stream.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.92/src/commands/jayree/org/stream.ts)_
 
 ### `sfdx jayree project compare snapshot`
 
@@ -369,7 +369,7 @@ ALIASES
   $ sfdx jayree source snapshot compare
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/compare/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/compare/snapshot.ts)_
 
 ### `sfdx jayree project fix`
 
@@ -391,7 +391,7 @@ ALIASES
   $ sfdx jayree source fix
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/fix.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/fix.ts)_
 
 ### `sfdx jayree project generate snapshot`
 
@@ -412,7 +412,7 @@ ALIASES
   $ sfdx jayree source snapshot generate
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/generate/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/generate/snapshot.ts)_
 
 ### `sfdx jayree project list tracking`
 
@@ -441,7 +441,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/list/tracking.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/list/tracking.ts)_
 
 ### `sfdx jayree project store tracking get`
 
@@ -467,7 +467,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/store/tracking/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/store/tracking/get.ts)_
 
 ### `sfdx jayree project store tracking set`
 
@@ -497,7 +497,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.95/src/commands/jayree/project/store/tracking/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.96/src/commands/jayree/project/store/tracking/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
