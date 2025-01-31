@@ -1691,20 +1691,20 @@
     prettier-plugin-apex "^2.2.2"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.96":
-  version "1.3.96"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.96.tgz#39558470ab8e0d2aabd51753c9bbecfa5f50ead8"
-  integrity sha512-ilf+/g3gIY1btc5rTqKINsV+s1Rt4d4c9IuOmYQUo4mS6xGQvKoVLVcNqYncnAVFWkOUzIDtUVFJj0vWzCQODg==
+"@jayree/sfdx-plugin-source@^1.3.97":
+  version "1.3.97"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.97.tgz#0b63df93f7b05742b37e6d4f0ea63fdb0b20293c"
+  integrity sha512-p7a4tRGmO871nw7nRjE6FXowHKqYRTz3KhQ21w9RHtzLIk3BtdCtx1XoxLyfMa2TZSDnjGYbYiJ9uqRnEk3lJg==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.2.4"
+    "@oclif/core" "^4.2.5"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^11.3.12"
-    "@salesforce/source-deploy-retrieve" "^12.13.0"
-    "@salesforce/source-tracking" "^7.3.9"
+    "@salesforce/source-deploy-retrieve" "^12.14.1"
+    "@salesforce/source-tracking" "^7.3.11"
     "@salesforce/ts-types" "^2.0.11"
-    ansis "^3.9.0"
+    ansis "^3.10.0"
     debug "^4.3.7"
     deep-object-diff "^1.1.9"
     fast-xml-parser "^4.5.1"
@@ -2055,7 +2055,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.6.1"
 
-"@salesforce/source-deploy-retrieve@^12.12.4", "@salesforce/source-deploy-retrieve@^12.13.0", "@salesforce/source-deploy-retrieve@^12.14.1":
+"@salesforce/source-deploy-retrieve@^12.12.4", "@salesforce/source-deploy-retrieve@^12.13.0", "@salesforce/source-deploy-retrieve@^12.14.0", "@salesforce/source-deploy-retrieve@^12.14.1":
   version "12.14.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.14.1.tgz#9067388b1eb9fadda7e6ccd894e9d1bb0e8407d5"
   integrity sha512-8POp6tqoeciDFAv7a40LG21aHZ2XGHvX0/ySqcjcAVhTVhVhcP0EpC+qO+SSKjB6Ocf0/6iXMo5ciU2Eq32ydw==
@@ -2075,7 +2075,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.6.1"
 
-"@salesforce/source-tracking@7.3.9", "@salesforce/source-tracking@^7.3.9":
+"@salesforce/source-tracking@7.3.9":
   version "7.3.9"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.9.tgz#baf13f0847a5fcd4298ed086db509e596e4c9a66"
   integrity sha512-nGVDtwzU3sj4IgA/crULC5NS6NeqBsmuTMlXDh+u2VgRpu+OB8QvSRGnhY4G2ctPE/hlYf9iOHfT0gDzqX/SZw==
@@ -2084,6 +2084,21 @@
     "@salesforce/core" "^8.8.2"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/source-deploy-retrieve" "^12.12.4"
+    "@salesforce/ts-types" "^2.0.12"
+    fast-xml-parser "^4.5.1"
+    graceful-fs "^4.2.11"
+    isomorphic-git "^1.27.2"
+    ts-retry-promise "^0.8.1"
+
+"@salesforce/source-tracking@^7.3.11":
+  version "7.3.11"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.11.tgz#2bb1a35d5834ea9940435aee0f197b1a4f3efc91"
+  integrity sha512-e7UfuwCsLzzNkN+NCtWF3bAWyf9WA/MsHD4sEq5F70dHDerw+W6L1M+16H4YXt9o8rPp7HKj6g615rYoy7PykA==
+  dependencies:
+    "@oclif/core" "^4.2.4"
+    "@salesforce/core" "^8.8.2"
+    "@salesforce/kit" "^3.2.3"
+    "@salesforce/source-deploy-retrieve" "^12.14.0"
     "@salesforce/ts-types" "^2.0.12"
     fast-xml-parser "^4.5.1"
     graceful-fs "^4.2.11"
@@ -3158,10 +3173,10 @@ ansi-styles@^6.0.0, ansi-styles@^6.1.0, ansi-styles@^6.2.1:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-ansis@^3.3.2, ansis@^3.5.2, ansis@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.9.0.tgz#d195c93c31a333916142ff8f0be4d7e3872f262e"
-  integrity sha512-PcDrVe15ldexeZMsVLBAzBwF2KhZgaU0R+CHxH+x5kqn/pO+UWVBZJ+NEXMPpEOLUFeNsnNdoWYc2gwO+MVkDg==
+ansis@^3.10.0, ansis@^3.3.2, ansis@^3.5.2, ansis@^3.9.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.10.0.tgz#6886afb0f729b1fa865df6b710b97a9915b7d0d4"
+  integrity sha512-hxDKLYT7hy3Y4sF3HxI926A3urzPxi73mZBB629m9bCVF+NyKNxbwCqqm+C/YrGPtxLwnl6d8/ZASCsz6SyvJA==
 
 any-promise@^1.0.0:
   version "1.3.0"
