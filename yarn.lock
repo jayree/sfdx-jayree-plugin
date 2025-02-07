@@ -1372,24 +1372,24 @@
     tslib "^2.8.1"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.100":
-  version "1.3.100"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.100.tgz#72d03be6c1003ead705eef0f5e73c201e2f011e5"
-  integrity sha512-k5idr7z4rkHifwipNB+XZr7ZzXPf/+o7+xRTswrF+kfjXD3ruGrIynAqff2Y0I76X8oLx+lqMTzFRgEXvZCv3w==
+"@jayree/sfdx-plugin-prettier@^1.3.101":
+  version "1.3.101"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.101.tgz#a8a926ef2dacbb073647b246a444cb4dbca5194f"
+  integrity sha512-I4X6rTCDfaqBR/SeI04WbCsUBtH15sXSAcGr1No0bgTACaaJ0z2iWSgmeVLd3xS/QM5jjDV/5Cf6or0Kq6P/vQ==
   dependencies:
     "@jayree/changelog" "^1.2.4"
-    "@oclif/core" "^4.2.5"
+    "@oclif/core" "^4.2.6"
     "@prettier/plugin-xml" "^3.4.1"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/sf-plugins-core" "^12.1.3"
-    "@salesforce/source-deploy-retrieve" "^12.14.1"
+    "@salesforce/sf-plugins-core" "^12.1.4"
+    "@salesforce/source-deploy-retrieve" "^12.14.3"
     cli-progress "^3.12.0"
     debug "^4.3.7"
     fs-extra "^11.3.0"
     ignore "^7.0.0"
     prettier "^3.4.2"
-    prettier-plugin-apex "^2.2.2"
+    prettier-plugin-apex "^2.2.4"
     tslib "^2.8.1"
 
 "@jayree/sfdx-plugin-source@^1.3.98":
@@ -1509,7 +1509,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4", "@oclif/core@^4.2.5", "@oclif/core@^4.2.6":
+"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4", "@oclif/core@^4.2.6":
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.6.tgz#f2f1696be03a815a4c391504312f90fce29fbb4e"
   integrity sha512-agk1Tlm7qMemWx+qq5aNgkYwX2JCkoVP4M0ruFveJrarmdUPbKZTMW1j/eg8lNKZh1sp68ytZyKhYXYEfRPcww==
@@ -1562,16 +1562,15 @@
     lodash "^4.17.21"
     registry-auth-token "^5.0.3"
 
-"@oclif/table@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.4.0.tgz#3bf97121a4fc3524801883f550eeb0fd822852a9"
-  integrity sha512-cXmZDb0VcxIk8o5cvd8J4CUtMGJeTuEDC8wQmlZC55Dl9FHcWE9TdZxksWLLp4w0qKP0YfJCFSvfGPMeMPyO5Q==
+"@oclif/table@^0.4.6":
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.4.6.tgz#4e07fc11de9b8a3187a5ea43edce71c42811ab7e"
+  integrity sha512-NXh72vHHYnDrWPmVfh4i7kDydz3CXm/tSAr17fWhmWfMM+8jGn5uo6FXtvB0cd9s4skvDqzoRcsRwOeR73zIKA==
   dependencies:
-    "@oclif/core" "^4"
     "@types/react" "^18.3.12"
     change-case "^5.4.4"
     cli-truncate "^4.0.0"
-    ink "^5.1.0"
+    ink "5.0.1"
     natural-orderby "^3.0.2"
     object-hash "^3.0.0"
     react "^18.3.1"
@@ -1627,25 +1626,25 @@
     "@pnpm/network.ca-file" "^1.0.1"
     config-chain "^1.1.11"
 
-"@prettier-apex/apex-ast-serializer-darwin-arm64@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-darwin-arm64/-/apex-ast-serializer-darwin-arm64-2.2.2.tgz#2e09f62c9b1a61d577bb60b5e0d193e55e320674"
-  integrity sha512-7L8jd+4RN87616X80mAhuZXRzvQmE/a2Fvwzp29z9gTN0hDWvAAzlmf6g5+a00daxTk9B/z+uDuHrgG7jIp7Ew==
+"@prettier-apex/apex-ast-serializer-darwin-arm64@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-darwin-arm64/-/apex-ast-serializer-darwin-arm64-2.2.4.tgz#5e18efff1e9d421e7a4e7e9dcf98e32689834a65"
+  integrity sha512-18MuJS1iPTgEHS2gPS1b8MfHkj2cpO5IK+ojOs3v+jh0JC5lzumO1p/CjUXb2Bd5HopOC42dFIb1HXaax5JgGQ==
 
-"@prettier-apex/apex-ast-serializer-darwin-x64@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-darwin-x64/-/apex-ast-serializer-darwin-x64-2.2.2.tgz#2e5c55d06caa62db4f054e055a2af56cceee7a06"
-  integrity sha512-rllsDy1qEK8EdcCMjOIG0eHxZPVYRMMW2qJ+3BWb7BIwtzMxZ4ikQrYEtdEtGHGOCt3ZFMzuKTTTG9DfP1ln0A==
+"@prettier-apex/apex-ast-serializer-darwin-x64@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-darwin-x64/-/apex-ast-serializer-darwin-x64-2.2.4.tgz#8bb7d1f6e014d424f49c60e7cc6d4e86ecc8546b"
+  integrity sha512-7ieK8FP7jGLaNDtOj3dAwP+8/Cu+0DM/HBn8ntR6fmMaKt6yr5rbq1BhIgdMCjbVTph0CUdE97Uli+AQEQvxeg==
 
-"@prettier-apex/apex-ast-serializer-linux-x64@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-linux-x64/-/apex-ast-serializer-linux-x64-2.2.2.tgz#2e92c7775c94e54d23ffeacf466423458fb6392b"
-  integrity sha512-F1nFRebFaQPthfNsa39zN7qexts+hoX6f2qwDK3Fl4lsFIWpvXZv3lVEbCcFXDaHVeda9dYbZ0Dn6HtZAdXDWA==
+"@prettier-apex/apex-ast-serializer-linux-x64@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-linux-x64/-/apex-ast-serializer-linux-x64-2.2.4.tgz#e1473bff738b6b673e29fd31c06ba68f9f4a9fbd"
+  integrity sha512-/i+PyD5/ohorLJ+iz2XzR5E4htfJ/xmE37dlvvth2WxEN4m0YNOjMRDI2sE+1HjPTZdG+m+cJuqq1UYZWmLFTg==
 
-"@prettier-apex/apex-ast-serializer-win32-x64@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-win32-x64/-/apex-ast-serializer-win32-x64-2.2.2.tgz#7ac27486589209b8abbf2fd690e952de8a02c1ea"
-  integrity sha512-8/tN8VgHPqBurvPC7Fyv1NJiKPMdAZMINOLWMChz4toCpysseu9RjKmdmBysfaO5G1Oy/WvxDusPmHUHdrP30Q==
+"@prettier-apex/apex-ast-serializer-win32-x64@2.2.4":
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/@prettier-apex/apex-ast-serializer-win32-x64/-/apex-ast-serializer-win32-x64-2.2.4.tgz#ed0ff470fa85b9f512644243f3f5f31ea932d406"
+  integrity sha512-SbT9ufY8OP976Owbefr/t8jPqZM51ps/gOavWjA/cu3+thOD4r50hMJ+Ke7NgTSwh11q2rPkadicCk/x2Y9HeA==
 
 "@prettier/plugin-xml@^3.4.1":
   version "3.4.1"
@@ -1750,15 +1749,15 @@
     string-width "^7.2.0"
     terminal-link "^3.0.0"
 
-"@salesforce/sf-plugins-core@^12.1.3":
-  version "12.1.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.1.3.tgz#4150b231f50bcdb64d6bd471a9d8f25f7ca57273"
-  integrity sha512-xJSzwl2G7OYSpZTokzWgq9Ybfw/ZtR3reQEFvJTNATLoPk7nv7UGo8WWbX1gcaepURBVvtmQlHsa8mVyoKjYmw==
+"@salesforce/sf-plugins-core@^12.1.3", "@salesforce/sf-plugins-core@^12.1.4":
+  version "12.1.4"
+  resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.1.4.tgz#c73829c7f12bdc96a2e2746ce7f574a604e8efb4"
+  integrity sha512-inSWsy9omNc4dIULVpoOJPX6DdEaqkA4CxmzTVrylc7P08jCbsv6LpS79wUaYC7Ah3krBQvbopP4wR9f3XvLeQ==
   dependencies:
     "@inquirer/confirm" "^3.1.22"
     "@inquirer/password" "^2.2.0"
     "@oclif/core" "^4.2.4"
-    "@oclif/table" "^0.4.0"
+    "@oclif/table" "^0.4.6"
     "@salesforce/core" "^8.5.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
@@ -4235,11 +4234,6 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-es-toolkit@^1.22.0:
-  version "1.31.0"
-  resolved "https://registry.yarnpkg.com/es-toolkit/-/es-toolkit-1.31.0.tgz#f4fc1382aea09cb239afa38f3c724a5658ff3163"
-  integrity sha512-vwS0lv/tzjM2/t4aZZRAgN9I9TP0MSkWuvt6By+hEXfG/uLs8yg2S1/ayRXH/x3pinbLgVJYT+eppueg3cM6tg==
-
 es6-error@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/es6-error/-/es6-error-4.1.1.tgz#9e3af407459deed47e9a91f9b885a84eb05c561d"
@@ -5384,10 +5378,10 @@ ini@^1.3.4:
   resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-ink@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/ink/-/ink-5.1.0.tgz#8ed050bf7a468489f231c99031f8bb1393c44079"
-  integrity sha512-3vIO+CU4uSg167/dZrg4wHy75llUINYXxN4OsdaCkE40q4zyOTPwNc2VEpLnnWsIvIQeo6x6lilAhuaSt+rIsA==
+ink@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/ink/-/ink-5.0.1.tgz#f2ef9796a3911830c3995dedd227ec84ae27de4b"
+  integrity sha512-ae4AW/t8jlkj/6Ou21H2av0wxTk8vrGzXv+v2v7j4in+bl1M5XRMVbfNghzhBokV++FjF8RBDJvYo+ttR9YVRg==
   dependencies:
     "@alcalzone/ansi-tokenize" "^0.1.3"
     ansi-escapes "^7.0.0"
@@ -5398,20 +5392,20 @@ ink@^5.1.0:
     cli-cursor "^4.0.0"
     cli-truncate "^4.0.0"
     code-excerpt "^4.0.0"
-    es-toolkit "^1.22.0"
     indent-string "^5.0.0"
-    is-in-ci "^1.0.0"
+    is-in-ci "^0.1.0"
+    lodash "^4.17.21"
     patch-console "^2.0.0"
     react-reconciler "^0.29.0"
     scheduler "^0.23.0"
     signal-exit "^3.0.7"
     slice-ansi "^7.1.0"
     stack-utils "^2.0.6"
-    string-width "^7.2.0"
-    type-fest "^4.27.0"
+    string-width "^7.0.0"
+    type-fest "^4.8.3"
     widest-line "^5.0.0"
     wrap-ansi "^9.0.0"
-    ws "^8.18.0"
+    ws "^8.15.0"
     yoga-wasm-web "~0.3.3"
 
 internal-slot@^1.0.7:
@@ -5536,10 +5530,10 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   dependencies:
     is-extglob "^2.1.1"
 
-is-in-ci@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/is-in-ci/-/is-in-ci-1.0.0.tgz#9a86bbda7e42c6129902e0574c54b018fbb6ab88"
-  integrity sha512-eUuAjybVTHMYWm/U+vBO1sY/JOCgoPCXRxzdju0K+K0BiGW0SChEL1MLC0PoCIR1OlPo5YAp8HuQoUlsWEICwg==
+is-in-ci@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/is-in-ci/-/is-in-ci-0.1.0.tgz#5e07d6a02ec3a8292d3f590973357efa3fceb0d3"
+  integrity sha512-d9PXLEY0v1iJ64xLiQMJ51J128EYHAaOR4yZqQi8aHGfw6KgifM3/Viw1oZZ1GCVmb3gBuyhLyHj0HgR2DhSXQ==
 
 is-inside-container@^1.0.0:
   version "1.0.0"
@@ -7335,18 +7329,18 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier-plugin-apex@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-2.2.2.tgz#a90449ec230f5d7598232febc24dcc0b3a505467"
-  integrity sha512-3x70d5iwzOE+JXz5MG0PS61i2vQZYlCA2PmLd5RDfwD2Zpp3kQWs9U9UhO+k+hJEaG3nUCRXM19a2GPQ7CUL/g==
+prettier-plugin-apex@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-apex/-/prettier-plugin-apex-2.2.4.tgz#cde8a1a08f68bd6b6a3b21799afaa0a8af41af0b"
+  integrity sha512-/mqsKuQ1TbGzav+WKi0EsOl+Ttappwh69KM5M04vTQXznk70jrNmEGNaCK3KvvVDMDwLSYCg8bkc9HsumWVfqg==
   dependencies:
     jest-docblock "^29.0.0"
     wait-on "^8.0.0"
   optionalDependencies:
-    "@prettier-apex/apex-ast-serializer-darwin-arm64" "2.2.2"
-    "@prettier-apex/apex-ast-serializer-darwin-x64" "2.2.2"
-    "@prettier-apex/apex-ast-serializer-linux-x64" "2.2.2"
-    "@prettier-apex/apex-ast-serializer-win32-x64" "2.2.2"
+    "@prettier-apex/apex-ast-serializer-darwin-arm64" "2.2.4"
+    "@prettier-apex/apex-ast-serializer-darwin-x64" "2.2.4"
+    "@prettier-apex/apex-ast-serializer-linux-x64" "2.2.4"
+    "@prettier-apex/apex-ast-serializer-win32-x64" "2.2.4"
 
 prettier@^2.8.8:
   version "2.8.8"
@@ -8612,10 +8606,10 @@ type-fest@^1.0.2:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
   integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
 
-type-fest@^4.27.0:
-  version "4.32.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.32.0.tgz#55bacdd6f2cf1392b7e9cde894e9b1d726807e97"
-  integrity sha512-rfgpoi08xagF3JSdtJlCwMq9DGNDE0IMh3Mkpc1wUypg9vPi786AiqeBBKcqvIkq42azsBM85N490fyZjeUftw==
+type-fest@^4.8.3:
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.33.0.tgz#2da0c135b9afa76cf8b18ecfd4f260ecd414a432"
+  integrity sha512-s6zVrxuyKbbAsSAD5ZPTB77q4YIdRctkTbJ2/Dqlinwz+8ooH2gd+YA7VA6Pa93KML9GockVvoxjZ2vHP+mu8g==
 
 typed-array-buffer@^1.0.2:
   version "1.0.2"
@@ -9010,7 +9004,7 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^8.18.0:
+ws@^8.15.0:
   version "8.18.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.0.tgz#0d7505a6eafe2b0e712d232b42279f53bc289bbc"
   integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
