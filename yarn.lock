@@ -1344,13 +1344,13 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.29.0"
 
-"@jayree/sfdx-plugin-org@^1.2.96":
-  version "1.2.96"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.96.tgz#333f231849781fe6f63fc0da42cc81cc66e46fc3"
-  integrity sha512-UfW0cUZj0ZA163XEqteg9QZWDZb7X4ulKHXTCNCtGGGe7+qEay3Lc67l41A/erXc5DMw9ri9yO//xSAvexGdZA==
+"@jayree/sfdx-plugin-org@^1.2.97":
+  version "1.2.97"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.97.tgz#f24f98ef91866884151e4ed184c232cd2c7bc79d"
+  integrity sha512-JrmiH2rMVnRa/YFcnfB8jubESFc6hc76tfApJj3Sng8BoifWmU8PXVM5stQqwksRnNev/vdBdn31W1xN0UX/Ew==
   dependencies:
-    "@jayree/changelog" "^1.2.5"
-    "@jsforce/jsforce-node" "^3.6.4"
+    "@jayree/changelog" "^1.2.6"
+    "@jsforce/jsforce-node" "^3.6.5"
     "@listr2/prompt-adapter-enquirer" "^2.0.12"
     "@oclif/core" "^4.2.6"
     "@salesforce/core" "^8.8.2"
@@ -1455,10 +1455,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.6.1", "@jsforce/jsforce-node@^3.6.4":
-  version "3.6.4"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.6.4.tgz#c1055e2064a501633e9d86f6f2fe1b287c6ce9ce"
-  integrity sha512-9IZL5lFDE1nUnPYnzOleH0xaEE3Sc9sQcLKwx1LQeSyAI/KvnxySadlIpZAdTrJap4hDRFQkXiEFiJ3oFwj/zg==
+"@jsforce/jsforce-node@^3.6.1", "@jsforce/jsforce-node@^3.6.5":
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.6.5.tgz#d8a4097b46348b6b5001da66d616b3e9c7efb59f"
+  integrity sha512-XqYOCgqET9XYhwI3wmrg4oMRzKkTqy0ua8aopMQRMGT2QVuq2IBfRTSrfoMa129lqJvNy7XXA4ntXQJkKI/VqQ==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
