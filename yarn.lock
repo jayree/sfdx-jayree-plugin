@@ -1313,14 +1313,14 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.5.tgz#915dff5e71b4964ea677ed570865c929a5c5f49e"
-  integrity sha512-jaMecAX/d3Pn7Likis+lGZ3c+uekqpoyDhEhHDnN5zd4tY1vkndFHbNoIdTRNGvtvNMUfvIZi2VeFO8r0C4Qcw==
+"@jayree/changelog@^1.2.5", "@jayree/changelog@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.6.tgz#99f3e1beeebb70c9664b185c09f0e22bb5a3763d"
+  integrity sha512-Ccy+R7krQ1WB/dXw0KVcsZubpElSk7Ea47Na88vxJRPLiw/6Hb3w4wh0zs9zh90pCRHZq0UnP25hhovclKoWkg==
   dependencies:
     debug "^4.4.0"
     fs-extra "^11.3.0"
-    marked "^12.0.2"
+    marked "^15.0.7"
     marked-terminal "^7.3.0"
     semver "^7.7.1"
     semver-compare "^1.0.0"
@@ -1392,23 +1392,23 @@
     prettier-plugin-apex "^2.2.4"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.99":
-  version "1.3.99"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.99.tgz#ba92e75ccf496bec13e62851e1c55819faf41943"
-  integrity sha512-U/9FZKgWhZ/q3tN9XcwMYgg6LjEtTI8HCOinEEfqqhrVtdXDatvONONpDTCPXPU5Gpdv1nGBpmWD0VnvMN8Efw==
+"@jayree/sfdx-plugin-source@^1.3.100":
+  version "1.3.100"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.100.tgz#b60a850d4c05112b40ff1d6cc650d8bb558b9ee9"
+  integrity sha512-94nSY0XPoKWopafrwNtGOW8Ajf4rO8xu1daW95tpIhijyjmWeK6LFhmnqduy/4HBNlXgEvapKfpbYUIbA4IXJA==
   dependencies:
-    "@jayree/changelog" "^1.2.5"
-    "@oclif/core" "^4.2.6"
+    "@jayree/changelog" "^1.2.6"
+    "@oclif/core" "^4.2.7"
     "@salesforce/core" "^8.8.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^11.3.12"
     "@salesforce/source-deploy-retrieve" "^12.15.0"
-    "@salesforce/source-tracking" "^7.3.14"
+    "@salesforce/source-tracking" "^7.3.15"
     "@salesforce/ts-types" "^2.0.11"
-    ansis "^3.14.0"
+    ansis "^3.15.0"
     debug "^4.3.7"
     deep-object-diff "^1.1.9"
-    fast-xml-parser "^4.5.1"
+    fast-xml-parser "^4.5.3"
     fs-extra "^11.3.0"
     globby "^14.0.2"
     ignore "^7.0.0"
@@ -1509,13 +1509,13 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4", "@oclif/core@^4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.6.tgz#f2f1696be03a815a4c391504312f90fce29fbb4e"
-  integrity sha512-agk1Tlm7qMemWx+qq5aNgkYwX2JCkoVP4M0ruFveJrarmdUPbKZTMW1j/eg8lNKZh1sp68ytZyKhYXYEfRPcww==
+"@oclif/core@^4", "@oclif/core@^4.0.27", "@oclif/core@^4.2.3", "@oclif/core@^4.2.4", "@oclif/core@^4.2.6", "@oclif/core@^4.2.7":
+  version "4.2.7"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.2.7.tgz#ca9d79454bc356218c8a5563728e831a972b751e"
+  integrity sha512-49wtIlSEw9UyxdSMPjJ2Ookj5e056Qbqr6A+uN7Ea8XCK6b8Q03KciTEpX5t0rfNggvewJc9e3SHY6uWZIkXVw==
   dependencies:
     ansi-escapes "^4.3.2"
-    ansis "^3.10.0"
+    ansis "^3.14.0"
     clean-stack "^3.0.1"
     cli-spinners "^2.9.2"
     debug "^4.4.0"
@@ -1785,7 +1785,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.6.1"
 
-"@salesforce/source-tracking@7.3.15", "@salesforce/source-tracking@^7.3.14":
+"@salesforce/source-tracking@7.3.15", "@salesforce/source-tracking@^7.3.15":
   version "7.3.15"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.15.tgz#dc2c9b45f02f94c0950eb43db41296bce33c4a70"
   integrity sha512-TA4vyYg4xfI14tiTzjauiMyD6w1zbJ+LSgx+4PblHrTPZr01wWS2tuoN1Czd1n0DVuEvTi5BWprI8+9loIezXQ==
@@ -2868,10 +2868,10 @@ ansi-styles@^6.0.0, ansi-styles@^6.1.0, ansi-styles@^6.2.1:
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-6.2.1.tgz#0e62320cf99c21afff3b3012192546aacbfb05c5"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
 
-ansis@^3.10.0, ansis@^3.14.0, ansis@^3.3.2, ansis@^3.5.2:
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.14.0.tgz#6eb4012927f000aa586236a7515da2022fb0883b"
-  integrity sha512-R1LnSpYZWMDEFoAyCrfgToVz4ES25luDpjlZsUlD5GXdPWb91U+TZGkxWAOvt+7zWRY/ctOxhtTx5HUtL3qmbA==
+ansis@^3.14.0, ansis@^3.15.0, ansis@^3.3.2, ansis@^3.5.2:
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/ansis/-/ansis-3.15.0.tgz#8c2c5546685ceba0944dad9485903851b6e704f6"
+  integrity sha512-zIcWDJ+Kwqxfdnogx66Gxzr0kVmCcRAdat9nlY2IHsshqTN4fBH6tMeRMPA/2w0rpBayIJvjQAaa2/4RDrNqwg==
 
 any-promise@^1.0.0:
   version "1.3.0"
@@ -4579,12 +4579,12 @@ fast-xml-parser@4.4.1:
   dependencies:
     strnum "^1.0.5"
 
-fast-xml-parser@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.5.1.tgz#a7e665ff79b7919100a5202f23984b6150f9b31e"
-  integrity sha512-y655CeyUQ+jj7KBbYMc4FG01V8ZQqjN+gDYGJ50RtfsUB8iG9AmwmwoAgeKLJdmueKKMrH1RJ7yXHTSoczdv5w==
+fast-xml-parser@^4.5.1, fast-xml-parser@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-4.5.3.tgz#c54d6b35aa0f23dc1ea60b6c884340c006dc6efb"
+  integrity sha512-RKihhV+SHsIUGXObeVy9AXiBbFwkVk7Syp8XgwN5U3JV416+Gwp/GO9i0JYKmikykgz/UHRrrV4ROuZEo/T0ig==
   dependencies:
-    strnum "^1.0.5"
+    strnum "^1.1.1"
 
 fastest-levenshtein@^1.0.7:
   version "1.0.16"
@@ -6316,15 +6316,15 @@ marked-terminal@^7.3.0:
     node-emoji "^2.2.0"
     supports-hyperlinks "^3.1.0"
 
-marked@^12.0.2:
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-12.0.2.tgz#b31578fe608b599944c69807b00f18edab84647e"
-  integrity sha512-qXUm7e/YKFoqFPYPa3Ukg9xlI5cyAtGmyEIzMfW//m6kXwCy2Ps9DYf5ioijFKQ8qyuscrHoY04iJGctu2Kg0Q==
-
 marked@^13.0.0:
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/marked/-/marked-13.0.2.tgz#d5d05bd2683a85cb9cc6afbe5240e3a8bffcb92a"
   integrity sha512-J6CPjP8pS5sgrRqxVRvkCIkZ6MFdRIjDkwUwgJ9nL2fbmM6qGQeB2C16hi8Cc9BOzj6xXzy0jyi0iPIfnMHYzA==
+
+marked@^15.0.7:
+  version "15.0.7"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-15.0.7.tgz#f67d7e34d202ce087e6b879107b5efb04e743314"
+  integrity sha512-dgLIeKGLx5FwziAnsk4ONoGwHwGPJzselimvlVskE9XLN4Orv9u2VA3GWw/lYUqjfA0rUT/6fqKwfZJapP9BEg==
 
 mdurl@^2.0.0:
   version "2.0.0"
@@ -8287,6 +8287,11 @@ strnum@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/strnum/-/strnum-1.0.5.tgz#5c4e829fe15ad4ff0d20c3db5ac97b73c9b072db"
   integrity sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==
+
+strnum@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/strnum/-/strnum-1.1.1.tgz#6b312934054594dd611bd18d9bcce5053a7caaee"
+  integrity sha512-O7aCHfYCamLCctjAiaucmE+fHf2DYHkus2OKCn4Wv03sykfFtgeECn505X6K4mPl8CRNd/qurC9guq+ynoN4pw==
 
 supports-color@^5.3.0, supports-color@^5.4.0:
   version "5.5.0"
