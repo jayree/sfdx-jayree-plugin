@@ -1344,18 +1344,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.29.0"
 
-"@jayree/sfdx-plugin-org@^1.2.97":
-  version "1.2.97"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.97.tgz#f24f98ef91866884151e4ed184c232cd2c7bc79d"
-  integrity sha512-JrmiH2rMVnRa/YFcnfB8jubESFc6hc76tfApJj3Sng8BoifWmU8PXVM5stQqwksRnNev/vdBdn31W1xN0UX/Ew==
+"@jayree/sfdx-plugin-org@^1.2.99":
+  version "1.2.99"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.99.tgz#8090dd76ff7bd93290334fe9cdce4c45f59dc16e"
+  integrity sha512-4PcsOxb7gG+6de/1nS/Ojd1tf/hmDYjx7GZ0BbfYdjk/SGVK1rzCT7wpUAkuhwr16izWjI9LGlY+uGV7xGtuWQ==
   dependencies:
     "@jayree/changelog" "^1.2.6"
-    "@jsforce/jsforce-node" "^3.6.5"
+    "@jsforce/jsforce-node" "^3.6.6"
     "@listr2/prompt-adapter-enquirer" "^2.0.12"
-    "@oclif/core" "^4.2.6"
+    "@oclif/core" "^4.2.7"
     "@salesforce/core" "^8.8.2"
     "@salesforce/sf-plugins-core" "^11.3.12"
-    "@salesforce/source-deploy-retrieve" "^12.15.0"
+    "@salesforce/source-deploy-retrieve" "^12.16.0"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.4.1"
     cli-progress "^3.12.0"
@@ -1455,10 +1455,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.6.5":
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.6.5.tgz#d8a4097b46348b6b5001da66d616b3e9c7efb59f"
-  integrity sha512-XqYOCgqET9XYhwI3wmrg4oMRzKkTqy0ua8aopMQRMGT2QVuq2IBfRTSrfoMa129lqJvNy7XXA4ntXQJkKI/VqQ==
+"@jsforce/jsforce-node@^3.6.5", "@jsforce/jsforce-node@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.6.6.tgz#26fe2fc9f4f3671ca8bfb0c98a728cb8a0219265"
+  integrity sha512-WdIo2lLbrz6nkfiaz2UynyaNiM8o+fEjaRev7zA4KKSaQYB1MJ66xHubeI5Iheq8WgkY9XGwWKAwPDhuV+GROQ==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
@@ -1653,7 +1653,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.5.1", "@salesforce/core@^8.8.0", "@salesforce/core@^8.8.2", "@salesforce/core@^8.8.4":
+"@salesforce/core@^8.5.1", "@salesforce/core@^8.8.0", "@salesforce/core@^8.8.2", "@salesforce/core@^8.8.3", "@salesforce/core@^8.8.4":
   version "8.8.4"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.8.4.tgz#1995d387a62c48810b4e0a66c68192ccdcf8001f"
   integrity sha512-TKioMWh/QWmXjnD0bMNvFHEqaH175TCYWNXUCO1CixdhhI0p1MQj4AnQsk8wuRJiH5kVhiYw6Z7NukcIxLtbUw==
@@ -1765,7 +1765,7 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.15.0", "@salesforce/source-deploy-retrieve@^12.15.0":
+"@salesforce/source-deploy-retrieve@12.15.0":
   version "12.15.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.15.0.tgz#b93c3c245953b7b0f34cf1022c36b6d0d4aae755"
   integrity sha512-UbJ68pzAmGsdeHhBB4ml1tzTFbD8SjmGj1bhl3AbgeqxYncT1SpIMj0OHCXaUZFZB4vsGe5J8ft394PajlCeWw==
@@ -1773,6 +1773,27 @@
     "@salesforce/core" "^8.8.2"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
+    fast-levenshtein "^3.0.0"
+    fast-xml-parser "^4.5.1"
+    got "^11.8.6"
+    graceful-fs "^4.2.11"
+    ignore "^5.3.2"
+    isbinaryfile "^5.0.2"
+    jszip "^3.10.1"
+    mime "2.6.0"
+    minimatch "^9.0.5"
+    proxy-agent "^6.4.0"
+    yaml "^2.6.1"
+
+"@salesforce/source-deploy-retrieve@^12.15.0", "@salesforce/source-deploy-retrieve@^12.16.0":
+  version "12.16.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.16.0.tgz#6c0338a5cd83b87161414ae4a326669d81884f60"
+  integrity sha512-vKBoefk1bHzs945e7PFhBJd21jLYJY2QrrNCwQpmHf6C3Lbu9+kzOnZVLPuDM4lGxXyhhQ89Nx3TtPCyndhmfg==
+  dependencies:
+    "@salesforce/core" "^8.8.3"
+    "@salesforce/kit" "^3.2.3"
+    "@salesforce/ts-types" "^2.0.12"
+    "@salesforce/types" "^1.3.0"
     fast-levenshtein "^3.0.0"
     fast-xml-parser "^4.5.1"
     got "^11.8.6"
@@ -1828,6 +1849,11 @@
   version "2.0.12"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-2.0.12.tgz#60420622812a7ec7e46d220667bc29b42dc247ff"
   integrity sha512-BIJyduJC18Kc8z+arUm5AZ9VkPRyw1KKAm+Tk+9LT99eOzhNilyfKzhZ4t+tG2lIGgnJpmytZfVDZ0e2kFul8g==
+
+"@salesforce/types@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/types/-/types-1.3.0.tgz#c8b686cd5d7351aa3b9857ed03561d6a7439e5a8"
+  integrity sha512-tcjBZrzCukOVIVm7mLHefsfDMyd+MTWWFWXk5wbdIQa+hiehUSA2SG0B0cpDMuOaIa9UiBm/SQCI+zznlt6W6g==
 
 "@shikijs/core@1.11.2":
   version "1.11.2"
