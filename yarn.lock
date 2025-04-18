@@ -1351,7 +1351,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.7", "@jayree/changelog@^1.2.8":
+"@jayree/changelog@^1.2.8":
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.8.tgz#e5ea5d49c3dda29a5a284dda444b08c37ce0225c"
   integrity sha512-uqD1ExM7JNyMcd1cbzXH55b7DqZZ69/f6TASKYGUKBR5BQ2jYXpY4i+KckAFaeebEPQhWW+KIJtCYj4tBWn7BA==
@@ -1382,18 +1382,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.30.1"
 
-"@jayree/sfdx-plugin-org@^1.2.103":
-  version "1.2.103"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.103.tgz#395b48745f6ef9a61b03486bdc29fc5a0e646fa2"
-  integrity sha512-riE23VLyE9QwmJ5w+B+ovbaU98SmTFFsM/ymNce7z2ZWd6Dsc2d4JKrsxQo/NQVruQ60N9ijbYEcvHeqdVeYkQ==
+"@jayree/sfdx-plugin-org@^1.2.107":
+  version "1.2.107"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.107.tgz#318aef8ea16c2fdf197762c490db779a436b3d84"
+  integrity sha512-6HmflmBvwKGGauwh0yxOYd01zUpzOm/ehvfaV0rBWtRjXOmxRUcgsijUVevP722cCMfkudBFHGW4Na3yfZlzCg==
   dependencies:
-    "@jayree/changelog" "^1.2.7"
+    "@jayree/changelog" "^1.2.8"
     "@jsforce/jsforce-node" "^3.7.0"
-    "@listr2/prompt-adapter-enquirer" "^2.0.12"
+    "@listr2/prompt-adapter-enquirer" "^2.0.15"
     "@oclif/core" "^4.2.10"
-    "@salesforce/core" "^8.8.6"
+    "@salesforce/core" "^8.9.0"
     "@salesforce/sf-plugins-core" "^11.3.12"
-    "@salesforce/source-deploy-retrieve" "^12.18.0"
+    "@salesforce/source-deploy-retrieve" "^12.19.3"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.4.1"
     cli-progress "^3.12.0"
@@ -1403,7 +1403,7 @@
     fs-extra "^11.3.0"
     is-docker "^3.0.0"
     is-wsl "^3.1.0"
-    listr2 "^8.2.5"
+    listr2 "^8.3.2"
     log-update "^6.0.0"
     playwright-chromium "^1.51.1"
     tabletojson "4.1.5"
@@ -1509,10 +1509,10 @@
     node-fetch "^2.6.1"
     xml2js "^0.6.2"
 
-"@listr2/prompt-adapter-enquirer@^2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.12.tgz#e65d01880c653d6a03c1a4899cdee71ca157c1a0"
-  integrity sha512-WR1RvaiRuSOQ8i8Hr6CLlPXFsL2u9xwoADKYD2GeUsk7EBOx7cb9GFvJhHnlVUZq4LaPvY1U1NtrgXoslteaVA==
+"@listr2/prompt-adapter-enquirer@^2.0.15":
+  version "2.0.15"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.15.tgz#9e0e29bc66dc2eca5fbd5cd34a3c8e197c4ca214"
+  integrity sha512-o/mvK72xAGZf9/50rVbmdD8f/RMwSHDk94mw6k4ZZGTFKYbuLrbQJwh+GWbmB0+bDxjsR9CiQ79Pzd46FkLDxA==
 
 "@mswjs/interceptors@^0.38.1":
   version "0.38.1"
@@ -1692,7 +1692,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.5.1", "@salesforce/core@^8.8.5", "@salesforce/core@^8.8.6", "@salesforce/core@^8.8.7", "@salesforce/core@^8.9.0", "@salesforce/core@^8.9.1":
+"@salesforce/core@^8.5.1", "@salesforce/core@^8.8.5", "@salesforce/core@^8.8.7", "@salesforce/core@^8.9.0", "@salesforce/core@^8.9.1":
   version "8.9.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.9.1.tgz#e31d307d495cc0b916c0b9312fba751714034e0a"
   integrity sha512-Q1evH4WD7IYWgbcIYCUDi3FTEMgy1KLVg4Xa4GacKLNcOBfom5s6whNsz3gUFESqjndGDwV5Pbgpi0ImC17PfQ==
@@ -1825,7 +1825,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.7.1"
 
-"@salesforce/source-deploy-retrieve@^12.15.0", "@salesforce/source-deploy-retrieve@^12.18.0", "@salesforce/source-deploy-retrieve@^12.19.0", "@salesforce/source-deploy-retrieve@^12.19.3":
+"@salesforce/source-deploy-retrieve@^12.15.0", "@salesforce/source-deploy-retrieve@^12.19.0", "@salesforce/source-deploy-retrieve@^12.19.3":
   version "12.19.3"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.19.3.tgz#42b34913b624115aee36cd289cb5ea1d5de9b7b1"
   integrity sha512-rvdEfi2beJmVbN4NQ3Ve4dULq+wMFuLKBKpmNBIb9udXNVZd8Q0P7TO9pM/tzfeAfwfdTE7swXaYe2Qv5UAd+g==
@@ -6281,10 +6281,10 @@ linkinator@^6.1.1:
     server-destroy "^1.0.1"
     srcset "^5.0.0"
 
-listr2@^8.2.5:
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.2.5.tgz#5c9db996e1afeb05db0448196d3d5f64fec2593d"
-  integrity sha512-iyAZCeyD+c1gPyE9qpFu8af0Y+MRtmKOncdGoA2S5EY8iFq99dmmvkNnHiWo+pj0s7yH7l3KPIgee77tKpXPWQ==
+listr2@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-8.3.2.tgz#c252ec9a3334950bfca9238457d0ad2c1a5cc867"
+  integrity sha512-vsBzcU4oE+v0lj4FhVLzr9dBTv4/fHIa57l+GCwovP8MoFNZJTOhGU8PXd4v2VJCbECAaijBiHntiekFMLvo0g==
   dependencies:
     cli-truncate "^4.0.0"
     colorette "^2.0.20"
