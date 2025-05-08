@@ -1,0 +1,13 @@
+diff --git a/node_modules/eslint-config-salesforce-license/.eslintrc.js b/node_modules/eslint-config-salesforce-license/.eslintrc.js
+index 128f277..c3421d4 100644
+--- a/node_modules/eslint-config-salesforce-license/.eslintrc.js
++++ b/node_modules/eslint-config-salesforce-license/.eslintrc.js
+@@ -6,7 +6,7 @@ module.exports = {
+       'block',
+       [
+         '',
+-        ` * Copyright ${new Date().getFullYear()}, Salesforce, Inc.`,
++        ` * Copyright ${new Date().getFullYear()}, jayree`,
+         ' *',
+         ' * Licensed under the Apache License, Version 2.0 (the "License");',
+         ' * you may not use this file except in compliance with the License.',
