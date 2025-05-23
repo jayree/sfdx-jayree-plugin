@@ -1567,18 +1567,18 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.3":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.3.tgz#a9cb13c914f9117dac12298cbae909278606f350"
-  integrity sha512-nMvYh8YOR6FDJSpbmR9msIYsFF86Ks6ob7Y+8oxUCCbwi8Tg/gcLrjwRUVVvpmThywlPXa4v4lJiK2y9BaNDAQ==
+"@jayree/sfdx-plugin-manifest@^4.0.8":
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.8.tgz#bfb3cf8d04d772c6e3f3fd0c7eeaf7a1e0397e8e"
+  integrity sha512-C0iTb2gH/Xr86xX75PW0Nzk/EbOQC5/f3uiIEd2VsEJsZUGOlf3aRdMBpxXrUpVOO/XuQ952CHRcZrsNZKJHNw==
   dependencies:
-    "@jayree/changelog" "^1.2.9"
+    "@jayree/changelog" "^1.2.10"
     "@oclif/core" "^4.3.0"
-    "@salesforce/core" "^8.10.3"
+    "@salesforce/core" "^8.11.0"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/sf-plugins-core" "^12.2.1"
-    "@salesforce/source-deploy-retrieve" "12.19.6"
-    "@salesforce/source-tracking" "7.3.24"
+    "@salesforce/sf-plugins-core" "^12.2.2"
+    "@salesforce/source-deploy-retrieve" "12.19.7"
+    "@salesforce/source-tracking" "7.3.25"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^5.2.3"
@@ -1972,7 +1972,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.9.0.tgz#ba477a112653a20b4edcf989c61c57bdff9aa3ca"
   integrity sha512-LiN37zG5ODT6z70sL1fxF7BQwtCX9JOWofSU8iliSNIM+WDEeinnoFtVqPInRSNt8I0RiJxIKCrqstsmQRBNvA==
 
-"@salesforce/sf-plugins-core@^12.2.1", "@salesforce/sf-plugins-core@^12.2.2":
+"@salesforce/sf-plugins-core@^12.2.2":
   version "12.2.2"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.2.2.tgz#41e704e47ba997dcb6922ab9563aa19407079c85"
   integrity sha512-LuNT1kzi0N185xhCBCOU9P650CwoehiICB2lCP1RsO98NqfHTRpD6Rq1TDQtLTudOh3pDUFZTgo8kt4qwz20yw==
@@ -1988,12 +1988,12 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.19.6", "@salesforce/source-deploy-retrieve@^12.19.5", "@salesforce/source-deploy-retrieve@^12.19.6":
-  version "12.19.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.19.6.tgz#0c208d2dfef6944e24afcea74ed05aa823e966aa"
-  integrity sha512-A/886Ht23G1snfyUj26pNDjaRWuMmiWIk5ckp+d9mdQjV8i45kPiOFJj5aHzAQ8071i/JgfnDYEhnk1voDujUA==
+"@salesforce/source-deploy-retrieve@12.19.7", "@salesforce/source-deploy-retrieve@^12.19.6":
+  version "12.19.7"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.19.7.tgz#7385702f9436577341490ae66de059b06bf0dff7"
+  integrity sha512-VlAHMEOkZsMD6WxUhtOt+dDD6uEiJ5V07+JM9S0qvlAzu4FdlOn4mLCi/z9jYjMSY9O+3Iz5W9dPo99i3LKOaw==
   dependencies:
-    "@salesforce/core" "^8.10.3"
+    "@salesforce/core" "^8.11.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
     "@salesforce/types" "^1.3.0"
@@ -2009,15 +2009,15 @@
     proxy-agent "^6.4.0"
     yaml "^2.7.1"
 
-"@salesforce/source-tracking@7.3.24", "@salesforce/source-tracking@^7.3.24":
-  version "7.3.24"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.24.tgz#e627f0645349b52a61c3a28e5656c8df20f2f329"
-  integrity sha512-J2TDoudQtdlcpYfBDB/7wJQDDtcID18LZd6zD60e6fGQjaBCyGjAc8z5NPzUR4CugbYbnyOjfd8DlbG3i/bkUQ==
+"@salesforce/source-tracking@7.3.25", "@salesforce/source-tracking@^7.3.24":
+  version "7.3.25"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.3.25.tgz#057b70c240b450e9319dc6cd2e732d5f0aae959e"
+  integrity sha512-vph1inQMkwFhAqxquHy/Woq0uQqFiFyVm59DmXJLZQxj25fxqFhQsbY22jCSidEug8ctj4IyaCJB1Ot/eShozw==
   dependencies:
     "@oclif/core" "^4.2.10"
     "@salesforce/core" "^8.9.1"
     "@salesforce/kit" "^3.2.3"
-    "@salesforce/source-deploy-retrieve" "^12.19.5"
+    "@salesforce/source-deploy-retrieve" "^12.19.6"
     "@salesforce/ts-types" "^2.0.12"
     fast-xml-parser "^4.5.3"
     graceful-fs "^4.2.11"
