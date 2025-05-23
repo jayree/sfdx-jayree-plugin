@@ -1555,16 +1555,16 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.9":
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.9.tgz#463857cb3b8d187a0e3b05c0c6628eeed7f3bab5"
-  integrity sha512-XmRXMDY/Dga1DMmpNNcOkyAqVjpR6d92X8hfnC1Vw3nY12IJ2rY/Zf1AR1U9IUURVwpGT3OR+9odXe3N+TnOyQ==
+"@jayree/changelog@^1.2.10", "@jayree/changelog@^1.2.9":
+  version "1.2.10"
+  resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.10.tgz#f895db7ac25e16bfc68e95507783058e8367a3a1"
+  integrity sha512-gzGP1+SMvotm6riltCuvilkgbhZBjR59c/ctpwhLAxFXRr236lk1a/3swQea1WMWS/lw8oBr4+HO91ojEUd4lg==
   dependencies:
-    debug "^4.4.0"
+    debug "^4.4.1"
     fs-extra "^11.3.0"
-    marked "^15.0.11"
+    marked "^15.0.12"
     marked-terminal "^7.3.0"
-    semver "^7.7.1"
+    semver "^7.7.2"
     semver-compare "^1.0.0"
 
 "@jayree/sfdx-plugin-manifest@^4.0.3":
@@ -1586,17 +1586,17 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.30.1"
 
-"@jayree/sfdx-plugin-org@^1.2.114":
-  version "1.2.114"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.114.tgz#87de52b4c36052d2ee6c0de482811fe376da43cd"
-  integrity sha512-ky3s8BqHaNTfTMLa2mkckHwWk61Q2QQhE3MpjZ17usENyzulpnhDkCLbZj81Kggtp+SffQm0hPYanEA0IE5wIA==
+"@jayree/sfdx-plugin-org@^1.2.116":
+  version "1.2.116"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.116.tgz#de03e55923c26a2c6b6f592ed508b00fb875d2a7"
+  integrity sha512-7d4s+kbCH/CTOq+YOVVx8hoaLAw5iacOUnSzBd2OSvwiGcIo6/3ateqYaXflG272MRMi3K8wivbiqb+kW2xvqg==
   dependencies:
-    "@jayree/changelog" "^1.2.9"
+    "@jayree/changelog" "^1.2.10"
     "@jsforce/jsforce-node" "^3.8.1"
     "@listr2/prompt-adapter-enquirer" "^2.0.16"
     "@oclif/core" "^4.3.0"
-    "@salesforce/core" "^8.10.3"
-    "@salesforce/sf-plugins-core" "^12.2.1"
+    "@salesforce/core" "^8.11.1"
+    "@salesforce/sf-plugins-core" "^12.2.2"
     "@salesforce/source-deploy-retrieve" "^12.19.6"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.4.1"
@@ -1610,7 +1610,7 @@
     listr2 "^8.3.3"
     log-update "^6.0.0"
     playwright-chromium "^1.52.0"
-    tabletojson "4.1.5"
+    tabletojson "4.1.6"
     tslib "^2.8.1"
     wrap-ansi "^9.0.0"
 
@@ -1696,10 +1696,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.8.1":
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.8.1.tgz#482fcf2820b48a6b10930d33550eb4e4cbd1e480"
-  integrity sha512-+IZZC7VfNjhkTyeAspBc4Z35Y5eAP0RIWQnyfKahsbY/aLjiFRIM9ejl1YbWbrbabf5ODFSUgBGmOiEYLW3f7Q==
+"@jsforce/jsforce-node@^3.8.1", "@jsforce/jsforce-node@^3.8.2":
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.8.2.tgz#68b903f6733ae479086ab02ea4a2de87a7f208eb"
+  integrity sha512-ewaRr9JnZRW6I28C/TzUnv5p70zMrWsKCq2ovRW6X557/ikdfvA24F9k4cQXZnTG2lZLEfVn+WwdBGEtY7pPnQ==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
@@ -1894,12 +1894,12 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.10.0", "@salesforce/core@^8.10.3", "@salesforce/core@^8.11.0", "@salesforce/core@^8.9.1":
-  version "8.11.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.11.0.tgz#23d5ddcc318008230258ab449e70a26f671123c2"
-  integrity sha512-S4UgHKUy1hykRQVaoYm+LSktQgRhI3ltAUoLGI25/Q8gYokERTa2E7MpPMb+X/kTpjJJvDlnQqelB/sQJs/AKA==
+"@salesforce/core@^8.10.0", "@salesforce/core@^8.10.3", "@salesforce/core@^8.11.0", "@salesforce/core@^8.11.1", "@salesforce/core@^8.9.1":
+  version "8.11.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.11.1.tgz#d680118f7671de0a102b4c2fe66235203ea6443f"
+  integrity sha512-plu13EOxApJBCdGKwbE8bMOrxB5YTnHKGVaBjAk2Mli2M0ADh+q3qn8eedYDG24oViFNcV+sjfjbamQpLNCclA==
   dependencies:
-    "@jsforce/jsforce-node" "^3.8.1"
+    "@jsforce/jsforce-node" "^3.8.2"
     "@salesforce/kit" "^3.2.2"
     "@salesforce/schemas" "^1.9.0"
     "@salesforce/ts-types" "^2.0.10"
@@ -6576,10 +6576,10 @@ marked@^13.0.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-13.0.2.tgz#d5d05bd2683a85cb9cc6afbe5240e3a8bffcb92a"
   integrity sha512-J6CPjP8pS5sgrRqxVRvkCIkZ6MFdRIjDkwUwgJ9nL2fbmM6qGQeB2C16hi8Cc9BOzj6xXzy0jyi0iPIfnMHYzA==
 
-marked@^15.0.11:
-  version "15.0.11"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-15.0.11.tgz#08a8d12c285e16259e44287b89ce0d871c9d55e8"
-  integrity sha512-1BEXAU2euRCG3xwgLVT1y0xbJEld1XOrmRJpUwRCcy7rxhSCwMrmEu9LXoPhHSCJG41V7YcQ2mjKRr5BA3ITIA==
+marked@^15.0.12:
+  version "15.0.12"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-15.0.12.tgz#30722c7346e12d0a2d0207ab9b0c4f0102d86c4e"
+  integrity sha512-8dD6FusOQSrpv9Z1rdNMdlSgQOIP880DHqnohobOmYLElGEqAL/JvxvuxZO16r4HtjTlfPRDC1hbvxC9dPN2nA==
 
 mdurl@^2.0.0:
   version "2.0.0"
@@ -8053,6 +8053,11 @@ semver@^7.3.4, semver@^7.3.5, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0, semve
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.1.tgz#abd5098d82b18c6c81f6074ff2647fd3e7220c9f"
   integrity sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==
 
+semver@^7.7.2:
+  version "7.7.2"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.2.tgz#67d99fdcd35cec21e6f8b87a7fd515a33f982b58"
+  integrity sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==
+
 sentence-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/sentence-case/-/sentence-case-3.0.4.tgz#3645a7b8c117c787fde8702056225bb62a45131f"
@@ -8589,10 +8594,10 @@ synckit@^0.11.0:
     "@pkgr/core" "^0.2.0"
     tslib "^2.8.1"
 
-tabletojson@4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.5.tgz#57703d490e199b76026b403ce50fe7be11341c89"
-  integrity sha512-GMn4lWvyFAYTuKyOyhvfCN5bTyOl/LHbRhBIHruvErGq5vD5bLfvVZ+8LqBdLauvDygft2cTdLXywiMxZ7DqlA==
+tabletojson@4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.6.tgz#1a807ed629569381cd1d51b7e98bbee7b145b565"
+  integrity sha512-5wMfcIJ9N45EO4HwgpYpsJGXVCtMiEYastQkmyc3D2Jz4w+CJ9Up8WmoOGreguFInxhcchB1atIll20ZCbOf+w==
   dependencies:
     cheerio "^1.0.0"
 
