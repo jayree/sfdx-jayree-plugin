@@ -96,16 +96,19 @@ index 0000000..0e56a73
 +}
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json
 new file mode 100644
-index 0000000..5dece17
+index 0000000..1c17e3f
 --- /dev/null
 +++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,10 @@
 +// Generated - Do not modify. Controlled by @salesforce/dev-scripts
 +// See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 +
 +{
 +  "extends": "@salesforce/dev-config/tsconfig-test-strict-esm",
-+  "include": ["./**/*.ts"]
++  "include": ["./**/*.ts"],
++  "compilerOptions": {
++    "skipLibCheck": true
++  }
 +}
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
 index 44147cc..87197ec 100644
