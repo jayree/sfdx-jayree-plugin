@@ -1567,10 +1567,10 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.12":
-  version "4.0.12"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.12.tgz#492f6b87098c0e441e8caac982d7eb2f2468362f"
-  integrity sha512-gTsxRIGygq/NBXVZ9kQXTxljy3XCLJO+NuMJm9g9DgeMfO5UJHfo5YoNxG9OFLQPTBZoxBjehDujqftG6wncog==
+"@jayree/sfdx-plugin-manifest@^4.0.13":
+  version "4.0.13"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.13.tgz#29ce8c3ef7af17bc5bddacfe2f112050c9e368f6"
+  integrity sha512-TXexFL1cAeVm1E/tAwX+ExSubVTvCxArP93bBq//SmD9Ow6zC+su5o9Zei2xo6pQeaPQWOLWBdgY6r/t6VCLVg==
   dependencies:
     "@jayree/changelog" "^1.2.10"
     "@oclif/core" "^4.3.0"
