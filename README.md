@@ -61,7 +61,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/flow/get/coverage.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/flow/get/coverage.ts)_
 
 ### `sfdx jayree manifest cleanup`
 
@@ -238,7 +238,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree org configure country`
 
@@ -258,7 +258,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree org configure state`
 
@@ -283,7 +283,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree org get settings`
 
@@ -313,7 +313,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/org/get/settings.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/org/get/settings.ts)_
 
 ### `sfdx jayree org stream`
 
@@ -345,7 +345,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.122/src/commands/jayree/org/stream.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.123/src/commands/jayree/org/stream.ts)_
 
 ### `sfdx jayree project compare snapshot`
 
@@ -366,7 +366,7 @@ ALIASES
   $ sfdx jayree source snapshot compare
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/compare/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/compare/snapshot.ts)_
 
 ### `sfdx jayree project fix`
 
@@ -388,7 +388,7 @@ ALIASES
   $ sfdx jayree source fix
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/fix.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/fix.ts)_
 
 ### `sfdx jayree project generate snapshot`
 
@@ -409,7 +409,7 @@ ALIASES
   $ sfdx jayree source snapshot generate
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/generate/snapshot.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/generate/snapshot.ts)_
 
 ### `sfdx jayree project list tracking`
 
@@ -438,7 +438,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:list -u me@my.org -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/list/tracking.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/list/tracking.ts)_
 
 ### `sfdx jayree project store tracking get`
 
@@ -464,7 +464,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:get -u me@my.org
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/store/tracking/get.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/store/tracking/get.ts)_
 
 ### `sfdx jayree project store tracking set`
 
@@ -494,7 +494,7 @@ EXAMPLES
   $ sfdx jayree:source:tracking:store:set -u MyTestOrg1 -r 101
 ```
 
-_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.119/src/commands/jayree/project/store/tracking/set.ts)_
+_See code: [@jayree/sfdx-plugin-source](https://github.com/jayree/sfdx-plugin-source/blob/v1.3.120/src/commands/jayree/project/store/tracking/set.ts)_
 <!-- commandsstop -->
 
 ## Hooks
