@@ -1555,7 +1555,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.10", "@jayree/changelog@^1.2.11":
+"@jayree/changelog@^1.2.11":
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.11.tgz#34d6dbb8c9bd24b1d68c9bd490f7e9e7685012db"
   integrity sha512-T3UmRnXuNL2V0td1R9FUfKf8wyheFySM3jJKALLwPdqkMzZXKOjzHMERORE5IGz08sDAGN4FyBlBDwUQI4XhtA==
@@ -1567,13 +1567,13 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.33":
-  version "4.0.33"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.33.tgz#842517f0560a898801d1798607e05c7967dd943b"
-  integrity sha512-N7/wiJ5AKXFA6ynGjrfHEa5OUlkg1poo89Fen/SgnEqMlWqEtFo21G6y9y+iWdEbdjLf91sTppKzfWGM9IPlZw==
+"@jayree/sfdx-plugin-manifest@^4.0.35":
+  version "4.0.35"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.35.tgz#304197c8858d187f81a4695c12918a4b5aa0518b"
+  integrity sha512-YPt7KQGA9kW6OwF2pAADNbrCOiEjily/bMDb4HTR5h+HSo2Qc06YZAKChte7jow1XjNzparEzIpXkJsG6z6eHQ==
   dependencies:
-    "@jayree/changelog" "^1.2.10"
-    "@oclif/core" "^4.4.0"
+    "@jayree/changelog" "^1.2.11"
+    "@oclif/core" "^4.4.1"
     "@salesforce/core" "^8.15.0"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.2.3"
