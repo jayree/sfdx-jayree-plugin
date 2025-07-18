@@ -1591,17 +1591,17 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.35":
-  version "4.0.35"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.35.tgz#304197c8858d187f81a4695c12918a4b5aa0518b"
-  integrity sha512-YPt7KQGA9kW6OwF2pAADNbrCOiEjily/bMDb4HTR5h+HSo2Qc06YZAKChte7jow1XjNzparEzIpXkJsG6z6eHQ==
+"@jayree/sfdx-plugin-manifest@^4.0.38":
+  version "4.0.38"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.38.tgz#c0fdb5d8b57cc0e31bb682e12fe1de8c14387d70"
+  integrity sha512-7ZQC6sGI+h01yK3mRuWm76AxyBHs1uI6g99ZHNeKD0dihPkTga8ogG9DN7xjZyHXYNRiZEdKIdmGZgimjGTO4g==
   dependencies:
     "@jayree/changelog" "^1.2.11"
-    "@oclif/core" "^4.4.1"
-    "@salesforce/core" "^8.15.0"
+    "@oclif/core" "^4.5.0"
+    "@salesforce/core" "^8.18.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.2.3"
-    "@salesforce/source-deploy-retrieve" "12.21.0"
+    "@salesforce/source-deploy-retrieve" "12.21.1"
     "@salesforce/source-tracking" "7.4.7"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
@@ -1774,7 +1774,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.3.0", "@oclif/core@^4.4.0", "@oclif/core@^4.4.1", "@oclif/core@^4.5.0", "@oclif/core@^4.5.1":
+"@oclif/core@^4", "@oclif/core@^4.3.0", "@oclif/core@^4.4.0", "@oclif/core@^4.5.0", "@oclif/core@^4.5.1":
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.5.1.tgz#7fa9041d13f624e4c00d89605d9f732cf8084748"
   integrity sha512-JAuARvXOzf75L7rqLL3TIP3OmuTf7N/cjRejkGASfRJH+09180+EGbSkPWSMCns+AaYpDMI+fdaJ6QCoa3f15A==
@@ -2012,10 +2012,10 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.21.0":
-  version "12.21.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.0.tgz#7e8dd986803ca8434882d56b8284a720d7e916a7"
-  integrity sha512-dLOHm2F2maHmFHhumwigYwImh/8hWJQIOGSHYgtOMy5E0xc6Sed06QyRw1WBsoSUx7ihXvTrWpp6FhArb4OhFA==
+"@salesforce/source-deploy-retrieve@12.21.1":
+  version "12.21.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.1.tgz#081ea10b86b1af3c222d9dea3ac3774bdb477954"
+  integrity sha512-VC6sAaLH04z1znJh7f8ftlUTDEzzUFzpaau8kIVjZW7Iq4xSnRORmxlh941C2KSTPRR454ZbnxuWC5czcn5Bcg==
   dependencies:
     "@salesforce/core" "^8.12.0"
     "@salesforce/kit" "^3.2.3"
