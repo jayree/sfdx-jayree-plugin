@@ -1379,10 +1379,10 @@
     tslib "^2.8.1"
     wrap-ansi "^9.0.0"
 
-"@jayree/sfdx-plugin-prettier@^1.3.122":
-  version "1.3.122"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.122.tgz#09d694e3050c2019efcb2d1637cee2309aae7cac"
-  integrity sha512-FLvd+uzXEG6jIIIB3Q5uWPCxcDLvZ6Ro/JsrvdjxwdVHyBYC9uMULpHA3Nm0FZVwHy45kkn+QokDJ6fCng17Aw==
+"@jayree/sfdx-plugin-prettier@^1.3.123":
+  version "1.3.123"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-prettier/-/sfdx-plugin-prettier-1.3.123.tgz#f9ef29e21eebeda4606e85d343c27008dbffb93f"
+  integrity sha512-iI2+nvx49w9AnCGl+cZqQOiKSk9okNV50aMehWhl34wfI1jIkl0pm+9cXj96/SJ7AcQ+qnVBYb7qe+1HA8UwLA==
   dependencies:
     "@jayree/changelog" "^1.2.11"
     "@oclif/core" "^4.5.0"
@@ -1390,7 +1390,7 @@
     "@salesforce/core" "^8.18.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.2.3"
-    "@salesforce/source-deploy-retrieve" "^12.21.1"
+    "@salesforce/source-deploy-retrieve" "^12.21.5"
     cli-progress "^3.12.0"
     debug "^4.4.1"
     fs-extra "^11.3.0"
@@ -1774,12 +1774,12 @@
     proxy-agent "^6.4.0"
     yaml "^2.7.1"
 
-"@salesforce/source-deploy-retrieve@^12.20.1", "@salesforce/source-deploy-retrieve@^12.21.1":
-  version "12.21.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.1.tgz#081ea10b86b1af3c222d9dea3ac3774bdb477954"
-  integrity sha512-VC6sAaLH04z1znJh7f8ftlUTDEzzUFzpaau8kIVjZW7Iq4xSnRORmxlh941C2KSTPRR454ZbnxuWC5czcn5Bcg==
+"@salesforce/source-deploy-retrieve@^12.20.1", "@salesforce/source-deploy-retrieve@^12.21.1", "@salesforce/source-deploy-retrieve@^12.21.5":
+  version "12.21.5"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.5.tgz#12620daa3c56a1320124eb72a0155a986ae12bdf"
+  integrity sha512-IdBNI2vDcCb6fhLib3b7eJEfu9DI/B2cVtkJ+z4aBVPAd/AjwCQWAuYDAgOoG17JOhBEZaI9bRxuKQLhpFTQHQ==
   dependencies:
-    "@salesforce/core" "^8.12.0"
+    "@salesforce/core" "^8.18.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
     "@salesforce/types" "^1.3.0"
