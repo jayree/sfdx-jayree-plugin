@@ -1351,16 +1351,16 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.32.1"
 
-"@jayree/sfdx-plugin-org@^1.2.125":
-  version "1.2.125"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.125.tgz#58c31d844da836b80aa5783feec77abb9dc47de0"
-  integrity sha512-IPdVAnaR0ybnFGnpPr61evtlqboU5zslJ40Z13Z72ZKCs8VztnqMd4C9JYuGtZNp7KBqMop+47e5cVas2z3gSA==
+"@jayree/sfdx-plugin-org@^1.2.126":
+  version "1.2.126"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.126.tgz#34177db1b3b00f57da1dc0062b1ae8cb5cb69a20"
+  integrity sha512-gq0eCUgqo2INHjrYgHNT4giqD9U+C+1VHQCpjmbwh4/vzj6gWAh+p1VYP7D/ME+TWhFLcCuyl4NGwWiu42/LPQ==
   dependencies:
     "@jayree/changelog" "^1.2.11"
-    "@jsforce/jsforce-node" "^3.9.1"
+    "@jsforce/jsforce-node" "^3.9.4"
     "@listr2/prompt-adapter-enquirer" "^2.0.16"
-    "@oclif/core" "^4.5.1"
-    "@salesforce/core" "^8.18.1"
+    "@oclif/core" "^4.5.2"
+    "@salesforce/core" "^8.18.5"
     "@salesforce/sf-plugins-core" "^12.2.3"
     "@salesforce/source-deploy-retrieve" "^12.21.5"
     "@salesforce/ts-types" "^2.0.12"
@@ -1461,17 +1461,17 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.9.1":
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.9.1.tgz#503bcee3b511b2768abb090b8c8af508c2412244"
-  integrity sha512-tHG9Wozb9tQMiOyKz4MgcSK0XEDdER+dUm42o7qUaokwqC+IPmjgptx0PNTO75U1nqgW6yX6M5Qq1thhj7KMCA==
+"@jsforce/jsforce-node@^3.9.1", "@jsforce/jsforce-node@^3.9.4":
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.9.4.tgz#0d0e13d271c3921a3d5d58d5ee30a83c3d5f8f90"
+  integrity sha512-Lsq0DX2101QyJGzQDf0oKW5BdnheQPWTWZ294DnjBF4ooNlU9ClqFjiMvi0gE2AdGorc3P1fkCdLSzUCCrHVfg==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
     csv-parse "^5.5.2"
     csv-stringify "^6.4.4"
     faye "^1.4.0"
-    form-data "^4.0.0"
+    form-data "^4.0.4"
     https-proxy-agent "^5.0.0"
     multistream "^3.1.0"
     node-fetch "^2.6.1"
