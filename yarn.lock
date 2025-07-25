@@ -1332,18 +1332,18 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.38":
-  version "4.0.38"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.38.tgz#c0fdb5d8b57cc0e31bb682e12fe1de8c14387d70"
-  integrity sha512-7ZQC6sGI+h01yK3mRuWm76AxyBHs1uI6g99ZHNeKD0dihPkTga8ogG9DN7xjZyHXYNRiZEdKIdmGZgimjGTO4g==
+"@jayree/sfdx-plugin-manifest@^4.0.42":
+  version "4.0.42"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.42.tgz#bdc716468925e8bbd584e37c589d5754d730ec88"
+  integrity sha512-NSKGpQkJikKc86hAv/5iAyh/VQDIPMgJSffp2/W6QYqaigeYO3AHyCDtGc9H9UW4M2SYXuASd/I+oAMo8vy9Yg==
   dependencies:
     "@jayree/changelog" "^1.2.11"
     "@oclif/core" "^4.5.0"
-    "@salesforce/core" "^8.18.1"
+    "@salesforce/core" "^8.18.3"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.2.3"
-    "@salesforce/source-deploy-retrieve" "12.21.1"
-    "@salesforce/source-tracking" "7.4.7"
+    "@salesforce/source-deploy-retrieve" "12.21.6"
+    "@salesforce/source-tracking" "7.4.9"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^5.2.5"
@@ -1659,7 +1659,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.12.0", "@salesforce/core@^8.15.0", "@salesforce/core@^8.18.1", "@salesforce/core@^8.18.5":
+"@salesforce/core@^8.15.0", "@salesforce/core@^8.18.1", "@salesforce/core@^8.18.3", "@salesforce/core@^8.18.5":
   version "8.18.5"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.18.5.tgz#8205f3b1ee9ef63740128bef81cc32213a76296a"
   integrity sha512-zQSIjo0L0ddcZbj3Oxxig2J6aYL5H5FY45TpXAXpjGe0UPWNxXkU2mrcDfs9OSn0MhM3uMj4fUIM1a158/3Lug==
@@ -1753,28 +1753,7 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.21.1":
-  version "12.21.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.1.tgz#081ea10b86b1af3c222d9dea3ac3774bdb477954"
-  integrity sha512-VC6sAaLH04z1znJh7f8ftlUTDEzzUFzpaau8kIVjZW7Iq4xSnRORmxlh941C2KSTPRR454ZbnxuWC5czcn5Bcg==
-  dependencies:
-    "@salesforce/core" "^8.12.0"
-    "@salesforce/kit" "^3.2.3"
-    "@salesforce/ts-types" "^2.0.12"
-    "@salesforce/types" "^1.3.0"
-    fast-levenshtein "^3.0.0"
-    fast-xml-parser "^4.5.3"
-    got "^11.8.6"
-    graceful-fs "^4.2.11"
-    ignore "^5.3.2"
-    isbinaryfile "^5.0.2"
-    jszip "^3.10.1"
-    mime "2.6.0"
-    minimatch "^9.0.5"
-    proxy-agent "^6.4.0"
-    yaml "^2.7.1"
-
-"@salesforce/source-deploy-retrieve@^12.20.1", "@salesforce/source-deploy-retrieve@^12.21.5", "@salesforce/source-deploy-retrieve@^12.21.6":
+"@salesforce/source-deploy-retrieve@12.21.6", "@salesforce/source-deploy-retrieve@^12.21.5", "@salesforce/source-deploy-retrieve@^12.21.6":
   version "12.21.6"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.21.6.tgz#28962b7bb12c08d9d4899f65f0f88650f606dbc4"
   integrity sha512-I0Mx0a/VgGKy++npOJpaTLV7oZA3IZDd+r3LrfFOddb5zO7jTPDaslpXxYRfJTlRyHNJCyUR2XY9t5Dz5a+awA==
@@ -1795,22 +1774,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.7.1"
 
-"@salesforce/source-tracking@7.4.7":
-  version "7.4.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.4.7.tgz#daa44ad1eeaf9f4dff36069c47c536062ab0eeb3"
-  integrity sha512-ysv7loc8Qboi5jroKYeYFrXCuRFJT0k+g3lpefT8NfQwZNm8GyoUlKOw2AlfeE3gIorHUq3N7oWxjX8xUDDa4g==
-  dependencies:
-    "@oclif/core" "^4.4.0"
-    "@salesforce/core" "^8.15.0"
-    "@salesforce/kit" "^3.2.3"
-    "@salesforce/source-deploy-retrieve" "^12.20.1"
-    "@salesforce/ts-types" "^2.0.12"
-    fast-xml-parser "^4.5.3"
-    graceful-fs "^4.2.11"
-    isomorphic-git "^1.30.1"
-    ts-retry-promise "^0.8.1"
-
-"@salesforce/source-tracking@^7.4.9":
+"@salesforce/source-tracking@7.4.9", "@salesforce/source-tracking@^7.4.9":
   version "7.4.9"
   resolved "https://registry.yarnpkg.com/@salesforce/source-tracking/-/source-tracking-7.4.9.tgz#cd587fd8723f305417d808aabcdf48dd6850c4f1"
   integrity sha512-DNXKBQC3mj+jIV7N78TFKv4YG6l1QIfOoK/eb3evH4N9uBLhZpmiQSHFXyGGZvngE5rCArF9iMlEB43/62lX8g==
