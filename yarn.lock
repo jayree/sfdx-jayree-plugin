@@ -1320,7 +1320,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.11", "@jayree/changelog@^1.2.12":
+"@jayree/changelog@^1.2.12":
   version "1.2.12"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.12.tgz#b8e9fdd6df3b3bbdfd359db3bd95955e83fee10a"
   integrity sha512-b/mVDIpGn6UtLcWuk18PB6LimD/lapZ/vkvgz0Sse+vGq+3CoyQ2yNgQVN0X6pAToPJ48BJGX0WIUx499Xc5qg==
@@ -1351,18 +1351,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.32.2"
 
-"@jayree/sfdx-plugin-org@^1.2.126":
-  version "1.2.126"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.126.tgz#34177db1b3b00f57da1dc0062b1ae8cb5cb69a20"
-  integrity sha512-gq0eCUgqo2INHjrYgHNT4giqD9U+C+1VHQCpjmbwh4/vzj6gWAh+p1VYP7D/ME+TWhFLcCuyl4NGwWiu42/LPQ==
+"@jayree/sfdx-plugin-org@^1.2.128":
+  version "1.2.128"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.128.tgz#51df89d8e1b527dc812ca2a15bd008dba9a0a492"
+  integrity sha512-721FoFhLze0yt96DjzQC48i6kJPRJneCtBaXR+63sJbO1q5CcLI3uycgUq306Vaf0aOWcByUAleC/tZaV043Hg==
   dependencies:
-    "@jayree/changelog" "^1.2.11"
-    "@jsforce/jsforce-node" "^3.9.4"
+    "@jayree/changelog" "^1.2.12"
+    "@jsforce/jsforce-node" "^3.9.5"
     "@listr2/prompt-adapter-enquirer" "^2.0.16"
     "@oclif/core" "^4.5.2"
     "@salesforce/core" "^8.18.5"
     "@salesforce/sf-plugins-core" "^12.2.3"
-    "@salesforce/source-deploy-retrieve" "^12.21.5"
+    "@salesforce/source-deploy-retrieve" "^12.22.1"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.4.1"
     cli-progress "^3.12.0"
@@ -1461,10 +1461,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.9.1", "@jsforce/jsforce-node@^3.9.4":
-  version "3.9.4"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.9.4.tgz#0d0e13d271c3921a3d5d58d5ee30a83c3d5f8f90"
-  integrity sha512-Lsq0DX2101QyJGzQDf0oKW5BdnheQPWTWZ294DnjBF4ooNlU9ClqFjiMvi0gE2AdGorc3P1fkCdLSzUCCrHVfg==
+"@jsforce/jsforce-node@^3.9.1", "@jsforce/jsforce-node@^3.9.5":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.0.tgz#1bf75e9d322434f99fc38a3b60738205051144c5"
+  integrity sha512-hNExEqzvJ/ixnsfZlrYh/FqEOYfn4vKmeBMqIdrEjeYciIsSaOeggghFl+1w0m2u7TNGr1+8jPUBvki3nebPSw==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
