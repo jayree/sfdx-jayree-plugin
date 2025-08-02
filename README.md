@@ -61,7 +61,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/flow/get/coverage.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/flow/get/coverage.ts)_
 
 ### `sfdx jayree manifest cleanup`
 
@@ -238,7 +238,7 @@ EXAMPLES
   $ sfdx jayree:org:configure --concurrent --tasks="Asset Settings","Activity Settings"
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/org/configure/index.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/org/configure/index.ts)_
 
 ### `sfdx jayree org configure country`
 
@@ -258,7 +258,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/org/configure/country.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/org/configure/country.ts)_
 
 ### `sfdx jayree org configure state`
 
@@ -283,7 +283,7 @@ GLOBAL FLAGS
   --json               Format output as json.
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/org/configure/state.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/org/configure/state.ts)_
 
 ### `sfdx jayree org get settings`
 
@@ -313,7 +313,7 @@ EXAMPLES
   $ sfdx jayree:org:settings -u MyTestOrg1 -w
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/org/get/settings.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/org/get/settings.ts)_
 
 ### `sfdx jayree org stream`
 
@@ -345,7 +345,7 @@ EXAMPLES
   ...
 ```
 
-_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.126/src/commands/jayree/org/stream.ts)_
+_See code: [@jayree/sfdx-plugin-org](https://github.com/jayree/sfdx-plugin-org/blob/v1.2.128/src/commands/jayree/org/stream.ts)_
 
 ### `sfdx jayree project compare snapshot`
 
