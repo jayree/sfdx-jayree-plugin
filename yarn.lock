@@ -1351,10 +1351,10 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.32.3"
 
-"@jayree/sfdx-plugin-org@^1.2.129":
-  version "1.2.129"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.129.tgz#ed8f4dc0280c3031d26112f54a41e79b1fd8d8c5"
-  integrity sha512-A8wcpCgWPiR/zbboRm/JXPY/Z39mxugGELaFMORYVYKJNH2kF6OSMNpbLzjVSIokFjpOJG8WxhVvht94cR/+wg==
+"@jayree/sfdx-plugin-org@^1.2.130":
+  version "1.2.130"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.130.tgz#fc190ed679fef477f22f83793f82643fa473f433"
+  integrity sha512-k3xy2iRzYyHXLWSSgI38W/QobVrlPJvRsQmIt36SpMP79w2u9+CbYPPRuAN16DSSn/rgKSSLCh+hGi9TqGbC7g==
   dependencies:
     "@jayree/changelog" "^1.2.13"
     "@jsforce/jsforce-node" "^3.10.1"
@@ -1362,7 +1362,7 @@
     "@oclif/core" "^4.5.2"
     "@salesforce/core" "^8.18.5"
     "@salesforce/sf-plugins-core" "^12.2.4"
-    "@salesforce/source-deploy-retrieve" "^12.22.2"
+    "@salesforce/source-deploy-retrieve" "^12.22.5"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.5.0"
     cli-progress "^3.12.0"
