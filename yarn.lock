@@ -1733,17 +1733,17 @@
     prettier-plugin-apex "^2.2.6"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.126":
-  version "1.3.126"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.126.tgz#a622fac4d60ceb8bcc695510cfb9e7396f1afa8e"
-  integrity sha512-nsXR7+zybG4po9Q0RvjFCvz8rRp42WJ2UZWTr981V4l6WArGpGN0cqwT2G++6MJqgLy5cKd9y/FsVZY8qSAUxA==
+"@jayree/sfdx-plugin-source@^1.3.127":
+  version "1.3.127"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.127.tgz#458e55d43180c283b847fe5697b2b31a2b184036"
+  integrity sha512-yn2sX9Ua4d6cF23rtttkTwsKSdteR1F7BZyTOb9DKMp6ktfDKJnpH76gk3qGeDt0GJ7ophpHWbXmuWFpy96DRg==
   dependencies:
     "@jayree/changelog" "^1.2.14"
     "@oclif/core" "^4.5.2"
-    "@salesforce/core" "^8.18.5"
+    "@salesforce/core" "^8.21.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/sf-plugins-core" "^12.2.4"
-    "@salesforce/source-deploy-retrieve" "^12.22.5"
+    "@salesforce/source-deploy-retrieve" "^12.22.9"
     "@salesforce/source-tracking" "^7.4.9"
     "@salesforce/ts-types" "^2.0.11"
     ansis "^4.1.0"
@@ -2036,10 +2036,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.18.1", "@salesforce/core@^8.18.5", "@salesforce/core@^8.18.7", "@salesforce/core@^8.19.1":
-  version "8.19.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.19.1.tgz#300b37db32e29a7b1055091cc13d04a6ccc4d8c1"
-  integrity sha512-HPJxus0W4S1aoT4Qn6mG2s9Ik/mZ59rXNUFc2c+BgEAs28khbZOLR2uiZYexNpXIIZnCrSbb+v1t8IW/idIyCA==
+"@salesforce/core@^8.18.1", "@salesforce/core@^8.18.5", "@salesforce/core@^8.18.7", "@salesforce/core@^8.19.1", "@salesforce/core@^8.21.1":
+  version "8.21.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.21.1.tgz#6cb62257a7fea3e6094ff8639b83d3993725534a"
+  integrity sha512-JKGCKHNquCWz9zySmRHLIwqkdu3u+IwlxrxqRSHDMPEPQxLXVEiMHJXuicjsnethU203b1IUviiMRsJBH9hmPA==
   dependencies:
     "@jsforce/jsforce-node" "^3.10.1"
     "@salesforce/kit" "^3.2.2"
@@ -2048,7 +2048,7 @@
     ajv "^8.17.1"
     change-case "^4.1.2"
     fast-levenshtein "^3.0.0"
-    faye "^1.4.0"
+    faye "^1.4.1"
     form-data "^4.0.4"
     js2xmlparser "^4.0.1"
     jsonwebtoken "9.0.2"
@@ -5377,6 +5377,18 @@ faye@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/faye/-/faye-1.4.0.tgz#01d3d26ed5642c1cb203eed358afb1c1444b8669"
   integrity sha512-kRrIg4be8VNYhycS2PY//hpBJSzZPr/DBbcy9VWelhZMW3KhyLkQR0HL0k0MNpmVoNFF4EdfMFkNAWjTP65g6w==
+  dependencies:
+    asap "*"
+    csprng "*"
+    faye-websocket ">=0.9.1"
+    safe-buffer "*"
+    tough-cookie "*"
+    tunnel-agent "*"
+
+faye@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/faye/-/faye-1.4.1.tgz#fd2f84e21d62b1cced1bd34968925b466d44a381"
+  integrity sha512-Cg/khikhqlvumHO3efwx2tps2ZgQRjUMrO24G0quz7MMzRYYaEjU224YFXOeuPIvanRegIchVxj6pmHK1W0ikA==
   dependencies:
     asap "*"
     csprng "*"
