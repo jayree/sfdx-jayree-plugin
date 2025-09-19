@@ -9,7 +9,7 @@
     "@jayree/sfdx-plugin-manifest": "^4.0.73",
     "@jayree/sfdx-plugin-org": "^1.2.136",
     "@jayree/sfdx-plugin-prettier": "^1.3.133",
-    "@jayree/sfdx-plugin-source": "^1.3.130"
+    "@jayree/sfdx-plugin-source": "^1.3.131"
   },
   "devDependencies": {
     "@oclif/plugin-help": "^6.2.32",
