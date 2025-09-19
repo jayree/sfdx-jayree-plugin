@@ -1672,17 +1672,17 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.71":
-  version "4.0.71"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.71.tgz#eb5e29d75444b03c3ad541473d8740ae354a37a0"
-  integrity sha512-rSbbz9yzTkS2LV31b8OYjIgzc87JVQFDu6l0wtObZIJ3lPrCbe4dVn6fQ7rG7CMMccnTS/8sWNw4As4ToucGKA==
+"@jayree/sfdx-plugin-manifest@^4.0.73":
+  version "4.0.73"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.73.tgz#dfe39f27170ee486af575fbdca2f4f63c683e373"
+  integrity sha512-oqIN+qjpIAnToQLYJCIv7NJomOAnJRWkDdsyxyXXBgj27ACbETNLoX9lSRdgZ5KsGhWDW7QucrzA0DRB0UJGxw==
   dependencies:
     "@jayree/changelog" "^1.2.16"
-    "@oclif/core" "^4.5.2"
+    "@oclif/core" "^4.5.3"
     "@salesforce/core" "^8.23.1"
     "@salesforce/kit" "^3.2.4"
     "@salesforce/sf-plugins-core" "^12.2.4"
-    "@salesforce/source-deploy-retrieve" "12.22.12"
+    "@salesforce/source-deploy-retrieve" "12.22.13"
     "@salesforce/source-tracking" "7.4.10"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
@@ -2137,12 +2137,12 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.22.12", "@salesforce/source-deploy-retrieve@^12.22.11", "@salesforce/source-deploy-retrieve@^12.22.12":
-  version "12.22.12"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.22.12.tgz#dc70af767c50ba78ba49a016d3fb501554d153cc"
-  integrity sha512-pVha+CH6bgXyzVtCUVDr43jkh3u59D/9tPSAbPnZecCxz4QQIIaITOjgy4cvOtY1WnEg1XmYspG+ZauQh2FtSA==
+"@salesforce/source-deploy-retrieve@12.22.13", "@salesforce/source-deploy-retrieve@^12.22.11", "@salesforce/source-deploy-retrieve@^12.22.12":
+  version "12.22.13"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.22.13.tgz#0844d37976fae195b6335d1b36f1314e4cc01630"
+  integrity sha512-gZ6YBEm1hT6DtsvtJGS4gDObM1+sXID64SLeSUa1uXHyxdfnbg03Dqw3lDCbbCIm2cptRB5y7MMGLK1fxvn/CA==
   dependencies:
-    "@salesforce/core" "^8.23.0"
+    "@salesforce/core" "^8.23.1"
     "@salesforce/kit" "^3.2.3"
     "@salesforce/ts-types" "^2.0.12"
     "@salesforce/types" "^1.4.0"
