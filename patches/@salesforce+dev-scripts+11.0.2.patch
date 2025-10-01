@@ -41,35 +41,28 @@ index 2e1a739..67d15b0 100755
      require('../utils/husky-init')();
    }
  }
+diff --git a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
+index 83a7ac4..da7200c 100644
+--- a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
++++ b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
+@@ -1,6 +1,6 @@
+ Apache License Version 2.0
+ 
+-Copyright (c) REPLACE_YEAR Salesforce, Inc.
++Copyright (c) REPLACE_YEAR jayree
+ All rights reserved.
+ 
+                                  Apache License
 diff --git a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
-index 33b19f5..eac972b 100644
+index 33b19f5..2409915 100644
 --- a/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
 +++ b/node_modules/@salesforce/dev-scripts/files/eslintrc-strict.cjs
-@@ -9,5 +9,24 @@
+@@ -9,5 +9,5 @@
  // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
  
  module.exports = {
 -  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'eslint-config-prettier'],
-+  extends: ['eslint-config-salesforce-typescript', 'plugin:sf-plugin/migration', 'plugin:prettier/recommended'],
-+  plugins: ['eslint-plugin-header'],
-+  ignorePatterns: ['**/*.d.ts', '**/*.cjs'],
-+  rules: {
-+    'header/header': [
-+      2,
-+      'block',
-+      [
-+        '',
-+        {
-+          pattern: ' \\* Copyright \\(c\\) \\d{4}, jayree',
-+          template: ' * Copyright (c) 2023, jayree',
-+        },
-+        ' * All rights reserved.',
-+        ' * Licensed under the BSD 3-Clause license.',
-+        ' * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause',
-+        ' ',
-+      ],
-+    ],
-+  },
++  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'plugin:sf-plugin/recommended', 'plugin:prettier/recommended'],
  };
 diff --git a/node_modules/@salesforce/dev-scripts/files/mocharc.json b/node_modules/@salesforce/dev-scripts/files/mocharc.json
 index 2e6bae4..6725c65 100644
@@ -103,16 +96,19 @@ index 0000000..0e56a73
 +}
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json
 new file mode 100644
-index 0000000..5dece17
+index 0000000..1c17e3f
 --- /dev/null
 +++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict-esm.json
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,10 @@
 +// Generated - Do not modify. Controlled by @salesforce/dev-scripts
 +// See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 +
 +{
 +  "extends": "@salesforce/dev-config/tsconfig-test-strict-esm",
-+  "include": ["./**/*.ts"]
++  "include": ["./**/*.ts"],
++  "compilerOptions": {
++    "skipLibCheck": true
++  }
 +}
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
 index 44147cc..87197ec 100644
@@ -172,7 +168,7 @@ index c1d55c8..a33594b 100644
  
  module.exports = PackageJson;
 diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
-index 8d1bc90..ff2b105 100644
+index f0da638..1740ae4 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
 @@ -33,7 +33,7 @@ const PACKAGE_DEFAULTS = {
@@ -202,7 +198,7 @@ index 8d1bc90..ff2b105 100644
        // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
        // see https://github.com/chalk/supports-color/issues/106
        env: {
-@@ -144,7 +144,7 @@ const resolveConfig = (path) => {
+@@ -145,7 +145,7 @@ const resolveConfig = (path) => {
    const configFromFile = (result && result.config) || {};
  
    if (configFromFile.test?.testsPath) {
@@ -210,8 +206,8 @@ index 8d1bc90..ff2b105 100644
 +    defaults.wireit['test:only'].command = `c8 mocha "${configFromFile.test.testsPath}"`;
    }
  
-   // Allow users to override certain scripts
-@@ -171,6 +171,12 @@ const resolveConfig = (path) => {
+   // If a custom license exists in the config file, don't add the fix-license script
+@@ -177,6 +177,12 @@ const resolveConfig = (path) => {
      delete config.wireit[scriptName];
    });
  
@@ -225,7 +221,7 @@ index 8d1bc90..ff2b105 100644
    return config;
  };
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
-index b47f4f9..0d69e29 100644
+index 2484e6f..d964278 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
 @@ -19,6 +19,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
@@ -247,7 +243,13 @@ index b47f4f9..0d69e29 100644
      copyFileSync(sourcePath, targetPath);
      return targetPath;
    }
-@@ -173,7 +176,8 @@ function replaceInFile(filePath, replaceFn) {
+@@ -168,12 +171,14 @@ function replaceInFile(filePath, replaceFn) {
+   const newContents = replaceFn(contents);
+   if (newContents !== contents) {
+     writeFileSync(filePath, newContents);
++    return true;
+   }
+ }
  
  // eslint-disable-next-line complexity
  module.exports = (packageRoot = require('./package-path')) => {
@@ -257,7 +259,20 @@ index b47f4f9..0d69e29 100644
    const testPath = join(packageRoot, 'test');
    const scripts = config.scripts;
  
-@@ -252,12 +256,12 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -192,8 +197,10 @@ module.exports = (packageRoot = require('./package-path')) => {
+       '[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/license/apache-2-0)'; // eslint-disable-line max-len
+ 
+     if (exists(readmeTargetPath)) {
+-      replaceInFile(readmeTargetPath, (contents) => contents.replace(oldLicenseRegex, newLicenseBadge));
+-      added.push(readmeTargetPath);
++      const wasReplaced = replaceInFile(readmeTargetPath, (contents) => contents.replace(oldLicenseRegex, newLicenseBadge));
++      if (wasReplaced) {
++        added.push(readmeTargetPath);
++      }
+     }
+   }
+ 
+@@ -268,12 +275,12 @@ module.exports = (packageRoot = require('./package-path')) => {
      const compileConfig = config.compile || {};
      const strict = config.strict || compileConfig.strict;
  
@@ -273,10 +288,10 @@ index b47f4f9..0d69e29 100644
        added.push(copyFile(tsconfigTestSourcePath, tsconfigTestTargetPath, strict));
      }
 diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-index 3001ff7..6e422c3 100644
+index 717db67..3bc35c1 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
-@@ -45,27 +45,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+@@ -51,27 +51,34 @@ module.exports = (packageRoot = require('./package-path')) => {
    const scriptList = Object.entries(config.scripts);
    const wireitList = Object.entries(config.wireit);
  
@@ -315,7 +330,7 @@ index 3001ff7..6e422c3 100644
  
    try {
 diff --git a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
-index 46a5477..e2510ce 100644
+index 6d58b0d..3b57afa 100644
 --- a/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 +++ b/node_modules/@salesforce/dev-scripts/utils/write-dependencies.js
 @@ -116,7 +116,7 @@ module.exports = (projectPath) => {
