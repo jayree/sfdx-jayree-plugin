@@ -1,6 +1,11 @@
 {
   "exclude-scripts": ["test:command-reference", "test:deprecation-policy", "test:json-schema", "link-check"],
-  "exclude-files": ["LICENSE.txt"],
-  "devDepOverrides": ["prettier", "pretty-quick", "typedoc", "typedoc-plugin-missing-exports"],
+  "devDepOverrides": [
+    "prettier",
+    "pretty-quick",
+    "typedoc",
+    "typedoc-plugin-missing-exports",
+    "eslint-config-salesforce-license"
+  ],
   "strict": true
 }
