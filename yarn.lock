@@ -1674,10 +1674,10 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.76":
-  version "4.0.76"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.76.tgz#b9dbda493192c20bc05ea389fa01268622ee9633"
-  integrity sha512-MybsIp8cgElr3wmZxRANiIB6dAKAz5GBqjVf3QT10+uiig7QIPAaWgijpvxBc6tz0XldAtfImJmf5jKyTIDusw==
+"@jayree/sfdx-plugin-manifest@^4.0.77":
+  version "4.0.77"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.77.tgz#3c0f937cc6ad354daeaa14898c7e3ba915f4ee5b"
+  integrity sha512-pJ8xaexB3GUVkdIW37emGhVpeu6DYA5peOwe3S1Z8zwbYUiEaYYeTxydieTsWIKRYQTBWUf+ZA12J+uG8BUQvA==
   dependencies:
     "@jayree/changelog" "^1.2.18"
     "@oclif/core" "^4.5.4"
@@ -1691,7 +1691,7 @@
     fast-xml-parser "^5.2.5"
     fs-extra "^11.3.0"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.33.1"
+    isomorphic-git "1.33.2"
 
 "@jayree/sfdx-plugin-org@^1.2.138":
   version "1.2.138"
@@ -6112,6 +6112,11 @@ is-fullwidth-code-point@^5.0.0:
   dependencies:
     get-east-asian-width "^1.0.0"
 
+is-git-ref-name-valid@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-git-ref-name-valid/-/is-git-ref-name-valid-1.0.0.tgz#6e151779357dd4f7888e1a83a07db329e3de119d"
+  integrity sha512-2hLTg+7IqMSP9nNp/EVCxzvAOJGsAn0f/cKtF8JaBeivjH5UgE/XZo3iJ0AvibdE7KSF1f/7JbjBTB8Wqgbn/w==
+
 is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.3.tgz#64f61e42cbbb2eec2071a9dac0b28ba1e65d5084"
@@ -6294,16 +6299,17 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@1.33.1, isomorphic-git@^1.30.1:
-  version "1.33.1"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.33.1.tgz#a3ded4cdd90a98d3822d0dc6254ded8736c51178"
-  integrity sha512-Fy5rPAncURJoqL9R+5nJXLl5rQH6YpcjJd7kdCoRJPhrBiLVkLm9b+esRqYQQlT1hKVtKtALbfNtpHjWWJgk6g==
+isomorphic-git@1.33.2, isomorphic-git@^1.30.1:
+  version "1.33.2"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.33.2.tgz#8197f46d30d0c2148919dcfebba1a1b2f7e51660"
+  integrity sha512-xPCYL90rIwI/ngiOYGIMdvNlIbZ7++gJbnO2S/CPyIyKuKrYDJziLqfE4IL8yks931SXobwzwsVqVnuA4GZ4IA==
   dependencies:
     async-lock "^1.4.1"
     clean-git-ref "^2.0.1"
     crc-32 "^1.2.0"
     diff3 "0.0.3"
     ignore "^5.1.4"
+    is-git-ref-name-valid "^1.0.0"
     minimisted "^2.0.0"
     pako "^1.0.10"
     path-browserify "^1.0.1"
