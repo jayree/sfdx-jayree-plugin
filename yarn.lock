@@ -1715,7 +1715,7 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.18.7", "@salesforce/core@^8.22.0", "@salesforce/core@^8.23.0", "@salesforce/core@^8.23.1", "@salesforce/core@^8.23.2":
+"@salesforce/core@^8.18.7", "@salesforce/core@^8.22.0", "@salesforce/core@^8.23.1", "@salesforce/core@^8.23.2":
   version "8.23.2"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.23.2.tgz#218152b97e05745cd0499ad2594df4443fa8aa18"
   integrity sha512-9XUlaI0orvdjDJZsgjt0lVLa5wrFWNaorRbshT/EJ6fIiqcAehOV2bR62NJtRhrOrgu1h34bTmUqMo+yUEES9w==
@@ -4467,12 +4467,12 @@ eslint-plugin-prettier@^5.5.4:
     prettier-linter-helpers "^1.0.0"
     synckit "^0.11.7"
 
-eslint-plugin-sf-plugin@^1.20.32:
-  version "1.20.32"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.32.tgz#9a3c1c84295090088addcf801abc082bb4980e35"
-  integrity sha512-laSlqqFgJEbffPw5XOxIgIdswsM7JxHqI0F7azKVmezIC0+ceEw0fkbIY1cI9cE/Ihu57/46GM5+fXRUYrodzw==
+eslint-plugin-sf-plugin@^1.20.33:
+  version "1.20.33"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.33.tgz#c59f7b330d71f09f02ff71a75e06ae7a98ceca40"
+  integrity sha512-qzl3IJ2Tqe33IXMlytehBk1Taz5o8CMu3Ujli3VW965k9RI90nCHxXj/JyRm8q7PqA02ENjJpNRR4Y5UP5kwIg==
   dependencies:
-    "@salesforce/core" "^8.23.0"
+    "@salesforce/core" "^8.23.1"
     "@typescript-eslint/utils" "^7.18.0"
 
 eslint-plugin-unicorn@^50.0.1:
