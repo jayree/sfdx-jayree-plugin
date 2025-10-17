@@ -1345,22 +1345,22 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.80":
-  version "4.0.80"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.80.tgz#4736de67efa30ea37344fff0c7e6e9478a82bc48"
-  integrity sha512-Y5ao5ZFv9KKwnDDLO3vJza3+zB3+hU/n48GDQ+x4uG5CtHOc0lNRZFD0gf6kDNMSkQY+6wfdf7tt+KruRf/5xw==
+"@jayree/sfdx-plugin-manifest@^4.0.82":
+  version "4.0.82"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.82.tgz#a8c5da9654d844dcba929b8b89cf79cd1c88e4a9"
+  integrity sha512-PVJnD0eHxLhwcY861NhGUZ3Rl8+MWAFqvgo1gWHGtkKIv+Wxbs3cwSLmW6mUyuBy1mJ3bBaH09mS1SL14EdOcg==
   dependencies:
     "@jayree/changelog" "^1.2.18"
-    "@oclif/core" "^4.5.4"
+    "@oclif/core" "^4.5.6"
     "@salesforce/core" "^8.23.2"
     "@salesforce/kit" "^3.2.4"
     "@salesforce/sf-plugins-core" "^12.2.4"
-    "@salesforce/source-deploy-retrieve" "12.22.14"
+    "@salesforce/source-deploy-retrieve" "12.24.0"
     "@salesforce/source-tracking" "7.4.10"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^5.3.0"
-    fs-extra "^11.3.0"
+    fs-extra "^11.3.2"
     graceful-fs "^4.2.11"
     isomorphic-git "1.34.0"
 
@@ -1571,10 +1571,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.4.0", "@oclif/core@^4.5.2", "@oclif/core@^4.5.3", "@oclif/core@^4.5.4":
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.5.4.tgz#d82bf4516d1e8a210aab4ccde826a0ce6cadf514"
-  integrity sha512-78YYJls8+KG96tReyUsesKKIKqC0qbFSY1peUSrt0P2uGsrgAuU9axQ0iBQdhAlIwZDcTyaj+XXVQkz2kl/O0w==
+"@oclif/core@^4", "@oclif/core@^4.4.0", "@oclif/core@^4.5.2", "@oclif/core@^4.5.3", "@oclif/core@^4.5.4", "@oclif/core@^4.5.6":
+  version "4.5.6"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.5.6.tgz#44671b5bafbc96ceeadd448da85f3b0eb0b16b41"
+  integrity sha512-FmmA6a2+GwhRtULNB9G+YZp2Whi/mgCjNC1EaHGMEztnlM4Je3wRmbAraucSsHsycSgihnm2MtcmudI+8xo8Lw==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.17.0"
@@ -1587,7 +1587,7 @@
     is-wsl "^2.2.0"
     lilconfig "^3.1.3"
     minimatch "^9.0.5"
-    semver "^7.6.3"
+    semver "^7.7.3"
     string-width "^4.2.3"
     supports-color "^8"
     tinyglobby "^0.2.14"
@@ -1810,30 +1810,10 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.22.14":
-  version "12.22.14"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.22.14.tgz#ec9b0a6c85a67392cbc2932a28fea87b0903ae9e"
-  integrity sha512-/MjbV4M40sz6JOBKbmzFSXMHF+k5u5gdG11Iy+uF6faakKOFvwLr65kKSKBH0rZs0ul7a3+iO+foIWNiBFfNBw==
-  dependencies:
-    "@salesforce/core" "^8.23.1"
-    "@salesforce/kit" "^3.2.3"
-    "@salesforce/ts-types" "^2.0.12"
-    "@salesforce/types" "^1.4.0"
-    fast-levenshtein "^3.0.0"
-    fast-xml-parser "^4.5.3"
-    got "^11.8.6"
-    graceful-fs "^4.2.11"
-    ignore "^5.3.2"
-    jszip "^3.10.1"
-    mime "2.6.0"
-    minimatch "^9.0.5"
-    proxy-agent "^6.4.0"
-    yaml "^2.8.1"
-
-"@salesforce/source-deploy-retrieve@^12.22.11", "@salesforce/source-deploy-retrieve@^12.23.1":
-  version "12.23.1"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.23.1.tgz#52e80532c668bf5327a966fd27e9caa029811e64"
-  integrity sha512-9CW0gDR7Du2JbCbiybjO24eOheBRVivgSfmW0AWMojYG1vFyZBgGXcCyrvXKkdM7qDRFJKMdUO0URKjyyOEHFA==
+"@salesforce/source-deploy-retrieve@12.24.0", "@salesforce/source-deploy-retrieve@^12.22.11", "@salesforce/source-deploy-retrieve@^12.23.1":
+  version "12.24.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.24.0.tgz#cc4e38175436aeb6c9c22ee795924c96d7ef87c8"
+  integrity sha512-gjS6whT1575UGxwR2foDILlsbDQPwng0rNyXsk39hwg+bRsbHABZGzxU5EeUIzpKqv4bf6C9z/BLYiHMcZocoQ==
   dependencies:
     "@salesforce/core" "^8.23.1"
     "@salesforce/kit" "^3.2.3"
@@ -4911,7 +4891,7 @@ fs-extra@^10.0.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fs-extra@^11.0.0, fs-extra@^11.2.0, fs-extra@^11.3.0, fs-extra@^11.3.2:
+fs-extra@^11.0.0, fs-extra@^11.2.0, fs-extra@^11.3.2:
   version "11.3.2"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.3.2.tgz#c838aeddc6f4a8c74dd15f85e11fe5511bfe02a4"
   integrity sha512-Xr9F6z6up6Ws+NjzMCZc6WXg2YFRlrLP9NQDO3VQrWrfiojdhS56TzueT88ze0uBdCTwEIhQ3ptnmKeWGFAe0A==
@@ -8005,6 +7985,11 @@ semver@^7.3.4, semver@^7.3.5, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0, semve
   version "7.7.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.2.tgz#67d99fdcd35cec21e6f8b87a7fd515a33f982b58"
   integrity sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==
+
+semver@^7.7.3:
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.3.tgz#4b5f4143d007633a8dc671cd0a6ef9147b8bb946"
+  integrity sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==
 
 sentence-case@^3.0.4:
   version "3.0.4"
