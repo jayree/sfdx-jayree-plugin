@@ -1843,7 +1843,7 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/plugin-help@^6.2.34", "@oclif/plugin-help@^6.2.36":
+"@oclif/plugin-help@^6.2.36":
   version "6.2.36"
   resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-6.2.36.tgz#8d6aaba7b9b934bcb92da9d8e527fc6617cd9fe0"
   integrity sha512-NBQIg5hEMhvdbi4mSrdqRGl5XJ0bqTAHq6vDCCCDXUcfVtdk3ZJbSxtRVWyVvo9E28vwqu6MZyHOJylevqcHbA==
@@ -7281,10 +7281,10 @@ object.values@^1.1.7:
     define-properties "^1.2.0"
     es-abstract "^1.22.1"
 
-oclif@^4.22.46:
-  version "4.22.46"
-  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.22.46.tgz#0c863cab012427af64e2df994400aec77eb0f9f9"
-  integrity sha512-uOV5AS7f8wcUAwjj15RtzsGXJPHAI8PnAm8br/A5FCb8nI/Oggr9ARnIVjKrklrUSUuKLoTs3M48jSTWaUa54g==
+oclif@^4.22.47:
+  version "4.22.47"
+  resolved "https://registry.yarnpkg.com/oclif/-/oclif-4.22.47.tgz#316d4888582ac6c5857505efce6c09694e811a19"
+  integrity sha512-ruEVcGHnoS1UOpUyrW48uY6H5sj1o2/02NvbMjpCqJFJ9I5UcXBO0dWN6ECXkQZHPLbjnx94zQEuaZciuLrRyQ==
   dependencies:
     "@aws-sdk/client-cloudfront" "^3.927.0"
     "@aws-sdk/client-s3" "^3.932.0"
@@ -7292,7 +7292,7 @@ oclif@^4.22.46:
     "@inquirer/input" "^2.2.4"
     "@inquirer/select" "^2.5.0"
     "@oclif/core" "^4.8.0"
-    "@oclif/plugin-help" "^6.2.34"
+    "@oclif/plugin-help" "^6.2.36"
     "@oclif/plugin-not-found" "^3.2.71"
     "@oclif/plugin-warn-if-update-available" "^3.1.53"
     ansis "^3.16.0"
