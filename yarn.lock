@@ -1361,16 +1361,16 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.106":
-  version "4.0.106"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.106.tgz#830a33863e19337399ac3859025b53169ebdce47"
-  integrity sha512-3bYqnMFmLGrFV0NsfaGtUvMq35sHz66X1CBVYMyBiXIXKwkPwkF+scUWwQLLxyMk7deTuKv27RL/x7ykS2c5Fw==
+"@jayree/sfdx-plugin-manifest@^4.0.110":
+  version "4.0.110"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.110.tgz#36dd184c0fb2215a792badfb796f3746ffbdb259"
+  integrity sha512-1ddTEjLdhkurULknHr9SX5ua7YJSlcegmq2+IQ4mGB5iGMKyfn5nIU61EQ7u3VgvANqBO+GjA4m0GoM6/OJ3nw==
   dependencies:
-    "@jayree/changelog" "^1.2.20"
+    "@jayree/changelog" "^1.2.21"
     "@oclif/core" "^4.8.0"
     "@salesforce/core" "^8.23.4"
     "@salesforce/kit" "^3.2.4"
-    "@salesforce/sf-plugins-core" "^12.2.5"
+    "@salesforce/sf-plugins-core" "^12.2.6"
     "@salesforce/source-deploy-retrieve" "12.30.0"
     "@salesforce/source-tracking" "7.7.0"
     "@salesforce/ts-types" "^2.0.12"
@@ -1810,7 +1810,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/schemas/-/schemas-1.10.3.tgz#52c867fdd60679cf216110aa49542b7ad391f5d1"
   integrity sha512-FKfvtrYTcvTXE9advzS25/DEY9yJhEyLvStm++eQFtnAaX1pe4G3oGHgiQ0q55BM5+0AlCh0+0CVtQv1t4oJRA==
 
-"@salesforce/sf-plugins-core@^12.2.5", "@salesforce/sf-plugins-core@^12.2.6":
+"@salesforce/sf-plugins-core@^12.2.6":
   version "12.2.6"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.2.6.tgz#856303e786f5fac1c6aa6dcd42f282cb1ac703e8"
   integrity sha512-EDKE72f/gGk9vL7KI9wsFO5wl/jFVvA2l5XBGR+6sJ1+FTMUbTGRMLObkkYJACk7bKvUFx00xdur2R6K8SWNvg==
