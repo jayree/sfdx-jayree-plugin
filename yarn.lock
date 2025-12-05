@@ -1380,18 +1380,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.35.1"
 
-"@jayree/sfdx-plugin-org@^1.2.148":
-  version "1.2.148"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.148.tgz#26cb8599236e97e27b02371dc5696aa7ffec5ef7"
-  integrity sha512-Wp6JUsqwaJz+0k1mU9+akjfYbY881OvEDFZWTzwXI7n07nXaIXPaitYAidwVcxUkXZk0cMnSly6A5dDksuA+YQ==
+"@jayree/sfdx-plugin-org@^1.2.149":
+  version "1.2.149"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.149.tgz#2d09eeff03560e8ffb96f624dbdbf00839007ea2"
+  integrity sha512-NdMdXw6Z7v8Rt7bBU+9OunGuC3mKThfcZk14RPSnhrGjebVecsqBaeT3XCTJWYXoXNgvqsXWtsF96uETVj6G8g==
   dependencies:
-    "@jayree/changelog" "^1.2.20"
-    "@jsforce/jsforce-node" "^3.10.8"
+    "@jayree/changelog" "^1.2.21"
+    "@jsforce/jsforce-node" "^3.10.10"
     "@listr2/prompt-adapter-enquirer" "^2.0.16"
     "@oclif/core" "^4.8.0"
-    "@salesforce/core" "^8.23.4"
+    "@salesforce/core" "^8.23.7"
     "@salesforce/sf-plugins-core" "^12.2.6"
-    "@salesforce/source-deploy-retrieve" "^12.30.0"
+    "@salesforce/source-deploy-retrieve" "^12.30.1"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
@@ -1494,22 +1494,6 @@
   version "3.10.10"
   resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.10.tgz#2d7bb77d1d739712733a30de7e9c941d2127bc4a"
   integrity sha512-/zUOX9kapwk8lyjmTYgXlBF+GbqcEpb0zrkDfX9i94xu5cvzERZxRHqSSaS/IImoDmvoSbatFSVfB7Y4lmANOw==
-  dependencies:
-    "@sindresorhus/is" "^4"
-    base64url "^3.0.1"
-    csv-parse "^5.5.2"
-    csv-stringify "^6.6.0"
-    faye "^1.4.0"
-    form-data "^4.0.4"
-    https-proxy-agent "^5.0.0"
-    multistream "^3.1.0"
-    node-fetch "^2.6.1"
-    xml2js "^0.6.2"
-
-"@jsforce/jsforce-node@^3.10.8":
-  version "3.10.8"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.8.tgz#f13903a0885fa3501a513512984cf9a717aebb9a"
-  integrity sha512-XGD/ivZz+htN5SgctFyEZ+JNG6C8FXzaEwvPbRSdsIy/hpWlexY38XtTpdT5xX3KnYSnOE4zA1M/oIbTm7RD/Q==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
