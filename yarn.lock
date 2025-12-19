@@ -1361,24 +1361,24 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.115":
-  version "4.0.115"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.115.tgz#d77a502badd4c6481ba4d0e6f7840427e91dbc92"
-  integrity sha512-LhFj3j1vSxGjFhTqMG4vRA80F5ESxGvqOxeImLGpphfdDQXeBUCNGBxSqlR42LeuumS/fSp+NhjA+9R3RmOSVg==
+"@jayree/sfdx-plugin-manifest@^4.0.118":
+  version "4.0.118"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.118.tgz#d6a5156bc7db02097ff36635b9d8e4a7fdf80bdb"
+  integrity sha512-ZAwSuDJyVAr/+RabToVCRn8RK7z62Vi2DK8gndL6//W7nFQ9PnRBvaOurlSUtotMtbrZNFVNxQ7nMS6chDcKxw==
   dependencies:
     "@jayree/changelog" "^1.2.22"
     "@oclif/core" "^4.8.0"
     "@salesforce/core" "^8.24.0"
     "@salesforce/kit" "^3.2.4"
     "@salesforce/sf-plugins-core" "^12.2.6"
-    "@salesforce/source-deploy-retrieve" "12.30.2"
+    "@salesforce/source-deploy-retrieve" "12.31.0"
     "@salesforce/source-tracking" "7.8.0"
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
-    fast-xml-parser "^5.3.2"
+    fast-xml-parser "^5.3.3"
     fs-extra "^11.3.2"
     graceful-fs "^4.2.11"
-    isomorphic-git "1.36.0"
+    isomorphic-git "1.36.1"
 
 "@jayree/sfdx-plugin-org@^1.2.150":
   version "1.2.150"
@@ -1821,27 +1821,7 @@
     cli-progress "^3.12.0"
     terminal-link "^3.0.0"
 
-"@salesforce/source-deploy-retrieve@12.30.2":
-  version "12.30.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.30.2.tgz#4ea3c62ad04d31ccbb1d6b95853eec2b529e03bb"
-  integrity sha512-hR682AqqLX40ie2GZmRjN+yeg4S6x5rAxhu1fOHbbsxwfOFJjhi40SJR8pgNb1uxbL+P8EWsIauzTLpp6qbcBA==
-  dependencies:
-    "@salesforce/core" "^8.23.4"
-    "@salesforce/kit" "^3.2.4"
-    "@salesforce/ts-types" "^2.0.12"
-    "@salesforce/types" "^1.5.0"
-    fast-levenshtein "^3.0.0"
-    fast-xml-parser "^4.5.3"
-    got "^11.8.6"
-    graceful-fs "^4.2.11"
-    ignore "^5.3.2"
-    jszip "^3.10.1"
-    mime "2.6.0"
-    minimatch "^9.0.5"
-    proxy-agent "^6.4.0"
-    yaml "^2.8.1"
-
-"@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.0":
+"@salesforce/source-deploy-retrieve@12.31.0", "@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.0":
   version "12.31.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.31.0.tgz#aed7aac22831b802c44069bdbb50c4f22883cef0"
   integrity sha512-imRP5qo+7NT0/UVQcGAJQPWdmD9wlBWQL4Q+rgQvFhea0nGi+ER13cPIwvr8eGTN+wwgWoMeLSfekC3kGVTDfQ==
@@ -4764,10 +4744,10 @@ fast-xml-parser@^4.5.3:
   dependencies:
     strnum "^1.1.1"
 
-fast-xml-parser@^5.3.2:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-5.3.2.tgz#78a51945fbf7312e1ff6726cb173f515b4ea11d8"
-  integrity sha512-n8v8b6p4Z1sMgqRmqLJm3awW4NX7NkaKPfb3uJIBTSH7Pdvufi3PQ3/lJLQrvxcMYl7JI2jnDO90siPEpD8JBA==
+fast-xml-parser@^5.3.2, fast-xml-parser@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-5.3.3.tgz#84b678e44eb81207c8585795152b4b1c94738b4d"
+  integrity sha512-2O3dkPAAC6JavuMm8+4+pgTk+5hoAs+CjZ+sWcQLkX9+/tHRuTkQh/Oaifr8qDmZ8iEHb771Ea6G8CdwkrgvYA==
   dependencies:
     strnum "^2.1.0"
 
@@ -5943,10 +5923,10 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
-isomorphic-git@1.36.0, isomorphic-git@^1.34.2:
-  version "1.36.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.36.0.tgz#3c51339ada18ccac58e8f7c1869b38971d42d003"
-  integrity sha512-22tU165ptowHYoDEwYJy5EKRzpHiuLMliaR01fH9ZwaUj1z/IqE++tGpjw/pD6eCWoxiOp6TPWX434aJ9zA4Lg==
+isomorphic-git@1.36.1, isomorphic-git@^1.34.2:
+  version "1.36.1"
+  resolved "https://registry.yarnpkg.com/isomorphic-git/-/isomorphic-git-1.36.1.tgz#e73bcca745bfb66154921c4d3b2afdc40a6573a7"
+  integrity sha512-fC8SRT8MwoaXDK8G4z5biPEbqf2WyEJUb2MJ2ftSd39/UIlsnoZxLGux+lae0poLZO4AEcx6aUVOh5bV+P8zFA==
   dependencies:
     async-lock "^1.4.1"
     clean-git-ref "^2.0.1"
