@@ -1349,7 +1349,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.21", "@jayree/changelog@^1.2.22":
+"@jayree/changelog@^1.2.22":
   version "1.2.22"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.22.tgz#a4412035defa2f2b1978e291726eaac6a6fa41d3"
   integrity sha512-dYUR942R3F/ob28karjuD5nlt+tm9ZaLDufcJxiuOkxfV2UrZG0pojyfpyLq859cKnfdKrcAkPw9vpEDQk731Q==
@@ -1380,12 +1380,12 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.1"
 
-"@jayree/sfdx-plugin-org@^1.2.150":
-  version "1.2.150"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.150.tgz#2654d4073731b8697e10538d682cce966085e21f"
-  integrity sha512-3VgfJQlYBVstXe1iGtWia2mAzz+md0IhwPmuJ2Pf/646plwljxS7+b93svRKL9K2eXd4N/PTTJF5W1l+gYrXhw==
+"@jayree/sfdx-plugin-org@^1.2.152":
+  version "1.2.152"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.152.tgz#679411a2981d290f5eaae478b17ee5da1b7f894c"
+  integrity sha512-o39tjy//sVvUwB7saQQLwXcQT62U2OfbRmSucLPi5TdYuTQpLPTLGxH9ScphwHRj14TJZkg0vQsrMgjGUMa42A==
   dependencies:
-    "@jayree/changelog" "^1.2.21"
+    "@jayree/changelog" "^1.2.22"
     "@jsforce/jsforce-node" "^3.10.10"
     "@listr2/prompt-adapter-enquirer" "^2.0.16"
     "@oclif/core" "^4.8.0"
@@ -1398,7 +1398,7 @@
     cli-truncate "^5.1.1"
     debug "^4.4.3"
     enquirer "^2.4.1"
-    fs-extra "^11.3.2"
+    fs-extra "^11.3.3"
     is-docker "^4.0.0"
     is-wsl "^3.1.0"
     listr2 "^9.0.5"
@@ -4941,10 +4941,10 @@ fs-extra@^10.0.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fs-extra@^11.0.0, fs-extra@^11.2.0, fs-extra@^11.3.2:
-  version "11.3.2"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.3.2.tgz#c838aeddc6f4a8c74dd15f85e11fe5511bfe02a4"
-  integrity sha512-Xr9F6z6up6Ws+NjzMCZc6WXg2YFRlrLP9NQDO3VQrWrfiojdhS56TzueT88ze0uBdCTwEIhQ3ptnmKeWGFAe0A==
+fs-extra@^11.0.0, fs-extra@^11.2.0, fs-extra@^11.3.2, fs-extra@^11.3.3:
+  version "11.3.3"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.3.3.tgz#a27da23b72524e81ac6c3815cc0179b8c74c59ee"
+  integrity sha512-VWSRii4t0AFm6ixFFmLLx1t7wS1gh+ckoa84aOeapGum0h+EZd1EhEumSB+ZdDLnEPuucsVB9oB7cxJHap6Afg==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
