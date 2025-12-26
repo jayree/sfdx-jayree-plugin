@@ -1370,10 +1370,10 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.118":
-  version "4.0.118"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.118.tgz#d6a5156bc7db02097ff36635b9d8e4a7fdf80bdb"
-  integrity sha512-ZAwSuDJyVAr/+RabToVCRn8RK7z62Vi2DK8gndL6//W7nFQ9PnRBvaOurlSUtotMtbrZNFVNxQ7nMS6chDcKxw==
+"@jayree/sfdx-plugin-manifest@^4.0.119":
+  version "4.0.119"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.119.tgz#43aba46882e4219fe16b871d665276818f6ebde8"
+  integrity sha512-CptjtSUrQ4visrYrOnExaiwgwqvDzuREJdqoQnCfrE5XFSece+XxEDSlSpoVXZmpsC3ICZ3jWSYyMMt8iiZnBA==
   dependencies:
     "@jayree/changelog" "^1.2.22"
     "@oclif/core" "^4.8.0"
@@ -1385,7 +1385,7 @@
     "@salesforce/ts-types" "^2.0.12"
     fast-deep-equal "^3.1.3"
     fast-xml-parser "^5.3.3"
-    fs-extra "^11.3.2"
+    fs-extra "^11.3.3"
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.1"
 
