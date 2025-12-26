@@ -1437,10 +1437,10 @@
     prettier-plugin-apex "^2.2.6"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.145":
-  version "1.3.145"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.145.tgz#d46ea8cb57eca3ece5a1c7f6a0e843b83b2d4d3e"
-  integrity sha512-8ruYEcfTF0kIBdpc0jX50lq5N8p8BiFXvHx14BZHGtlx3vSDpN9r+/nV4crpn/eO4yxYSl1lBppemTdpW/PJNQ==
+"@jayree/sfdx-plugin-source@^1.3.146":
+  version "1.3.146"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.146.tgz#0478f8456a80465225c2faab22ff3d41b1fd8338"
+  integrity sha512-Q43PfMUvuYmKEifzAJg0MiqaZ6VE73jysiZH4a2F0YoxXdUkXBhQYdh9dWWqJkeMOTBwmKiYqPUmtHJyC7lJVg==
   dependencies:
     "@jayree/changelog" "^1.2.22"
     "@oclif/core" "^4.8.0"
@@ -1455,7 +1455,7 @@
     deep-object-diff "^1.1.9"
     fast-xml-parser "^5.3.3"
     fs-extra "^11.3.3"
-    globby "^16.0.0"
+    globby "^16.1.0"
     object-path "^0.11.8"
     tslib "^2.8.1"
 
@@ -5227,10 +5227,10 @@ globby@^11.1.0:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-globby@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/globby/-/globby-16.0.0.tgz#45a133d4e70fcfdd6e33b3166d490c99c9298f5a"
-  integrity sha512-ejy4TJFga99yW6Q0uhM3pFawKWZmtZzZD/v/GwI5+9bCV5Ew+D2pSND6W7fUes5UykqSsJkUfxFVdRh7Q1+P3Q==
+globby@^16.1.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/globby/-/globby-16.1.0.tgz#71ab8199e4fc1c4c21a59bd14ec0f31c71d7d7d4"
+  integrity sha512-+A4Hq7m7Ze592k9gZRy4gJ27DrXRNnC1vPjxTt1qQxEY8RxagBkBxivkCwg7FxSTG0iLLEMaUx13oOr0R2/qcQ==
   dependencies:
     "@sindresorhus/merge-streams" "^4.0.0"
     fast-glob "^3.3.3"
