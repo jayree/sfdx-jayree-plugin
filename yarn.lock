@@ -1389,18 +1389,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.1"
 
-"@jayree/sfdx-plugin-org@^1.2.152":
-  version "1.2.152"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.152.tgz#679411a2981d290f5eaae478b17ee5da1b7f894c"
-  integrity sha512-o39tjy//sVvUwB7saQQLwXcQT62U2OfbRmSucLPi5TdYuTQpLPTLGxH9ScphwHRj14TJZkg0vQsrMgjGUMa42A==
+"@jayree/sfdx-plugin-org@^1.2.154":
+  version "1.2.154"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.154.tgz#75d4a49cdf9b4226e5dbe35ef1731f672b32a48e"
+  integrity sha512-clNY6N6WiyRu9ZRhJi4yYlKPw2rs4n1NWHk0dSGT6K3BOsqRtfqNuySWYO7QMOy4/IEIrNw2BmRDTjkF29Qjew==
   dependencies:
-    "@jayree/changelog" "^1.2.22"
+    "@jayree/changelog" "^1.2.23"
     "@jsforce/jsforce-node" "^3.10.10"
-    "@listr2/prompt-adapter-enquirer" "^2.0.16"
+    "@listr2/prompt-adapter-enquirer" "^3.0.5"
     "@oclif/core" "^4.8.0"
     "@salesforce/core" "^8.24.0"
     "@salesforce/sf-plugins-core" "^12.2.6"
-    "@salesforce/source-deploy-retrieve" "^12.31.0"
+    "@salesforce/source-deploy-retrieve" "^12.31.2"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
@@ -1558,10 +1558,10 @@
     "@jsonjoy.com/buffers" "^1.0.0"
     "@jsonjoy.com/codegen" "^1.0.0"
 
-"@listr2/prompt-adapter-enquirer@^2.0.16":
-  version "2.0.16"
-  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-2.0.16.tgz#309b5ed28dd12af886734963f0ac210517f7a5c7"
-  integrity sha512-CNhdBXWi+HWJCyjYwOSgEmK0rrUnwZrG9h0bKUrwxSqpz5A6unMTxvN254k+3TbDZRtzu+21mcb4KNT/6vxIzg==
+"@listr2/prompt-adapter-enquirer@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-3.0.5.tgz#03850037469127e911422de5ff9385ff960ad7e9"
+  integrity sha512-qWYAtMf+JRhUm+3pY9dD6PsByCe2gXd2l4y/bznfS1zyfmz5Tg8ZCEA8KnunO9UcFldNimU2/eZETn6oLk+g1Q==
 
 "@mswjs/interceptors@^0.39.5":
   version "0.39.5"
