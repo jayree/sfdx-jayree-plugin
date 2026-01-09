@@ -20,7 +20,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-sf-plugin": "^1.20.33",
     "nock": "^14.0.10",
-    "oclif": "^4.22.61",
+    "oclif": "^4.22.63",
     "patch-package": "^8.0.1",
     "pinst": "^3.0.0",
     "prettier": "^3.7.1",
