@@ -1,3 +1,10 @@
+## [4.8.178](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.177...v4.8.178) (2026-01-15)
+
+
+### Bug Fixes
+
+* **deps:** bump undici from 7.16.0 to 7.18.2 ([#1855](https://github.com/jayree/sfdx-jayree-plugin/issues/1855)) ([1c16722](https://github.com/jayree/sfdx-jayree-plugin/commit/1c167225cf4eb930a83b19b5cbc29598a424da7a))
+
 ## [4.8.177](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.176...v4.8.177) (2026-01-09)
 
 
