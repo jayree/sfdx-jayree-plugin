@@ -1389,18 +1389,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.1"
 
-"@jayree/sfdx-plugin-org@^1.2.154":
-  version "1.2.154"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.154.tgz#75d4a49cdf9b4226e5dbe35ef1731f672b32a48e"
-  integrity sha512-clNY6N6WiyRu9ZRhJi4yYlKPw2rs4n1NWHk0dSGT6K3BOsqRtfqNuySWYO7QMOy4/IEIrNw2BmRDTjkF29Qjew==
+"@jayree/sfdx-plugin-org@^1.2.155":
+  version "1.2.155"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.155.tgz#7d2b66728a08280e54d0eb073d819447b9260e69"
+  integrity sha512-B+0ZIuDxIy6wA5UXpdjsoVa6azrYF7+AiVWNKwGd9W5O/eRV04jTWx3RcKyNPCYLAbycbqWHj+ZGBAwv7AblHQ==
   dependencies:
     "@jayree/changelog" "^1.2.23"
-    "@jsforce/jsforce-node" "^3.10.10"
+    "@jsforce/jsforce-node" "^3.10.13"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
     "@oclif/core" "^4.8.0"
-    "@salesforce/core" "^8.24.0"
+    "@salesforce/core" "^8.24.3"
     "@salesforce/sf-plugins-core" "^12.2.6"
-    "@salesforce/source-deploy-retrieve" "^12.31.2"
+    "@salesforce/source-deploy-retrieve" "^12.31.6"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
@@ -1498,22 +1498,6 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
-
-"@jsforce/jsforce-node@^3.10.10":
-  version "3.10.10"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.10.tgz#2d7bb77d1d739712733a30de7e9c941d2127bc4a"
-  integrity sha512-/zUOX9kapwk8lyjmTYgXlBF+GbqcEpb0zrkDfX9i94xu5cvzERZxRHqSSaS/IImoDmvoSbatFSVfB7Y4lmANOw==
-  dependencies:
-    "@sindresorhus/is" "^4"
-    base64url "^3.0.1"
-    csv-parse "^5.5.2"
-    csv-stringify "^6.6.0"
-    faye "^1.4.0"
-    form-data "^4.0.4"
-    https-proxy-agent "^5.0.0"
-    multistream "^3.1.0"
-    node-fetch "^2.6.1"
-    xml2js "^0.6.2"
 
 "@jsforce/jsforce-node@^3.10.13":
   version "3.10.13"
@@ -1871,7 +1855,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.8.1"
 
-"@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.2", "@salesforce/source-deploy-retrieve@^12.31.5", "@salesforce/source-deploy-retrieve@^12.31.6":
+"@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.5", "@salesforce/source-deploy-retrieve@^12.31.6":
   version "12.31.6"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.31.6.tgz#8c731718c455cd3a1be528f608f85c00551e7e0f"
   integrity sha512-88PKzSwGYL6GQWryfgcTPPD462Sgnhw08HkKf/yVLnc9q6U67ebLUdfrdBLGDL/HJ6uRRHP8RVFPvsFxRU6mcQ==
