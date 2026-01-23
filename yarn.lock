@@ -1370,14 +1370,14 @@
     semver "^7.7.2"
     semver-compare "^1.0.0"
 
-"@jayree/sfdx-plugin-manifest@^4.0.121":
-  version "4.0.121"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.121.tgz#ab908dbad5dc78219b03f7e203ed444a768cc1d6"
-  integrity sha512-3J2tCqdeAV4WkLgdNBx/OzUCnowwahEde6LnWh72suJyFA2ZlFyidUJJg3riMsg7kDZXqs5y/GcuXY/PsqxvrA==
+"@jayree/sfdx-plugin-manifest@^4.0.123":
+  version "4.0.123"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-manifest/-/sfdx-plugin-manifest-4.0.123.tgz#2ea12385940582cbf71f41f0324b4ac86d9fc599"
+  integrity sha512-dfrT5SktDRePrv40azUs1iec7UzdWQLLjaPVNRUls6mxfumUpXFRLiBbOZMVrFR5TQ8tyuKE4owGTeJNyoHXhA==
   dependencies:
     "@jayree/changelog" "^1.2.23"
     "@oclif/core" "^4.8.0"
-    "@salesforce/core" "^8.24.0"
+    "@salesforce/core" "^8.24.3"
     "@salesforce/kit" "^3.2.4"
     "@salesforce/sf-plugins-core" "^12.2.6"
     "@salesforce/source-deploy-retrieve" "12.31.4"
