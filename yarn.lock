@@ -1437,17 +1437,17 @@
     prettier-plugin-apex "^2.2.6"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.149":
-  version "1.3.149"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.149.tgz#a331b857d0eb4d2f10fd7be79cd89c397685720d"
-  integrity sha512-KTQlJH5Kgjy6fAyxCeQdEDZOQ8lfsQxg9vF3eYvmfA4gzkH2q/I+rABJ7BxdVziVKs4BjN/7L1XfcA796l/YaA==
+"@jayree/sfdx-plugin-source@^1.3.150":
+  version "1.3.150"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.150.tgz#18defff4dbd9c13ccdfe359dde1252008fec4978"
+  integrity sha512-l4PNOQarLV16mREG3kOQ2JdAwBZxWof7Djk9ECxFVfB3Uc3sxYVgJ3ciWP7s//bM+wsDylaTyKoP3MFZkUX77A==
   dependencies:
     "@jayree/changelog" "^1.2.23"
     "@oclif/core" "^4.8.0"
-    "@salesforce/core" "^8.24.3"
+    "@salesforce/core" "^8.25.0"
     "@salesforce/kit" "^3.2.4"
     "@salesforce/sf-plugins-core" "^12.2.6"
-    "@salesforce/source-deploy-retrieve" "^12.31.6"
+    "@salesforce/source-deploy-retrieve" "^12.31.8"
     "@salesforce/source-tracking" "^7.8.1"
     "@salesforce/ts-types" "^2.0.11"
     ansis "^4.2.0"
@@ -1745,10 +1745,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.18.7", "@salesforce/core@^8.23.1", "@salesforce/core@^8.23.5", "@salesforce/core@^8.24.0", "@salesforce/core@^8.24.3":
-  version "8.24.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.24.3.tgz#c18fb2481ab212c460fd351520712a4fa8b4329f"
-  integrity sha512-E9k4G3S8svS6QtsPVhUvxr0VHWyzg7KxH8sYM0o5pk7QEUXZCKQEQE5VjQOa+Gl3jRyX6zv/8Cp4UpQ2ZszOVg==
+"@salesforce/core@^8.18.7", "@salesforce/core@^8.23.1", "@salesforce/core@^8.23.5", "@salesforce/core@^8.24.0", "@salesforce/core@^8.24.3", "@salesforce/core@^8.25.0":
+  version "8.25.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.25.0.tgz#2cf53f38aee8fb6ea1b0e6b6e301b66bc0d81d1c"
+  integrity sha512-LdUDEK8mmiWpnKn6wtaSDcvZc2Svrg/xldint1OGyVhCGZUAQLjCWRKkBT5DdIVV3g9QrDNhLboi904jcwDe1g==
   dependencies:
     "@jsforce/jsforce-node" "^3.10.13"
     "@salesforce/kit" "^3.2.4"
@@ -1855,10 +1855,10 @@
     proxy-agent "^6.4.0"
     yaml "^2.8.1"
 
-"@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.5", "@salesforce/source-deploy-retrieve@^12.31.6":
-  version "12.31.6"
-  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.31.6.tgz#8c731718c455cd3a1be528f608f85c00551e7e0f"
-  integrity sha512-88PKzSwGYL6GQWryfgcTPPD462Sgnhw08HkKf/yVLnc9q6U67ebLUdfrdBLGDL/HJ6uRRHP8RVFPvsFxRU6mcQ==
+"@salesforce/source-deploy-retrieve@^12.30.0", "@salesforce/source-deploy-retrieve@^12.31.5", "@salesforce/source-deploy-retrieve@^12.31.6", "@salesforce/source-deploy-retrieve@^12.31.8":
+  version "12.31.8"
+  resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.31.8.tgz#0eade61d5f117722fed81a4f2c04eb7a7d5f4703"
+  integrity sha512-gp2yJUuAsR86v8QkGY50Sxyiup4H0QNyT7bC3rowxUnR/mw1q3gkXSDnhHOWt5toWsZr78oL1ztGQxG89l89XQ==
   dependencies:
     "@salesforce/core" "^8.24.0"
     "@salesforce/kit" "^3.2.4"
