@@ -1,3 +1,10 @@
+## [4.8.184](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.183...v4.8.184) (2026-02-12)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.12.0 to 1.13.5 ([#1881](https://github.com/jayree/sfdx-jayree-plugin/issues/1881)) ([db714b2](https://github.com/jayree/sfdx-jayree-plugin/commit/db714b2089862f406f1de19d10b14709ed220c88))
+
 ## [4.8.183](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.182...v4.8.183) (2026-02-06)
 
 
