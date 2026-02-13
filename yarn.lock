@@ -1574,10 +1574,10 @@
   resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-3.0.5.tgz#03850037469127e911422de5ff9385ff960ad7e9"
   integrity sha512-qWYAtMf+JRhUm+3pY9dD6PsByCe2gXd2l4y/bznfS1zyfmz5Tg8ZCEA8KnunO9UcFldNimU2/eZETn6oLk+g1Q==
 
-"@mswjs/interceptors@^0.39.5":
-  version "0.39.5"
-  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.39.5.tgz#6f0571493bf76291a60b62234ed0add2c4bd970e"
-  integrity sha512-B9nHSJYtsv79uo7QdkZ/b/WoKm20IkVSmTc/WCKarmDtFwM0dRx2ouEniqwNkzCSLn3fydzKmnMzjtfdOWt3VQ==
+"@mswjs/interceptors@^0.41.0":
+  version "0.41.2"
+  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.41.2.tgz#6e490a41f9701edf237aa561b5cd23fe262f4ce6"
+  integrity sha512-7G0Uf0yK3f2bjElBLGHIQzgRgMESczOMyYVasq1XK8P5HaXtlW4eQhz9MBL+TQILZLaruq+ClGId+hH0w4jvWw==
   dependencies:
     "@open-draft/deferred-promise" "^2.2.0"
     "@open-draft/logger" "^0.3.0"
@@ -6955,12 +6955,12 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
-nock@^14.0.10:
-  version "14.0.10"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-14.0.10.tgz#d6f4e73e1c6b4b7aa19d852176e68940e15cd19d"
-  integrity sha512-Q7HjkpyPeLa0ZVZC5qpxBt5EyLczFJ91MEewQiIi9taWuA0KB/MDJlUWtON+7dGouVdADTQsf9RA7TZk6D8VMw==
+nock@^14.0.11:
+  version "14.0.11"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-14.0.11.tgz#4ed20d50433b0479ddabd9f03c5886054608aeae"
+  integrity sha512-u5xUnYE+UOOBA6SpELJheMCtj2Laqx15Vl70QxKo43Wz/6nMHXS7PrEioXLjXAwhmawdEMNImwKCcPhBJWbKVw==
   dependencies:
-    "@mswjs/interceptors" "^0.39.5"
+    "@mswjs/interceptors" "^0.41.0"
     json-stringify-safe "^5.0.1"
     propagate "^2.0.0"
 
