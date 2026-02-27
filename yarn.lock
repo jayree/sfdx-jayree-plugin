@@ -1345,16 +1345,16 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.3"
 
-"@jayree/sfdx-plugin-org@^1.2.160":
-  version "1.2.160"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.160.tgz#59c4dd74393f6e4d3e808124a0ae5d696bad62a9"
-  integrity sha512-Pxwi7H1PNB6iwtjUmO5SSMHQw7FlYqP7CQyOU46vkV+9KnDm6NMvX0H7frGkSJpjYquYcmp5oMQQARQ3fBnhwg==
+"@jayree/sfdx-plugin-org@^1.2.161":
+  version "1.2.161"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.161.tgz#8c7643fbb170942dc3e37574b006e166fe99eb3c"
+  integrity sha512-EHy2lA3zqNUh7qdiBllO2bCGMJoQ64cB/NFG8baMxCCiLvr1bl1a3L1LsZYLkFZhW0MzaToDySIlrehbYtWS8g==
   dependencies:
     "@jayree/changelog" "^1.2.25"
     "@jsforce/jsforce-node" "^3.10.14"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
-    "@oclif/core" "^4.8.0"
-    "@salesforce/core" "^8.26.2"
+    "@oclif/core" "^4.8.1"
+    "@salesforce/core" "^8.26.3"
     "@salesforce/sf-plugins-core" "^12.2.6"
     "@salesforce/source-deploy-retrieve" "^12.31.14"
     "@salesforce/ts-types" "^2.0.12"
@@ -1552,10 +1552,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.5.2", "@oclif/core@^4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.8.0.tgz#bde8fad00019c8c0a8e27787b4b42c4670842785"
-  integrity sha512-jteNUQKgJHLHFbbz806aGZqf+RJJ7t4gwF4MYa8fCwCxQ8/klJNWc0MvaJiBebk7Mc+J39mdlsB4XraaCKznFw==
+"@oclif/core@^4", "@oclif/core@^4.5.2", "@oclif/core@^4.8.0", "@oclif/core@^4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.8.1.tgz#84def567778d3271d5c84d9cd6fe0a582e56fded"
+  integrity sha512-07mq0vKCWNsB85ZHeBMlTAiO0KLFqHyAeRK3bD2K8CI1tX3tiwkWw1lZQZkiw8MUBrhxdROhMkYMY4Q0l7JHqA==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.17.0"
@@ -1567,7 +1567,7 @@
     indent-string "^4.0.0"
     is-wsl "^2.2.0"
     lilconfig "^3.1.3"
-    minimatch "^9.0.5"
+    minimatch "^10.2.1"
     semver "^7.7.3"
     string-width "^4.2.3"
     supports-color "^8"
@@ -1701,10 +1701,10 @@
   dependencies:
     "@xml-tools/parser" "^1.0.11"
 
-"@salesforce/core@^8.18.7", "@salesforce/core@^8.23.1", "@salesforce/core@^8.24.0", "@salesforce/core@^8.25.0", "@salesforce/core@^8.26.2":
-  version "8.26.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.26.2.tgz#1b82f7bc8e8598ba1ed8779759a5188b74841445"
-  integrity sha512-P1otybl1d+sXg5FORl3PD82TzaOOP5aH1j0UVkpGf1p4BLw6VD0mJekS4mDc0pz6UKK2iIt0CFxXAEMKa/YtBA==
+"@salesforce/core@^8.18.7", "@salesforce/core@^8.23.1", "@salesforce/core@^8.24.0", "@salesforce/core@^8.25.0", "@salesforce/core@^8.26.2", "@salesforce/core@^8.26.3":
+  version "8.26.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.26.3.tgz#0b2502cacca8977f2ae95283d944771040eb7869"
+  integrity sha512-lPNFHjHFeC4V3KuH88xuVLGhAqmtM8meUcvyejNh8bQ5w642APKRTGDZ0pOnWHJAe5SQy7cSQ1WqvO3V73ouQw==
   dependencies:
     "@jsforce/jsforce-node" "^3.10.13"
     "@salesforce/kit" "^3.2.4"
@@ -3176,6 +3176,11 @@ balanced-match@^3.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-3.0.1.tgz#e854b098724b15076384266497392a271f4a26a0"
   integrity sha512-vjtV3hiLqYDNRoiAv0zC4QaGAMPomEoq83PRmYIofPswwZurCeWR5LByXm7SyoL0Zh5+2z0+HC7jG8gSZJUh0w==
 
+balanced-match@^4.0.2:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-4.0.4.tgz#bfb10662feed8196a2c62e7c68e17720c274179a"
+  integrity sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==
+
 base64-js@^1.3.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
@@ -3227,6 +3232,13 @@ brace-expansion@^4.0.0:
   integrity sha512-l/mOwLWs7BQIgOKrL46dIAbyCKvPV7YJPDspkuc88rHsZRlg3hptUGdU7Trv0VFP4d3xnSGBQrKu5ZvGB7UeIw==
   dependencies:
     balanced-match "^3.0.0"
+
+brace-expansion@^5.0.2:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-5.0.4.tgz#614daaecd0a688f660bbbc909a8748c3d80d4336"
+  integrity sha512-h+DEnpVvxmfVefa4jFbCf5HdH5YMDXRsmKflpf1pILZWRFlTbJpxeU55nJl4Smt5HQaGzg1o6RHFPJaOqnmBDg==
+  dependencies:
+    balanced-match "^4.0.2"
 
 braces@^3.0.3, braces@~3.0.2:
   version "3.0.3"
@@ -6732,6 +6744,13 @@ minimatch@9.0.3, minimatch@^9.0.1:
   integrity sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==
   dependencies:
     brace-expansion "^2.0.1"
+
+minimatch@^10.2.1:
+  version "10.2.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-10.2.4.tgz#465b3accbd0218b8281f5301e27cedc697f96fde"
+  integrity sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==
+  dependencies:
+    brace-expansion "^5.0.2"
 
 minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
