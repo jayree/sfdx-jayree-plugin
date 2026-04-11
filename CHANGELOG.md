@@ -1,3 +1,10 @@
+## [4.8.197](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.196...v4.8.197) (2026-04-11)
+
+
+### Bug Fixes
+
+* **deps:** bump basic-ftp from 5.2.1 to 5.2.2 ([#1946](https://github.com/jayree/sfdx-jayree-plugin/issues/1946)) ([3824399](https://github.com/jayree/sfdx-jayree-plugin/commit/3824399f5336d87d4307fe23bb722e08e9207b96))
+
 ## [4.8.196](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.195...v4.8.196) (2026-04-10)
 
 
