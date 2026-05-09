@@ -1,3 +1,11 @@
+## [4.8.203](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.202...v4.8.203) (2026-05-09)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.0.1 to 3.1.2 ([#1975](https://github.com/jayree/sfdx-jayree-plugin/issues/1975)) ([57c9b1f](https://github.com/jayree/sfdx-jayree-plugin/commit/57c9b1fc94b8d0605adc9d50e7f9da65b3c23593))
+* **deps:** bump fast-xml-builder from 1.1.4 to 1.2.0 ([#1974](https://github.com/jayree/sfdx-jayree-plugin/issues/1974)) ([03e17a6](https://github.com/jayree/sfdx-jayree-plugin/commit/03e17a6f4b2166621f72a59472a6abf730d58106))
+
 ## [4.8.202](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.201...v4.8.202) (2026-05-08)
 
 
