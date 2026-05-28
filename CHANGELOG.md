@@ -1,3 +1,10 @@
+## [4.8.205](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.204...v4.8.205) (2026-05-28)
+
+
+### Bug Fixes
+
+* **deps:** bump tmp from 0.2.5 to 0.2.7 ([#1986](https://github.com/jayree/sfdx-jayree-plugin/issues/1986)) ([d2693ac](https://github.com/jayree/sfdx-jayree-plugin/commit/d2693aca614cdad0921ac897ec1b7913a7308826))
+
 ## [4.8.204](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.203...v4.8.204) (2026-05-22)
 
 
