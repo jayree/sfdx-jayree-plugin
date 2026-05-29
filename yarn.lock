@@ -1435,7 +1435,7 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.3.tgz#e45e384e4b8ec16bce2fd903af78450f6bf7ec98"
   integrity sha512-ZXRY4jNvVgSVQ8DL3LTcakaAtXwTVUxE81hslsyD2AtoXW/wVob10HkOJ1X/pAlcI7D+2YoZKg5do8G/w6RYgA==
 
-"@jayree/changelog@^1.2.23", "@jayree/changelog@^1.2.32", "@jayree/changelog@^1.2.33":
+"@jayree/changelog@^1.2.23", "@jayree/changelog@^1.2.33":
   version "1.2.33"
   resolved "https://registry.yarnpkg.com/@jayree/changelog/-/changelog-1.2.33.tgz#1be6c5a1b644bbef47948398b471b30f040683f2"
   integrity sha512-7BErUOGY/MebNzV6AB4Rq+PN1hu0UV6ZXYD8CPalrgCV1GLDq62TlS927syTFJzqmPd9JNxugpAj9++huQvHaw==
@@ -1514,17 +1514,17 @@
     prettier-plugin-apex "^2.2.6"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^1.3.168":
-  version "1.3.168"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.168.tgz#c89cf304258815eb7a8e4065d12436e0275bf1cd"
-  integrity sha512-9HLP29OTXWWJcsfsnXb1QKKUPLP2PQgrqmG03ecLj7aSM/QMGkDnUc2m573VGkiYZZxJg0vWyiSGYkgpQeKD8Q==
+"@jayree/sfdx-plugin-source@^1.3.169":
+  version "1.3.169"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-1.3.169.tgz#5c989004aec59e6a551a9c6427a732c4c42f1ff1"
+  integrity sha512-L2MA1YfUZ6KWkSKZRzjKPhzz7QVdE07jSk+RpEHXKtv0+MPXqQtiWGYilmWxv6zmxQObXwLNWDDfaowsZmC/Kw==
   dependencies:
-    "@jayree/changelog" "^1.2.32"
+    "@jayree/changelog" "^1.2.33"
     "@oclif/core" "^4.11.1"
     "@salesforce/core" "^8.30.0"
     "@salesforce/kit" "^3.2.6"
-    "@salesforce/sf-plugins-core" "^12.2.16"
-    "@salesforce/source-deploy-retrieve" "^12.35.4"
+    "@salesforce/sf-plugins-core" "^12.2.17"
+    "@salesforce/source-deploy-retrieve" "^12.35.10"
     "@salesforce/source-tracking" "^7.8.16"
     "@salesforce/ts-types" "^2.0.11"
     ansis "^4.3.0"
@@ -1909,7 +1909,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/prettier-config/-/prettier-config-0.0.3.tgz#ba648d4886bb38adabe073dbea0b3a91b3753bb0"
   integrity sha512-hYOhoPTCSYMDYn+U1rlEk16PoBeAJPkrdg4/UtAzupM1mRRJOwEPMG1d7U8DxJFKuXW3DMEYWr2MwAIBDaHmFg==
 
-"@salesforce/sf-plugins-core@^12.2.16", "@salesforce/sf-plugins-core@^12.2.17", "@salesforce/sf-plugins-core@^12.2.6":
+"@salesforce/sf-plugins-core@^12.2.17", "@salesforce/sf-plugins-core@^12.2.6":
   version "12.2.22"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.2.22.tgz#55e6be65e6289e454220065b3554871452da34af"
   integrity sha512-ApuAXxIwpbJ8i+QooQF8L7z4nz+yJNlkaktbUBxG7LF2KSLKhVgvZjv42Ok1gNPtDnQN9P/hyvVBwDkfSz+6hw==
@@ -1945,7 +1945,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.8.1"
 
-"@salesforce/source-deploy-retrieve@^12.31.8", "@salesforce/source-deploy-retrieve@^12.35.10", "@salesforce/source-deploy-retrieve@^12.35.4", "@salesforce/source-deploy-retrieve@^12.35.9":
+"@salesforce/source-deploy-retrieve@^12.31.8", "@salesforce/source-deploy-retrieve@^12.35.10", "@salesforce/source-deploy-retrieve@^12.35.9":
   version "12.36.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.36.0.tgz#3cf9e34e93b1c9531885340d43faeff6d7622560"
   integrity sha512-8oy70UqBh6eDfN+AXO31NtGrF+Dpy8JG3BqXTctghVfd5Y/vGjFcrectih3WbtXj9e7WNrrvSdsRJ6aD/sGqmw==
