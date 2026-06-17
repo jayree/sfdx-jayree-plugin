@@ -1,3 +1,12 @@
+## [4.8.210](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.209...v4.8.210) (2026-06-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @babel/core from 7.25.2 to 7.29.7 ([#2008](https://github.com/jayree/sfdx-jayree-plugin/issues/2008)) ([47b042d](https://github.com/jayree/sfdx-jayree-plugin/commit/47b042d46e51f87a3f25f3a32691e1655d6d43dd))
+* **deps:** bump markdown-it from 14.1.0 to 14.2.0 ([#2006](https://github.com/jayree/sfdx-jayree-plugin/issues/2006)) ([d504f0d](https://github.com/jayree/sfdx-jayree-plugin/commit/d504f0df3f955e7d9a50f1ab2d7646aa1e7777d1))
+* **deps:** bump ws from 8.20.1 to 8.21.0 ([#2007](https://github.com/jayree/sfdx-jayree-plugin/issues/2007)) ([6fe2204](https://github.com/jayree/sfdx-jayree-plugin/commit/6fe2204478855a04cfe800b39c399eaf69f26c56))
+
 ## [4.8.209](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.208...v4.8.209) (2026-06-13)
 
 
