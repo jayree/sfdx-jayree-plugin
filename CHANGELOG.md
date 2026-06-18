@@ -1,3 +1,10 @@
+## [4.8.211](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.210...v4.8.211) (2026-06-18)
+
+
+### Bug Fixes
+
+* **deps:** bump form-data from 4.0.4 to 4.0.6 ([#2009](https://github.com/jayree/sfdx-jayree-plugin/issues/2009)) ([1f1c5d1](https://github.com/jayree/sfdx-jayree-plugin/commit/1f1c5d1d989fab59aa728ca5727da3fa4c0d7348))
+
 ## [4.8.210](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.209...v4.8.210) (2026-06-17)
 
 
