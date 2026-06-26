@@ -1278,18 +1278,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.3"
 
-"@jayree/sfdx-plugin-org@^1.2.176":
-  version "1.2.176"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.176.tgz#d066fd2463e5bc4d98b1fa23b94923634ebe7530"
-  integrity sha512-yyJ/wRBglEcirCwSPUty7goemKpxjpOaxGMBKxFAl7cvKACRZIcfVzE/Odz2f6xE9jYj9l6sHVOCPvuO5ceD4w==
+"@jayree/sfdx-plugin-org@^1.2.177":
+  version "1.2.177"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.177.tgz#fa9912410596bd647cb491cb29f969ef656393f1"
+  integrity sha512-jrScY4r4oKKEdJtw+7JI3WmOdSlaJeCb5q1n7iFJ+ZMlOWi6WhXNkyy1E+qqR8INNvexcHnG/K0Sxc5pA3iqJA==
   dependencies:
     "@jayree/changelog" "^1.2.35"
     "@jsforce/jsforce-node" "^3.10.16"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
-    "@oclif/core" "^4.11.1"
-    "@salesforce/core" "^8.31.1"
+    "@oclif/core" "^4.11.7"
+    "@salesforce/core" "^8.31.2"
     "@salesforce/sf-plugins-core" "^12.2.24"
-    "@salesforce/source-deploy-retrieve" "^12.36.2"
+    "@salesforce/source-deploy-retrieve" "^12.36.3"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
@@ -1301,7 +1301,7 @@
     is-wsl "^3.1.1"
     listr2 "^9.0.5"
     log-update "^7.2.0"
-    playwright-chromium "^1.60.0"
+    playwright-chromium "^1.61.0"
     tabletojson "4.1.10"
     tslib "^2.8.1"
     wrap-ansi "^9.0.2"
@@ -1417,23 +1417,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.10.16":
-  version "3.10.16"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.16.tgz#a7f320896b5d3ff98dce8048a2a26f5c561d8f16"
-  integrity sha512-Fh5Op3vgyWMmPhjsr0d50AwPj6X9rsUNiJOPqA2OmJmv3HduIRY8tK+nc/IdtkOGdYXDk09q1cu0PG5pGERGgA==
-  dependencies:
-    "@sindresorhus/is" "^4"
-    base64url "^3.0.1"
-    csv-parse "^5.5.2"
-    csv-stringify "^6.6.0"
-    faye "^1.4.0"
-    form-data "^4.0.4"
-    https-proxy-agent "^5.0.0"
-    multistream "^3.1.0"
-    node-fetch "^2.6.1"
-    xml2js "^0.6.2"
-
-"@jsforce/jsforce-node@^3.10.17":
+"@jsforce/jsforce-node@^3.10.16", "@jsforce/jsforce-node@^3.10.17":
   version "3.10.17"
   resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.17.tgz#c8f0a9d3b88925d45b297f2a9dac8af2a17c47ee"
   integrity sha512-gYWiK0Y68dMUTdlPjkF+Bw3r7pmfTbqzs7/6ZChg2Md14NyzXk/usp+y8hHj6vc1SF3s7e6j5OUzUasYF5RJWQ==
@@ -1546,7 +1530,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.11.1", "@oclif/core@^4.11.4", "@oclif/core@^4.11.7", "@oclif/core@^4.8.0":
+"@oclif/core@^4", "@oclif/core@^4.11.4", "@oclif/core@^4.11.7", "@oclif/core@^4.8.0":
   version "4.11.11"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.11.11.tgz#bd5c7d79285c12a43e5830b3362773dbe6048878"
   integrity sha512-LoGzrvkH9I8dwhxuLafcf90MAp+fYfAiAhpyixaVAWaclIgs+vXeMMQwBG90/wqjdygIKcFAqNnNJrfl3s3X8Q==
@@ -2399,13 +2383,6 @@ acorn@^8.4.1, acorn@^8.9.0:
   version "8.11.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.11.3.tgz#71e0b14e13a4ec160724b38fb7b0f233b1b81d7a"
   integrity sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==
-
-agent-base@6:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
-  integrity sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==
-  dependencies:
-    debug "4"
 
 agent-base@^7.0.2, agent-base@^7.1.0:
   version "7.1.0"
@@ -5126,14 +5103,6 @@ http2-wrapper@^2.1.10:
     quick-lru "^5.1.1"
     resolve-alpn "^1.2.0"
 
-https-proxy-agent@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz#c59ef224a04fe8b754f3db0063a25ea30d0005d6"
-  integrity sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==
-  dependencies:
-    agent-base "6"
-    debug "4"
-
 https-proxy-agent@^7.0.1, https-proxy-agent@^7.0.2, https-proxy-agent@^7.0.3:
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-7.0.4.tgz#8e97b841a029ad8ddc8731f26595bad868cb4168"
@@ -6599,7 +6568,7 @@ node-emoji@^2.2.0:
     emojilib "^2.4.0"
     skin-tone "^2.0.0"
 
-node-fetch@^2.6.1, node-fetch@^2.6.9:
+node-fetch@^2.6.9:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.7.0.tgz#d0f0fa6e3e2dc1d27efcd8ad99d550bda94d187d"
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
@@ -7237,17 +7206,17 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.60.0:
-  version "1.60.0"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.60.0.tgz#b0cb4f3f405287f5654b735100850f24120663a2"
-  integrity sha512-xxz9pc2HIxQW/Qg9ijG2fZOHRT//KhLo0KfvJRa45YYRrcA7ZONoilgJR40SW5pmecb6HkuROaeViXoCaXTZyQ==
+playwright-chromium@^1.61.0:
+  version "1.61.1"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.61.1.tgz#a928a64d797edd38a4bf7ac49069220801fb8564"
+  integrity sha512-YK3K8JakUv5Hq5WjY6oU/XwuD/041s9XVtoTKTrZHYRY72DOAsni/iXye7iBS8lgYWUZENt/6tBnpmhaSg72ug==
   dependencies:
-    playwright-core "1.60.0"
+    playwright-core "1.61.1"
 
-playwright-core@1.60.0:
-  version "1.60.0"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.60.0.tgz#24e0d9cc4730713db5dffcace29b5e4696b1907a"
-  integrity sha512-9bW6zvX/m0lEbgTKJ6YppOKx8H3VOPBMOCFh2irXFOT4BbHgrx5hPjwJYLT40Lu+4qtD36qKc/Hn56StUW57IA==
+playwright-core@1.61.1:
+  version "1.61.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.61.1.tgz#3c99841307efbbabc9d724c41a88c914705d15fc"
+  integrity sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==
 
 pluralize@^8.0.0:
   version "8.0.0"
