@@ -1040,31 +1040,31 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.3"
 
-"@jayree/sfdx-plugin-org@^1.2.178":
-  version "1.2.178"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.178.tgz#6208e54931f4b52f2768331b93cb87be1af67407"
-  integrity sha512-HlNkOXRI2JF/B1Hfc0CwZmXX+Ztv8ioOInHGsqdpkfp7/l66meXl0rpSrTRlwU9VQ/HE1cCMAByaom+zln7NwQ==
+"@jayree/sfdx-plugin-org@^1.2.179":
+  version "1.2.179"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.179.tgz#cdbf0ce1c8f9b4564cea398319ea4c54004ac0b3"
+  integrity sha512-YlUwwRWM2ja7//MapD5QZd2MCUjux0B7m3OxW535gY4l0LajkO7eC2bmn2/92NwhNKuzpu+kl9uYyqfHiUFBTQ==
   dependencies:
     "@jayree/changelog" "^1.2.37"
-    "@jsforce/jsforce-node" "^3.10.16"
+    "@jsforce/jsforce-node" "^3.10.19"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
-    "@oclif/core" "^4.11.11"
-    "@salesforce/core" "^8.31.4"
-    "@salesforce/sf-plugins-core" "^12.2.24"
-    "@salesforce/source-deploy-retrieve" "^12.36.7"
+    "@oclif/core" "^4.11.14"
+    "@salesforce/core" "^8.31.5"
+    "@salesforce/sf-plugins-core" "^12.2.25"
+    "@salesforce/source-deploy-retrieve" "^12.37.0"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
     cli-truncate "^5.2.0"
     debug "^4.4.3"
     enquirer "^2.4.1"
-    fs-extra "^11.3.5"
+    fs-extra "^11.3.6"
     is-docker "^4.0.0"
     is-wsl "^3.1.1"
     listr2 "^9.0.5"
     log-update "^7.2.0"
     playwright-chromium "^1.61.1"
-    tabletojson "4.1.10"
+    tabletojson "4.1.11"
     tslib "^2.8.1"
     wrap-ansi "^9.0.2"
 
@@ -1179,10 +1179,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.10.16", "@jsforce/jsforce-node@^3.10.17":
-  version "3.10.17"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.17.tgz#c8f0a9d3b88925d45b297f2a9dac8af2a17c47ee"
-  integrity sha512-gYWiK0Y68dMUTdlPjkF+Bw3r7pmfTbqzs7/6ZChg2Md14NyzXk/usp+y8hHj6vc1SF3s7e6j5OUzUasYF5RJWQ==
+"@jsforce/jsforce-node@^3.10.17", "@jsforce/jsforce-node@^3.10.19":
+  version "3.10.19"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.10.19.tgz#ccbc539c12f4f7dff9cfdcc6cfb8f07bd840f731"
+  integrity sha512-k7i2Tntu1fLvkMtRcKDFU64/Fr2M692ECtbwIGX6hcOh5mj+jrMa1tlvcdwffxAMl+lPYCXnY2bjErxWmP84zA==
   dependencies:
     "@sindresorhus/is" "^4"
     base64url "^3.0.1"
@@ -1547,7 +1547,7 @@
     proxy-agent "^6.4.0"
     yaml "^2.8.1"
 
-"@salesforce/source-deploy-retrieve@^12.31.8", "@salesforce/source-deploy-retrieve@^12.36.3", "@salesforce/source-deploy-retrieve@^12.36.6", "@salesforce/source-deploy-retrieve@^12.36.7", "@salesforce/source-deploy-retrieve@^12.37.0":
+"@salesforce/source-deploy-retrieve@^12.31.8", "@salesforce/source-deploy-retrieve@^12.36.3", "@salesforce/source-deploy-retrieve@^12.36.6", "@salesforce/source-deploy-retrieve@^12.37.0":
   version "12.37.1"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-12.37.1.tgz#b028db0b2c64afe7485877d12f96c7df3582ea3e"
   integrity sha512-K2M54QGIvYq0r1KnlM0PAw/Aoez1c/YRASbFWutLkmvJ1SqWxglH0nB6Yu7H+a+wogdLGW3I5JVhxT1CWXgUqA==
@@ -8071,10 +8071,10 @@ synckit@^0.11.13:
   dependencies:
     "@pkgr/core" "^0.3.6"
 
-tabletojson@4.1.10:
-  version "4.1.10"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.10.tgz#79cc5dd9b3239c5e1ff7a27bfb1746a6ea8b1bc1"
-  integrity sha512-hvYEHg+iXpXrlOXXwa9waMJ2hgFPKHxgmHKnoN1lbi6rPcKS1rswMi0fhlqAHxmuz4st9gKcYGbuiKAfftM4wg==
+tabletojson@4.1.11:
+  version "4.1.11"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.11.tgz#cc3a5c8b5d19454fb8e08ee652c2cc15d03b142d"
+  integrity sha512-8XmLOHNmyTPlKWryNYcVwRWCA2V4QilLD8NEwJr4knGAq1fntjKHk1pmFZE0teNacaSESFcaUYI+5dRWivbDKg==
   dependencies:
     cheerio "^1.2.0"
 
