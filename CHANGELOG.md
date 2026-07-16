@@ -1,3 +1,10 @@
+## [4.8.216](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.215...v4.8.216) (2026-07-16)
+
+
+### Bug Fixes
+
+* **deps:** bump websocket-driver from 0.7.4 to 0.7.5 ([#2040](https://github.com/jayree/sfdx-jayree-plugin/issues/2040)) ([ac85ba6](https://github.com/jayree/sfdx-jayree-plugin/commit/ac85ba6a8ff2ba6b8a0fde7c45891b56769f78bb))
+
 ## [4.8.215](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.214...v4.8.215) (2026-07-10)
 
 
