@@ -1040,18 +1040,18 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.3"
 
-"@jayree/sfdx-plugin-org@^1.2.179":
-  version "1.2.179"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.179.tgz#cdbf0ce1c8f9b4564cea398319ea4c54004ac0b3"
-  integrity sha512-YlUwwRWM2ja7//MapD5QZd2MCUjux0B7m3OxW535gY4l0LajkO7eC2bmn2/92NwhNKuzpu+kl9uYyqfHiUFBTQ==
+"@jayree/sfdx-plugin-org@^1.2.181":
+  version "1.2.181"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.181.tgz#bf09a3d79a5184efe545407e1ba6b995889fc66e"
+  integrity sha512-gJBGgJbD32Nvfcd/kar5IGdrMp/l9q94O0Rfl+n4t3G7FofLh361IYzuoP4BJJbQUI20mdybs6B5Q0IYf0tqsw==
   dependencies:
-    "@jayree/changelog" "^1.2.37"
+    "@jayree/changelog" "^1.2.38"
     "@jsforce/jsforce-node" "^3.10.19"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
     "@oclif/core" "^4.11.14"
-    "@salesforce/core" "^8.31.5"
-    "@salesforce/sf-plugins-core" "^12.2.25"
-    "@salesforce/source-deploy-retrieve" "^12.37.0"
+    "@salesforce/core" "^8.32.4"
+    "@salesforce/sf-plugins-core" "^12.2.26"
+    "@salesforce/source-deploy-retrieve" "^12.37.2"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
     cli-progress "^3.12.0"
@@ -1064,7 +1064,7 @@
     listr2 "^9.0.5"
     log-update "^7.2.0"
     playwright-chromium "^1.61.1"
-    tabletojson "4.1.11"
+    tabletojson "4.1.12"
     tslib "^2.8.1"
     wrap-ansi "^9.0.2"
 
@@ -8094,10 +8094,10 @@ synckit@^0.11.13:
   dependencies:
     "@pkgr/core" "^0.3.6"
 
-tabletojson@4.1.11:
-  version "4.1.11"
-  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.11.tgz#cc3a5c8b5d19454fb8e08ee652c2cc15d03b142d"
-  integrity sha512-8XmLOHNmyTPlKWryNYcVwRWCA2V4QilLD8NEwJr4knGAq1fntjKHk1pmFZE0teNacaSESFcaUYI+5dRWivbDKg==
+tabletojson@4.1.12:
+  version "4.1.12"
+  resolved "https://registry.yarnpkg.com/tabletojson/-/tabletojson-4.1.12.tgz#7d545cafd2b60050ab02f60915c9b70da5603264"
+  integrity sha512-CJ0wifkPWEFZ1ELAF3XDq9rL2lhjJDNukptH8d815i6ljYZrsv72VfAryzbpOl9AhPHq1myLqsqsWHLD8Sq7jw==
   dependencies:
     cheerio "^1.2.0"
 
