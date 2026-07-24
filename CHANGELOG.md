@@ -1,3 +1,11 @@
+## [4.8.218](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.217...v4.8.218) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.1.2 to 3.1.4 ([#2049](https://github.com/jayree/sfdx-jayree-plugin/issues/2049)) ([88ed2a6](https://github.com/jayree/sfdx-jayree-plugin/commit/88ed2a69b8eb4589ec83c74a4d3d4eb59acccb64))
+* **deps:** bump linkify-it from 5.0.1 to 5.0.2 ([#2050](https://github.com/jayree/sfdx-jayree-plugin/issues/2050)) ([7d9c8b2](https://github.com/jayree/sfdx-jayree-plugin/commit/7d9c8b22c86e283cc66f726f557cb10b6c34964b))
+
 ## [4.8.217](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.216...v4.8.217) (2026-07-17)
 
 
