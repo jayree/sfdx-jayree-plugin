@@ -1040,17 +1040,17 @@
     graceful-fs "^4.2.11"
     isomorphic-git "1.36.3"
 
-"@jayree/sfdx-plugin-org@^1.2.182":
-  version "1.2.182"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.182.tgz#2db9ccb751f72a74480ccf0f87921fa690747fb4"
-  integrity sha512-klSMXhCk+d3RbENfUUX2lUwB04udWxP59TPrypd0JbyOhosuBAIyTt/t7oKOAkaFNCFtwqSDr3o4c6acmoMT1A==
+"@jayree/sfdx-plugin-org@^1.2.183":
+  version "1.2.183"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-org/-/sfdx-plugin-org-1.2.183.tgz#7ddb1275da9885171663b622d59b94f1e310ff8f"
+  integrity sha512-iYetXxVCSCcYk656I+slmQueUqlDItDV30iUWQXSSVr5e5Y8vTPDU9/n87d0VLI7tr7soajrSxxG6NTpa7RfxA==
   dependencies:
     "@jayree/changelog" "^1.2.39"
     "@jsforce/jsforce-node" "^3.10.19"
     "@listr2/prompt-adapter-enquirer" "^3.0.5"
-    "@oclif/core" "^4.13.0"
+    "@oclif/core" "^4.13.2"
     "@salesforce/core" "^8.32.6"
-    "@salesforce/sf-plugins-core" "^12.2.26"
+    "@salesforce/sf-plugins-core" "^12.2.28"
     "@salesforce/source-deploy-retrieve" "^12.37.2"
     "@salesforce/ts-types" "^2.0.12"
     chalk "^5.6.2"
@@ -1063,7 +1063,7 @@
     is-wsl "^3.1.1"
     listr2 "^9.0.5"
     log-update "^7.2.0"
-    playwright-chromium "^1.61.1"
+    playwright-chromium "^1.62.0"
     tabletojson "4.1.12"
     tslib "^2.8.1"
     wrap-ansi "^9.0.2"
@@ -1287,7 +1287,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4", "@oclif/core@^4.11.11", "@oclif/core@^4.11.4", "@oclif/core@^4.13.0", "@oclif/core@^4.13.2", "@oclif/core@^4.8.0":
+"@oclif/core@^4", "@oclif/core@^4.11.11", "@oclif/core@^4.11.4", "@oclif/core@^4.13.2", "@oclif/core@^4.8.0":
   version "4.13.3"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.13.3.tgz#856aa8c48d65e711574dca2955eb0b29d86c1a74"
   integrity sha512-wBp2igI2KVwq2ZmpnfmGtOROo7aXZIr3OEtAS16g1wHFBqyEuswL+9K50NJWJvlpAmxd+4dVj/ycawXESU3wQQ==
@@ -1511,7 +1511,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/prettier-config/-/prettier-config-0.0.3.tgz#ba648d4886bb38adabe073dbea0b3a91b3753bb0"
   integrity sha512-hYOhoPTCSYMDYn+U1rlEk16PoBeAJPkrdg4/UtAzupM1mRRJOwEPMG1d7U8DxJFKuXW3DMEYWr2MwAIBDaHmFg==
 
-"@salesforce/sf-plugins-core@^12.2.26", "@salesforce/sf-plugins-core@^12.2.28", "@salesforce/sf-plugins-core@^12.2.6":
+"@salesforce/sf-plugins-core@^12.2.28", "@salesforce/sf-plugins-core@^12.2.6":
   version "12.2.28"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-12.2.28.tgz#2fae75f25a8a09e2cbd18266ed1407c858c72fd8"
   integrity sha512-amfPBfdlgYoM9LCQewtoLWOe29kY7urLnYH1a5G7QLWN74tJeXEkvc1OyM18n+f2MHmpK0/ICAg5Wq276HwxHQ==
@@ -6942,17 +6942,17 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-playwright-chromium@^1.61.1:
-  version "1.61.1"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.61.1.tgz#a928a64d797edd38a4bf7ac49069220801fb8564"
-  integrity sha512-YK3K8JakUv5Hq5WjY6oU/XwuD/041s9XVtoTKTrZHYRY72DOAsni/iXye7iBS8lgYWUZENt/6tBnpmhaSg72ug==
+playwright-chromium@^1.62.0:
+  version "1.62.1"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.62.1.tgz#d5a1cf19dca6a8b82d1f667042e9255f1a6da41a"
+  integrity sha512-yRMzeViD44qD1ZVMNupp82NJQNjumZ02W5r7+DmtD5+7aP9+v66a0PsAk63ewpVDH1GxMf/J/mO+TS1sTaK29w==
   dependencies:
-    playwright-core "1.61.1"
+    playwright-core "1.62.1"
 
-playwright-core@1.61.1:
-  version "1.61.1"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.61.1.tgz#3c99841307efbbabc9d724c41a88c914705d15fc"
-  integrity sha512-h7Qlt6m4REp25qvIdvbDtVmD4LqVXfpRxhORv9L0jzETM05p4fuPJ3dKyuSXQxDSbXnmS79HAgi9589lGSpLkg==
+playwright-core@1.62.1:
+  version "1.62.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.62.1.tgz#120f67a19181bfd183c60fa903c0d99330b56785"
+  integrity sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==
 
 pluralize@^8.0.0:
   version "8.0.0"
