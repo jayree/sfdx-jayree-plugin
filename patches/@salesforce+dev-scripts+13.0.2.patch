@@ -1,0 +1,270 @@
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
+index 9da4307..5fce2c5 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sf-clean.js
+@@ -59,7 +59,7 @@ if (gitignorePath) {
+ 
+   // The first line of the segment is what we are looking for. Either # -- CLEAN or # -- CLEAN ALL
+   if (segments['CLEAN']) {
+-    toClean = segments['CLEAN'];
++    toClean = toClean.concat(segments['CLEAN']);
+   } else {
+     const example = join(__dirname, '..', 'files', '.gitignore');
+     log(
+@@ -69,7 +69,7 @@ if (gitignorePath) {
+     );
+   }
+   if (segments['CLEAN ALL']) {
+-    toCleanAll = segments['CLEAN ALL'];
++    toCleanAll = toCleanAll.concat(segments['CLEAN ALL']);
+   }
+ }
+ 
+@@ -81,6 +81,6 @@ if (cleanAll) {
+ if (ignoreSigningArtifacts) {
+   toClean = toClean.filter((item) => !item.endsWith('.tgz') && !item.endsWith('.sig'));
+ }
+-
++toClean = [...new Set(toClean)]
+ log(`rm -rf ${toClean}`);
+ shell.rm('-rf', toClean);
+diff --git a/node_modules/@salesforce/dev-scripts/bin/sf-install.js b/node_modules/@salesforce/dev-scripts/bin/sf-install.js
+index eabaa3b..e770b29 100755
+--- a/node_modules/@salesforce/dev-scripts/bin/sf-install.js
++++ b/node_modules/@salesforce/dev-scripts/bin/sf-install.js
+@@ -28,7 +28,8 @@ if (changed) {
+ } else {
+   require('../utils/standardize-pjson')();
+   require('../utils/standardize-files')();
+-  if (exists('.git')) {
++  const isCi = process.env.CI !== undefined;
++  if (exists('.git') && !isCi) {
+     require('../utils/husky-init')();
+   }
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
+index 83a7ac4..da7200c 100644
+--- a/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
++++ b/node_modules/@salesforce/dev-scripts/files/LICENSE.txt
+@@ -1,6 +1,6 @@
+ Apache License Version 2.0
+ 
+-Copyright (c) REPLACE_YEAR Salesforce, Inc.
++Copyright (c) REPLACE_YEAR jayree
+ All rights reserved.
+ 
+                                  Apache License
+diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
+index d4f6ee8..2474e7d 100644
+--- a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
++++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
+@@ -2,10 +2,13 @@
+ // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
+ 
+ {
+-  "extends": "@salesforce/dev-config/tsconfig-strict",
++  "extends": "@salesforce/dev-config/tsconfig-strict-esm",
+   "compilerOptions": {
+     "outDir": "lib",
+-    "incremental": true
++    "incremental": true,
++    "skipLibCheck": true,
++    "resolveJsonModule": true,
++    "rootDir": "./src"
+   },
+   "include": ["./src/**/*.ts"]
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
+index 44147cc..1c17e3f 100644
+--- a/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
++++ b/node_modules/@salesforce/dev-scripts/files/tsconfig-test-strict.json
+@@ -2,6 +2,9 @@
+ // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
+ 
+ {
+-  "extends": "@salesforce/dev-config/tsconfig-test-strict",
+-  "include": ["./**/*.ts"]
++  "extends": "@salesforce/dev-config/tsconfig-test-strict-esm",
++  "include": ["./**/*.ts"],
++  "compilerOptions": {
++    "skipLibCheck": true
++  }
+ }
+diff --git a/node_modules/@salesforce/dev-scripts/utils/package-json.js b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+index 0462630..5948b87 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/package-json.js
++++ b/node_modules/@salesforce/dev-scripts/utils/package-json.js
+@@ -34,6 +34,9 @@ class PackageJson {
+     if (this.contents.scripts) {
+       this.contents.scripts = orderMap(this.contents.scripts);
+     }
++    if (this.contents.wireit) {
++      this.contents.wireit = orderMap(this.contents.wireit);
++    }
+     if (this.contents.devDependencies) {
+       this.contents.devDependencies = orderMap(this.contents.devDependencies);
+     }
+@@ -50,6 +53,7 @@ class PackageJson {
+ 
+       writeFileSync(this.pjsonPath, pjson);
+       log(`wrote changes to ${this.pjsonPath}`, 1);
++      process.exit(1);
+     }
+   }
+ 
+@@ -62,6 +66,18 @@ class PackageJson {
+     }
+     return this.contents[name];
+   }
++
++  delete(name, value) {
++    if (!name) {
++      throw new Error('property name is required');
++    }
++    if (!value) {
++      throw new Error('property value is required');
++    }
++    if (this.contents[name][value]) {
++      delete this.contents[name][value];
++    }
++  }
+ }
+ 
+ module.exports = PackageJson;
+diff --git a/node_modules/@salesforce/dev-scripts/utils/sf-config.js b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
+index 56b5f4b..4843de8 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/sf-config.js
++++ b/node_modules/@salesforce/dev-scripts/utils/sf-config.js
+@@ -73,7 +73,7 @@ const PACKAGE_DEFAULTS = {
+       dependencies: ['test:only', 'test:compile', 'link-check'],
+     },
+     'test:only': {
+-      command: 'nyc mocha "test/**/*.test.ts"',
++      command: 'c8 mocha "test/**/*.test.ts"',
+       // things that use `chalk` might not output colors with how wireit uses spawn and gha treats that as non-tty
+       // see https://github.com/chalk/supports-color/issues/106
+       env: {
+@@ -101,7 +101,7 @@ const resolveConfig = (path) => {
+ 
+   // if path is undefined/null, assume we're executing from a plugin root
+   const usesJsBinScripts = existsSync(join(path ?? process.cwd(), 'bin', 'dev.js'));
+-  const loader = 'node --loader ts-node/esm --no-warnings=ExperimentalWarning';
++  const loader = 'node';
+   const dev = usesJsBinScripts ? `${loader} "./bin/dev.js"` : '"./bin/dev"';
+   const pluginDefaults = {
+     scripts: {
+@@ -152,7 +152,7 @@ const resolveConfig = (path) => {
+   const configFromFile = (result && result.config) || {};
+ 
+   if (configFromFile.test?.testsPath) {
+-    defaults.wireit['test:only'].command = `nyc mocha "${configFromFile.test.testsPath}"`;
++    defaults.wireit['test:only'].command = `c8 mocha "${configFromFile.test.testsPath}"`;
+   }
+ 
+   // If a custom license exists in the config file, don't add the fix-license script
+@@ -184,6 +184,12 @@ const resolveConfig = (path) => {
+     delete config.wireit[scriptName];
+   });
+ 
++  Object.keys(config.wireit).forEach((scriptName) => {
++    if (config.wireit[scriptName].dependencies) {
++      config.wireit[scriptName].dependencies = config.wireit[scriptName].dependencies.filter(depScriptName => !config['exclude-scripts']?.includes(depScriptName));
++    }
++  })
++
+   resolvedConfigs[path] = config;
+   return config;
+ };
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
+index 93b51b9..6192e54 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-files.js
+@@ -28,6 +28,9 @@ const FILE_NAME_LICENSE = 'LICENSE.txt';
+ const FILE_NAME_GITIGNORE = 'gitignore';
+ const FILE_NAME_MOCHARC = 'mocharc.json';
+ 
++let config;
++let pkgRoot;
++
+ // We don't copy over the .gitignore file since plugins/libraries might have their own
+ // unique additions to the file. So in order to programmatically add entries, we need to
+ // read the existing .gitignore file and append these entries to it in case they don't exist.
+@@ -60,7 +63,7 @@ function copyFile(sourcePath, targetPath, override = false) {
+   const fileExists = exists(targetPath);
+   const shouldWriteFile = override || !fileExists;
+ 
+-  if (shouldWriteFile && isDifferent(sourcePath, targetPath)) {
++  if (shouldWriteFile && isDifferent(sourcePath, targetPath) && !(config['exclude-files'] || []).some((e) => targetPath === join(pkgRoot,e))) {
+     copyFileSync(sourcePath, targetPath);
+     return targetPath;
+   }
+@@ -177,11 +180,13 @@ function replaceInFile(filePath, replaceFn) {
+   const newContents = replaceFn(contents);
+   if (newContents !== contents) {
+     writeFileSync(filePath, newContents);
++    return true;
+   }
+ }
+ 
+ module.exports = (packageRoot = require('./package-path')) => {
+-  const config = resolveConfig(packageRoot);
++  config = resolveConfig(packageRoot);
++  pkgRoot = packageRoot;
+   const testPath = join(packageRoot, 'test');
+   const scripts = config.scripts;
+ 
+@@ -200,8 +205,10 @@ module.exports = (packageRoot = require('./package-path')) => {
+       '[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](https://opensource.org/license/apache-2-0)';
+ 
+     if (exists(readmeTargetPath)) {
+-      replaceInFile(readmeTargetPath, (contents) => contents.replace(oldLicenseRegex, newLicenseBadge));
+-      added.push(readmeTargetPath);
++      const wasReplaced = replaceInFile(readmeTargetPath, (contents) => contents.replace(oldLicenseRegex, newLicenseBadge));
++      if (wasReplaced) {
++        added.push(readmeTargetPath);
++      }
+     }
+   }
+ 
+diff --git a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+index 20f3b79..782b4a2 100644
+--- a/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
++++ b/node_modules/@salesforce/dev-scripts/utils/standardize-pjson.js
+@@ -60,27 +60,34 @@ module.exports = (packageRoot = require('./package-path')) => {
+   const scriptList = Object.entries(config.scripts);
+   const wireitList = Object.entries(config.wireit);
+ 
++  let excludeScripts = config['exclude-scripts'] || [];
++
++  excludeScripts.forEach((scriptName) => {
++    pjson.delete('scripts',scriptName)
++    pjson.delete('wireit',scriptName)
++  });
++
+   if (scriptList.length > 0) {
+     const scriptsChanged = [];
+ 
+     const scripts = pjson.get('scripts');
+ 
+     for (let [scriptName, scriptCommand] of scriptList) {
+-      if (scripts[scriptName] !== scriptCommand) {
++      if (JSON.stringify(scripts[scriptName]) !== JSON.stringify(scriptCommand)) {
+         scripts[scriptName] = scriptCommand;
+         scriptsChanged.push(scriptName);
+       }
+     }
+-    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+     if (wireitList.length > 0) {
+       const wireit = pjson.get('wireit');
+       for (const [scriptName, scriptCommand] of wireitList) {
+-        if (wireit[scriptName] !== scriptCommand) {
++        if (JSON.stringify(wireit[scriptName]) !== JSON.stringify(scriptCommand)) {
+           wireit[scriptName] = scriptCommand;
+           scriptsChanged.push(scriptName);
+         }
+       }
+     }
++    pjson.actions.push(`standardizing scripts: ${scriptsChanged.join(', ')}`);
+   }
+ 
+   try {
