@@ -54,6 +54,18 @@ index 83a7ac4..da7200c 100644
  All rights reserved.
  
                                   Apache License
+diff --git a/node_modules/@salesforce/dev-scripts/files/eslint-strict.config.mjs b/node_modules/@salesforce/dev-scripts/files/eslint-strict.config.mjs
+index ab81b3d..7c1d6b1 100644
+--- a/node_modules/@salesforce/dev-scripts/files/eslint-strict.config.mjs
++++ b/node_modules/@salesforce/dev-scripts/files/eslint-strict.config.mjs
+@@ -1 +1,6 @@
+-export { default } from 'eslint-config-salesforce-typescript';
++import tsconfigs from 'eslint-config-salesforce-typescript';
++import plugin from 'eslint-plugin-sf-plugin';
++
++const configs = [...tsconfigs, ...plugin.configs.recommended];
++
++export default configs;
 diff --git a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json b/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
 index d4f6ee8..2474e7d 100644
 --- a/node_modules/@salesforce/dev-scripts/files/tsconfig-strict.json
