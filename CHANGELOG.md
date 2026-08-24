@@ -1,3 +1,10 @@
+## [4.8.224](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.223...v4.8.224) (2026-08-24)
+
+
+### Bug Fixes
+
+* **deps:** bump github/codeql-action from 4.37.7 to 4.37.8 ([#2079](https://github.com/jayree/sfdx-jayree-plugin/issues/2079)) ([cb8057c](https://github.com/jayree/sfdx-jayree-plugin/commit/cb8057cb2bac5cb1e78178cc4778eabb96e0677b))
+
 ## [4.8.223](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.222...v4.8.223) (2026-08-21)
 
 
