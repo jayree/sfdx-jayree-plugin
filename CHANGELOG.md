@@ -1,3 +1,10 @@
+## [4.8.226](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.225...v4.8.226) (2026-09-01)
+
+
+### Bug Fixes
+
+* **deps:** bump browserslist from 4.23.0 to 4.28.8 ([#2087](https://github.com/jayree/sfdx-jayree-plugin/issues/2087)) ([463d737](https://github.com/jayree/sfdx-jayree-plugin/commit/463d737d1b4829b035211469020d64793619edf7))
+
 ## [4.8.225](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.224...v4.8.225) (2026-08-28)
 
 
