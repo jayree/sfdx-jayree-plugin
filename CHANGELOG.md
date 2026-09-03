@@ -1,3 +1,10 @@
+## [4.8.227](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.226...v4.8.227) (2026-09-03)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.1.5 to 3.1.7 ([#2088](https://github.com/jayree/sfdx-jayree-plugin/issues/2088)) ([e23bd0f](https://github.com/jayree/sfdx-jayree-plugin/commit/e23bd0f99bccba555a3df5415dca7e7005668948))
+
 ## [4.8.226](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.225...v4.8.226) (2026-09-01)
 
 
