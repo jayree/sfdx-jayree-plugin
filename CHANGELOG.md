@@ -1,3 +1,10 @@
+## [4.8.229](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.228...v4.8.229) (2026-09-09)
+
+
+### Bug Fixes
+
+* **deps:** bump joi from 18.2.3 to 18.2.8 ([#2095](https://github.com/jayree/sfdx-jayree-plugin/issues/2095)) ([cd4f4da](https://github.com/jayree/sfdx-jayree-plugin/commit/cd4f4da9900f2cb174568676b7449c74b4946409))
+
 ## [4.8.228](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.227...v4.8.228) (2026-09-04)
 
 
