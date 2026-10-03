@@ -1,3 +1,12 @@
+## [4.8.233](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.232...v4.8.233) (2026-10-03)
+
+
+### Bug Fixes
+
+* **deps:** bump axios from 1.18.1 to 1.20.0 ([#2114](https://github.com/jayree/sfdx-jayree-plugin/issues/2114)) ([7eecf9a](https://github.com/jayree/sfdx-jayree-plugin/commit/7eecf9aef8a13971658f67be3baae8888bc7f9fb))
+* **deps:** bump fast-uri from 3.1.7 to 3.1.8 ([#2115](https://github.com/jayree/sfdx-jayree-plugin/issues/2115)) ([de9fb4c](https://github.com/jayree/sfdx-jayree-plugin/commit/de9fb4cc535273984db8b627d9dd9dc0e43853ab))
+* **deps:** bump markdown-it from 14.2.0 to 14.3.2 ([#2113](https://github.com/jayree/sfdx-jayree-plugin/issues/2113)) ([f0b1dac](https://github.com/jayree/sfdx-jayree-plugin/commit/f0b1dac38c7f02281a88c23b6852bd37f57cb128))
+
 ## [4.8.232](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.231...v4.8.232) (2026-09-28)
 
 
