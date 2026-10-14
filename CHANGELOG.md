@@ -1,3 +1,10 @@
+## [4.8.236](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.235...v4.8.236) (2026-10-14)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/checkout from 6 to 7 ([#2011](https://github.com/jayree/sfdx-jayree-plugin/issues/2011)) ([7292bd3](https://github.com/jayree/sfdx-jayree-plugin/commit/7292bd3879e1afbe65ce5aab6f85015454c950dd))
+
 ## [4.8.235](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.234...v4.8.235) (2026-10-13)
 
 
