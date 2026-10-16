@@ -1839,10 +1839,10 @@
     isomorphic-git "^1.34.2"
     ts-retry-promise "^0.8.1"
 
-"@salesforce/ts-sinon@^1.4.37":
-  version "1.4.37"
-  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.37.tgz#54420fae4c73cd472b0105c0c55e341eb73aad9b"
-  integrity sha512-n8u6lmEn3uISVpDKzJg2YfqaKd0G+bS9/FzzphA4eHz1deTCc69twZteNWiaSQKFao5mt+dqcbBvgvknm4DOAQ==
+"@salesforce/ts-sinon@^1.4.39":
+  version "1.4.39"
+  resolved "https://registry.yarnpkg.com/@salesforce/ts-sinon/-/ts-sinon-1.4.39.tgz#345edb6edea8e9a9f4f37226bd005b87ec3515c7"
+  integrity sha512-vXTLHIab8vUJVr8Qd05Qh3x+lpRKWxHXTI8o3FXiBxDT10xN8D9Hb7dgSKOKwk445lHzqXOONiV96RfeKXz5Wg==
   dependencies:
     "@salesforce/ts-types" "^2.0.12"
     sinon "^5.1.1"
