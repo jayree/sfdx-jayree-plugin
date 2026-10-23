@@ -1262,23 +1262,23 @@
     prettier-plugin-apex "^2.3.0"
     tslib "^2.8.1"
 
-"@jayree/sfdx-plugin-source@^2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-2.0.9.tgz#ddc34687066082436810f6894e50f295099d1eac"
-  integrity sha512-OWBwcnfkmmEvuDAWFo/O4DCUbSrMG0tKL9/uqAV6xti2V4qFb21+DBkd/4OhMAZJJNAg8u7+Dbk+ri6inHGp/w==
+"@jayree/sfdx-plugin-source@^2.0.11":
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/@jayree/sfdx-plugin-source/-/sfdx-plugin-source-2.0.11.tgz#08ba1542cc0b526df2f8fe63ab2993f66b07c113"
+  integrity sha512-HHbEPmngPA7b1PiF7ArzBR/sXe9967nwxSAabrgsi/s+iwuF5pueFfCQ3X9Z9iGd6chuKOUwPGA6FDNykGbbcA==
   dependencies:
     "@jayree/changelog" "^1.2.42"
-    "@oclif/core" "^4.14.0"
-    "@salesforce/core" "^9.1.6"
-    "@salesforce/kit" "^4.0.0"
-    "@salesforce/sf-plugins-core" "^13.0.4"
-    "@salesforce/source-deploy-retrieve" "^13.4.0"
+    "@oclif/core" "^5.1.7"
+    "@salesforce/core" "^9.3.6"
+    "@salesforce/kit" "^4.0.1"
+    "@salesforce/sf-plugins-core" "^13.0.7"
+    "@salesforce/source-deploy-retrieve" "^13.4.5"
     "@salesforce/source-tracking" "^8.1.4"
-    "@salesforce/ts-types" "^3.2.1"
+    "@salesforce/ts-types" "^3.2.2"
     ansis "^4.4.0"
     debug "^4.4.3"
     deep-object-diff "^1.1.9"
-    fast-xml-parser "^5.11.1"
+    fast-xml-parser "^5.11.2"
     fs-extra "^11.4.0"
     globby "^16.2.4"
     object-path "^0.11.8"
@@ -1664,7 +1664,7 @@
     ts-retry-promise "^0.8.1"
     zod "^4.1.12"
 
-"@salesforce/core@^9.1.10", "@salesforce/core@^9.1.6", "@salesforce/core@^9.1.9", "@salesforce/core@^9.2.2", "@salesforce/core@^9.3.6", "@salesforce/core@^9.3.7":
+"@salesforce/core@^9.1.10", "@salesforce/core@^9.1.9", "@salesforce/core@^9.2.2", "@salesforce/core@^9.3.6", "@salesforce/core@^9.3.7":
   version "9.4.1"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-9.4.1.tgz#297591e86038a1050a8bfa91e37a00618aba7cf7"
   integrity sha512-aE8llAP+uMyWGNB8+FCpkSOql4D9BA9RtrbdG/ha9luqHpWZugiUwNYx50R/GawJW5UGTsHUKHYrCF75muRodg==
@@ -1745,7 +1745,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/prettier-config/-/prettier-config-0.0.3.tgz#ba648d4886bb38adabe073dbea0b3a91b3753bb0"
   integrity sha512-hYOhoPTCSYMDYn+U1rlEk16PoBeAJPkrdg4/UtAzupM1mRRJOwEPMG1d7U8DxJFKuXW3DMEYWr2MwAIBDaHmFg==
 
-"@salesforce/sf-plugins-core@^13.0.3", "@salesforce/sf-plugins-core@^13.0.4", "@salesforce/sf-plugins-core@^13.0.7":
+"@salesforce/sf-plugins-core@^13.0.3", "@salesforce/sf-plugins-core@^13.0.7":
   version "13.0.7"
   resolved "https://registry.yarnpkg.com/@salesforce/sf-plugins-core/-/sf-plugins-core-13.0.7.tgz#eadf33d17c8d300bd085b4c78d6905f166936a0e"
   integrity sha512-nfVYno70TORUITGAMhGo0eD62M7LxTiD5TnpnRLOuG6ygt0TVz60NWX6eJRvmxOkHKqAK5hWjPOZXAYqV8JZUg==
@@ -1781,7 +1781,7 @@
     proxy-agent "^6.5.0"
     yaml "^2.9.0"
 
-"@salesforce/source-deploy-retrieve@^13.3.1", "@salesforce/source-deploy-retrieve@^13.4.0", "@salesforce/source-deploy-retrieve@^13.4.6":
+"@salesforce/source-deploy-retrieve@^13.3.1", "@salesforce/source-deploy-retrieve@^13.4.0", "@salesforce/source-deploy-retrieve@^13.4.5", "@salesforce/source-deploy-retrieve@^13.4.6":
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/@salesforce/source-deploy-retrieve/-/source-deploy-retrieve-13.7.0.tgz#b50cc0bba1370fb9a88ed99d5fc448b9aa603109"
   integrity sha512-cANPedW09Hzt8MMoUJUKJrg14/SV25QtcIsTcjyBxARIhlg5uQIZfqL21p6xtxkzINBrRDj6t/yM/XRY2aeGsA==
@@ -1829,7 +1829,7 @@
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-2.0.12.tgz#60420622812a7ec7e46d220667bc29b42dc247ff"
   integrity sha512-BIJyduJC18Kc8z+arUm5AZ9VkPRyw1KKAm+Tk+9LT99eOzhNilyfKzhZ4t+tG2lIGgnJpmytZfVDZ0e2kFul8g==
 
-"@salesforce/ts-types@^3.2.0", "@salesforce/ts-types@^3.2.1", "@salesforce/ts-types@^3.2.2":
+"@salesforce/ts-types@^3.2.0", "@salesforce/ts-types@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@salesforce/ts-types/-/ts-types-3.2.2.tgz#954bee036a69acfbefeb83fec8c01d03d306e8bb"
   integrity sha512-3t+/+CzdL2RSOPUvakbg7ICKgu+y5r+lBKYjcVa5TzeLkAnWad8TH98qgurndLZLXHVyW3rA4AM0oTpH+TZZVA==
@@ -4363,7 +4363,7 @@ fast-xml-builder@^1.2.0:
     path-expression-matcher "^1.5.0"
     xml-naming "^0.1.0"
 
-fast-xml-parser@^5.11.1, fast-xml-parser@^5.11.2, fast-xml-parser@^5.5.7, fast-xml-parser@^5.7.3:
+fast-xml-parser@^5.11.2, fast-xml-parser@^5.5.7, fast-xml-parser@^5.7.3:
   version "5.11.2"
   resolved "https://registry.yarnpkg.com/fast-xml-parser/-/fast-xml-parser-5.11.2.tgz#0d4987adf4e7934af11d82a73b2841eca9928a42"
   integrity sha512-R9iDuNrQYeQut46cn2r2wHKn4HYzVDvDm5J1wW+koZewykv0yuO2HChTYeZtrULyHIDM9cj9TUXloCsueCQUog==
