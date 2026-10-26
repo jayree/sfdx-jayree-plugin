@@ -1,3 +1,14 @@
+## [4.8.239](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.238...v4.8.239) (2026-10-26)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.1.8 to 3.1.9 ([#2147](https://github.com/jayree/sfdx-jayree-plugin/issues/2147)) ([1536b43](https://github.com/jayree/sfdx-jayree-plugin/commit/1536b43583bf56db09fd75764e02afa4caa84b67))
+* **deps:** bump github/codeql-action from 4.39.0 to 4.39.1 ([#2146](https://github.com/jayree/sfdx-jayree-plugin/issues/2146)) ([80d9c52](https://github.com/jayree/sfdx-jayree-plugin/commit/80d9c523573bdcd8bbeba538a7f4d815c4c5ceef))
+* **deps:** bump js-yaml from 3.14.1 to 3.15.2 ([#2150](https://github.com/jayree/sfdx-jayree-plugin/issues/2150)) ([d30e5c6](https://github.com/jayree/sfdx-jayree-plugin/commit/d30e5c6ef261ba47cdf12004ad340cd9b7774004))
+* **deps:** bump undici from 7.28.0 to 7.30.1 ([#2148](https://github.com/jayree/sfdx-jayree-plugin/issues/2148)) ([72a0baf](https://github.com/jayree/sfdx-jayree-plugin/commit/72a0baf42d891330936b84fcb74549e37a98477f))
+* **deps:** bump zod from 4.1.13 to 4.6.7 ([#2149](https://github.com/jayree/sfdx-jayree-plugin/issues/2149)) ([7b10b19](https://github.com/jayree/sfdx-jayree-plugin/commit/7b10b190c2a55240c7b4de58a3c4fdd51ff3b92b))
+
 ## [4.8.238](https://github.com/jayree/sfdx-jayree-plugin/compare/v4.8.237...v4.8.238) (2026-10-23)
 
 
