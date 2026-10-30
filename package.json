@@ -19,7 +19,7 @@
     "eslint-config-salesforce-license": "^1.0.2",
     "eslint-plugin-prettier": "^5.5.7",
     "eslint-plugin-sf-plugin": "^1.20.33",
-    "nock": "^15.0.4",
+    "nock": "^15.0.5",
     "oclif": "^6.0.10",
     "patch-package": "^8.0.1",
     "pinst": "^3.0.0",
