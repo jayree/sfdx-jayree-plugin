@@ -1255,17 +1255,17 @@
   resolved "https://registry.yarnpkg.com/@listr2/prompt-adapter-enquirer/-/prompt-adapter-enquirer-4.4.3.tgz#a122bd2976686459c264b2b4b4ed9c4feafaa677"
   integrity sha512-7P0Kh6Df8gO2pv0gMBNXfyD2GcRdgF1VDlIL6afdp4QJLeo+DVhR3BfYLsL0krMcWvCe/V7gqE+POePLVBiDeg==
 
-"@mswjs/interceptors@^0.44.0":
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.44.0.tgz#20055ab61c6937d6146ecd3c053f939b14970bca"
-  integrity sha512-IYHevRStF4ijM20GI9c9Ndhw483NSAjCydQhUr4/zIB0BNLsTVw3vFAxTo6TlvX4QnV60wEHttUa9539TTAq+A==
+"@mswjs/interceptors@^0.45.11":
+  version "0.45.12"
+  resolved "https://registry.yarnpkg.com/@mswjs/interceptors/-/interceptors-0.45.12.tgz#1a382ad0b5fc8573bdff20f3ea336dc1c66bcb5c"
+  integrity sha512-LLttQ/SSmseGFD/sNiHv9q34hd4gmPLN9uQdIIsU/V/o2AgTJm3dWoKHA4KTj0BzAans6CoEmpHYmp80yp69VA==
   dependencies:
     "@open-draft/until" "^3.0.1"
     "@types/debug" "^4.1.13"
     debug "^4.4.3"
     is-node-process "^1.2.0"
     outvariant "^1.4.3"
-    rettime "^0.11.11"
+    rettime "^0.11.12"
 
 "@nodable/entities@^3.0.1":
   version "3.1.0"
@@ -6259,12 +6259,12 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
-nock@^15.0.5:
-  version "15.0.5"
-  resolved "https://registry.yarnpkg.com/nock/-/nock-15.0.5.tgz#b838af589022c430550069ab1dbc63b7b60e6299"
-  integrity sha512-nVeuZGS2we1PyvqbW082Qj0EB4bd//6pZk/zOPDlaTPU72qcWrqfHg3kx9JcBcH1fJxwJHjmsfuQ4mss42su4w==
+nock@^15.0.6:
+  version "15.0.6"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-15.0.6.tgz#1939705a29b9e8bb22659f974eb02c1f4e37403c"
+  integrity sha512-eyOJ1wemcgJZ+PQC3lecfF3gQc2SAmGlQ4mHGfFXcOa/+7v0qjnX+ft/NV2F+4vCwzkXZqik3gS6ZIjh+QcigQ==
   dependencies:
-    "@mswjs/interceptors" "^0.44.0"
+    "@mswjs/interceptors" "^0.45.11"
 
 node-emoji@^2.2.0:
   version "2.2.0"
@@ -7318,7 +7318,7 @@ retry@^0.12.0:
   resolved "https://registry.yarnpkg.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
   integrity sha512-9LkiTwjUh6rT555DtE9rTX+BKByPfrMzEAtnlEtdEwr3Nkffwiihqe2bWADg+OQRjt9gl6ICdmB/ZFDCGAtSow==
 
-rettime@^0.11.11:
+rettime@^0.11.12:
   version "0.11.12"
   resolved "https://registry.yarnpkg.com/rettime/-/rettime-0.11.12.tgz#db50d2baf9178ed64615909a424222a7e59e7ba4"
   integrity sha512-5ExtR1ppiDBQkVoPw5NAqdbfH4Iq2VOmQKHMtUoaFxA9bo2krzFYBtyq6K40xxbYp+2w/YOr6D+1ToF6tTN53A==
