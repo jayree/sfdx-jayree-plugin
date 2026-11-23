@@ -1,0 +1,15 @@
+diff --git a/node_modules/eslint-config-salesforce-typescript/index.mjs b/node_modules/eslint-config-salesforce-typescript/index.mjs
+index b1d9e65..0fd7d33 100644
+--- a/node_modules/eslint-config-salesforce-typescript/index.mjs
++++ b/node_modules/eslint-config-salesforce-typescript/index.mjs
+@@ -110,8 +110,8 @@ export default tseslint.config(
+         [
+           '',
+           {
+-            pattern: ' \\* Copyright \\d{4}, Salesforce, Inc\\.',
+-            template: ' * Copyright 2025, Salesforce, Inc.',
++            pattern: ' \\* Copyright \\d{4}, jayree',
++            template: ' * Copyright 2026, jayree',
+           },
+           ' *',
+           ' * Licensed under the Apache License, Version 2.0 (the "License");',
